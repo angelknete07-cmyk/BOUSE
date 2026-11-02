@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import { emptyState, parseState } from "../src/lib/storage.ts";
 import type { ReviewEvent } from "../src/lib/types.ts";
 import type { ProjectExperiment, ProjectDecision } from "../src/lib/types.ts";
+import type { SimulationSnapshot } from "../src/lib/simulation.ts";
 
 function savedState() {
   return {
@@ -332,4 +333,87 @@ test("notes and last lesson must contain text or the documented null state", () 
   );
   assert.throws(() => parse({ ...value, lastLessonId: 17 }));
   assert.equal(parse({ ...value, lastLessonId: null }).lastLessonId, null);
+});
+
+const simulation: SimulationSnapshot = {
+  id: "simulation-1",
+  title: "Comparer les délais clients",
+  modelVersion: "1.0.0",
+  createdAt: "2026-11-02T14:00:00.000Z",
+  input: {
+    baseline: {
+      price: 100,
+      unitCost: 40,
+      units: 120,
+      fixedCosts: 5000,
+      openingCash: 12000,
+      collectionDelayMonths: 1,
+    },
+    change: {
+      priceChangePct: 0,
+      volumeChangePct: 0,
+      unitCostChangePct: 0,
+      additionalFixedCosts: 0,
+      collectionDelayMonths: 3,
+    },
+  },
+};
+
+test("older v1 backups do not invent saved simulations", () => {
+  const previous = savedState();
+  const restored = parse(previous);
+  assert.deepEqual(restored, previous);
+  assert.equal(Object.hasOwn(restored, "simulations"), false);
+});
+
+test("simulation hypotheses and model version survive JSON roundtrip independently of evidence", () => {
+  const previous = { ...savedState(), simulations: [simulation] };
+  const restored = parse(previous);
+  assert.deepEqual(restored, previous);
+  assert.deepEqual(restored.attempts, savedState().attempts);
+  assert.deepEqual(restored.projects, savedState().projects);
+  assert.equal(restored.experiments, undefined);
+});
+
+test("malformed simulation snapshots and unknown model versions are rejected before replacement", () => {
+  for (const simulations of [
+    null,
+    {},
+    [false],
+    [{ ...simulation, modelVersion: "9.0.0" }],
+    [{ ...simulation, createdAt: "not-a-date" }],
+    [{ ...simulation, input: {} }],
+    [{ ...simulation, title: " " }],
+    [
+      {
+        ...simulation,
+        input: {
+          ...simulation.input,
+          change: { ...simulation.input.change, collectionDelayMonths: 1.5 },
+        },
+      },
+    ],
+    [
+      {
+        ...simulation,
+        input: {
+          ...simulation.input,
+          baseline: { ...simulation.input.baseline, openingCash: -1 },
+        },
+      },
+    ],
+  ])
+    assert.throws(() => parse({ ...savedState(), simulations }));
+});
+
+test("duplicate simulation identifiers cannot create an ambiguous saved comparison", () => {
+  assert.throws(() =>
+    parse({
+      ...savedState(),
+      simulations: [
+        simulation,
+        { ...simulation, title: "Une autre comparaison" },
+      ],
+    }),
+  );
 });

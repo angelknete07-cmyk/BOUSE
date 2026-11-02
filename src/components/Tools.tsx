@@ -16,7 +16,7 @@ const euros = new Intl.NumberFormat("fr-FR", {
 });
 const number = new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 1 });
 
-export function Lab() {
+export function Lab({ onNavigate }: { onNavigate: (route: string) => void }) {
   const [values, setValues] = useState({
     price: "45",
     unitCost: "18",
@@ -83,6 +83,12 @@ export function Lab() {
         <p className="muted">
           Changez une hypothèse. Observez l’effet sur votre modèle économique.
         </p>
+        <button
+          className="text-button"
+          onClick={() => onNavigate("simulation")}
+        >
+          Explorer six mois avec « Et si ? » <Icon name="arrow" size={16} />
+        </button>
       </header>
       <section className="panel">
         <div className="panel-header">

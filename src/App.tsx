@@ -17,6 +17,7 @@ import { AILab, Incubator, Lab } from "./components/Tools";
 import { LessonView } from "./components/LessonView";
 import { Reviews } from "./components/Reviews";
 import { ProjectWorkbench } from "./components/ProjectWorkbench";
+import { SimulationLab } from "./components/SimulationLab";
 
 const navigation = [
   { id: "home", label: "Vue d’ensemble", icon: "home" },
@@ -24,6 +25,7 @@ const navigation = [
   { id: "skills", label: "Mes compétences", icon: "node" },
   { id: "reviews", label: "Révisions", icon: "clock" },
   { id: "lab", label: "Lab financier", icon: "lab" },
+  { id: "simulation", label: "Et si ?", icon: "chart" },
   { id: "incubator", label: "Incubator", icon: "idea" },
   { id: "ai", label: "AI Lab", icon: "ai" },
   { id: "radar", label: "Radar", icon: "radar" },
@@ -397,7 +399,9 @@ function App() {
             ) : route === "reviews" ? (
               <Reviews state={state} update={update} onNavigate={go} />
             ) : route === "lab" ? (
-              <Lab />
+              <Lab onNavigate={go} />
+            ) : route === "simulation" ? (
+              <SimulationLab state={state} update={update} onNavigate={go} />
             ) : route === "ai" ? (
               <AILab />
             ) : route === "incubator" ? (
@@ -884,7 +888,10 @@ function Search({
       title: n.label,
       detail: "Espace",
       route: n.id,
-      search: n.label,
+      search:
+        n.id === "simulation"
+          ? `${n.label} simulation simulateur scénarios trésorerie cash délais clients`
+          : n.label,
     })),
     ...lessons.map((l) => ({
       title: l.title,

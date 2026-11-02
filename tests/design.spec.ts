@@ -87,6 +87,9 @@ async function neutral(
 
 async function capture(page: Page, testInfo: TestInfo, name: string) {
   await noOverflow(page);
+  // A pointer left over from the previous screen can create an unrelated hover
+  // beside the selected item. Capture the neutral state consistently.
+  await page.mouse.move(0, 0);
   await page.evaluate(async () => {
     window.scrollTo(0, 0);
     await new Promise<void>((resolve) =>
@@ -110,6 +113,11 @@ async function capture(page: Page, testInfo: TestInfo, name: string) {
   if (name === "12-project-outcome")
     await page.screenshot({
       path: testInfo.outputPath("12-project-viewport.png"),
+      fullPage: false,
+    });
+  if (name === "13-simulation-default")
+    await page.screenshot({
+      path: testInfo.outputPath("13-simulation-viewport.png"),
       fullPage: false,
     });
 }
@@ -572,6 +580,41 @@ test("galerie des écrans et du quiz validé sans débordement", async ({
     .getByRole("button", { name: "Enregistrer le bilan", exact: true })
     .click();
   await capture(page, testInfo, "12-project-outcome");
+
+  // Compare and preserve explicit hypotheses; no simulated result is recorded
+  // as a quiz, a real observation, or a project validation.
+  await page.goto("/#simulation");
+  await expect(
+    page.getByRole("heading", {
+      name: "Rentable. Mais à court de cash ?",
+      exact: true,
+    }),
+  ).toBeVisible();
+  await capture(page, testInfo, "13-simulation-default");
+  await page
+    .getByRole("button", { name: "Coûts fournisseurs", exact: true })
+    .click();
+  await page.getByRole("button", { name: "Mois 3", exact: true }).click();
+  await expect(
+    page.getByRole("button", { name: "Mois 3", exact: true }),
+  ).toHaveAttribute("aria-pressed", "true");
+  await capture(page, testInfo, "13-simulation-scenario");
+  await page
+    .getByRole("button", { name: "Conserver la comparaison", exact: true })
+    .click();
+  await page
+    .getByLabel("Nom de la comparaison", { exact: true })
+    .fill("Coûts fournisseurs : +25 %, volume inchangé");
+  await page
+    .getByRole("button", { name: "Enregistrer la comparaison", exact: true })
+    .click();
+  await expect(
+    page.getByRole("button", {
+      name: "Charger : Coûts fournisseurs : +25 %, volume inchangé",
+      exact: true,
+    }),
+  ).toBeVisible();
+  await capture(page, testInfo, "13-simulation-saved");
   expect(errors).toEqual([]);
 });
 

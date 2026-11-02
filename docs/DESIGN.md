@@ -76,6 +76,8 @@ La seconde passe remplace les KPI et l’anneau génériques par une trajectoire
 
 L’atelier de projet privilégie un dossier de travail : registre de tests, étapes numérotées et comparaison entre attente initiale et résultat observé. Éviter de transformer ces éléments en tuiles de KPI. Les surfaces neutres distinguent le plan et les faits ; les conclusions s’expriment en texte sans couleur dominante. Sur mobile, la comparaison devient séquentielle, l’introduction se resserre et les actions des formulaires restent accessibles au-dessus du dock.
 
+Le mode « Et si ? » utilise un grand tracé comparatif monochrome et des mois sélectionnables pour expliquer le cash. La référence et le scénario se distinguent par le trait et les libellés ; le signe et le texte indiquent un besoin de financement sans grande surface rouge ou verte. Les hypothèses restent accessibles, les flux disposent d’une lecture tabulaire et l’ordre mobile rapproche le graphique des décisions.
+
 La revue visuelle est obligatoire après toute modification importante. Voir `AGENTS.md`, `design-reviews/LATEST.md` et la commande `npm run review:render`. Les captures sont conservées dans le dépôt avec une paire stable desktop/mobile et un historique daté. La vérification interne et la validation design externe sont des étapes distinctes.
 
 Les résultats des tests et de l’inspection des captures sont consignés dans `docs/VALIDATION.md`. La vérification porte sur le rendu réel dans Chromium desktop et mobile émulé ; elle ne constitue pas un test sur appareil physique.

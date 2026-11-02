@@ -1,3 +1,5 @@
+import type { SimulationSnapshot } from "./simulation";
+
 export interface Profile {
   name: string;
   level: string;
@@ -90,5 +92,6 @@ export interface AppState {
   reviewEvents?: ReviewEvent[];
   experiments?: ProjectExperiment[];
   decisions?: ProjectDecision[];
+  simulations?: SimulationSnapshot[];
 }
 export type StateUpdater = (updater: (state: AppState) => AppState) => void;

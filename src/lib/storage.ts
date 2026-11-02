@@ -2,6 +2,7 @@ import type { AppState } from "./types";
 import { projectStages } from "./domain.ts";
 import { isReviewEvent } from "./reviews.ts";
 import { isExperiment, isDecision } from "./projects.ts";
+import { isSimulationSnapshot } from "./simulation.ts";
 
 export const storageKey = "bouse.academy.v1";
 export const emptyState: AppState = {
@@ -14,6 +15,7 @@ export const emptyState: AppState = {
   reviewEvents: [],
   experiments: [],
   decisions: [],
+  simulations: [],
 };
 export function parseState(raw: string): AppState {
   const data: unknown = JSON.parse(raw);
@@ -148,6 +150,22 @@ export function parseState(raw: string): AppState {
     )
       throw new Error(
         "Une décision fait référence à un test absent ou à un autre projet.",
+      );
+  }
+  if (s.simulations !== undefined) {
+    if (
+      !Array.isArray(s.simulations) ||
+      !s.simulations.every(isSimulationSnapshot)
+    )
+      throw new Error(
+        "Comparaisons financières invalides ou version de modèle incompatible.",
+      );
+    if (
+      new Set(s.simulations.map((entry) => entry.id)).size !==
+      s.simulations.length
+    )
+      throw new Error(
+        "Comparaisons financières invalides : identifiants en double.",
       );
   }
   return s;
