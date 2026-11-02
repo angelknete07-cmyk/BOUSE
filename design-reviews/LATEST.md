@@ -1,47 +1,48 @@
-# Review design — passe 03 : révisions espacées
+# Review design — passe 04 : atelier terrain et décisions
 
-**Rendus du 2 novembre 2026 à 22:24, Europe/Paris.**
-**Statut : vérification interne effectuée ; nouveaux rendus prêts pour review.**
+**Rendus du 2 novembre 2026 à 22:47, Europe/Paris.**
+**Statut : vérification interne effectuée ; nouveaux rendus à examiner.**
 
-La passe 02 a été acceptée par l’utilisateur : « OK, bah c’est parti pour la suite alors. » Cet accord autorisait cette brique ; aucune validation des nouvelles images n’est supposée.
+La passe 03 a été acceptée par l’utilisateur avec « LA SUITE ». Cette autorisation a permis de construire cette étape sur les projets. Aucune validation design indépendante ni acceptation de la passe 04 n’est revendiquée.
 
-## Rendus
+## Rendus à examiner
 
 - [Desktop, viewport 1440 × 1000](latest-desktop.png) · [Mobile, viewport CSS 412 × 839](latest-mobile.png)
-- [Disponibles — desktop](screens/desktop/11-revisions-due.png) · [mobile](screens/mobile/11-revisions-due.png)
-- [Rappel — desktop](screens/desktop/11-revisions-recall.png) · [mobile](screens/mobile/11-revisions-recall.png)
-- [Repères révélés — desktop](screens/desktop/11-revisions-revealed.png) · [mobile](screens/mobile/11-revisions-revealed.png)
-- [Bilan — desktop](screens/desktop/11-revisions-complete.png) · [mobile](screens/mobile/11-revisions-complete.png)
-- [Échéances futures — desktop](screens/desktop/11-revisions-planned.png) · [mobile](screens/mobile/11-revisions-planned.png)
-- [État vide — desktop](screens/desktop/11-revisions-empty.png) · [mobile](screens/mobile/11-revisions-empty.png)
-- [Accueil actualisé — desktop](screens/desktop/01-home.png) · [mobile](screens/mobile/01-home.png)
+- [Atelier vide — desktop](screens/desktop/12-project-empty.png) · [mobile](screens/mobile/12-project-empty.png)
+- [Plan du test — desktop](screens/desktop/12-project-test-plan.png) · [mobile](screens/mobile/12-project-test-plan.png)
+- [Observations et preuves — desktop](screens/desktop/12-project-result.png) · [mobile](screens/mobile/12-project-result.png)
+- [Décision initiale — desktop](screens/desktop/12-project-decision.png) · [mobile](screens/mobile/12-project-decision.png)
+- [Comparaison attendu/réel — desktop](screens/desktop/12-project-outcome.png) · [mobile](screens/mobile/12-project-outcome.png)
+- [Liste des projets — desktop](screens/desktop/07-incubator.png) · [mobile](screens/mobile/07-incubator.png)
 
-**49 captures réelles**, dont les autres écrans existants. La paire latest montre désormais le nouvel espace Révisions. Le mobile utilise Pixel 7 émulé, à 2,625 pixels par pixel CSS. Les images de page complète incluent le dock fixe à la position du viewport : la paire latest représente le premier écran réel. Le profil et les tentatives sont explicitement des données de démonstration.
+**61 captures réelles**, incluant les autres écrans existants. La paire latest montre le premier écran de l’atelier Décisions. La comparaison complète se trouve plus bas dans la page, dans les captures `12-project-outcome.png`. Le mobile utilise Pixel 7 émulé, à 2,625 pixels par pixel CSS. Dans les captures de page complète, le dock fixe apparaît à la limite du premier viewport ; ce raccord est un effet de capture. Les fichiers latest montrent le viewport réel. Toutes les données sont fictives et destinées à la démonstration.
 
-## Changements
+## Audit et changements
 
-- Sessions de cinq cartes maximum : rappel de mémoire, révélation puis autoévaluation.
-- Échec au quiz : priorité aux repères de la leçon, sans diagnostic artificiel d’une faiblesse précise.
-- « À reprendre » : 24 h et palier remis au début ; « Encore fragile » : 24 h sans avancer ; « Retrouvé sans aide » : 3, 7, 14 puis 30 jours.
-- Score des quiz inchangé. Passer ou quitter ne crée aucune réussite.
-- Échéances et historique conservés au rechargement et dans l’export/import JSON ; anciennes sauvegardes compatibles.
-- Les tentatives et les cartes sont associées à une version de contenu. Un quiz v1 ne crée pas de retard sur une nouvelle leçon v2 jamais travaillée.
-- Accès depuis l’accueil, le bilan du quiz et la navigation. Le dock mobile donne accès à « Réviser » ; l’AI Lab reste dans les espaces et son univers.
+L’Incubator conservait une fiche d’idée et un stade manuel, sans espace pour garder les preuves terrain ni comparer une décision à ses résultats. Le nouvel atelier utilise les tokens centraux existants ; aucune nouvelle palette ou marque n’a été introduite.
+
+- **Terrain** : hypothèse, protocole, critère de réussite et date de revue, puis observations, éléments de preuve et conclusion personnelle.
+- **Décisions** : contexte, alternatives, choix, résultat attendu, confiance déclarée et risque, puis comparaison au réel et apprentissage.
+- Le plan initial et le raisonnement sont conservés tels qu’enregistrés. Ajouter un bilan ne les réécrit pas ; cette règle est expliquée avant enregistrement.
+- Registre numéroté et lecture par séquences. Les surfaces distinguent plan et faits ; le contraste et les mots indiquent les conclusions, sans accent coloré.
+- Sur mobile : introduction et espacements resserrés après inspection, comparaison séquentielle, actions de formulaires accessibles au-dessus du dock.
+- Export Markdown du dossier ouvert ; sauvegarde JSON complète et anciennes sauvegardes v1 compatibles. Accès direct depuis un projet et la recherche.
+- Les observations ne changent automatiquement ni stade du projet, ni quiz, ni maîtrise des compétences. La confiance est une estimation personnelle.
 
 ## Comparaison et vérification
 
-La base acceptée est conservée dans [l’archive de la passe 02](archive/2026-11-02_22-03-08-Europe-Paris/LATEST.md). Le nouvel espace reprend ses noirs, gris, argent, surfaces discrètes et hiérarchie typographique. Une table de rappel centrale et un calendrier visuel remplacent une longue liste de cartes. Les autres univers gardent leur composition.
+La base acceptée est conservée dans [l’archive de la passe 03](archive/2026-11-02_22-24-49-Europe-Paris/LATEST.md). Comparer notamment son [ancienne fiche Incubator](archive/2026-11-02_22-24-49-Europe-Paris/screens/desktop/07-incubator.png) au registre et à la comparaison attendu/réel. L’ancienne fiche regroupait toute l’information dans un grand panneau ; l’atelier distingue désormais préparation, faits et apprentissage par la composition et les changements de surface. Les autres univers gardent leur identité.
 
-Inspection desktop/mobile effectuée pour les états disponible, carte, révélé, bilan, planifié et vide : typographie lisible, question dominante pendant la session, pas de débordement ni chevauchement observé, choix tactiles adaptés au dock, focus sur la réponse révélée. Pas de grandes surfaces vertes ; les états restent neutres. Transitions non linéaires et réduction des mouvements conservées.
+Inspection desktop/mobile des états vide, planifié, observé, décision et bilan : noirs et gris cohérents, titres nettement distincts des métadonnées, surfaces discrètes, absence de débordement observé. Les espaces mobiles ont été réduits après une première capture pour faire apparaître plus tôt l’action et le premier élément. Les états interactifs ont été exercés dans Chromium. Les formulaires et notices utilisent les easings des tokens ; `prefers-reduced-motion` désactive leur mouvement.
 
-**Compilation/TypeScript, 54 tests unitaires et 18 tests navigateur réussis, aucun test ignoré.** Les parcours couvrent révélation obligatoire, double clic sans doublon, échéances exactes, quiz inchangé, abandon, rechargement, sauvegardes anciennes et export. Les tests métier couvrent aussi versions, dates futures, changements d’heure et paliers.
+Contrôle navigateur complémentaire : entrée des formulaires mesurée à 360 ms avec une décélération non linéaire, opacité de 0 à 1 et mouvement de 5 px. Avec réduction des mouvements, affichage immédiat sans animation ni transition. Focus argent visible ; navigation des onglets par flèches, Home et End vérifiée. Le hover mobile a été exercé avec un pointeur émulé ; il ne représente pas un geste tactile.
 
-Le manifeste conserve empreintes des sources/PNG, viewports et résultat du run. Archive actuelle : archive/2026-11-02_22-24-49-Europe-Paris/.
+**Compilation/TypeScript, 75 cas unitaires et 24 tests navigateur réussis, aucun test ignoré.** Les parcours vérifient notamment la conservation du plan et de l’attente initiale, les liens entre décisions et tests d’un même projet, le rechargement, l’export Markdown du seul dossier ouvert, l’export JSON et les anciennes sauvegardes. Les tests métier refusent les identifiants ambigus, dates invalides, données incomplètes et références à un autre projet.
 
-## Reproduire et examiner
+Le manifeste contient les empreintes des sources et PNG, les viewports et le résultat du run. Archive actuelle : `archive/2026-11-02_22-47-00-Europe-Paris/`.
 
-Lancer npm run test:e2e, puis npm run review:save -- --primary=11-revisions-viewport. Le script refuse les images antérieures aux sources ou issues d’un run échoué.
+## Reproduire et limites
 
-Code et rendus sont destinés à la branche codex/learning-design-review du dépôt angelknete07-cmyk/BOUSE ; la synchronisation est vérifiée à la livraison. Examiner notamment Reviews.tsx, reviews.css et reviews.ts.
+Lancer `npm run test:e2e`, puis `npm run review:save -- --primary=12-project-viewport`. Le script refuse les images antérieures aux sources ou issues d’un run échoué. Examiner `ProjectWorkbench.tsx`, `project-workbench.css`, `projects.ts` et la validation d’import dans `storage.ts`.
 
-Limites : stockage dans le navigateur, sans notification hors application ni synchronisation entre appareils. Calendrier explicite du produit, sans promesse de personnalisation scientifique. Mobile émulé dans Chromium ; les captures fixes ne restituent pas les animations.
+Code et rendus sont destinés à la branche `codex/learning-design-review` du dépôt `angelknete07-cmyk/BOUSE` ; la synchronisation est vérifiée à la livraison. Stockage local au navigateur, sans compte ni synchronisation entre appareils. L’application ne vérifie pas les preuves saisies et n’envoie pas de rappel extérieur. Mobile émulé dans Chromium ; les captures fixes ne restituent pas les animations et ne remplacent pas une review design externe.

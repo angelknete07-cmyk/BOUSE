@@ -74,6 +74,8 @@ La capture de référence fournie guide les contrastes noir/argent, la densité 
 
 La seconde passe remplace les KPI et l’anneau génériques par une trajectoire interactive, différencie visuellement Finance et IA, allège la navigation desktop et ajoute un dock mobile. Les leçons se présentent en séquences manipulables ; le quiz avance question par question. Le graphe de compétences utilise les prérequis réels et les preuves des dernières tentatives.
 
+L’atelier de projet privilégie un dossier de travail : registre de tests, étapes numérotées et comparaison entre attente initiale et résultat observé. Éviter de transformer ces éléments en tuiles de KPI. Les surfaces neutres distinguent le plan et les faits ; les conclusions s’expriment en texte sans couleur dominante. Sur mobile, la comparaison devient séquentielle, l’introduction se resserre et les actions des formulaires restent accessibles au-dessus du dock.
+
 La revue visuelle est obligatoire après toute modification importante. Voir `AGENTS.md`, `design-reviews/LATEST.md` et la commande `npm run review:render`. Les captures sont conservées dans le dépôt avec une paire stable desktop/mobile et un historique daté. La vérification interne et la validation design externe sont des étapes distinctes.
 
 Les résultats des tests et de l’inspection des captures sont consignés dans `docs/VALIDATION.md`. La vérification porte sur le rendu réel dans Chromium desktop et mobile émulé ; elle ne constitue pas un test sur appareil physique.

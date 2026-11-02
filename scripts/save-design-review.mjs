@@ -36,6 +36,11 @@ const requiredScreens = [
   "11-revisions-recall.png",
   "11-revisions-revealed.png",
   "11-revisions-complete.png",
+  "12-project-empty.png",
+  "12-project-test-plan.png",
+  "12-project-result.png",
+  "12-project-decision.png",
+  "12-project-outcome.png",
 ];
 const projects = [
   { name: "desktop-chromium", directory: "desktop" },

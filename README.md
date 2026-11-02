@@ -20,7 +20,7 @@ Le serveur de développement utilise le port 5173. Aucune clé API n’est néce
 - Tableau de bord, six leçons de fondations, prérequis, quiz corrigés, flashcards, notes et progression par compétence.
 - Lab de rentabilité : prix, coûts, volume et seuil de rentabilité.
 - AI Lab : relecture de prompts par grille explicite et déterministe.
-- Incubateur : création, modification et évolution des projets, liés aux leçons.
+- Incubateur : projets liés aux leçons, atelier de tests terrain et journal de décisions avec comparaison attendu/réel.
 - Recherche et palette de commandes, navigation mobile dédiée et réduction des animations.
 - Leçons en séquences, outils manipulables, teach-back autoévalué et quiz progressif.
 - Trajectoire et graphe de compétences interactifs fondés sur les prérequis et les dernières tentatives.

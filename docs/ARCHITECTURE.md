@@ -56,3 +56,11 @@ Les commandes et leurs résultats de validation sont rapportés au moment de la 
 `src/lib/reviews.ts` dérive le calendrier des tentatives et de ces événements. Les cartes sont identifiées par `lessonId::version::index`. Les nouvelles tentatives portent `lessonVersion` ; les anciennes sans cette propriété correspondent au catalogue initial `1.0.0`. Un quiz v1 ne crée pas de retard sur une nouvelle version v2. L’historique v1 reste conservé.
 
 Les intervalles sont des durées UTC exactes, affichées en heure de Paris. Les événements futurs, invalides ou précédant le travail de la version sont écartés du calcul. L’ajout d’événement est immuable et idempotent par identifiant. Le composant fige au plus cinq cartes au départ, garde la révélation avant notation, protège les doubles clics et ne modifie jamais les tentatives. Le score de quiz et l’autoévaluation de rappel sont deux preuves différentes.
+
+## Tests terrain et journal de décisions
+
+Les champs optionnels `experiments` et `decisions` étendent le format v1 sans transformer les anciennes sauvegardes. `src/lib/projects.ts` valide les formes, bornes de saisie, dates calendaires réelles et horodatages UTC. Les constructeurs copient explicitement les champs autorisés ; les fonctions de bilan conservent le plan initial et refusent un second résultat.
+
+La frontière de sauvegarde valide aussi les relations : identifiants uniques, projet existant et test associé appartenant au même projet que la décision. Un import incohérent est refusé avant remplacement ; les anciennes données sont préservées. Les échéances sont des dates calendaires sans heure inventée ; les enregistrements ont un instant UTC et un résultat ne peut précéder son plan.
+
+Le parcours `project/<id>` ouvre l’atelier. Les états et calculs de compétences/quiz/révision ne sont pas modifiés par les conclusions terrain. L’avancement de projet reste une déclaration manuelle. Les exports Markdown et les menus de tests associés sont limités au projet courant.

@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { emptyState, parseState } from "../src/lib/storage.ts";
 import type { ReviewEvent } from "../src/lib/types.ts";
+import type { ProjectExperiment, ProjectDecision } from "../src/lib/types.ts";
 
 function savedState() {
   return {
@@ -47,6 +48,117 @@ function savedState() {
 }
 
 const parse = (value: unknown) => parseState(JSON.stringify(value));
+
+const fieldTest: ProjectExperiment = {
+  id: "test-1",
+  projectId: "projet-1",
+  title: "Comparer la prévision aux ventes",
+  hypothesis: "Une prévision hebdomadaire évite les achats inutiles.",
+  protocol: "Comparer quatre semaines de prévisions avec les ventes observées.",
+  successCriterion:
+    "L’écart reste inférieur à dix pour cent sur trois semaines.",
+  reviewOn: "2026-11-30",
+  createdAt: "2026-11-02T10:00:00.000Z",
+  result: {
+    observation: "L’écart a varié suivant les semaines.",
+    evidence: "Tableau des quatre semaines conservé dans le dossier local.",
+    conclusion: "inconclusive",
+    recordedAt: "2026-12-01T10:00:00.000Z",
+  },
+};
+const projectDecision: ProjectDecision = {
+  id: "decision-1",
+  projectId: "projet-1",
+  experimentId: "test-1",
+  title: "Tester avec un second commerce",
+  context: "Le premier résultat est ambigu.",
+  options: "Arrêter ou refaire un test mieux cadré.",
+  choice: "Refaire un test.",
+  expectedOutcome: "Comprendre les facteurs qui font varier la demande.",
+  confidence: 60,
+  risk: "Un petit échantillon peut tromper.",
+  reviewOn: "2026-12-15",
+  createdAt: "2026-12-01T11:00:00.000Z",
+  outcome: {
+    observed: "La variabilité était liée aux jours d’ouverture.",
+    comparison: "mixed",
+    learning: "Fixer les facteurs comparables avant le test.",
+    recordedAt: "2026-12-15T15:00:00.000Z",
+  },
+};
+
+test("legacy backups without project histories stay unchanged", () => {
+  const original = savedState();
+  const restored = parse(original);
+  assert.deepEqual(restored, original);
+  assert.equal(restored.experiments, undefined);
+  assert.equal(restored.decisions, undefined);
+});
+
+test("project plans, evidence and decision expectations survive an export roundtrip", () => {
+  const value = {
+    ...savedState(),
+    experiments: [fieldTest],
+    decisions: [projectDecision],
+  };
+  assert.deepEqual(parse(value), value);
+  assert.equal(parse(value).decisions?.[0]?.confidence, 60);
+});
+
+test("malformed or orphan experiments cannot enter persisted state", () => {
+  for (const experiments of [
+    null,
+    {},
+    [false],
+    [{ ...fieldTest, projectId: "absent" }],
+    [{ ...fieldTest, reviewOn: "2026-02-30" }],
+    [
+      {
+        ...fieldTest,
+        result: { ...fieldTest.result, recordedAt: "2026-01-01T00:00:00.000Z" },
+      },
+    ],
+    [fieldTest, fieldTest],
+  ]) {
+    assert.throws(() => parse({ ...savedState(), experiments }));
+  }
+});
+
+test("decisions cannot link missing or foreign-project evidence", () => {
+  const original = savedState();
+  assert.throws(() => parse({ ...original, decisions: [projectDecision] }));
+  const otherProject = { ...original.projects[0]!, id: "other-project" };
+  assert.throws(() =>
+    parse({
+      ...original,
+      projects: [...original.projects, otherProject],
+      experiments: [fieldTest],
+      decisions: [{ ...projectDecision, projectId: otherProject.id }],
+    }),
+  );
+  for (const decisions of [
+    null,
+    {},
+    [false],
+    [{ ...projectDecision, projectId: "absent" }],
+    [{ ...projectDecision, confidence: 101 }],
+    [projectDecision, projectDecision],
+  ]) {
+    assert.throws(() =>
+      parse({ ...original, experiments: [fieldTest], decisions }),
+    );
+  }
+});
+
+test("duplicate project identities are rejected before histories become ambiguous", () => {
+  const original = savedState();
+  assert.throws(() =>
+    parse({
+      ...original,
+      projects: [...original.projects, ...original.projects],
+    }),
+  );
+});
 
 const reviewEvent: ReviewEvent = {
   id: "recall-1",

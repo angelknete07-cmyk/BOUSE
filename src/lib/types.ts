@@ -41,6 +41,44 @@ export interface ReviewEvent {
   intervalDays: number;
   step: number;
 }
+export interface ExperimentResult {
+  observation: string;
+  evidence: string;
+  conclusion: "supported" | "refuted" | "inconclusive";
+  recordedAt: string;
+}
+export interface ProjectExperiment {
+  id: string;
+  projectId: string;
+  title: string;
+  hypothesis: string;
+  protocol: string;
+  successCriterion: string;
+  reviewOn: string;
+  createdAt: string;
+  result?: ExperimentResult;
+}
+export interface DecisionOutcome {
+  observed: string;
+  comparison: "better" | "as-expected" | "worse" | "mixed";
+  learning: string;
+  recordedAt: string;
+}
+export interface ProjectDecision {
+  id: string;
+  projectId: string;
+  experimentId?: string;
+  title: string;
+  context: string;
+  options: string;
+  choice: string;
+  expectedOutcome: string;
+  confidence: number;
+  risk: string;
+  reviewOn: string;
+  createdAt: string;
+  outcome?: DecisionOutcome;
+}
 export interface AppState {
   schemaVersion: 1;
   profile: Profile | null;
@@ -50,5 +88,7 @@ export interface AppState {
   lastLessonId: string | null;
   /** Additive v1 field: older backups without it remain valid. */
   reviewEvents?: ReviewEvent[];
+  experiments?: ProjectExperiment[];
+  decisions?: ProjectDecision[];
 }
 export type StateUpdater = (updater: (state: AppState) => AppState) => void;

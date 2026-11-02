@@ -21,12 +21,12 @@ npm run test:e2e
 node scripts/save-design-review.mjs --check
 node scripts/save-design-review.mjs
 # Choisir le nouvel écran de cette passe pour la paire latest-* :
-node scripts/save-design-review.mjs --primary=11-revisions-viewport
+node scripts/save-design-review.mjs --primary=12-project-viewport
 ```
 
 Playwright lance ou réutilise l’application selon `playwright.config.ts`. Dans ce cloud, Vite et Chromium peuvent nécessiter le mécanisme de permissions étendues de l’outil. Voir [`docs/SETUP.md`](../docs/SETUP.md).
 
-Le paramètre `--primary` choisit une capture présente dans les deux viewports pour les fichiers stables. Pour cette passe, il s’agit de `11-revisions-viewport` ; les pages complètes et les états de session restent dans `screens/`.
+Le paramètre `--primary` choisit une capture présente dans les deux viewports pour les fichiers stables. Pour cette passe, il s’agit de `12-project-viewport` ; les pages complètes et les états intermédiaires restent dans `screens/`. La comparaison entre attente initiale et résultat observé se trouve dans `12-project-outcome.png`.
 
 Le script utilise Node et la configuration Playwright déjà installée ; il ne télécharge aucun paquet. Il exige un dernier run réussi, les captures desktop et mobile de la galerie, et des fichiers d’interface qui n’ont pas changé après les tests. Il refuse les captures manquantes, ambiguës ou antérieures aux dernières sources. L’option `--check` ne modifie aucun fichier.
 

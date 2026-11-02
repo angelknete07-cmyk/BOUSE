@@ -16,6 +16,7 @@ import { Onboarding } from "./components/Onboarding";
 import { AILab, Incubator, Lab } from "./components/Tools";
 import { LessonView } from "./components/LessonView";
 import { Reviews } from "./components/Reviews";
+import { ProjectWorkbench } from "./components/ProjectWorkbench";
 
 const navigation = [
   { id: "home", label: "Vue d’ensemble", icon: "home" },
@@ -143,7 +144,7 @@ function App() {
     setMobileOpen(false);
     window.scrollTo({ top: 0 });
     titleRef.current?.focus({ preventScroll: true });
-    document.title = `${navigation.find((n) => n.id === route)?.label || (route.startsWith("lesson/") ? "Leçon" : "Mon espace")} — BOUSE`;
+    document.title = `${navigation.find((n) => n.id === route)?.label || (route.startsWith("lesson/") ? "Leçon" : route.startsWith("project/") ? "Atelier projet" : "Mon espace")} — BOUSE`;
   }, [route, !!state.profile]);
   const done = passedIds(state);
   function go(next: string) {
@@ -210,6 +211,9 @@ function App() {
   const lesson = route.startsWith("lesson/")
     ? lessons.find((l) => l.id === route.slice(7))
     : undefined;
+  const project = route.startsWith("project/")
+    ? state.projects.find((item) => item.id === route.slice(8))
+    : undefined;
   return (
     <div className="app-shell">
       <a
@@ -269,12 +273,16 @@ function App() {
               href={`#${n.id}`}
               onClick={() => setMobileOpen(false)}
               aria-current={
-                route === n.id || (n.id === "academy" && lesson)
+                route === n.id ||
+                (n.id === "academy" && lesson) ||
+                (n.id === "incubator" && route.startsWith("project/"))
                   ? "page"
                   : undefined
               }
               className={
-                route === n.id || (n.id === "academy" && lesson)
+                route === n.id ||
+                (n.id === "academy" && lesson) ||
+                (n.id === "incubator" && route.startsWith("project/"))
                   ? "nav-link active"
                   : "nav-link"
               }
@@ -329,8 +337,10 @@ function App() {
             <span>
               {lesson
                 ? "Academy"
-                : navigation.find((n) => n.id === route)?.label ||
-                  "Préférences"}
+                : route.startsWith("project/")
+                  ? "Incubator"
+                  : navigation.find((n) => n.id === route)?.label ||
+                    "Préférences"}
             </span>
           </div>
           <div>
@@ -391,7 +401,29 @@ function App() {
             ) : route === "ai" ? (
               <AILab />
             ) : route === "incubator" ? (
-              <Incubator state={state} update={update} />
+              <Incubator state={state} update={update} onNavigate={go} />
+            ) : project ? (
+              <ProjectWorkbench
+                key={project.id}
+                project={project}
+                state={state}
+                update={update}
+                onNavigate={go}
+              />
+            ) : route.startsWith("project/") ? (
+              <div className="empty-state">
+                <h1>Projet introuvable.</h1>
+                <p>
+                  Ce projet n’est pas présent dans cette sauvegarde. Retrouvez
+                  vos fiches dans l’Incubator.
+                </p>
+                <button
+                  className="button primary"
+                  onClick={() => go("incubator")}
+                >
+                  Retrouver mes projets
+                </button>
+              </div>
             ) : route === "radar" ? (
               <Radar />
             ) : route === "settings" ? (
@@ -426,7 +458,9 @@ function App() {
             key={item.id}
             href={`#${item.id}`}
             aria-current={
-              route === item.id || (item.id === "academy" && lesson)
+              route === item.id ||
+              (item.id === "academy" && lesson) ||
+              (item.id === "incubator" && route.startsWith("project/"))
                 ? "page"
                 : undefined
             }
@@ -861,7 +895,7 @@ function Search({
     ...state.projects.map((p) => ({
       title: p.title,
       detail: "Projet · Incubator",
-      route: "incubator",
+      route: `project/${p.id}`,
       search: `${p.title} ${p.problem} ${p.customer}`,
     })),
     ...Object.entries(state.notes)

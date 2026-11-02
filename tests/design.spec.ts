@@ -107,6 +107,11 @@ async function capture(page: Page, testInfo: TestInfo, name: string) {
       path: testInfo.outputPath("11-revisions-viewport.png"),
       fullPage: false,
     });
+  if (name === "12-project-outcome")
+    await page.screenshot({
+      path: testInfo.outputPath("12-project-viewport.png"),
+      fullPage: false,
+    });
 }
 
 async function importReviewDemo(page: Page, state: AppState) {
@@ -451,6 +456,122 @@ test("galerie des écrans et du quiz validé sans débordement", async ({
     page.getByRole("heading", { name: "À jour pour le moment.", exact: true }),
   ).toBeVisible();
   await capture(page, testInfo, "11-revisions-planned");
+
+  // Build the project's evidence and decision history through the actual UI.
+  await page.goto("/#project/design-project");
+  await expect(
+    page.getByRole("heading", {
+      name: "Prévoir le cash d’un atelier",
+      exact: true,
+    }),
+  ).toBeVisible();
+  await capture(page, testInfo, "12-project-empty");
+  await page
+    .getByRole("button", { name: "Préparer un test", exact: true })
+    .click();
+  for (const [label, value] of [
+    ["Nom du test", "Tester un suivi de trésorerie hebdomadaire"],
+    [
+      "Hypothèse à vérifier",
+      "Trois artisans sur cinq acceptent un essai de suivi pendant deux semaines.",
+    ],
+    [
+      "Protocole de test",
+      "Présenter un exemple à cinq artisans, noter leur pratique actuelle et demander un engagement concret.",
+    ],
+    [
+      "Critère de réussite",
+      "Trois engagements écrits pour un essai limité à deux semaines.",
+    ],
+    ["Date de revue du test", "2026-11-10"],
+  ])
+    await page.getByLabel(label!, { exact: true }).fill(value!);
+  await page
+    .getByRole("button", { name: "Enregistrer le test", exact: true })
+    .click();
+  await capture(page, testInfo, "12-project-test-plan");
+  await page
+    .getByRole("button", { name: "Consigner le résultat", exact: true })
+    .click();
+  await page
+    .getByLabel("Observation", { exact: true })
+    .fill(
+      "Deux artisans demandent un essai et trois ne souhaitent pas poursuivre.",
+    );
+  await page
+    .getByLabel("Éléments de preuve", { exact: true })
+    .fill(
+      "Compte rendu fictif des cinq entretiens : deux engagements écrits, trois refus documentés.",
+    );
+  await page
+    .getByLabel("Conclusion", { exact: true })
+    .selectOption("inconclusive");
+  await page
+    .getByRole("button", { name: "Enregistrer le résultat", exact: true })
+    .click();
+  await capture(page, testInfo, "12-project-result");
+  const projectState: AppState = await page.evaluate(() =>
+    JSON.parse(localStorage.getItem("bouse.academy.v1")!),
+  );
+  const experiment = projectState.experiments!.find(
+    (item) => item.projectId === "design-project",
+  )!;
+  expect(experiment.result?.conclusion).toBe("inconclusive");
+  await page.getByRole("tab", { name: /^Décisions/ }).click();
+  await page
+    .getByRole("button", { name: "Noter une décision", exact: true })
+    .click();
+  for (const [label, value] of [
+    ["Titre de la décision", "Limiter le premier pilote à deux ateliers"],
+    [
+      "Contexte disponible",
+      "Deux ateliers demandent un essai ; le temps de suivi reste inconnu.",
+    ],
+    [
+      "Options envisagées",
+      "Lancer un pilote limité, chercher davantage de clients ou différer la construction.",
+    ],
+    [
+      "Choix retenu",
+      "Tester une méthode manuelle pendant deux semaines avec les deux ateliers volontaires.",
+    ],
+    [
+      "Résultat attendu",
+      "Les deux ateliers utilisent le suivi chaque semaine avec moins de trente minutes de travail par atelier.",
+    ],
+    ["Confiance initiale (%)", "70"],
+    [
+      "Risque principal",
+      "Le suivi manuel pourrait prendre trop de temps pour être rentable.",
+    ],
+    ["Date de revue de la décision", "2026-11-17"],
+  ])
+    await page.getByLabel(label!, { exact: true }).fill(value!);
+  await page
+    .getByLabel("Test terrain associé (facultatif)", { exact: true })
+    .selectOption(experiment.id);
+  await page
+    .getByRole("button", { name: "Enregistrer la décision", exact: true })
+    .click();
+  await capture(page, testInfo, "12-project-decision");
+  await page
+    .getByRole("button", { name: "Comparer au réel", exact: true })
+    .click();
+  await page
+    .getByLabel("Ce qui s’est passé", { exact: true })
+    .fill(
+      "Un atelier a utilisé le suivi deux fois ; l’autre n’a pas renouvelé son engagement.",
+    );
+  await page.getByLabel("Comparaison", { exact: true }).selectOption("mixed");
+  await page
+    .getByLabel("Ce que j’en retiens", { exact: true })
+    .fill(
+      "Mesurer l’usage réel et le temps de préparation avant d’automatiser.",
+    );
+  await page
+    .getByRole("button", { name: "Enregistrer le bilan", exact: true })
+    .click();
+  await capture(page, testInfo, "12-project-outcome");
   expect(errors).toEqual([]);
 });
 

@@ -345,9 +345,11 @@ const emptyDraft: ProjectDraft = {
 export function Incubator({
   state,
   update,
+  onNavigate,
 }: {
   state: AppState;
   update: StateUpdater;
+  onNavigate: (route: string) => void;
 }) {
   const [draft, setDraft] = useState<ProjectDraft>(emptyDraft);
   const [editingId, setEditingId] = useState<string | null>(null);
@@ -633,6 +635,12 @@ export function Incubator({
             sur {projectStages.length} · {projectStages.join(" → ")}
           </p>
           <div>
+            <button
+              className="button primary"
+              onClick={() => onNavigate(`project/${project.id}`)}
+            >
+              Ouvrir l’atelier <Icon name="arrow" size={16} />
+            </button>{" "}
             <button className="button secondary" onClick={() => edit(project)}>
               Modifier la fiche
             </button>{" "}

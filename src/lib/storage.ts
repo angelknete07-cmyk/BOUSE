@@ -1,6 +1,7 @@
 import type { AppState } from "./types";
 import { projectStages } from "./domain.ts";
 import { isReviewEvent } from "./reviews.ts";
+import { isExperiment, isDecision } from "./projects.ts";
 
 export const storageKey = "bouse.academy.v1";
 export const emptyState: AppState = {
@@ -11,6 +12,8 @@ export const emptyState: AppState = {
   notes: {},
   lastLessonId: null,
   reviewEvents: [],
+  experiments: [],
+  decisions: [],
 };
 export function parseState(raw: string): AppState {
   const data: unknown = JSON.parse(raw);
@@ -88,6 +91,12 @@ export function parseState(raw: string): AppState {
     )
   )
     throw new Error("Projets invalides.");
+  const projectIds = new Set(s.projects.map((project) => project.id));
+  if (
+    projectIds.size !== s.projects.length ||
+    s.projects.some((project) => !project.id.trim())
+  )
+    throw new Error("Projets invalides : identifiants absents ou en double.");
   if (
     !Object.values(s.notes).every((n) => typeof n === "string") ||
     (s.lastLessonId !== null && typeof s.lastLessonId !== "string")
@@ -100,6 +109,45 @@ export function parseState(raw: string): AppState {
     if (ids.size !== s.reviewEvents.length)
       throw new Error(
         "Historique de révision invalide : identifiants en double.",
+      );
+  }
+  if (s.experiments !== undefined) {
+    if (
+      !Array.isArray(s.experiments) ||
+      !s.experiments.every(isExperiment) ||
+      s.experiments.some((item) => !projectIds.has(item.projectId))
+    )
+      throw new Error("Tests terrain invalides ou sans projet associé.");
+    if (
+      new Set(s.experiments.map((item) => item.id)).size !==
+      s.experiments.length
+    )
+      throw new Error("Tests terrain invalides : identifiants en double.");
+  }
+  if (s.decisions !== undefined) {
+    if (
+      !Array.isArray(s.decisions) ||
+      !s.decisions.every(isDecision) ||
+      s.decisions.some((item) => !projectIds.has(item.projectId))
+    )
+      throw new Error("Journal de décisions invalide ou sans projet associé.");
+    if (new Set(s.decisions.map((item) => item.id)).size !== s.decisions.length)
+      throw new Error(
+        "Journal de décisions invalide : identifiants en double.",
+      );
+    if (
+      s.decisions.some(
+        (item) =>
+          item.experimentId !== undefined &&
+          !s.experiments?.some(
+            (test) =>
+              test.id === item.experimentId &&
+              test.projectId === item.projectId,
+          ),
+      )
+    )
+      throw new Error(
+        "Une décision fait référence à un test absent ou à un autre projet.",
       );
   }
   return s;
