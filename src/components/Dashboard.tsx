@@ -3,6 +3,8 @@ import { lessons, type Lesson } from "../data/lessons";
 import type { AppState } from "../lib/types";
 import { Icon } from "./Icon";
 import { Terrain } from "./Terrain";
+import { buildReviewDeck, dueReviewCards } from "../lib/reviews";
+import { useClock } from "../lib/useClock";
 import "../dashboard-experience.css";
 
 type Props = { state: AppState; onNavigate: (route: string) => void };
@@ -60,6 +62,9 @@ function getProgress(state: AppState) {
 }
 
 export function Dashboard({ state, onNavigate }: Props) {
+  const now = useClock();
+  const reviewDeck = buildReviewDeck(lessons, state, now);
+  const due = dueReviewCards(reviewDeck, now);
   const { latest, done, current } = getProgress(state);
   const [selectedId, setSelectedId] = useState(current.id);
   const selected =
@@ -362,26 +367,26 @@ export function Dashboard({ state, onNavigate }: Props) {
       >
         <button
           className="learning-next-action"
-          onClick={() =>
-            onNavigate(
-              revisions.length ? `lesson/${revisions[0]!.id}` : "academy",
-            )
-          }
+          onClick={() => onNavigate("reviews")}
         >
           <span className="learning-action-icon">
-            <Icon name="node" size={21} />
+            <Icon name="clock" size={21} />
           </span>
           <span>
-            <small>NOTIONS À REPRENDRE</small>
+            <small>FAIRE DURER CE QUE VOUS APPRENEZ</small>
             <strong>
               {revisions.length
                 ? `${String(revisions.length).padStart(2, "0")} repère${revisions.length > 1 ? "s" : ""} à consolider`
-                : "Votre curiosité ouvre la suite."}
+                : due.length
+                  ? `${String(due.length).padStart(2, "0")} carte${due.length > 1 ? "s" : ""} à revoir`
+                  : reviewDeck.length
+                    ? "Vos prochaines révisions sont planifiées."
+                    : "Un premier repère, puis un rappel."}
             </strong>
             <span>
-              {revisions.length
-                ? "Une erreur est un point de départ utile."
-                : "Choisissez une notion à mettre en pratique."}
+              {due.length
+                ? `${due.length} carte${due.length > 1 ? "s" : ""} disponible${due.length > 1 ? "s" : ""} · une courte session de rappel.`
+                : "Quiz, rappel, espacement : chaque étape garde sa propre preuve."}
             </span>
           </span>
           <Icon name="arrow" size={18} />

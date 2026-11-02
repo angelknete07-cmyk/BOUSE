@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { emptyState, parseState } from "../src/lib/storage.ts";
+import type { ReviewEvent } from "../src/lib/types.ts";
 
 function savedState() {
   return {
@@ -46,6 +47,46 @@ function savedState() {
 }
 
 const parse = (value: unknown) => parseState(JSON.stringify(value));
+
+const reviewEvent: ReviewEvent = {
+  id: "recall-1",
+  cardId: "ca-marge-tresorerie::1.0.0::0",
+  lessonId: "ca-marge-tresorerie",
+  lessonVersion: "1.0.0",
+  rating: "remembered",
+  at: "2026-11-02T10:00:00.000Z",
+  dueAt: "2026-11-05T10:00:00.000Z",
+  intervalDays: 3,
+  step: 1,
+};
+
+test("older v1 backups remain compatible without a review history", () => {
+  const original = savedState();
+  const restored = parse(original);
+  assert.deepEqual(restored, original);
+  assert.equal(restored.reviewEvents, undefined);
+});
+
+test("review history survives backup export and import with quiz evidence unchanged", () => {
+  const value = { ...savedState(), reviewEvents: [reviewEvent] };
+  const restored = parse(value);
+  assert.deepEqual(restored.reviewEvents, [reviewEvent]);
+  assert.deepEqual(restored.attempts, value.attempts);
+});
+
+test("invalid or duplicated review schedules cannot enter persisted state", () => {
+  for (const reviewEvents of [
+    null,
+    {},
+    [false],
+    [{ ...reviewEvent, rating: "perfect" }],
+    [{ ...reviewEvent, dueAt: reviewEvent.at }],
+    [{ ...reviewEvent, cardId: "another-lesson::1.0.0::0" }],
+    [reviewEvent, reviewEvent],
+  ]) {
+    assert.throws(() => parse({ ...savedState(), reviewEvents }));
+  }
+});
 
 test("an empty state survives JSON export and reimport", () => {
   assert.deepEqual(parse(emptyState), emptyState);
@@ -128,6 +169,8 @@ test("malformed attempts cannot be imported as progress", () => {
     { ...attempt, total: -1 },
     { ...attempt, passed: "true" },
     { ...attempt, at: 0 },
+    { ...attempt, lessonVersion: 7 },
+    { ...attempt, lessonVersion: "" },
   ])
     assert.throws(() => parse({ ...value, attempts: [bad] }));
 });

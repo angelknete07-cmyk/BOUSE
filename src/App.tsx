@@ -15,11 +15,13 @@ import { KnowledgeMap } from "./components/KnowledgeMap";
 import { Onboarding } from "./components/Onboarding";
 import { AILab, Incubator, Lab } from "./components/Tools";
 import { LessonView } from "./components/LessonView";
+import { Reviews } from "./components/Reviews";
 
 const navigation = [
   { id: "home", label: "Vue d’ensemble", icon: "home" },
   { id: "academy", label: "Academy", icon: "book" },
   { id: "skills", label: "Mes compétences", icon: "node" },
+  { id: "reviews", label: "Révisions", icon: "clock" },
   { id: "lab", label: "Lab financier", icon: "lab" },
   { id: "incubator", label: "Incubator", icon: "idea" },
   { id: "ai", label: "AI Lab", icon: "ai" },
@@ -382,6 +384,8 @@ function App() {
               />
             ) : route === "skills" ? (
               <KnowledgeMap state={state} onNavigate={go} />
+            ) : route === "reviews" ? (
+              <Reviews state={state} update={update} onNavigate={go} />
             ) : route === "lab" ? (
               <Lab />
             ) : route === "ai" ? (
@@ -415,7 +419,7 @@ function App() {
         {[
           { id: "home", label: "Accueil", icon: "home" },
           { id: "academy", label: "Apprendre", icon: "book" },
-          { id: "ai", label: "AI Lab", icon: "ai" },
+          { id: "reviews", label: "Réviser", icon: "clock" },
           { id: "incubator", label: "Projets", icon: "idea" },
         ].map((item) => (
           <a

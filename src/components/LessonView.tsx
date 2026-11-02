@@ -111,6 +111,7 @@ export function LessonView({ lesson, state, update, onNavigate }: Props) {
     submitted.current = true;
     const attempt: Attempt = {
       lessonId: lesson.id,
+      lessonVersion: lesson.version,
       answers: { ...answers },
       ...evaluateQuiz(lesson.quiz, answers),
       at: new Date().toISOString(),
@@ -748,6 +749,17 @@ export function LessonView({ lesson, state, update, onNavigate }: Props) {
                       ? "Repères validés sur ce quiz. La prochaine preuve se construit dans une situation concrète."
                       : "Votre prochaine révision ciblera cette notion. Comparez votre raisonnement aux explications, puis réessayez."}
                   </p>
+                  <p className="learning-footnote">
+                    Les repères de cette leçon rejoignent votre calendrier de
+                    rappel. Les autoévaluations de révision restent distinctes
+                    de ce quiz.
+                  </p>
+                  <button
+                    className="text-button"
+                    onClick={() => onNavigate("reviews")}
+                  >
+                    Ouvrir mes révisions <Icon name="arrow" size={16} />
+                  </button>
                   <div className="learning-result-review">
                     {lesson.quiz.map((item, index) => (
                       <details key={item.id}>

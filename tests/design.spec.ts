@@ -102,6 +102,30 @@ async function capture(page: Page, testInfo: TestInfo, name: string) {
       path: testInfo.outputPath("00-home-viewport.png"),
       fullPage: false,
     });
+  if (name === "11-revisions-due")
+    await page.screenshot({
+      path: testInfo.outputPath("11-revisions-viewport.png"),
+      fullPage: false,
+    });
+}
+
+async function importReviewDemo(page: Page, state: AppState) {
+  await page.goto("/#settings");
+  await page.getByLabel("Importer une sauvegarde").setInputFiles({
+    name: "profil-demo-revisions.json",
+    mimeType: "application/json",
+    buffer: Buffer.from(JSON.stringify(state)),
+  });
+  await page
+    .getByRole("button", { name: "Confirmer le remplacement", exact: true })
+    .click();
+  await page.goto("/#reviews");
+  await expect(
+    page.getByRole("heading", {
+      name: "Faire revenir les idées.",
+      exact: true,
+    }),
+  ).toBeVisible();
 }
 
 test("surfaces neutres et états de navigation sur un véritable rendu", async ({
@@ -338,6 +362,95 @@ test("galerie des écrans et du quiz validé sans débordement", async ({
       await capture(page, testInfo, "09-competences-selection");
     }
   }
+
+  // Use the application's validated import flow. The gallery init script would
+  // replace direct localStorage mutations after a document reload.
+  const currentState: AppState = await page.evaluate(() =>
+    JSON.parse(localStorage.getItem("bouse.academy.v1")!),
+  );
+  await importReviewDemo(page, {
+    ...currentState,
+    attempts: [],
+    reviewEvents: [],
+  });
+  await expect(
+    page.getByRole("heading", {
+      name: "Le premier rappel commence par une leçon.",
+      exact: true,
+    }),
+  ).toBeVisible();
+  await capture(page, testInfo, "11-revisions-empty");
+
+  const reviewLesson = lessons.find((item) => item.id === "seuil-rentabilite")!;
+  await importReviewDemo(page, {
+    ...currentState,
+    attempts: [
+      ...currentState.attempts,
+      {
+        lessonId: reviewLesson.id,
+        answers: Object.fromEntries(
+          reviewLesson.quiz.map((question) => [
+            question.id,
+            (question.answer + 1) % question.options.length,
+          ]),
+        ),
+        correct: 0,
+        total: reviewLesson.quiz.length,
+        percent: 0,
+        passed: false,
+        at: new Date(Date.now() - 2 * 86_400_000).toISOString(),
+      },
+    ],
+    reviewEvents: [],
+  });
+  await expect(
+    page.getByRole("button", { name: "Commencer la révision", exact: true }),
+  ).toBeVisible();
+  await capture(page, testInfo, "11-revisions-due");
+  await page
+    .getByRole("button", { name: "Commencer la révision", exact: true })
+    .click();
+  await expect(
+    page.getByRole("heading", {
+      name: reviewLesson.flashcards[0]!.front,
+      exact: true,
+    }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: "Retrouvé sans aide", exact: true }),
+  ).toHaveCount(0);
+  await capture(page, testInfo, "11-revisions-recall");
+  await page
+    .getByLabel("Votre rappel", { exact: true })
+    .fill(
+      "Je divise les charges fixes par la contribution de chaque vente, en gardant les hypothèses constantes.",
+    );
+  await page
+    .getByRole("button", { name: "Voir les repères", exact: true })
+    .click();
+  await expect(page.locator(".review-answer")).toContainText(
+    reviewLesson.flashcards[0]!.back,
+  );
+  await capture(page, testInfo, "11-revisions-revealed");
+  await page
+    .getByRole("button", { name: "Retrouvé sans aide", exact: true })
+    .click();
+  await page
+    .getByRole("button", { name: "Voir les repères", exact: true })
+    .click();
+  await page
+    .getByRole("button", { name: "Encore fragile", exact: true })
+    .click();
+  await expect(
+    page.getByRole("heading", { name: "Une pause qui compte.", exact: true }),
+  ).toBeVisible();
+  await capture(page, testInfo, "11-revisions-complete");
+  await page.goto("/#academy");
+  await page.goto("/#reviews");
+  await expect(
+    page.getByRole("heading", { name: "À jour pour le moment.", exact: true }),
+  ).toBeVisible();
+  await capture(page, testInfo, "11-revisions-planned");
   expect(errors).toEqual([]);
 });
 

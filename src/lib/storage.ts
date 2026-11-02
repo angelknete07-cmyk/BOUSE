@@ -1,5 +1,6 @@
 import type { AppState } from "./types";
 import { projectStages } from "./domain.ts";
+import { isReviewEvent } from "./reviews.ts";
 
 export const storageKey = "bouse.academy.v1";
 export const emptyState: AppState = {
@@ -9,6 +10,7 @@ export const emptyState: AppState = {
   projects: [],
   notes: {},
   lastLessonId: null,
+  reviewEvents: [],
 };
 export function parseState(raw: string): AppState {
   const data: unknown = JSON.parse(raw);
@@ -49,6 +51,9 @@ export function parseState(raw: string): AppState {
       (a) =>
         a &&
         strings(a, ["lessonId", "at"]) &&
+        (a.lessonVersion === undefined ||
+          (typeof a.lessonVersion === "string" &&
+            a.lessonVersion.trim().length > 0)) &&
         answers(a.answers) &&
         Number.isFinite(a.percent) &&
         a.percent >= 0 &&
@@ -88,6 +93,15 @@ export function parseState(raw: string): AppState {
     (s.lastLessonId !== null && typeof s.lastLessonId !== "string")
   )
     throw new Error("Notes invalides.");
+  if (s.reviewEvents !== undefined) {
+    if (!Array.isArray(s.reviewEvents) || !s.reviewEvents.every(isReviewEvent))
+      throw new Error("Historique de révision invalide.");
+    const ids = new Set(s.reviewEvents.map((event) => event.id));
+    if (ids.size !== s.reviewEvents.length)
+      throw new Error(
+        "Historique de révision invalide : identifiants en double.",
+      );
+  }
   return s;
 }
 export function readState(): { state: AppState; error: string | null } {

@@ -32,6 +32,10 @@ const requiredScreens = [
   "06-ai-lab.png",
   "07-incubator.png",
   "03-recherche.png",
+  "11-revisions-due.png",
+  "11-revisions-recall.png",
+  "11-revisions-revealed.png",
+  "11-revisions-complete.png",
 ];
 const projects = [
   { name: "desktop-chromium", directory: "desktop" },
@@ -39,6 +43,9 @@ const projects = [
 ];
 const args = process.argv.slice(2);
 const checkOnly = args.includes("--check");
+const primaryArgument = args.find((arg) => arg.startsWith("--primary="));
+const primaryScreen =
+  primaryArgument?.slice("--primary=".length) || "00-home-viewport";
 const digest = (bytes) => createHash("sha256").update(bytes).digest("hex");
 const toRelative = (path) => relative(projectRoot, path).split(sep).join("/");
 
@@ -133,12 +140,13 @@ async function atomicCopy(source, target) {
 async function main() {
   if (args.includes("--help")) {
     console.log(
-      "Usage : node scripts/save-design-review.mjs [--check]\n--check valide les rendus et leur fraîcheur sans modifier design-reviews/.",
+      "Usage : node scripts/save-design-review.mjs [--check] [--primary=00-home-viewport]\n--check valide les rendus sans modifier design-reviews/.\n--primary choisit la paire de PNG à copier vers latest-*.png.",
     );
     return;
   }
   ensure(
-    args.every((arg) => arg === "--check"),
+    args.every((arg) => arg === "--check" || arg === primaryArgument) &&
+      /^[0-9]{2}-[a-z0-9-]+$/.test(primaryScreen),
     "Option inconnue. Utilisez --help.",
   );
   const run = JSON.parse(await readFile(runPath, "utf8"));
@@ -246,7 +254,7 @@ async function main() {
         });
       }
     }
-    for (const name of requiredScreens)
+    for (const name of [...requiredScreens, `${primaryScreen}.png`])
       ensure(
         seen.has(name),
         `Capture requise absente : ${project.directory}/${name}. Exécuter toute la galerie de tests/design.spec.ts.`,
@@ -261,6 +269,7 @@ async function main() {
     testRunCompletedAt: runStat.mtime.toISOString(),
     testRunStatus: run.status,
     captureMode: "latest: viewport; screens: full-page and viewport",
+    primaryScreen,
     viewports,
     sourceSha256: digest(JSON.stringify(sourceFiles)),
     sourceFiles,
@@ -304,7 +313,7 @@ async function main() {
     }
     for (const project of projects)
       await copyFile(
-        join(staging, "screens", project.directory, "00-home-viewport.png"),
+        join(staging, "screens", project.directory, `${primaryScreen}.png`),
         join(staging, `latest-${project.directory}.png`),
       );
     await writeFile(

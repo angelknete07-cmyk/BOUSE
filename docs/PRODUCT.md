@@ -9,6 +9,7 @@ BOUSE est une académie personnelle francophone de business, de finance et d’i
 | Premier lancement     | Profil court : niveau déclaré, objectif, intérêts, temps disponible, préférence d’apprentissage ; diagnostic de trois questions.                                                                                                  |
 | Tableau de bord       | Prochaine action utile, progression issue des tentatives et accès aux projets. Aucun historique prérempli présenté comme personnel.                                                                                               |
 | Academy               | Six leçons de fondations, deux piliers finance et IA, prérequis explicites, quiz corrigés, flashcards et notes.                                                                                                                   |
+| Révisions             | Sessions de cinq cartes maximum après un quiz de la version courante, rappel avant révélation, autoévaluation et échéances transparentes. Les notes de quiz restent distinctes.                                                   |
 | Compétences           | Indicateurs fondés sur le diagnostic et les tentatives ; accès aux preuves et aux notions à retravailler. Une bonne réponse ne constitue pas une certification professionnelle.                                                   |
 | Lab                   | Calculateur de chiffre d’affaires, contribution, résultat simplifié et seuil de rentabilité. Hypothèses modifiables, cas limites expliqués.                                                                                       |
 | AI Lab                | Grille de relecture de prompt et trame réutilisable. Analyse déterministe et explicite, sans appel à un modèle.                                                                                                                   |
@@ -35,7 +36,7 @@ Les exercices utilisent des situations fictives annoncées comme telles. Les inf
 
 ## Données personnelles
 
-Le profil, les réponses, les tentatives, les notes et les projets sont conservés dans le `localStorage` du navigateur courant. Ils servent à reprendre l’apprentissage et les projets. Ils restent jusqu’à leur suppression dans l’application ou par le navigateur. Il n’existe dans cette version ni compte, ni synchronisation entre appareils, ni sauvegarde distante.
+Le profil, les réponses, les tentatives, les autoévaluations de rappel, les notes et les projets sont conservés dans le `localStorage` du navigateur courant. Ils servent à reprendre l’apprentissage et les projets. Ils restent jusqu’à leur suppression dans l’application ou par le navigateur. Il n’existe dans cette version ni compte, ni synchronisation entre appareils, ni sauvegarde distante.
 
 L’export JSON permet une sauvegarde volontaire ; ce fichier contient des données personnelles en clair. L’import remplace l’état local après validation et confirmation : conserver un export avant d’importer. La suppression doit être explicite. Si le stockage est indisponible, l’application explique l’erreur ; la persistance ne doit jamais être supposée réussie.
 
@@ -43,7 +44,7 @@ L’AI Lab initial n’envoie pas les prompts à un service externe. Les liens d
 
 ## Feuille de route ordonnée
 
-1. **Consolider les fondations** : affiner les contenus après retours utilisateurs, preuves de compétences, révisions espacées, export Markdown/Obsidian et accessibilité. Étendre les tests aux parcours réellement ajoutés.
+1. **Consolider les fondations** : affiner les contenus après retours utilisateurs, preuves de compétences, révisions espacées (version locale livrée), export Markdown/Obsidian et accessibilité. Étendre les tests aux parcours réellement ajoutés.
 2. **Persistance et comptes** : Supabase/PostgreSQL, migrations, authentification, politiques d’accès par utilisateur, sauvegardes et suppression de compte. Ne connecter aucun projet existant sans inspection préalable.
 3. **Mentor et recherche IA** : adaptateurs de fournisseurs côté serveur, permissions, budgets, évaluation, citations et distinction entre brouillon et contenu validé. Aucun faux dialogue de mentor en attendant.
 4. **Projets approfondis** : fiches d’idées, validation terrain, journal de décision, analyse contradictoire et liens bidirectionnels compétences/projets.
@@ -53,3 +54,11 @@ L’AI Lab initial n’envoie pas les prompts à un service externe. Les liens d
 8. **Distribution** : PWA, hors-ligne, exploitation et déploiement après validation de la sécurité, de la confidentialité et des besoins réels.
 
 Ces étapes restent des travaux futurs tant que leurs capacités et validations ne sont pas explicitement livrées.
+
+## Règle des révisions locales
+
+Un premier quiz inscrit les repères de sa version de leçon. Un échec rend les cartes de cette leçon prioritaires ; il ne permet pas de diagnostiquer une faiblesse précise sur une carte. Sans échec, le premier rappel vient 24 h après le premier quiz. Une nouvelle réussite ne repousse pas une carte déjà due. Une nouvelle erreur peut avancer le rappel.
+
+Après avoir révélé les repères, « À reprendre » propose 24 h et remet le palier au début ; « Encore fragile » propose 24 h sans avancer ; « Retrouvé sans aide » progresse par 3, 7, 14 puis 30 jours. Ce sont des intervalles explicites de l’application, sans promesse de personnalisation scientifique. Les dates sont conservées en UTC et présentées en heure de Paris ; un jour de planification correspond à 24 heures, y compris aux changements d’heure.
+
+Passer ou quitter une carte ne crée aucune réussite. Une session contient au maximum cinq cartes fixées au départ. Les brouillons ne durent que pendant la session ; les autoévaluations rejoignent la sauvegarde locale et l’export JSON. Elles ne changent ni résultat de quiz ni niveau de compétence. Une version révisée de contenu exige un quiz sur cette version avant inscription aux révisions.

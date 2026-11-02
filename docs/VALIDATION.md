@@ -7,12 +7,12 @@ Validation de l’instance cloud et des fichiers présents dans `/workspace/BOUS
 | Accès GitHub en lecture avec l’authentification existante | `git ls-remote origin HEAD` réussi                                             |
 | Installation reproductible                                | `npm ci --no-audit --no-fund` réussi, lockfile conservé                        |
 | Compilation TypeScript stricte et Vite                    | `npm run build` réussi                                                         |
-| Logique métier, import et structure pédagogique           | `npm test` : **33 réussis**, aucun échec ni test ignoré                        |
-| Parcours navigateur                                       | `npm run test:e2e` : **12 réussis**, aucun échec ni test ignoré                |
+| Logique métier, import et structure pédagogique           | `npm test` : **54 réussis**, aucun échec ni test ignoré                        |
+| Parcours navigateur                                       | `npm run test:e2e` : **18 réussis**, aucun échec ni test ignoré                |
 | Serveur de production local                               | HTML et ressources JavaScript/CSS de la dernière compilation reçus avec succès |
 | Lisibilité et espaces                                     | Prettier et `git diff --check` réussis                                         |
 
-Trois scénarios fonctionnels et trois scénarios de rendu/motion sont exécutés dans Chromium sur ordinateur et en émulation Pixel 7 :
+Six scénarios fonctionnels et trois scénarios de rendu/motion sont exécutés dans Chromium sur ordinateur et en émulation Pixel 7 :
 
 1. Onboarding et diagnostic, leçon, exercice avec indice et solution, quiz, création d’idée sans doublon, modification et avancement du projet, rechargement et carte de compétences.
 2. Calcul financier et cas limites, navigation clavier de la palette, synonymes de recherche et grille locale de prompts.
@@ -31,3 +31,9 @@ L’enregistrement du brouillon a été confirmé par l’outil. La revue, l’e
 ## Limites
 
 Pas de test sur appareil physique, Safari ou Firefox, ni d’audit d’accessibilité automatisé complet. Le fonctionnement du clavier et les états principaux sont exercés ; cela ne constitue pas une certification d’accessibilité. Les références pédagogiques sont signalées comme non vérifiées. Les intégrations Supabase, authentification, IA distante et veille automatisée restent à construire. Aucun identifiant n’est requis pour la version locale validée.
+
+## Passe 03 — rappels espacés
+
+La dernière exécution complète comporte 18 tests navigateur réussis (9 scénarios sur desktop et mobile) et 54 tests unitaires réussis : 6 de contenu, 15 métier, 18 de planification, 15 de sauvegarde. Les nouveaux parcours vérifient la révélation avant notation, le double clic, les échéances exactes de 24 h/3 jours, le score de quiz inchangé, la conservation au rechargement, l’export et l’import d’une ancienne sauvegarde sans historique de rappel. Les tests unitaires couvrent aussi les versions de contenu, les dates futures, les changements d’heure, les paliers et les nouveaux échecs de quiz.
+
+La galerie réelle de 49 captures est enregistrée dans `design-reviews/`, avec la paire principale centrée sur les révisions. Les états disponibles, rappel, révélé, terminé, à jour et vide ont été inspectés sur les deux viewports. La passe précédente a été autorisée par l’utilisateur ; les nouveaux rendus de la passe 03 restent à examiner.

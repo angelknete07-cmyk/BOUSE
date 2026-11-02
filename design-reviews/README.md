@@ -4,7 +4,7 @@ Ce dossier fait partie du dépôt. Les captures proviennent de l’application r
 
 ## Dernière passe
 
-- [`latest-desktop.png`](latest-desktop.png) et [`latest-mobile.png`](latest-mobile.png) : accueil de la dernière passe enregistrée.
+- [`latest-desktop.png`](latest-desktop.png) et [`latest-mobile.png`](latest-mobile.png) : écran principal choisi pour la dernière passe enregistrée.
 - `screens/desktop/` et `screens/mobile/` : autres écrans et états capturés.
 - [`LATEST.md`](LATEST.md) : changements, écrans concernés, contrôles, comparaison et statut de review.
 - `render-manifest.json` : dimensions, empreintes SHA-256 des images et des sources, date du run et viewports réellement configurés.
@@ -20,9 +20,13 @@ Depuis la racine du projet :
 npm run test:e2e
 node scripts/save-design-review.mjs --check
 node scripts/save-design-review.mjs
+# Choisir le nouvel écran de cette passe pour la paire latest-* :
+node scripts/save-design-review.mjs --primary=11-revisions-viewport
 ```
 
 Playwright lance ou réutilise l’application selon `playwright.config.ts`. Dans ce cloud, Vite et Chromium peuvent nécessiter le mécanisme de permissions étendues de l’outil. Voir [`docs/SETUP.md`](../docs/SETUP.md).
+
+Le paramètre `--primary` choisit une capture présente dans les deux viewports pour les fichiers stables. Pour cette passe, il s’agit de `11-revisions-viewport` ; les pages complètes et les états de session restent dans `screens/`.
 
 Le script utilise Node et la configuration Playwright déjà installée ; il ne télécharge aucun paquet. Il exige un dernier run réussi, les captures desktop et mobile de la galerie, et des fichiers d’interface qui n’ont pas changé après les tests. Il refuse les captures manquantes, ambiguës ou antérieures aux dernières sources. L’option `--check` ne modifie aucun fichier.
 

@@ -48,3 +48,11 @@ La relecture de prompts utilise une grille transparente de mots-clés : objectif
 - Aucune donnée personnelle fictive présentée comme historique réel, aucun secret dans Git, aucune transmission externe implicite.
 
 Les commandes et leurs résultats de validation sont rapportés au moment de la livraison. La compilation seule ne démontre ni accessibilité complète, ni sécurité d’un futur backend, ni disponibilité en production.
+
+## Révisions espacées — extension compatible du format v1
+
+`reviewEvents` est un champ facultatif du format existant. Les anciennes sauvegardes qui ne le contiennent pas restent acceptées sans effacement ni migration destructive. Les nouveaux événements portent identifiant, leçon/version, carte, autoévaluation, instant UTC, échéance et palier. La validation de sauvegarde réutilise `isReviewEvent` pour refuser les échéances incohérentes et les identifiants en double.
+
+`src/lib/reviews.ts` dérive le calendrier des tentatives et de ces événements. Les cartes sont identifiées par `lessonId::version::index`. Les nouvelles tentatives portent `lessonVersion` ; les anciennes sans cette propriété correspondent au catalogue initial `1.0.0`. Un quiz v1 ne crée pas de retard sur une nouvelle version v2. L’historique v1 reste conservé.
+
+Les intervalles sont des durées UTC exactes, affichées en heure de Paris. Les événements futurs, invalides ou précédant le travail de la version sont écartés du calcul. L’ajout d’événement est immuable et idempotent par identifiant. Le composant fige au plus cinq cartes au départ, garde la révélation avant notation, protège les doubles clics et ne modifie jamais les tentatives. Le score de quiz et l’autoévaluation de rappel sont deux preuves différentes.

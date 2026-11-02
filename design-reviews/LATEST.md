@@ -1,56 +1,47 @@
-# Review design — passe 02
+# Review design — passe 03 : révisions espacées
 
-**Rendus du 2 novembre 2026 à 22:03, Europe/Paris.**
+**Rendus du 2 novembre 2026 à 22:24, Europe/Paris.**
+**Statut : vérification interne effectuée ; nouveaux rendus prêts pour review.**
 
-**Statut : vérification interne effectuée ; review design externe en attente.** Le « GO » autorise cette passe de construction et de rendus. Il n’est pas interprété comme une validation des nouvelles images. Aucune nouvelle fonctionnalité ne sera empilée pendant cette phase de revue.
+La passe 02 a été acceptée par l’utilisateur : « OK, bah c’est parti pour la suite alors. » Cet accord autorisait cette brique ; aucune validation des nouvelles images n’est supposée.
 
-## Ouvrir les rendus
+## Rendus
 
-- [Desktop — viewport 1440 × 1000](latest-desktop.png)
-- [Mobile — viewport CSS 412 × 839, Pixel 7 émulé](latest-mobile.png)
-- [Accueil complet desktop](screens/desktop/01-home.png) · [mobile](screens/mobile/01-home.png)
-- [Leçon interactive desktop](screens/desktop/03-lecon-learn.png) · [mobile](screens/mobile/03-lecon-learn.png)
-- [Quiz et feedback desktop](screens/desktop/04-quiz-feedback.png) · [mobile](screens/mobile/04-quiz-feedback.png)
-- [Teach-back desktop](screens/desktop/03-teach-back.png) · [mobile](screens/mobile/03-teach-back.png)
-- [Graphe de compétences desktop](screens/desktop/09-competences.png) · [mobile](screens/mobile/09-competences.png)
+- [Desktop, viewport 1440 × 1000](latest-desktop.png) · [Mobile, viewport CSS 412 × 839](latest-mobile.png)
+- [Disponibles — desktop](screens/desktop/11-revisions-due.png) · [mobile](screens/mobile/11-revisions-due.png)
+- [Rappel — desktop](screens/desktop/11-revisions-recall.png) · [mobile](screens/mobile/11-revisions-recall.png)
+- [Repères révélés — desktop](screens/desktop/11-revisions-revealed.png) · [mobile](screens/mobile/11-revisions-revealed.png)
+- [Bilan — desktop](screens/desktop/11-revisions-complete.png) · [mobile](screens/mobile/11-revisions-complete.png)
+- [Échéances futures — desktop](screens/desktop/11-revisions-planned.png) · [mobile](screens/mobile/11-revisions-planned.png)
+- [État vide — desktop](screens/desktop/11-revisions-empty.png) · [mobile](screens/mobile/11-revisions-empty.png)
+- [Accueil actualisé — desktop](screens/desktop/01-home.png) · [mobile](screens/mobile/01-home.png)
 
-La galerie `screens/` couvre aussi onboarding, Academy, résultat du quiz, Lab financier, AI Lab, Incubator et son erreur de formulaire, Radar, sélection d’un autre nœud de compétences, recherche et paramètres. **35 PNG** proviennent de la dernière exécution réussie. Les fichiers `latest-*` montrent le viewport réel ; les fichiers des écrans comprennent aussi des captures de page complète. Les éléments fixes de navigation apparaissent à la position du viewport dans les images de page complète : utiliser la paire `latest-*` pour juger le premier écran mobile.
+**49 captures réelles**, dont les autres écrans existants. La paire latest montre désormais le nouvel espace Révisions. Le mobile utilise Pixel 7 émulé, à 2,625 pixels par pixel CSS. Les images de page complète incluent le dock fixe à la position du viewport : la paire latest représente le premier écran réel. Le profil et les tentatives sont explicitement des données de démonstration.
 
-Les images mobiles sont enregistrées à l’échelle native du profil Playwright (2,625 pixels par pixel CSS), d’où des dimensions PNG supérieures au viewport CSS. Le profil affiché est explicitement **« Profil démo »**. « Camille » n’est présent que dans les fixtures des tests fonctionnels et dans l’archive de la passe précédente ; aucun prénom n’est codé en dur dans `src/`.
+## Changements
 
-## Changements et comparaison
+- Sessions de cinq cartes maximum : rappel de mémoire, révélation puis autoévaluation.
+- Échec au quiz : priorité aux repères de la leçon, sans diagnostic artificiel d’une faiblesse précise.
+- « À reprendre » : 24 h et palier remis au début ; « Encore fragile » : 24 h sans avancer ; « Retrouvé sans aide » : 3, 7, 14 puis 30 jours.
+- Score des quiz inchangé. Passer ou quitter ne crée aucune réussite.
+- Échéances et historique conservés au rechargement et dans l’export/import JSON ; anciennes sauvegardes compatibles.
+- Les tentatives et les cartes sont associées à une version de contenu. Un quiz v1 ne crée pas de retard sur une nouvelle leçon v2 jamais travaillée.
+- Accès depuis l’accueil, le bilan du quiz et la navigation. Le dock mobile donne accès à « Réviser » ; l’AI Lab reste dans les espaces et son univers.
 
-| Zone          | Passe précédente                                             | Passe actuelle                                                                                                 |
-| ------------- | ------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------- |
-| Cadre desktop | Sidebar large, séparateur vertical et répétition de panneaux | Rail discret sans cadre, espace principal élargi et lumière neutre très légère                                 |
-| Accueil       | Héro, anneau de pourcentage et bande de KPI                  | Héro topographique animé lentement, trajectoire à six nœuds sélectionnables et action suivante contextualisée  |
-| Finance / IA  | Deux cartes de composition très proche                       | Lecture comptable et matière verticale pour Finance ; réseau contexte/modèle/vérification pour IA              |
-| Compétences   | Six cartes indépendantes                                     | Graphe des prérequis réels, état issu du dernier quiz et panneau contextuel unique                             |
-| Leçon         | Tous les paragraphes affichés successivement                 | Séquences courtes : concept, outil manipulable, approfondissement, situation fictive, teach-back et synthèse   |
-| Quiz          | Radios classiques, deux questions empilées                   | Choix à lettres, une question à la fois, progression, validation, explication et bilan consultable             |
-| Mobile        | Desktop essentiellement empilé                               | Dock accessible en bas, trajectoire et univers balayables, sélecteur de séquence, carnet et sources repliables |
-| Couleurs      | Neutres avec plusieurs confirmations vertes                  | Succès courants en gris ; erreurs et avertissements ponctuels uniquement                                       |
+## Comparaison et vérification
 
-La comparaison visuelle a été faite avec [l’accueil desktop précédent](archive/2026-11-02-pass-01/desktop/surfaces/01-home.png) et [la leçon précédente](archive/2026-11-02-pass-01/desktop/gallery/03-lecon-learn.png), puis avec leurs versions mobiles. L’archive de cette passe est `archive/2026-11-02_22-03-08-Europe-Paris/`.
+La base acceptée est conservée dans [l’archive de la passe 02](archive/2026-11-02_22-03-08-Europe-Paris/LATEST.md). Le nouvel espace reprend ses noirs, gris, argent, surfaces discrètes et hiérarchie typographique. Une table de rappel centrale et un calendrier visuel remplacent une longue liste de cartes. Les autres univers gardent leur composition.
 
-## Contrôles effectués
+Inspection desktop/mobile effectuée pour les états disponible, carte, révélé, bilan, planifié et vide : typographie lisible, question dominante pendant la session, pas de débordement ni chevauchement observé, choix tactiles adaptés au dock, focus sur la réponse révélée. Pas de grandes surfaces vertes ; les états restent neutres. Transitions non linéaires et réduction des mouvements conservées.
 
-- Application réellement lancée avec Vite sur le port 5173 ; captures prises dans Chromium, aucune image de maquette substituée.
-- Inspection des rendus de l’accueil, de la leçon, du quiz, du teach-back et du graphe : hiérarchie des titres, rythme de lecture, profondeur neutre, espaces, largeur mobile et accès aux actions.
-- Ajustements issus de cette inspection : séparation des styles de l’accueil et de la leçon, réduction de l’illustration Finance sur mobile, libellé du réseau IA contenu dans son cadre, action de séquence placée au-dessus du dock mobile, icônes SVG cohérentes.
-- Trajectoire et graphe réellement sélectionnables ; manipulation du délai client distinguant résultat et cash ; teach-back explicitement autoévalué, sans modèle IA ni score automatique inventé.
-- Quiz réussi et échoué, absence de double soumission, progression conservée au rechargement, projet appliqué et modifié, export/import explicite.
-- Transitions non linéaires, états hover/focus/pressed et respect de `prefers-reduced-motion`. La matière graphique ne bouge que de quelques pixels avec une variation d’échelle faible ; elle s’immobilise avec la réduction des mouvements.
-- **Compilation et TypeScript réussis, 33 tests unitaires réussis, 12 tests navigateur réussis**, aucun test ignoré. Les tests vérifient aussi les couleurs neutres et l’absence de débordement horizontal.
+**Compilation/TypeScript, 54 tests unitaires et 18 tests navigateur réussis, aucun test ignoré.** Les parcours couvrent révélation obligatoire, double clic sans doublon, échéances exactes, quiz inchangé, abandon, rechargement, sauvegardes anciennes et export. Les tests métier couvrent aussi versions, dates futures, changements d’heure et paliers.
 
-Le manifeste `render-manifest.json` conserve les empreintes des sources et des PNG, les viewports, les heures de capture et le résultat du run. Le script refuse une capture manquante ou antérieure aux sources.
+Le manifeste conserve empreintes des sources/PNG, viewports et résultat du run. Archive actuelle : archive/2026-11-02_22-24-49-Europe-Paris/.
 
-## Points à examiner dans la review externe
+## Reproduire et examiner
 
-La signature topographique, le rail desktop, la densité de la trajectoire, la distinction des deux univers, le rythme des séquences et le dock mobile sont prêts à être jugés avec les images ci-dessus. La qualité perçue et l’identité de marque restent des sujets de review : les tests ne valent pas approbation artistique.
+Lancer npm run test:e2e, puis npm run review:save -- --primary=11-revisions-viewport. Le script refuse les images antérieures aux sources ou issues d’un run échoué.
 
-Les animations sont exercées dans l’application ; une capture fixe ne les restitue pas. Mobile émulé dans Chromium, sans validation sur appareil physique ou Safari. Les cas chiffrés sont pédagogiques et fictifs ; aucune entreprise réelle ou vidéo de cours n’est simulée.
+Code et rendus sont destinés à la branche codex/learning-design-review du dépôt angelknete07-cmyk/BOUSE ; la synchronisation est vérifiée à la livraison. Examiner notamment Reviews.tsx, reviews.css et reviews.ts.
 
-## Accès pour la review externe
-
-Le code, les rendus stables, la galerie, les archives et ce compte rendu sont versionnés sur la branche GitHub **`codex/learning-design-review`** du dépôt **`angelknete07-cmyk/BOUSE`**. La publication de cette branche a été confirmée par Git. Un autre ChatGPT chargé du Product Design doit lire ce fichier sur cette branche puis examiner les PNG avec les composants correspondants. Le statut de validation externe reste **en attente**.
+Limites : stockage dans le navigateur, sans notification hors application ni synchronisation entre appareils. Calendrier explicite du produit, sans promesse de personnalisation scientifique. Mobile émulé dans Chromium ; les captures fixes ne restituent pas les animations.
