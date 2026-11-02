@@ -25,6 +25,7 @@ Le serveur de développement utilise le port 5173. Aucune clé API n’est néce
 - Recherche et palette de commandes, navigation mobile dédiée et réduction des animations.
 - Leçons en séquences, outils manipulables, teach-back autoévalué et quiz progressif.
 - Trajectoire et graphe de compétences interactifs fondés sur les prérequis et les dernières tentatives.
+- Portfolio d’apprentissage : quiz courants, notes, dossiers et explorations reliés, avec export Markdown utilisable dans Obsidian.
 - Révisions espacées : sessions courtes de rappel, autoévaluation et prochaines échéances sauvegardées.
 - Sauvegarde dans le navigateur, export/import JSON et suppression des données.
 - Radar de références sélectionnées, avec distinction entre vérification et piste proposée.

@@ -1,53 +1,54 @@
-# Review design — passe 05 : laboratoire « Et si ? »
+# Review design — passe 06 : portfolio d’apprentissage
 
-**Rendus du 2 novembre 2026 à 23:06, Europe/Paris.**
+**Rendus du 2 novembre 2026 à 23:27, Europe/Paris.**
 **Statut : vérification interne effectuée ; nouveaux rendus à examiner.**
 
-L’utilisateur a autorisé la suite de la passe 04 avec « SUIT ». Cette étape ajoute une expérience financière sur six mois. Aucune validation indépendante ni acceptation de la passe 05 n’est revendiquée.
+L’utilisateur a autorisé la suite de la passe 05 avec « GO ». Cette étape consolide les traces déjà enregistrées, sans ajouter de nouveau stockage. Aucune validation indépendante ni acceptation de la passe 06 n’est revendiquée.
 
 ## Rendus à examiner
 
 - [Desktop, viewport 1440 × 1000](latest-desktop.png) · [Mobile, viewport CSS 412 × 839](latest-mobile.png)
-- [Paiements retardés — desktop](screens/desktop/13-simulation-default.png) · [mobile](screens/mobile/13-simulation-default.png)
-- [Coûts fournisseurs — desktop](screens/desktop/13-simulation-scenario.png) · [mobile](screens/mobile/13-simulation-scenario.png)
-- [Comparaison sauvegardée — desktop](screens/desktop/13-simulation-saved.png) · [mobile](screens/mobile/13-simulation-saved.png)
-- [Accès depuis le Lab — desktop](screens/desktop/05-lab-financier.png) · [mobile](screens/mobile/05-lab-financier.png)
+- [Registre et détail — desktop](screens/desktop/14-portfolio-overview.png) · [mobile](screens/mobile/14-portfolio-overview.png)
+- [Dossiers et explorations — desktop](screens/desktop/14-portfolio-projects.png) · [mobile](screens/mobile/14-portfolio-projects.png)
+- [Notes — desktop](screens/desktop/14-portfolio-notes.png) · [mobile](screens/mobile/14-portfolio-notes.png)
+- [Dossier vide — desktop](screens/desktop/14-portfolio-empty.png) · [mobile](screens/mobile/14-portfolio-empty.png)
+- [Accès depuis la carte — desktop](screens/desktop/09-competences.png) · [mobile](screens/mobile/09-competences.png)
 
-**69 captures réelles**, incluant les autres écrans existants. La paire latest montre le scénario fictif « Paiements retardés ». Les pages complètes incluent les flux, la comparaison du résultat et du cash, les hypothèses et les sauvegardes. Pixel 7 émulé, échelle 2,625. Dans une capture de page complète, le dock fixe apparaît à la limite du premier viewport : la paire latest montre le premier écran réel. Données de démonstration, sans historique personnel inventé.
+**79 captures réelles**, incluant les autres écrans existants. La paire latest montre le registre des notions ; sélectionner une ligne révèle les traces associées. Sur mobile, ce détail reçoit le focus et défile dans la zone visible. Pixel 7 émulé, échelle 2,625. Les pages complètes montrent le dock fixe à la limite du premier viewport ; la paire latest représente le premier écran réel. Toutes les données sont fictives et destinées à la démonstration.
 
 ## Audit et changements
 
-Le Lab précédent calculait un mois de rentabilité, avec une référence temporaire. Il n’expliquait pas les décalages d’encaissement et ne conservait pas les hypothèses de deux scénarios. Son calculateur reste accessible ; l’expérience « Et si ? » prolonge ce travail.
+Les quiz, notes, projets, observations et simulations étaient répartis entre les espaces. La carte montrait les prérequis mais n’offrait pas de dossier commun exportable. Certains écrans utilisaient également l’ordre du tableau importé pour déterminer le « dernier quiz ».
 
-- Grande courbe comparative monochrome : référence en pointillé, scénario en trait plein, six fins de mois sélectionnables et détail des flux.
-- Scénarios modifiables : paiements retardés, perte de volume client, coûts fournisseurs, recrutement et hausse de prix. Aucun effet de prix sur la demande n’est inventé.
-- Résultat cumulé, cash, créances et besoin théorique de financement expliqués séparément, avec identité comptable visible et tableau des flux.
-- Sauvegarde de la référence, des changements et de la version du modèle ; charger une copie ne réécrit pas l’original. Export Markdown avec hypothèses exactes, calculs et limites ; export/import JSON compatible avec les anciennes sauvegardes.
-- Composition portée par le graphique, la typographie et les surfaces des tokens existants. Aucun accent coloré décoratif. Sur mobile : scénarios horizontaux, pupitre en deux colonnes et comparaison adaptée à la largeur.
-- Les simulations ne changent pas les observations terrain, les quiz ou les compétences.
+- Accès depuis **Mes compétences → Ouvrir mon portfolio**, ainsi que depuis la recherche. Le portfolio reste rattaché à cet espace, sans ajouter une nouvelle entrée dans la navigation principale.
+- Registre de six notions, état du quiz courant, présence de notes et liens vers les dossiers. La sélection révèle la dernière tentative, les repères, les notes et les applications reliées.
+- Onglets **Notions / Projets & explorations / Notes**. Les observations et bilans sont déclaratifs ; les simulations sont présentées séparément comme explorations fictives.
+- Export d’un fichier Markdown utilisable dans Obsidian : versions, historique, notes hors catalogue, dossiers, observations, bilans et hypothèses de simulation. La date est celle de l’export ; aucune date de note ou vérification de contenu n’est inventée.
+- Le registre devient une liste compacte sur mobile. Les contrastes, surfaces, rayons, typographie et mouvements reprennent les tokens centraux. Aucun accent coloré décoratif ni score de certification.
+- Consulter, sélectionner, changer d’onglet ou exporter ne crée ni progression ni nouvelle donnée.
 
 ## Comparaison et corrections
 
-Comparer l’[ancien Lab financier](archive/2026-11-02_22-47-00-Europe-Paris/screens/desktop/05-lab-financier.png) à la nouvelle expérience : la courbe et le choix d’un mois rendent la relation résultat/encaissement directement manipulable. Les autres univers conservent leur composition.
+Comparer l’[ancienne carte](archive/2026-11-02_23-06-07-Europe-Paris/screens/desktop/09-competences.png) à son accès au portfolio : le graphe garde son rôle de carte, tandis que le nouveau registre relie les notions aux traces personnelles et aux dossiers. L’[archive de la passe 05](archive/2026-11-02_23-06-07-Europe-Paris/LATEST.md) conserve la base précédente.
 
-L’audit a corrigé un arrondi de produit décimal : `1.005 × 3` doit donner `3.02`, et non `3.01`. Le modèle calcule désormais produits et variations en décimal exact avant arrondi au centime. L’export conserve les hypothèses numériques sans perte de précision. Les points et boutons du graphique ont aussi été alignés sur les mêmes abscisses.
+La première inspection a corrigé les accords des repères avec un compteur égal à un. Les nouveaux rendus ont été produits ensuite. Desktop : registre et volet se lisent côte à côte ; mobile : liste et détail se succèdent avec des contrôles accessibles. Hiérarchie, spacing, surfaces, sélection, notes multilignes et états vides ont été inspectés ; aucun débordement observé.
 
-Le [premier rendu mobile](archive/2026-11-02_23-03-19-Europe-Paris/latest-mobile.png) répétait des montants trop serrés sous les six mois. La version actuelle garde uniquement les noms des mois à cet endroit ; le montant précis figure dans le détail sélectionné. La suite complète et les captures ont été relancées après cette correction. Cette comparaison conserve une trace concrète de l’inspection interne.
+La règle de quiz est désormais commune à l’accueil, aux prérequis, à la carte, au résumé de leçon et au portfolio : dernière tentative chronologique admissible de la version courante, anciennes versions et dates invalides/futures conservées en archives. Une réussite suivie d’un échec reste « À reprendre ».
 
-Inspection desktop/mobile effectuée : noirs et gris cohérents, titres distincts des métadonnées, profondeur discrète de la scène, courbes différenciées sans couleur, contrôles lisibles et absence de débordement observé. Sélection, focus, survol, sauvegarde, chargement et export ont été exercés dans l’application. Les mouvements utilisent les courbes des tokens : point 220 ms, formulaire 360 ms ; `prefers-reduced-motion` supprime les transitions et déplacements. Le hover mobile a été exercé avec un pointeur émulé, sans prétendre à un geste tactile.
+L’audit a aussi corrigé l’horloge : une tentative soumise entre deux rafraîchissements ne doit pas sembler future. Un parcours réel avance la date de dix secondes puis soumet le quiz ; le résultat apparaît immédiatement dans la leçon, sans attendre le tick d’une minute.
 
 ## Contrôles et limites
 
-**Compilation/TypeScript, 101 cas unitaires et 30 tests navigateur réussis, aucun test ignoré.** Les parcours couvrent délai client sans changement du bénéfice, flux mensuels, entrée vide, hypothèses immuables, rechargement, exports et imports ancien/invalide. Les tests métier vérifient aussi l’identité cash/résultat/créances et les arrondis. Le bundle de production et ses ressources ont été reçus et comparés aux fichiers compilés.
+**Compilation/TypeScript, 121 cas unitaires et 38 tests navigateur réussis, aucun test ignoré.** Les parcours couvrent navigation, cohérence des quiz, dossiers, notes hors catalogue, téléchargement Markdown, données inchangées et soumission entre deux ticks. Le bundle de production et ses ressources ont été reçus et comparés aux fichiers compilés.
 
-Le correctif d’export avec titre vide a été exercé : alerte sans téléchargement ni erreur JavaScript, puis téléchargement Markdown réussi après saisie d’un titre valide.
+Contrôle autonome : flèches/Home/End pour les onglets, Tab/Entrée pour les notions, focus visible et transfert au détail mobile. Entrée du contenu mesurée à 360 ms, opacité de 0 à 1 et déplacement de 5 px, avec easing non linéaire. Les lignes utilisent les transitions des tokens. `prefers-reduced-motion` rend l’affichage immédiat, sans animation ni transition. Aucune erreur JavaScript observée dans ce contrôle.
 
-Le cas commence au mois 1 sans créances initiales, avec ventes constantes et dépenses payées le mois de la vente. Les encaissements se décalent par mois entiers. Les variations à l’intérieur du mois, TVA, impôts, stocks, investissements, dette, intérêts, impayés et capacité ne sont pas modélisés. Un solde négatif indique un besoin théorique de financement ; aucun financement automatique ou risque de faillite chiffré n’est inventé.
+Le portfolio n’est pas un diplôme. Notes et conclusions restent personnelles, les rappels sont autoévalués et les simulations hypothétiques. Les exercices et teach-back non conservés ne sont pas présentés comme réalisés. Le Markdown sert à lire les traces ; le JSON reste le format de restauration. Aucun coffre Obsidian n’est ouvert ou synchronisé.
 
-Données locales au navigateur, sans compte ni synchronisation. Mobile émulé dans Chromium, sans appareil physique, Safari, vidéo ou mesure GPU. Les captures fixes et la vérification interne ne remplacent pas la review design externe.
+Données locales au navigateur, sans compte ni synchronisation entre appareils. Mobile émulé dans Chromium, sans appareil physique, Safari, vidéo ou mesure GPU. Les captures fixes et les vérifications internes ne remplacent pas la review design externe.
 
 ## Reproduire
 
-Lancer `npm run test:e2e`, puis `npm run review:save -- --primary=13-simulation-viewport`. Le script refuse les images antérieures aux sources ou issues d’un run échoué. Le manifeste conserve les empreintes des sources/PNG, les viewports et le résultat du run.
+Lancer `npm run test:e2e`, puis `npm run review:save -- --primary=14-portfolio-viewport`. Le script refuse les images antérieures aux sources ou issues d’un run échoué. Le manifeste conserve les empreintes des sources/PNG, les viewports et le résultat du run.
 
-Archive actuelle : `archive/2026-11-02_23-06-07-Europe-Paris/`. Examiner `SimulationLab.tsx`, `simulation-lab.css`, `simulation.ts` et la validation d’import dans `storage.ts`. Code et rendus destinés à la branche `codex/learning-design-review` du dépôt `angelknete07-cmyk/BOUSE` ; synchronisation vérifiée à la livraison.
+Archive actuelle : `archive/2026-11-02_23-27-21-Europe-Paris/`. Examiner `LearningPortfolio.tsx`, `learning-portfolio.css`, `portfolio.ts`, `useClock.ts` et les intégrations du helper de quiz dans les écrans existants. Code et rendus destinés à la branche `codex/learning-design-review` du dépôt `angelknete07-cmyk/BOUSE` ; synchronisation vérifiée à la livraison.

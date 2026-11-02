@@ -18,6 +18,8 @@ import { LessonView } from "./components/LessonView";
 import { Reviews } from "./components/Reviews";
 import { ProjectWorkbench } from "./components/ProjectWorkbench";
 import { SimulationLab } from "./components/SimulationLab";
+import { LearningPortfolio } from "./components/LearningPortfolio";
+import { latestCurrentAttempt } from "./lib/portfolio";
 
 const navigation = [
   { id: "home", label: "Vue d’ensemble", icon: "home" },
@@ -52,9 +54,13 @@ function useRoute() {
   return [route, navigate] as const;
 }
 function passedIds(state: AppState) {
-  const latest = new Map(state.attempts.map((a) => [a.lessonId, a]));
+  const now = new Date();
   return new Set(
-    [...latest.values()].filter((a) => a.passed).map((a) => a.lessonId),
+    lessons
+      .filter(
+        (lesson) => latestCurrentAttempt(lesson, state.attempts, now)?.passed,
+      )
+      .map((lesson) => lesson.id),
   );
 }
 function App() {
@@ -146,7 +152,7 @@ function App() {
     setMobileOpen(false);
     window.scrollTo({ top: 0 });
     titleRef.current?.focus({ preventScroll: true });
-    document.title = `${navigation.find((n) => n.id === route)?.label || (route.startsWith("lesson/") ? "Leçon" : route.startsWith("project/") ? "Atelier projet" : "Mon espace")} — BOUSE`;
+    document.title = `${navigation.find((n) => n.id === route)?.label || (route === "portfolio" ? "Portfolio" : route.startsWith("lesson/") ? "Leçon" : route.startsWith("project/") ? "Atelier projet" : "Mon espace")} — BOUSE`;
   }, [route, !!state.profile]);
   const done = passedIds(state);
   function go(next: string) {
@@ -277,6 +283,7 @@ function App() {
               aria-current={
                 route === n.id ||
                 (n.id === "academy" && lesson) ||
+                (n.id === "skills" && route === "portfolio") ||
                 (n.id === "incubator" && route.startsWith("project/"))
                   ? "page"
                   : undefined
@@ -284,6 +291,7 @@ function App() {
               className={
                 route === n.id ||
                 (n.id === "academy" && lesson) ||
+                (n.id === "skills" && route === "portfolio") ||
                 (n.id === "incubator" && route.startsWith("project/"))
                   ? "nav-link active"
                   : "nav-link"
@@ -339,10 +347,12 @@ function App() {
             <span>
               {lesson
                 ? "Academy"
-                : route.startsWith("project/")
-                  ? "Incubator"
-                  : navigation.find((n) => n.id === route)?.label ||
-                    "Préférences"}
+                : route === "portfolio"
+                  ? "Portfolio"
+                  : route.startsWith("project/")
+                    ? "Incubator"
+                    : navigation.find((n) => n.id === route)?.label ||
+                      "Préférences"}
             </span>
           </div>
           <div>
@@ -396,6 +406,8 @@ function App() {
               />
             ) : route === "skills" ? (
               <KnowledgeMap state={state} onNavigate={go} />
+            ) : route === "portfolio" ? (
+              <LearningPortfolio state={state} onNavigate={go} />
             ) : route === "reviews" ? (
               <Reviews state={state} update={update} onNavigate={go} />
             ) : route === "lab" ? (
@@ -884,6 +896,13 @@ function Search({
       .replace(/\b(ai|llm)\b/g, "ia");
   const q = searchable(query);
   const items = [
+    {
+      title: "Portfolio d’apprentissage",
+      detail: "Mes compétences",
+      route: "portfolio",
+      search:
+        "portfolio preuves dossier apprentissage Obsidian export Markdown notes",
+    },
     ...navigation.map((n) => ({
       title: n.label,
       detail: "Espace",
@@ -909,8 +928,12 @@ function Search({
       .filter(([, note]) => note.trim())
       .map(([id, note]) => ({
         title: `Note · ${lessons.find((l) => l.id === id)?.title || id}`,
-        detail: "Note personnelle",
-        route: `lesson/${id}`,
+        detail: lessons.some((lesson) => lesson.id === id)
+          ? "Note personnelle"
+          : "Note hors catalogue · Portfolio",
+        route: lessons.some((lesson) => lesson.id === id)
+          ? `lesson/${id}`
+          : "portfolio",
         search: note,
       })),
   ].filter((i) => !q || searchable(i.search).includes(q));

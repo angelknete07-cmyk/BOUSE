@@ -72,3 +72,11 @@ Le parcours `project/<id>` ouvre l’atelier. Les états et calculs de compéten
 Le modèle n’a aucune créance initiale. Une vente est encaissée après un nombre entier de mois ; les dépenses sont payées immédiatement. Le ledger mensuel expose revenu, dépenses, résultat, encaissements, cash et créances. Le financement nécessaire est dérivé du minimum des soldes d’ouverture et de fin de mois, sans versement automatique. L’identité cash/résultat/créances permet une vérification indépendante.
 
 Le champ optionnel `simulations` préserve la compatibilité du format v1. Chaque comparaison stocke identifiant, titre, instant UTC, version de modèle et copie des hypothèses ; les résultats sont recalculés. L’import refuse les snapshots invalides, les identifiants en double et les versions de modèle inconnues avant remplacement. L’interface `simulation` ne modifie ni projets, ni tentatives, ni rappels.
+
+## Portfolio dérivé et règle commune de quiz
+
+`src/lib/portfolio.ts` dérive un dossier depuis le catalogue et l’état existant, sans nouveau champ de stockage. `latestCurrentAttempt` et `currentQuizAttempts` sélectionnent les tentatives de la version courante, avec instant UTC canonique valide et antérieur ou égal à la date d’observation. L’ordre chronologique prime sur l’ordre importé ; en cas d’égalité, la dernière entrée tranche. Les anciennes tentatives sans version se rapportent à `1.0.0`. Les cas non admissibles sont conservés dans les archives.
+
+Ces helpers sont partagés par le portfolio, l’accueil, les prérequis, la carte et le résumé de leçon pour éviter des états divergents après import. L’export Markdown conserve les notes, projets, observations, bilans et comparaisons sans les convertir en preuves de maîtrise. Son frontmatter date l’export, sans inventer de vérification de contenu. Les textes personnels préservent leur contenu dans des blocs littéraux qui protègent la structure du document. Les sorties sont des copies ; aucune consultation ni export ne modifie l’état.
+
+Le hook `useClock` déclenche toujours une actualisation périodique et au retour sur l’onglet, mais lit l’heure réelle à chaque rendu. Une tentative enregistrée entre deux ticks ne doit pas être rejetée comme future à cause d’une heure mémorisée plus ancienne.

@@ -10,7 +10,7 @@ BOUSE est une académie personnelle francophone de business, de finance et d’i
 | Tableau de bord       | Prochaine action utile, progression issue des tentatives et accès aux projets. Aucun historique prérempli présenté comme personnel.                                                                                                                                              |
 | Academy               | Six leçons de fondations, deux piliers finance et IA, prérequis explicites, quiz corrigés, flashcards et notes.                                                                                                                                                                  |
 | Révisions             | Sessions de cinq cartes maximum après un quiz de la version courante, rappel avant révélation, autoévaluation et échéances transparentes. Les notes de quiz restent distinctes.                                                                                                  |
-| Compétences           | Indicateurs fondés sur le diagnostic et les tentatives ; accès aux preuves et aux notions à retravailler. Une bonne réponse ne constitue pas une certification professionnelle.                                                                                                  |
+| Compétences           | Carte des prérequis et portfolio reliant quiz de la version courante, notes, dossiers et explorations ; export Markdown. Aucun score de certification professionnelle.                                                                                                           |
 | Lab                   | Calculateur de rentabilité et mode « Et si ? » sur six mois : scénarios comparés, trésorerie, délais clients, hypothèses sauvegardées et export Markdown.                                                                                                                        |
 | AI Lab                | Grille de relecture de prompt et trame réutilisable. Analyse déterministe et explicite, sans appel à un modèle.                                                                                                                                                                  |
 | Incubator             | Création et modification de projets, ateliers de tests terrain et journal de décisions. Plans et attentes initiales conservés ; observations, preuves et bilans ajoutés ensuite. Changer d’étape consigne une décision personnelle ; cela ne prouve pas la validation du marché. |
@@ -44,7 +44,7 @@ L’AI Lab initial n’envoie pas les prompts à un service externe. Les liens d
 
 ## Feuille de route ordonnée
 
-1. **Consolider les fondations** : affiner les contenus après retours utilisateurs, preuves de compétences, révisions espacées (version locale livrée), export Markdown/Obsidian et accessibilité. Étendre les tests aux parcours réellement ajoutés.
+1. **Consolider les fondations** : affiner les contenus après retours utilisateurs, preuves de compétences, révisions espacées, portfolio et export Markdown/Obsidian (versions locales livrées), puis accessibilité. Étendre les tests aux parcours réellement ajoutés.
 2. **Persistance et comptes** : Supabase/PostgreSQL, migrations, authentification, politiques d’accès par utilisateur, sauvegardes et suppression de compte. Ne connecter aucun projet existant sans inspection préalable.
 3. **Mentor et recherche IA** : adaptateurs de fournisseurs côté serveur, permissions, budgets, évaluation, citations et distinction entre brouillon et contenu validé. Aucun faux dialogue de mentor en attendant.
 4. **Projets approfondis** : fiches d’idées, validation terrain et journal de décision (atelier local livré), analyse contradictoire et liens bidirectionnels compétences/projets.
@@ -80,3 +80,13 @@ L’activité commence au mois 1 sans créances initiales. Les ventes sont const
 Le besoin maximal de financement mesure le plus bas solde négatif aux fins de mois. La projection se poursuit pour rendre ce besoin visible ; elle ne suppose aucun financement automatique et ne calcule aucune probabilité de faillite. Elle exclut les variations à l’intérieur du mois, TVA, impôts, stocks, impayés, dette, intérêts, capacité et comportement de la demande.
 
 Conserver une comparaison enregistre les deux jeux d’hypothèses et la version du modèle. Modifier le brouillon ou charger une comparaison ne réécrit pas les sauvegardes. Ces simulations restent distinctes des observations terrain et des preuves de compétence. Elles sont incluses dans l’export JSON ; un export Markdown rend les calculs et limites lisibles hors de l’application.
+
+## Portfolio d’apprentissage
+
+Le portfolio relie les notions du catalogue aux quiz, aux notes personnelles et aux dossiers de projet. Il présente aussi les tests avec observations, les bilans de décision et les simulations conservées, en distinguant leurs natures. Il dérive ces traces des données existantes ; consulter ou exporter le portfolio ne modifie aucune progression.
+
+L’état d’un quiz vient de la dernière tentative chronologique admissible de la version courante. Une ancienne tentative sans version correspond au catalogue initial `1.0.0`. Les dates invalides ou futures et les anciennes versions restent archivées et exportables, sans devenir des preuves actuelles. Une réussite suivie d’un échec donne « À reprendre » ; la meilleure note historique n’efface pas cet échec. Cette règle est partagée avec l’accueil, la carte, les leçons et les prérequis.
+
+Les notes n’ont pas de date enregistrée ; aucune date de rédaction n’est inventée. Une fiche de projet, une conclusion terrain et une autoévaluation restent déclaratives. Une simulation est une exploration fictive, sans réussite certifiée. Les exercices et teach-back ne sont pas comptés comme réalisés : leurs réponses ne sont pas conservées. Aucun score global ne transforme ces traces en diplôme.
+
+Un fichier Markdown exporte les traces, leurs versions, les notes hors catalogue et les hypothèses des simulations avec une date d’export explicite. Il peut être ouvert dans Obsidian ; l’application n’accède pas au coffre et ne le synchronise pas. La sauvegarde JSON reste le format de restauration de l’application.

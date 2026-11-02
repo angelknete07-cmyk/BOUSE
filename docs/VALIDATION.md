@@ -2,17 +2,17 @@
 
 Validation de l’instance cloud et des fichiers présents dans `/workspace/BOUSE`. Ces résultats ne constituent ni une publication de l’environnement, ni un déploiement, ni une validation dans une nouvelle tâche restaurée.
 
-| Contrôle exécuté                                          | Résultat                                                                        |
-| --------------------------------------------------------- | ------------------------------------------------------------------------------- |
-| Accès GitHub en lecture avec l’authentification existante | `git ls-remote origin HEAD` réussi                                              |
-| Installation reproductible                                | `npm ci --no-audit --no-fund` réussi, lockfile conservé                         |
-| Compilation TypeScript stricte et Vite                    | `npm run build` réussi                                                          |
-| Logique métier, import et structure pédagogique           | **101 cas unitaires réussis** dans les six fichiers, aucun échec ni test ignoré |
-| Parcours navigateur                                       | `npm run test:e2e` : **30 réussis**, aucun échec ni test ignoré                 |
-| Serveur de production local                               | HTML et ressources JavaScript/CSS de la dernière compilation reçus avec succès  |
-| Lisibilité et espaces                                     | Prettier et `git diff --check` réussis                                          |
+| Contrôle exécuté                                          | Résultat                                                                         |
+| --------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| Accès GitHub en lecture avec l’authentification existante | `git ls-remote origin HEAD` réussi                                               |
+| Installation reproductible                                | `npm ci --no-audit --no-fund` réussi, lockfile conservé                          |
+| Compilation TypeScript stricte et Vite                    | `npm run build` réussi                                                           |
+| Logique métier, import et structure pédagogique           | **121 cas unitaires réussis** dans les sept fichiers, aucun échec ni test ignoré |
+| Parcours navigateur                                       | `npm run test:e2e` : **38 réussis**, aucun échec ni test ignoré                  |
+| Serveur de production local                               | HTML et ressources JavaScript/CSS de la dernière compilation reçus avec succès   |
+| Lisibilité et espaces                                     | Prettier et `git diff --check` réussis                                           |
 
-Douze scénarios fonctionnels et trois scénarios de rendu/motion sont exécutés dans Chromium sur ordinateur et en émulation Pixel 7. Les parcours initiaux comprennent :
+Seize scénarios fonctionnels et trois scénarios de rendu/motion sont exécutés dans Chromium sur ordinateur et en émulation Pixel 7. Les parcours initiaux comprennent :
 
 1. Onboarding et diagnostic, leçon, exercice avec indice et solution, quiz, création d’idée sans doublon, modification et avancement du projet, rechargement et carte de compétences.
 2. Calcul financier et cas limites, navigation clavier de la palette, synonymes de recherche et grille locale de prompts.
@@ -50,12 +50,22 @@ Un contrôle navigateur autonome a aussi mesuré l’entrée des formulaires tes
 
 ## Passe 05 — laboratoire « Et si ? »
 
-La dernière suite complète passe : **30 tests navigateur**, **101 cas unitaires** (6 de contenu, 15 métier, 16 projets, 18 révisions, 22 simulation et 24 sauvegarde), TypeScript et compilation Vite. Les six fichiers unitaires ont été lancés directement pour confirmer les comptes de cas en plus de `npm test`. Aucun test ignoré. Le serveur de production a aussi servi le HTML et les ressources JS/CSS strictement identiques à la dernière compilation.
+Cette passe comportait **30 tests navigateur** et **101 cas unitaires** (6 de contenu, 15 métier, 16 projets, 18 révisions, 22 simulation et 24 sauvegarde), avec TypeScript et compilation Vite réussis. Les six fichiers unitaires ont été lancés directement pour confirmer les comptes de cas en plus de `npm test`. Aucun test ignoré. Le serveur de production a aussi servi le HTML et les ressources JS/CSS strictement identiques à la compilation.
 
 Les nouveaux parcours vérifient le résultat inchangé avec un délai client différent, les flux mensuels accessibles, l’absence de calcul sur une entrée vide, la conservation des hypothèses d’une comparaison, la copie chargée sans réécriture, le rechargement, les exports Markdown/JSON et l’import ancien ou invalide. Les nouveaux cas unitaires couvrent les délais entiers, créances, besoin de financement, ventes nulles, contribution négative, identité comptable, bornes, précision décimale avant arrondi, snapshots et export reproductible. Les régressions incluent `1.005 × 3 → 3.02` et les variations en pourcentage sur des fractions de centime.
 
-**69 captures réelles** sont enregistrées avec une archive datée. L’inspection a conduit à aligner les points sur les libellés des six fins de mois et à retirer sur mobile les montants répétés sous les boutons, trop serrés. Les montants précis restent dans le détail sélectionné et le tableau. La suite navigateur complète et les rendus ont été régénérés après la dernière correction mobile.
+**69 captures réelles** sont conservées en archive. L’inspection a conduit à aligner les points sur les libellés des six fins de mois et à retirer sur mobile les montants répétés sous les boutons, trop serrés. Les montants précis restent dans le détail sélectionné et le tableau. La suite navigateur complète et les rendus ont été régénérés après la dernière correction mobile.
 
-Contrôle navigateur complémentaire du nouvel écran : transition du point 220 ms avec easing non linéaire, entrée du formulaire 360 ms, focus visible, sélection d’un mois au clavier et réduction des mouvements immédiate. Aucun débordement ni erreur JavaScript observé dans ce contrôle. Chromium headless et Pixel 7 émulé ; pas de mesure sur appareil physique ou de performance GPU. La review design externe de cette passe reste à effectuer.
+Contrôle navigateur complémentaire du nouvel écran : transition du point 220 ms avec easing non linéaire, entrée du formulaire 360 ms, focus visible, sélection d’un mois au clavier et réduction des mouvements immédiate. Aucun débordement ni erreur JavaScript observé dans ce contrôle. Chromium headless et Pixel 7 émulé ; pas de mesure sur appareil physique ou de performance GPU. L’utilisateur a autorisé la poursuite sur cette base.
 
 Le correctif d’export a aussi été exercé directement : titre vide → alerte, aucun téléchargement ni erreur JavaScript ; titre valide → Markdown téléchargé avec le titre et la version attendus. Aucune comparaison n’a été créée par ce contrôle.
+
+## Passe 06 — portfolio d’apprentissage
+
+La dernière suite complète comporte **38 tests navigateur réussis**, **121 cas unitaires réussis** (6 de contenu, 15 métier, 16 projets, 18 révisions, 22 simulation, 24 sauvegarde, 20 portfolio), TypeScript et compilation Vite. `npm test` et les sept fichiers lancés directement passent, sans test ignoré. Le HTML et les ressources JS/CSS servis en production ont été comparés aux fichiers de la dernière compilation.
+
+Les huit nouveaux parcours navigateur vérifient l’accès depuis la carte, la sélection d’une notion, le dernier échec courant malgré un import désordonné ou une ancienne réussite, les dossiers et simulations séparés, les notes hors catalogue, le téléchargement Markdown et l’absence de mutation des données. Une régression avance la date de dix secondes sans déclencher le timer : un quiz réellement soumis reste immédiatement visible dans le résumé de la leçon. Les tests métier vérifient aussi versions, dates futures ou invalides, égalités chronologiques, copies indépendantes, relations, archives et protection de la structure Markdown.
+
+**79 captures réelles** sont enregistrées dans `design-reviews/`, avec une paire principale sur le portfolio et une archive datée. Les vues notions, dossiers/explorations, notes et dossier vide ont été inspectées sur ordinateur et mobile. Les accords des repères ont été corrigés après le premier rendu puis la suite et les captures ont été régénérées. La carte, l’accueil et le résumé de leçon utilisent maintenant la même règle de quiz courant.
+
+Un contrôle autonome a exercé les onglets par flèches/Home/End, les lignes par Tab/Entrée et le transfert du focus au détail mobile. Motion observée : contenu 360 ms avec easing non linéaire, opacité de 0 à 1 et déplacement de 5 px ; réduction des mouvements : affichage immédiat, aucune animation ou transition. Aucun débordement ni erreur JavaScript observé, état inchangé. Chromium headless et Pixel 7 émulé, sans appareil physique ni mesure GPU. La review design externe de cette passe reste à effectuer.

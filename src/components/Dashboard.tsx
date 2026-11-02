@@ -1,6 +1,7 @@
 import { useState, type CSSProperties } from "react";
 import { lessons, type Lesson } from "../data/lessons";
-import type { AppState } from "../lib/types";
+import type { AppState, Attempt } from "../lib/types";
+import { latestCurrentAttempt } from "../lib/portfolio";
 import { Icon } from "./Icon";
 import { Terrain } from "./Terrain";
 import { buildReviewDeck, dueReviewCards } from "../lib/reviews";
@@ -24,10 +25,12 @@ const mapNodes = [
   { id: "automatisation-agent", label: "L’action", x: 85, y: 77, icon: "node" },
 ];
 
-function getProgress(state: AppState) {
-  const latest = new Map(
-    state.attempts.map((attempt) => [attempt.lessonId, attempt]),
-  );
+function getProgress(state: AppState, now: Date) {
+  const latest = new Map<string, Attempt>();
+  for (const lesson of lessons) {
+    const attempt = latestCurrentAttempt(lesson, state.attempts, now);
+    if (attempt) latest.set(lesson.id, attempt);
+  }
   const done = new Set(
     [...latest.values()]
       .filter((attempt) => attempt.passed)
@@ -65,7 +68,7 @@ export function Dashboard({ state, onNavigate }: Props) {
   const now = useClock();
   const reviewDeck = buildReviewDeck(lessons, state, now);
   const due = dueReviewCards(reviewDeck, now);
-  const { latest, done, current } = getProgress(state);
+  const { latest, done, current } = getProgress(state, now);
   const [selectedId, setSelectedId] = useState(current.id);
   const selected =
     lessons.find((lesson) => lesson.id === selectedId) || current;

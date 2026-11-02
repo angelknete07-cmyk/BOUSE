@@ -5,6 +5,8 @@ import { downloadFile } from "../lib/storage";
 import type { AppState, Attempt, StateUpdater } from "../lib/types";
 import { Icon } from "./Icon";
 import { LessonScene } from "./LessonScene";
+import { latestCurrentAttempt } from "../lib/portfolio";
+import { useClock } from "../lib/useClock";
 import "../lesson-experience.css";
 
 type Props = {
@@ -21,6 +23,7 @@ const stages = [
 ];
 
 export function LessonView({ lesson, state, update, onNavigate }: Props) {
+  const now = useClock();
   const [tab, setTab] = useState(0);
   const [sequence, setSequence] = useState(0);
   const [exerciseText, setExerciseText] = useState("");
@@ -38,9 +41,7 @@ export function LessonView({ lesson, state, update, onNavigate }: Props) {
   const [selfReview, setSelfReview] = useState<string[]>([]);
   const submitted = useRef(false);
   const stageRef = useRef<HTMLElement>(null);
-  const latest = state.attempts
-    .filter((attempt) => attempt.lessonId === lesson.id)
-    .at(-1);
+  const latest = latestCurrentAttempt(lesson, state.attempts, now);
   const linkedProjects = state.projects.filter((project) =>
     project.lessonIds.includes(lesson.id),
   );

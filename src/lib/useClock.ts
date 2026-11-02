@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 
 /** Refresh scheduled UI when time passes or a background tab becomes active. */
 export function useClock() {
-  const [now, setNow] = useState(() => Date.now());
+  const [, setTick] = useState(0);
   useEffect(() => {
-    const refresh = () => setNow(Date.now());
+    const refresh = () => setTick((tick) => tick + 1);
     const timer = window.setInterval(refresh, 60_000);
     window.addEventListener("focus", refresh);
     document.addEventListener("visibilitychange", refresh);
@@ -14,5 +14,7 @@ export function useClock() {
       document.removeEventListener("visibilitychange", refresh);
     };
   }, []);
-  return new Date(now);
+  // A new quiz or review may trigger a render between timer ticks. Its timestamp
+  // must be compared with the real current time, not the previous minute's time.
+  return new Date();
 }

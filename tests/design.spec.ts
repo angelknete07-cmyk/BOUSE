@@ -120,6 +120,11 @@ async function capture(page: Page, testInfo: TestInfo, name: string) {
       path: testInfo.outputPath("13-simulation-viewport.png"),
       fullPage: false,
     });
+  if (name === "14-portfolio-overview")
+    await page.screenshot({
+      path: testInfo.outputPath("14-portfolio-viewport.png"),
+      fullPage: false,
+    });
 }
 
 async function importReviewDemo(page: Page, state: AppState) {
@@ -615,6 +620,56 @@ test("galerie des écrans et du quiz validé sans débordement", async ({
     }),
   ).toBeVisible();
   await capture(page, testInfo, "13-simulation-saved");
+
+  // The portfolio reads existing records, never manufactures achievements.
+  // Its demonstration dossier reuses the lesson, field observations, decision
+  // comparison and simulation that the browser actually exercised above.
+  await page.goto("/#portfolio");
+  await expect(
+    page.getByRole("heading", {
+      name: "Ce que vous pouvez montrer.",
+      exact: true,
+    }),
+  ).toBeVisible();
+  await page
+    .getByRole("button", {
+      name: `Voir les traces : ${lesson.title}`,
+      exact: true,
+    })
+    .click();
+  await capture(page, testInfo, "14-portfolio-overview");
+  await page
+    .getByRole("tab", { name: "Projets & explorations", exact: true })
+    .click();
+  await capture(page, testInfo, "14-portfolio-projects");
+  await page.getByRole("tab", { name: "Notes", exact: true }).click();
+  await capture(page, testInfo, "14-portfolio-notes");
+
+  const emptyPortfolio: AppState = {
+    schemaVersion: 1,
+    profile: fixture.profile,
+    attempts: [],
+    projects: [],
+    notes: {},
+    lastLessonId: null,
+  };
+  await page.goto("/#settings");
+  await page.getByLabel("Importer une sauvegarde").setInputFiles({
+    name: "profil-demo-portfolio-vide.json",
+    mimeType: "application/json",
+    buffer: Buffer.from(JSON.stringify(emptyPortfolio)),
+  });
+  await page
+    .getByRole("button", { name: "Confirmer le remplacement", exact: true })
+    .click();
+  await page.goto("/#portfolio");
+  await expect(
+    page.getByRole("heading", {
+      name: "Votre dossier commence ici.",
+      exact: true,
+    }),
+  ).toBeVisible();
+  await capture(page, testInfo, "14-portfolio-empty");
   expect(errors).toEqual([]);
 });
 

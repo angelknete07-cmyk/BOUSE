@@ -2,6 +2,8 @@ import { useId, useRef, useState, type CSSProperties } from "react";
 import { lessons, type Lesson } from "../data/lessons";
 import type { AppState, Attempt } from "../lib/types";
 import { Icon } from "./Icon";
+import { currentQuizAttempts, latestCurrentAttempt } from "../lib/portfolio";
+import { useClock } from "../lib/useClock";
 import "../knowledge-map.css";
 
 type Props = {
@@ -19,8 +21,9 @@ const positions: Record<string, Position> = {
   "automatisation-agent": { x: 83.33, y: 78, label: "Automatisation ou agent" },
 };
 
-function latestAttempt(state: AppState, id: string) {
-  return state.attempts.filter((attempt) => attempt.lessonId === id).at(-1);
+function latestAttempt(state: AppState, id: string, now: Date) {
+  const lesson = lessons.find((entry) => entry.id === id);
+  return lesson ? latestCurrentAttempt(lesson, state.attempts, now) : undefined;
 }
 
 function statusLabel(attempt: Attempt | undefined) {
@@ -33,6 +36,7 @@ function statusLabel(attempt: Attempt | undefined) {
 
 /** A prerequisite map, not a percentage estimate of professional mastery. */
 export function KnowledgeMap({ state, onNavigate }: Props) {
+  const now = useClock();
   const [selectedId, setSelectedId] = useState(
     lessons.some((lesson) => lesson.id === state.lastLessonId)
       ? state.lastLessonId!
@@ -41,10 +45,8 @@ export function KnowledgeMap({ state, onNavigate }: Props) {
   const detailRef = useRef<HTMLElement>(null);
   const markerId = `knowledge-arrow-${useId().replace(/[^a-zA-Z0-9_-]/g, "")}`;
   const selected = lessons.find((lesson) => lesson.id === selectedId)!;
-  const latest = latestAttempt(state, selected.id);
-  const attempts = state.attempts.filter(
-    (attempt) => attempt.lessonId === selected.id,
-  );
+  const latest = latestAttempt(state, selected.id, now);
+  const attempts = currentQuizAttempts(selected, state.attempts, now);
   const prerequisites = selected.prerequisites
     .map((id) => lessons.find((lesson) => lesson.id === id))
     .filter((lesson): lesson is Lesson => !!lesson);
@@ -52,10 +54,10 @@ export function KnowledgeMap({ state, onNavigate }: Props) {
     lesson.prerequisites.includes(selected.id),
   );
   const verified = lessons.filter(
-    (lesson) => latestAttempt(state, lesson.id)?.passed,
+    (lesson) => latestAttempt(state, lesson.id, now)?.passed,
   ).length;
   const toReview = lessons.filter((lesson) => {
-    const attempt = latestAttempt(state, lesson.id);
+    const attempt = latestAttempt(state, lesson.id, now);
     return attempt && !attempt.passed;
   }).length;
   const edges = lessons.flatMap((lesson) =>
@@ -93,6 +95,9 @@ export function KnowledgeMap({ state, onNavigate }: Props) {
             point pour voir vos preuves et le prochain pas.
           </p>
         </div>
+        <button className="text-button" onClick={() => onNavigate("portfolio")}>
+          Ouvrir mon portfolio <Icon name="arrow" size={16} />
+        </button>
       </header>
       <div className="knowledge-summary" aria-label="Vos repères actuels">
         <p>
@@ -184,7 +189,7 @@ export function KnowledgeMap({ state, onNavigate }: Props) {
             {lessons.map((lesson) => {
               const position = positions[lesson.id];
               if (!position) return null;
-              const attempt = latestAttempt(state, lesson.id);
+              const attempt = latestAttempt(state, lesson.id, now);
               return (
                 <button
                   key={lesson.id}
@@ -274,7 +279,7 @@ export function KnowledgeMap({ state, onNavigate }: Props) {
                     <span>
                       {lesson.title}
                       <small>
-                        {statusLabel(latestAttempt(state, lesson.id))}
+                        {statusLabel(latestAttempt(state, lesson.id, now))}
                       </small>
                     </span>
                     <Icon name="arrow" size={15} />
