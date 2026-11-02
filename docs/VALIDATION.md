@@ -26,7 +26,7 @@ Les tests contrôlent aussi l’absence de débordement horizontal et le retour 
 
 Le brouillon de l’environnement contient `install_script` et `start_skill`. Le script a été exécuté intégralement avant enregistrement. Il installe les versions du lockfile, compile et exécute les tests unitaires. Les instructions de démarrage décrivent le checkout existant, le processus Vite à relancer, Chromium système, les contrôles fonctionnels et les limites du stockage local. La politique réseau et les exigences de secrets n’ont pas été modifiées.
 
-L’enregistrement du brouillon a été confirmé par l’outil. La revue, l’enregistrement dans les paramètres et la publication de l’environnement restent des actions du produit à effectuer par l’utilisateur. Aucun push GitHub ni déploiement de l’application n’a été effectué.
+L’enregistrement du brouillon a été confirmé par l’outil. La revue, l’enregistrement dans les paramètres et la publication de l’environnement restent des actions du produit à effectuer par l’utilisateur. Le code et les fichiers de review sont synchronisés avec la branche GitHub `codex/learning-design-review`. La synchronisation Git est distincte de la publication de l’environnement cloud et du déploiement de l’application.
 
 ## Limites
 

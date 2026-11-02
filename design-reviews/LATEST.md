@@ -50,3 +50,7 @@ Le manifeste `render-manifest.json` conserve les empreintes des sources et des P
 La signature topographique, le rail desktop, la densité de la trajectoire, la distinction des deux univers, le rythme des séquences et le dock mobile sont prêts à être jugés avec les images ci-dessus. La qualité perçue et l’identité de marque restent des sujets de review : les tests ne valent pas approbation artistique.
 
 Les animations sont exercées dans l’application ; une capture fixe ne les restitue pas. Mobile émulé dans Chromium, sans validation sur appareil physique ou Safari. Les cas chiffrés sont pédagogiques et fictifs ; aucune entreprise réelle ou vidéo de cours n’est simulée.
+
+## Accès pour la review externe
+
+Le code, les rendus stables, la galerie, les archives et ce compte rendu sont versionnés sur la branche GitHub **`codex/learning-design-review`** du dépôt **`angelknete07-cmyk/BOUSE`**. La publication de cette branche a été confirmée par Git. Un autre ChatGPT chargé du Product Design doit lire ce fichier sur cette branche puis examiner les PNG avec les composants correspondants. Le statut de validation externe reste **en attente**.
