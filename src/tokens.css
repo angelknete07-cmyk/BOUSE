@@ -1,0 +1,100 @@
+/* BOUSE — monochrome by default. Color only communicates a functional state. */
+:root {
+  --font-sans:
+    "Inter", ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Arial, sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", Consolas, monospace;
+  --font-mark: Georgia, serif;
+
+  --bg: #0b0b0c;
+  --surface-low: #111113;
+  --surface: #171719;
+  --raised: #202023;
+  --surface-hover: #252528;
+  --surface-selected: #29292d;
+  --text: #f3f3f1;
+  --text-secondary: #b6b6ba;
+  --muted: #a4a4a7;
+  --text-tertiary: #808084;
+  --text-inverse: #171719;
+  --accent: #e4e4e8;
+  --accent-hover: #ffffff;
+  --accent-dark: #242427;
+  --line: rgb(255 255 255 / 0.07);
+  --line-strong: rgb(255 255 255 / 0.16);
+  --line-focus: #cacace;
+  --decorative-line: rgb(255 255 255 / 0.14);
+  --overlay: rgb(0 0 0 / 0.72);
+
+  --success-text: #a9c8b2;
+  --success-surface: #17221b;
+  --success-line: #405e49;
+  --error-text: #e0a5a5;
+  --danger-surface: #652c30;
+  --warning-text: #dac29d;
+  --warning-surface: #282219;
+  --warning-line: #66543a;
+
+  --type-micro: 0.625rem;
+  --type-caption: 0.6875rem;
+  --type-small: 0.75rem;
+  --type-body-sm: 0.8125rem;
+  --type-body: 0.875rem;
+  --type-body-lg: 1rem;
+  --type-title-sm: 1.125rem;
+  --type-title-md: 1.25rem;
+  --type-title-lg: 1.5rem;
+  --type-heading: 1.75rem;
+  --type-hero: 2rem;
+  --type-number: 2.5rem;
+  --type-mark: 2.75rem;
+  --type-display: 4rem;
+  --type-page-fluid: clamp(2rem, 3vw, 2.75rem);
+  --type-stage-title: clamp(2rem, 3.2vw, 3.5rem);
+  --type-concept: clamp(1.5rem, 2vw, 2rem);
+  --type-reading: 1rem;
+  --measure-reading: 66ch;
+  --type-hero-fluid: clamp(1.75rem, 2.1vw, 2.125rem);
+  --type-display-fluid: clamp(3.125rem, 6vw, 5.375rem);
+  --type-metric-fluid: clamp(1.125rem, 2vw, 1.75rem);
+  --weight-regular: 400;
+  --weight-light: 300;
+  --weight-book: 450;
+  --weight-medium: 500;
+  --weight-emphasis: 550;
+  --weight-semibold: 600;
+  --weight-brand: 650;
+  --weight-bold: 700;
+  --leading-tight: 1.22;
+  --leading-body: 1.7;
+  --leading-reading: 1.9;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --radius-xs: 3px;
+  --radius-sm: 5px;
+  --radius: 8px;
+  --radius-round: 50%;
+  --shadow-surface: 0 8px 24px rgb(0 0 0 / 0.12);
+  --shadow-control: 0 1px 2px rgb(0 0 0 / 0.24);
+  --shadow-dialog: 0 24px 80px rgb(0 0 0 / 0.5);
+  --highlight-edge: inset 0 1px 0 rgb(255 255 255 / 0.04);
+  --light-stage: rgb(255 255 255 / 0.035);
+  --light-matter: rgb(255 255 255 / 0.06);
+  --shadow-stage: 0 20px 65px rgb(0 0 0 / 0.18);
+
+  --motion-fast: 140ms;
+  --motion-normal: 220ms;
+  --motion-enter: 360ms;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-settle: cubic-bezier(0.2, 0.8, 0.3, 1.04);
+}

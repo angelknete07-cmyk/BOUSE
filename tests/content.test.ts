@@ -1,0 +1,99 @@
+import test from "node:test";
+import assert from "node:assert/strict";
+import { lessons } from "../src/data/lessons.ts";
+
+test("the initial catalogue contains six substantial versioned lessons", () => {
+  assert.equal(lessons.length, 6);
+  for (const lesson of lessons) {
+    assert.ok(lesson.title.trim());
+    assert.ok(lesson.summary.trim());
+    assert.ok(lesson.minutes > 0);
+    assert.ok(lesson.skills.length > 0);
+    assert.ok(lesson.sections.length > 0);
+    assert.ok(
+      lesson.sections.every(
+        (section) => section.title.trim() && section.body.length > 0,
+      ),
+    );
+    assert.ok(lesson.version.trim());
+    assert.ok(lesson.editorialStatus.trim());
+    assert.ok(lesson.application.trim());
+    assert.ok(lesson.exercise.prompt.trim());
+    assert.ok(lesson.exercise.hint.trim());
+    assert.ok(lesson.exercise.explanation.trim());
+    assert.ok(lesson.flashcards.length > 0);
+  }
+});
+
+test("lesson and quiz identifiers are unique and stable enough to store progress", () => {
+  const lessonIds = lessons.map((lesson) => lesson.id);
+  assert.ok(lessonIds.every((id) => id.trim()));
+  assert.equal(new Set(lessonIds).size, lessonIds.length);
+  const questionIds = lessons.flatMap((lesson) =>
+    lesson.quiz.map((question) => question.id),
+  );
+  assert.ok(questionIds.every((id) => id.trim()));
+  assert.equal(new Set(questionIds).size, questionIds.length);
+});
+
+test("each lesson has two usable assessment questions with valid answer indexes", () => {
+  for (const lesson of lessons) {
+    assert.equal(lesson.quiz.length, 2);
+    for (const question of lesson.quiz) {
+      assert.ok(question.question.trim());
+      assert.ok(question.explanation.trim());
+      assert.ok(question.options.length >= 2);
+      assert.equal(new Set(question.options).size, question.options.length);
+      assert.ok(question.options.every((option) => option.trim()));
+      assert.ok(Number.isInteger(question.answer));
+      assert.ok(
+        question.answer >= 0 && question.answer < question.options.length,
+      );
+    }
+  }
+});
+
+test("all prerequisite references resolve to another lesson in the catalogue", () => {
+  const ids = new Set(lessons.map((lesson) => lesson.id));
+  for (const lesson of lessons) {
+    for (const prerequisite of lesson.prerequisites) {
+      assert.ok(
+        ids.has(prerequisite),
+        `${lesson.id}: missing prerequisite ${prerequisite}`,
+      );
+      assert.notEqual(prerequisite, lesson.id);
+    }
+  }
+});
+
+test("prerequisite graph has no cycles, so every lesson can be unlocked", () => {
+  const byId = new Map(lessons.map((lesson) => [lesson.id, lesson]));
+  const completed = new Set<string>();
+  const visiting = new Set<string>();
+  function visit(id: string) {
+    if (completed.has(id)) return;
+    assert.ok(!visiting.has(id), `Prerequisite cycle at ${id}`);
+    visiting.add(id);
+    const lesson = byId.get(id);
+    assert.ok(lesson, `Missing lesson ${id}`);
+    for (const prerequisite of lesson.prerequisites) visit(prerequisite);
+    visiting.delete(id);
+    completed.add(id);
+  }
+  for (const lesson of lessons) visit(lesson.id);
+  assert.equal(completed.size, lessons.length);
+});
+
+test("every lesson includes named HTTPS source references", () => {
+  for (const lesson of lessons) {
+    assert.ok(lesson.sources.length > 0);
+    for (const source of lesson.sources) {
+      assert.ok(source.title.trim());
+      const url = new URL(source.url);
+      assert.equal(url.protocol, "https:");
+      assert.ok(url.hostname.includes("."));
+      assert.equal(url.username, "");
+      assert.equal(url.password, "");
+    }
+  }
+});
