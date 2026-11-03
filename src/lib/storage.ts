@@ -3,6 +3,7 @@ import { projectStages } from "./domain.ts";
 import { isReviewEvent } from "./reviews.ts";
 import { isExperiment, isDecision } from "./projects.ts";
 import { isSimulationSnapshot } from "./simulation.ts";
+import { isLearningGoalIds } from "./projectLearning.ts";
 
 export const storageKey = "bouse.academy.v1";
 export const emptyState: AppState = {
@@ -89,7 +90,9 @@ export function parseState(raw: string): AppState {
         ]) &&
         projectStages.some((stage) => stage === p.stage) &&
         Array.isArray(p.lessonIds) &&
-        p.lessonIds.every((id) => typeof id === "string"),
+        p.lessonIds.every((id) => typeof id === "string") &&
+        (p.learningGoalIds === undefined ||
+          isLearningGoalIds(p.learningGoalIds)),
     )
   )
     throw new Error("Projets invalides.");

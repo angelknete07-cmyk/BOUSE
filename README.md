@@ -22,6 +22,7 @@ Le serveur de développement utilise le port 5173. Aucune clé API n’est néce
 - Mode « Et si ? » : comparaison de scénarios sur six mois, délais de paiement, courbe de trésorerie, hypothèses sauvegardées et export Markdown.
 - AI Lab : relecture de prompts par grille explicite et déterministe.
 - Incubateur : projets liés aux leçons, atelier de tests terrain et journal de décisions avec comparaison attendu/réel.
+- Parcours par projet : objectifs d’apprentissage choisis, prérequis et prochaine leçon selon les quiz courants, avec retour direct au plan.
 - Recherche et palette de commandes, navigation mobile dédiée et réduction des animations.
 - Leçons en séquences, outils manipulables, teach-back autoévalué et quiz progressif.
 - Trajectoire et graphe de compétences interactifs fondés sur les prérequis et les dernières tentatives.

@@ -47,7 +47,7 @@ L’AI Lab initial n’envoie pas les prompts à un service externe. Les liens d
 1. **Consolider les fondations** : affiner les contenus après retours utilisateurs, preuves de compétences, révisions espacées, portfolio et export Markdown/Obsidian (versions locales livrées), puis accessibilité. Étendre les tests aux parcours réellement ajoutés.
 2. **Persistance et comptes** : Supabase/PostgreSQL, migrations, authentification, politiques d’accès par utilisateur, sauvegardes et suppression de compte. Ne connecter aucun projet existant sans inspection préalable.
 3. **Mentor et recherche IA** : adaptateurs de fournisseurs côté serveur, permissions, budgets, évaluation, citations et distinction entre brouillon et contenu validé. Aucun faux dialogue de mentor en attendant.
-4. **Projets approfondis** : fiches d’idées, validation terrain et journal de décision (atelier local livré), analyse contradictoire et liens bidirectionnels compétences/projets.
+4. **Projets approfondis** : fiches d’idées, validation terrain, journal de décision, parcours d’apprentissage et liens entre objectifs et projets (versions locales livrées), puis analyse contradictoire et applications plus avancées.
 5. **Simulation** : laboratoire financier « et si ? » sur six mois (version locale livrée), puis modèle d’entreprise plus complet, scénarios à compromis et points de vue de direction distincts. Les effets doivent venir d’un modèle testable, pas de chiffres arbitraires.
 6. **Recherche et contenu vivant** : collecte autorisée, déduplication, vérification, historique des versions, révision humaine et publication. Ajouter ensuite cas d’entreprises, analyses de documents et opportunités assorties d’incertitudes.
 7. **Extension du curriculum** : économie, finance personnelle, marketing/vente, stratégie, RH, vie professionnelle, droit et fiscalité français, puis niveaux avancés et projets de fin de module. Publier seulement les branches suffisamment profondes et vérifiées.
@@ -90,3 +90,13 @@ L’état d’un quiz vient de la dernière tentative chronologique admissible d
 Les notes n’ont pas de date enregistrée ; aucune date de rédaction n’est inventée. Une fiche de projet, une conclusion terrain et une autoévaluation restent déclaratives. Une simulation est une exploration fictive, sans réussite certifiée. Les exercices et teach-back ne sont pas comptés comme réalisés : leurs réponses ne sont pas conservées. Aucun score global ne transforme ces traces en diplôme.
 
 Un fichier Markdown exporte les traces, leurs versions, les notes hors catalogue et les hypothèses des simulations avec une date d’export explicite. Il peut être ouvert dans Obsidian ; l’application n’accède pas au coffre et ne le synchronise pas. La sauvegarde JSON reste le format de restauration de l’application.
+
+## Parcours d’apprentissage par projet
+
+L’onglet Repères permet de choisir des objectifs parmi les notions du catalogue. Ces choix sont distincts des apprentissages associés depuis Apply. Une ancienne fiche sans objectifs reste vide à cet endroit ; les associations ne sont pas transformées automatiquement en besoins ou en réussites.
+
+Le parcours ajoute les prérequis, les déduplique et les ordonne. Les états utilisent la règle commune des quiz courants : validé, disponible, à reprendre ou prérequis à travailler. La prochaine notion proposée respecte les prérequis ; une réussite avancée ne masque pas un prérequis à reprendre. Les minutes concernent les contenus disponibles restant à travailler, sans prédire le temps nécessaire pour réaliser le projet.
+
+Les objectifs absents du catalogue restent visibles et exportables. Ils ne disparaissent qu’après un retrait explicite. Les quiz validés du parcours n’établissent ni application réelle au projet, ni marché validé, ni certification professionnelle. Modifier les objectifs ne change ni les associations, ni la prochaine action terrain, ni le stade.
+
+La carte montre séparément les notions choisies comme objectifs dans des projets. Depuis une leçon, objectif ou prérequis, un lien revient directement au plan. Les sauvegardes JSON et les exports Markdown du dossier et du portfolio conservent les objectifs ; les prérequis et états du parcours se recalculent depuis le catalogue courant.

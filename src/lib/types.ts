@@ -29,6 +29,8 @@ export interface Project {
   nextAction: string;
   stage: string;
   lessonIds: string[];
+  /** Explicit study goals, separate from knowledge associated through Apply. */
+  learningGoalIds?: string[];
   createdAt: string;
 }
 export type ReviewRating = "again" | "hard" | "remembered";

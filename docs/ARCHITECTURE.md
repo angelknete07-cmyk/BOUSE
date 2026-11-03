@@ -80,3 +80,11 @@ Le champ optionnel `simulations` préserve la compatibilité du format v1. Chaqu
 Ces helpers sont partagés par le portfolio, l’accueil, les prérequis, la carte et le résumé de leçon pour éviter des états divergents après import. L’export Markdown conserve les notes, projets, observations, bilans et comparaisons sans les convertir en preuves de maîtrise. Son frontmatter date l’export, sans inventer de vérification de contenu. Les textes personnels préservent leur contenu dans des blocs littéraux qui protègent la structure du document. Les sorties sont des copies ; aucune consultation ni export ne modifie l’état.
 
 Le hook `useClock` déclenche toujours une actualisation périodique et au retour sur l’onglet, mais lit l’heure réelle à chaque rendu. Une tentative enregistrée entre deux ticks ne doit pas être rejetée comme future à cause d’une heure mémorisée plus ancienne.
+
+## Objectifs et parcours d’un projet
+
+`Project.learningGoalIds?: string[]` est une extension compatible du format v1. L’absence du champ ne crée aucun objectif à partir de `lessonIds`, qui conserve son rôle d’association depuis Apply. La validation refuse formes invalides, doublons et identifiants non normalisés, mais conserve les identifiants hors catalogue. Le setter copie la fiche complète et la mise à jour fonctionnelle préserve les autres champs actuels.
+
+`src/lib/projectLearning.ts` dérive la fermeture des prérequis, l’ordre des étapes, leurs objectifs d’origine et les états selon `latestCurrentAttempt`. Les prérequis partagés n’apparaissent qu’une fois. Les cycles et contenus manquants bloquent leurs descendants ; une branche indépendante peut rester disponible. Les minutes et compteurs sont dérivés, sans état « compétence terminée » persisté.
+
+`project-plan/<id>` ouvre directement Repères sans modifier les routes de dossier existantes. Les leçons relient les objectifs et leurs prérequis au plan ; la carte distingue les objectifs explicitement choisis des apprentissages associés. L’export de dossier utilise `projectLearningMarkdown` ; le portfolio exporte les objectifs exacts sans importer le module de parcours, ce qui évite une dépendance circulaire avec les helpers de quiz.

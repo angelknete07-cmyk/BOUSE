@@ -18,6 +18,8 @@ import {
 } from "../lib/projects";
 import { downloadFile } from "../lib/storage";
 import { Icon } from "./Icon";
+import { ProjectLearningPlan } from "./ProjectLearningPlan";
+import { projectLearningMarkdown } from "../lib/projectLearning";
 import "../project-workbench.css";
 
 type Props = {
@@ -25,6 +27,7 @@ type Props = {
   state: AppState;
   update: StateUpdater;
   onNavigate: (route: string) => void;
+  initialTab?: "terrain" | "decisions" | "reperes";
 };
 type Tab = "terrain" | "decisions" | "reperes";
 type TestDraft = Omit<ProjectExperiment, "id" | "createdAt" | "result">;
@@ -136,8 +139,9 @@ export function ProjectWorkbench({
   state,
   update,
   onNavigate,
+  initialTab = "terrain",
 }: Props) {
-  const [tab, setTab] = useState<Tab>("terrain");
+  const [tab, setTab] = useState<Tab>(initialTab);
   const [newTestOpen, setNewTestOpen] = useState(false);
   const [newDecisionOpen, setNewDecisionOpen] = useState(false);
   const [test, setTest] = useState(() => testDraft(project));
@@ -174,17 +178,9 @@ export function ProjectWorkbench({
   const linkedLessons = lessons.filter((lesson) =>
     project.lessonIds.includes(lesson.id),
   );
-  const suggestedLessons = lessons.filter(
-    (lesson) =>
-      !project.lessonIds.includes(lesson.id) &&
-      ((lesson.domain === "Entrepreneuriat" &&
-        lesson.prerequisites.length === 0) ||
-        (lesson.prerequisites.length > 0 &&
-          lesson.prerequisites.every((id) => project.lessonIds.includes(id)))),
-  );
 
   useEffect(() => {
-    setTab("terrain");
+    setTab(initialTab);
     setNewTestOpen(false);
     setNewDecisionOpen(false);
     setTest(testDraft(project));
@@ -196,7 +192,7 @@ export function ProjectWorkbench({
     completed.current = new Set();
     // A project owns its drafts; state updates inside the project must not reset them.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [project.id]);
+  }, [project.id, initialTab]);
 
   function showError(error: unknown) {
     setNotice({
@@ -438,6 +434,7 @@ export function ProjectWorkbench({
       ...linkedLessons.map(
         (lesson) => `- ${lesson.title} (version ${lesson.version})`,
       ),
+      projectLearningMarkdown(lessons, project, state, new Date()),
       "\nLes observations et conclusions sont déclarées par l’utilisateur. Elles ne constituent pas une validation externe du marché.",
     ].join("\n\n");
     downloadFile(
@@ -448,7 +445,9 @@ export function ProjectWorkbench({
   }
 
   return (
-    <div className="project-workbench">
+    <div
+      className={`project-workbench${tab === "reperes" ? " workbench-plan-view" : ""}`}
+    >
       <div className="workbench-topline">
         <button className="text-button" onClick={() => onNavigate("incubator")}>
           <Icon name="back" size={16} /> Tous mes projets
@@ -1167,87 +1166,24 @@ export function ProjectWorkbench({
         )}
         {tab === "reperes" && (
           <>
-            <div className="workbench-section-heading">
-              <div>
-                <p className="eyebrow">LE SAVOIR AU SERVICE DU PROJET</p>
-                <h2>Apprendre ce qui ouvre la prochaine porte.</h2>
-                <p>
-                  Vos liens aux leçons restent des pistes de travail, pas des
-                  compétences acquises automatiquement.
-                </p>
-              </div>
-            </div>
-            <section className="workbench-project-brief">
-              <span className="eyebrow">VOTRE FIL ROUGE</span>
+            <ProjectLearningPlan
+              project={project}
+              state={state}
+              update={update}
+              onNavigate={onNavigate}
+            />
+            <details className="workbench-project-brief">
+              <summary>
+                Le cap du projet <Icon name="plus" size={15} />
+              </summary>
+              <p className="eyebrow">Étape déclarée : {project.stage}</p>
+              <p>{project.problem}</p>
               <h3>{project.customer || "Un client à préciser"}</h3>
               <p>
                 {project.nextAction ||
                   "Définir la prochaine action observable dans la fiche du projet."}
               </p>
-            </section>
-            <h3 className="workbench-lessons-heading">
-              Apprentissages associés
-            </h3>
-            {linkedLessons.length ? (
-              <div className="workbench-lesson-list">
-                {linkedLessons.map((lesson) => (
-                  <button
-                    key={lesson.id}
-                    onClick={() => onNavigate(`lesson/${lesson.id}`)}
-                  >
-                    <span>
-                      <small>
-                        {lesson.domain} · {lesson.minutes} min
-                      </small>
-                      <strong>{lesson.title}</strong>
-                    </span>
-                    <Icon name="arrow" size={17} />
-                  </button>
-                ))}
-              </div>
-            ) : (
-              <div className="workbench-empty compact">
-                <p>
-                  Aucune leçon liée pour le moment. Depuis « Apply » dans un
-                  cours, reliez cette connaissance à votre projet.
-                </p>
-                <button
-                  className="text-button"
-                  onClick={() => onNavigate("academy")}
-                >
-                  Explorer l’Academy <Icon name="arrow" size={16} />
-                </button>
-              </div>
-            )}
-            {suggestedLessons.length > 0 && (
-              <>
-                <h3 className="workbench-lessons-heading">
-                  Des pistes pour votre prochain pas
-                </h3>
-                <div className="workbench-lesson-list">
-                  {suggestedLessons.map((lesson) => (
-                    <button
-                      key={lesson.id}
-                      onClick={() => onNavigate(`lesson/${lesson.id}`)}
-                    >
-                      <span>
-                        <small>
-                          {lesson.prerequisites.length
-                            ? "S’appuie sur vos leçons liées"
-                            : "Un point d’entrée pour tester votre idée"}
-                        </small>
-                        <strong>{lesson.title}</strong>
-                      </span>
-                      <Icon name="arrow" size={17} />
-                    </button>
-                  ))}
-                </div>
-                <p className="workbench-footnote">
-                  Suggestions fondées sur les liens et prérequis du catalogue,
-                  sans analyse automatique de votre marché.
-                </p>
-              </>
-            )}
+            </details>
           </>
         )}
       </section>

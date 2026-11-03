@@ -125,6 +125,11 @@ async function capture(page: Page, testInfo: TestInfo, name: string) {
       path: testInfo.outputPath("14-portfolio-viewport.png"),
       fullPage: false,
     });
+  if (name === "15-project-learning-plan")
+    await page.screenshot({
+      path: testInfo.outputPath("15-project-learning-viewport.png"),
+      fullPage: false,
+    });
 }
 
 async function importReviewDemo(page: Page, state: AppState) {
@@ -644,6 +649,121 @@ test("galerie des écrans et du quiz validé sans débordement", async ({
   await capture(page, testInfo, "14-portfolio-projects");
   await page.getByRole("tab", { name: "Notes", exact: true }).click();
   await capture(page, testInfo, "14-portfolio-notes");
+
+  // Goals are chosen explicitly. Existing application links are left intact,
+  // and prerequisite progress comes only from the current-version quizzes.
+  const learningGoal = lessons.find(
+    (entry) => entry.id === "seuil-rentabilite",
+  )!;
+  const automationGoal = lessons.find(
+    (entry) => entry.id === "automatisation-agent",
+  )!;
+  await page.goto("/#project/design-project");
+  await page.getByRole("tab", { name: "Repères", exact: true }).click();
+  await expect(
+    page.getByRole("heading", {
+      name: "Donnez un cap à votre apprentissage.",
+      exact: true,
+    }),
+  ).toBeVisible();
+  await capture(page, testInfo, "15-project-learning-empty");
+  await page
+    .getByRole("button", { name: "Choisir mes objectifs", exact: true })
+    .click();
+  await page
+    .getByRole("checkbox", {
+      name: `Objectif : ${learningGoal.title}`,
+      exact: true,
+    })
+    .check();
+  await page
+    .getByRole("checkbox", {
+      name: `Objectif : ${automationGoal.title}`,
+      exact: true,
+    })
+    .check();
+  await capture(page, testInfo, "15-project-learning-editor");
+  await page
+    .getByRole("button", { name: "Enregistrer les objectifs", exact: true })
+    .click();
+  await expect(
+    page
+      .getByRole("list", { name: "Étapes du parcours", exact: true })
+      .getByRole("listitem"),
+  ).toHaveCount(5);
+  await capture(page, testInfo, "15-project-learning-plan");
+  await page
+    .getByRole("button", {
+      name: `Étudier : ${learningGoal.title}`,
+      exact: true,
+    })
+    .click();
+  await expect(
+    page.getByRole("button", {
+      name: "Reprendre le plan : Prévoir le cash d’un atelier",
+      exact: true,
+    }),
+  ).toBeVisible();
+  await capture(page, testInfo, "15-project-learning-lesson");
+  await page.getByRole("tab", { name: /Prove/ }).click();
+  for (const [index, question] of learningGoal.quiz.entries()) {
+    await page
+      .getByRole("radio", {
+        name: question.options[question.answer],
+        exact: true,
+      })
+      .locator("..")
+      .click();
+    if (index < learningGoal.quiz.length - 1) {
+      await page
+        .getByRole("button", { name: "Valider cette réponse", exact: true })
+        .click();
+      await page
+        .getByRole("button", { name: "Question suivante", exact: true })
+        .click();
+    }
+  }
+  await page
+    .getByRole("button", { name: "Vérifier mes réponses", exact: true })
+    .click();
+  await expect(
+    page.getByRole("status").filter({
+      hasText: `${learningGoal.quiz.length}/${learningGoal.quiz.length} · 100 %`,
+    }),
+  ).toBeVisible();
+  await page
+    .getByRole("button", {
+      name: "Reprendre le plan : Prévoir le cash d’un atelier",
+      exact: true,
+    })
+    .click();
+  await page.getByRole("tab", { name: "Repères", exact: true }).click();
+  await expect(
+    page
+      .getByRole("list", { name: "Étapes du parcours", exact: true })
+      .getByRole("listitem")
+      .filter({
+        has: page.getByRole("heading", {
+          name: learningGoal.title,
+          exact: true,
+        }),
+      }),
+  ).toContainText("Quiz validé");
+  await capture(page, testInfo, "15-project-learning-updated");
+  await page.goto("/#skills");
+  await page
+    .getByRole("button", {
+      name: `${learningGoal.title} · Quiz validé`,
+      exact: true,
+    })
+    .click();
+  await expect(
+    page.getByRole("heading", {
+      name: "Objectif dans vos projets",
+      exact: true,
+    }),
+  ).toBeVisible();
+  await capture(page, testInfo, "15-project-learning-map");
 
   const emptyPortfolio: AppState = {
     schemaVersion: 1,

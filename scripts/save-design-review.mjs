@@ -48,6 +48,12 @@ const requiredScreens = [
   "14-portfolio-projects.png",
   "14-portfolio-notes.png",
   "14-portfolio-empty.png",
+  "15-project-learning-empty.png",
+  "15-project-learning-editor.png",
+  "15-project-learning-plan.png",
+  "15-project-learning-updated.png",
+  "15-project-learning-lesson.png",
+  "15-project-learning-map.png",
 ];
 const projects = [
   { name: "desktop-chromium", directory: "desktop" },

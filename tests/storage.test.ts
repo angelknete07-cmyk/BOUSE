@@ -417,3 +417,74 @@ test("duplicate simulation identifiers cannot create an ambiguous saved comparis
     }),
   );
 });
+
+test("legacy projects do not infer learning goals from associated lessons", () => {
+  const original = savedState();
+  const restored = parse(original);
+  assert.deepEqual(restored, original);
+  assert.equal(Object.hasOwn(restored.projects[0]!, "learningGoalIds"), false);
+});
+
+test("learning goals survive a backup without rewriting project associations or evidence", () => {
+  const original = savedState();
+  const value = {
+    ...original,
+    projects: original.projects.map((project) => ({
+      ...project,
+      learningGoalIds: ["seuil-rentabilite", "automatisation-agent"],
+    })),
+  };
+  const restored = parse(value);
+  assert.deepEqual(restored, value);
+  assert.deepEqual(
+    restored.projects[0]!.lessonIds,
+    original.projects[0]!.lessonIds,
+  );
+  assert.deepEqual(restored.attempts, original.attempts);
+  assert.equal(restored.projects[0]!.stage, original.projects[0]!.stage);
+  assert.equal(
+    restored.projects[0]!.nextAction,
+    original.projects[0]!.nextAction,
+  );
+});
+
+test("unknown learning goals remain importable without losing their identifiers", () => {
+  const original = savedState();
+  const value = {
+    ...original,
+    projects: [
+      { ...original.projects[0]!, learningGoalIds: ["future-lesson-v2"] },
+    ],
+  };
+  assert.deepEqual(parse(value), value);
+  assert.deepEqual(
+    parse({
+      ...value,
+      projects: [{ ...value.projects[0]!, learningGoalIds: [] }],
+    }).projects[0]!.learningGoalIds,
+    [],
+  );
+});
+
+test("invalid learning goal shapes are rejected before replacing a backup", () => {
+  const original = savedState();
+  for (const learningGoalIds of [
+    null,
+    false,
+    {},
+    [null],
+    [7],
+    [""],
+    [" "],
+    [" ca-marge-tresorerie"],
+    ["x".repeat(161)],
+    ["same", "same"],
+  ]) {
+    assert.throws(() =>
+      parse({
+        ...original,
+        projects: [{ ...original.projects[0]!, learningGoalIds }],
+      }),
+    );
+  }
+});

@@ -39,6 +39,12 @@ const getRoute = () => {
     return "home";
   }
 };
+const projectIdForRoute = (route: string) =>
+  route.startsWith("project-plan/")
+    ? route.slice(13)
+    : route.startsWith("project/")
+      ? route.slice(8)
+      : null;
 function useRoute() {
   const [route, setRoute] = useState(getRoute);
   useEffect(() => {
@@ -68,6 +74,7 @@ function App() {
   const [state, setState] = useState(loaded.state);
   const [storageError, setStorageError] = useState<string | null>(loaded.error);
   const [route, navigate] = useRoute();
+  const projectId = projectIdForRoute(route);
   const [searchOpen, setSearchOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(
@@ -152,7 +159,7 @@ function App() {
     setMobileOpen(false);
     window.scrollTo({ top: 0 });
     titleRef.current?.focus({ preventScroll: true });
-    document.title = `${navigation.find((n) => n.id === route)?.label || (route === "portfolio" ? "Portfolio" : route.startsWith("lesson/") ? "Leçon" : route.startsWith("project/") ? "Atelier projet" : "Mon espace")} — BOUSE`;
+    document.title = `${navigation.find((n) => n.id === route)?.label || (route === "portfolio" ? "Portfolio" : route.startsWith("lesson/") ? "Leçon" : projectId !== null ? "Atelier projet" : "Mon espace")} — BOUSE`;
   }, [route, !!state.profile]);
   const done = passedIds(state);
   function go(next: string) {
@@ -219,9 +226,10 @@ function App() {
   const lesson = route.startsWith("lesson/")
     ? lessons.find((l) => l.id === route.slice(7))
     : undefined;
-  const project = route.startsWith("project/")
-    ? state.projects.find((item) => item.id === route.slice(8))
-    : undefined;
+  const project =
+    projectId !== null
+      ? state.projects.find((item) => item.id === projectId)
+      : undefined;
   return (
     <div className="app-shell">
       <a
@@ -284,7 +292,7 @@ function App() {
                 route === n.id ||
                 (n.id === "academy" && lesson) ||
                 (n.id === "skills" && route === "portfolio") ||
-                (n.id === "incubator" && route.startsWith("project/"))
+                (n.id === "incubator" && projectId !== null)
                   ? "page"
                   : undefined
               }
@@ -292,7 +300,7 @@ function App() {
                 route === n.id ||
                 (n.id === "academy" && lesson) ||
                 (n.id === "skills" && route === "portfolio") ||
-                (n.id === "incubator" && route.startsWith("project/"))
+                (n.id === "incubator" && projectId !== null)
                   ? "nav-link active"
                   : "nav-link"
               }
@@ -349,7 +357,7 @@ function App() {
                 ? "Academy"
                 : route === "portfolio"
                   ? "Portfolio"
-                  : route.startsWith("project/")
+                  : projectId !== null
                     ? "Incubator"
                     : navigation.find((n) => n.id === route)?.label ||
                       "Préférences"}
@@ -425,8 +433,11 @@ function App() {
                 state={state}
                 update={update}
                 onNavigate={go}
+                initialTab={
+                  route.startsWith("project-plan/") ? "reperes" : "terrain"
+                }
               />
-            ) : route.startsWith("project/") ? (
+            ) : projectId !== null ? (
               <div className="empty-state">
                 <h1>Projet introuvable.</h1>
                 <p>
@@ -476,7 +487,7 @@ function App() {
             aria-current={
               route === item.id ||
               (item.id === "academy" && lesson) ||
-              (item.id === "incubator" && route.startsWith("project/"))
+              (item.id === "incubator" && projectId !== null)
                 ? "page"
                 : undefined
             }

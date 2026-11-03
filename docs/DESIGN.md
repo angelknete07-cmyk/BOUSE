@@ -80,6 +80,8 @@ Le mode « Et si ? » utilise un grand tracé comparatif monochrome et des mois 
 
 Le portfolio utilise un registre de notions et de traces, relié aux dossiers existants. La sélection révèle les détails ; quiz, notes et projets se distinguent par leurs libellés et leur composition, sans score global ni palette par catégorie. Sur mobile, le registre devient une liste compacte et le détail conserve des actions accessibles. Les explorations fictives restent visuellement séparées des observations déclarées.
 
+Le parcours de projet étend Repères avec une timeline d’apprentissage et un prochain pas dominant. Les objectifs choisis et les prérequis se distinguent par leurs libellés ; les quiz restent neutres visuellement. Le contexte de projet secondaire est repliable après le parcours afin de préserver l’accès mobile à l’action principale. L’éditeur d’objectifs utilise les mêmes surfaces, états de focus et tokens de mouvement.
+
 La revue visuelle est obligatoire après toute modification importante. Voir `AGENTS.md`, `design-reviews/LATEST.md` et la commande `npm run review:render`. Les captures sont conservées dans le dépôt avec une paire stable desktop/mobile et un historique daté. La vérification interne et la validation design externe sont des étapes distinctes.
 
 Les résultats des tests et de l’inspection des captures sont consignés dans `docs/VALIDATION.md`. La vérification porte sur le rendu réel dans Chromium desktop et mobile émulé ; elle ne constitue pas un test sur appareil physique.

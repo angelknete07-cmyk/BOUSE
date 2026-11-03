@@ -7,6 +7,7 @@ import { Icon } from "./Icon";
 import { LessonScene } from "./LessonScene";
 import { latestCurrentAttempt } from "../lib/portfolio";
 import { useClock } from "../lib/useClock";
+import { buildProjectLearningPlan } from "../lib/projectLearning";
 import "../lesson-experience.css";
 
 type Props = {
@@ -44,6 +45,13 @@ export function LessonView({ lesson, state, update, onNavigate }: Props) {
   const latest = latestCurrentAttempt(lesson, state.attempts, now);
   const linkedProjects = state.projects.filter((project) =>
     project.lessonIds.includes(lesson.id),
+  );
+  const learningProjects = state.projects.filter(
+    (project) =>
+      project.learningGoalIds?.length &&
+      buildProjectLearningPlan(lessons, project, state, now).steps.some(
+        (step) => step.lesson.id === lesson.id,
+      ),
   );
   const sequences = [
     ...lesson.sections.map((section, index) => ({
@@ -966,6 +974,23 @@ export function LessonView({ lesson, state, update, onNavigate }: Props) {
             </div>
           )}
           <div className="learning-support">
+            {learningProjects.length > 0 && (
+              <details open>
+                <summary>
+                  Dans le parcours de vos projets <Icon name="plus" size={15} />
+                </summary>
+                {learningProjects.map((project) => (
+                  <button
+                    className="text-button"
+                    key={project.id}
+                    onClick={() => onNavigate(`project-plan/${project.id}`)}
+                  >
+                    Reprendre le plan : {project.title}{" "}
+                    <Icon name="arrow" size={14} />
+                  </button>
+                ))}
+              </details>
+            )}
             <details>
               <summary>
                 Mon carnet <span>{note.trim() ? "1 note" : ""}</span>

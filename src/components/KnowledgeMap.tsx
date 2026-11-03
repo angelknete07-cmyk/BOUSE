@@ -69,6 +69,9 @@ export function KnowledgeMap({ state, onNavigate }: Props) {
   const linkedProjects = state.projects.filter((project) =>
     project.lessonIds.includes(selected.id),
   );
+  const learningProjects = state.projects.filter((project) =>
+    project.learningGoalIds?.includes(selected.id),
+  );
 
   function select(id: string) {
     setSelectedId(id);
@@ -302,6 +305,24 @@ export function KnowledgeMap({ state, onNavigate }: Props) {
                     onClick={() => select(lesson.id)}
                   >
                     <span>{lesson.title}</span>
+                    <Icon name="arrow" size={15} />
+                  </button>
+                ))}
+              </section>
+            )}
+            {learningProjects.length > 0 && (
+              <section className="knowledge-detail-section">
+                <h3>Objectif dans vos projets</h3>
+                {learningProjects.map((project) => (
+                  <button
+                    className="knowledge-related"
+                    key={project.id}
+                    onClick={() => onNavigate(`project-plan/${project.id}`)}
+                  >
+                    <span>
+                      {project.title}
+                      <small>Voir le parcours d’apprentissage</small>
+                    </span>
                     <Icon name="arrow" size={15} />
                   </button>
                 ))}

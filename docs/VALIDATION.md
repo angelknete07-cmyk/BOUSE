@@ -1,4 +1,4 @@
-# Validation du 2 novembre 2026
+# Validation — mise à jour du 3 novembre 2026
 
 Validation de l’instance cloud et des fichiers présents dans `/workspace/BOUSE`. Ces résultats ne constituent ni une publication de l’environnement, ni un déploiement, ni une validation dans une nouvelle tâche restaurée.
 
@@ -7,12 +7,12 @@ Validation de l’instance cloud et des fichiers présents dans `/workspace/BOUS
 | Accès GitHub en lecture avec l’authentification existante | `git ls-remote origin HEAD` réussi                                               |
 | Installation reproductible                                | `npm ci --no-audit --no-fund` réussi, lockfile conservé                          |
 | Compilation TypeScript stricte et Vite                    | `npm run build` réussi                                                           |
-| Logique métier, import et structure pédagogique           | **121 cas unitaires réussis** dans les sept fichiers, aucun échec ni test ignoré |
-| Parcours navigateur                                       | `npm run test:e2e` : **38 réussis**, aucun échec ni test ignoré                  |
+| Logique métier, import et structure pédagogique           | **146 cas unitaires réussis** dans les huit fichiers, aucun échec ni test ignoré |
+| Parcours navigateur                                       | `npm run test:e2e` : **44 réussis**, aucun échec ni test ignoré                  |
 | Serveur de production local                               | HTML et ressources JavaScript/CSS de la dernière compilation reçus avec succès   |
 | Lisibilité et espaces                                     | Prettier et `git diff --check` réussis                                           |
 
-Seize scénarios fonctionnels et trois scénarios de rendu/motion sont exécutés dans Chromium sur ordinateur et en émulation Pixel 7. Les parcours initiaux comprennent :
+Dix-neuf scénarios fonctionnels et trois scénarios de rendu/motion sont exécutés dans Chromium sur ordinateur et en émulation Pixel 7. Les parcours initiaux comprennent :
 
 1. Onboarding et diagnostic, leçon, exercice avec indice et solution, quiz, création d’idée sans doublon, modification et avancement du projet, rechargement et carte de compétences.
 2. Calcul financier et cas limites, navigation clavier de la palette, synonymes de recherche et grille locale de prompts.
@@ -62,10 +62,22 @@ Le correctif d’export a aussi été exercé directement : titre vide → alert
 
 ## Passe 06 — portfolio d’apprentissage
 
-La dernière suite complète comporte **38 tests navigateur réussis**, **121 cas unitaires réussis** (6 de contenu, 15 métier, 16 projets, 18 révisions, 22 simulation, 24 sauvegarde, 20 portfolio), TypeScript et compilation Vite. `npm test` et les sept fichiers lancés directement passent, sans test ignoré. Le HTML et les ressources JS/CSS servis en production ont été comparés aux fichiers de la dernière compilation.
+Cette passe comportait **38 tests navigateur réussis**, **121 cas unitaires réussis** (6 de contenu, 15 métier, 16 projets, 18 révisions, 22 simulation, 24 sauvegarde, 20 portfolio), TypeScript et compilation Vite. `npm test` et les sept fichiers lancés directement passent, sans test ignoré. Le HTML et les ressources JS/CSS servis en production ont été comparés aux fichiers de la dernière compilation.
 
 Les huit nouveaux parcours navigateur vérifient l’accès depuis la carte, la sélection d’une notion, le dernier échec courant malgré un import désordonné ou une ancienne réussite, les dossiers et simulations séparés, les notes hors catalogue, le téléchargement Markdown et l’absence de mutation des données. Une régression avance la date de dix secondes sans déclencher le timer : un quiz réellement soumis reste immédiatement visible dans le résumé de la leçon. Les tests métier vérifient aussi versions, dates futures ou invalides, égalités chronologiques, copies indépendantes, relations, archives et protection de la structure Markdown.
 
 **79 captures réelles** sont enregistrées dans `design-reviews/`, avec une paire principale sur le portfolio et une archive datée. Les vues notions, dossiers/explorations, notes et dossier vide ont été inspectées sur ordinateur et mobile. Les accords des repères ont été corrigés après le premier rendu puis la suite et les captures ont été régénérées. La carte, l’accueil et le résumé de leçon utilisent maintenant la même règle de quiz courant.
 
-Un contrôle autonome a exercé les onglets par flèches/Home/End, les lignes par Tab/Entrée et le transfert du focus au détail mobile. Motion observée : contenu 360 ms avec easing non linéaire, opacité de 0 à 1 et déplacement de 5 px ; réduction des mouvements : affichage immédiat, aucune animation ou transition. Aucun débordement ni erreur JavaScript observé, état inchangé. Chromium headless et Pixel 7 émulé, sans appareil physique ni mesure GPU. La review design externe de cette passe reste à effectuer.
+Un contrôle autonome a exercé les onglets par flèches/Home/End, les lignes par Tab/Entrée et le transfert du focus au détail mobile. Motion observée : contenu 360 ms avec easing non linéaire, opacité de 0 à 1 et déplacement de 5 px ; réduction des mouvements : affichage immédiat, aucune animation ou transition. Aucun débordement ni erreur JavaScript observé, état inchangé. Chromium headless et Pixel 7 émulé, sans appareil physique ni mesure GPU. L’utilisateur a autorisé la poursuite sur cette base ; aucune validation design indépendante n’est revendiquée.
+
+## Passe 07 — parcours d’apprentissage par projet
+
+Le 3 novembre 2026, la suite complète passe avec **44 tests navigateur** (22 scénarios sur desktop et mobile) et **146 cas unitaires** : 6 de contenu, 15 métier, 16 projets, 18 révisions, 22 simulation, 28 sauvegarde, 20 portfolio et 21 parcours de projet. Les huit fichiers passent via `npm test` et ont été exécutés directement pour confirmer les nombres de cas. Aucun échec ni test ignoré. TypeScript strict et compilation Vite passent.
+
+Les six nouveaux parcours navigateur vérifient les objectifs explicites, la fermeture des prérequis, la sauvegarde au rechargement, la conservation du stade et des associations, la priorité au prérequis à reprendre, un quiz réellement soumis puis le retour immédiat au plan. Ils couvrent aussi les objectifs hors catalogue dans les exports JSON et Markdown du dossier et du portfolio, leur retrait explicite et le lien inverse depuis la carte. Les tests métier incluent prérequis partagés, versions, dates, import désordonné, cycles qui se chevauchent, branches indépendantes, contenus manquants et copies indépendantes.
+
+**93 captures réelles** sont conservées avec une paire stable sur le parcours du projet. Le premier rendu mobile occupait tout l’écran avec des introductions : la correction rapproche « Étudier » et la première étape du début de page. L’inspection desktop a aussi révélé une classe héritée qui limitait indûment la largeur ; la vue dispose désormais de sa propre portée de style. Le volet secondaire « Le cap du projet » utilise un indicateur unique. Les six tests de galerie/motion ont été réexécutés après cette dernière correction CSS et les rendus régénérés. Les anciennes captures sont archivées pour comparaison.
+
+Contrôle navigateur complémentaire sur le build de production : action principale dans le premier viewport, focus sur l’éditeur, sélection avec Espace, annulation et retour du focus, données inchangées. Animation de 360 ms, déplacement de 5 px et easing `cubic-bezier(0.22, 1, 0.36, 1)` ; préférence de réduction : aucune animation. Aucun débordement ni erreur JavaScript observé dans ces contrôles. Le HTML et les ressources JS/CSS servis ont été comparés aux fichiers compilés.
+
+Les objectifs restent distincts des associations et des réussites de quiz ; le parcours ne certifie ni compétence professionnelle ni réussite du projet. Les tests utilisent Chromium et une émulation Pixel 7, sans appareil physique ni Safari/Firefox. La review design externe de cette passe reste à effectuer avant le prochain élargissement fonctionnel.

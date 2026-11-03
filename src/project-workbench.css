@@ -607,6 +607,65 @@
   line-height: 1.8;
   margin: 0;
 }
+.workbench-plan-view .workbench-topline {
+  margin-bottom: var(--space-5);
+}
+.workbench-plan-view .workbench-heading {
+  margin-bottom: var(--space-5);
+}
+.workbench-plan-view .workbench-heading > .eyebrow,
+.workbench-plan-view .workbench-heading > p:not(.eyebrow),
+.workbench-plan-view .workbench-context {
+  display: none;
+}
+.workbench-plan-view .workbench-heading h1 {
+  font-size: var(--type-heading);
+  max-width: none;
+  margin-bottom: 0;
+}
+.workbench-plan-view .workbench-tabs {
+  margin-bottom: var(--space-4);
+}
+.workbench-plan-view .project-learning-plan {
+  margin-top: 0;
+}
+.workbench-plan-view .workbench-project-brief {
+  margin-top: var(--space-8);
+}
+.workbench-project-brief > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  min-height: 44px;
+  list-style: none;
+  cursor: pointer;
+  color: var(--text-secondary);
+  font-size: var(--type-body);
+}
+.workbench-project-brief > summary::-webkit-details-marker {
+  display: none;
+}
+.workbench-project-brief > summary:hover {
+  color: var(--text);
+}
+.workbench-project-brief[open] > summary {
+  margin-bottom: var(--space-6);
+}
+.workbench-project-brief[open] > summary svg {
+  transform: rotate(45deg);
+}
+@media (max-width: 700px) {
+  .workbench-plan-view .workbench-topline {
+    margin-bottom: var(--space-3);
+  }
+  .workbench-plan-view .workbench-heading h1 {
+    font-size: var(--type-title-lg);
+  }
+  .workbench-plan-view .workbench-heading {
+    margin-bottom: var(--space-4);
+  }
+}
 @keyframes workbench-enter {
   from {
     opacity: 0;

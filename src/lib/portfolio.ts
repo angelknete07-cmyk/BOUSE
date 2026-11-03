@@ -546,6 +546,26 @@ export function portfolioMarkdown(
         ".",
       "",
     );
+    if (project.learningGoalIds !== undefined) {
+      lines.push(
+        "#### Objectifs d’apprentissage choisis",
+        "",
+        "Ces objectifs sont distincts des apprentissages associés ; leur sélection ne prouve ni maîtrise ni réalisation du projet.",
+        "",
+        literal(JSON.stringify(project.learningGoalIds, null, 2), "json"),
+        "",
+        ...project.learningGoalIds.map(
+          (id) =>
+            "- " +
+            markdownText(byId.get(id)?.title ?? id) +
+            (byId.has(id)
+              ? " (objectif choisi)."
+              : " (indisponible dans le catalogue actuel)."),
+        ),
+        ...(project.learningGoalIds.length ? [] : ["Aucun objectif choisi."]),
+        "",
+      );
+    }
     if (!entry.experiments.length)
       lines.push("Aucun test terrain enregistré.", "");
     for (const experiment of entry.experiments)
