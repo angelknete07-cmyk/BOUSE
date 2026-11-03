@@ -44,6 +44,8 @@ Les tokens de succès, d’erreur et d’avertissement restent séparés des tok
 
 Définir des rôles cohérents : titre de page, titre de section, titre de composant, texte de lecture, contrôle, métadonnée et nombre financier. Employer des chiffres tabulaires pour les données financières. Garder un contraste suffisant pour la lecture ; la discrétion d’une métadonnée ne justifie pas son illisibilité.
 
+Inter variable est chargée localement pour les titres, la lecture et les contrôles, avec adaptation optique automatique. Les titres principaux utilisent le rôle `--weight-display` (600), les titres de section `--weight-heading` (550), les grands nombres `--weight-figure` (450) et la lecture le poids régulier (400). Les approches `--tracking-display`, `--tracking-heading` et `--tracking-figure` évitent les lettres excessivement serrées. Les indices techniques conservent la pile monospace ; le monogramme garde sa police dédiée.
+
 Utiliser une échelle d’espacement partagée pour les regroupements, séparations et marges de page. Un groupe s’identifie d’abord par sa proximité et son titre ; il ne nécessite pas systématiquement une carte bordée. Conserver des cibles tactiles confortables sur mobile.
 
 ### Radius et profondeur
@@ -96,8 +98,12 @@ La demande du 3 novembre arrête l’élargissement fonctionnel pour corriger la
 - **Leçon** : chapitre compact, vocabulaire composé, scène manipulable, explications numérotées, cas éditorial, atelier d’explication et quiz question par question. Sur mobile, la scène interactive précède le développement du concept ; le résumé redondant de l’en-tête est masqué.
 - **Lab financier** : les contrôles habitent l’équation prix − coût = contribution. Le graphe ventes/coûts et le seuil sont proches des curseurs volume/charges ; l’équation mensuelle révèle le résultat. Les règles de calcul restent identiques.
 
-Manrope variable est auto-hébergée pour les titres et grands nombres ; texte courant et chiffres techniques conservent leurs rôles. Source et licence OFL sont documentées dans `public/fonts/`. Les couleurs, surfaces, échelles, rayons, ombres et courbes partent de `tokens.css`. `art-direction.css` rassemble ces compositions et leurs variantes mobiles ; ses règles spécifiques ne doivent pas détourner les classes des écrans secondaires.
+La passe 08 utilisait Manrope pour les titres et grands nombres, remplacée par Inter à la passe 09 après retour utilisateur. Source et licence OFL de la police active sont documentées dans `public/fonts/`. Les couleurs, surfaces, échelles, rayons, ombres et courbes partent de `tokens.css`. `art-direction.css` rassemble ces compositions et leurs variantes mobiles ; ses règles spécifiques ne doivent pas détourner les classes des écrans secondaires.
 
 La matière varie de quelques pixels sur 18 secondes avec une courbe non linéaire. Les nœuds et extraits ont des retours courts ; les points et tracés financiers suivent les paramètres. Les animations sont supprimées avec `prefers-reduced-motion`. Aucun effet ne doit introduire un délai dans un calcul ou une saisie.
 
 La passe attend une review design externe avant de poursuivre les fonctionnalités. Les rendus précédents restent archivés ; `design-reviews/LATEST.md` relie chaque écran avant/après.
+
+## Passe 09 — correction typographique
+
+Le retour utilisateur porte sur la police. L’audit relève des titres Manrope très fins, des approches allant jusqu’à −0,07 em et une référence à Inter dans la pile de texte sans fichier Inter chargé. Le remplacement unifie l’interface autour d’une Inter variable auto-hébergée et préchargée. Les titres gagnent en poids et en espacement, les nombres gardent un poids intermédiaire et les textes de lecture restent réguliers. Les réglages sont centralisés pour les cinq écrans prioritaires et les composants communs. La composition, la palette, les animations et la logique métier sont conservées. Les nouveaux rendus sont comparés à la passe 08 dans `design-reviews/LATEST.md`.

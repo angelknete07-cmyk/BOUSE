@@ -23,8 +23,8 @@ h4 {
   font-family: var(--font-display);
   font-size: var(--type-editorial);
   line-height: 1.06;
-  font-weight: 450;
-  letter-spacing: -0.065em;
+  font-weight: var(--weight-display);
+  letter-spacing: var(--tracking-display);
   margin: var(--space-5) 0 0;
 }
 .art-heading > p,
@@ -71,14 +71,14 @@ h4 {
   color: var(--muted);
 }
 .instrument-principle > p {
-  font: 400 var(--type-heading)/1.5 var(--font-display);
-  letter-spacing: -0.035em;
+  font: var(--weight-regular) var(--type-heading)/1.5 var(--font-display);
+  letter-spacing: var(--tracking-heading);
   color: var(--text-secondary);
   margin: var(--space-5) 0;
 }
 .instrument-principle strong {
   color: var(--text);
-  font-weight: 450;
+  font-weight: var(--weight-heading);
 }
 .instrument-principle > small {
   display: block;
@@ -113,7 +113,7 @@ h4 {
 }
 .art-home .learning-greeting h1 {
   font-size: var(--type-title-lg);
-  font-weight: 400;
+  font-weight: var(--weight-heading);
 }
 .art-home .learning-stage {
   display: block;
@@ -181,8 +181,8 @@ h4 {
   font-family: var(--font-display);
   font-size: var(--type-scene);
   line-height: 1.04;
-  font-weight: 450;
-  letter-spacing: -0.065em;
+  font-weight: var(--weight-display);
+  letter-spacing: var(--tracking-display);
   max-width: 12ch;
   margin: var(--space-5) 0;
   text-wrap: initial;
@@ -292,13 +292,14 @@ h4 {
   margin: 0 0 var(--space-2);
 }
 .art-home .trajectory-heading h2 {
+  font-weight: var(--weight-heading);
   font-size: var(--type-heading);
-  letter-spacing: -0.05em;
+  letter-spacing: var(--tracking-heading);
 }
 .art-home .trajectory-count strong {
   font-family: var(--font-display);
   font-size: var(--type-number-lg);
-  font-weight: 400;
+  font-weight: var(--weight-figure);
   line-height: 1;
 }
 .art-home .trajectory-map {
@@ -341,8 +342,8 @@ h4 {
 }
 .art-home .learning-universes-heading h2 {
   font-size: clamp(1.8rem, 3vw, 2.75rem);
-  font-weight: 400;
-  letter-spacing: -0.055em;
+  font-weight: var(--weight-heading);
+  letter-spacing: var(--tracking-heading);
 }
 .art-home .learning-universes {
   display: grid;
@@ -384,9 +385,9 @@ h4 {
 }
 .art-home .domain-copy h3 {
   font-size: clamp(2rem, 3.2vw, 3rem);
-  font-weight: 400;
+  font-weight: var(--weight-heading);
   line-height: 1.1;
-  letter-spacing: -0.055em;
+  letter-spacing: var(--tracking-heading);
   max-width: 17ch;
 }
 .art-home .domain-copy p {
@@ -476,7 +477,7 @@ h4 {
 }
 .prompt-writing > label {
   color: var(--text);
-  font: 450 var(--type-title-md)/1.4 var(--font-display);
+  font: var(--weight-heading) var(--type-title-md)/1.4 var(--font-display);
   margin: var(--space-8) 0 var(--space-5);
   max-width: 23ch;
 }
@@ -573,8 +574,8 @@ h4 {
   box-shadow: var(--highlight-edge), var(--shadow-stage);
 }
 .prompt-core > span {
-  font: 300 52px/1 var(--font-display);
-  letter-spacing: -0.07em;
+  font: var(--weight-figure) 52px/1 var(--font-display);
+  letter-spacing: var(--tracking-figure);
 }
 .prompt-core > small {
   color: var(--muted);
@@ -631,7 +632,7 @@ h4 {
 }
 .prompt-part strong {
   font-size: var(--type-small);
-  font-weight: 450;
+  font-weight: var(--weight-heading);
 }
 .prompt-part small {
   font-size: var(--type-micro);
@@ -646,14 +647,14 @@ h4 {
   animation: instrument-reveal var(--motion-enter) var(--ease-out) both;
 }
 .prompt-lens-index {
-  font: 300 36px/1 var(--font-display);
+  font: var(--weight-figure) 36px/1 var(--font-display);
   color: var(--ink-faint);
 }
 .prompt-lens h2 {
   font-size: var(--type-title-sm);
-  font-weight: 450;
+  font-weight: var(--weight-heading);
   margin: 0 0 var(--space-2);
-  letter-spacing: -0.025em;
+  letter-spacing: var(--tracking-heading);
 }
 .prompt-lens p {
   color: var(--muted);
@@ -706,8 +707,8 @@ h4 {
 }
 .prompt-comparison h2 {
   font-size: clamp(1.8rem, 3vw, 2.8rem);
-  font-weight: 400;
-  letter-spacing: -0.055em;
+  font-weight: var(--weight-heading);
+  letter-spacing: var(--tracking-heading);
   line-height: 1.2;
   margin: var(--space-4) 0 0;
 }
@@ -734,7 +735,7 @@ h4 {
 }
 .prompt-comparison-columns h3 {
   font-size: var(--type-body-lg);
-  font-weight: 400;
+  font-weight: var(--weight-heading);
   display: flex;
   align-items: center;
   gap: var(--space-4);
@@ -916,7 +917,7 @@ h4 {
 }
 .atlas-node strong {
   color: var(--text-secondary);
-  font: 450 var(--type-body-sm)/1.4 var(--font-display);
+  font: var(--weight-heading) var(--type-body-sm)/1.4 var(--font-display);
   background: var(--bg);
   padding: 2px var(--space-2);
 }
@@ -965,14 +966,14 @@ h4 {
   background: transparent;
 }
 .atlas-lesson-index {
-  font: 300 var(--type-index-sm)/1 var(--font-display);
-  letter-spacing: -0.07em;
+  font: var(--weight-figure) var(--type-index-sm)/1 var(--font-display);
+  letter-spacing: var(--tracking-figure);
   color: var(--ink-faint);
 }
 .atlas-lesson h2 {
   font-size: clamp(1.6rem, 2.6vw, 2.3rem);
-  font-weight: 450;
-  letter-spacing: -0.045em;
+  font-weight: var(--weight-heading);
+  letter-spacing: var(--tracking-heading);
   line-height: 1.2;
   margin: var(--space-3) 0 var(--space-4);
 }
@@ -1050,8 +1051,8 @@ h4 {
   border-radius: 0;
   background: transparent;
   padding: var(--space-2) 0;
-  font: 400 var(--type-instrument)/1.1 var(--font-display);
-  letter-spacing: -0.065em;
+  font: var(--weight-figure) var(--type-instrument)/1.1 var(--font-display);
+  letter-spacing: var(--tracking-figure);
   min-width: 0;
   width: 100%;
   color: var(--text);
@@ -1071,7 +1072,7 @@ h4 {
   cursor: pointer;
 }
 .math-operator {
-  font: 300 36px var(--font-display);
+  font: var(--weight-figure) 36px var(--font-display);
   color: var(--ink-faint);
   text-align: center;
 }
@@ -1087,8 +1088,8 @@ h4 {
   font-size: var(--type-small);
 }
 .unit-contribution > strong {
-  font: 350 var(--type-instrument)/1.1 var(--font-display);
-  letter-spacing: -0.06em;
+  font: var(--weight-figure) var(--type-instrument)/1.1 var(--font-display);
+  letter-spacing: var(--tracking-figure);
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
   animation: instrument-reveal var(--motion-normal) var(--ease-out);
@@ -1194,8 +1195,8 @@ h4 {
 }
 .financial-chart h2 {
   font-size: var(--type-title-lg);
-  font-weight: 450;
-  letter-spacing: -0.04em;
+  font-weight: var(--weight-heading);
+  letter-spacing: var(--tracking-heading);
 }
 .financial-chart > p {
   color: var(--muted);
@@ -1244,8 +1245,8 @@ h4 {
 }
 .monthly-equation strong {
   display: block;
-  font: 350 clamp(1.5rem, 3vw, 2.7rem)/1.2 var(--font-display);
-  letter-spacing: -0.045em;
+  font: var(--weight-figure) clamp(1.5rem, 3vw, 2.7rem)/1.2 var(--font-display);
+  letter-spacing: var(--tracking-figure);
   font-variant-numeric: tabular-nums;
   overflow-wrap: anywhere;
 }
@@ -1292,9 +1293,9 @@ h4 {
 }
 .lesson-chapter-index {
   grid-row: 1 / 4;
-  font: 300 var(--type-index)/1 var(--font-display);
+  font: var(--weight-figure) var(--type-index)/1 var(--font-display);
   color: var(--ink-faint);
-  letter-spacing: -0.07em;
+  letter-spacing: var(--tracking-figure);
 }
 .lesson-chapter-index small {
   display: block;
@@ -1306,9 +1307,10 @@ h4 {
   margin-bottom: var(--space-2);
 }
 .editorial-lesson .learning-header h1 {
+  font-weight: var(--weight-display);
   font-size: clamp(1.6rem, 2.7vw, 2.5rem);
   max-width: 32ch;
-  letter-spacing: -0.05em;
+  letter-spacing: var(--tracking-display);
   margin-bottom: var(--space-3);
 }
 .editorial-lesson .learning-header > p {
@@ -1341,9 +1343,10 @@ h4 {
   font-size: var(--type-annotation);
 }
 .editorial-lesson .concept-vocabulary {
+  font-weight: var(--weight-heading);
   max-width: none;
   font-size: clamp(1.7rem, 2.7vw, 2.7rem);
-  letter-spacing: -0.055em;
+  letter-spacing: var(--tracking-heading);
   line-height: 1.15;
   margin-bottom: var(--space-6);
 }
@@ -1398,8 +1401,8 @@ h4 {
 .editorial-lesson .scene-number {
   font-family: var(--font-display);
   font-size: clamp(2.5rem, 4vw, 4rem);
-  font-weight: 350;
-  letter-spacing: -0.065em;
+  font-weight: var(--weight-figure);
+  letter-spacing: var(--tracking-figure);
 }
 .editorial-lesson .scene-number-line > p {
   font-size: var(--type-small);
@@ -1423,7 +1426,7 @@ h4 {
 }
 .editorial-lesson .learning-insight > span {
   display: block;
-  font: 300 42px/1 var(--font-display);
+  font: var(--weight-figure) 42px/1 var(--font-display);
   margin-bottom: var(--space-5);
   color: var(--ink-faint);
 }
@@ -1440,8 +1443,8 @@ h4 {
   padding-top: var(--space-5);
 }
 .lesson-case-stamp {
-  font: 400 clamp(2.5rem, 4vw, 4rem)/1.08 var(--font-display);
-  letter-spacing: -0.06em;
+  font: var(--weight-heading) clamp(2.5rem, 4vw, 4rem)/1.08 var(--font-display);
+  letter-spacing: var(--tracking-display);
   color: var(--text);
   grid-row: 1 / 4;
 }
@@ -1490,8 +1493,8 @@ h4 {
   padding-top: var(--space-8);
 }
 .lesson-teachback-mark {
-  font: 350 clamp(3rem, 5vw, 5.5rem)/1 var(--font-display);
-  letter-spacing: -0.07em;
+  font: var(--weight-heading) clamp(3rem, 5vw, 5.5rem)/1 var(--font-display);
+  letter-spacing: var(--tracking-display);
   color: var(--text);
   grid-column: 1;
   margin-bottom: var(--space-8);
@@ -1541,14 +1544,15 @@ h4 {
   position: absolute;
   left: 0;
   top: var(--space-10);
-  font: 300 var(--type-index-sm)/1 var(--font-display);
+  font: var(--weight-figure) var(--type-index-sm)/1 var(--font-display);
   color: var(--ink-faint);
-  letter-spacing: -0.07em;
+  letter-spacing: var(--tracking-figure);
 }
 .editorial-lesson .learning-question legend {
+  font-weight: var(--weight-heading);
   font-family: var(--font-display);
   font-size: clamp(1.5rem, 2.6vw, 2.25rem);
-  letter-spacing: -0.045em;
+  letter-spacing: var(--tracking-heading);
 }
 .editorial-lesson .learning-options {
   gap: var(--space-2);
@@ -1569,10 +1573,11 @@ h4 {
 }
 .editorial-lesson .learning-apply h2,
 .editorial-lesson .learning-practice h2 {
+  font-weight: var(--weight-heading);
   font-size: clamp(2rem, 3.8vw, 3.5rem);
   line-height: 1.15;
   max-width: 26ch;
-  letter-spacing: -0.055em;
+  letter-spacing: var(--tracking-heading);
 }
 .editorial-lesson .learning-summary-skills {
   background: transparent;

@@ -93,3 +93,13 @@ TypeScript et build Vite réussis. Les huit fichiers unitaires ont été exécut
 Les limites restent celles de Chromium/Pixel 7 émulé, des modèles locaux et des contenus existants. La vérification interne ne vaut pas validation design externe. Les liens avant/après, captures prioritaires et états secondaires sont dans [LATEST.md](../design-reviews/LATEST.md).
 
 Le dernier contrôle du build de production confirme les cinq routes, la police locale et l’affichage des centimes. Le déplacement des tracés financiers a été observé pendant la transition, puis supprimé avec reduced motion. Les vues mobiles et repères du prompt ont été sélectionnés au clavier avec un focus visible.
+
+## Passe 09 — correction de la police
+
+Après le retour utilisateur sur la typographie, Inter variable auto-hébergée remplace Manrope et la police de secours du texte courant. Les graisses et les approches des titres, sections et nombres sont centralisées. Aucun changement aux composants React, aux contenus ou aux règles métier.
+
+`npm run build` réussit. Les **8 tests existants de galerie/motion** passent sur desktop et mobile, avec **133 nouvelles captures** : navigation, leçon complète, quiz, atlas, instrument de prompt, états du calculateur, surfaces neutres et réduction des animations. Aucun test ajouté pour cette correction de styles. La suite métier et les 38 autres tests fonctionnels ne sont pas relancés ; leurs résultats de la passe 08 restent historiques.
+
+L’inspection des cinq écrans prioritaires sur les deux viewports, du teach-back, du quiz corrigé et de l’onboarding desktop confirme la nouvelle hiérarchie. Les cinq routes ont aussi été contrôlées à 320, 375, 768, 1024 et 1920 px, sans débordement du document ni erreur JavaScript. Les glyphes des titres et du texte de leçon ont été vérifiés via le protocole Chromium : police locale Inter réellement utilisée, pas seulement déclarée dans CSS. Le chargement initial des cinq routes desktop/mobile confirme aussi la disponibilité d’Inter.
+
+Les captures, les liens avant/après et les limites sont consignés dans [LATEST.md](../design-reviews/LATEST.md), archive `2026-11-03_20-49-59-Europe-Paris`. Validation design externe encore attendue ; Chromium et Pixel 7 émulé uniquement.

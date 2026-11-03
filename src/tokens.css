@@ -1,16 +1,16 @@
 @font-face {
-  font-family: "Manrope";
+  font-family: "Inter";
   font-style: normal;
-  font-weight: 200 800;
+  font-weight: 100 900;
   font-display: swap;
-  src: url("/fonts/manrope-latin-variable.woff2") format("woff2");
+  src: url("/fonts/inter-latin-variable.woff2") format("woff2");
 }
 /* BOUSE — monochrome by default. Color only communicates a functional state. */
 :root {
   --font-sans:
     "Inter", ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI",
     Arial, sans-serif;
-  --font-display: "Manrope", ui-sans-serif, sans-serif;
+  --font-display: var(--font-sans);
   --font-mono: ui-monospace, "SFMono-Regular", Consolas, monospace;
   --font-mark: Georgia, serif;
 
@@ -84,6 +84,12 @@
   --weight-semibold: 600;
   --weight-brand: 650;
   --weight-bold: 700;
+  --weight-display: 600;
+  --weight-heading: 550;
+  --weight-figure: 450;
+  --tracking-display: -0.035em;
+  --tracking-heading: -0.025em;
+  --tracking-figure: -0.035em;
   --leading-tight: 1.22;
   --leading-body: 1.7;
   --leading-reading: 1.9;
