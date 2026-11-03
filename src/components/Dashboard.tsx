@@ -91,10 +91,12 @@ export function Dashboard({ state, onNavigate }: Props) {
     ) || lessons.find((lesson) => lesson.domain === domain)!;
 
   return (
-    <div className="learning-home">
+    <div className="learning-home art-home">
       <header className="learning-greeting">
         <div>
-          <p className="eyebrow">L’ATELIER PERSONNEL / {date}</p>
+          <p className="home-dateline">
+            Votre atelier personnel <span>/</span> {date}
+          </p>
           <h1>À vous de jouer, {state.profile?.name || "vous"}.</h1>
         </div>
         <span className="learning-session">
@@ -114,19 +116,17 @@ export function Dashboard({ state, onNavigate }: Props) {
             <Terrain />
           </div>
           <div className="learning-hero-top">
-            <span className="eyebrow">
+            <span className="scene-label">
               {state.lastLessonId
-                ? "LE FIL DE VOTRE APPRENTISSAGE"
-                : "VOTRE PROCHAINE TRAVERSÉE"}
+                ? "Reprendre le fil"
+                : "Commencer la traversée"}
             </span>
-            <span className="learning-coordinate">
-              {String(currentIndex).padStart(2, "0")} /{" "}
-              {String(lessons.length).padStart(2, "0")}
-            </span>
+            <span className="learning-coordinate">BOUSE / FONDATIONS</span>
           </div>
           <div className="hero-main learning-hero-content">
             <span className="tag">
-              {current.domain} <span>·</span> Fondations
+              {current.domain} <span>·</span> Leçon{" "}
+              {String(currentIndex).padStart(2, "0")}
             </span>
             <h2 id="current-lesson-title">{current.title}</h2>
             <p>{current.summary}</p>
@@ -141,24 +141,41 @@ export function Dashboard({ state, onNavigate }: Props) {
                 <Icon name="arrow" size={17} />
               </button>
               <span>
-                {current.minutes} min
-                <small>une notion, une mise en pratique</small>
+                {current.minutes} min<small>pour faire un pas</small>
               </span>
             </div>
           </div>
-          <div className="learning-method" aria-label="Méthode pédagogique">
-            <span>
-              <i>01</i>Comprendre
-            </span>
-            <span>
-              <i>02</i>Manipuler
-            </span>
-            <span>
-              <i>03</i>Démontrer
-            </span>
-            <span>
-              <i>04</i>Appliquer
-            </span>
+          <div className="scene-coordinate" aria-hidden="true">
+            <span>NO. {String(currentIndex).padStart(2, "0")}</span>
+            <i />
+            <small>Un nouveau point de vue.</small>
+          </div>
+          <div className="home-scene-footer">
+            <div
+              className="home-progress"
+              aria-label={`${done.size} quiz validés sur ${lessons.length}`}
+            >
+              <span>
+                <strong>{String(done.size).padStart(2, "0")}</strong> /{" "}
+                {String(lessons.length).padStart(2, "0")}
+              </span>
+              <div aria-hidden="true">
+                {lessons.map((l) => (
+                  <i
+                    key={l.id}
+                    className={
+                      done.has(l.id)
+                        ? "complete"
+                        : l.id === current.id
+                          ? "current"
+                          : ""
+                    }
+                  />
+                ))}
+              </div>
+              <small>quiz validés</small>
+            </div>
+            <span>Comprendre. Manipuler. Appliquer.</span>
           </div>
         </section>
 
@@ -168,7 +185,7 @@ export function Dashboard({ state, onNavigate }: Props) {
         >
           <div className="trajectory-heading">
             <div>
-              <p className="eyebrow">LA CARTE, PAS UNE LIGNE DROITE</p>
+              <p className="trajectory-intro">Les idées se relient.</p>
               <h2 id="trajectory-title">Votre trajectoire.</h2>
             </div>
             <span className="trajectory-count">
@@ -257,8 +274,8 @@ export function Dashboard({ state, onNavigate }: Props) {
 
       <div className="learning-universes-heading">
         <div>
-          <p className="eyebrow">DEUX LANGAGES POUR CONSTRUIRE</p>
-          <h2>Comprendre le monde. Agir dessus.</h2>
+          <p className="territory-caption">Choisir un territoire</p>
+          <h2>Deux langages. Un même horizon.</h2>
         </div>
         <button className="text-button" onClick={() => onNavigate("academy")}>
           Toute l’Academy
@@ -284,19 +301,27 @@ export function Dashboard({ state, onNavigate }: Props) {
             </span>
           </div>
           <div className="finance-signature" aria-hidden="true">
-            <span className="finance-ledger">
-              <i />
-              <i />
-              <i />
-              <i />
-              <i />
-            </span>
-            <span className="finance-equation">
-              € <span>≠</span> €
-            </span>
-            <span className="finance-caption">
-              résultat <i /> trésorerie
-            </span>
+            <svg viewBox="0 0 440 200">
+              <path className="finance-axis" d="M20 160H420M20 40V160" />
+              <path
+                className="finance-curve-result"
+                d="M20 145C95 143 130 70 200 68S310 38 420 32"
+              />
+              <path
+                className="finance-curve-cash"
+                d="M20 154H115V121H210V95H310V61H420"
+              />
+              <circle cx="210" cy="95" r="4" />
+              <text x="22" y="190">
+                TEMPS
+              </text>
+              <text x="323" y="22">
+                RÉSULTAT
+              </text>
+              <text x="340" y="85">
+                TRÉSORERIE
+              </text>
+            </svg>
           </div>
           <div className="domain-copy">
             <h3>

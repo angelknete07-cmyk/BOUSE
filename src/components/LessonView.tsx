@@ -207,7 +207,7 @@ export function LessonView({ lesson, state, update, onNavigate }: Props) {
   }
 
   return (
-    <div className="learning-experience">
+    <div className="learning-experience editorial-lesson">
       <div className="learning-topline">
         <button
           className="text-button"
@@ -225,6 +225,10 @@ export function LessonView({ lesson, state, update, onNavigate }: Props) {
         </button>
       </div>
       <header className="learning-header">
+        <span className="lesson-chapter-index" aria-hidden="true">
+          {String(lessons.indexOf(lesson) + 1).padStart(2, "0")}
+          <small>/ FONDATIONS</small>
+        </span>
         <div className="learning-kicker">
           <span>{lesson.domain}</span>
           <span>Niveau {lesson.level}</span>
@@ -316,7 +320,10 @@ export function LessonView({ lesson, state, update, onNavigate }: Props) {
                   ))}
                 </div>
               </div>
-              <div className="learning-sequence" key={sequence}>
+              <div
+                className={`learning-sequence sequence-${current.type} ${sequence === 0 ? "sequence-concept" : ""}`}
+                key={sequence}
+              >
                 {current.type === "section" && section && (
                   <>
                     <div className="learning-concept-heading">
@@ -327,9 +334,19 @@ export function LessonView({ lesson, state, update, onNavigate }: Props) {
                             ? "LE POINT DE VIGILANCE"
                             : "ALLER UN CRAN PLUS LOIN"}
                       </span>
-                      <h2>
+                      <h2
+                        className={
+                          sequence === 0 ? "concept-vocabulary" : undefined
+                        }
+                      >
                         {sequence === 0
-                          ? lesson.skills.slice(0, 3).join(". ") + "."
+                          ? lesson.skills.slice(0, 3).map((skill, index) => (
+                              <span key={skill}>
+                                <i>{String(index + 1).padStart(2, "0")}</i>
+                                {skill}
+                                <b>.</b>
+                              </span>
+                            ))
                           : section.title}
                       </h2>
                       <p className="learning-lead">{section.body[0]}</p>
@@ -370,6 +387,11 @@ export function LessonView({ lesson, state, update, onNavigate }: Props) {
                 )}
                 {current.type === "example" && (
                   <div className="learning-case">
+                    <div className="lesson-case-stamp" aria-hidden="true">
+                      À l’épreuve
+                      <br />
+                      du terrain<span>CAS / 01</span>
+                    </div>
                     <span className="learning-section-label">
                       DÉCIDER DANS UNE SITUATION CONCRÈTE
                     </span>
@@ -398,6 +420,9 @@ export function LessonView({ lesson, state, update, onNavigate }: Props) {
                 )}
                 {current.type === "teachback" && (
                   <div className="learning-teachback">
+                    <span className="lesson-teachback-mark" aria-hidden="true">
+                      À vous.
+                    </span>
                     <span className="learning-section-label">
                       TEACH-BACK / EXPLIQUER POUR COMPRENDRE
                     </span>
@@ -614,6 +639,11 @@ export function LessonView({ lesson, state, update, onNavigate }: Props) {
           )}
           {tab === 2 && (
             <div className="learning-quiz">
+              {!result && (
+                <span className="quiz-ordinal" aria-hidden="true">
+                  {String(questionIndex + 1).padStart(2, "0")}
+                </span>
+              )}
               {!result ? (
                 <>
                   <div className="learning-sequence-top">

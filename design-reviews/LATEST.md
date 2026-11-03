@@ -1,48 +1,60 @@
-# Review design — passe 07 : apprendre pour un projet
+# Review design — passe 08 : scènes, atlas et instruments
 
-**Rendus du 3 novembre 2026 à 08:16, Europe/Paris.**
-**Statut : vérification interne effectuée ; review design externe à réaliser.**
+**3 novembre 2026, 15:29 Europe/Paris.** Vérification interne effectuée ; **review design externe attendue**. Passe exclusivement artistique, en réponse à la demande de correction de composition. Aucun élargissement fonctionnel.
 
-Le « GO » de l’utilisateur autorisait la suite du portfolio (passe 06). Cette passe étend l’onglet Repères des projets avec des objectifs explicites et leur parcours de prérequis. Aucune validation design indépendante n’est revendiquée.
+## Rendus prioritaires
 
-## Rendus à examiner
+| Écran                                     | Desktop                                                 | Mobile                                                 |
+| ----------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------ |
+| Accueil, premier écran                    | [Capture](latest-desktop.png)                           | [Capture](latest-mobile.png)                           |
+| Accueil complet, trajectoire et domaines  | [Capture](screens/desktop/01-home.png)                  | [Capture](screens/mobile/01-home.png)                  |
+| AI Lab, instrument et extrait sélectionné | [Capture](screens/desktop/06-ai-structure-viewport.png) | [Capture](screens/mobile/06-ai-structure-viewport.png) |
+| Academy, atlas                            | [Capture](screens/desktop/02-academy.png)               | [Capture](screens/mobile/02-academy.png)               |
+| Leçon, concept et manipulation            | [Capture](screens/desktop/03-lecon-learn.png)           | [Capture](screens/mobile/03-lecon-learn.png)           |
+| Lab financier, équations et seuil         | [Capture](screens/desktop/05-lab-financier.png)         | [Capture](screens/mobile/05-lab-financier.png)         |
 
-- [Desktop, viewport 1440 × 1000](latest-desktop.png) · [Mobile, viewport CSS 412 × 839](latest-mobile.png)
-- [Sans objectif — desktop](screens/desktop/15-project-learning-empty.png) · [mobile](screens/mobile/15-project-learning-empty.png)
-- [Choisir les objectifs — desktop](screens/desktop/15-project-learning-editor.png) · [mobile](screens/mobile/15-project-learning-editor.png)
-- [Parcours complet — desktop](screens/desktop/15-project-learning-plan.png) · [mobile](screens/mobile/15-project-learning-plan.png)
-- [Après un quiz réussi — desktop](screens/desktop/15-project-learning-updated.png) · [mobile](screens/mobile/15-project-learning-updated.png)
-- [Retour depuis la leçon — desktop](screens/desktop/15-project-learning-lesson.png) · [mobile](screens/mobile/15-project-learning-lesson.png)
-- [Accès depuis la carte — desktop](screens/desktop/15-project-learning-map.png) · [mobile](screens/mobile/15-project-learning-map.png)
+**133 captures réelles**, dont la galerie existante pour contrôler la propagation du design system. Desktop : 1440 × 1000. Mobile : Pixel 7 émulé, viewport CSS 412 × 839, échelle 2,625. Données de démonstration fictives. Les captures complètes conservent les barres fixes à la limite du premier viewport ; aucune retouche d’image.
 
-**93 captures réelles**, incluant la galerie existante. La paire stable montre le premier écran du parcours. Les pages complètes montrent le dock fixe à la limite du premier viewport ; les captures ne sont pas retouchées. Pixel 7 émulé, échelle 2,625. Toutes les données présentées sont fictives.
+## Ce qui change
 
-## Audit et changements
+- **Accueil** : scène panoramique, relief argenté animé, titre dominant ; trajectoire ouverte et deux domaines aux signatures différentes, courbes pour Finance et réseau pour IA.
+- **AI Lab** : sept repères reliés au texte, sélection d’un passage, comparaison original/trame ; sur mobile, vues Structure et Écrire partageant le même brouillon. Le score existant devient secondaire.
+- **Academy** : carte spatiale des notions et de leurs prérequis, sélection focalisée, catalogue en second choix ; exploration horizontale mobile.
+- **Leçon** : compositions différentes pour concept, explications, cas, teach-back et quiz. La manipulation remonte avant le développement du concept sur mobile.
+- **Lab financier** : paramètres dans l’équation par vente, graphe ventes/coûts animé, seuil visible, équation mensuelle. Les règles de calcul sont conservées et les montants affichent les centimes lorsqu’ils existent.
+- **Système central** : noir profond, blanc cassé, argent, surfaces ponctuelles, Manrope variable auto-hébergée, indices typographiques et mouvement mesuré. Logo conservé.
 
-L’ancien onglet Repères affichait des liens aux leçons et des suggestions fondées sur ces associations. Il ne permettait pas de choisir un objectif, de voir tous ses prérequis ni de reprendre directement le parcours après un quiz.
+L’[audit avant intervention](AUDIT-08.md) décrit les écarts observés. Les règles métier, contenus de cours, sauvegardes et données utilisateur n’ont pas été refondus.
 
-- **Incubator → ouvrir un projet → Repères → Choisir mes objectifs.** Les choix sont sauvegardés séparément des apprentissages associés depuis Apply.
-- Une chronologie relie les objectifs et leurs prérequis, déduplique les notions communes et propose le prochain pas disponible. Les quiz courants déterminent les états ; une ancienne réussite ne masque pas un échec plus récent.
-- Les leçons, y compris les prérequis, proposent un retour direct au plan. La carte signale les objectifs choisis dans les projets.
-- Sauvegarde JSON et exports Markdown du dossier et du portfolio conservent les objectifs, même ceux absents du catalogue. Les anciennes fiches restent compatibles.
-- Surfaces, typographie, espacement, rayons, ombres et motion reprennent les tokens centraux. Le fil des étapes structure le contenu sans grille de cartes ni couleurs décoratives.
+## Comparaison avant / après
 
-## Comparaison et corrections
+Base : passe 07, archive `2026-11-03_08-16-27-Europe-Paris`. Comparaison effectuée à viewports identiques.
 
-Comparer le premier diagnostic [desktop](archive/2026-11-02_project-learning-initial/latest-desktop.png) et [mobile](archive/2026-11-02_project-learning-initial/latest-mobile.png) à la paire stable. Les introductions occupaient tout le premier écran mobile. L’en-tête et la notice ont été resserrés ; le contexte du projet est maintenant repliable après le parcours. **Le bouton Étudier et la première étape sont visibles sans défiler** dans le viewport mobile de référence.
+| Écran         | Avant desktop / mobile                                                                                                                                                            | Différence visible dans les nouveaux rendus ci-dessus                                                                      |
+| ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| Accueil       | [Desktop](archive/2026-11-03_08-16-27-Europe-Paris/screens/desktop/01-home.png) · [Mobile](archive/2026-11-03_08-16-27-Europe-Paris/screens/mobile/01-home.png)                   | Le hero et son petit widget adjacent cèdent la place à une scène dominante et un réseau en bande ouverte.                  |
+| AI Lab        | [Desktop](archive/2026-11-03_08-16-27-Europe-Paris/screens/desktop/06-ai-lab.png) · [Mobile](archive/2026-11-03_08-16-27-Europe-Paris/screens/mobile/06-ai-lab.png)               | Le formulaire et la checklist empilés deviennent un instrument texte/réseau ; la carte est visible dès l’ouverture mobile. |
+| Academy       | [Desktop](archive/2026-11-03_08-16-27-Europe-Paris/screens/desktop/02-academy.png) · [Mobile](archive/2026-11-03_08-16-27-Europe-Paris/screens/mobile/02-academy.png)             | Les articles identiques deviennent un territoire avec relations et détail sélectionné.                                     |
+| Leçon         | [Desktop](archive/2026-11-03_08-16-27-Europe-Paris/screens/desktop/03-lecon-learn.png) · [Mobile](archive/2026-11-03_08-16-27-Europe-Paris/screens/mobile/03-lecon-learn.png)     | Concept éditorial face à la scène ; en-tête mobile allégé et manipulation remontée.                                        |
+| Lab financier | [Desktop](archive/2026-11-03_08-16-27-Europe-Paris/screens/desktop/05-lab-financier.png) · [Mobile](archive/2026-11-03_08-16-27-Europe-Paris/screens/mobile/05-lab-financier.png) | Les formulaires et métriques séparés deviennent deux équations et une représentation physique du seuil.                    |
 
-Une règle de style héritée rétrécissait la composition desktop ; elle a été isolée. Le volet « Le cap du projet » utilise désormais un seul indicateur d’ouverture, cohérent avec les autres volets. Les rendus ont été régénérés après ces corrections.
+## États complémentaires
 
-Inspection interne : hiérarchie de la prochaine action, densité, alignements, contrastes monochromes, profondeur légère, sélection des objectifs, états disponibles/à reprendre/prérequis et retour après quiz. Aucun débordement horizontal observé. Le contexte secondaire reste accessible sous le parcours.
+Les deux dossiers `screens/desktop/` et `screens/mobile/` contiennent les mêmes noms :
 
-## Contrôles et limites
+- Academy : `02-academy-selection.png`, `02-academy-catalogue.png`.
+- AI Lab : `06-ai-empty.png`, `06-ai-writing.png`, `06-ai-structure.png`, `06-ai-comparison.png`.
+- Leçon complète : `03-lecon-learn.png`, `03-lecon-mechanisms.png`, `03-lecon-vocabulary.png`, `03-lecon-pitfall.png`, `03-lecon-case.png`, `03-teach-back.png`, `03-lecon-summary.png`, `03-lecon-practice.png`, `04-quiz-feedback.png`, `04-quiz-valide.png`, `03-lecon-application.png`.
+- Lab financier : `05-lab-below-threshold.png`, `05-lab-invalid.png`.
 
-**Compilation/TypeScript, 146 cas unitaires et 44 tests navigateur réussis, aucun test ignoré.** Les six tests de galerie/motion ont ensuite été réexécutés après la dernière correction CSS. Les 93 images sont fraîches et liées aux sources par `render-manifest.json`.
+## Vérifications et limites
 
-Contrôle complémentaire dans Chromium : action principale visible, focus sur l’éditeur, sélection avec Espace, annulation avec retour du focus et données inchangées. Entrée de 360 ms, déplacement de 5 px et easing non linéaire ; aucune animation avec `prefers-reduced-motion`. Le HTML et les ressources JS/CSS servis en production correspondent aux fichiers compilés.
+Compilation TypeScript/Vite réussie. **146 cas unitaires et 46 tests navigateur réussis** sur la version finale, dont huit tests de galerie, interactions et motion. Aucun test ignoré. Le manifeste associe les 133 images aux sources finales et au dernier run réussi.
 
-Le parcours reste limité au catalogue actuel de six leçons. Les minutes sont indicatives ; un quiz validé ne certifie ni compétence professionnelle ni réussite du projet. Stockage local, sans synchronisation cloud. Pas de test sur appareil physique, Safari ou Firefox, ni de certification d’accessibilité.
+Inspection interne : composition, contrastes de masse, hiérarchie, spacing, profondeur, lisibilité des diagrammes, sélection, erreurs, progression, responsive et états du quiz. Corrections issues des rendus : vue mobile contextuelle pour AI Lab, remontée de la scène de leçon, séparation d’un style d’atlas qui débordait sur la carte de compétences. Les captures ont été régénérées après correction.
 
-Archive finale : `archive/2026-11-03_08-16-27-Europe-Paris/`. La [passe 06](archive/2026-11-02_23-27-21-Europe-Paris/LATEST.md) reste disponible pour comparaison.
+Contrôle complémentaire des cinq écrans à 320, 375, 768, 1024 et 1920 px : aucun débordement du document. Matière SVG observée en mouvement (18 s, amplitude de quelques pixels, easing non linéaire), désactivée avec `prefers-reduced-motion`. La carte horizontale reste volontairement défilable à l’intérieur de son conteneur. Contrôle du build servi : cinq routes, police locale et ressources compilées chargées sans erreur ; transitions du graphe observées, puis désactivées en reduced motion. Navigation au clavier des vues et repères AI Lab vérifiée avec focus visible.
 
-Reproduction : `npm run test:e2e`, puis `node scripts/save-design-review.mjs --primary=15-project-learning-viewport`. La review externe de cette passe précède le prochain élargissement fonctionnel.
+AI Lab reste un outil local à indices lexicaux, sans modèle IA connecté ; les sept repères graphiques et le score à six règles ne certifient pas la qualité d’un prompt. La trame doit être complétée. Les exemples financiers sont fictifs et simplifiés. Chromium et émulation mobile uniquement, sans validation sur appareil physique ni Safari/Firefox.
+
+Archive finale : `archive/2026-11-03_15-29-31-Europe-Paris/`. Reproduction : `npx playwright test tests/design.spec.ts`, puis `node scripts/save-design-review.mjs --primary=00-home-viewport`. **La suite fonctionnelle reste suspendue jusqu’à la review design externe.**

@@ -1,23 +1,33 @@
+@font-face {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+  src: url("/fonts/manrope-latin-variable.woff2") format("woff2");
+}
 /* BOUSE — monochrome by default. Color only communicates a functional state. */
 :root {
   --font-sans:
     "Inter", ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI",
     Arial, sans-serif;
+  --font-display: "Manrope", ui-sans-serif, sans-serif;
   --font-mono: ui-monospace, "SFMono-Regular", Consolas, monospace;
   --font-mark: Georgia, serif;
 
-  --bg: #0b0b0c;
-  --surface-low: #111113;
-  --surface: #171719;
-  --raised: #202023;
+  --bg: #050505;
+  --bg-secondary: #09090a;
+  --surface-low: #0d0d0f;
+  --surface: #141416;
+  --raised: #1a1a1d;
   --surface-hover: #252528;
   --surface-selected: #29292d;
-  --text: #f3f3f1;
-  --text-secondary: #b6b6ba;
-  --muted: #a4a4a7;
-  --text-tertiary: #808084;
+  --text: #f3f2ee;
+  --text-secondary: #b4b4b9;
+  --muted: #9a9a9f;
+  --text-tertiary: #85858b;
+  --ink-faint: #626268;
   --text-inverse: #171719;
-  --accent: #e4e4e8;
+  --accent: #d8d8dc;
   --accent-hover: #ffffff;
   --accent-dark: #242427;
   --line: rgb(255 255 255 / 0.07);
@@ -35,6 +45,9 @@
   --warning-surface: #282219;
   --warning-line: #66543a;
 
+  --type-editorial: clamp(2.75rem, 5.2vw, 5rem);
+  --type-instrument: clamp(2.5rem, 5.4vw, 5.5rem);
+  --type-scene: clamp(2.6rem, 5.3vw, 5.25rem);
   --type-micro: 0.625rem;
   --type-caption: 0.6875rem;
   --type-small: 0.75rem;
@@ -47,6 +60,12 @@
   --type-heading: 1.75rem;
   --type-hero: 2rem;
   --type-number: 2.5rem;
+  --type-number-lg: 3.5rem;
+  --type-number-xl: 3.75rem;
+  --type-index: 5.375rem;
+  --type-index-sm: 4.75rem;
+  --type-annotation: 0.5625rem;
+  --type-coordinate: 0.5rem;
   --type-mark: 2.75rem;
   --type-display: 4rem;
   --type-page-fluid: clamp(2rem, 3vw, 2.75rem);
@@ -79,6 +98,9 @@
   --space-10: 40px;
   --space-12: 48px;
   --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+  --motion-matter: 18s;
   --radius-xs: 3px;
   --radius-sm: 5px;
   --radius: 8px;

@@ -82,7 +82,8 @@ async function neutral(
   expect(
     Math.max(...color.channels) - Math.min(...color.channels),
     `${description}: ${property} = ${color.value}`,
-  ).toBeLessThanOrEqual(4);
+    // Off-white (#F3F2EE) and cool silver retain up to six channel levels.
+  ).toBeLessThanOrEqual(6);
 }
 
 async function capture(page: Page, testInfo: TestInfo, name: string) {
@@ -100,6 +101,19 @@ async function capture(page: Page, testInfo: TestInfo, name: string) {
     path: testInfo.outputPath(`${name}.png`),
     fullPage: true,
   });
+  if (
+    [
+      "02-academy",
+      "06-ai-empty",
+      "06-ai-structure",
+      "05-lab-financier",
+      "03-lecon-learn",
+    ].includes(name)
+  )
+    await page.screenshot({
+      path: testInfo.outputPath(`${name}-viewport.png`),
+      fullPage: false,
+    });
   if (name === "01-home")
     await page.screenshot({
       path: testInfo.outputPath("00-home-viewport.png"),
@@ -311,7 +325,7 @@ test("galerie des écrans et du quiz validé sans débordement", async ({
     page.getByRole("heading", { name: "Les chiffres prennent vie." }),
   ).toBeVisible();
   await neutral(
-    page.locator(".metric").first(),
+    page.locator(".financial-chart"),
     "background-color",
     "Données financières",
   );
@@ -320,6 +334,8 @@ test("galerie des écrans et du quiz validé sans débordement", async ({
   await expect(
     page.getByRole("heading", { name: "De l’intention à l’instruction." }),
   ).toBeVisible();
+  const writeView = page.getByRole("button", { name: "Écrire", exact: true });
+  if (await writeView.isVisible()) await writeView.click();
   await page
     .getByLabel("Quel travail voulez-vous confier à l’IA ?")
     .fill(
@@ -791,6 +807,131 @@ test("galerie des écrans et du quiz validé sans débordement", async ({
   ).toBeVisible();
   await capture(page, testInfo, "14-portfolio-empty");
   expect(errors).toEqual([]);
+});
+
+test("compositions des instruments, atlas et leçon complète", async ({
+  page,
+}, testInfo) => {
+  await seed(page);
+  await page.goto("/#academy");
+  const nodes = page.locator(".atlas-node");
+  await nodes.last().click();
+  await expect(page.locator(".atlas-focus h2")).toHaveText(
+    lessons.at(-1)!.title,
+  );
+  await capture(page, testInfo, "02-academy-selection");
+  await page.getByRole("button", { name: "Catalogue", exact: true }).click();
+  await expect(page.locator(".atlas-catalog article")).toHaveCount(
+    lessons.length,
+  );
+  await capture(page, testInfo, "02-academy-catalogue");
+  await page.getByLabel("Rechercher une leçon").fill("zzzz");
+  await expect(
+    page.getByRole("heading", { name: "Aucune leçon pour cette recherche." }),
+  ).toBeVisible();
+  await page.getByRole("button", { name: "Voir toutes les leçons" }).click();
+  await page.getByRole("button", { name: "Atlas", exact: true }).click();
+  await page.getByRole("button", { name: "Finance", exact: true }).click();
+  await expect(page.locator(".atlas-node:visible")).toHaveCount(2);
+  await expect(page.locator(".atlas-link")).toHaveCount(1);
+
+  await page.goto("/#ai");
+  await capture(page, testInfo, "06-ai-empty");
+  const writeView = page.getByRole("button", { name: "Écrire", exact: true });
+  if (await writeView.isVisible()) await writeView.click();
+  const draft =
+    "Objectif : comparer trois offres. Contexte : entreprise artisanale. Données : devis fournis. Contrainte : maximum 200 mots. Format : tableau. Critères de réussite : prix et délai. Vérifie les sources et signale les incertitudes.";
+  await page
+    .getByLabel("Quel travail voulez-vous confier à l’IA ?")
+    .fill(draft);
+  await expect(
+    page.getByRole("region", { name: "Analyse de la structure" }),
+  ).toHaveCount(0);
+  await capture(page, testInfo, "06-ai-writing");
+  const structureView = page.getByRole("button", { name: /^Structure/ });
+  if (await structureView.isVisible()) await structureView.click();
+  await expect(page.locator(".prompt-part.is-found")).toHaveCount(7);
+  await page
+    .getByRole("button", { name: "Repère : Vérification", exact: true })
+    .click();
+  await expect(page.locator(".prompt-lens mark")).toHaveText(
+    "Vérifie les sources et signale les incertitudes.",
+  );
+  await capture(page, testInfo, "06-ai-structure");
+  if (await writeView.isVisible()) await writeView.click();
+  await expect(
+    page.getByLabel("Quel travail voulez-vous confier à l’IA ?"),
+  ).toHaveValue(draft);
+  await page
+    .getByRole("button", { name: "Examiner la structure", exact: true })
+    .click();
+  await expect(
+    page.getByRole("heading", { name: "100 / 100", exact: true }),
+  ).toBeVisible();
+  await capture(page, testInfo, "06-ai-comparison");
+  if (await writeView.isVisible()) await writeView.click();
+  await page
+    .getByLabel("Quel travail voulez-vous confier à l’IA ?")
+    .fill("Objectif : comparer.");
+  await expect(
+    page.getByRole("region", { name: "Analyse de la structure" }),
+  ).toHaveCount(0);
+  if (await structureView.isVisible()) await structureView.click();
+  await expect(page.locator(".prompt-part.is-found")).toHaveCount(1);
+
+  await page.goto("/#lab");
+  const plot = page.locator(".equilibrium-plot");
+  await expect(plot).toHaveAttribute("aria-label", /Volume actuel : 120/);
+  await page.locator("#economics-units").fill("40");
+  await expect(plot).toHaveAttribute("aria-label", /Volume actuel : 40/);
+  await expect(page.locator(".financial-profit strong")).toContainText(
+    /-1\s?320/,
+  );
+  await capture(page, testInfo, "05-lab-below-threshold");
+  await page.locator("#economics-price").fill("45.5");
+  await page.locator("#economics-unitCost").fill("18.25");
+  await expect(page.locator(".unit-contribution strong")).toHaveText(
+    /27,25\s?€/,
+  );
+  await page.locator("#economics-price").fill("0");
+  await expect(page.getByRole("alert")).toBeVisible();
+  await expect(plot).toHaveCount(0);
+  await capture(page, testInfo, "05-lab-invalid");
+
+  await page.goto(`/#lesson/${lesson.id}`);
+  const sequenceSelect = page.getByLabel("Choisir une séquence");
+  async function sequence(index: number) {
+    if (await sequenceSelect.isVisible())
+      await sequenceSelect.selectOption(String(index));
+    else
+      await page
+        .getByRole("navigation", { name: "Séquences de la leçon" })
+        .getByRole("button")
+        .nth(index)
+        .click();
+  }
+  for (const [index, name] of [
+    [1, "03-lecon-mechanisms"],
+    [2, "03-lecon-vocabulary"],
+    [3, "03-lecon-pitfall"],
+    [4, "03-lecon-case"],
+    [6, "03-lecon-summary"],
+  ] as const) {
+    await sequence(index);
+    await capture(page, testInfo, name);
+  }
+  await page.getByRole("tab", { name: /Do/ }).click();
+  await page
+    .getByLabel("Votre raisonnement", { exact: true })
+    .fill(
+      "Je sépare les ventes, les coûts et les encaissements avant de conclure.",
+    );
+  await page
+    .getByRole("button", { name: "Comparer avec la solution", exact: true })
+    .click();
+  await capture(page, testInfo, "03-lecon-practice");
+  await page.getByRole("tab", { name: /Apply/ }).click();
+  await capture(page, testInfo, "03-lecon-application");
 });
 
 test("mouvement de page mesuré et préférence de réduction respectée", async ({

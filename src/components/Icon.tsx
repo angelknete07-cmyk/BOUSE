@@ -67,6 +67,13 @@ export function Icon({ name, size = 20 }: { name: string; size?: number }) {
         <path d="M4 21v-3a8 8 0 0 1 16 0v3" />
       </>
     ),
+    copy: (
+      <>
+        <rect x="8" y="8" width="12" height="13" rx="2" />
+        <path d="M15 4H4v12" />
+      </>
+    ),
+    edit: <path d="m15 4 5 5M4 20l5-1L21 7l-5-5L4 14z" />,
     close: <path d="m6 6 12 12M6 18 18 6" />,
     menu: <path d="M4 6h16M4 12h16M4 18h16" />,
     node: (

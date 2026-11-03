@@ -31,9 +31,9 @@ Les valeurs de référence sont centralisées dans **`src/tokens.css`**, chargé
 
 ### Couleurs et surfaces
 
-- Fond presque noir : `#0b0b0c`.
-- Surfaces successives : `#111113`, `#171719`, puis gris anthracite légèrement relevé pour les éléments interactifs.
-- Texte principal blanc cassé ; texte secondaire et métadonnées en gris neutre.
+- Fond profond : `#050505`, arrière-plan secondaire : `#09090A`.
+- Surfaces successives : `#0D0D0F`, `#141416`, puis `#1A1A1D` pour une élévation exceptionnelle.
+- Texte principal `#F3F2EE`, secondaire `#B4B4B9`, métadonnées `#9A9A9F`, accent argent `#D8D8DC`. `#626268` reste réservé aux grands indices décoratifs. Les petits textes utilisent un gris plus lisible.
 - Accent éventuel blanc, gris froid ou argent discret. Le contraste, plutôt qu’une teinte colorée, identifie l’action principale.
 - Séparateurs blancs à faible opacité ; contours plus présents uniquement lorsqu’ils servent l’interaction ou la compréhension.
 - Aucun gradient coloré, néon ou halo décoratif. Une profondeur neutre très légère peut renforcer un élément sans devenir une illustration concurrente.
@@ -85,3 +85,19 @@ Le parcours de projet étend Repères avec une timeline d’apprentissage et un 
 La revue visuelle est obligatoire après toute modification importante. Voir `AGENTS.md`, `design-reviews/LATEST.md` et la commande `npm run review:render`. Les captures sont conservées dans le dépôt avec une paire stable desktop/mobile et un historique daté. La vérification interne et la validation design externe sont des étapes distinctes.
 
 Les résultats des tests et de l’inspection des captures sont consignés dans `docs/VALIDATION.md`. La vérification porte sur le rendu réel dans Chromium desktop et mobile émulé ; elle ne constitue pas un test sur appareil physique.
+
+## Passe 08 — scènes, atlas et instruments
+
+La demande du 3 novembre arrête l’élargissement fonctionnel pour corriger la composition. L’audit de départ est dans [AUDIT-08.md](../design-reviews/AUDIT-08.md). La palette monochrome seule ne suffit pas : les grands nombres, les relations et les espaces composent l’écran.
+
+- **Accueil** : une scène panoramique associe titre éditorial et relief SVG original. La progression reprend les quiz réels. La trajectoire flotte sous la scène ; Finance emploie des courbes activité/cash et IA un réseau, sans deux cadres jumeaux.
+- **AI Lab** : le texte et son architecture occupent deux foyers. Sept repères sélectionnables révèlent les passages associés ; leur détection repose sur les règles locales existantes et des indices lexicaux, sans prétendre comprendre ou évaluer le prompt. Original et trame à compléter se lisent en parallèle. Sur mobile, Structure et Écrire partagent le même brouillon dans deux vues contextuelles.
+- **Academy** : un atlas représente les six notions, trois domaines et leurs vrais prérequis. La sélection révèle une seule leçon ; le catalogue reste une présentation secondaire. Le défilement horizontal mobile et le recentrage interne préservent la carte sans élargir la page.
+- **Leçon** : chapitre compact, vocabulaire composé, scène manipulable, explications numérotées, cas éditorial, atelier d’explication et quiz question par question. Sur mobile, la scène interactive précède le développement du concept ; le résumé redondant de l’en-tête est masqué.
+- **Lab financier** : les contrôles habitent l’équation prix − coût = contribution. Le graphe ventes/coûts et le seuil sont proches des curseurs volume/charges ; l’équation mensuelle révèle le résultat. Les règles de calcul restent identiques.
+
+Manrope variable est auto-hébergée pour les titres et grands nombres ; texte courant et chiffres techniques conservent leurs rôles. Source et licence OFL sont documentées dans `public/fonts/`. Les couleurs, surfaces, échelles, rayons, ombres et courbes partent de `tokens.css`. `art-direction.css` rassemble ces compositions et leurs variantes mobiles ; ses règles spécifiques ne doivent pas détourner les classes des écrans secondaires.
+
+La matière varie de quelques pixels sur 18 secondes avec une courbe non linéaire. Les nœuds et extraits ont des retours courts ; les points et tracés financiers suivent les paramètres. Les animations sont supprimées avec `prefers-reduced-motion`. Aucun effet ne doit introduire un délai dans un calcul ou une saisie.
+
+La passe attend une review design externe avant de poursuivre les fonctionnalités. Les rendus précédents restent archivés ; `design-reviews/LATEST.md` relie chaque écran avant/après.

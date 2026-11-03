@@ -270,6 +270,8 @@ test("calcul financier, limites du modèle et recherche au clavier vers AI Lab",
   await expect(
     page.getByText("Aucun modèle IA connecté.", { exact: false }),
   ).toBeVisible();
+  const writeView = page.getByRole("button", { name: "Écrire", exact: true });
+  if (await writeView.isVisible()) await writeView.click();
   await page
     .getByLabel("Quel travail voulez-vous confier à l’IA ?")
     .fill(

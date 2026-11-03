@@ -8,11 +8,11 @@ Validation de l’instance cloud et des fichiers présents dans `/workspace/BOUS
 | Installation reproductible                                | `npm ci --no-audit --no-fund` réussi, lockfile conservé                          |
 | Compilation TypeScript stricte et Vite                    | `npm run build` réussi                                                           |
 | Logique métier, import et structure pédagogique           | **146 cas unitaires réussis** dans les huit fichiers, aucun échec ni test ignoré |
-| Parcours navigateur                                       | `npm run test:e2e` : **44 réussis**, aucun échec ni test ignoré                  |
+| Parcours navigateur                                       | **46 tests réussis** sur la version finale, aucun test ignoré                    |
 | Serveur de production local                               | HTML et ressources JavaScript/CSS de la dernière compilation reçus avec succès   |
 | Lisibilité et espaces                                     | Prettier et `git diff --check` réussis                                           |
 
-Dix-neuf scénarios fonctionnels et trois scénarios de rendu/motion sont exécutés dans Chromium sur ordinateur et en émulation Pixel 7. Les parcours initiaux comprennent :
+Dix-neuf scénarios fonctionnels et quatre scénarios de rendu/motion sont exécutés dans Chromium sur ordinateur et en émulation Pixel 7. Les parcours initiaux comprennent :
 
 1. Onboarding et diagnostic, leçon, exercice avec indice et solution, quiz, création d’idée sans doublon, modification et avancement du projet, rechargement et carte de compétences.
 2. Calcul financier et cas limites, navigation clavier de la palette, synonymes de recherche et grille locale de prompts.
@@ -81,3 +81,15 @@ Les six nouveaux parcours navigateur vérifient les objectifs explicites, la fer
 Contrôle navigateur complémentaire sur le build de production : action principale dans le premier viewport, focus sur l’éditeur, sélection avec Espace, annulation et retour du focus, données inchangées. Animation de 360 ms, déplacement de 5 px et easing `cubic-bezier(0.22, 1, 0.36, 1)` ; préférence de réduction : aucune animation. Aucun débordement ni erreur JavaScript observé dans ces contrôles. Le HTML et les ressources JS/CSS servis ont été comparés aux fichiers compilés.
 
 Les objectifs restent distincts des associations et des réussites de quiz ; le parcours ne certifie ni compétence professionnelle ni réussite du projet. Les tests utilisent Chromium et une émulation Pixel 7, sans appareil physique ni Safari/Firefox. La review design externe de cette passe reste à effectuer avant le prochain élargissement fonctionnel.
+
+## Passe 08 — direction artistique exclusivement
+
+Les cinq compositions prioritaires ont été refactorisées : scène d’accueil, instrument de prompt, atlas Academy, séquences de leçon et équations/graphe du Lab financier. Aucun changement dans `src/lib/` ni `src/data/`. La police Manrope est locale et accompagnée de sa licence OFL.
+
+TypeScript et build Vite réussis. Les huit fichiers unitaires ont été exécutés directement : **146 cas réussis**, aucun échec. La suite navigateur a confirmé les **38 tests fonctionnels** et les six anciens tests de galerie/motion. Les deux nouveaux tests de composition ont d’abord révélé une donnée de test ambiguë (« document » active aussi Format) ; elle a été remplacée par une consigne ne contenant qu’un indice d’objectif. La suite complète finale passe : **46 tests navigateur réussis**, incluant les huit tests de galerie/motion, sur desktop et mobile. Ils exercent atlas, sélection et filtres, brouillon partagé entre vues mobiles, repères lexicaux et extraits, comparaison de prompt, graphe financier modifié/invalide et toutes les séquences de la première leçon.
+
+**133 captures fraîches**, vérifiées puis enregistrées avec manifeste, paire stable sur l’accueil et archive datée. L’inspection a conduit à séparer les noms de classe des deux cartes, remplacer l’empilement AI Lab mobile par deux vues et rapprocher la manipulation du début de la leçon mobile. Le contrôle complémentaire des cinq écrans à 320, 375, 768, 1024 et 1920 px n’a relevé aucun débordement du document. La matière SVG a été mesurée à 18 secondes avec easing non linéaire ; elle s’arrête avec la préférence de réduction des mouvements.
+
+Les limites restent celles de Chromium/Pixel 7 émulé, des modèles locaux et des contenus existants. La vérification interne ne vaut pas validation design externe. Les liens avant/après, captures prioritaires et états secondaires sont dans [LATEST.md](../design-reviews/LATEST.md).
+
+Le dernier contrôle du build de production confirme les cinq routes, la police locale et l’affichage des centimes. Le déplacement des tracés financiers a été observé pendant la transition, puis supprimé avec reduced motion. Les vues mobiles et repères du prompt ont été sélectionnés au clavier avec un focus visible.
