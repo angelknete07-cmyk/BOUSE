@@ -9,7 +9,6 @@ import {
   type ReviewCard,
 } from "../lib/reviews";
 import { Icon } from "./Icon";
-import "../reviews.css";
 
 type Props = {
   state: AppState;
@@ -50,6 +49,16 @@ const intervalLabel = (days: number) =>
   days === 1 ? "Dans 24 h" : `Dans ${days} jours`;
 const plural = (count: number, singular: string, multiple: string) =>
   count === 1 ? singular : multiple;
+
+// Intervals after a card is found without help (24 h, then 3, 7, 14, 30 days),
+// placed on a linear 30-day axis so the growing gaps are drawn to scale.
+const spacingSteps = [
+  { days: 1, label: "24 h" },
+  { days: 3, label: "3 j" },
+  { days: 7, label: "7 j" },
+  { days: 14, label: "14 j" },
+  { days: 30, label: "30 j" },
+].map((step) => ({ ...step, x: 20 + (step.days / 30) * 300 }));
 
 export function Reviews({ state, update, onNavigate }: Props) {
   const [now, setNow] = useState(() => new Date());
@@ -508,33 +517,37 @@ export function Reviews({ state, update, onNavigate }: Props) {
                 aria-labelledby="review-next-title"
               >
                 <p className="eyebrow">LA DISTANCE QUI SE CONSTRUIT</p>
+                {/* True to the schedule: a linear day axis, each arc spanning the real gap. */}
                 <svg
                   className="review-spacing-art"
                   viewBox="0 0 340 150"
                   fill="none"
                   aria-hidden="true"
                 >
-                  <path d="M20 100C50 100 60 50 90 50S140 100 170 100S235 30 260 30S300 85 320 85" />
-                  <circle cx="20" cy="100" r="4" />
-                  <circle cx="90" cy="50" r="4" />
-                  <circle cx="170" cy="100" r="4" />
-                  <circle cx="260" cy="30" r="4" />
-                  <circle cx="320" cy="85" r="4" />
-                  <text x="18" y="126">
-                    24 h
-                  </text>
-                  <text x="78" y="30">
-                    3 j
-                  </text>
-                  <text x="158" y="126">
-                    7 j
-                  </text>
-                  <text x="245" y="12">
-                    14 j
-                  </text>
-                  <text x="301" y="111">
-                    30 j
-                  </text>
+                  <path className="review-spacing-axis" d="M20 110H320" />
+                  {spacingSteps.map((step, index) => {
+                    const from = index ? spacingSteps[index - 1]!.x : 20;
+                    const lift =
+                      10 +
+                      (step.days -
+                        (index ? spacingSteps[index - 1]!.days : 0)) *
+                        4;
+                    const mid = (from + step.x) / 2;
+                    return (
+                      <path
+                        key={step.days}
+                        d={`M${from} 110Q${mid} ${110 - lift * 2} ${step.x} 110`}
+                      />
+                    );
+                  })}
+                  {spacingSteps.map((step) => (
+                    <g key={step.days}>
+                      <circle cx={step.x} cy="110" r="4" />
+                      <text x={step.x} y="134" textAnchor="middle">
+                        {step.label}
+                      </text>
+                    </g>
+                  ))}
                 </svg>
                 <h2 id="review-next-title">
                   {upcoming[0]

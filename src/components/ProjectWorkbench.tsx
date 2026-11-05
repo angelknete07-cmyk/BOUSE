@@ -20,7 +20,6 @@ import { downloadFile } from "../lib/storage";
 import { Icon } from "./Icon";
 import { ProjectLearningPlan } from "./ProjectLearningPlan";
 import { projectLearningMarkdown } from "../lib/projectLearning";
-import "../project-workbench.css";
 
 type Props = {
   project: Project;
@@ -457,7 +456,7 @@ export function ProjectWorkbench({
         </button>
       </div>
       <header className="workbench-heading">
-        <p className="eyebrow">INCUBATOR / L’ATELIER DU PROJET</p>
+        <p className="eyebrow">PROJETS / L’ATELIER DU PROJET</p>
         <h1>{project.title}</h1>
         <p>
           {project.problem ||

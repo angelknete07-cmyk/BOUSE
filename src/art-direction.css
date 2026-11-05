@@ -914,7 +914,7 @@ h4 {
   top: 43%;
 }
 .atlas-ai {
-  top: 68%;
+  top: 71%;
 }
 .atlas-caption {
   position: absolute;
@@ -2258,15 +2258,7 @@ h4 {
     width: 100%;
   }
 }
-@media (prefers-reduced-motion: reduce) {
-  .art-home *,
-  .art-page *,
-  .editorial-lesson * {
-    animation: none !important;
-    transition: none !important;
-    scroll-behavior: auto !important;
-  }
-}
+/* Reduced motion: covered by the global rule in styles.css. */
 
 /* Mobile: filters, atlas and trajectory scroll sideways; a fade replaces the hard cut. */
 @media (max-width: 700px) {
@@ -2292,5 +2284,15 @@ h4 {
       var(--bg) calc(100% - var(--space-8)),
       transparent
     );
+  }
+}
+
+/* The unit follows the figure instead of floating at the far end of the field. */
+@supports (field-sizing: content) {
+  .financial-input-value input {
+    field-sizing: content;
+    width: auto;
+    min-width: 2ch;
+    max-width: 100%;
   }
 }

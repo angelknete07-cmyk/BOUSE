@@ -213,8 +213,9 @@ test("apprendre, prouver, appliquer et retrouver la progression après rechargem
   await project.getByRole("button", { name: "Passer à « Recherche »" }).click();
   await page.reload();
   await expect(
-    page.locator("article").getByText("Recherche", { exact: true }),
-  ).toBeVisible();
+    page.locator("article").locator('[aria-current="step"]'),
+  ).toHaveText("Recherche");
+  await expect(page.locator("article")).toContainText("Étape 2 sur 9");
   await expect(
     page.getByText("Artisans qui facturent leurs clients à 60 jours", {
       exact: true,
@@ -369,5 +370,47 @@ test("une erreur alimente la révision ; export et import nécessitent un rempla
   await expect(
     page.getByLabel("Prénom ou pseudo", { exact: true }),
   ).toHaveValue("Alex");
+  await noHorizontalOverflow(page);
+});
+
+test("les préférences modifient tout le profil, sont conservées et ne touchent ni quiz ni projets", async ({
+  page,
+}) => {
+  await onboard(page);
+  await page.goto("/#settings");
+  await expect(
+    page.getByRole("heading", { name: "Vous gardez la main." }),
+  ).toBeVisible();
+  await page.getByLabel("Niveau").selectOption("Intermédiaire");
+  await page
+    .getByRole("combobox", { name: /^Objectif/ })
+    .selectOption("Construire un projet avec l’IA");
+  await page.getByRole("checkbox", { name: "Entrepreneuriat" }).check();
+  await page.getByRole("checkbox", { name: "Finance" }).uncheck();
+  await page
+    .getByLabel("Façon d’apprendre")
+    .selectOption("Appliquer à mon projet");
+  await page.reload();
+  const saved = await page.evaluate(
+    () =>
+      JSON.parse(localStorage.getItem("bouse.academy.v1")!) as {
+        profile: Record<string, unknown>;
+        attempts: unknown[];
+        projects: unknown[];
+      },
+  );
+  expect(saved.profile).toMatchObject({
+    name: "Camille",
+    level: "Intermédiaire",
+    goal: "Construire un projet avec l’IA",
+    preference: "Appliquer à mon projet",
+  });
+  expect(saved.profile.interests).toEqual(
+    expect.arrayContaining(["Entrepreneuriat"]),
+  );
+  expect(saved.profile.interests).not.toContain("Finance");
+  expect(saved.attempts).toEqual([]);
+  expect(saved.projects).toEqual([]);
+  await expect(page.getByLabel("Niveau")).toHaveValue("Intermédiaire");
   await noHorizontalOverflow(page);
 });

@@ -1094,12 +1094,4 @@
     font-size: var(--type-small);
   }
 }
-@media (prefers-reduced-motion: reduce) {
-  .learning-portfolio *,
-  .learning-portfolio *::before,
-  .learning-portfolio *::after {
-    animation: none !important;
-    transition: none !important;
-    scroll-behavior: auto !important;
-  }
-}
+/* Reduced motion: covered by the global rule in styles.css. */

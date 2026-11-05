@@ -552,42 +552,6 @@
   font-size: var(--type-body);
   margin-bottom: 0;
 }
-.workbench-lessons-heading {
-  font-size: var(--type-title-md);
-  font-weight: var(--weight-regular);
-  margin: var(--space-10) 0 var(--space-4);
-}
-.workbench-lesson-list {
-  display: grid;
-  max-width: 900px;
-}
-.workbench-lesson-list button {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: var(--space-6);
-  padding: var(--space-5) 0;
-  background: transparent;
-  border: 0;
-  text-align: left;
-  border-radius: var(--radius-sm);
-  transition: background var(--motion-normal) var(--ease-out);
-}
-.workbench-lesson-list button:hover {
-  background: var(--surface-low);
-}
-.workbench-lesson-list strong {
-  display: block;
-  font-weight: var(--weight-regular);
-  font-size: var(--type-body);
-  color: var(--text-secondary);
-  margin-top: var(--space-2);
-}
-.workbench-lesson-list small {
-  display: block;
-  font-size: var(--type-caption);
-  color: var(--text-tertiary);
-}
 .workbench-empty.compact {
   padding-block: var(--space-4);
 }
@@ -920,26 +884,8 @@
   .workbench-project-brief > p {
     font-size: var(--type-body-sm);
   }
-  .workbench-lessons-heading {
-    font-size: var(--type-title-sm);
-    margin-top: var(--space-8);
-  }
-  .workbench-lesson-list button {
-    gap: var(--space-4);
-  }
-  .workbench-lesson-list strong {
-    font-size: var(--type-body-sm);
-  }
   .workbench-footer {
     margin-top: var(--space-8);
   }
 }
-@media (prefers-reduced-motion: reduce) {
-  .project-workbench *,
-  .project-workbench *::before,
-  .project-workbench *::after {
-    animation: none !important;
-    transition: none !important;
-    scroll-behavior: auto !important;
-  }
-}
+/* Reduced motion: covered by the global rule in styles.css. */

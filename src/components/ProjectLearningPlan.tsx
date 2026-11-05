@@ -7,7 +7,6 @@ import {
 } from "../lib/projectLearning";
 import { useClock } from "../lib/useClock";
 import { Icon } from "./Icon";
-import "../project-learning-plan.css";
 
 type Props = {
   project: Project;

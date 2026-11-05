@@ -270,47 +270,45 @@ export function Incubator({
             </div>
             <span className="tag">{project.stage}</span>
           </div>
-          <div className="field-grid">
+          <dl className="project-facts">
             <div>
-              <h3>Le problème</h3>
-              <p>{project.problem || "À préciser dans la fiche projet."}</p>
+              <dt>Le problème</dt>
+              <dd>{project.problem || "À préciser dans la fiche projet."}</dd>
             </div>
             <div>
-              <h3>Le client</h3>
-              <p>{project.customer || "À préciser avant les entretiens."}</p>
+              <dt>Le client</dt>
+              <dd>{project.customer || "À préciser avant les entretiens."}</dd>
             </div>
-          </div>
-          <h3>Hypothèse à tester</h3>
-          <p>
-            {project.hypothesis ||
-              "Quelle hypothèse pourrait remettre le projet en question ?"}
-          </p>
-          <h3>Prochaine action</h3>
-          <p>
-            {project.nextAction ||
-              "Définissez une action mesurable et réalisable cette semaine."}
-          </p>
-          {!!project.lessonIds.length && (
             <div>
-              <h3>Apprentissages associés</h3>
-              <ul>
-                {project.lessonIds.map((id) => (
-                  <li key={id}>
-                    {lessons.find((lesson) => lesson.id === id)?.title ??
-                      "Leçon archivée"}
-                  </li>
-                ))}
-              </ul>
+              <dt>Hypothèse à tester</dt>
+              <dd>
+                {project.hypothesis ||
+                  "Quelle hypothèse pourrait remettre le projet en question ?"}
+              </dd>
             </div>
-          )}
-          <p className="muted">
-            Étape{" "}
-            {Math.max(
-              1,
-              projectStages.findIndex((stage) => stage === project.stage) + 1,
-            )}{" "}
-            sur {projectStages.length} · {projectStages.join(" → ")}
-          </p>
+            <div>
+              <dt>Prochaine action</dt>
+              <dd>
+                {project.nextAction ||
+                  "Définissez une action mesurable et réalisable cette semaine."}
+              </dd>
+            </div>
+            {!!project.lessonIds.length && (
+              <div className="project-facts-wide">
+                <dt>Apprentissages associés</dt>
+                <dd>
+                  {project.lessonIds
+                    .map(
+                      (id) =>
+                        lessons.find((lesson) => lesson.id === id)?.title ??
+                        "Leçon archivée",
+                    )
+                    .join(" · ")}
+                </dd>
+              </div>
+            )}
+          </dl>
+          <StageTrack stage={project.stage} />
           <div>
             <button
               className="button primary"
@@ -337,6 +335,40 @@ export function Incubator({
         Les fiches suivent le stockage de votre progression dans ce navigateur.
         Vous pouvez les exporter dans les paramètres.
       </p>
+    </div>
+  );
+}
+
+/** The nine declared stages as a quiet track; the current one is named. */
+function StageTrack({ stage }: { stage: string }) {
+  const index = projectStages.findIndex((candidate) => candidate === stage);
+  const current = Math.max(0, index);
+  return (
+    <div className="project-stage">
+      <p className="project-stage-caption">
+        Étape {current + 1} sur {projectStages.length}
+        <span aria-hidden="true"> · </span>
+        <strong>{index >= 0 ? stage : `${stage} (hors parcours)`}</strong>
+      </p>
+      <ol className="project-stage-track" aria-label="Étapes du projet">
+        {projectStages.map((name, position) => (
+          <li
+            key={name}
+            className={
+              position < current
+                ? "is-past"
+                : position === current && index >= 0
+                  ? "is-current"
+                  : ""
+            }
+            aria-current={
+              position === current && index >= 0 ? "step" : undefined
+            }
+          >
+            <span>{name}</span>
+          </li>
+        ))}
+      </ol>
     </div>
   );
 }

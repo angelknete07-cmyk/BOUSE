@@ -3,10 +3,10 @@ import { lessons, type Lesson } from "../data/lessons";
 import type { AppState, Attempt } from "../lib/types";
 import { latestCurrentAttempt } from "../lib/portfolio";
 import { Icon } from "./Icon";
+import { lessonShortLabel } from "../data/lessonLabels";
 import { Terrain } from "./Terrain";
 import { buildReviewDeck, dueReviewCards } from "../lib/reviews";
 import { useClock } from "../lib/useClock";
-import "../dashboard-experience.css";
 
 type Props = { state: AppState; onNavigate: (route: string) => void };
 
@@ -15,16 +15,15 @@ type Props = { state: AppState; onNavigate: (route: string) => void };
 const mapNodes = [
   {
     id: "ca-marge-tresorerie",
-    label: "Les chiffres",
     x: 12,
     y: 16,
     icon: "chart",
   },
-  { id: "seuil-rentabilite", label: "L’équilibre", x: 50, y: 16, icon: "lab" },
-  { id: "validation-client", label: "Le client", x: 12, y: 50, icon: "idea" },
-  { id: "comprendre-llm", label: "Le modèle", x: 12, y: 84, icon: "ai" },
-  { id: "prompt-structure", label: "Le prompt", x: 50, y: 84, icon: "book" },
-  { id: "automatisation-agent", label: "L’action", x: 88, y: 50, icon: "node" },
+  { id: "seuil-rentabilite", x: 50, y: 16, icon: "lab" },
+  { id: "validation-client", x: 12, y: 50, icon: "idea" },
+  { id: "comprendre-llm", x: 12, y: 84, icon: "ai" },
+  { id: "prompt-structure", x: 50, y: 84, icon: "book" },
+  { id: "automatisation-agent", x: 88, y: 50, icon: "node" },
 ];
 const mapLinks = mapNodes.flatMap((node) => {
   const lesson = lessons.find((item) => item.id === node.id);
@@ -253,7 +252,9 @@ export function Dashboard({ state, onNavigate }: Props) {
                       <Icon name={node.icon} size={17} />
                     )}
                   </span>
-                  <span className="trajectory-node-label">{node.label}</span>
+                  <span className="trajectory-node-label">
+                    {lessonShortLabel(node.id, lesson.title)}
+                  </span>
                   <span className="trajectory-node-index">0{index + 1}</span>
                   <span hidden id={`trajectory-description-${node.id}`}>
                     {lesson.domain}, {lesson.minutes} minutes.{" "}

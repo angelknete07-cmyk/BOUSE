@@ -8,7 +8,6 @@ import { LessonScene } from "./LessonScene";
 import { latestCurrentAttempt } from "../lib/portfolio";
 import { useClock } from "../lib/useClock";
 import { buildProjectLearningPlan } from "../lib/projectLearning";
-import "../lesson-experience.css";
 
 type Props = {
   lesson: Lesson;

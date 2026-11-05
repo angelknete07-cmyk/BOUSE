@@ -1,14 +1,15 @@
 import { useEffect, useRef, type CSSProperties } from "react";
 import { lessons } from "../data/lessons";
 import { Icon } from "./Icon";
+import { lessonShortLabel } from "../data/lessonLabels";
 
-const positions: Record<string, { x: number; y: number; short: string }> = {
-  "ca-marge-tresorerie": { x: 16, y: 22, short: "Lire les chiffres" },
-  "seuil-rentabilite": { x: 53, y: 22, short: "Trouver l’équilibre" },
-  "validation-client": { x: 29, y: 53, short: "Comprendre le client" },
-  "comprendre-llm": { x: 16, y: 83, short: "Comprendre le modèle" },
-  "prompt-structure": { x: 53, y: 83, short: "Structurer la demande" },
-  "automatisation-agent": { x: 86, y: 60, short: "Orchestrer l’action" },
+const positions: Record<string, { x: number; y: number }> = {
+  "ca-marge-tresorerie": { x: 16, y: 22 },
+  "seuil-rentabilite": { x: 53, y: 22 },
+  "validation-client": { x: 29, y: 53 },
+  "comprendre-llm": { x: 16, y: 83 },
+  "prompt-structure": { x: 53, y: 83 },
+  "automatisation-agent": { x: 86, y: 60 },
 };
 export function KnowledgeAtlas({
   selectedId,
@@ -122,7 +123,7 @@ export function KnowledgeAtlas({
                   )}
                 </span>
               </span>
-              <strong>{point.short}</strong>
+              <strong>{lessonShortLabel(lesson.id, lesson.title)}</strong>
               <span hidden id={`atlas-description-${lesson.id}`}>
                 {lesson.title}
               </span>

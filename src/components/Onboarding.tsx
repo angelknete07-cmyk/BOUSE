@@ -1,4 +1,11 @@
 import { useEffect, useRef, useState } from "react";
+import {
+  goalOptions,
+  interestOptions,
+  levelOptions,
+  minuteOptions,
+  preferenceOptions,
+} from "../data/profileOptions";
 import type { Profile } from "../lib/types";
 import { Icon } from "./Icon";
 
@@ -75,7 +82,7 @@ export function Onboarding({
       <div className="onboarding-brand">
         <span className="brand-mark">b.</span>
         <span>
-          BOUSE <small>BUSINESS & AI ACADEMY</small>
+          BOUSE <small>ACADÉMIE BUSINESS & IA</small>
         </span>
       </div>
       <div className="onboarding-layout">
@@ -137,10 +144,9 @@ export function Onboarding({
                     value={profile.level}
                     onChange={(e) => patch({ level: e.target.value })}
                   >
-                    <option>Fondations</option>
-                    <option>Débutant++</option>
-                    <option>Intermédiaire</option>
-                    <option>Avancé</option>
+                    {levelOptions.map((option) => (
+                      <option key={option}>{option}</option>
+                    ))}
                   </select>
                 </label>
                 <label className="field">
@@ -149,9 +155,11 @@ export function Onboarding({
                     value={profile.minutes}
                     onChange={(e) => patch({ minutes: Number(e.target.value) })}
                   >
-                    <option value={10}>10 minutes</option>
-                    <option value={20}>20 minutes</option>
-                    <option value={40}>40 minutes</option>
+                    {minuteOptions.map((option) => (
+                      <option key={option} value={option}>
+                        {option} minutes
+                      </option>
+                    ))}
                   </select>
                 </label>
               </div>
@@ -161,18 +169,14 @@ export function Onboarding({
                   value={profile.goal}
                   onChange={(e) => patch({ goal: e.target.value })}
                 >
-                  <option>Comprendre et piloter un business</option>
-                  <option>Construire un projet avec l’IA</option>
-                  <option>Mieux décider dans ma vie professionnelle</option>
+                  {goalOptions.map((option) => (
+                    <option key={option}>{option}</option>
+                  ))}
                 </select>
               </label>
               <fieldset className="interest-fields">
                 <legend>Vos centres d’intérêt</legend>
-                {[
-                  "Finance",
-                  "Entrepreneuriat",
-                  "Intelligence artificielle",
-                ].map((i) => (
+                {interestOptions.map((i) => (
                   <label key={i}>
                     <input
                       type="checkbox"
@@ -195,9 +199,9 @@ export function Onboarding({
                   value={profile.preference}
                   onChange={(e) => patch({ preference: e.target.value })}
                 >
-                  <option>Exemples puis pratique</option>
-                  <option>Concepts puis cas professionnel</option>
-                  <option>Appliquer à mon projet</option>
+                  {preferenceOptions.map((option) => (
+                    <option key={option}>{option}</option>
+                  ))}
                 </select>
               </label>
               <button className="button primary full" type="submit">

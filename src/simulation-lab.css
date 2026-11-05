@@ -1109,15 +1109,7 @@
     min-height: 320px;
   }
 }
-@media (prefers-reduced-motion: reduce) {
-  .simulation-lab *,
-  .simulation-lab *::before,
-  .simulation-lab *::after {
-    animation: none !important;
-    transition: none !important;
-    scroll-behavior: auto !important;
-  }
-}
+/* Reduced motion: covered by the global rule in styles.css. */
 
 /* Mobile: the scenario row scrolls sideways; the fade says so instead of cutting a label. */
 @media (max-width: 700px) {

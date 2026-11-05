@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { calculateEconomics } from "../lib/domain";
-import "../lesson-scene.css";
 
 const euros = new Intl.NumberFormat("fr-FR", {
   style: "currency",

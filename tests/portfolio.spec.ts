@@ -191,7 +191,7 @@ test("le portfolio relie le dernier quiz courant aux notes et aux dossiers sans 
   await open(page, initial, "skills");
   await expect(
     page.getByRole("button", {
-      name: /Marge & trésorerie.*À reprendre/,
+      name: /Marge et trésorerie.*À reprendre/,
     }),
   ).toBeVisible();
   await page

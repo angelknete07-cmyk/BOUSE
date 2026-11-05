@@ -1,24 +1,24 @@
 import { useId, useRef, useState, type CSSProperties } from "react";
+import { lessonShortLabel } from "../data/lessonLabels";
 import { lessons, type Lesson } from "../data/lessons";
 import type { AppState, Attempt } from "../lib/types";
 import { Icon } from "./Icon";
 import { currentQuizAttempts, latestCurrentAttempt } from "../lib/portfolio";
 import { useClock } from "../lib/useClock";
-import "../knowledge-map.css";
 
 type Props = {
   state: AppState;
   onNavigate: (route: string) => void;
 };
 
-type Position = { x: number; y: number; label: string };
+type Position = { x: number; y: number };
 const positions: Record<string, Position> = {
-  "ca-marge-tresorerie": { x: 16.67, y: 23, label: "Marge & trésorerie" },
-  "seuil-rentabilite": { x: 16.67, y: 56, label: "Seuil de rentabilité" },
-  "validation-client": { x: 50, y: 23, label: "Valider un problème" },
-  "comprendre-llm": { x: 83.33, y: 23, label: "Comprendre un LLM" },
-  "prompt-structure": { x: 83.33, y: 51, label: "Structurer un prompt" },
-  "automatisation-agent": { x: 83.33, y: 78, label: "Automatisation ou agent" },
+  "ca-marge-tresorerie": { x: 16.67, y: 23 },
+  "seuil-rentabilite": { x: 16.67, y: 56 },
+  "validation-client": { x: 50, y: 23 },
+  "comprendre-llm": { x: 83.33, y: 23 },
+  "prompt-structure": { x: 83.33, y: 51 },
+  "automatisation-agent": { x: 83.33, y: 78 },
 };
 
 function latestAttempt(state: AppState, id: string, now: Date) {
@@ -222,7 +222,9 @@ export function KnowledgeMap({ state, onNavigate }: Props) {
                       <span className="knowledge-node-core" />
                     )}
                   </span>
-                  <span className="knowledge-node-label">{position.label}</span>
+                  <span className="knowledge-node-label">
+                    {lessonShortLabel(lesson.id, lesson.title)}
+                  </span>
                   <span hidden id={`knowledge-description-${lesson.id}`}>
                     {lesson.title}
                   </span>

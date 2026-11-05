@@ -87,6 +87,8 @@ async function neutral(
 }
 
 async function capture(page: Page, testInfo: TestInfo, name: string) {
+  // Secondary screens are lazy-loaded: never capture the loading placeholder.
+  await expect(page.locator(".page-loading")).toHaveCount(0);
   await noOverflow(page);
   // A pointer left over from the previous screen can create an unrelated hover
   // beside the selected item. Capture the neutral state consistently.
@@ -189,11 +191,11 @@ test("surfaces neutres et états de navigation sur un véritable rendu", async (
   for (const [selector, property, description] of colors) {
     await neutral(page.locator(selector).first(), property, description);
   }
-  await page.getByRole("button", { name: /^L’équilibre/ }).click();
+  await page.getByRole("button", { name: /^Seuil de rentabilité/ }).click();
   await expect(page.locator(".trajectory-detail h3")).toHaveText(
     "Trouver son seuil de rentabilité",
   );
-  await page.getByRole("button", { name: /^Les chiffres/ }).click();
+  await page.getByRole("button", { name: /^Marge et trésorerie/ }).click();
   const menu = page.getByRole("button", {
     name: "Ouvrir la navigation",
     exact: true,
@@ -857,6 +859,9 @@ test("compositions des instruments, atlas et leçon complète", async ({
   await expect(page.locator(".atlas-link")).toHaveCount(1);
 
   await page.goto("/#ai");
+  await expect(
+    page.getByRole("heading", { name: "De l’intention à l’instruction." }),
+  ).toBeVisible();
   await capture(page, testInfo, "06-ai-empty");
   const writeView = page.getByRole("button", { name: "Écrire", exact: true });
   if (await writeView.isVisible()) await writeView.click();
@@ -918,6 +923,9 @@ test("compositions des instruments, atlas et leçon complète", async ({
   await capture(page, testInfo, "05-lab-invalid");
 
   await page.goto(`/#lesson/${lesson.id}`);
+  await expect(
+    page.getByRole("heading", { name: lesson.title, exact: true }),
+  ).toBeVisible();
   const sequenceSelect = page.getByLabel("Choisir une séquence");
   async function sequence(index: number) {
     if (await sequenceSelect.isVisible())

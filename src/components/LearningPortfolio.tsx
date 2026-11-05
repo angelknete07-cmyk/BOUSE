@@ -5,7 +5,6 @@ import type { AppState, Attempt } from "../lib/types";
 import { downloadFile } from "../lib/storage";
 import { useClock } from "../lib/useClock";
 import { Icon } from "./Icon";
-import "../learning-portfolio.css";
 
 type Props = { state: AppState; onNavigate: (route: string) => void };
 type Tab = "notions" | "projects" | "notes";

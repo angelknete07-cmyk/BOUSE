@@ -13,7 +13,6 @@ import {
 } from "../lib/simulation";
 import { downloadFile } from "../lib/storage";
 import { Icon } from "./Icon";
-import "../simulation-lab.css";
 
 type Props = {
   state: AppState;

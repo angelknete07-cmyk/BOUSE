@@ -50,21 +50,6 @@
   box-shadow: var(--highlight-edge), var(--shadow-stage);
   padding: var(--space-8);
 }
-.review-invitation::after {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  height: 140px;
-  width: 140px;
-  border: 1px solid var(--decorative-line);
-  border-radius: var(--radius-round);
-  right: var(--space-8);
-  top: 85px;
-  opacity: 0.45;
-  box-shadow:
-    0 0 0 18px var(--light-stage),
-    0 0 0 38px var(--light-stage);
-}
 .review-invitation-top {
   display: flex;
   justify-content: space-between;
@@ -917,12 +902,7 @@
     width: 100%;
   }
 }
-@media (prefers-reduced-motion: reduce) {
-  .reviews-experience *,
-  .reviews-experience *::before,
-  .reviews-experience *::after {
-    animation: none !important;
-    transition: none !important;
-    scroll-behavior: auto !important;
-  }
+/* Reduced motion: covered by the global rule in styles.css. */
+.review-spacing-art .review-spacing-axis {
+  stroke: var(--line);
 }

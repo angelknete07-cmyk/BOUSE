@@ -1,7 +1,21 @@
-import { Academy } from "./components/Academy";
-import { useEffect, useRef, useState, type RefObject } from "react";
+import {
+  lazy,
+  Suspense,
+  useEffect,
+  useRef,
+  useState,
+  type RefObject,
+} from "react";
 import { lessons } from "./data/lessons";
-import type { AppState, StateUpdater } from "./lib/types";
+import type { AppState, Profile, StateUpdater } from "./lib/types";
+import {
+  goalOptions,
+  interestOptions,
+  levelOptions,
+  minuteOptions,
+  preferenceOptions,
+  withCurrent,
+} from "./data/profileOptions";
 import {
   downloadFile,
   emptyState,
@@ -12,15 +26,48 @@ import {
 import { normalizeSearch, rankSearchResults } from "./lib/domain";
 import { Icon } from "./components/Icon";
 import { Dashboard } from "./components/Dashboard";
-import { KnowledgeMap } from "./components/KnowledgeMap";
 import { Onboarding } from "./components/Onboarding";
-import { AILab, Incubator, Lab } from "./components/Tools";
-import { LessonView } from "./components/LessonView";
-import { Reviews } from "./components/Reviews";
-import { ProjectWorkbench } from "./components/ProjectWorkbench";
-import { SimulationLab } from "./components/SimulationLab";
-import { LearningPortfolio } from "./components/LearningPortfolio";
 import { latestCurrentAttempt } from "./lib/portfolio";
+
+// Secondary screens load on demand; home and onboarding stay in the entry chunk.
+const Academy = lazy(() =>
+  import("./components/Academy").then((m) => ({ default: m.Academy })),
+);
+const KnowledgeMap = lazy(() =>
+  import("./components/KnowledgeMap").then((m) => ({
+    default: m.KnowledgeMap,
+  })),
+);
+const LessonView = lazy(() =>
+  import("./components/LessonView").then((m) => ({ default: m.LessonView })),
+);
+const Reviews = lazy(() =>
+  import("./components/Reviews").then((m) => ({ default: m.Reviews })),
+);
+const ProjectWorkbench = lazy(() =>
+  import("./components/ProjectWorkbench").then((m) => ({
+    default: m.ProjectWorkbench,
+  })),
+);
+const SimulationLab = lazy(() =>
+  import("./components/SimulationLab").then((m) => ({
+    default: m.SimulationLab,
+  })),
+);
+const LearningPortfolio = lazy(() =>
+  import("./components/LearningPortfolio").then((m) => ({
+    default: m.LearningPortfolio,
+  })),
+);
+const AILab = lazy(() =>
+  import("./components/Tools").then((m) => ({ default: m.AILab })),
+);
+const Incubator = lazy(() =>
+  import("./components/Tools").then((m) => ({ default: m.Incubator })),
+);
+const Lab = lazy(() =>
+  import("./components/Tools").then((m) => ({ default: m.Lab })),
+);
 
 const navigation = [
   { id: "home", label: "Vue d’ensemble", icon: "home" },
@@ -310,7 +357,7 @@ function App() {
         <a className="brand" href="#home" onClick={() => setMobileOpen(false)}>
           <span className="brand-mark">b.</span>
           <span>
-            BOUSE<small>BUSINESS & AI ACADEMY</small>
+            BOUSE<small>ACADÉMIE BUSINESS & IA</small>
           </span>
         </a>
         <button
@@ -448,69 +495,77 @@ function App() {
             </div>
           )}
           <div className="page-view" key={route}>
-            {route === "home" ? (
-              <Dashboard state={state} onNavigate={go} />
-            ) : route === "academy" ? (
-              <Academy state={state} onNavigate={go} />
-            ) : lesson ? (
-              <LessonView
-                key={lesson.id}
-                lesson={lesson}
-                state={state}
-                update={update}
-                onNavigate={go}
-              />
-            ) : route === "skills" ? (
-              <KnowledgeMap state={state} onNavigate={go} />
-            ) : route === "portfolio" ? (
-              <LearningPortfolio state={state} onNavigate={go} />
-            ) : route === "reviews" ? (
-              <Reviews state={state} update={update} onNavigate={go} />
-            ) : route === "lab" ? (
-              <Lab onNavigate={go} />
-            ) : route === "simulation" ? (
-              <SimulationLab state={state} update={update} onNavigate={go} />
-            ) : route === "ai" ? (
-              <AILab />
-            ) : route === "incubator" ? (
-              <Incubator state={state} update={update} onNavigate={go} />
-            ) : project ? (
-              <ProjectWorkbench
-                key={project.id}
-                project={project}
-                state={state}
-                update={update}
-                onNavigate={go}
-                initialTab={
-                  route.startsWith("project-plan/") ? "reperes" : "terrain"
-                }
-              />
-            ) : projectId !== null ? (
-              <div className="empty-state">
-                <h1>Projet introuvable.</h1>
-                <p>
-                  Ce projet n’est pas présent dans cette sauvegarde. Retrouvez
-                  vos fiches dans Projets.
+            <Suspense
+              fallback={
+                <p className="page-loading" role="status">
+                  Chargement…
                 </p>
-                <button
-                  className="button primary"
-                  onClick={() => go("incubator")}
-                >
-                  Retrouver mes projets
-                </button>
-              </div>
-            ) : route === "radar" ? (
-              <Radar />
-            ) : route === "settings" ? (
-              <Settings state={state} update={update} />
-            ) : (
-              <div className="empty-state">
-                <h1>Cette page n’existe pas.</h1>
-                <button className="button primary" onClick={() => go("home")}>
-                  Revenir à mon espace
-                </button>
-              </div>
-            )}
+              }
+            >
+              {route === "home" ? (
+                <Dashboard state={state} onNavigate={go} />
+              ) : route === "academy" ? (
+                <Academy state={state} onNavigate={go} />
+              ) : lesson ? (
+                <LessonView
+                  key={lesson.id}
+                  lesson={lesson}
+                  state={state}
+                  update={update}
+                  onNavigate={go}
+                />
+              ) : route === "skills" ? (
+                <KnowledgeMap state={state} onNavigate={go} />
+              ) : route === "portfolio" ? (
+                <LearningPortfolio state={state} onNavigate={go} />
+              ) : route === "reviews" ? (
+                <Reviews state={state} update={update} onNavigate={go} />
+              ) : route === "lab" ? (
+                <Lab onNavigate={go} />
+              ) : route === "simulation" ? (
+                <SimulationLab state={state} update={update} onNavigate={go} />
+              ) : route === "ai" ? (
+                <AILab />
+              ) : route === "incubator" ? (
+                <Incubator state={state} update={update} onNavigate={go} />
+              ) : project ? (
+                <ProjectWorkbench
+                  key={project.id}
+                  project={project}
+                  state={state}
+                  update={update}
+                  onNavigate={go}
+                  initialTab={
+                    route.startsWith("project-plan/") ? "reperes" : "terrain"
+                  }
+                />
+              ) : projectId !== null ? (
+                <div className="empty-state">
+                  <h1>Projet introuvable.</h1>
+                  <p>
+                    Ce projet n’est pas présent dans cette sauvegarde. Retrouvez
+                    vos fiches dans Projets.
+                  </p>
+                  <button
+                    className="button primary"
+                    onClick={() => go("incubator")}
+                  >
+                    Retrouver mes projets
+                  </button>
+                </div>
+              ) : route === "radar" ? (
+                <Radar />
+              ) : route === "settings" ? (
+                <Settings state={state} update={update} />
+              ) : (
+                <div className="empty-state">
+                  <h1>Cette page n’existe pas.</h1>
+                  <button className="button primary" onClick={() => go("home")}>
+                    Revenir à mon espace
+                  </button>
+                </div>
+              )}
+            </Suspense>
           </div>
         </main>
         <footer className="page-footer">
@@ -649,6 +704,12 @@ function Settings({
   const [message, setMessage] = useState("");
   const [confirm, setConfirm] = useState(false);
   const [pending, setPending] = useState<AppState | null>(null);
+  const profile = state.profile!;
+  const patchProfile = (changes: Partial<Profile>) =>
+    update((s) => ({
+      ...s,
+      profile: s.profile ? { ...s.profile, ...changes } : null,
+    }));
   return (
     <>
       <div className="page-heading">
@@ -663,37 +724,87 @@ function Settings({
             Prénom ou pseudo
             <input
               maxLength={40}
-              value={state.profile!.name}
-              onChange={(e) =>
-                update((s) => ({
-                  ...s,
-                  profile: s.profile
-                    ? { ...s.profile, name: e.target.value }
-                    : null,
-                }))
-              }
+              value={profile.name}
+              onChange={(e) => patchProfile({ name: e.target.value })}
             />
           </label>
+          <div className="field-grid">
+            <label className="field">
+              Niveau
+              <select
+                value={profile.level}
+                onChange={(e) => patchProfile({ level: e.target.value })}
+              >
+                {withCurrent(levelOptions, profile.level).map((option) => (
+                  <option key={option}>{option}</option>
+                ))}
+              </select>
+            </label>
+            <label className="field">
+              Temps par session
+              <select
+                value={profile.minutes}
+                onChange={(e) =>
+                  patchProfile({ minutes: Number(e.target.value) })
+                }
+              >
+                {withCurrent<number>(minuteOptions, profile.minutes).map(
+                  (option) => (
+                    <option key={option} value={option}>
+                      {option} minutes
+                    </option>
+                  ),
+                )}
+              </select>
+            </label>
+          </div>
           <label className="field">
-            Temps par session
+            Objectif
             <select
-              value={state.profile!.minutes}
-              onChange={(e) =>
-                update((s) => ({
-                  ...s,
-                  profile: s.profile
-                    ? { ...s.profile, minutes: Number(e.target.value) }
-                    : null,
-                }))
-              }
+              value={profile.goal}
+              onChange={(e) => patchProfile({ goal: e.target.value })}
             >
-              <option value={10}>10 minutes</option>
-              <option value={20}>20 minutes</option>
-              <option value={40}>40 minutes</option>
+              {withCurrent(goalOptions, profile.goal).map((option) => (
+                <option key={option}>{option}</option>
+              ))}
             </select>
           </label>
-          <p className="muted">Objectif : {state.profile!.goal}</p>
-          <p className="muted">Préférence : {state.profile!.preference}</p>
+          <fieldset className="interest-fields">
+            <legend>Centres d’intérêt</legend>
+            {interestOptions.map((interest) => (
+              <label key={interest}>
+                <input
+                  type="checkbox"
+                  checked={profile.interests.includes(interest)}
+                  onChange={(e) =>
+                    patchProfile({
+                      interests: e.target.checked
+                        ? [...profile.interests, interest]
+                        : profile.interests.filter((x) => x !== interest),
+                    })
+                  }
+                />
+                {interest}
+              </label>
+            ))}
+          </fieldset>
+          <label className="field">
+            Façon d’apprendre
+            <select
+              value={profile.preference}
+              onChange={(e) => patchProfile({ preference: e.target.value })}
+            >
+              {withCurrent(preferenceOptions, profile.preference).map(
+                (option) => (
+                  <option key={option}>{option}</option>
+                ),
+              )}
+            </select>
+          </label>
+          <p className="muted settings-note">
+            Ces choix orientent la leçon proposée à l’accueil. Ils ne modifient
+            ni vos quiz, ni vos révisions, ni vos projets.
+          </p>
         </section>
         <section className="panel">
           <h2>Vos données, ici.</h2>

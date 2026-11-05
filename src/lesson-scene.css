@@ -551,11 +551,4 @@
     font-size: var(--type-micro);
   }
 }
-@media (prefers-reduced-motion: reduce) {
-  .scene-workbench *,
-  .scene-workbench *::before,
-  .scene-workbench *::after {
-    animation: none !important;
-    transition: none !important;
-  }
-}
+/* Reduced motion: covered by the global rule in styles.css. */

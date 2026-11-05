@@ -142,28 +142,6 @@
   max-width: 120px;
   line-height: 1.5;
 }
-.learning-method {
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  gap: var(--space-4);
-  margin-top: auto;
-  padding: var(--space-4) var(--space-8);
-  background: color-mix(in srgb, var(--bg) 42%, transparent);
-  font-size: var(--type-micro);
-  color: var(--muted);
-}
-.learning-method span {
-  display: flex;
-  gap: var(--space-2);
-  align-items: center;
-}
-.learning-method i {
-  font-family: var(--font-mono);
-  font-style: normal;
-  color: var(--text-tertiary);
-  font-size: var(--type-micro);
-}
 .learning-trajectory {
   display: flex;
   flex-direction: column;
@@ -430,50 +408,6 @@
   z-index: -1;
   color: var(--text-secondary);
 }
-.finance-ledger {
-  display: flex;
-  position: absolute;
-  inset: 0;
-  justify-content: space-evenly;
-  opacity: 0.45;
-  mask-image: linear-gradient(
-    to bottom,
-    transparent,
-    var(--accent) 30%,
-    transparent
-  );
-}
-.finance-ledger i {
-  width: 1px;
-  background: var(--decorative-line);
-  height: 100%;
-}
-.finance-equation {
-  font-family: var(--font-mark);
-  font-size: var(--type-display);
-  letter-spacing: -0.08em;
-  white-space: nowrap;
-  opacity: 0.8;
-}
-.finance-equation > span {
-  font-family: var(--font-sans);
-  font-size: var(--type-heading);
-  vertical-align: middle;
-  margin: 0 var(--space-2);
-  color: var(--text-tertiary);
-}
-.finance-caption {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-  font-size: var(--type-micro);
-  color: var(--text-tertiary);
-}
-.finance-caption i {
-  height: 1px;
-  width: 16px;
-  background: var(--line-strong);
-}
 .intelligence-signature {
   position: absolute;
   right: var(--space-3);
@@ -608,13 +542,6 @@
   .learning-hero-actions > span {
     display: none;
   }
-  .learning-method {
-    padding: var(--space-4) var(--space-6);
-    gap: var(--space-2);
-  }
-  .learning-method i {
-    display: none;
-  }
   .learning-home .domain-folio {
     padding: var(--space-6);
   }
@@ -733,14 +660,6 @@
     gap: var(--space-4);
   }
   .learning-hero-actions small {
-    display: none;
-  }
-  .learning-method {
-    padding: var(--space-4) var(--space-6);
-    font-size: var(--type-micro);
-    gap: var(--space-2);
-  }
-  .learning-method i {
     display: none;
   }
   .learning-trajectory {
@@ -873,16 +792,6 @@
     top: 54px;
     opacity: 0.45;
   }
-  .finance-equation {
-    font-size: var(--type-hero);
-  }
-  .finance-equation > span {
-    font-size: var(--type-title-md);
-    margin-inline: var(--space-1);
-  }
-  .finance-caption {
-    display: none;
-  }
   .intelligence-signature {
     width: 220px;
     height: 160px;
@@ -935,12 +844,4 @@
     display: none;
   }
 }
-@media (prefers-reduced-motion: reduce) {
-  .learning-home *,
-  .learning-home *::before,
-  .learning-home *::after {
-    animation: none !important;
-    transition: none !important;
-    scroll-behavior: auto !important;
-  }
-}
+/* Reduced motion: covered by the global rule in styles.css. */

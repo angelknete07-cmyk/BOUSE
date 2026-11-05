@@ -1177,16 +1177,4 @@
     font-size: var(--type-caption);
   }
 }
-@media (prefers-reduced-motion: reduce) {
-  .learning-sequence,
-  .learning-answer-reveal,
-  .learning-self-review,
-  .learning-quiz-feedback {
-    animation: none !important;
-  }
-  .learning-experience *,
-  .learning-experience *::before,
-  .learning-experience *::after {
-    transition: none !important;
-  }
-}
+/* Reduced motion: covered by the global rule in styles.css. */
