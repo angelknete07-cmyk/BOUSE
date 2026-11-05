@@ -414,15 +414,30 @@ legend {
   color: var(--muted);
   margin-top: 5px;
 }
+/* Brand mark, same as the app icon: Inter "b" and a square silver dot.
+   The "." stays in the text for assistive technology; only its glyph is hidden. */
 .brand-mark {
-  font-family: var(--font-mark);
+  font-family: var(--font-sans);
   line-height: 42px;
   font-size: var(--type-mark);
-  letter-spacing: -5px;
-  font-weight: var(--weight-bold);
-  color: var(--accent);
+  letter-spacing: -0.04em;
+  font-weight: var(--weight-display);
+  color: var(--text);
   display: inline-block;
   width: 40px;
+  white-space: nowrap;
+}
+.brand-dot {
+  display: inline-block;
+  width: 0.17em;
+  height: 0.17em;
+  margin-left: 0.03em;
+  border-radius: 0.03em;
+  background: var(--text-secondary);
+  color: transparent;
+  overflow: hidden;
+  line-height: 0;
+  vertical-align: baseline;
 }
 .search-trigger {
   display: flex;

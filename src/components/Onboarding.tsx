@@ -80,7 +80,9 @@ export function Onboarding({
   return (
     <main className="onboarding">
       <div className="onboarding-brand">
-        <span className="brand-mark">b.</span>
+        <span className="brand-mark">
+          b<span className="brand-dot">.</span>
+        </span>
         <span>
           BOUSE <small>ACADÉMIE BUSINESS & IA</small>
         </span>

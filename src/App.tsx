@@ -364,7 +364,9 @@ function App() {
           <Icon name="close" size={18} />
         </button>
         <a className="brand" href="#home" onClick={() => setMobileOpen(false)}>
-          <span className="brand-mark">b.</span>
+          <span className="brand-mark">
+            b<span className="brand-dot">.</span>
+          </span>
           <span>
             BOUSE<small>ACADÉMIE BUSINESS & IA</small>
           </span>

@@ -21,3 +21,13 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <App />
   </React.StrictMode>,
 );
+
+// Offline reading once installed. Production only: the dev server must never
+// be shadowed by a cached copy.
+if (import.meta.env.PROD && "serviceWorker" in navigator) {
+  addEventListener("load", () => {
+    void navigator.serviceWorker.register("/sw.js").catch(() => {
+      // Without a service worker the app still works online.
+    });
+  });
+}

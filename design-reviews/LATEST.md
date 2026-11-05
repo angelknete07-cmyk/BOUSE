@@ -1,3 +1,26 @@
+# Review design — passe 14 : application installable et nouveau logo
+
+**5 novembre 2026.** BOUSE devient une application web installable, qui fonctionne hors ligne. Le logo est remplacé par la proposition D, choisie par l'utilisateur parmi quatre ([propositions](logo-propositions.png), [jeu final](logo-final.png)).
+
+- **Logo D.**
+  - Icônes : un « b. » en Inter, avec un point carré argent, sur fond noir et la vague topographique de l'accueil.
+  - Variante sans les lignes fines pour les favicons de 32 et 48 px, où elles deviennent illisibles.
+  - Version « maskable » : le logo est recentré dans la zone sûre, pour les lanceurs qui découpent l'icône en cercle.
+  - Le « b. » de la barre latérale et de l'onboarding adopte le même dessin (Inter, point carré argent). Le « . » reste présent pour les lecteurs d'écran.
+- **Installation.**
+  - Manifeste en français (`BOUSE`, plein écran, démarrage sur l'accueil).
+  - Icône Apple, balises pour iOS, couleur de thème `#050505`.
+- **Hors ligne.**
+  - Le service worker prend la page sur le réseau en priorité, puis sa copie en cache.
+  - Les ressources compilées sont servies depuis le cache. Un plugin Vite inscrit tous les fichiers compilés, avec une version calculée sur leur contenu.
+  - Les requêtes vers d'autres domaines (synchronisation, mentor) ne sont jamais mises en cache.
+  - Enregistrement en production seulement.
+- **Vérifié sur la version compilée** (`vite preview`, Chromium) : 24 fichiers en cache, l'accueil se recharge hors ligne, et le lexique s'ouvre hors ligne sans jamais avoir été ouvert en ligne. Un premier essai a échoué (scripts `crossorigin` et en-tête `Vary`), puis il a été corrigé avec `ignoreVary`.
+- **Tests.** `npm test` : 179 cas réussis, dont 2 sur le manifeste et le service worker. `npx playwright test` : 68 tests réussis. 153 captures enregistrées, dont l'accueil et le nouveau « b. ».
+- **Limites.** Pas d'essai d'installation sur un vrai téléphone. Le cache est réservé à l'origine du site.
+
+---
+
 # Review design — passe 13 : module Bourse, comptes et mentor IA
 
 **5 novembre 2026, 11:15 Europe/Paris.** À la demande « Oui fais les 3 », cette passe livre trois chantiers :
