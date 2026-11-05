@@ -7,6 +7,11 @@ import { Icon } from "./Icon";
 import { LessonScene } from "./LessonScene";
 import { MentorPanel } from "./MentorPanel";
 import { latestCurrentAttempt } from "../lib/portfolio";
+import {
+  afterQuizAction,
+  canSkipToQuiz,
+  recommendLesson,
+} from "../lib/recommendation";
 import { useClock } from "../lib/useClock";
 import { buildProjectLearningPlan } from "../lib/projectLearning";
 
@@ -44,6 +49,11 @@ export function LessonView({ lesson, state, update, onNavigate }: Props) {
   const stageRef = useRef<HTMLElement>(null);
   const feedbackRef = useRef<HTMLDivElement>(null);
   const latest = latestCurrentAttempt(lesson, state.attempts, now);
+  const nextAction = afterQuizAction(
+    lesson,
+    state.profile?.preference,
+    recommendLesson(state, now).current,
+  );
   const linkedProjects = state.projects.filter((project) =>
     project.lessonIds.includes(lesson.id),
   );
@@ -247,6 +257,20 @@ export function LessonView({ lesson, state, update, onNavigate }: Props) {
         </div>
         <h1>{lesson.title}</h1>
         <p>{lesson.summary}</p>
+        {canSkipToQuiz(state.profile?.level) && !latest && tab === 0 && (
+          <div className="learning-skip">
+            <span>
+              Votre niveau : vous connaissez peut-être déjà ces notions.
+            </span>
+            <button
+              type="button"
+              className="text-button"
+              onClick={() => advanceTo(2)}
+            >
+              Vérifier directement au quiz <Icon name="arrow" size={15} />
+            </button>
+          </div>
+        )}
       </header>
       <div
         className="learning-journey"
@@ -368,7 +392,7 @@ export function LessonView({ lesson, state, update, onNavigate }: Props) {
                         {section.body.length > 1 && (
                           <details className="learning-depth">
                             <summary>
-                              Pourquoi ce repère change les décisions{" "}
+                              Pourquoi cette notion change les décisions{" "}
                               <Icon name="plus" size={15} />
                             </summary>
                             {section.body.slice(1).map((paragraph, index) => (
@@ -388,8 +412,8 @@ export function LessonView({ lesson, state, update, onNavigate }: Props) {
                         <div className="learning-recall">
                           <Icon name="idea" size={20} />
                           <p>
-                            Avant de continuer : comment ce repère changerait-il
-                            une décision dans votre projet ?
+                            Avant de continuer : comment cette notion
+                            changerait-elle une décision dans votre projet ?
                           </p>
                         </div>
                       </div>
@@ -457,7 +481,7 @@ export function LessonView({ lesson, state, update, onNavigate }: Props) {
                         disabled={teachBack.trim().length < 20}
                         onClick={() => setShowTeachBack(true)}
                       >
-                        Comparer avec les repères{" "}
+                        Comparer avec les points clés{" "}
                         <Icon name="arrow" size={16} />
                       </button>
                       <span className="learning-footnote">
@@ -514,7 +538,7 @@ export function LessonView({ lesson, state, update, onNavigate }: Props) {
                       CE QUE VOUS EMPORTEZ
                     </span>
                     <h2>
-                      Quelques repères.
+                      Quelques idées clés.
                       <br />
                       De meilleures décisions.
                     </h2>
@@ -622,7 +646,7 @@ export function LessonView({ lesson, state, update, onNavigate }: Props) {
               {hintVisible && (
                 <section className="learning-answer-reveal">
                   <span className="eyebrow">INDICE 01</span>
-                  <h3>Le premier repère</h3>
+                  <h3>Un premier indice</h3>
                   <p>{lesson.exercise.hint}</p>
                 </section>
               )}
@@ -736,8 +760,8 @@ export function LessonView({ lesson, state, update, onNavigate }: Props) {
                           <div>
                             <strong>
                               {selectionIsCorrect
-                                ? "Bien vu. Le repère est posé."
-                                : "Un repère à ajuster."}
+                                ? "Bien vu. L’idée est posée."
+                                : "Une idée à ajuster."}
                             </strong>
                             <p>{question.explanation}</p>
                           </div>
@@ -789,20 +813,20 @@ export function LessonView({ lesson, state, update, onNavigate }: Props) {
                   <h2>
                     {result.passed
                       ? "L’idée est comprise.\nFaites-en quelque chose."
-                      : "Une erreur utile.\nUn repère à reprendre."}
+                      : "Une erreur utile.\nUne notion à reprendre."}
                   </h2>
                   <p className="learning-result-score" role="status">
                     {result.correct}/{result.total} · {result.percent} %
                   </p>
                   <p className="learning-lead">
                     {result.passed
-                      ? "Repères validés sur ce quiz. La prochaine preuve se construit dans une situation concrète."
+                      ? "Quiz validé. La prochaine preuve se construit dans une situation concrète."
                       : "Votre prochaine révision ciblera cette notion. Comparez votre raisonnement aux explications, puis réessayez."}
                   </p>
                   <p className="learning-footnote">
-                    Les repères de cette leçon rejoignent votre calendrier de
-                    rappel. Les autoévaluations de révision restent distinctes
-                    de ce quiz.
+                    Les cartes de rappel de cette leçon rejoignent votre
+                    calendrier. Les autoévaluations de révision restent
+                    distinctes de ce quiz.
                   </p>
                   <button
                     className="text-button"
@@ -824,7 +848,7 @@ export function LessonView({ lesson, state, update, onNavigate }: Props) {
                           <span>
                             Question {index + 1} ·{" "}
                             {answers[item.id] === item.answer
-                              ? "repère identifié"
+                              ? "bonne réponse"
                               : "à retravailler"}
                           </span>
                           <Icon name="plus" size={16} />
@@ -852,19 +876,39 @@ export function LessonView({ lesson, state, update, onNavigate }: Props) {
                     >
                       Nouvelle tentative
                     </button>
+                    {result.passed && nextAction.kind === "route" && (
+                      <button
+                        className="button secondary"
+                        onClick={() => advanceTo(3)}
+                      >
+                        Appliquer à un projet
+                      </button>
+                    )}
                     <button
                       className="button primary"
                       onClick={() => {
+                        if (result.passed && nextAction.kind === "route")
+                          return onNavigate(nextAction.route);
                         setSequence(0);
                         advanceTo(result.passed ? 3 : 0);
                       }}
                     >
-                      {result.passed
-                        ? "Appliquer à un projet"
-                        : "Revoir la leçon"}
+                      {!result.passed
+                        ? "Revoir la leçon"
+                        : nextAction.kind === "route"
+                          ? nextAction.label
+                          : "Appliquer à un projet"}
                       <Icon name="arrow" size={17} />
                     </button>
                   </div>
+                  {result.passed && state.profile?.preference && (
+                    <p className="learning-footnote">
+                      Suite proposée selon votre façon d’apprendre{"\u00a0"}: «
+                      {"\u00a0"}
+                      {state.profile.preference}
+                      {"\u00a0"}». Modifiable dans les préférences.
+                    </p>
+                  )}
                   <p className="learning-footnote">
                     Seuil de réussite : 80 %. Avec deux questions, les deux
                     réponses sont nécessaires.
@@ -1000,7 +1044,7 @@ export function LessonView({ lesson, state, update, onNavigate }: Props) {
           )}
           {tab !== 0 && (
             <div className="learning-side-concepts">
-              <span className="eyebrow">VOS REPÈRES</span>
+              <span className="eyebrow">LES NOTIONS CLÉS</span>
               {lesson.skills.map((skill, index) => (
                 <p key={skill}>
                   <span>0{index + 1}</span>
@@ -1009,7 +1053,7 @@ export function LessonView({ lesson, state, update, onNavigate }: Props) {
               ))}
               <p className="learning-footnote">
                 {latest
-                  ? `Dernier quiz : ${latest.percent} % · ${latest.passed ? "repères validés" : "à revoir"}.`
+                  ? `Dernier quiz : ${latest.percent} % · ${latest.passed ? "notion validée" : "à revoir"}.`
                   : "Aucune tentative sur cette leçon."}
               </p>
             </div>

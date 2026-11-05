@@ -25,7 +25,7 @@ type Session = {
 };
 
 const choices: { rating: ReviewRating; label: string; hint: string }[] = [
-  { rating: "again", label: "À reprendre", hint: "Le repère m’a échappé." },
+  { rating: "again", label: "À reprendre", hint: "La réponse m’a échappé." },
   {
     rating: "hard",
     label: "Encore fragile",
@@ -226,8 +226,8 @@ export function Reviews({ state, update, onNavigate }: Props) {
             </p>
             <p className="review-result-description">
               {session.rated.length
-                ? "Vos choix ont donné une prochaine échéance à ces repères. Le score de vos quiz reste inchangé."
-                : "Aucune autoévaluation enregistrée. Vos repères restent disponibles pour une autre session."}
+                ? "Vos choix ont donné une prochaine échéance à ces cartes. Le score de vos quiz reste inchangé."
+                : "Aucune autoévaluation enregistrée. Vos cartes restent disponibles pour une autre session."}
             </p>
             <div className="review-session-account">
               <span>
@@ -273,7 +273,7 @@ export function Reviews({ state, update, onNavigate }: Props) {
                     ? `${due.length} ${plural(due.length, "carte à revoir", "cartes à revoir")}`
                     : upcoming[0]
                       ? formatDate(upcoming[0].dueAt)
-                      : "Votre prochain quiz ouvrira de nouveaux repères."}
+                      : "Votre prochain quiz ouvrira de nouvelles cartes."}
                 </strong>
               </div>
             </div>
@@ -345,7 +345,7 @@ export function Reviews({ state, update, onNavigate }: Props) {
               </div>
               <p className="review-reason">
                 {card.reason === "quiz-error"
-                  ? "Les repères de cette leçon reviennent après un quiz à reprendre."
+                  ? "Les cartes de cette leçon reviennent après un quiz à reprendre."
                   : "Une révision planifiée pour faire revenir cette notion."}
               </p>
               <h2 id="review-question-title" ref={questionRef} tabIndex={-1}>
@@ -373,7 +373,7 @@ export function Reviews({ state, update, onNavigate }: Props) {
               {!revealed ? (
                 <div className="review-reveal-actions">
                   <button className="button primary" onClick={reveal}>
-                    Voir les repères <Icon name="arrow" size={17} />
+                    Voir les points clés <Icon name="arrow" size={17} />
                   </button>
                   <button className="text-button" onClick={skip}>
                     Passer cette carte
@@ -385,7 +385,7 @@ export function Reviews({ state, update, onNavigate }: Props) {
                     className="review-answer"
                     ref={answerRef}
                     tabIndex={-1}
-                    aria-label="Les repères à comparer"
+                    aria-label="Les points clés à comparer"
                   >
                     <span className="eyebrow">COMPARER AVEC VOTRE RAPPEL</span>
                     <p>{card.back}</p>
@@ -476,8 +476,8 @@ export function Reviews({ state, update, onNavigate }: Props) {
                   <span>
                     {plural(
                       due.length,
-                      "repère disponible",
-                      "repères disponibles",
+                      "carte disponible",
+                      "cartes disponibles",
                     )}
                     <small>Maintenant, à votre rythme.</small>
                   </span>
@@ -490,7 +490,7 @@ export function Reviews({ state, update, onNavigate }: Props) {
                 <p>
                   {due.length
                     ? urgentLessons.size
-                      ? `${urgentLessons.size === 1 ? "Les repères de cette leçon reviennent" : `Les repères de ces ${urgentLessons.size} leçons reviennent`} après un quiz à reprendre. Ce rappel ne présume pas de l’erreur précise.`
+                      ? `${urgentLessons.size === 1 ? "Les cartes de cette leçon reviennent" : `Les cartes de ces ${urgentLessons.size} leçons reviennent`} après un quiz à reprendre. Ce rappel ne présume pas de l’erreur précise.`
                       : "Quelques rappels planifiés vous attendent. Une session courte suffit pour faire revenir l’essentiel."
                     : "Vos cartes ont déjà leur rendez-vous. Revenez à leur échéance ; poursuivez votre parcours entre-temps."}
                 </p>
@@ -592,9 +592,9 @@ export function Reviews({ state, update, onNavigate }: Props) {
                 Le premier rappel commence par une leçon.
               </h2>
               <p>
-                Après votre premier quiz, les repères de la leçon rejoindront
-                cet espace. Une erreur les rend prioritaires ; une réussite
-                prévoit un rappel un peu plus tard.
+                Après votre premier quiz, les cartes de la leçon rejoindront cet
+                espace. Une erreur les rend prioritaires ; une réussite prévoit
+                un rappel un peu plus tard.
               </p>
               <button
                 className="button primary"
@@ -612,7 +612,7 @@ export function Reviews({ state, update, onNavigate }: Props) {
               <div className="review-index-heading">
                 <span className="eyebrow">LE FIL DE VOS RÉVISIONS</span>
                 <h2 id="review-enrolled-title">
-                  Des repères reliés à leurs leçons.
+                  Des cartes reliées à leurs leçons.
                 </h2>
               </div>
               <div>
@@ -628,12 +628,12 @@ export function Reviews({ state, update, onNavigate }: Props) {
                     <span>
                       <small>
                         {lesson.domain} · {cards.length}{" "}
-                        {plural(cards.length, "repère", "repères")}
+                        {plural(cards.length, "carte", "cartes")}
                       </small>
                       <strong>{lesson.title}</strong>
                       <span>
                         {dueCount
-                          ? `${dueCount} ${plural(dueCount, "repère à revoir", "repères à revoir")}`
+                          ? `${dueCount} ${plural(dueCount, "carte à revoir", "cartes à revoir")}`
                           : next
                             ? `Prévu le ${formatDate(next.dueAt)}`
                             : "Aucun rappel planifié"}
@@ -653,7 +653,7 @@ export function Reviews({ state, update, onNavigate }: Props) {
             <div>
               <p>
                 Un quiz ouvre les cartes de sa leçon. S’il faut le reprendre,
-                tous les repères de cette leçon deviennent prioritaires :
+                toutes les cartes de cette leçon deviennent prioritaires :
                 l’application ne déduit pas quelle carte explique votre erreur.
               </p>
               <p>

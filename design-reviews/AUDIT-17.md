@@ -117,6 +117,8 @@ Mises en œuvre dans cette passe :
 
 ## Ce qui reste imparfait
 
+> Mise à jour passe 18 : le vocabulaire « repère » est unifié et les choix du profil ont un effet. Les deux premiers points ci-dessous sont traités.
+
 - **Vocabulaire :** « repère » garde plusieurs sens (voir l'idée 7).
 - **Profil :** le niveau, l'objectif et la façon d'apprendre n'influencent pas encore le parcours.
 - **Trajectoire de l'accueil :** limitée aux 6 notions de base. Une leçon recommandée en Finance personnelle ou en Investissement n'y apparaît pas.

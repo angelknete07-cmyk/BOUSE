@@ -1,7 +1,7 @@
 import { useState, type CSSProperties } from "react";
 import { lessons, type Lesson } from "../data/lessons";
 import type { AppState } from "../lib/types";
-import { recommendLesson } from "../lib/recommendation";
+import { recommendLesson, sessionPlan } from "../lib/recommendation";
 import { Icon } from "./Icon";
 import { lessonShortLabel } from "../data/lessonLabels";
 import { Terrain } from "./Terrain";
@@ -156,6 +156,12 @@ export function Dashboard({ state, onNavigate }: Props) {
                 <strong>Pourquoi celle-ci ?</strong> {reason}
               </span>
             </p>
+            <p className="learning-hero-reason">
+              <Icon name="clock" size={14} />
+              <span>
+                {sessionPlan(state.profile?.minutes || 20, current, due.length)}
+              </span>
+            </p>
             <div className="learning-hero-actions">
               <button
                 className="button primary"
@@ -275,7 +281,7 @@ export function Dashboard({ state, onNavigate }: Props) {
                     {attempt
                       ? `Dernier quiz ${attempt.percent} %.`
                       : "Aucune tentative."}{" "}
-                    Afficher ce repère.
+                    Afficher cette notion.
                   </span>
                 </button>
               );
@@ -300,7 +306,7 @@ export function Dashboard({ state, onNavigate }: Props) {
                 selected.prerequisites.includes(current.id)
                   ? `Après « ${lessonShortLabel(current.id, current.title)} » : son quiz ouvre la suite.`
                   : selected.prerequisites.length
-                    ? `S’appuie sur ${selected.prerequisites.length} repère${selected.prerequisites.length > 1 ? "s" : ""} conseillé${selected.prerequisites.length > 1 ? "s" : ""}.`
+                    ? `S’appuie sur ${selected.prerequisites.length} notion${selected.prerequisites.length > 1 ? "s" : ""} préalable${selected.prerequisites.length > 1 ? "s" : ""}.`
                     : "Un point d’entrée. Aucun prérequis."}
               </p>
             </div>
@@ -540,12 +546,12 @@ export function Dashboard({ state, onNavigate }: Props) {
             <small>FAIRE DURER CE QUE VOUS APPRENEZ</small>
             <strong>
               {revisions.length
-                ? `${String(revisions.length).padStart(2, "0")} repère${revisions.length > 1 ? "s" : ""} à consolider`
+                ? `${String(revisions.length).padStart(2, "0")} notion${revisions.length > 1 ? "s" : ""} à consolider`
                 : due.length
                   ? `${String(due.length).padStart(2, "0")} carte${due.length > 1 ? "s" : ""} à revoir`
                   : reviewDeck.length
                     ? "Vos prochaines révisions sont planifiées."
-                    : "Un premier repère, puis un rappel."}
+                    : "Une première notion, puis un rappel."}
             </strong>
             <span>
               {due.length

@@ -105,7 +105,7 @@ test("révéler, s’autoévaluer une seule fois et conserver les échéances sa
       "La marge couvre les charges ; un encaissement dépend du délai du client.",
     );
   await page
-    .getByRole("button", { name: "Voir les repères", exact: true })
+    .getByRole("button", { name: "Voir les points clés", exact: true })
     .click();
   await expect(page.locator(".review-answer")).toContainText(
     lesson.flashcards[0]!.back,
@@ -126,7 +126,7 @@ test("révéler, s’autoévaluer une seule fois et conserver les échéances sa
     page.getByRole("button", { name: "Encore fragile", exact: true }),
   ).toHaveCount(0);
   await page
-    .getByRole("button", { name: "Voir les repères", exact: true })
+    .getByRole("button", { name: "Voir les points clés", exact: true })
     .click();
   await page
     .getByRole("button", { name: "Encore fragile", exact: true })

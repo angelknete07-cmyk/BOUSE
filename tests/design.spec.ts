@@ -302,7 +302,7 @@ test("galerie des écrans et du quiz validé sans débordement", async ({
       "Le résultat mesure l’activité, la trésorerie les encaissements : une vente rentable à crédit peut manquer de cash.",
     );
   await page
-    .getByRole("button", { name: "Comparer avec les repères", exact: true })
+    .getByRole("button", { name: "Comparer avec les points clés", exact: true })
     .click();
   await expect(page.locator(".learning-self-review")).toBeVisible();
   await capture(page, testInfo, "03-teach-back");
@@ -492,7 +492,7 @@ test("galerie des écrans et du quiz validé sans débordement", async ({
       "Je divise les charges fixes par la contribution de chaque vente, en gardant les hypothèses constantes.",
     );
   await page
-    .getByRole("button", { name: "Voir les repères", exact: true })
+    .getByRole("button", { name: "Voir les points clés", exact: true })
     .click();
   await expect(page.locator(".review-answer")).toContainText(
     reviewLesson.flashcards[0]!.back,
@@ -502,7 +502,7 @@ test("galerie des écrans et du quiz validé sans débordement", async ({
     .getByRole("button", { name: "Retrouvé sans aide", exact: true })
     .click();
   await page
-    .getByRole("button", { name: "Voir les repères", exact: true })
+    .getByRole("button", { name: "Voir les points clés", exact: true })
     .click();
   await page
     .getByRole("button", { name: "Encore fragile", exact: true })
@@ -702,7 +702,7 @@ test("galerie des écrans et du quiz validé sans débordement", async ({
     (entry) => entry.id === "automatisation-agent",
   )!;
   await page.goto("/#project/design-project");
-  await page.getByRole("tab", { name: "Repères", exact: true }).click();
+  await page.getByRole("tab", { name: "Notions", exact: true }).click();
   await expect(
     page.getByRole("heading", {
       name: "Donnez un cap à votre apprentissage.",
@@ -780,7 +780,7 @@ test("galerie des écrans et du quiz validé sans débordement", async ({
       exact: true,
     })
     .click();
-  await page.getByRole("tab", { name: "Repères", exact: true }).click();
+  await page.getByRole("tab", { name: "Notions", exact: true }).click();
   await expect(
     page
       .getByRole("list", { name: "Étapes du parcours", exact: true })

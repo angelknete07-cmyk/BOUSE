@@ -278,7 +278,7 @@ export function ProjectLearningPlan({
           <div
             className="project-plan-summary"
             role="group"
-            aria-label="Repères du parcours"
+            aria-label="Notions du parcours"
           >
             <div className="project-plan-count">
               <strong>{String(plan.passedCount).padStart(2, "0")}</strong>
@@ -316,7 +316,7 @@ export function ProjectLearningPlan({
                 <h4>{plan.next.lesson.title}</h4>
                 <p>
                   {plan.next.status === "revisit"
-                    ? "Un repère à reprendre"
+                    ? "Une notion à reprendre"
                     : plan.next.lesson.prerequisites.length === 0
                       ? "Aucun prérequis requis"
                       : "Prérequis validés au quiz"}
@@ -340,8 +340,8 @@ export function ProjectLearningPlan({
               <div>
                 <h3>Quiz du parcours validés.</h3>
                 <p>
-                  Vos repères courants sont validés au quiz. Leur application au
-                  projet et la validation du marché restent à éprouver.
+                  Vos notions sont validées au quiz. Leur application au projet
+                  et la validation du marché restent à éprouver.
                 </p>
               </div>
             </div>
@@ -451,7 +451,7 @@ export function ProjectLearningPlan({
                     )}
                     {step.requiredBy.length > 1 && (
                       <small className="project-plan-shared">
-                        Un même repère pour {step.requiredBy.length} objectifs.
+                        Une même notion pour {step.requiredBy.length} objectifs.
                       </small>
                     )}
                   </div>

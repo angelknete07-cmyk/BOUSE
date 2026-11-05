@@ -921,11 +921,15 @@ function Settings({
             </select>
           </label>
           <p className="muted settings-note">
-            Aujourd’hui, vos centres d’intérêt orientent la leçon proposée à
-            l’accueil et le temps par session s’y affiche. Le niveau, l’objectif
-            et la façon d’apprendre sont enregistrés mais ne modifient pas
-            encore le parcours. Rien de tout cela ne change vos quiz, vos
-            révisions ou vos projets, et tout le contenu reste accessible.
+            Ce que chaque choix change : vos <strong>centres d’intérêt</strong>{" "}
+            et votre <strong>objectif</strong> choisissent la leçon proposée à
+            l’accueil ; le <strong>temps par session</strong> y découpe votre
+            séance ; aux niveaux « Je pratique déjà » et « Je veux
+            approfondir », une leçon jamais ouverte propose d’aller directement
+            au quiz ; votre <strong>façon d’apprendre</strong> choisit la suite
+            proposée après un quiz réussi. Rien de tout cela ne modifie vos
+            quiz, vos révisions ou vos projets, et tout le contenu reste
+            accessible.
           </p>
         </section>
         <section className="panel">

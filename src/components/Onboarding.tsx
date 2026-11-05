@@ -127,7 +127,7 @@ export function Onboarding({
                 Faisons connaissance.
               </h2>
               <p className="muted">
-                Quelques repères pour choisir votre prochaine action.
+                Quelques questions pour choisir votre prochaine action.
               </p>
               <label className="field">
                 Votre prénom ou pseudo <small>(facultatif)</small>
@@ -241,7 +241,7 @@ export function Onboarding({
               </h2>
               <p className="muted">
                 {showResult
-                  ? `${score}/3 repères identifiés. Ce diagnostic oriente le parcours ; il ne certifie pas un niveau.`
+                  ? `${score}/3 bonnes réponses. Ce diagnostic oriente le parcours ; il ne certifie pas un niveau.`
                   : "Répondez spontanément. « Je ne sais pas encore » est une réponse utile : elle oriente aussi le parcours."}
               </p>
               {diagnostic.map((q, index) => (
@@ -272,7 +272,7 @@ export function Onboarding({
                   {showResult && (
                     <p className="feedback">
                       {profile.diagnostic[q.id] === q.answer
-                        ? "Repère identifié."
+                        ? "Bonne réponse."
                         : profile.diagnostic[q.id] === UNKNOWN
                           ? `Une bonne question pour commencer. La réponse : ${q.options[q.answer]}`
                           : `À explorer : ${q.options[q.answer]}`}

@@ -165,7 +165,7 @@ export function LearningPortfolio({ state, onNavigate }: Props) {
           </p>
           <h1>Ce que vous pouvez montrer.</h1>
           <p>
-            Reliez vos repères, vos idées et ce que vous avez observé. Des
+            Reliez vos notions, vos idées et ce que vous avez observé. Des
             traces d’apprentissage, pas un diplôme.
           </p>
         </div>
@@ -185,7 +185,7 @@ export function LearningPortfolio({ state, onNavigate }: Props) {
       <div
         className="portfolio-thread"
         role="group"
-        aria-label="Repères de votre dossier"
+        aria-label="Notions de votre dossier"
       >
         <p>
           <strong>{summary.quizPassed}</strong>
@@ -366,7 +366,7 @@ export function LearningPortfolio({ state, onNavigate }: Props) {
                   </p>
                 )}
                 <div className="portfolio-concepts">
-                  <span>Les repères associés</span>
+                  <span>Les notions associées</span>
                   <p>{selected.lesson.skills.join(" · ")}</p>
                 </div>
                 <div className="portfolio-detail-note">
@@ -674,7 +674,7 @@ export function LearningPortfolio({ state, onNavigate }: Props) {
             <div className="portfolio-section-heading">
               <div>
                 <p className="eyebrow">GARDER VOTRE RAISONNEMENT</p>
-                <h2>Vos mots, vos repères.</h2>
+                <h2>Vos mots, vos notions.</h2>
               </div>
               <span>{plural(summary.notes, "note")}</span>
             </div>

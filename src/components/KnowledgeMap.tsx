@@ -116,7 +116,7 @@ export function KnowledgeMap({ state, onNavigate }: Props) {
       <div
         className="knowledge-summary"
         role="group"
-        aria-label="Vos repères actuels"
+        aria-label="Vos notions actuelles"
       >
         <p>
           <strong>{verified}</strong> quiz validé{verified > 1 ? "s" : ""}
@@ -378,7 +378,7 @@ export function KnowledgeMap({ state, onNavigate }: Props) {
               <Icon name="arrow" size={16} />
             </button>
             <p className="knowledge-evidence-note">
-              Un quiz apporte un repère de compréhension. La maîtrise se
+              Un quiz apporte une indication de compréhension. La maîtrise se
               confirme dans des situations réelles.
             </p>
           </div>

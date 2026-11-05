@@ -120,7 +120,7 @@ Le diagnostic de reprise du 5 novembre a relevé des défauts visibles et une co
 - **Largeur** : toutes les racines de page utilisent `--page-max`.
 - **Défilement horizontal mobile** : une rangée qui défile se termine par un fondu (`mask-image`) et une marge de fin, jamais par un libellé coupé net.
 - **Focus** : contour de 2 px à 2 px d'écart avec `--line-focus` ; contour intérieur dans les listes à fond sélectionné.
-- **Langue** : libellés en français (Comprendre / Pratiquer / Démontrer / Appliquer, Académie, Projets, Atelier IA). Radar est conservé : « Veille » suggérerait une surveillance automatique.
+- **Langue** : libellés en français (Comprendre / Pratiquer / Démontrer / Appliquer, Académie, Projets, Atelier IA). Radar est devenu « Sources » en passe 17 : « Veille » aurait suggéré une surveillance automatique, « Radar » ne disait pas ce que contient l'espace.
 
 La passe attend une review design externe avant de poursuivre les fonctionnalités.
 
@@ -157,6 +157,6 @@ Règles d'usage ajoutées, à garder pour tout nouvel écran :
 - **La navigation s'organise par intentions** : Apprendre, S'exercer, Construire. Chaque espace a une phrase d'usage, visible dans le menu mobile et en infobulle sur le rail. On n'ajoute pas d'entrée sans dire ce qu'elle permet.
 - **Ne pas savoir n'est jamais bloquant** : toute question de diagnostic propose « Je ne sais pas encore ».
 - **Un nombre ne se sépare jamais de son unité ni de ses milliers** : espaces insécables, vérifiées par `tests/typography.test.ts`.
-- **Un même mot pour un même concept** : chantier ouvert pour « repère », qui a encore plusieurs sens.
+- **Un même mot pour un même concept** (passe 18) : une **notion** est le sujet d'une leçon ; une **carte** est un rappel de révision ; un **élément** est une partie d'une demande à l'IA ; un **point clé** est ce qu'une réponse doit contenir ; un **indice** aide pendant l'exercice. « Repère » ne garde que son sens courant.
 
 Détail : `design-reviews/AUDIT-17.md`.

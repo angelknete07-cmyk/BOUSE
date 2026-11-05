@@ -1,3 +1,58 @@
+# Review design — passe 18 : choix du profil effectifs, vocabulaire unifié
+
+**5 novembre 2026, 16:38 Europe/Paris.** Suite de la passe 17, validée par l'utilisateur (« Oui vas-y go »). Deux chantiers de la liste « ce qui reste imparfait ». **La direction artistique n'est pas déclarée validée.**
+
+## Choix du profil effectifs
+
+Chaque choix a maintenant un effet visible, expliqué là où il agit. Détail dans `docs/PRODUCT.md` (« Ce que le profil change ») :
+
+- **Objectif** : il départage les notions accessibles et il est cité dans « Pourquoi celle-ci ? ».
+- **Niveau** : aux niveaux « Je pratique déjà » et « Je veux approfondir », une leçon jamais ouverte propose « Vérifier directement au quiz ».
+- **Temps par session** : l'accueil découpe la séance (« Votre séance de 10 min : environ 3 séquences sur 7 »).
+- **Façon d'apprendre** : elle choisit la suite après un quiz réussi. Cette suite pointe toujours vers la **même** prochaine leçon que l'accueil : un premier rendu proposait deux leçons différentes, corrigé avant les captures.
+- **Préférences** : la phrase d'aide dit ce que chaque choix change.
+
+Captures, profil « Je pratique déjà », 10 min, « Concepts puis cas professionnel » :
+
+| Écran                | Desktop                                     | Mobile                                     |
+| -------------------- | ------------------------------------------- | ------------------------------------------ |
+| Accueil              | [Voir](profil-18/desktop-home.png)          | [Voir](profil-18/mobile-home.png)          |
+| Leçon jamais ouverte | [Voir](profil-18/desktop-lesson-skip.png)   | [Voir](profil-18/mobile-lesson-skip.png)   |
+| Quiz réussi          | [Voir](profil-18/desktop-quiz-passed.png)   | [Voir](profil-18/mobile-quiz-passed.png)   |
+| Préférences          | [Voir](profil-18/desktop-settings-note.png) | [Voir](profil-18/mobile-settings-note.png) |
+
+## Vocabulaire unifié
+
+Le mot « repère » avait plusieurs sens. Chaque concept a maintenant son mot :
+
+| Concept                         | Mot           |
+| ------------------------------- | ------------- |
+| Sujet d'une leçon               | **notion**    |
+| Rappel de révision              | **carte**     |
+| Partie d'une demande à l'IA     | **élément**   |
+| Ce qu'une réponse doit contenir | **point clé** |
+| Aide pendant l'exercice         | **indice**    |
+
+Exemples : l'onglet « Repères » d'un projet devient « Notions », « 02 repères disponibles » devient « 02 cartes disponibles », « 6 / 7 repères dans le texte » devient « 6 / 7 éléments dans le texte ».
+
+## Vérifications internes
+
+- `npm test` : 196 cas réussis, dont 6 nouveaux sur la recommandation, le découpage de séance et la suite après un quiz.
+- `npx playwright test` : 70 tests réussis (desktop et Pixel 7 émulé), dont l'audit axe. Seuls les libellés renommés ont été mis à jour dans les tests.
+- Build sans avertissement ; 159 captures, archive `2026-11-05_16-38-57-Europe-Paris`.
+- Défauts vus à l'écran et corrigés :
+  - bandeau du quiz placé dans la colonne du numéro, puis masqué sur mobile ;
+  - deux « prochaines leçons » différentes après un quiz réussi ;
+  - guillemets coupés en fin de ligne.
+
+**Limites :**
+
+- La recommandation ne saute jamais les prérequis, même au niveau avancé : seul le passage direct au quiz est proposé.
+- Le découpage de séance est une estimation (durée de la leçon divisée par 7, environ 1 min par rappel).
+- La reprise à la séquence exacte n'est pas encore faite.
+
+---
+
 # Review design — passe 17 : review globale des espaces et des parcours
 
 **5 novembre 2026, 15:59 Europe/Paris.** Application de la règle de review globale : tous les espaces, parcours et états significatifs, en desktop et en mobile, à partir de **scénarios utilisateurs réels** (première visite, première leçon avec un quiz échoué) et des 159 captures. Détail, priorités et comparaisons : [AUDIT-17.md](AUDIT-17.md). **La direction artistique n'est pas déclarée validée.**

@@ -52,7 +52,7 @@ async function onboard(page: Page) {
     .click();
   await page.getByRole("button", { name: "Voir mon point de départ" }).click();
   await expect(
-    page.getByText("3/3 repères identifiés.", { exact: false }),
+    page.getByText("3/3 bonnes réponses.", { exact: false }),
   ).toBeVisible();
   await page.getByRole("button", { name: "Entrer dans l’Académie" }).click();
   await expect(
@@ -127,7 +127,7 @@ test("apprendre, prouver, appliquer et retrouver la progression après rechargem
     );
   await page.getByRole("button", { name: "Un indice", exact: true }).click();
   await expect(
-    page.getByRole("heading", { name: "Le premier repère" }),
+    page.getByRole("heading", { name: "Un premier indice" }),
   ).toBeVisible();
   await page.getByRole("button", { name: "Comparer avec la solution" }).click();
   await expect(
@@ -281,7 +281,7 @@ test("calcul financier, limites du modèle et recherche au clavier vers l’Atel
   await page.getByRole("button", { name: "Examiner la structure" }).click();
   await expect(page.getByRole("heading", { name: "100 / 100" })).toBeVisible();
   await expect(
-    page.getByText("Un repère, pas une note de qualité", { exact: true }),
+    page.getByText("Une indication, pas une note de qualité", { exact: true }),
   ).toBeVisible();
   await page.keyboard.press("Control+k");
   await palette.getByRole("textbox").fill("cash");
@@ -327,7 +327,7 @@ test("une erreur alimente la révision ; export et import nécessitent un rempla
   ).toBeVisible();
   await navigate(page, "Vue d’ensemble");
   await expect(
-    page.getByRole("button", { name: /01 repère à consolider/i }),
+    page.getByRole("button", { name: /01 notion à consolider/i }),
   ).toContainText("01");
   await page.goto("/#settings");
   await expect(

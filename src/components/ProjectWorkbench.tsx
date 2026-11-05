@@ -37,7 +37,7 @@ type DecisionDraft = Omit<
 const tabs: { id: Tab; label: string; icon: string }[] = [
   { id: "terrain", label: "Terrain", icon: "lab" },
   { id: "decisions", label: "Décisions", icon: "node" },
-  { id: "reperes", label: "Repères", icon: "book" },
+  { id: "reperes", label: "Notions", icon: "book" },
 ];
 const conclusions = {
   supported: "Hypothèse confortée",

@@ -388,7 +388,7 @@ test("un quiz enregistré dix secondes après l’ouverture compte immédiatemen
   // but must contain the new quiz immediately in the same mounted lesson.
   await expect(
     page.locator(".learning-side-concepts .learning-footnote"),
-  ).toHaveText("Dernier quiz : 100 % · repères validés.");
+  ).toHaveText("Dernier quiz : 100 % · notion validée.");
   const evidence = await stored(page);
   expect(evidence.attempts).toHaveLength(1);
   expect(evidence.attempts[0]).toMatchObject({

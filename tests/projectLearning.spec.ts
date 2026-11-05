@@ -85,7 +85,7 @@ async function openPlan(page: Page, initial = savedState()) {
     { state: initial, key: storageKey },
   );
   await page.goto(`/#project/${projectId}`);
-  await page.getByRole("tab", { name: "Repères", exact: true }).click();
+  await page.getByRole("tab", { name: "Notions", exact: true }).click();
   await expect(
     page.getByRole("region", {
       name: "Parcours d’apprentissage du projet",
@@ -205,7 +205,7 @@ test("choisir des objectifs explicites dérive les prérequis sans transformer l
   await expect(step(page, firstAI)).toContainText("Disponible");
   await expect(step(page, firstFinance)).toContainText("Disponible");
   await page.reload();
-  await page.getByRole("tab", { name: "Repères", exact: true }).click();
+  await page.getByRole("tab", { name: "Notions", exact: true }).click();
   expect((await stored(page)).projects[0]).toEqual(withGoals);
   await expect(steps(page).getByRole("listitem")).toHaveCount(5);
   await page.goto("/#skills");
@@ -232,7 +232,7 @@ test("choisir des objectifs explicites dérive les prérequis sans transformer l
     .filter({ hasText: initial.projects[0]!.title })
     .click();
   await expect(
-    page.getByRole("tab", { name: "Repères", exact: true }),
+    page.getByRole("tab", { name: "Notions", exact: true }),
   ).toHaveAttribute("aria-selected", "true");
   await expect(steps(page).getByRole("listitem")).toHaveCount(5);
   expect((await stored(page)).projects[0]).toEqual(withGoals);
@@ -286,7 +286,7 @@ test("reprendre le prérequis courant puis réussir son quiz actualise immédiat
       exact: true,
     }),
   ).toBeVisible();
-  await page.getByRole("tab", { name: "Repères", exact: true }).click();
+  await page.getByRole("tab", { name: "Notions", exact: true }).click();
   await expect(
     page.getByRole("heading", {
       name: "Quiz du parcours validés.",
@@ -353,7 +353,7 @@ test("conserver un objectif hors catalogue dans les exports puis le retirer expl
     preserved.learningGoalIds,
   );
   await page.goto(`/#project/${projectId}`);
-  await page.getByRole("tab", { name: "Repères", exact: true }).click();
+  await page.getByRole("tab", { name: "Notions", exact: true }).click();
   await page
     .getByRole("button", { name: "Modifier les objectifs", exact: true })
     .click();
@@ -381,7 +381,7 @@ test("conserver un objectif hors catalogue dans les exports puis le retirer expl
     .getByRole("button", { name: "Confirmer le remplacement", exact: true })
     .click();
   await page.goto(`/#project/${projectId}`);
-  await page.getByRole("tab", { name: "Repères", exact: true }).click();
+  await page.getByRole("tab", { name: "Notions", exact: true }).click();
   await expect(
     page.getByRole("heading", {
       name: "Donnez un cap à votre apprentissage.",

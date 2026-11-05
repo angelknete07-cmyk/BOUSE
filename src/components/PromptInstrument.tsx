@@ -124,7 +124,7 @@ export function AILab() {
           <h1>De l’intention à l’instruction.</h1>
         </div>
         <p>
-          Sept repères pour structurer une demande. Lecture locale, sans modèle
+          Sept éléments pour structurer une demande. Lecture locale, sans modèle
           connecté.
         </p>
       </header>
@@ -185,7 +185,7 @@ export function AILab() {
               />
             ))}
             <span>
-              {found.filter(Boolean).length} / {parts.length} repères dans le
+              {found.filter(Boolean).length} / {parts.length} éléments dans le
               texte
             </span>
           </div>
@@ -205,7 +205,7 @@ export function AILab() {
         >
           <div className="instrument-caption">
             <span>02 / Architecture de l’instruction</span>
-            <span>{String(count).padStart(2, "0")} / 07 repères</span>
+            <span>{String(count).padStart(2, "0")} / 07 éléments</span>
           </div>
           <div className="prompt-constellation">
             <svg
@@ -324,7 +324,7 @@ export function AILab() {
             </div>
             <div className="prompt-assessment">
               <h3>{analysis.score} / 100</h3>
-              <span>Un repère, pas une note de qualité</span>
+              <span>Une indication, pas une note de qualité</span>
             </div>
           </header>
           <div className="prompt-comparison-columns">

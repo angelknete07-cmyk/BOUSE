@@ -14,7 +14,7 @@ BOUSE est une académie personnelle francophone de business, de finance et d’i
 | Lab                   | Calculateur de rentabilité et mode « Et si ? » sur six mois : scénarios comparés, trésorerie, délais clients, hypothèses sauvegardées et export Markdown.                                                                                                                        |
 | Atelier IA            | Grille de relecture de prompt et trame réutilisable. Analyse déterministe et explicite, sans appel à un modèle.                                                                                                                                                                  |
 | Projets               | Création et modification de projets, ateliers de tests terrain et journal de décisions. Plans et attentes initiales conservés ; observations, preuves et bilans ajoutés ensuite. Changer d’étape consigne une décision personnelle ; cela ne prouve pas la validation du marché. |
-| Radar                 | Sources sélectionnées et pistes de recherche. Aucune surveillance automatique ni actualité prétendument en temps réel.                                                                                                                                                           |
+| Sources (ex-Radar)    | Sources sélectionnées et pistes de recherche. Aucune surveillance automatique ni actualité prétendument en temps réel.                                                                                                                                                           |
 | Navigation et données | Recherche, palette de commandes, interface adaptative, sauvegarde locale, export/import JSON et suppression volontaire.                                                                                                                                                          |
 
 Les contrôles réellement exécutés et leurs résultats sont consignés lors de la livraison. Cette fiche décrit le périmètre fonctionnel ; elle ne certifie ni déploiement ni aptitude à une utilisation en production.
@@ -102,3 +102,18 @@ Le parcours ajoute les prérequis, les déduplique et les ordonne. Les états ut
 Les objectifs absents du catalogue restent visibles et exportables. Ils ne disparaissent qu’après un retrait explicite. Les quiz validés du parcours n’établissent ni application réelle au projet, ni marché validé, ni certification professionnelle. Modifier les objectifs ne change ni les associations, ni la prochaine action terrain, ni le stade.
 
 La carte montre séparément les notions choisies comme objectifs dans des projets. Depuis une leçon, objectif ou prérequis, un lien revient directement au plan. Les sauvegardes JSON et les exports Markdown du dossier et du portfolio conservent les objectifs ; les prérequis et états du parcours se recalculent depuis le catalogue courant.
+
+## Ce que le profil change
+
+Chaque choix du profil a un effet visible, expliqué à l'endroit où il agit (passe 18) :
+
+| Choix             | Effet                                                                                                                                                                        |
+| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Point de départ   | Une notion manquée (ou « Je ne sais pas encore ») dans un centre d'intérêt passe en tête de la leçon proposée.                                                               |
+| Centres d'intérêt | Départagent les notions accessibles.                                                                                                                                         |
+| Objectif          | Départage ensuite selon les domaines qui le servent ; l'accueil le cite dans « Pourquoi celle-ci ? ».                                                                        |
+| Niveau            | « Je découvre » : la notion la plus douce d'abord. « Je pratique déjà » et « Je veux approfondir » : une leçon jamais ouverte propose « Vérifier directement au quiz ».      |
+| Temps par session | L'accueil découpe la séance : rappels prêts, puis la leçon entière ou un nombre de séquences.                                                                                |
+| Façon d'apprendre | Choisit la suite proposée après un quiz réussi : s'exercer (Lab, Atelier IA, projet), la prochaine leçon ou l'application à un projet. Les autres choix restent disponibles. |
+
+Une seule prochaine leçon existe dans l'application (`src/lib/recommendation.ts`). Les prérequis ne sont jamais sautés par la recommandation ; le passage direct au quiz est une proposition, pas une validation.
