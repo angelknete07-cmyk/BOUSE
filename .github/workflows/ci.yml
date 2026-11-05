@@ -1,8 +1,9 @@
 name: CI
 
 on:
+  # Feature branches are checked through their pull request; main on push.
   push:
-    branches: [main, "claude/**", "codex/**"]
+    branches: [main]
   pull_request:
 
 permissions:
