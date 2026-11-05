@@ -970,7 +970,7 @@ test("module investissement : lexique, leçon et simulateur de frais", async ({
   await seed(page);
   await page.goto("/#lexique");
   await expect(
-    page.getByRole("heading", { name: "Lexique de la finance." }),
+    page.getByRole("heading", { name: "Lexique de l’Académie." }),
   ).toBeVisible();
   await capture(page, testInfo, "17-lexique");
   await page.getByLabel("Chercher un terme").fill("ordre");

@@ -42,9 +42,9 @@ test("le lexique filtre, cherche et renvoie vers la leçon qui explique le terme
 }) => {
   await seed(page);
   await page.goto("/#academy");
-  await page.getByRole("button", { name: "Lexique de la finance" }).click();
+  await page.getByRole("button", { name: "Lexique de l’Académie" }).click();
   await expect(
-    page.getByRole("heading", { name: "Lexique de la finance." }),
+    page.getByRole("heading", { name: "Lexique de l’Académie." }),
   ).toBeVisible();
   await expect(page.locator(".glossary-count")).toHaveText(
     `${glossary.length} termes`,

@@ -54,7 +54,7 @@ export function Academy({
             d’entrée.
           </p>
           <button className="text-button" onClick={() => onNavigate("lexique")}>
-            Lexique de la finance <Icon name="arrow" size={16} />
+            Lexique de l’Académie <Icon name="arrow" size={16} />
           </button>
         </div>
       </header>

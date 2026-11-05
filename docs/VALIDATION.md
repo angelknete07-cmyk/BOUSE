@@ -178,3 +178,7 @@ Contrôles du 5 novembre 2026. `npm run build` réussit sans avertissement. `npm
 ## Passe 20 — lexique dans les leçons, point de départ sur 5 domaines
 
 Contrôles du 5 novembre 2026. `npm run build` réussit sans avertissement. `npm test` passe avec **203 cas unitaires** (nouveau : `tests/glossaryLinks.test.ts`). `npx playwright test` passe avec **72 tests** (desktop et Pixel 7 émulé). Termes, définition, fermeture au clavier et point de départ exercés dans un vrai navigateur ; captures dans `design-reviews/parcours-20/`. Archive `2026-11-05_17-13-14-Europe-Paris`. Aucune validation design externe n'est revendiquée.
+
+## Passe 21 — lexique des fondations, cas pratiques reliés
+
+Contrôles du 5 novembre 2026. `npm run build` réussit sans avertissement. `npm test` passe avec **203 cas unitaires**. `npx playwright test` passe avec **72 tests**. Termes des leçons de base, cas pratique et page du lexique exercés dans un vrai navigateur en desktop et mobile ; captures dans `design-reviews/parcours-21/`. Aucune validation design externe n'est revendiquée.

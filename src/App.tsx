@@ -305,7 +305,7 @@ function App() {
     const routeTitle = route.startsWith("lesson/")
       ? lessons.find((item) => item.id === route.slice(7))?.title
       : route === "lexique" || route.startsWith("lexique/")
-        ? "Lexique de la finance"
+        ? "Lexique de l’Académie"
         : projectId !== null
           ? state.projects.find((item) => item.id === projectId)?.title
           : navigation.find((item) => item.id === route)?.label;
@@ -1116,8 +1116,8 @@ function Search({
       search: `${l.title} ${l.summary} ${l.skills.join(" ")} ${l.id.includes("llm") ? "ia" : ""}`,
     })),
     {
-      title: "Lexique de la finance",
-      detail: "Académie · Bourse et finance personnelle",
+      title: "Lexique de l’Académie",
+      detail: "Académie · Cinq domaines",
       route: "lexique",
       search:
         "lexique glossaire vocabulaire bourse budget crédit termes définitions",

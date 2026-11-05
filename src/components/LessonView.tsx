@@ -490,7 +490,13 @@ export function LessonView({ lesson, state, update, onNavigate }: Props) {
                       <span className="learning-case-mark" aria-hidden="true">
                         “
                       </span>
-                      <p>{lesson.example.body}</p>
+                      <p>
+                        <GlossaryText
+                          text={lesson.example.body}
+                          lesson={lesson}
+                          onNavigate={onNavigate}
+                        />
+                      </p>
                     </div>
                     <div className="learning-recall">
                       <Icon name="node" size={20} />
@@ -663,7 +669,13 @@ export function LessonView({ lesson, state, update, onNavigate }: Props) {
                 <br />
                 autant que le résultat.
               </h2>
-              <p className="learning-lead">{lesson.exercise.prompt}</p>
+              <p className="learning-lead">
+                <GlossaryText
+                  text={lesson.exercise.prompt}
+                  lesson={lesson}
+                  onNavigate={onNavigate}
+                />
+              </p>
               <label className="field">
                 Votre raisonnement
                 <textarea

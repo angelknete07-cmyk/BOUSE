@@ -1,5 +1,6 @@
 /**
- * Lexique de la finance : bourse, investissement, budget et crédit. Définitions pédagogiques
+ * Lexique de l'Académie : entreprise, intelligence artificielle, bourse,
+ * investissement, budget et crédit. Définitions pédagogiques
  * générales ; les règles fiscales et plafonds ne sont volontairement pas
  * chiffrés (à vérifier à la date d'une décision).
  */
@@ -12,6 +13,8 @@ export const glossaryCategories = [
   "Enveloppes",
   "Comportement",
   "Budget et crédit",
+  "Entreprise",
+  "Intelligence artificielle",
 ] as const;
 export type GlossaryCategory = (typeof glossaryCategories)[number];
 
@@ -576,6 +579,190 @@ export const glossary: GlossaryTerm[] = [
     lessonId: prices,
     definition:
       "Indicateur publié par l’Insee qui mesure l’évolution des prix d’un panier représentatif de dépenses.",
+  },
+  {
+    id: "chiffre-affaires",
+    term: "Chiffre d’affaires",
+    category: "Entreprise",
+    lessonId: "ca-marge-tresorerie",
+    definition:
+      "Montant des ventes de biens et de services sur une période. Une facture peut compter dans le chiffre d’affaires avant d’être encaissée.",
+  },
+  {
+    id: "marge-couts-variables",
+    term: "Marge sur coûts variables",
+    category: "Entreprise",
+    lessonId: "ca-marge-tresorerie",
+    definition:
+      "Ce qui reste du chiffre d’affaires après les coûts qui évoluent avec les ventes. Elle doit encore couvrir les charges fixes : ce n’est pas le bénéfice.",
+  },
+  {
+    id: "tresorerie",
+    term: "Trésorerie",
+    category: "Entreprise",
+    lessonId: "ca-marge-tresorerie",
+    definition:
+      "Argent réellement disponible sur les comptes à un moment donné. Une activité rentable peut en manquer si ses clients paient tard.",
+  },
+  {
+    id: "resultat",
+    term: "Résultat",
+    category: "Entreprise",
+    lessonId: "ca-marge-tresorerie",
+    definition:
+      "Différence entre le chiffre d’affaires et l’ensemble des charges d’une période. Il mesure ce qui est gagné, pas ce qui est disponible.",
+  },
+  {
+    id: "creance-client",
+    term: "Créance client",
+    category: "Entreprise",
+    lessonId: "ca-marge-tresorerie",
+    definition:
+      "Somme due par un client pour une vente déjà réalisée mais pas encore réglée.",
+  },
+  {
+    id: "delai-paiement",
+    term: "Délai de paiement",
+    category: "Entreprise",
+    lessonId: "ca-marge-tresorerie",
+    definition:
+      "Temps entre la facture et son règlement. Il crée un décalage entre l’activité et la trésorerie.",
+  },
+  {
+    id: "bfr",
+    term: "Besoin en fonds de roulement (BFR)",
+    category: "Entreprise",
+    lessonId: "ca-marge-tresorerie",
+    definition:
+      "Argent immobilisé notamment dans les stocks et les créances clients, diminué des dettes d’exploitation. Il grandit souvent avec la croissance.",
+  },
+  {
+    id: "seuil-rentabilite",
+    term: "Seuil de rentabilité",
+    category: "Entreprise",
+    lessonId: "seuil-rentabilite",
+    definition:
+      "Volume ou chiffre d’affaires pour lequel le résultat est nul sur une période : en dessous, l’activité perd de l’argent. On parle aussi de point mort.",
+  },
+  {
+    id: "cout-variable",
+    term: "Coût variable",
+    category: "Entreprise",
+    lessonId: "seuil-rentabilite",
+    definition:
+      "Coût qui évolue avec le volume vendu : matière, livraison, commission ou sous-traitance liée à chaque vente.",
+  },
+  {
+    id: "hypothese",
+    term: "Hypothèse",
+    category: "Entreprise",
+    lessonId: "validation-client",
+    definition:
+      "Ce que l’on suppose vrai sur un client ou un problème, formulé pour pouvoir être confirmé ou contredit par une observation.",
+  },
+  {
+    id: "proposition-valeur",
+    term: "Proposition de valeur",
+    category: "Entreprise",
+    lessonId: "validation-client",
+    definition:
+      "Lien entre un segment de clients précis, un problème important et le résultat que ces clients recherchent.",
+  },
+  {
+    id: "llm",
+    term: "LLM (grand modèle de langage)",
+    category: "Intelligence artificielle",
+    lessonId: "comprendre-llm",
+    definition:
+      "Modèle qui apprend des régularités dans de grandes quantités de données et génère une réponse en estimant des suites de tokens à partir du contexte.",
+  },
+  {
+    id: "token",
+    term: "Token",
+    category: "Intelligence artificielle",
+    lessonId: "comprendre-llm",
+    definition:
+      "Unité de texte traitée par un modèle : un mot, un fragment de mot ou un autre symbole.",
+  },
+  {
+    id: "contexte",
+    term: "Contexte",
+    category: "Intelligence artificielle",
+    lessonId: "comprendre-llm",
+    definition:
+      "Informations transmises au modèle pour une requête : messages, instructions, documents et résultats d’outils. Sa taille est limitée.",
+  },
+  {
+    id: "hallucination",
+    term: "Hallucination",
+    category: "Intelligence artificielle",
+    lessonId: "comprendre-llm",
+    definition:
+      "Réponse plausible mais incorrecte ou sans fondement suffisant, comme une référence inventée ou un chiffre non sourcé.",
+  },
+  {
+    id: "inference",
+    term: "Inférence",
+    category: "Intelligence artificielle",
+    lessonId: "comprendre-llm",
+    definition:
+      "Utilisation d’un modèle déjà entraîné pour produire une réponse. Une conversation ordinaire ne le réentraîne pas.",
+  },
+  {
+    id: "prompt",
+    term: "Prompt",
+    category: "Intelligence artificielle",
+    lessonId: "prompt-structure",
+    definition:
+      "Consigne de travail donnée à un modèle : objectif, contexte, données, contraintes, format et critères de réussite.",
+  },
+  {
+    id: "few-shot",
+    term: "Few-shot",
+    category: "Intelligence artificielle",
+    lessonId: "prompt-structure",
+    definition:
+      "Consigne accompagnée de quelques exemples d’entrée et de sortie. Sans exemple, on parle de zero-shot.",
+  },
+  {
+    id: "injection-prompt",
+    term: "Injection de prompt",
+    category: "Intelligence artificielle",
+    lessonId: "prompt-structure",
+    definition:
+      "Texte placé dans un document qui se fait passer pour une instruction afin de détourner le modèle.",
+  },
+  {
+    id: "workflow",
+    term: "Workflow",
+    category: "Intelligence artificielle",
+    lessonId: "automatisation-agent",
+    definition:
+      "Séquence d’étapes organisée, avec ses branches et ses validations. Il reste souvent déterministe.",
+  },
+  {
+    id: "agent",
+    term: "Agent",
+    category: "Intelligence artificielle",
+    lessonId: "automatisation-agent",
+    definition:
+      "Système où un modèle choisit une partie des prochaines actions ou des outils selon un objectif, dans des limites fixées.",
+  },
+  {
+    id: "moindre-privilege",
+    term: "Moindre privilège",
+    category: "Intelligence artificielle",
+    lessonId: "automatisation-agent",
+    definition:
+      "Principe qui consiste à n’accorder à un système que les capacités strictement nécessaires à sa tâche.",
+  },
+  {
+    id: "idempotence",
+    term: "Idempotence",
+    category: "Intelligence artificielle",
+    lessonId: "automatisation-agent",
+    definition:
+      "Propriété d’une action que l’on peut répéter sans effet supplémentaire : traiter deux fois le même événement ne produit pas deux remboursements.",
   },
 ];
 

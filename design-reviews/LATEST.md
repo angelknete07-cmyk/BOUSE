@@ -1,3 +1,35 @@
+# Review design — passe 21 : lexique des fondations, cas pratiques reliés
+
+**5 novembre 2026, 17:26 Europe/Paris.** Suite demandée par l'utilisateur (« Vas-y go »). **La direction artistique n'est pas déclarée validée.**
+
+## Changements
+
+- **Lexique des fondations.** 23 termes ajoutés (68 → 91), définis d'après le texte des leçons, sans conseil ni chiffre réglementé. Deux catégories nouvelles :
+  - **Entreprise** : chiffre d'affaires, marge sur coûts variables, trésorerie, résultat, créance client, délai de paiement, BFR, seuil de rentabilité, coût variable, hypothèse, proposition de valeur ;
+  - **Intelligence artificielle** : LLM, token, contexte, hallucination, inférence, prompt, few-shot, injection de prompt, workflow, agent, moindre privilège, idempotence.
+- **Nouveau nom.** Le lexique s'appelle « Lexique de l'Académie », puisqu'il couvre les cinq domaines (lien de l'Académie, titre, recherche).
+- **Cas pratiques et exercices reliés.** Le cas pratique (« En situation ») et l'énoncé de l'exercice reconnaissent désormais les termes, comme les séquences. Exemple dans le cas de l'atelier de mobilier : « Marge sur coûts variables », « Charges fixes », « Résultat », « trésorerie ».
+- **Quiz : volontairement inchangés.** Un quiz validé n'est reconnu que pour la version de sa leçon (`lesson.version`). Ajouter une question imposerait une nouvelle version, et tous les quiz déjà validés repasseraient « à revoir ». Ce choix reste à l'utilisateur.
+
+## Captures
+
+| Écran                            | Desktop                                     | Mobile                                     |
+| -------------------------------- | ------------------------------------------- | ------------------------------------------ |
+| Leçon LLM, termes soulignés      | [Voir](parcours-21/desktop-llm-terms.png)   | [Voir](parcours-21/mobile-llm-terms.png)   |
+| Définition de « LLM »            | [Voir](parcours-21/desktop-llm-popover.png) | [Voir](parcours-21/mobile-llm-popover.png) |
+| Cas pratique relié au lexique    | [Voir](parcours-21/desktop-case.png)        | [Voir](parcours-21/mobile-case.png)        |
+| Lexique de l'Académie, 91 termes | [Voir](parcours-21/desktop-lexique.png)     | [Voir](parcours-21/mobile-lexique.png)     |
+
+## Vérifications internes
+
+- `npm test` : 203 cas réussis. Les tests du lexique vérifient l'unicité, les catégories utilisées et les leçons existantes ; le test typographique couvre les nouvelles définitions.
+- `npx playwright test` : 72 tests réussis (desktop et Pixel 7 émulé). Les tests visant l'ancien titre du lexique ont été mis à jour.
+- Build sans avertissement ; captures enregistrées, archive `2026-11-05_17-26-06-Europe-Paris`, paire principale sur le lexique (`17-lexique-viewport`). Aucun débordement horizontal sur la page du lexique.
+
+**Limites :** le texte des quiz n'est pas relié au lexique, pour ne pas souffler la réponse.
+
+---
+
 # Review design — passe 20 : lexique dans les leçons, point de départ sur 5 domaines
 
 **5 novembre 2026, 17:13 Europe/Paris.** Suite demandée par l'utilisateur (« Vas-y go »), deux idées de la liste de la passe 17. **La direction artistique n'est pas déclarée validée.**
