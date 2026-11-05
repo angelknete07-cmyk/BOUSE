@@ -193,7 +193,7 @@ test("les menus et la recherche ne superposent pas leurs pièges de focus", asyn
     await expect(opener).toBeFocused();
     await opener.press("Enter");
     await menu
-      .getByRole("link", { name: "Academy", exact: true })
+      .getByRole("link", { name: "Académie", exact: true })
       .press("Enter");
     await expect(page).toHaveURL(/#academy$/);
     await expect(page.getByRole("main")).toBeFocused();
@@ -240,7 +240,7 @@ test("le diagnostic et le quiz gardent un repère clavier à chaque étape", asy
     page.getByRole("heading", { name: "Votre point de départ est posé." }),
   ).toBeFocused();
   await page
-    .getByRole("button", { name: "Entrer dans mon Academy" })
+    .getByRole("button", { name: "Entrer dans l’Académie" })
     .press("Enter");
   await expect(page.getByRole("main")).toBeFocused();
   await page.goto(`/#lesson/${lesson.id}`);
@@ -254,11 +254,11 @@ test("le diagnostic et le quiz gardent un repère clavier à chaque étape", asy
   await expect(page.getByRole("tabpanel")).toBeFocused();
   await previous.press("Enter");
   await expect(previous).toBeDisabled();
-  await page.getByRole("tab", { name: /Learn/ }).focus();
+  await page.getByRole("tab", { name: /Comprendre/ }).focus();
   await page.keyboard.press("End");
-  await expect(page.getByRole("tab", { name: /Apply/ })).toBeFocused();
+  await expect(page.getByRole("tab", { name: /Appliquer/ })).toBeFocused();
   await page.keyboard.press("ArrowLeft");
-  await expect(page.getByRole("tab", { name: /Prove/ })).toBeFocused();
+  await expect(page.getByRole("tab", { name: /Démontrer/ })).toBeFocused();
   await page.keyboard.press("Tab");
   await expect(page.getByRole("radio").first()).toBeFocused();
   await page.keyboard.press("Space");

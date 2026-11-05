@@ -103,7 +103,7 @@ export function Incubator({
   return (
     <div className="stack">
       <header className="page-heading">
-        <p className="eyebrow">Incubator · De la connaissance au terrain</p>
+        <p className="eyebrow">Projets · De la connaissance au terrain</p>
         <h1>Donnez une suite à vos idées.</h1>
         <p className="muted">
           Un client précis. Une hypothèse à vérifier. Une prochaine action

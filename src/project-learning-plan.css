@@ -1,6 +1,5 @@
 .project-learning-plan {
   margin-top: var(--space-10);
-  max-width: 1120px;
 }
 .project-learning-plan.has-goals {
   margin-top: var(--space-6);
@@ -276,10 +275,11 @@
 }
 .project-plan-count strong {
   font-size: var(--type-hero);
-  font-family: var(--font-mono);
-  letter-spacing: -0.07em;
-  font-weight: var(--weight-regular);
   color: var(--text);
+  font-family: var(--font-display);
+  font-weight: var(--weight-figure);
+  letter-spacing: var(--tracking-figure);
+  font-variant-numeric: tabular-nums;
 }
 .project-plan-count > span:nth-of-type(1) {
   font-size: var(--type-heading);

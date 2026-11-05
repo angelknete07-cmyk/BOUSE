@@ -278,7 +278,7 @@ export function Onboarding({
                 </button>
                 <button className="button primary" type="submit">
                   {showResult
-                    ? "Entrer dans mon Academy"
+                    ? "Entrer dans l’Académie"
                     : "Voir mon point de départ"}
                   <Icon name="arrow" size={18} />
                 </button>

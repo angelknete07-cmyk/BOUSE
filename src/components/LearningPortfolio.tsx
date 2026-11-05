@@ -598,14 +598,14 @@ export function LearningPortfolio({ state, onNavigate }: Props) {
                 <div className="portfolio-empty-section">
                   <h3>Aucun dossier de projet.</h3>
                   <p>
-                    Reliez une idée à vos leçons dans l’Incubator, puis
-                    documentez vos tests.
+                    Reliez une idée à vos leçons dans Projets, puis documentez
+                    vos tests.
                   </p>
                   <button
                     className="text-button"
                     onClick={() => onNavigate("incubator")}
                   >
-                    Ouvrir l’Incubator <Icon name="arrow" size={15} />
+                    Ouvrir Projets <Icon name="arrow" size={15} />
                   </button>
                 </div>
               )}

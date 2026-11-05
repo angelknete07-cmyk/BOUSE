@@ -54,7 +54,7 @@ async function onboard(page: Page) {
   await expect(
     page.getByText("3/3 repères identifiés.", { exact: false }),
   ).toBeVisible();
-  await page.getByRole("button", { name: "Entrer dans mon Academy" }).click();
+  await page.getByRole("button", { name: "Entrer dans l’Académie" }).click();
   await expect(
     page.getByRole("heading", { name: "À vous de jouer, Camille." }),
   ).toBeVisible();
@@ -75,7 +75,7 @@ async function navigate(page: Page, name: string) {
 }
 
 async function openFinanceLesson(page: Page) {
-  await navigate(page, "Academy");
+  await navigate(page, "Académie");
   await page
     .getByLabel("Rechercher une leçon", { exact: true })
     .fill("tresorerie");
@@ -119,7 +119,7 @@ test("apprendre, prouver, appliquer et retrouver la progression après rechargem
     .getByRole("button", { name: "Trésorerie", exact: true })
     .click();
   await expect(cashScene.locator(".scene-number")).toHaveText(/-800\s?€/);
-  await page.getByRole("tab", { name: /Do/ }).click();
+  await page.getByRole("tab", { name: /Pratiquer/ }).click();
   await page
     .getByLabel("Votre raisonnement")
     .fill(
@@ -231,7 +231,7 @@ test("apprendre, prouver, appliquer et retrouver la progression après rechargem
   expect(errors).toEqual([]);
 });
 
-test("calcul financier, limites du modèle et recherche au clavier vers AI Lab", async ({
+test("calcul financier, limites du modèle et recherche au clavier vers l’Atelier IA", async ({
   page,
 }) => {
   await onboard(page);
@@ -260,7 +260,7 @@ test("calcul financier, limites du modèle et recherche au clavier vers AI Lab",
   await page.keyboard.press("Control+k");
   const palette = page.getByRole("dialog", { name: "Recherche universelle" });
   await expect(palette).toBeVisible();
-  await palette.getByRole("textbox").fill("AI Lab");
+  await palette.getByRole("textbox").fill("Atelier IA");
   await page.keyboard.press("Tab");
   await page.keyboard.press("Tab");
   await page.keyboard.press("Enter");
@@ -299,7 +299,7 @@ test("une erreur alimente la révision ; export et import nécessitent un rempla
 }) => {
   await onboard(page);
   await openFinanceLesson(page);
-  await page.getByRole("tab", { name: /Prove/ }).click();
+  await page.getByRole("tab", { name: /Démontrer/ }).click();
   for (const [index, question] of firstLesson.quiz.entries()) {
     await page
       .getByRole("radio", {

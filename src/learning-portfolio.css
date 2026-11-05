@@ -1,5 +1,5 @@
 .learning-portfolio {
-  max-width: 1320px;
+  max-width: var(--page-max);
   margin: 0 auto;
 }
 .portfolio-topline {
@@ -60,11 +60,12 @@
 }
 .portfolio-index-mark strong {
   display: block;
-  font-family: var(--font-mono);
   font-size: var(--type-number);
-  font-weight: var(--weight-regular);
-  letter-spacing: -0.08em;
   line-height: 1.5;
+  font-family: var(--font-display);
+  font-weight: var(--weight-figure);
+  letter-spacing: var(--tracking-figure);
+  font-variant-numeric: tabular-nums;
 }
 .portfolio-index-mark i {
   font-style: normal;
@@ -90,9 +91,11 @@
 }
 .portfolio-thread strong {
   color: var(--text-secondary);
-  font-family: var(--font-mono);
   font-size: var(--type-title-sm);
-  font-weight: var(--weight-regular);
+  font-family: var(--font-display);
+  font-weight: var(--weight-figure);
+  letter-spacing: var(--tracking-figure);
+  font-variant-numeric: tabular-nums;
 }
 .portfolio-thread p > span {
   color: var(--text-tertiary);
@@ -361,10 +364,11 @@
   margin: var(--space-6) 0;
 }
 .portfolio-latest-quiz > strong {
-  font-family: var(--font-mono);
   font-size: var(--type-number);
-  font-weight: var(--weight-regular);
-  letter-spacing: -0.06em;
+  font-family: var(--font-display);
+  font-weight: var(--weight-figure);
+  letter-spacing: var(--tracking-figure);
+  font-variant-numeric: tabular-nums;
 }
 .portfolio-latest-quiz > strong > small {
   font-size: var(--type-title-sm);

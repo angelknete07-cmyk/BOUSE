@@ -353,7 +353,7 @@ test("un quiz enregistré dix secondes après l’ouverture compte immédiatemen
   // Change Date only: this deliberately does not execute the 60-second timer
   // or mount a new clock hook before the persisted quiz is read again.
   await page.clock.setFixedTime(new Date(recordedAt));
-  await page.getByRole("tab", { name: /Prove/ }).click();
+  await page.getByRole("tab", { name: /Démontrer/ }).click();
   for (const [index, question] of firstLesson.quiz.entries()) {
     await page
       .getByRole("radio", {
@@ -380,7 +380,7 @@ test("un quiz enregistré dix secondes après l’ouverture compte immédiatemen
   await page
     .getByRole("button", { name: "Appliquer à un projet", exact: true })
     .click();
-  await expect(page.getByRole("tab", { name: /Apply/ })).toHaveAttribute(
+  await expect(page.getByRole("tab", { name: /Appliquer/ })).toHaveAttribute(
     "aria-selected",
     "true",
   );

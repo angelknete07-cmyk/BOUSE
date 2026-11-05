@@ -10,6 +10,41 @@ export function normalizeSearch(value: string): string {
     .trim();
 }
 
+/**
+ * Relevance of a search entry for an already-normalised query.
+ * Lower is better; -1 means no match. Titles outrank descriptions so that a
+ * lesson named after the query appears before a space that only mentions it.
+ */
+export function searchRank(
+  title: string,
+  description: string,
+  query: string,
+): number {
+  if (!query) return 0;
+  const name = normalizeSearch(title);
+  if (name === query) return 0;
+  if (name.startsWith(query)) return 1;
+  if (name.split(/[^a-z0-9]+/).some((word) => word.startsWith(query))) return 2;
+  if (name.includes(query)) return 3;
+  return normalizeSearch(description).includes(query) ? 4 : -1;
+}
+
+/** Stable relevance ordering: equal ranks keep their declared order. */
+export function rankSearchResults<T>(
+  items: T[],
+  query: string,
+  fields: (item: T) => { title: string; description: string },
+): T[] {
+  return items
+    .map((item, index) => {
+      const { title, description } = fields(item);
+      return { item, index, rank: searchRank(title, description, query) };
+    })
+    .filter((entry) => entry.rank >= 0)
+    .sort((a, b) => a.rank - b.rank || a.index - b.index)
+    .map((entry) => entry.item);
+}
+
 export interface EconomicsInput {
   price: number;
   unitCost: number;

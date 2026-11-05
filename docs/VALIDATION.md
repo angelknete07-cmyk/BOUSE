@@ -115,3 +115,13 @@ Le run final du 5 novembre 2026 passe avec **54 tests navigateur** (27 scénario
 **141 captures fraîches** sont archivées sous `2026-11-05_05-27-47-Europe-Paris`, avec la paire stable sur la recherche. L’inspection a corrigé un texte d’assistance visible par erreur dans la barre latérale ; la galerie finale a été régénérée. La correction du quiz est focalisée et sa boîte vérifiée au-dessus du dock mobile ; deux rendus de viewport montrent ce comportement. Les tests de motion et de réduction des mouvements passent. Les sélecteurs de tests suivent désormais les libellés visibles des graphes.
 
 Les captures de recherche, quiz, leçon et simulation ont été inspectées sur desktop/mobile et comparées à la passe Inter. Les comptes rendus et limites sont dans [LATEST.md](../design-reviews/LATEST.md). La poursuite a été autorisée par l’utilisateur ; aucune review design indépendante ni certification d’accessibilité n’est revendiquée.
+
+## Passe 11 — corrections du diagnostic de reprise
+
+Contrôles du 5 novembre 2026 sur le conteneur cloud de reprise (Chromium de `/opt/pw-browsers`, Node 22.23). Avant toute modification, la base `87eaa74` a été recontrôlée : build réussi, **146 cas unitaires** et **54 tests navigateur** réussis.
+
+Après les corrections : `npm run build` réussit (bundle principal 503,08 kB minifié, avertissement Vite inchangé). `npm test` passe avec **148 cas unitaires**, dont deux nouveaux sur le classement de la recherche. La suite complète `npx playwright test` passe avec **54 tests**, sans échec, test ignoré ni retry. Prettier passe sur `src/` et `tests/`.
+
+Les sélecteurs des tests navigateur suivent les nouveaux libellés visibles ; aucune assertion n'a été retirée. **141 captures** fraîches sont enregistrées avec la paire principale sur l'atlas de l'Académie, archive `2026-11-05_06-43-13-Europe-Paris`. Les écrans modifiés ont été inspectés sur desktop et mobile ; les constats et limites sont dans [LATEST.md](../design-reviews/LATEST.md).
+
+Pas d'appareil physique, de Safari/Firefox ni de lecteur d'écran réel. Aucune review design externe n'est revendiquée.

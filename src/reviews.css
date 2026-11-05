@@ -1,5 +1,5 @@
 .reviews-experience {
-  max-width: 1200px;
+  max-width: var(--page-max);
   margin: 0 auto;
 }
 .review-page-heading {
@@ -84,10 +84,11 @@
 }
 .review-due-number > strong {
   font-size: calc(var(--type-number) * 1.8);
-  font-family: var(--font-mono);
-  font-weight: var(--weight-light);
   line-height: 1;
-  letter-spacing: -0.08em;
+  font-family: var(--font-display);
+  font-weight: var(--weight-figure);
+  letter-spacing: var(--tracking-figure);
+  font-variant-numeric: tabular-nums;
 }
 .review-due-number > span {
   color: var(--text-secondary);

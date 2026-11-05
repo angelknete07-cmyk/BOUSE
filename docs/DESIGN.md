@@ -109,3 +109,17 @@ La passe attend une review design externe avant de poursuivre les fonctionnalit�
 ## Passe 09 — correction typographique
 
 Le retour utilisateur porte sur la police. L’audit relève des titres Manrope très fins, des approches allant jusqu’à −0,07 em et une référence à Inter dans la pile de texte sans fichier Inter chargé. Le remplacement unifie l’interface autour d’une Inter variable auto-hébergée et préchargée. Les titres gagnent en poids et en espacement, les nombres gardent un poids intermédiaire et les textes de lecture restent réguliers. Les réglages sont centralisés pour les cinq écrans prioritaires et les composants communs. La composition, la palette, les animations et la logique métier sont conservées. Les nouveaux rendus sont comparés à la passe 08 dans `design-reviews/LATEST.md`.
+
+## Passe 11 — corrections du diagnostic de reprise
+
+Le diagnostic de reprise du 5 novembre a relevé des défauts visibles et une composition trop uniforme. L'utilisateur a demandé de tout corriger. Le détail est dans [AUDIT-11.md](../design-reviews/AUDIT-11.md).
+
+- **Pages de travail** : l'Académie, le Lab et l'Atelier IA ouvrent sur un titre factuel d'une ligne (`--type-page-fluid`) et une phrase utile, pas sur un slogan de deux lignes. L'accueil garde sa scène, plus compacte (`--type-stage-title`).
+- **Graphes de relations** : un nœud est ancré par le centre de son cercle, pas par le centre de son bloc. L'atlas et la trajectoire partagent la même grammaire (colonnes = profondeur des prérequis, lignes = domaines) et leurs liaisons viennent des prérequis réels.
+- **Chiffres** : un seul style pour les grands nombres, Inter avec `--weight-figure`, `--tracking-figure` et chiffres tabulaires. Le monospace reste réservé aux petites coordonnées et indices.
+- **Largeur** : toutes les racines de page utilisent `--page-max`.
+- **Défilement horizontal mobile** : une rangée qui défile se termine par un fondu (`mask-image`) et une marge de fin, jamais par un libellé coupé net.
+- **Focus** : contour de 2 px à 2 px d'écart avec `--line-focus` ; contour intérieur dans les listes à fond sélectionné.
+- **Langue** : libellés en français (Comprendre / Pratiquer / Démontrer / Appliquer, Académie, Projets, Atelier IA). Radar est conservé : « Veille » suggérerait une surveillance automatique.
+
+La passe attend une review design externe avant de poursuivre les fonctionnalités.

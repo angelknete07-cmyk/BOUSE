@@ -94,6 +94,8 @@
   --leading-body: 1.7;
   --leading-reading: 1.9;
 
+  /* One reading frame for every page root, so content edges never jump between screens. */
+  --page-max: 1366px; /* .main-content 1450px minus its 2 × 42px gutters */
   --space-1: 4px;
   --space-2: 8px;
   --space-3: 12px;

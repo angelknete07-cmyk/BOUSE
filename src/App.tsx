@@ -9,7 +9,7 @@ import {
   readState,
   storageKey,
 } from "./lib/storage";
-import { normalizeSearch } from "./lib/domain";
+import { normalizeSearch, rankSearchResults } from "./lib/domain";
 import { Icon } from "./components/Icon";
 import { Dashboard } from "./components/Dashboard";
 import { KnowledgeMap } from "./components/KnowledgeMap";
@@ -24,13 +24,13 @@ import { latestCurrentAttempt } from "./lib/portfolio";
 
 const navigation = [
   { id: "home", label: "Vue d’ensemble", icon: "home" },
-  { id: "academy", label: "Academy", icon: "book" },
+  { id: "academy", label: "Académie", icon: "book" },
   { id: "skills", label: "Mes compétences", icon: "node" },
   { id: "reviews", label: "Révisions", icon: "clock" },
   { id: "lab", label: "Lab financier", icon: "lab" },
   { id: "simulation", label: "Et si ?", icon: "chart" },
-  { id: "incubator", label: "Incubator", icon: "idea" },
-  { id: "ai", label: "AI Lab", icon: "ai" },
+  { id: "incubator", label: "Projets", icon: "idea" },
+  { id: "ai", label: "Atelier IA", icon: "ai" },
   { id: "radar", label: "Radar", icon: "radar" },
 ];
 const getRoute = () => {
@@ -401,11 +401,11 @@ function App() {
             <span className="breadcrumb-separator">/</span>
             <span>
               {lesson
-                ? "Academy"
+                ? "Académie"
                 : route === "portfolio"
                   ? "Portfolio"
                   : projectId !== null
-                    ? "Incubator"
+                    ? "Projets"
                     : navigation.find((n) => n.id === route)?.label ||
                       "Préférences"}
             </span>
@@ -490,7 +490,7 @@ function App() {
                 <h1>Projet introuvable.</h1>
                 <p>
                   Ce projet n’est pas présent dans cette sauvegarde. Retrouvez
-                  vos fiches dans l’Incubator.
+                  vos fiches dans Projets.
                 </p>
                 <button
                   className="button primary"
@@ -850,7 +850,7 @@ function Search({
       .replace(/\b(cash|liquidite)\b/g, "tresorerie")
       .replace(/\b(ai|llm)\b/g, "ia");
   const q = searchable(query);
-  const items = [
+  const entries = [
     {
       title: "Portfolio d’apprentissage",
       detail: "Mes compétences",
@@ -875,7 +875,7 @@ function Search({
     })),
     ...state.projects.map((p) => ({
       title: p.title,
-      detail: "Projet · Incubator",
+      detail: "Projet",
       route: `project/${p.id}`,
       search: `${p.title} ${p.problem} ${p.customer}`,
     })),
@@ -890,8 +890,16 @@ function Search({
           ? `lesson/${id}`
           : "portfolio",
         search: note,
+        // A note is found by its own text, not by the title of its lesson.
+        rankTitle: note,
       })),
-  ].filter((i) => !q || searchable(i.search).includes(q));
+  ];
+  const items = rankSearchResults(entries, q, (entry) => ({
+    title: searchable(
+      "rankTitle" in entry ? String(entry.rankTitle) : entry.title,
+    ),
+    description: searchable(entry.search),
+  }));
   function focusResult(index: number) {
     const buttons =
       resultsRef.current?.querySelectorAll<HTMLButtonElement>("button");

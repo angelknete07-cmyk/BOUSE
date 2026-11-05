@@ -38,25 +38,20 @@ export function Academy({
       <header className="art-heading">
         <div>
           <span className="instrument-index">
-            Academy <i /> Le territoire des possibles
+            Académie <i /> Fondations
           </span>
-          <h1>
-            Des fondations
-            <br />
-            qui tiennent.
-          </h1>
+          <h1>Six notions, trois domaines.</h1>
         </div>
         <p>
-          Six notions. Trois territoires.
-          <br />
-          Chaque idée ouvre un nouveau chemin.
+          Chaque ligne relie une notion à ses prérequis. Choisissez un point
+          d’entrée.
         </p>
       </header>
       <div className="atlas-toolbar">
         <div
           className="atlas-views"
           role="group"
-          aria-label="Présentation de l’Academy"
+          aria-label="Présentation de l’Académie"
         >
           <button
             aria-pressed={view === "atlas"}

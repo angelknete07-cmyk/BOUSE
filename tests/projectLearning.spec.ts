@@ -135,7 +135,7 @@ async function passQuiz(page: Page, lesson: Lesson) {
   await expect(
     page.getByRole("heading", { name: lesson.title, exact: true }),
   ).toBeVisible();
-  await page.getByRole("tab", { name: /Prove/ }).click();
+  await page.getByRole("tab", { name: /Démontrer/ }).click();
   for (const [index, question] of lesson.quiz.entries()) {
     await page
       .getByRole("radio", {

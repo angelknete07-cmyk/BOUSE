@@ -10,20 +10,33 @@ import "../dashboard-experience.css";
 
 type Props = { state: AppState; onNavigate: (route: string) => void };
 
+// Columns follow the depth of prerequisites, rows follow the domains — the same
+// grammar as the Académie atlas. Links are drawn from the real prerequisites.
 const mapNodes = [
   {
     id: "ca-marge-tresorerie",
     label: "Les chiffres",
-    x: 20,
-    y: 17,
+    x: 12,
+    y: 16,
     icon: "chart",
   },
-  { id: "seuil-rentabilite", label: "L’équilibre", x: 80, y: 17, icon: "lab" },
-  { id: "validation-client", label: "Le client", x: 50, y: 43, icon: "idea" },
-  { id: "comprendre-llm", label: "Le modèle", x: 15, y: 77, icon: "ai" },
-  { id: "prompt-structure", label: "Le prompt", x: 50, y: 77, icon: "book" },
-  { id: "automatisation-agent", label: "L’action", x: 85, y: 77, icon: "node" },
+  { id: "seuil-rentabilite", label: "L’équilibre", x: 50, y: 16, icon: "lab" },
+  { id: "validation-client", label: "Le client", x: 12, y: 50, icon: "idea" },
+  { id: "comprendre-llm", label: "Le modèle", x: 12, y: 84, icon: "ai" },
+  { id: "prompt-structure", label: "Le prompt", x: 50, y: 84, icon: "book" },
+  { id: "automatisation-agent", label: "L’action", x: 88, y: 50, icon: "node" },
 ];
+const mapLinks = mapNodes.flatMap((node) => {
+  const lesson = lessons.find((item) => item.id === node.id);
+  return (lesson?.prerequisites || []).flatMap((id) => {
+    const from = mapNodes.find((item) => item.id === id);
+    if (!from) return [];
+    const mid = (from.x + node.x) / 2;
+    return [
+      `M${from.x} ${from.y}C${mid} ${from.y},${mid} ${node.y},${node.x} ${node.y}`,
+    ];
+  });
+});
 
 function getProgress(state: AppState, now: Date) {
   const latest = new Map<string, Attempt>();
@@ -69,7 +82,17 @@ export function Dashboard({ state, onNavigate }: Props) {
   const reviewDeck = buildReviewDeck(lessons, state, now);
   const due = dueReviewCards(reviewDeck, now);
   const { latest, done, current } = getProgress(state, now);
-  const [selectedId, setSelectedId] = useState(current.id);
+  // The hero already presents the current lesson: the trajectory opens on what follows it.
+  const following =
+    lessons.find(
+      (lesson) =>
+        !done.has(lesson.id) && lesson.prerequisites.includes(current.id),
+    ) ||
+    lessons.find(
+      (lesson) => lesson.id !== current.id && !done.has(lesson.id),
+    ) ||
+    current;
+  const [selectedId, setSelectedId] = useState(following.id);
   const selected =
     lessons.find((lesson) => lesson.id === selectedId) || current;
   const selectedAttempt = latest.get(selected.id);
@@ -145,11 +168,6 @@ export function Dashboard({ state, onNavigate }: Props) {
               </span>
             </div>
           </div>
-          <div className="scene-coordinate" aria-hidden="true">
-            <span>NO. {String(currentIndex).padStart(2, "0")}</span>
-            <i />
-            <small>Un nouveau point de vue.</small>
-          </div>
           <div className="home-scene-footer">
             <div
               className="home-progress"
@@ -193,10 +211,6 @@ export function Dashboard({ state, onNavigate }: Props) {
               <p className="trajectory-intro">Les idées se relient.</p>
               <h2 id="trajectory-title">Votre trajectoire.</h2>
             </div>
-            <span className="trajectory-count">
-              <strong>{String(done.size).padStart(2, "0")}</strong>
-              <small>/ {String(lessons.length).padStart(2, "0")}</small>
-            </span>
           </div>
           <div
             className="trajectory-map"
@@ -209,7 +223,9 @@ export function Dashboard({ state, onNavigate }: Props) {
               preserveAspectRatio="none"
               aria-hidden="true"
             >
-              <path d="M20 17H80M15 77H85M15 77C15 49 85 49 85 77" />
+              {mapLinks.map((d) => (
+                <path key={d} d={d} />
+              ))}
             </svg>
             {mapNodes.map((node, index) => {
               const lesson = lessons.find((item) => item.id === node.id)!;
@@ -290,7 +306,7 @@ export function Dashboard({ state, onNavigate }: Props) {
           <h2>Deux langages. Un même horizon.</h2>
         </div>
         <button className="text-button" onClick={() => onNavigate("academy")}>
-          Toute l’Academy
+          Toute l’Académie
           <Icon name="arrow" size={16} />
         </button>
       </div>

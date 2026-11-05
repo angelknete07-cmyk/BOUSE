@@ -529,7 +529,7 @@ export const lessons: Lesson[] = [
         body: [
           "Conserve une petite liste de cas avec le résultat attendu ou une grille explicite. Inclus données manquantes, ambiguïté, contradiction et contenu hostile. Compare les versions sur les mêmes cas.",
           "Modifie une dimension à la fois quand tu cherches la cause d’un échec. Mesure aussi les erreurs graves, le coût et la latence si la tâche est répétée.",
-          "La grille du AI Lab de cette application repère des éléments présents dans le texte ; elle n’interroge pas un modèle et ne mesure pas la qualité réelle des réponses. Elle aide à réviser une consigne avant des essais sur un véritable fournisseur.",
+          "La grille de l’Atelier IA de cette application repère des éléments présents dans le texte ; elle n’interroge pas un modèle et ne mesure pas la qualité réelle des réponses. Elle aide à réviser une consigne avant des essais sur un véritable fournisseur.",
         ],
       },
     ],

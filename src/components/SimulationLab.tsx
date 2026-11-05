@@ -519,7 +519,9 @@ export function SimulationLab({ state, update, onNavigate }: Props) {
           {changeFields.map((field) => (
             <div className="simulation-control" key={field.key}>
               <label htmlFor={`simulation-${field.key}`}>{field.label}</label>
-              <div className="simulation-number">
+              <div
+                className={`simulation-number ${field.suffix.length > 1 ? "has-long-unit" : ""}`}
+              >
                 <input
                   id={`simulation-${field.key}`}
                   type="number"

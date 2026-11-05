@@ -5,6 +5,8 @@ import {
   evaluateQuiz,
   nextProjectStage,
   normalizeSearch,
+  rankSearchResults,
+  searchRank,
   projectStages,
   reviewPrompt,
 } from "../src/lib/domain.ts";
@@ -184,4 +186,37 @@ test("project stages advance one step and stop at growth", () => {
   assert.equal(nextProjectStage("Croissance"), "Croissance");
   assert.equal(projectStages.length, 9);
   assert.throws(() => nextProjectStage("Publié"), RangeError);
+});
+
+test("search ranks exact and leading title matches before mere mentions", () => {
+  assert.equal(searchRank("Trésorerie", "", "tresorerie"), 0);
+  assert.equal(searchRank("Trésorerie du mois", "", "tresorerie"), 1);
+  assert.equal(
+    searchRank("Chiffre d’affaires, marge et trésorerie", "", "tresorerie"),
+    2,
+  );
+  assert.equal(
+    searchRank("Et si ?", "simulation trésorerie cash", "tresorerie"),
+    4,
+  );
+  assert.equal(searchRank("Radar", "sources", "tresorerie"), -1);
+  assert.equal(searchRank("Radar", "sources", ""), 0);
+});
+
+test("search results keep declared order for equal ranks and drop misses", () => {
+  const entries = [
+    { title: "Et si ?", search: "Et si ? simulation trésorerie" },
+    { title: "Radar", search: "Radar" },
+    { title: "Chiffre d’affaires, marge et trésorerie", search: "CA" },
+    { title: "Prévoir le cash", search: "trésorerie atelier" },
+  ];
+  const ranked = rankSearchResults(entries, "tresorerie", (entry) => ({
+    title: entry.title,
+    description: entry.search,
+  }));
+  assert.deepEqual(
+    ranked.map((entry) => entry.title),
+    ["Chiffre d’affaires, marge et trésorerie", "Et si ?", "Prévoir le cash"],
+  );
+  assert.equal(entries.length, 4, "the source list is not mutated");
 });

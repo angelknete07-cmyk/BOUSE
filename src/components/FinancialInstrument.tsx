@@ -220,19 +220,13 @@ export function Lab({ onNavigate }: { onNavigate: (route: string) => void }) {
       <header className="art-heading">
         <div>
           <span className="instrument-index">
-            Instrument 01 <i /> Économie d’une activité
+            Lab financier <i /> Instrument 01
           </span>
-          <h1>
-            Les chiffres
-            <br />
-            prennent vie.
-          </h1>
+          <h1>L’économie d’une vente.</h1>
         </div>
         <div className="financial-heading-side">
           <p>
-            Une vente, puis cent.
-            <br />
-            Voyez où naît l’équilibre.
+            Prix, coût variable, volume et charges : voyez où naît l’équilibre.
           </p>
           <button
             className="text-button"

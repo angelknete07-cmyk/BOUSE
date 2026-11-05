@@ -1,5 +1,5 @@
 .simulation-lab {
-  max-width: 1320px;
+  max-width: var(--page-max);
   margin: 0 auto;
 }
 .simulation-topline {
@@ -353,11 +353,11 @@
   font-size: var(--type-micro);
   pointer-events: none;
 }
-.simulation-control:last-of-type .simulation-number input {
-  padding-right: var(--space-8);
+.simulation-number.has-long-unit input {
+  padding-right: var(--space-12);
 }
-.simulation-control:last-of-type .simulation-number > span {
-  right: var(--space-1);
+.simulation-number.has-long-unit > span {
+  right: var(--space-2);
   font-size: var(--type-micro);
 }
 .simulation-control > input[type="range"] {
@@ -949,7 +949,7 @@
     padding-right: var(--space-8);
     font-size: var(--type-body);
   }
-  .simulation-control:last-of-type .simulation-number > span {
+  .simulation-number.has-long-unit > span {
     right: var(--space-2);
     font-size: var(--type-micro);
   }
@@ -1116,5 +1116,17 @@
     animation: none !important;
     transition: none !important;
     scroll-behavior: auto !important;
+  }
+}
+
+/* Mobile: the scenario row scrolls sideways; the fade says so instead of cutting a label. */
+@media (max-width: 700px) {
+  .simulation-cases {
+    mask-image: linear-gradient(
+      to right,
+      var(--bg) calc(100% - var(--space-10)),
+      transparent
+    );
+    padding-inline-end: var(--space-10);
   }
 }

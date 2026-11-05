@@ -187,19 +187,6 @@
   letter-spacing: -0.045em;
   margin: 0;
 }
-.trajectory-count {
-  white-space: nowrap;
-  font-family: var(--font-mono);
-  color: var(--text-tertiary);
-}
-.trajectory-count strong {
-  color: var(--text);
-  font-size: var(--type-title-lg);
-  font-weight: var(--weight-light);
-}
-.trajectory-count small {
-  font-size: var(--type-micro);
-}
 .trajectory-map {
   position: relative;
   height: 225px;
@@ -214,13 +201,17 @@
   overflow: visible;
   fill: none;
   stroke: var(--decorative-line);
-  stroke-width: 0.4;
+  stroke-width: 1;
+}
+.trajectory-connections path {
+  vector-effect: non-scaling-stroke;
 }
 .trajectory-node {
   position: absolute;
   left: var(--node-x);
   top: var(--node-y);
-  transform: translate(-50%, -50%);
+  /* Anchor the core centre (padding + 35px / 2) on the point the links reach. */
+  transform: translate(-50%, calc(-1 * (var(--space-2) + 17.5px)));
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -761,9 +752,6 @@
   .trajectory-heading .eyebrow {
     font-size: var(--type-micro);
     margin-bottom: var(--space-1);
-  }
-  .trajectory-count strong {
-    font-size: var(--type-title-md);
   }
   .trajectory-map {
     height: auto;

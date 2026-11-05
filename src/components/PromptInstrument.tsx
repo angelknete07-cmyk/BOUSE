@@ -119,17 +119,13 @@ export function AILab() {
       <header className="art-heading">
         <div>
           <span className="instrument-index">
-            Instrument 02 <i /> Langage
+            Atelier IA <i /> Instrument 02
           </span>
-          <h1>
-            De l’intention
-            <br />à l’instruction.
-          </h1>
+          <h1>De l’intention à l’instruction.</h1>
         </div>
         <p>
-          Un prompt se construit.
-          <br />
-          Donnez une forme à votre pensée.
+          Sept repères pour structurer une demande. Lecture locale, sans modèle
+          connecté.
         </p>
       </header>
       <div
@@ -252,7 +248,12 @@ export function AILab() {
                   {String(index + 1).padStart(2, "0")}
                 </span>
                 <strong>{part.name}</strong>
-                <small>{found[index] ? "indice repéré" : "à préciser"}</small>
+                {/* Only the gaps are shown; a found cue stays announced, not repeated seven times. */}
+                {found[index] ? (
+                  <small className="sr-only">indice repéré</small>
+                ) : (
+                  <small>à préciser</small>
+                )}
               </button>
             ))}
           </div>

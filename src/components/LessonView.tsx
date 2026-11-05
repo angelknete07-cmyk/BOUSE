@@ -17,10 +17,10 @@ type Props = {
   onNavigate: (route: string) => void;
 };
 const stages = [
-  { label: "Learn", subtitle: "Comprendre" },
-  { label: "Do", subtitle: "Pratiquer" },
-  { label: "Prove", subtitle: "Démontrer" },
-  { label: "Apply", subtitle: "Construire" },
+  { label: "Comprendre", subtitle: "Les notions" },
+  { label: "Pratiquer", subtitle: "Exercice" },
+  { label: "Démontrer", subtitle: "Quiz" },
+  { label: "Appliquer", subtitle: "Mon projet" },
 ];
 
 export function LessonView({ lesson, state, update, onNavigate }: Props) {

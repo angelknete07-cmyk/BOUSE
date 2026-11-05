@@ -9,20 +9,21 @@ h4 {
   font-family: var(--font-display);
 }
 .art-page {
-  max-width: 1280px;
+  max-width: var(--page-max);
   margin-inline: auto;
 }
+/* Working pages open on a compact, factual heading: the instrument comes first. */
 .art-heading {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
   gap: var(--space-12);
-  margin: var(--space-3) 0 var(--space-12);
+  margin: var(--space-3) 0 var(--space-8);
 }
 .art-heading h1 {
   font-family: var(--font-display);
-  font-size: var(--type-editorial);
-  line-height: 1.06;
+  font-size: var(--type-page-fluid);
+  line-height: 1.1;
   font-weight: var(--weight-display);
   letter-spacing: var(--tracking-display);
   margin: var(--space-5) 0 0;
@@ -32,7 +33,7 @@ h4 {
   color: var(--muted);
   font-size: var(--type-body);
   line-height: 1.8;
-  max-width: 31ch;
+  max-width: 38ch;
   margin: 0 0 var(--space-2);
 }
 .instrument-index {
@@ -119,7 +120,7 @@ h4 {
   display: block;
 }
 .art-home .learning-hero {
-  min-height: 568px;
+  min-height: 460px;
   border-radius: var(--radius-xs);
   background:
     radial-gradient(ellipse at 76% 65%, var(--light-matter), transparent 60%),
@@ -179,11 +180,11 @@ h4 {
 }
 .art-home .learning-hero-content h2 {
   font-family: var(--font-display);
-  font-size: var(--type-scene);
-  line-height: 1.04;
+  font-size: var(--type-stage-title);
+  line-height: 1.08;
   font-weight: var(--weight-display);
   letter-spacing: var(--tracking-display);
-  max-width: 12ch;
+  max-width: 18ch;
   margin: var(--space-5) 0;
   text-wrap: initial;
 }
@@ -199,30 +200,6 @@ h4 {
 }
 .art-home .learning-hero-actions {
   gap: var(--space-6);
-}
-.scene-coordinate {
-  position: absolute;
-  left: 73%;
-  top: 35%;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-  font-family: var(--font-mono);
-  font-size: var(--type-micro);
-  letter-spacing: 0.12em;
-  color: var(--muted);
-}
-.scene-coordinate i {
-  display: block;
-  height: 60px;
-  width: 1px;
-  background: linear-gradient(var(--line-strong), transparent);
-}
-.scene-coordinate small {
-  font-family: var(--font-sans);
-  font-size: var(--type-caption);
-  letter-spacing: 0;
-  color: var(--text-tertiary);
 }
 .home-scene-footer {
   display: flex;
@@ -295,12 +272,6 @@ h4 {
   font-weight: var(--weight-heading);
   font-size: var(--type-heading);
   letter-spacing: var(--tracking-heading);
-}
-.art-home .trajectory-count strong {
-  font-family: var(--font-display);
-  font-size: var(--type-number-lg);
-  font-weight: var(--weight-figure);
-  line-height: 1;
 }
 .art-home .trajectory-map {
   margin: 0;
@@ -811,7 +782,7 @@ h4 {
 .academy-map-canvas {
   position: relative;
   min-width: 680px;
-  height: 490px;
+  height: 520px;
   margin: var(--space-5) 0 var(--space-6);
 }
 .academy-map-canvas > svg {
@@ -859,7 +830,8 @@ h4 {
   position: absolute;
   left: var(--atlas-x);
   top: var(--atlas-y);
-  transform: translate(-50%, -50%);
+  /* Anchor the orbit centre (76px / 2) on the point, so prerequisite links meet the circles. */
+  transform: translate(-50%, -38px);
   border: 0;
   background: transparent;
   display: flex;
@@ -871,7 +843,7 @@ h4 {
   transition: transform var(--motion-normal) var(--ease-out);
 }
 .atlas-node:hover {
-  transform: translate(-50%, -50%) translateY(-3px);
+  transform: translate(-50%, -38px) translateY(-3px);
 }
 .atlas-node[hidden] {
   display: none;
@@ -1587,7 +1559,7 @@ h4 {
 
 @media (max-width: 1100px) {
   .art-heading h1 {
-    font-size: clamp(2.75rem, 5.8vw, 4.5rem);
+    font-size: var(--type-page-fluid);
   }
   .art-home .learning-hero-content {
     width: 68%;
@@ -1658,9 +1630,9 @@ h4 {
     margin: var(--space-3) 0 var(--space-8);
   }
   .art-heading h1 {
-    font-size: clamp(2.6rem, 11.5vw, 3.5rem);
-    margin-top: var(--space-4);
-    line-height: 1.08;
+    font-size: var(--type-hero-fluid);
+    margin-top: var(--space-3);
+    line-height: 1.12;
   }
   .art-heading > p,
   .financial-heading-side {
@@ -1696,7 +1668,7 @@ h4 {
     display: none;
   }
   .art-home .learning-hero {
-    min-height: 600px;
+    min-height: 0;
   }
   .art-home .learning-hero-top {
     padding: var(--space-5) var(--space-5) 0;
@@ -1712,9 +1684,9 @@ h4 {
     padding: var(--space-6) var(--space-5) var(--space-8);
   }
   .art-home .learning-hero-content h2 {
-    font-size: clamp(2.3rem, 10.4vw, 3rem);
-    max-width: 13ch;
-    line-height: 1.07;
+    font-size: var(--type-hero-fluid);
+    max-width: 16ch;
+    line-height: 1.12;
     margin: var(--space-4) 0;
   }
   .art-home .learning-hero-content p {
@@ -1731,22 +1703,9 @@ h4 {
   .art-home .learning-matter {
     inset: auto -30% 25px auto;
     width: 140%;
-    height: 320px;
+    height: 150px;
     mask-image: linear-gradient(180deg, transparent, var(--accent) 28%);
-    opacity: 0.8;
-  }
-  .scene-coordinate {
-    left: auto;
-    right: var(--space-5);
-    top: auto;
-    bottom: 160px;
-    font-size: var(--type-coordinate);
-  }
-  .scene-coordinate i {
-    height: 24px;
-  }
-  .scene-coordinate small {
-    display: none;
+    opacity: 0.55;
   }
   .home-scene-footer {
     padding: var(--space-5);
@@ -1774,9 +1733,6 @@ h4 {
   }
   .art-home .trajectory-heading h2 {
     font-size: var(--type-title-lg);
-  }
-  .art-home .trajectory-count strong {
-    font-size: 2.625rem;
   }
   .art-home .trajectory-map {
     grid-column: 1;
@@ -2003,7 +1959,7 @@ h4 {
   }
   .academy-map-canvas {
     min-width: 670px;
-    height: 420px;
+    height: 450px;
     margin: var(--space-5) var(--space-2) var(--space-4);
   }
   .atlas-scroll::after {
@@ -2309,5 +2265,32 @@ h4 {
     animation: none !important;
     transition: none !important;
     scroll-behavior: auto !important;
+  }
+}
+
+/* Mobile: filters, atlas and trajectory scroll sideways; a fade replaces the hard cut. */
+@media (max-width: 700px) {
+  .art-home .trajectory-map {
+    mask-image: linear-gradient(
+      to right,
+      var(--bg) calc(100% - var(--space-10)),
+      transparent
+    );
+    padding-inline-end: var(--space-10);
+  }
+  .atlas-filters {
+    mask-image: linear-gradient(
+      to right,
+      var(--bg) calc(100% - var(--space-10)),
+      transparent
+    );
+    padding-inline-end: var(--space-10);
+  }
+  .atlas-scroll {
+    mask-image: linear-gradient(
+      to right,
+      var(--bg) calc(100% - var(--space-8)),
+      transparent
+    );
   }
 }

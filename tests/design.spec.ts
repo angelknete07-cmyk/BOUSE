@@ -265,7 +265,7 @@ test("galerie des écrans et du quiz validé sans débordement", async ({
   // Change the document URL so the init script runs after the empty onboarding.
   await page.goto("/?gallery=1#academy");
   await expect(
-    page.getByRole("heading", { name: "Des fondations qui tiennent." }),
+    page.getByRole("heading", { name: "Six notions, trois domaines." }),
   ).toBeVisible();
   await neutral(
     page.locator(".catalog-card").first(),
@@ -278,7 +278,7 @@ test("galerie des écrans et du quiz validé sans débordement", async ({
     page.getByRole("heading", { name: lesson.title, exact: true }),
   ).toBeVisible();
   await neutral(
-    page.getByRole("tab", { name: /Learn/ }),
+    page.getByRole("tab", { name: /Comprendre/ }),
     "background-color",
     "Étape de leçon active",
   );
@@ -301,7 +301,7 @@ test("galerie des écrans et du quiz validé sans débordement", async ({
     .click();
   await expect(page.locator(".learning-self-review")).toBeVisible();
   await capture(page, testInfo, "03-teach-back");
-  await page.getByRole("tab", { name: /Prove/ }).click();
+  await page.getByRole("tab", { name: /Démontrer/ }).click();
   for (const [index, question] of lesson.quiz.entries()) {
     await page
       .getByRole("radio", {
@@ -346,7 +346,7 @@ test("galerie des écrans et du quiz validé sans débordement", async ({
   await capture(page, testInfo, "04-quiz-valide");
   await page.goto("/#lab");
   await expect(
-    page.getByRole("heading", { name: "Les chiffres prennent vie." }),
+    page.getByRole("heading", { name: "L’économie d’une vente." }),
   ).toBeVisible();
   await neutral(
     page.locator(".financial-chart"),
@@ -743,7 +743,7 @@ test("galerie des écrans et du quiz validé sans débordement", async ({
     }),
   ).toBeVisible();
   await capture(page, testInfo, "15-project-learning-lesson");
-  await page.getByRole("tab", { name: /Prove/ }).click();
+  await page.getByRole("tab", { name: /Démontrer/ }).click();
   for (const [index, question] of learningGoal.quiz.entries()) {
     await page
       .getByRole("radio", {
@@ -939,7 +939,7 @@ test("compositions des instruments, atlas et leçon complète", async ({
     await sequence(index);
     await capture(page, testInfo, name);
   }
-  await page.getByRole("tab", { name: /Do/ }).click();
+  await page.getByRole("tab", { name: /Pratiquer/ }).click();
   await page
     .getByLabel("Votre raisonnement", { exact: true })
     .fill(
@@ -949,7 +949,7 @@ test("compositions des instruments, atlas et leçon complète", async ({
     .getByRole("button", { name: "Comparer avec la solution", exact: true })
     .click();
   await capture(page, testInfo, "03-lecon-practice");
-  await page.getByRole("tab", { name: /Apply/ }).click();
+  await page.getByRole("tab", { name: /Appliquer/ }).click();
   await capture(page, testInfo, "03-lecon-application");
 });
 
