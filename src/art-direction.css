@@ -318,8 +318,8 @@ h4 {
 }
 .art-home .learning-universes {
   display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  gap: var(--space-16);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-10);
 }
 .art-home .domain-folio {
   display: flex;
@@ -782,7 +782,7 @@ h4 {
 .academy-map-canvas {
   position: relative;
   min-width: 680px;
-  height: 520px;
+  height: 790px;
   margin: var(--space-5) 0 var(--space-6);
 }
 .academy-map-canvas > svg {
@@ -908,18 +908,20 @@ h4 {
   left: 2%;
 }
 .atlas-finance {
-  top: 8%;
+  top: 3%;
 }
 .atlas-business {
-  top: 43%;
+  top: 26%;
 }
 .atlas-ai {
-  top: 71%;
+  top: 52%;
+}
+.atlas-investing {
+  top: 78%;
 }
 .atlas-caption {
-  position: absolute;
-  right: 0;
-  bottom: 0;
+  text-align: right;
+  margin: 0 0 var(--space-4);
   font-size: var(--type-caption);
   color: var(--text-tertiary);
 }
@@ -1958,8 +1960,9 @@ h4 {
     margin-inline: calc(-1 * var(--space-2));
   }
   .academy-map-canvas {
-    min-width: 670px;
-    height: 450px;
+    /* Five investing nodes share a lane: give them room and let the atlas scroll. */
+    min-width: 900px;
+    height: 700px;
     margin: var(--space-5) var(--space-2) var(--space-4);
   }
   .atlas-scroll::after {

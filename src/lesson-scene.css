@@ -552,3 +552,15 @@
   }
 }
 /* Reduced motion: covered by the global rule in styles.css. */
+.scene-bar-dim {
+  fill: none;
+  stroke: var(--line-strong);
+  stroke-dasharray: 3 4;
+}
+.scene-bar-focus {
+  fill: var(--surface-selected);
+  stroke: var(--accent);
+  transition:
+    y var(--motion-normal) var(--ease-out),
+    height var(--motion-normal) var(--ease-out);
+}

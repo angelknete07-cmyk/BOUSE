@@ -4,12 +4,17 @@ import { Icon } from "./Icon";
 import { lessonShortLabel } from "../data/lessonLabels";
 
 const positions: Record<string, { x: number; y: number }> = {
-  "ca-marge-tresorerie": { x: 16, y: 22 },
-  "seuil-rentabilite": { x: 53, y: 22 },
-  "validation-client": { x: 29, y: 53 },
-  "comprendre-llm": { x: 16, y: 83 },
-  "prompt-structure": { x: 53, y: 83 },
-  "automatisation-agent": { x: 86, y: 60 },
+  "ca-marge-tresorerie": { x: 16, y: 12 },
+  "seuil-rentabilite": { x: 53, y: 12 },
+  "validation-client": { x: 29, y: 36 },
+  "comprendre-llm": { x: 16, y: 62 },
+  "prompt-structure": { x: 53, y: 62 },
+  "automatisation-agent": { x: 86, y: 49 },
+  "inv-marches-financiers": { x: 16, y: 87 },
+  "inv-interets-composes": { x: 34.5, y: 87 },
+  "inv-risque-diversification": { x: 53, y: 87 },
+  "inv-fonds-enveloppes": { x: 69.5, y: 87 },
+  "inv-ordres-biais": { x: 86, y: 87 },
 };
 export function KnowledgeAtlas({
   selectedId,
@@ -66,7 +71,7 @@ export function KnowledgeAtlas({
               <stop offset="1" stopColor="var(--accent)" stopOpacity="0" />
             </linearGradient>
           </defs>
-          {[0.2, 0.5, 0.8].map((y) => (
+          {[0.12, 0.36, 0.62, 0.87].map((y) => (
             <path key={y} className="atlas-guide" d={`M0 ${y * 480}H1000`} />
           ))}
           {[0.16, 0.53, 0.86].map((x) => (
@@ -96,6 +101,7 @@ export function KnowledgeAtlas({
         <span className="atlas-domain atlas-finance">Finance</span>
         <span className="atlas-domain atlas-business">Entrepreneuriat</span>
         <span className="atlas-domain atlas-ai">Intelligence artificielle</span>
+        <span className="atlas-domain atlas-investing">Investissement</span>
         {lessons.map((lesson, index) => {
           const point = positions[lesson.id]!;
           return (
@@ -135,10 +141,10 @@ export function KnowledgeAtlas({
             </button>
           );
         })}
-        <span className="atlas-caption">
-          Une ligne relie une notion à son prérequis.
-        </span>
       </div>
+      <p className="atlas-caption">
+        Une ligne relie une notion à son prérequis.
+      </p>
     </div>
   );
 }

@@ -13,12 +13,17 @@ type Props = {
 
 type Position = { x: number; y: number };
 const positions: Record<string, Position> = {
-  "ca-marge-tresorerie": { x: 16.67, y: 23 },
-  "seuil-rentabilite": { x: 16.67, y: 56 },
-  "validation-client": { x: 50, y: 23 },
-  "comprendre-llm": { x: 83.33, y: 23 },
-  "prompt-structure": { x: 83.33, y: 51 },
-  "automatisation-agent": { x: 83.33, y: 78 },
+  "ca-marge-tresorerie": { x: 12.5, y: 23 },
+  "seuil-rentabilite": { x: 12.5, y: 56 },
+  "validation-client": { x: 37.5, y: 23 },
+  "comprendre-llm": { x: 62.5, y: 23 },
+  "prompt-structure": { x: 62.5, y: 51 },
+  "automatisation-agent": { x: 62.5, y: 78 },
+  "inv-marches-financiers": { x: 87.5, y: 14 },
+  "inv-interets-composes": { x: 87.5, y: 32 },
+  "inv-risque-diversification": { x: 87.5, y: 50 },
+  "inv-fonds-enveloppes": { x: 87.5, y: 68 },
+  "inv-ordres-biais": { x: 87.5, y: 86 },
 };
 
 function latestAttempt(state: AppState, id: string, now: Date) {
@@ -140,6 +145,7 @@ export function KnowledgeMap({ state, onNavigate }: Props) {
               <span>Finance</span>
               <span>Entrepreneuriat</span>
               <span>Intelligence artificielle</span>
+              <span>Investissement</span>
             </div>
             <svg
               className="knowledge-connections"

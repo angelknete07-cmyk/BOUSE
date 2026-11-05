@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { calculateEconomics } from "../lib/domain";
+import { projectInvestment } from "../lib/investing";
 
 const euros = new Intl.NumberFormat("fr-FR", {
   style: "currency",
@@ -14,6 +15,8 @@ export function LessonScene({ lessonId }: { lessonId: string }) {
   if (lessonId === "comprendre-llm") return <LanguageScene />;
   if (lessonId === "prompt-structure") return <PromptScene />;
   if (lessonId === "automatisation-agent") return <WorkflowScene />;
+  if (lessonId === "inv-interets-composes") return <CompoundScene />;
+  if (lessonId === "inv-risque-diversification") return <DrawdownScene />;
   return null;
 }
 
@@ -485,6 +488,205 @@ function WorkflowScene() {
         {deterministic
           ? "L’envoi n’est pas exécuté ici. Les règles et l’approbation restent explicites."
           : "Un workflow de recherche guidé peut aussi suffire. L’autonomie doit répondre à un besoin, pas devenir un objectif."}
+      </p>
+    </section>
+  );
+}
+
+/** Fictitious constant-rate projection: compounding versus fees. */
+function CompoundScene() {
+  const [fees, setFees] = useState(1);
+  const [years, setYears] = useState(20);
+  const projection = projectInvestment({
+    initial: 10_000,
+    monthly: 0,
+    annualReturn: 5,
+    annualFees: fees,
+    inflation: 0,
+    years,
+  });
+  const max = projection.finalWithoutFees;
+  const x = (year: number) => 40 + (year / years) * 520;
+  const y = (value: number) => 130 - (value / max) * 110;
+  const line = (key: "value" | "valueWithoutFees") =>
+    projection.years
+      .map(
+        (point, index) =>
+          `${index ? "L" : "M"}${x(point.year)} ${y(point[key])}`,
+      )
+      .join(" ");
+  return (
+    <section
+      className="scene-workbench"
+      aria-label="Explorer les intérêts composés et les frais"
+    >
+      <div className="scene-heading">
+        <div>
+          <span className="eyebrow">FAITES VARIER LES FRAIS</span>
+          <h3>Le temps compose. Les frais aussi.</h3>
+        </div>
+        <span className="scene-fiction">Taux fictif constant · 5 %</span>
+      </div>
+      <div className="scene-number-line">
+        <div>
+          <strong className="scene-number" aria-live="polite">
+            {euros.format(projection.finalValue)}
+          </strong>
+          <span>
+            après {years} ans, avec {fees.toLocaleString("fr-FR")} % de frais
+            annuels
+          </span>
+        </div>
+        <p>
+          Sans frais :{" "}
+          <strong>{euros.format(projection.finalWithoutFees)}</strong>. Les
+          frais coûtent <strong>{euros.format(projection.feeCost)}</strong> sur
+          la période.
+        </p>
+      </div>
+      <svg
+        className="scene-break-even"
+        viewBox="0 0 600 155"
+        role="img"
+        aria-label={`10 000 € deviennent ${euros.format(projection.finalValue)} avec frais, contre ${euros.format(projection.finalWithoutFees)} sans frais.`}
+      >
+        <line x1="40" y1="130" x2="560" y2="130" className="scene-line-dim" />
+        <path d={line("valueWithoutFees")} className="scene-cost-curve" />
+        <path d={line("value")} className="scene-revenue-curve" />
+        <text x="40" y="151">
+          Aujourd’hui
+        </text>
+        <text x="560" y="151" textAnchor="end">
+          {years} ans
+        </text>
+      </svg>
+      <div className="scene-legend">
+        <span>
+          <i />
+          Avec frais
+        </span>
+        <span>
+          <i />
+          Sans frais
+        </span>
+      </div>
+      <label className="scene-range">
+        Frais annuels <strong>{fees.toLocaleString("fr-FR")} %</strong>
+        <input
+          type="range"
+          min="0"
+          max="3"
+          step="0.1"
+          value={fees}
+          aria-label="Frais annuels en pourcentage"
+          onChange={(event) => setFees(Number(event.target.value))}
+        />
+      </label>
+      <label className="scene-range">
+        Durée <strong>{years} ans</strong>
+        <input
+          type="range"
+          min="1"
+          max="40"
+          step="1"
+          value={years}
+          aria-label="Durée en années"
+          onChange={(event) => setYears(Number(event.target.value))}
+        />
+      </label>
+      <p className="scene-takeaway">
+        10 000 € placés à un taux fictif constant de 5 %, gains réinvestis.{" "}
+        <strong>Une illustration du mécanisme, pas une prévision.</strong>
+      </p>
+    </section>
+  );
+}
+
+/** Losses and gains are not symmetric: the recovery needed after a fall. */
+function DrawdownScene() {
+  const [loss, setLoss] = useState(30);
+  const remaining = 100 - loss;
+  const recovery = remaining > 0 ? (loss / remaining) * 100 : null;
+  const percent = new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 1 });
+  return (
+    <section
+      className="scene-workbench"
+      aria-label="Explorer la hausse nécessaire après une baisse"
+    >
+      <div className="scene-heading">
+        <div>
+          <span className="eyebrow">CHOISISSEZ UNE BAISSE</span>
+          <h3>Perdre puis remonter.</h3>
+        </div>
+        <span className="scene-fiction">Calcul exact · sans frais</span>
+      </div>
+      <div className="scene-number-line">
+        <div>
+          <strong className="scene-number" aria-live="polite">
+            {recovery === null ? "—" : `+${percent.format(recovery)} %`}
+          </strong>
+          <span>pour revenir au point de départ</span>
+        </div>
+        <p>
+          10 000 € perdent {loss} % et deviennent{" "}
+          <strong>{euros.format(remaining * 100)}</strong>. Il faut ensuite
+          regagner {euros.format(loss * 100)} sur une base plus petite.
+        </p>
+      </div>
+      <svg
+        className="scene-break-even"
+        viewBox="0 0 600 155"
+        aria-hidden="true"
+      >
+        <line x1="40" y1="130" x2="560" y2="130" className="scene-line-dim" />
+        <rect
+          x="90"
+          y={130 - 110}
+          width="120"
+          height="110"
+          className="scene-bar-dim"
+        />
+        <rect
+          x="240"
+          y={130 - remaining * 1.1}
+          width="120"
+          height={remaining * 1.1}
+          className="scene-bar-focus"
+        />
+        <rect
+          x="390"
+          y={130 - 110}
+          width="120"
+          height="110"
+          className="scene-bar-dim"
+        />
+        <text x="150" y="151" textAnchor="middle">
+          Départ
+        </text>
+        <text x="300" y="151" textAnchor="middle">
+          Après −{loss} %
+        </text>
+        <text x="450" y="151" textAnchor="middle">
+          Retour
+        </text>
+      </svg>
+      <label className="scene-range">
+        Baisse <strong>−{loss} %</strong>
+        <input
+          type="range"
+          min="5"
+          max="90"
+          step="5"
+          value={loss}
+          aria-label="Baisse en pourcentage"
+          onChange={(event) => setLoss(Number(event.target.value))}
+        />
+      </label>
+      <p className="scene-takeaway">
+        Hausse nécessaire = baisse ÷ (100 − baisse).{" "}
+        <strong>
+          Plus la chute est profonde, plus la remontée est longue.
+        </strong>
       </p>
     </section>
   );

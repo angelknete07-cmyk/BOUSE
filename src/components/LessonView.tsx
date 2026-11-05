@@ -231,7 +231,12 @@ export function LessonView({ lesson, state, update, onNavigate }: Props) {
       <header className="learning-header">
         <span className="lesson-chapter-index" aria-hidden="true">
           {String(lessons.indexOf(lesson) + 1).padStart(2, "0")}
-          <small>/ FONDATIONS</small>
+          <small>
+            /{" "}
+            {lesson.domain === "Investissement"
+              ? "INVESTISSEMENT"
+              : "FONDATIONS"}
+          </small>
         </span>
         <div className="learning-kicker">
           <span>{lesson.domain}</span>

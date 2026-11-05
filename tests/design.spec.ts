@@ -111,6 +111,8 @@ async function capture(page: Page, testInfo: TestInfo, name: string) {
       "05-lab-financier",
       "03-lecon-learn",
       "16-search-keyboard",
+      "17-lexique",
+      "18-investissement-lecon",
     ].includes(name)
   )
     await page.screenshot({
@@ -267,7 +269,7 @@ test("galerie des écrans et du quiz validé sans débordement", async ({
   // Change the document URL so the init script runs after the empty onboarding.
   await page.goto("/?gallery=1#academy");
   await expect(
-    page.getByRole("heading", { name: "Six notions, trois domaines." }),
+    page.getByRole("heading", { name: "11 notions, 4 domaines." }),
   ).toBeVisible();
   await neutral(
     page.locator(".catalog-card").first(),
@@ -959,6 +961,35 @@ test("compositions des instruments, atlas et leçon complète", async ({
   await capture(page, testInfo, "03-lecon-practice");
   await page.getByRole("tab", { name: /Appliquer/ }).click();
   await capture(page, testInfo, "03-lecon-application");
+});
+
+test("module investissement : lexique, leçon et simulateur de frais", async ({
+  page,
+}, testInfo) => {
+  await seed(page);
+  await page.goto("/#lexique");
+  await expect(
+    page.getByRole("heading", { name: "Lexique de la bourse." }),
+  ).toBeVisible();
+  await capture(page, testInfo, "17-lexique");
+  await page.getByLabel("Chercher un terme").fill("ordre");
+  await capture(page, testInfo, "17-lexique-recherche");
+  await page.goto("/#lesson/inv-interets-composes");
+  await expect(
+    page.getByRole("heading", {
+      name: "Intérêts composés, inflation et frais",
+      exact: true,
+    }),
+  ).toBeVisible();
+  await capture(page, testInfo, "18-investissement-lecon");
+  await page.goto("/#lesson/inv-risque-diversification");
+  await expect(
+    page.getByRole("heading", {
+      name: "Risque, rendement et diversification",
+      exact: true,
+    }),
+  ).toBeVisible();
+  await capture(page, testInfo, "18-investissement-risque");
 });
 
 test("mouvement de page mesuré et préférence de réduction respectée", async ({

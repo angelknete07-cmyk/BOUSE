@@ -60,7 +60,7 @@
   position: absolute;
   inset: var(--space-10) 0 auto;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   text-align: center;
   gap: var(--space-3);
 }
@@ -358,7 +358,8 @@
     font-size: var(--type-micro);
   }
   .knowledge-canvas {
-    height: 475px;
+    /* Five investing notions stack in one column: leave room for wrapped labels. */
+    height: 680px;
   }
   .knowledge-lanes {
     inset-block-start: var(--space-8);

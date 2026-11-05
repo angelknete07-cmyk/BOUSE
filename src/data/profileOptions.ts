@@ -1,3 +1,5 @@
+import { domains } from "./domains";
+
 /** Profile choices shared by onboarding and preferences. */
 export const levelOptions = [
   "Fondations",
@@ -11,11 +13,7 @@ export const goalOptions = [
   "Construire un projet avec l’IA",
   "Mieux décider dans ma vie professionnelle",
 ] as const;
-export const interestOptions = [
-  "Finance",
-  "Entrepreneuriat",
-  "Intelligence artificielle",
-] as const;
+export const interestOptions = domains;
 export const preferenceOptions = [
   "Exemples puis pratique",
   "Concepts puis cas professionnel",

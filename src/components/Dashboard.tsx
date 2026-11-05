@@ -107,6 +107,11 @@ export function Dashboard({ state, onNavigate }: Props) {
     timeZone: "Europe/Paris",
   }).format(new Date());
   const openLesson = (lesson: Lesson) => onNavigate(`lesson/${lesson.id}`);
+  const domainCount = (domain: Lesson["domain"]) => {
+    const inDomain = lessons.filter((lesson) => lesson.domain === domain);
+    const validated = inDomain.filter((lesson) => done.has(lesson.id)).length;
+    return `${validated} / ${inDomain.length} repères`;
+  };
   const nextFor = (domain: string) =>
     lessons.find(
       (lesson) => lesson.domain === domain && !done.has(lesson.id),
@@ -304,7 +309,7 @@ export function Dashboard({ state, onNavigate }: Props) {
       <div className="learning-universes-heading">
         <div>
           <p className="territory-caption">Choisir un territoire</p>
-          <h2>Deux langages. Un même horizon.</h2>
+          <h2>Trois territoires. Un même horizon.</h2>
         </div>
         <button className="text-button" onClick={() => onNavigate("academy")}>
           Toute l’Académie
@@ -318,15 +323,7 @@ export function Dashboard({ state, onNavigate }: Props) {
         >
           <div className="domain-kicker">
             <span className="eyebrow">01 / FINANCE</span>
-            <span>
-              {
-                lessons.filter(
-                  (lesson) =>
-                    lesson.domain === "Finance" && done.has(lesson.id),
-                ).length
-              }{" "}
-              / 2 repères
-            </span>
+            <span>{domainCount("Finance")}</span>
           </div>
           <div className="finance-signature" aria-hidden="true">
             <svg viewBox="0 0 440 200">
@@ -372,16 +369,7 @@ export function Dashboard({ state, onNavigate }: Props) {
         >
           <div className="domain-kicker">
             <span className="eyebrow">02 / INTELLIGENCE ARTIFICIELLE</span>
-            <span>
-              {
-                lessons.filter(
-                  (lesson) =>
-                    lesson.domain === "Intelligence artificielle" &&
-                    done.has(lesson.id),
-                ).length
-              }{" "}
-              / 3 repères
-            </span>
+            <span>{domainCount("Intelligence artificielle")}</span>
           </div>
           <div className="intelligence-signature" aria-hidden="true">
             <svg viewBox="0 0 310 180">
@@ -412,6 +400,51 @@ export function Dashboard({ state, onNavigate }: Props) {
           </div>
           <span className="domain-link">
             Penser avec l’IA <Icon name="arrow" size={18} />
+          </span>
+        </button>
+        <button
+          className="path-card domain-folio domain-investing"
+          onClick={() => openLesson(nextFor("Investissement"))}
+        >
+          <div className="domain-kicker">
+            <span className="eyebrow">03 / INVESTISSEMENT</span>
+            <span>{domainCount("Investissement")}</span>
+          </div>
+          <div className="finance-signature" aria-hidden="true">
+            <svg viewBox="0 0 440 200">
+              <path className="finance-axis" d="M20 160H420M20 40V160" />
+              <path
+                className="finance-curve-result"
+                d="M20 150C120 146 220 128 300 98S390 50 420 36"
+              />
+              <path
+                className="finance-curve-cash"
+                d="M20 150C120 148 220 136 300 116S390 86 420 76"
+              />
+              <text x="22" y="190">
+                TEMPS
+              </text>
+              <text x="318" y="28">
+                SANS FRAIS
+              </text>
+              <text x="330" y="110">
+                AVEC FRAIS
+              </text>
+            </svg>
+          </div>
+          <div className="domain-copy">
+            <h3>
+              Le temps, le risque,
+              <br />
+              les frais.
+            </h3>
+            <p>
+              Comprendre la bourse
+              <br className="desktop-break" /> avant d’y placer un euro.
+            </p>
+          </div>
+          <span className="domain-link">
+            Apprendre à investir <Icon name="arrow" size={18} />
           </span>
         </button>
       </div>

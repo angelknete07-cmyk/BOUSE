@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { lessons } from "../data/lessons";
+import { domains } from "../data/domains";
 import { normalizeSearch } from "../lib/domain";
 import { latestCurrentAttempt } from "../lib/portfolio";
 import { useClock } from "../lib/useClock";
@@ -40,12 +41,19 @@ export function Academy({
           <span className="instrument-index">
             Académie <i /> Fondations
           </span>
-          <h1>Six notions, trois domaines.</h1>
+          <h1>
+            {lessons.length} notions, {domains.length} domaines.
+          </h1>
         </div>
-        <p>
-          Chaque ligne relie une notion à ses prérequis. Choisissez un point
-          d’entrée.
-        </p>
+        <div className="financial-heading-side">
+          <p>
+            Chaque ligne relie une notion à ses prérequis. Choisissez un point
+            d’entrée.
+          </p>
+          <button className="text-button" onClick={() => onNavigate("lexique")}>
+            Lexique de la bourse <Icon name="arrow" size={16} />
+          </button>
+        </div>
       </header>
       <div className="atlas-toolbar">
         <div
@@ -83,12 +91,7 @@ export function Academy({
         role="group"
         aria-label="Domaines"
       >
-        {[
-          "Tous",
-          "Finance",
-          "Entrepreneuriat",
-          "Intelligence artificielle",
-        ].map((d) => (
+        {["Tous", ...domains].map((d) => (
           <button
             key={d}
             aria-pressed={filter === d}

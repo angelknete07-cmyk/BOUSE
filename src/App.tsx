@@ -7,6 +7,7 @@ import {
   type RefObject,
 } from "react";
 import { lessons } from "./data/lessons";
+import { glossary } from "./data/investingGlossary";
 import type { AppState, Profile, StateUpdater } from "./lib/types";
 import {
   goalOptions,
@@ -59,6 +60,9 @@ const AILab = lazy(() =>
 );
 const Incubator = lazy(() =>
   import("./components/Tools").then((m) => ({ default: m.Incubator })),
+);
+const Glossary = lazy(() =>
+  import("./components/Glossary").then((m) => ({ default: m.Glossary })),
 );
 const Lab = lazy(() =>
   import("./components/Tools").then((m) => ({ default: m.Lab })),
@@ -238,9 +242,11 @@ function App() {
     );
     const routeTitle = route.startsWith("lesson/")
       ? lessons.find((item) => item.id === route.slice(7))?.title
-      : projectId !== null
-        ? state.projects.find((item) => item.id === projectId)?.title
-        : navigation.find((item) => item.id === route)?.label;
+      : route === "lexique" || route.startsWith("lexique/")
+        ? "Lexique de la bourse"
+        : projectId !== null
+          ? state.projects.find((item) => item.id === projectId)?.title
+          : navigation.find((item) => item.id === route)?.label;
     document.title = `${routeTitle || (route === "portfolio" ? "Portfolio" : route === "settings" ? "Profil et paramètres" : "Mon espace")} — BOUSE`;
     return () => cancelAnimationFrame(frame);
   }, [route, !!state.profile]);
@@ -306,6 +312,7 @@ function App() {
         />
       </>
     );
+  const inGlossary = route === "lexique" || route.startsWith("lexique/");
   const lesson = route.startsWith("lesson/")
     ? lessons.find((l) => l.id === route.slice(7))
     : undefined;
@@ -377,7 +384,7 @@ function App() {
               onClick={() => setMobileOpen(false)}
               aria-current={
                 route === n.id ||
-                (n.id === "academy" && lesson) ||
+                (n.id === "academy" && (lesson || inGlossary)) ||
                 (n.id === "skills" && route === "portfolio") ||
                 (n.id === "incubator" && projectId !== null)
                   ? "page"
@@ -385,7 +392,7 @@ function App() {
               }
               className={
                 route === n.id ||
-                (n.id === "academy" && lesson) ||
+                (n.id === "academy" && (lesson || inGlossary)) ||
                 (n.id === "skills" && route === "portfolio") ||
                 (n.id === "incubator" && projectId !== null)
                   ? "nav-link active"
@@ -444,7 +451,7 @@ function App() {
             <span className="topbar-parent">Mon espace</span>
             <span className="breadcrumb-separator">/</span>
             <span>
-              {lesson
+              {lesson || inGlossary
                 ? "Académie"
                 : route === "portfolio"
                   ? "Portfolio"
@@ -550,6 +557,11 @@ function App() {
                     Retrouver mes projets
                   </button>
                 </div>
+              ) : inGlossary ? (
+                <Glossary
+                  focusId={route.startsWith("lexique/") ? route.slice(8) : null}
+                  onNavigate={go}
+                />
               ) : route === "radar" ? (
                 <Radar />
               ) : route === "settings" ? (
@@ -586,7 +598,7 @@ function App() {
             href={`#${item.id}`}
             aria-current={
               route === item.id ||
-              (item.id === "academy" && lesson) ||
+              (item.id === "academy" && (lesson || inGlossary)) ||
               (item.id === "incubator" && projectId !== null)
                 ? "page"
                 : undefined
@@ -980,6 +992,18 @@ function Search({
       detail: `Leçon · ${l.domain}`,
       route: `lesson/${l.id}`,
       search: `${l.title} ${l.summary} ${l.skills.join(" ")} ${l.id.includes("llm") ? "ia" : ""}`,
+    })),
+    {
+      title: "Lexique de la bourse",
+      detail: "Académie · Investissement",
+      route: "lexique",
+      search: "lexique glossaire vocabulaire bourse termes définitions",
+    },
+    ...glossary.map((entry) => ({
+      title: entry.term,
+      detail: `Lexique · ${entry.category}`,
+      route: `lexique/${entry.id}`,
+      search: `${entry.term} ${entry.definition}`,
     })),
     ...state.projects.map((p) => ({
       title: p.title,

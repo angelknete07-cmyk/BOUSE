@@ -1,7 +1,10 @@
+import type { Domain } from "./domains";
+import { investingLessons } from "./investingLessons.ts";
+
 export interface Lesson {
   id: string;
   title: string;
-  domain: "Finance" | "Entrepreneuriat" | "Intelligence artificielle";
+  domain: Domain;
   level: 0 | 1 | 2;
   minutes: number;
   summary: string;
@@ -33,7 +36,7 @@ export interface Lesson {
 const editorialStatus =
   "Contenu pédagogique initial · références à consulter · aucune vérification d’actualité revendiquée";
 
-export const lessons: Lesson[] = [
+const foundationLessons: Lesson[] = [
   {
     id: "ca-marge-tresorerie",
     title: "Chiffre d’affaires, marge et trésorerie",
@@ -721,3 +724,5 @@ export const lessons: Lesson[] = [
     ],
   },
 ];
+
+export const lessons: Lesson[] = [...foundationLessons, ...investingLessons];

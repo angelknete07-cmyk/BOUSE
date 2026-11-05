@@ -2,8 +2,12 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { lessons } from "../src/data/lessons.ts";
 
-test("the initial catalogue contains six substantial versioned lessons", () => {
-  assert.equal(lessons.length, 6);
+test("the catalogue contains six foundations and five investing lessons, all substantial", () => {
+  assert.equal(lessons.length, 11);
+  assert.equal(
+    lessons.filter((lesson) => lesson.domain === "Investissement").length,
+    5,
+  );
   for (const lesson of lessons) {
     assert.ok(lesson.title.trim());
     assert.ok(lesson.summary.trim());
@@ -95,5 +99,33 @@ test("every lesson includes named HTTPS source references", () => {
       assert.equal(url.username, "");
       assert.equal(url.password, "");
     }
+  }
+});
+
+test("investing lessons stay educational: fictitious examples and an explicit no-advice status", () => {
+  const investing = lessons.filter(
+    (lesson) => lesson.domain === "Investissement",
+  );
+  for (const lesson of investing) {
+    assert.match(lesson.example.title, /fictif/i, lesson.id);
+    assert.match(lesson.editorialStatus, /aucun conseil en investissement/);
+    assert.ok(
+      lesson.sources.some((source) =>
+        new URL(source.url).hostname.endsWith("amf-france.org"),
+      ),
+      `${lesson.id} cites the AMF`,
+    );
+  }
+});
+
+test("the investing module is a single prerequisite chain starting from the markets lesson", () => {
+  const investing = lessons.filter(
+    (lesson) => lesson.domain === "Investissement",
+  );
+  assert.deepEqual(investing[0]!.prerequisites, []);
+  for (let index = 1; index < investing.length; index++) {
+    assert.deepEqual(investing[index]!.prerequisites, [
+      investing[index - 1]!.id,
+    ]);
   }
 });
