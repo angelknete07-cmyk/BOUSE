@@ -16,7 +16,7 @@ const diagnostic = [
   {
     id: "finance",
     question:
-      "Une vente de 1 000 € est facturée, mais le client paiera dans 60 jours. Que peut-on affirmer ?",
+      "Une vente de 1 000 € est facturée, mais le client paiera dans 60 jours. Que peut-on affirmer\u00a0?",
     options: [
       "Le compte bancaire a reçu 1 000 €.",
       "La vente et l’encaissement n’ont pas lieu au même moment.",
@@ -27,7 +27,7 @@ const diagnostic = [
   {
     id: "business",
     question:
-      "Quelle preuve est la plus utile pour valider un problème client ?",
+      "Quelle preuve est la plus utile pour valider un problème client\u00a0?",
     options: [
       "Un proche trouve l’idée intéressante.",
       "Un marché semble à la mode.",
@@ -38,13 +38,35 @@ const diagnostic = [
   {
     id: "ai",
     question:
-      "Un modèle de langage fournit une réponse très convaincante. Est-elle forcément exacte ?",
+      "Un modèle de langage fournit une réponse très convaincante. Est-elle forcément exacte\u00a0?",
     options: [
       "Non, il faut vérifier les affirmations importantes.",
       "Oui, si la réponse est détaillée.",
       "Oui, si deux formulations donnent la même réponse.",
     ],
     answer: 0,
+  },
+  {
+    id: "personal",
+    question:
+      "Votre salaire arrive en début de mois. Quelle habitude protège le mieux votre épargne\u00a0?",
+    options: [
+      "Épargner ce qui reste à la fin du mois.",
+      "Programmer un virement vers l’épargne dès que le salaire arrive.",
+      "Épargner seulement les mois sans imprévu.",
+    ],
+    answer: 1,
+  },
+  {
+    id: "investing",
+    question:
+      "Deux placements ont le même rendement avant frais. L’un prélève 2\u00a0% par an, l’autre 0,2\u00a0%. Sur vingt ans\u00a0:",
+    options: [
+      "les frais comptent peu si le rendement est le même ;",
+      "l’écart de frais se cumule chaque année et pèse nettement sur le capital final ;",
+      "le placement le plus cher est forcément le mieux géré.",
+    ],
+    answer: 1,
   },
 ];
 export function Onboarding({
@@ -237,11 +259,11 @@ export function Onboarding({
               <h2 ref={headingRef} tabIndex={-1}>
                 {showResult
                   ? "Votre point de départ est posé."
-                  : "Trois questions. Aucun jugement."}
+                  : "Cinq questions. Aucun jugement."}
               </h2>
               <p className="muted">
                 {showResult
-                  ? `${score}/3 bonnes réponses. Ce diagnostic oriente le parcours ; il ne certifie pas un niveau.`
+                  ? `${score}/${diagnostic.length} bonnes réponses. Ce diagnostic oriente le parcours ; il ne certifie pas un niveau.`
                   : "Répondez spontanément. « Je ne sais pas encore » est une réponse utile : elle oriente aussi le parcours."}
               </p>
               {diagnostic.map((q, index) => (

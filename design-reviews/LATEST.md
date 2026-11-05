@@ -1,3 +1,43 @@
+# Review design — passe 20 : lexique dans les leçons, point de départ sur 5 domaines
+
+**5 novembre 2026, 17:13 Europe/Paris.** Suite demandée par l'utilisateur (« Vas-y go »), deux idées de la liste de la passe 17. **La direction artistique n'est pas déclarée validée.**
+
+## Les termes du lexique reconnus dans les leçons
+
+- **Termes soulignés.** Dans le texte des leçons, les termes du lexique sont soulignés en pointillé discret. Exemple dans la leçon crédit : « mensualité », « coût total du crédit », « taux nominal », « TAEG ».
+- **Définition sur place.** Un clic, ou Entrée au clavier, ouvre une définition courte dans un panneau au premier plan (API `popover` native). On ferme par Échap, un clic à côté ou « Fermer ». Le panneau propose « Ouvrir dans le lexique » et, si le terme est expliqué ailleurs, un lien vers sa leçon.
+- **Pas de faux positifs sur les mots courants.** « action », « cours » ou « défaut » ne sont reconnus que dans les leçons qui les définissent ou s'appuient dessus. Les termes de plusieurs mots et les sigles (TAEG, PEA, ETF) le sont partout. Chaque terme n'est souligné qu'une fois par paragraphe ; on garde le terme le plus long (« rendement réel » plutôt que « rendement »).
+- **Code :** `src/lib/glossaryLinks.ts` (pur, 4 tests) et `src/components/GlossaryText.tsx`.
+
+## Point de départ sur les 5 domaines
+
+- **Deux questions ajoutées :** Finance personnelle (se payer en premier) et Investissement (effet des frais sur vingt ans). Le titre devient « Cinq questions. Aucun jugement. ».
+- **Recommandation :** une réponse manquée ou « Je ne sais pas encore » dans un de vos centres d'intérêt fait passer ce domaine en tête de la leçon proposée. Les profils créés avant comptent ces deux domaines comme « à explorer ».
+- **Typographie :** espaces insécables avant « ? », « : » et « % » dans les questions.
+
+## Captures
+
+| Écran                             | Desktop                                               | Mobile                                               |
+| --------------------------------- | ----------------------------------------------------- | ---------------------------------------------------- |
+| Termes soulignés (leçon crédit)   | [Voir](parcours-20/desktop-termes-soulignes.png)      | [Voir](parcours-20/mobile-termes-soulignes.png)      |
+| Définition ouverte                | [Voir](parcours-20/desktop-lexique-dans-la-lecon.png) | [Voir](parcours-20/mobile-lexique-dans-la-lecon.png) |
+| Point de départ, questions 4 et 5 | [Voir](parcours-20/desktop-point-de-depart.png)       | [Voir](parcours-20/mobile-point-de-depart.png)       |
+
+## Vérifications internes
+
+- `npm test` : 203 cas réussis. Nouveaux : reconnaissance des termes et recommandation sur les nouveaux domaines.
+- `npx playwright test` : 72 tests réussis (desktop et Pixel 7 émulé), dont l'audit axe. Après la retouche typographique, les tests d'onboarding et d'accessibilité ont été relancés (20 réussis).
+- Build sans avertissement ; 159 captures, archive `2026-11-05_17-13-14-Europe-Paris`.
+- Défaut vu à l'écran et corrigé : « ? » seul en fin de ligne dans la question 4.
+
+**Limites :**
+
+- Le texte des cas pratiques et des quiz n'est pas encore relié au lexique.
+- Le lexique ne couvre pas les notions de base (marge, trésorerie, LLM) : il est centré sur la bourse et la finance personnelle.
+- Les quiz restent à deux questions. Les allonger changerait leur version, et les quiz validés repasseraient « à revoir ».
+
+---
+
 # Review design — passe 19 : reprise à la séquence exacte, trajectoire sur 5 domaines
 
 **5 novembre 2026, 16:54 Europe/Paris.** Suite demandée par l'utilisateur (« Vas-y go ») : deux points de la liste « ce qui reste imparfait » (`AUDIT-17.md`). **La direction artistique n'est pas déclarée validée.**

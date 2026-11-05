@@ -55,6 +55,9 @@ export function recommendLesson(state: AppState, now: Date) {
     diagnostic?.finance !== 1 ? "Finance" : "",
     diagnostic?.business !== 2 ? "Entrepreneuriat" : "",
     diagnostic?.ai !== 0 ? "Intelligence artificielle" : "",
+    // Profiles created before these questions count them as still to explore.
+    diagnostic?.personal !== 1 ? "Finance personnelle" : "",
+    diagnostic?.investing !== 1 ? "Investissement" : "",
   ];
   const interested = (lesson: Lesson) =>
     Boolean(profile?.interests.includes(lesson.domain));

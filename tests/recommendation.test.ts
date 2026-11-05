@@ -19,7 +19,7 @@ const profile: Profile = {
   interests: ["Finance", "Intelligence artificielle"],
   minutes: 20,
   preference: "Exemples puis pratique",
-  diagnostic: { finance: 1, business: 2, ai: 0 },
+  diagnostic: { finance: 1, business: 2, ai: 0, personal: 1, investing: 1 },
 };
 const withProfile = (patch: Partial<Profile>): AppState => ({
   ...emptyState,
@@ -39,7 +39,9 @@ test("the goal decides between equally interesting accessible notions", () => {
 
 test("a gap of the starting point in an interest comes before the goal", () => {
   const result = recommendLesson(
-    withProfile({ diagnostic: { finance: 1, business: 2, ai: 3 } }),
+    withProfile({
+      diagnostic: { finance: 1, business: 2, ai: 3, personal: 1, investing: 1 },
+    }),
     now,
   );
   assert.equal(result.current.domain, "Intelligence artificielle");
@@ -112,4 +114,16 @@ test("the session plan starts where the lesson was left", () => {
     /la fin de la leçon, séquences 4 à 7\./,
   );
   assert.match(sessionPlan(4, lesson, 0, 7, 3), /les séquences 4 à 5 sur 7/);
+});
+
+test("the starting point now covers personal finance and investing", () => {
+  const result = recommendLesson(
+    withProfile({
+      interests: ["Finance", "Finance personnelle"],
+      diagnostic: { finance: 1, business: 2, ai: 0, personal: 3, investing: 1 },
+    }),
+    now,
+  );
+  assert.equal(result.current.id, "fp-budget");
+  assert.match(result.reason, /finance personnelle/);
 });

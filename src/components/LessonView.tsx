@@ -4,6 +4,7 @@ import { evaluateQuiz } from "../lib/domain";
 import { downloadFile } from "../lib/storage";
 import type { AppState, Attempt, StateUpdater } from "../lib/types";
 import { Icon } from "./Icon";
+import { GlossaryText } from "./GlossaryText";
 import { LessonScene } from "./LessonScene";
 import { MentorPanel } from "./MentorPanel";
 import { latestCurrentAttempt } from "../lib/portfolio";
@@ -420,7 +421,13 @@ export function LessonView({ lesson, state, update, onNavigate }: Props) {
                             ))
                           : section.title}
                       </h2>
-                      <p className="learning-lead">{section.body[0]}</p>
+                      <p className="learning-lead">
+                        <GlossaryText
+                          text={section.body[0]!}
+                          lesson={lesson}
+                          onNavigate={onNavigate}
+                        />
+                      </p>
                     </div>
                     {sequence === 0 ? (
                       <>
@@ -432,7 +439,13 @@ export function LessonView({ lesson, state, update, onNavigate }: Props) {
                               <Icon name="plus" size={15} />
                             </summary>
                             {section.body.slice(1).map((paragraph, index) => (
-                              <p key={index}>{paragraph}</p>
+                              <p key={index}>
+                                <GlossaryText
+                                  text={paragraph}
+                                  lesson={lesson}
+                                  onNavigate={onNavigate}
+                                />
+                              </p>
                             ))}
                           </details>
                         )}
@@ -442,7 +455,13 @@ export function LessonView({ lesson, state, update, onNavigate }: Props) {
                         {section.body.slice(1).map((paragraph, index) => (
                           <div className="learning-insight" key={index}>
                             <span>{String(index + 1).padStart(2, "0")}</span>
-                            <p>{paragraph}</p>
+                            <p>
+                              <GlossaryText
+                                text={paragraph}
+                                lesson={lesson}
+                                onNavigate={onNavigate}
+                              />
+                            </p>
                           </div>
                         ))}
                         <div className="learning-recall">

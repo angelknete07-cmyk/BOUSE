@@ -121,3 +121,7 @@ Une seule prochaine leçon existe dans l'application (`src/lib/recommendation.ts
 ## Reprendre où l'on s'est arrêté
 
 Une leçon retient la séquence où elle a été quittée et y rouvre, en l'annonçant, avec « Revenir au début » (passe 19). L'accueil découpe la séance à partir de cette séquence. La trajectoire de l'accueil couvre trois parcours (Fondations, Finance personnelle, Investissement), soit les 5 domaines, et s'ouvre sur celui de la leçon recommandée.
+
+## Lexique dans les leçons
+
+Dans le texte des leçons, les termes du lexique ouvrent une définition courte sur place, avec un lien vers le lexique et vers la leçon qui les explique (passe 20). Les mots courants ne sont reconnus que dans les leçons qui les définissent ou s'appuient dessus. Le point de départ compte cinq questions, une par domaine principal.

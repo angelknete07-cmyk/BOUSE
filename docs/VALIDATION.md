@@ -174,3 +174,7 @@ Contrôles du 5 novembre 2026. `npm run build` réussit sans avertissement. `npm
 ## Passe 19 — reprise et trajectoire
 
 Contrôles du 5 novembre 2026. `npm run build` réussit sans avertissement. `npm test` passe avec **198 cas unitaires**. `npx playwright test` passe avec **72 tests** (desktop et Pixel 7 émulé), dont le nouveau scénario de reprise de séquence. Parcours exercés en desktop et mobile ; captures dans `design-reviews/parcours-19/`. Archive `2026-11-05_16-54-17-Europe-Paris`. Aucune validation design externe n'est revendiquée.
+
+## Passe 20 — lexique dans les leçons, point de départ sur 5 domaines
+
+Contrôles du 5 novembre 2026. `npm run build` réussit sans avertissement. `npm test` passe avec **203 cas unitaires** (nouveau : `tests/glossaryLinks.test.ts`). `npx playwright test` passe avec **72 tests** (desktop et Pixel 7 émulé). Termes, définition, fermeture au clavier et point de départ exercés dans un vrai navigateur ; captures dans `design-reviews/parcours-20/`. Archive `2026-11-05_17-13-14-Europe-Paris`. Aucune validation design externe n'est revendiquée.

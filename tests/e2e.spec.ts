@@ -50,9 +50,17 @@ async function onboard(page: Page) {
     })
     .locator("..")
     .click();
+  for (const answer of [
+    "Programmer un virement vers l’épargne dès que le salaire arrive.",
+    "l’écart de frais se cumule chaque année et pèse nettement sur le capital final ;",
+  ])
+    await page
+      .getByRole("radio", { name: answer, exact: true })
+      .locator("..")
+      .click();
   await page.getByRole("button", { name: "Voir mon point de départ" }).click();
   await expect(
-    page.getByText("3/3 bonnes réponses.", { exact: false }),
+    page.getByText("5/5 bonnes réponses.", { exact: false }),
   ).toBeVisible();
   await page.getByRole("button", { name: "Entrer dans l’Académie" }).click();
   await expect(

@@ -228,7 +228,7 @@ test("le diagnostic et le quiz gardent un repère clavier à chaque étape", asy
     .getByRole("button", { name: "Trouver mon point de départ" })
     .press("Enter");
   await expect(
-    page.getByRole("heading", { name: "Trois questions. Aucun jugement." }),
+    page.getByRole("heading", { name: "Cinq questions. Aucun jugement." }),
   ).toBeFocused();
   for (const question of await page.locator("fieldset.question").all()) {
     await question.getByRole("radio").first().press("Space");
