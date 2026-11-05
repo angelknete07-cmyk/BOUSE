@@ -28,3 +28,13 @@ test("context titles name the lesson and the section they come from", () => {
   assert.ok(context[0]!.title.startsWith(lesson.title));
   assert.ok(context.some((item) => item.title.includes(lesson.example.title)));
 });
+
+test("the hand-off prompt carries the rules, the lesson excerpts and the question", async () => {
+  const { claudeHandoffPrompt } = await import("../src/lib/mentorContext.ts");
+  const lesson = lessons.find((item) => item.id === "inv-ordres-biais")!;
+  const prompt = claudeHandoffPrompt(lesson, "  C’est quoi le spread ?  ");
+  assert.match(prompt, /aucun conseil/);
+  assert.ok(prompt.includes(lesson.title));
+  assert.ok(prompt.includes(lesson.sections[0]!.title));
+  assert.ok(prompt.trimEnd().endsWith("C’est quoi le spread ?"));
+});

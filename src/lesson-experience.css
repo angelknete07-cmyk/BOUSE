@@ -1228,3 +1228,13 @@
   display: grid;
   gap: var(--space-3);
 }
+.mentor-options {
+  display: grid;
+  gap: var(--space-5);
+}
+.mentor-handoff {
+  display: grid;
+  gap: var(--space-3);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--line);
+}

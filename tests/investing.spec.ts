@@ -106,9 +106,18 @@ test("sans serveur configuré, le mentor l’annonce et ne simule aucune répons
   await page.goto("/#lesson/inv-marches-financiers");
   await page.getByText("Poser une question au mentor").click();
   await expect(
-    page.getByText("Mentor IA non connecté sur cette installation"),
+    page.getByText("Mentor intégré non connecté sur cette installation"),
   ).toBeVisible();
   await expect(page.getByLabel("Votre question sur cette leçon")).toHaveCount(
     0,
   );
+  // The free hand-off to the person's own Claude stays available.
+  const handoff = page.getByRole("button", {
+    name: "Copier et demander à mon Claude",
+  });
+  await expect(handoff).toBeDisabled();
+  await page
+    .getByLabel("Votre question", { exact: true })
+    .fill("C’est quoi un indice ?");
+  await expect(handoff).toBeEnabled();
 });

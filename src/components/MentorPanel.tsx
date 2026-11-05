@@ -5,7 +5,7 @@ import {
   mentorAvailability,
   type MentorAvailability,
 } from "../lib/mentor";
-import { lessonContext } from "../lib/mentorContext";
+import { claudeHandoffPrompt, lessonContext } from "../lib/mentorContext";
 import {
   mentorLimits,
   type MentorCitation,
@@ -24,7 +24,7 @@ type Exchange = {
  * backend and a signed-in person, the panel says so. Exchanges live only for
  * this session and are never stored.
  */
-export function MentorPanel({
+function IntegratedMentor({
   lesson,
   onNavigate,
 }: {
@@ -100,8 +100,8 @@ export function MentorPanel({
   if (availability === "not-configured")
     return (
       <p className="learning-footnote mentor-off">
-        Mentor IA non connecté sur cette installation. Aucune réponse n’est
-        simulée : relisez la leçon ou utilisez l’atelier « À vous d’expliquer ».
+        Mentor intégré non connecté sur cette installation : aucune réponse
+        n’est simulée.
       </p>
     );
 
@@ -185,6 +185,74 @@ export function MentorPanel({
           {remaining > 1 ? "s" : ""} aujourd’hui.
         </p>
       )}
+    </div>
+  );
+}
+
+/** Free hand-off: copy the lesson and the question, then open claude.ai. */
+function AskMyClaude({ lesson }: { lesson: Lesson }) {
+  const [question, setQuestion] = useState("");
+  const [copied, setCopied] = useState<"idle" | "copied" | "manual">("idle");
+  const prompt = claudeHandoffPrompt(lesson, question);
+
+  async function handOff() {
+    try {
+      await navigator.clipboard.writeText(prompt);
+      setCopied("copied");
+    } catch {
+      setCopied("manual");
+    }
+    window.open("https://claude.ai/new", "_blank", "noopener,noreferrer");
+  }
+
+  return (
+    <div className="mentor-handoff">
+      <label className="field">
+        Votre question
+        <textarea
+          rows={3}
+          maxLength={mentorLimits.questionChars}
+          value={question}
+          onChange={(event) => setQuestion(event.target.value)}
+          placeholder="Ce que je n’ai pas compris…"
+        />
+      </label>
+      <button
+        className="button secondary"
+        type="button"
+        disabled={!question.trim()}
+        onClick={() => void handOff()}
+      >
+        Copier et demander à mon Claude
+      </button>
+      <p className="learning-footnote">
+        Copie votre question avec le texte de la leçon, puis ouvre claude.ai :
+        collez et envoyez avec votre propre abonnement. BOUSE n’envoie rien
+        lui-même.
+      </p>
+      {copied === "copied" && (
+        <p className="learning-footnote" role="status">
+          Copié. Collez dans la nouvelle conversation Claude.
+        </p>
+      )}
+      {copied === "manual" && (
+        <label className="field">
+          Copie automatique refusée par le navigateur : sélectionnez ce texte
+          <textarea readOnly rows={6} value={prompt} />
+        </label>
+      )}
+    </div>
+  );
+}
+
+export function MentorPanel(props: {
+  lesson: Lesson;
+  onNavigate: (route: string) => void;
+}) {
+  return (
+    <div className="mentor-options">
+      <AskMyClaude lesson={props.lesson} />
+      <IntegratedMentor {...props} />
     </div>
   );
 }

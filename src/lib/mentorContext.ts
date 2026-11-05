@@ -30,3 +30,22 @@ export function lessonContext(lesson: Lesson): MentorContext[] {
   }
   return result;
 }
+
+/**
+ * Text for a manual hand-off to the person's own Claude conversation: the
+ * course rules, the lesson excerpts and the question. Nothing is sent by the
+ * application; the person pastes it themselves.
+ */
+export function claudeHandoffPrompt(lesson: Lesson, question: string): string {
+  const excerpts = lessonContext(lesson)
+    .map((item) => `### ${item.title}\n${item.excerpt}`)
+    .join("\n\n");
+  return [
+    "Tu es mon mentor pour un cours de l’académie BOUSE (business, finance, IA).",
+    "Explique en français, simplement, en partant de l’intuition puis du vocabulaire. Appuie-toi d’abord sur les extraits de la leçon ci-dessous et cite-les. N’invente aucun chiffre ni règle fiscale. Pour l’investissement : pédagogie uniquement, aucun conseil ni recommandation de titre.",
+    `## Leçon : ${lesson.title}`,
+    excerpts,
+    "## Ma question",
+    question.trim(),
+  ].join("\n\n");
+}
