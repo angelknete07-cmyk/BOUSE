@@ -1,3 +1,53 @@
+# Review design — passe 16 : finition artistique ciblée
+
+**5 novembre 2026, 15:34 Europe/Paris.** Réponse à la review externe « DA non encore validée ». Passe de finition **sans nouvelle fonctionnalité** sur les cinq écrans prioritaires. Détail point par point : [AUDIT-16.md](AUDIT-16.md). **La direction artistique n'est pas déclarée validée : une nouvelle review externe est attendue.**
+
+## Avant / après (gauche : passe 15, droite : passe 16)
+
+| Écran                         | Desktop                                          | Mobile                                          |
+| ----------------------------- | ------------------------------------------------ | ----------------------------------------------- |
+| 1. Accueil                    | [Comparer](compare-16/01-accueil-desktop.png)    | [Comparer](compare-16/01-accueil-mobile.png)    |
+| 2. Académie (atlas)           | [Comparer](compare-16/02-academie-desktop.png)   | [Comparer](compare-16/02-academie-mobile.png)   |
+| 3. Atelier IA (après analyse) | [Comparer](compare-16/03-atelier-ia-desktop.png) | [Comparer](compare-16/03-atelier-ia-mobile.png) |
+| 4. Leçon (séquence concept)   | [Comparer](compare-16/04-lecon-desktop.png)      | [Comparer](compare-16/04-lecon-mobile.png)      |
+| 5. Leçon budget (cas signalé) | [Comparer](compare-16/05-budget-desktop.png)     | [Comparer](compare-16/05-budget-mobile.png)     |
+
+Avant : archive `2026-11-05_12-59-57-Europe-Paris`. Après : archive `2026-11-05_15-34-40-Europe-Paris`. Paire principale : [desktop](latest-desktop.png) · [mobile](latest-mobile.png) sur l'accueil.
+
+## En bref
+
+- **Accueil :** territoires en folios asymétriques (7/5 puis 5/7 colonnes), avec relief, courbes de niveau, grain, numéro fantôme et barre de repères. Aucune couleur ajoutée.
+- **Académie :**
+  - bandes de domaines alignées sur les rangées ;
+  - taille des cercles selon le niveau ;
+  - états validée, accessible et prérequis ;
+  - chemin de la notion choisie en argent ;
+  - légende des états.
+- **Atelier IA :**
+  - écriture et analyse réunies en un seul instrument ;
+  - jauge des repères sous le texte ;
+  - rayons ancrés sur les points, plus jamais sur les libellés ;
+  - comparaison en deux panneaux.
+- **Leçons :**
+  - métadonnées de 11 à 13 px ;
+  - vocabulaire moins massif, explication de 13 à 16 px ;
+  - scène posée sur un établi ;
+  - libellés de graphique agrandis ;
+  - « % » insécable.
+- **Mobile :** « Séquence suivante » n'est plus flottant et ne couvre plus la scène budget. Les champs qui reçoivent le focus restent au-dessus du dock.
+- **Identité :** quatre tokens de matière partagés et une seule feuille `src/finish.css`. La motion ajoutée respecte `prefers-reduced-motion`.
+
+## Vérifications internes
+
+- `npm test` : 189 cas réussis.
+- `npx playwright test` : 70 tests réussis (desktop 1440 × 1000, Pixel 7 émulé).
+- Build sans avertissement ; 159 captures.
+- Quatre défauts vus à l'inspection et corrigés avant les captures finales : numéros fantômes sur le compteur, libellés de l'atlas illisibles, rayon traversant « Objectif », grille du concept qui écrasait la scène budget sur mobile.
+
+**Limites :** pas d'appareil physique, ni Safari, ni Firefox, ni lecteur d'écran réel ; le survol et l'animation ne se voient pas sur une capture fixe.
+
+---
+
 # Review design — passe 15 : module Finance personnelle
 
 **5 novembre 2026, 12:59 Europe/Paris.** Quatre leçons enchaînées, deux scènes interactives, 15 termes ajoutés au lexique, renommé « Lexique de la finance ». Vérification interne effectuée ; review design externe toujours attendue.

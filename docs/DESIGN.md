@@ -134,3 +134,17 @@ L'audit des écrans restants est consigné dans [AUDIT-12.md](../design-reviews/
 - **Fiches** : libellés discrets en `--text-tertiary`, contenu en `--text-secondary`. Un parcours déclaré se montre comme une frise ; l'étape courante est nommée en texte.
 - **Unités** : une unité suit le nombre qu'elle qualifie.
 - **Reduced motion** : une seule règle globale dans `styles.css`. Ne pas la dupliquer par écran.
+
+## Passe 16 — finition artistique ciblée
+
+Réponse à une review externe (« DA non encore validée »), sans nouvelle fonctionnalité. Les matériaux communs sont des tokens : `--matter-grain` (grain), `--matter-contour` (courbes de niveau), `--line-silver` (filet et chemin argent), `--glow-ring` (halo d'un élément choisi). Ils sont appliqués par `src/finish.css`, chargée en dernier, plutôt que par des styles locaux.
+
+Règles à garder :
+
+- une surface importante se distingue par sa **matière** (bord fin, lumière, grain), pas par une couleur ;
+- dans l'atlas, l'état d'une notion se lit à la forme (plein, anneau argent, pointillé) ; on atténue le cercle d'une notion éloignée, **jamais son libellé** ;
+- un trait de liaison aboutit à un point, pas à un texte ;
+- une métadonnée utile (niveau, durée, séquence) ne descend pas sous 12 px ;
+- sur mobile, aucune action de navigation flottante ne recouvre un contenu interactif ; seules les barres d'action de formulaire restent fixes, avec `scroll-padding-bottom`.
+
+Détail et comparaisons : `design-reviews/AUDIT-16.md`. La direction artistique attend une nouvelle review externe.

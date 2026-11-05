@@ -747,8 +747,14 @@ function BudgetScene() {
         </div>
         <p>
           Épargne programmée : <strong>{euros.format(savings)}</strong>, soit{" "}
-          {result.savingsRate.toLocaleString("fr-FR")} % des revenus. Charges
-          fixes : {result.fixedShare.toLocaleString("fr-FR")} %.
+          {result.savingsRate.toLocaleString("fr-FR", {
+            maximumFractionDigits: 1,
+          })}
+          {"\u00a0"}% des revenus. Charges fixes{"\u00a0"}:{" "}
+          {result.fixedShare.toLocaleString("fr-FR", {
+            maximumFractionDigits: 1,
+          })}
+          {"\u00a0"}%.
         </p>
       </div>
       <svg

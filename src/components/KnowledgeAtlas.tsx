@@ -32,6 +32,32 @@ export function KnowledgeAtlas({
   visibleIds: Set<string>;
 }) {
   const scrollRef = useRef<HTMLDivElement>(null);
+  // The selected notion's path: everything it builds on and everything it opens.
+  const byId = new Map(lessons.map((lesson) => [lesson.id, lesson]));
+  const related = new Set<string>([selectedId]);
+  const climb = (id: string) => {
+    for (const prerequisite of byId.get(id)?.prerequisites ?? [])
+      if (!related.has(prerequisite)) {
+        related.add(prerequisite);
+        climb(prerequisite);
+      }
+  };
+  const descend = (id: string) => {
+    for (const lesson of lessons)
+      if (lesson.prerequisites.includes(id) && !related.has(lesson.id)) {
+        related.add(lesson.id);
+        descend(lesson.id);
+      }
+  };
+  climb(selectedId);
+  descend(selectedId);
+  const stateOf = (id: string) => {
+    if (done.has(id)) return "is-complete";
+    const lesson = byId.get(id);
+    return lesson?.prerequisites.every((p) => done.has(p))
+      ? "is-available"
+      : "is-waiting";
+  };
   useEffect(() => {
     const region = scrollRef.current;
     const node = region?.querySelector<HTMLElement>('[aria-pressed="true"]');
@@ -91,7 +117,7 @@ export function KnowledgeAtlas({
                 b = positions[lesson.id];
               if (!a || !b || !visibleIds.has(id) || !visibleIds.has(lesson.id))
                 return null;
-              const active = selectedId === id || selectedId === lesson.id;
+              const active = related.has(id) && related.has(lesson.id);
               return (
                 <path
                   key={`${id}-${lesson.id}`}
@@ -102,6 +128,25 @@ export function KnowledgeAtlas({
             }),
           )}
         </svg>
+        <div className="atlas-lanes" aria-hidden="true">
+          {[
+            [3, 18],
+            [18, 37],
+            [37, 57.5],
+            [57.5, 78.5],
+            [78.5, 100],
+          ].map(([top, bottom]) => (
+            <span
+              key={top}
+              style={
+                {
+                  "--lane-top": `${top}%`,
+                  "--lane-height": `${bottom! - top!}%`,
+                } as CSSProperties
+              }
+            />
+          ))}
+        </div>
         <span className="atlas-domain atlas-finance">Finance</span>
         <span className="atlas-domain atlas-business">Entrepreneuriat</span>
         <span className="atlas-domain atlas-ai">Intelligence artificielle</span>
@@ -113,7 +158,7 @@ export function KnowledgeAtlas({
             <button
               key={lesson.id}
               type="button"
-              className={`atlas-node ${visibleIds.has(lesson.id) ? "" : "is-filtered"} ${done.has(lesson.id) ? "is-complete" : ""}`}
+              className={`atlas-node level-${lesson.level} ${stateOf(lesson.id)} ${related.has(lesson.id) ? "is-related" : "is-distant"} ${visibleIds.has(lesson.id) ? "" : "is-filtered"}`}
               aria-describedby={`atlas-description-${lesson.id}`}
               aria-pressed={selectedId === lesson.id}
               onClick={() => onSelect(lesson.id)}
@@ -147,9 +192,23 @@ export function KnowledgeAtlas({
           );
         })}
       </div>
-      <p className="atlas-caption">
-        Une ligne relie une notion à son prérequis.
-      </p>
+      <ul className="atlas-legend" aria-label="Légende de l’atlas">
+        <li>
+          <i className="is-selected" /> Notion choisie
+        </li>
+        <li>
+          <i className="is-path" /> Son chemin : prérequis et suites
+        </li>
+        <li>
+          <i className="is-available" /> Accessible maintenant
+        </li>
+        <li>
+          <i className="is-waiting" /> Prérequis à valider d’abord
+        </li>
+        <li>
+          <i className="is-complete" /> Quiz validé
+        </li>
+      </ul>
     </div>
   );
 }

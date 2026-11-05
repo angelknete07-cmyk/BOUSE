@@ -154,3 +154,9 @@ Contrôles du 5 novembre 2026. `npm run build` réussit sans avertissement : le 
 **Non exécuté :** aucune connexion réelle à Supabase, aucun appel au fournisseur d'IA ni exécution Deno de la fonction. Aucun projet ni aucune clé n'étaient disponibles. La fonction a été vérifiée par TypeScript contre les vrais types de `@anthropic-ai/sdk` 1.1.0 et `@supabase/supabase-js` 2.118.0. La migration SQL n'a pas été appliquée à une base. La procédure d'activation est décrite dans `docs/SETUP.md`.
 
 **153 captures**, archive `2026-11-05_11-15-35-Europe-Paris`, paire principale sur la leçon d'intérêts composés. Aucune review design externe n'est revendiquée.
+
+## Passe 16 — finition artistique
+
+Contrôles du 5 novembre 2026. `npm run build` réussit sans avertissement (bundle principal 392,21 kB). `npm test` passe avec **189 cas unitaires**. `npx playwright test` passe avec **70 tests** (desktop et Pixel 7 émulé). Prettier passe sur `src/`, `tests/` et `supabase/`.
+
+**159 captures**, archive `2026-11-05_15-34-40-Europe-Paris`. Comparaisons avant/après des cinq écrans prioritaires dans `design-reviews/compare-16/`. Pas d'appareil physique, de Safari/Firefox ni de lecteur d'écran réel. Aucune validation design externe n'est revendiquée : la review externe est attendue.

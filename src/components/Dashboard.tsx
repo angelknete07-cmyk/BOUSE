@@ -107,6 +107,18 @@ export function Dashboard({ state, onNavigate }: Props) {
     timeZone: "Europe/Paris",
   }).format(new Date());
   const openLesson = (lesson: Lesson) => onNavigate(`lesson/${lesson.id}`);
+  const domainTicks = (domain: Lesson["domain"]) => (
+    <span className="domain-ticks" aria-hidden="true">
+      {lessons
+        .filter((lesson) => lesson.domain === domain)
+        .map((lesson) => (
+          <i
+            key={lesson.id}
+            className={done.has(lesson.id) ? "complete" : ""}
+          />
+        ))}
+    </span>
+  );
   const domainCount = (domain: Lesson["domain"]) => {
     const inDomain = lessons.filter((lesson) => lesson.domain === domain);
     const validated = inDomain.filter((lesson) => done.has(lesson.id)).length;
@@ -321,9 +333,13 @@ export function Dashboard({ state, onNavigate }: Props) {
           className="path-card domain-folio domain-finance"
           onClick={() => openLesson(nextFor("Finance"))}
         >
+          <span className="domain-ghost" aria-hidden="true">
+            01
+          </span>
           <div className="domain-kicker">
             <span className="eyebrow">01 / FINANCE</span>
             <span>{domainCount("Finance")}</span>
+            {domainTicks("Finance")}
           </div>
           <div className="finance-signature" aria-hidden="true">
             <svg viewBox="0 0 440 200">
@@ -367,9 +383,13 @@ export function Dashboard({ state, onNavigate }: Props) {
           className="path-card domain-folio domain-intelligence"
           onClick={() => openLesson(nextFor("Intelligence artificielle"))}
         >
+          <span className="domain-ghost" aria-hidden="true">
+            02
+          </span>
           <div className="domain-kicker">
             <span className="eyebrow">02 / INTELLIGENCE ARTIFICIELLE</span>
             <span>{domainCount("Intelligence artificielle")}</span>
+            {domainTicks("Intelligence artificielle")}
           </div>
           <div className="intelligence-signature" aria-hidden="true">
             <svg viewBox="0 0 310 180">
@@ -406,9 +426,13 @@ export function Dashboard({ state, onNavigate }: Props) {
           className="path-card domain-folio domain-investing"
           onClick={() => openLesson(nextFor("Investissement"))}
         >
+          <span className="domain-ghost" aria-hidden="true">
+            03
+          </span>
           <div className="domain-kicker">
             <span className="eyebrow">03 / INVESTISSEMENT</span>
             <span>{domainCount("Investissement")}</span>
+            {domainTicks("Investissement")}
           </div>
           <div className="finance-signature" aria-hidden="true">
             <svg viewBox="0 0 440 200">
@@ -451,9 +475,13 @@ export function Dashboard({ state, onNavigate }: Props) {
           className="path-card domain-folio domain-personal"
           onClick={() => openLesson(nextFor("Finance personnelle"))}
         >
+          <span className="domain-ghost" aria-hidden="true">
+            04
+          </span>
           <div className="domain-kicker">
             <span className="eyebrow">04 / FINANCE PERSONNELLE</span>
             <span>{domainCount("Finance personnelle")}</span>
+            {domainTicks("Finance personnelle")}
           </div>
           <div className="finance-signature" aria-hidden="true">
             <svg viewBox="0 0 440 200">

@@ -176,6 +176,19 @@ export function AILab() {
               setFeedback("");
             }}
           />
+          <div className="prompt-meter" aria-hidden="true">
+            {parts.map((part, index) => (
+              <i
+                key={part.name}
+                className={found[index] ? "is-found" : ""}
+                title={part.name}
+              />
+            ))}
+            <span>
+              {found.filter(Boolean).length} / {parts.length} repères dans le
+              texte
+            </span>
+          </div>
           <div className="prompt-writing-footer">
             <span>20 caractères minimum · brouillon de session</span>
             <button className="button primary" type="submit">
@@ -218,7 +231,8 @@ export function AILab() {
                 <path
                   key={part.name}
                   className={`${found[index] ? "found" : ""} ${selected === index ? "selected" : ""}`}
-                  d={`M50 49 Q${50 + (part.x - 50) * 0.15} ${part.y} ${part.x} ${part.y}`}
+                  /* The top spoke stops under its label instead of crossing it. */
+                  d={`M50 49 Q${50 + (part.x - 50) * 0.15} ${part.y} ${part.x} ${part.y < 25 ? part.y + 13 : part.y}`}
                 />
               ))}
               <path
