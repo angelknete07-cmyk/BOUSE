@@ -1,4 +1,5 @@
 import {
+  Fragment,
   lazy,
   Suspense,
   useCallback,
@@ -13,6 +14,7 @@ import type { AppState, Profile, StateUpdater } from "./lib/types";
 import {
   goalOptions,
   interestOptions,
+  levelLabel,
   levelOptions,
   minuteOptions,
   preferenceOptions,
@@ -71,16 +73,71 @@ const Lab = lazy(() =>
   import("./components/Tools").then((m) => ({ default: m.Lab })),
 );
 
+// Three verbs organise the nine spaces; each says in a few words what it holds.
 const navigation = [
-  { id: "home", label: "Vue d’ensemble", icon: "home" },
-  { id: "academy", label: "Académie", icon: "book" },
-  { id: "skills", label: "Mes compétences", icon: "node" },
-  { id: "reviews", label: "Révisions", icon: "clock" },
-  { id: "lab", label: "Lab financier", icon: "lab" },
-  { id: "simulation", label: "Et si ?", icon: "chart" },
-  { id: "incubator", label: "Projets", icon: "idea" },
-  { id: "ai", label: "Atelier IA", icon: "ai" },
-  { id: "radar", label: "Radar", icon: "radar" },
+  {
+    id: "home",
+    label: "Vue d’ensemble",
+    icon: "home",
+    group: "Apprendre",
+    hint: "Votre prochaine action",
+  },
+  {
+    id: "academy",
+    label: "Académie",
+    icon: "book",
+    group: "Apprendre",
+    hint: "Toutes les leçons et le lexique",
+  },
+  {
+    id: "reviews",
+    label: "Révisions",
+    icon: "clock",
+    group: "Apprendre",
+    hint: "Rappels pour retenir",
+  },
+  {
+    id: "skills",
+    label: "Mes compétences",
+    icon: "node",
+    group: "Apprendre",
+    hint: "Votre carte et vos preuves",
+  },
+  {
+    id: "lab",
+    label: "Lab financier",
+    icon: "lab",
+    group: "S’exercer",
+    hint: "Prix, coûts et seuil de rentabilité",
+  },
+  {
+    id: "simulation",
+    label: "Scénarios",
+    icon: "chart",
+    group: "S’exercer",
+    hint: "« Et si ? » : la trésorerie sur six mois",
+  },
+  {
+    id: "ai",
+    label: "Atelier IA",
+    icon: "ai",
+    group: "S’exercer",
+    hint: "Structurer une demande à une IA",
+  },
+  {
+    id: "incubator",
+    label: "Projets",
+    icon: "idea",
+    group: "Construire",
+    hint: "Du savoir au terrain",
+  },
+  {
+    id: "radar",
+    label: "Sources",
+    icon: "radar",
+    group: "Construire",
+    hint: "Sites de référence à consulter",
+  },
 ];
 const getRoute = () => {
   try {
@@ -381,34 +438,49 @@ function App() {
           <span>Rechercher</span>
           <kbd>⌘ K</kbd>
         </button>
-        <p className="nav-section">VOTRE ESPACE</p>
         <nav aria-label="Navigation principale">
-          {navigation.map((n) => (
-            <a
-              key={n.id}
-              aria-label={n.label}
-              href={`#${n.id}`}
-              onClick={() => setMobileOpen(false)}
-              aria-current={
-                route === n.id ||
-                (n.id === "academy" && (lesson || inGlossary)) ||
-                (n.id === "skills" && route === "portfolio") ||
-                (n.id === "incubator" && projectId !== null)
-                  ? "page"
-                  : undefined
-              }
-              className={
-                route === n.id ||
-                (n.id === "academy" && (lesson || inGlossary)) ||
-                (n.id === "skills" && route === "portfolio") ||
-                (n.id === "incubator" && projectId !== null)
-                  ? "nav-link active"
-                  : "nav-link"
-              }
-            >
-              <Icon name={n.icon} size={19} />
-              <span className="nav-label">{n.label}</span>
-            </a>
+          {navigation.map((n, index) => (
+            <Fragment key={n.id}>
+              {navigation[index - 1]?.group !== n.group && (
+                <p className="nav-group" aria-hidden="true">
+                  {n.group}
+                </p>
+              )}
+              <a
+                aria-describedby={`nav-hint-${n.id}`}
+                title={`${n.label} : ${n.hint}`}
+                href={`#${n.id}`}
+                onClick={() => setMobileOpen(false)}
+                aria-current={
+                  route === n.id ||
+                  (n.id === "academy" && (lesson || inGlossary)) ||
+                  (n.id === "skills" && route === "portfolio") ||
+                  (n.id === "incubator" && projectId !== null)
+                    ? "page"
+                    : undefined
+                }
+                className={
+                  route === n.id ||
+                  (n.id === "academy" && (lesson || inGlossary)) ||
+                  (n.id === "skills" && route === "portfolio") ||
+                  (n.id === "incubator" && projectId !== null)
+                    ? "nav-link active"
+                    : "nav-link"
+                }
+              >
+                <Icon name={n.icon} size={19} />
+                <span className="nav-label">
+                  {n.label}
+                  <small
+                    className="nav-hint"
+                    id={`nav-hint-${n.id}`}
+                    aria-hidden="true"
+                  >
+                    {n.hint}
+                  </small>
+                </span>
+              </a>
+            </Fragment>
           ))}
         </nav>
         <div className="sidebar-bottom">
@@ -465,7 +537,9 @@ function App() {
                   : projectId !== null
                     ? "Projets"
                     : navigation.find((n) => n.id === route)?.label ||
-                      "Préférences"}
+                      (route === "settings"
+                        ? "Préférences"
+                        : "Page introuvable")}
             </span>
           </div>
           <div>
@@ -578,11 +652,32 @@ function App() {
               ) : route === "settings" ? (
                 <Settings state={state} update={update} cloud={cloud} />
               ) : (
-                <div className="empty-state">
+                <div className="empty-state not-found">
                   <h1>Cette page n’existe pas.</h1>
-                  <button className="button primary" onClick={() => go("home")}>
-                    Revenir à mon espace
-                  </button>
+                  <p>
+                    Le lien est peut-être ancien ou incomplet. Votre progression
+                    n’est pas touchée.
+                  </p>
+                  <div className="not-found-actions">
+                    <button
+                      className="button primary"
+                      onClick={() => go("home")}
+                    >
+                      Revenir à mon espace
+                    </button>
+                    <button
+                      className="button secondary"
+                      onClick={() => go("academy")}
+                    >
+                      Voir toutes les leçons
+                    </button>
+                    <button
+                      className="button secondary"
+                      onClick={() => setSearchOpen(true)}
+                    >
+                      Rechercher
+                    </button>
+                  </div>
                 </div>
               )}
             </Suspense>
@@ -758,7 +853,9 @@ function Settings({
                 onChange={(e) => patchProfile({ level: e.target.value })}
               >
                 {withCurrent(levelOptions, profile.level).map((option) => (
-                  <option key={option}>{option}</option>
+                  <option key={option} value={option}>
+                    {levelLabel(option)}
+                  </option>
                 ))}
               </select>
             </label>
@@ -1003,8 +1100,10 @@ function Search({
       route: n.id,
       search:
         n.id === "simulation"
-          ? `${n.label} simulation simulateur scénarios trésorerie cash délais clients`
-          : n.label,
+          ? `${n.label} et si simulation simulateur scénarios trésorerie cash délais clients`
+          : n.id === "radar"
+            ? `${n.label} radar sources références veille`
+            : `${n.label} ${n.hint}`,
     })),
     ...lessons.map((l) => ({
       title: l.title,

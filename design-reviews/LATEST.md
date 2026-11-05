@@ -1,3 +1,61 @@
+# Review design — passe 17 : review globale des espaces et des parcours
+
+**5 novembre 2026, 15:59 Europe/Paris.** Application de la règle de review globale : tous les espaces, parcours et états significatifs, en desktop et en mobile, à partir de **scénarios utilisateurs réels** (première visite, première leçon avec un quiz échoué) et des 159 captures. Détail, priorités et comparaisons : [AUDIT-17.md](AUDIT-17.md). **La direction artistique n'est pas déclarée validée.**
+
+## En bref
+
+- **Bloquant :** aucun constaté.
+- **Majeur, corrigé :**
+  - une seule prochaine leçon, partagée par l'accueil, l'Académie et la carte des compétences, avec sa raison (« Pourquoi celle-ci ? ») ;
+  - les rappels prêts proposés à côté de l'action principale ;
+  - navigation regroupée en **Apprendre / S'exercer / Construire**, avec une phrase d'usage par espace ; « Scénarios » et « Sources » remplacent « Et si ? » et « Radar » ;
+  - « Je ne sais pas encore » accepté au point de départ, prénom facultatif ;
+  - les 5 domaines présents sur l'accueil.
+- **Amélioration et finition, corrigées :**
+  - page introuvable utile ;
+  - un seul « Passer à la pratique » ;
+  - niveaux en langage clair ;
+  - « mes projets » au lieu d'« incubateur » ;
+  - 256 espaces insécables, avec un test ;
+  - rail plus lisible.
+- **Idées proposées, non implémentées :** termes du lexique reconnus dans les leçons, reprise à la séquence exacte, séance calibrée sur le temps choisi, trajectoire sur 5 domaines, vocabulaire « repère » unifié, choix du profil effectifs.
+
+## Avant / après (gauche : passe 16, droite : passe 17)
+
+| Sujet                        | Desktop                                                  | Mobile                                                |
+| ---------------------------- | -------------------------------------------------------- | ----------------------------------------------------- |
+| Point de départ              | [Comparer](compare-17/01-diagnostic-desktop.png)         | [Comparer](compare-17/01-diagnostic-mobile.png)       |
+| Premier accueil              | [Comparer](compare-17/02-accueil-nouveau-desktop.png)    | [Comparer](compare-17/02-accueil-nouveau-mobile.png)  |
+| Trajectoire et territoires   | [Comparer](compare-17/03-trajectoire-desktop.png)        | [Comparer](compare-17/03-trajectoire-mobile.png)      |
+| Académie                     | [Comparer](compare-17/04-academie-desktop.png)           | [Comparer](compare-17/04-academie-mobile.png)         |
+| Menu                         | rail visible dans « Premier accueil »                    | [Comparer](compare-17/05-menu-mobile.png)             |
+| Page introuvable             | [Comparer](compare-17/06-page-introuvable-desktop.png)   | [Comparer](compare-17/06-page-introuvable-mobile.png) |
+| Fin de leçon                 | [Comparer](compare-17/07-fin-de-lecon-desktop.png)       | —                                                     |
+| Quiz                         | [Comparer](compare-17/08-quiz-desktop.png)               | —                                                     |
+| Accueil après un quiz échoué | [Comparer](compare-17/09-accueil-apres-quiz-desktop.png) | [Après](compare-17/09-accueil-apres-quiz-mobile.png)  |
+| Préférences                  | [Comparer](compare-17/10-preferences-desktop.png)        | [Comparer](compare-17/10-preferences-mobile.png)      |
+
+Avant : archive `2026-11-05_15-34-40-Europe-Paris`. Après : archive `2026-11-05_15-59-53-Europe-Paris`. Paire principale : [desktop](latest-desktop.png) · [mobile](latest-mobile.png).
+
+## Vérifications internes
+
+- `npm test` : 190 cas réussis.
+- `npx playwright test` : 70 tests réussis (desktop 1440 × 1000, Pixel 7 émulé), dont l'audit axe.
+- Build sans avertissement ; 159 captures.
+- Défauts vus en cours de passe et corrigés avant les captures finales :
+  - actions de l'accueil serrées sur mobile ;
+  - libellé « Commencer la traversée » sur deux lignes ;
+  - nom accessible des liens de navigation différent de leur texte visible ;
+  - carte des compétences qui ne s'ouvrait plus sur la dernière leçon travaillée.
+
+**Limites :**
+
+- Le projet complet, l'import et l'export, le mentor, la synchronisation et le mode hors ligne n'ont pas été rejoués à la main dans cette passe ; ils restent couverts par les tests automatisés.
+- Pas d'appareil physique, ni Safari, ni Firefox, ni lecteur d'écran réel.
+- Liste complète de ce qui reste imparfait : [AUDIT-17.md](AUDIT-17.md#ce-qui-reste-imparfait).
+
+---
+
 # Review design — passe 16 : finition artistique ciblée
 
 **5 novembre 2026, 15:34 Europe/Paris.** Réponse à la review externe « DA non encore validée ». Passe de finition **sans nouvelle fonctionnalité** sur les cinq écrans prioritaires. Détail point par point : [AUDIT-16.md](AUDIT-16.md). **La direction artistique n'est pas déclarée validée : une nouvelle review externe est attendue.**

@@ -5,6 +5,7 @@ import type { AppState, Attempt } from "../lib/types";
 import { Icon } from "./Icon";
 import { currentQuizAttempts, latestCurrentAttempt } from "../lib/portfolio";
 import { useClock } from "../lib/useClock";
+import { recommendLesson } from "../lib/recommendation";
 
 type Props = {
   state: AppState;
@@ -46,10 +47,11 @@ function statusLabel(attempt: Attempt | undefined) {
 /** A prerequisite map, not a percentage estimate of professional mastery. */
 export function KnowledgeMap({ state, onNavigate }: Props) {
   const now = useClock();
-  const [selectedId, setSelectedId] = useState(
+  // What you just worked on first (its proofs), otherwise the shared next lesson.
+  const [selectedId, setSelectedId] = useState(() =>
     lessons.some((lesson) => lesson.id === state.lastLessonId)
       ? state.lastLessonId!
-      : lessons[0]!.id,
+      : recommendLesson(state, now).current.id,
   );
   const detailRef = useRef<HTMLElement>(null);
   const markerId = `knowledge-arrow-${useId().replace(/[^a-zA-Z0-9_-]/g, "")}`;

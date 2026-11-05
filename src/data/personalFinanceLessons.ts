@@ -67,7 +67,7 @@ export const personalFinanceLessons: Lesson[] = [
       {
         title: "Le piège des petites dépenses invisibles",
         body: [
-          "Les abonnements oubliés et les petites dépenses répétées pèsent lourd parce qu’elles sont régulières : 4 € par jour font environ 120 € par mois.",
+          "Les abonnements oubliés et les petites dépenses répétées pèsent lourd parce qu’elles sont régulières : 4 € par jour font environ 120 € par mois.",
           "Un budget trop serré casse vite. Mieux vaut prévoir une ligne « imprévus et plaisirs » réaliste qu’un plan parfait abandonné au bout de trois semaines.",
           "Limites : cette leçon ne traite ni la fiscalité du foyer, ni les situations de surendettement. En cas de difficulté, des dispositifs publics existent : se renseigner auprès de sa banque ou de la Banque de France.",
         ],
@@ -75,15 +75,15 @@ export const personalFinanceLessons: Lesson[] = [
     ],
     example: {
       title: "Exemple fictif · le budget de Léa",
-      body: "Léa, personnage fictif, reçoit 1 800 € nets par mois. Ses charges fixes (loyer, assurances, téléphone, transport) font 1 100 €. Elle programme 150 € d’épargne le jour de sa paie. Il lui reste 550 € pour les dépenses variables. Si ses courses et sorties montent à 450 €, il lui reste 100 € de marge. Son taux d’épargne est d’environ 8 %.",
+      body: "Léa, personnage fictif, reçoit 1 800 € nets par mois. Ses charges fixes (loyer, assurances, téléphone, transport) font 1 100 €. Elle programme 150 € d’épargne le jour de sa paie. Il lui reste 550 € pour les dépenses variables. Si ses courses et sorties montent à 450 €, il lui reste 100 € de marge. Son taux d’épargne est d’environ 8 %.",
     },
     exercise: {
       prompt:
-        "Cas fictif : 1 800 € de revenus nets, 1 100 € de charges fixes, 450 € de dépenses variables. Combien reste-t-il en fin de mois, en euros, avant toute épargne ?",
+        "Cas fictif : 1 800 € de revenus nets, 1 100 € de charges fixes, 450 € de dépenses variables. Combien reste-t-il en fin de mois, en euros, avant toute épargne ?",
       hint: "Retire les charges fixes puis les dépenses variables des revenus.",
       answer: "250",
       explanation:
-        "1 800 − 1 100 − 450 = 250 €. En programmant une partie de ces 250 € en épargne dès le début du mois, on évite de la dépenser par défaut.",
+        "1 800 − 1 100 − 450 = 250 €. En programmant une partie de ces 250 € en épargne dès le début du mois, on évite de la dépenser par défaut.",
     },
     quiz: [
       {
@@ -181,15 +181,15 @@ export const personalFinanceLessons: Lesson[] = [
     ],
     example: {
       title: "Exemple fictif · combien mettre de côté",
-      body: "Karim, personnage fictif, dépense 1 500 € par mois pour l’essentiel (logement, nourriture, transport, assurances). Salarié en CDI, il vise trois mois : 4 500 €. Sa sœur, indépendante aux revenus irréguliers, vise six mois de ses propres dépenses. Tous deux gardent cette réserve sur un livret disponible, séparé du compte courant.",
+      body: "Karim, personnage fictif, dépense 1 500 € par mois pour l’essentiel (logement, nourriture, transport, assurances). Salarié en CDI, il vise trois mois : 4 500 €. Sa sœur, indépendante aux revenus irréguliers, vise six mois de ses propres dépenses. Tous deux gardent cette réserve sur un livret disponible, séparé du compte courant.",
     },
     exercise: {
       prompt:
-        "Cas fictif : 1 500 € de dépenses essentielles par mois. Quel montant représente une réserve de trois mois, en euros ?",
+        "Cas fictif : 1 500 € de dépenses essentielles par mois. Quel montant représente une réserve de trois mois, en euros ?",
       hint: "Multiplie les dépenses mensuelles par le nombre de mois de couverture.",
       answer: "4500",
       explanation:
-        "1 500 × 3 = 4 500 €. Avec des revenus irréguliers, viser six mois donnerait 9 000 €.",
+        "1 500 × 3 = 4 500 €. Avec des revenus irréguliers, viser six mois donnerait 9 000 €.",
     },
     quiz: [
       {
@@ -254,7 +254,7 @@ export const personalFinanceLessons: Lesson[] = [
       {
         title: "Pourquoi apprendre ça ?",
         body: [
-          "Un crédit se vend souvent par sa mensualité : « seulement 150 € par mois ». La vraie question est ailleurs : combien coûte-t-il au total, et pendant combien de temps engage-t-il le budget ?",
+          "Un crédit se vend souvent par sa mensualité : « seulement 150 € par mois ». La vraie question est ailleurs : combien coûte-t-il au total, et pendant combien de temps engage-t-il le budget ?",
           "Savoir lire une offre évite les crédits chers et permet de comparer des propositions différentes.",
         ],
       },
@@ -283,16 +283,16 @@ export const personalFinanceLessons: Lesson[] = [
       },
     ],
     example: {
-      title: "Exemple fictif · 3 000 € sur un an",
-      body: "Pour financer un ordinateur, Inès, personnage fictif, emprunte 3 000 € sur 12 mois à un taux nominal fictif de 6 %. Sa mensualité est d’environ 258,20 € et les intérêts totaux d’environ 98 €, hors assurance et frais. Sur 24 mois, la mensualité baisserait vers 133 €, mais les intérêts doubleraient presque.",
+      title: "Exemple fictif · 3 000 € sur un an",
+      body: "Pour financer un ordinateur, Inès, personnage fictif, emprunte 3 000 € sur 12 mois à un taux nominal fictif de 6 %. Sa mensualité est d’environ 258,20 € et les intérêts totaux d’environ 98 €, hors assurance et frais. Sur 24 mois, la mensualité baisserait vers 133 €, mais les intérêts doubleraient presque.",
     },
     exercise: {
       prompt:
-        "Cas fictif : tu rembourses 12 mensualités de 260 € pour un emprunt de 3 000 €. Quel est le coût total du crédit, en euros, hors frais ?",
+        "Cas fictif : tu rembourses 12 mensualités de 260 € pour un emprunt de 3 000 €. Quel est le coût total du crédit, en euros, hors frais ?",
       hint: "Additionne les mensualités puis retire le capital emprunté.",
       answer: "120",
       explanation:
-        "12 × 260 = 3 120 € remboursés. 3 120 − 3 000 = 120 € de coût. Le TAEG, qui inclut frais et assurance exigée, permet de comparer avec une autre offre.",
+        "12 × 260 = 3 120 € remboursés. 3 120 − 3 000 = 120 € de coût. Le TAEG, qui inclut frais et assurance exigée, permet de comparer avec une autre offre.",
     },
     quiz: [
       {
@@ -362,7 +362,7 @@ export const personalFinanceLessons: Lesson[] = [
       {
         title: "Pourquoi apprendre ça ?",
         body: [
-          "Une hausse de salaire de 2 % n’enrichit pas si les prix montent de 3 % : on peut gagner plus d’euros et vivre moins bien.",
+          "Une hausse de salaire de 2 % n’enrichit pas si les prix montent de 3 % : on peut gagner plus d’euros et vivre moins bien.",
           "Comprendre l’inflation aide à négocier, à ajuster son budget et à juger l’intérêt réel d’une épargne.",
         ],
       },
@@ -392,29 +392,29 @@ export const personalFinanceLessons: Lesson[] = [
     ],
     example: {
       title: "Exemple fictif · une hausse qui n’en est pas une",
-      body: "Tom, personnage fictif, obtient une augmentation de 2 % sur un salaire de 2 000 € : 2 040 €. Sur la même année, les prix montent de 3 % (taux fictif). Pour garder son pouvoir d’achat, il lui aurait fallu 2 060 €. Son salaire réel baisse d’environ 1 % : ses 2 040 € achètent un peu moins que ses 2 000 € de l’an passé.",
+      body: "Tom, personnage fictif, obtient une augmentation de 2 % sur un salaire de 2 000 € : 2 040 €. Sur la même année, les prix montent de 3 % (taux fictif). Pour garder son pouvoir d’achat, il lui aurait fallu 2 060 €. Son salaire réel baisse d’environ 1 % : ses 2 040 € achètent un peu moins que ses 2 000 € de l’an passé.",
     },
     exercise: {
       prompt:
-        "Cas fictif : ton salaire augmente de 4 % pendant que les prix augmentent de 1 %. De combien, en pourcentage environ, ton salaire réel progresse-t-il ?",
+        "Cas fictif : ton salaire augmente de 4 % pendant que les prix augmentent de 1 %. De combien, en pourcentage environ, ton salaire réel progresse-t-il ?",
       hint: "Fais la différence entre la hausse du salaire et l’inflation.",
       answer: "3",
       explanation:
-        "Environ 4 − 1 = 3 %. Le calcul exact donne (1,04 ÷ 1,01) − 1 ≈ 2,97 %.",
+        "Environ 4 − 1 = 3 %. Le calcul exact donne (1,04 ÷ 1,01) − 1 ≈ 2,97 %.",
     },
     quiz: [
       {
         id: "fp-inflation-1",
         question:
-          "Ton salaire augmente de 2 % et les prix de 3 %. Que devient ton pouvoir d’achat ?",
+          "Ton salaire augmente de 2 % et les prix de 3 %. Que devient ton pouvoir d’achat ?",
         options: [
-          "Il baisse d’environ 1 %",
-          "Il augmente d’environ 2 %",
-          "Il augmente d’environ 5 %",
+          "Il baisse d’environ 1 %",
+          "Il augmente d’environ 2 %",
+          "Il augmente d’environ 5 %",
         ],
         answer: 0,
         explanation:
-          "Salaire réel ≈ 2 % − 3 % = −1 % : le revenu en euros monte, mais il achète moins.",
+          "Salaire réel ≈ 2 % − 3 % = −1 % : le revenu en euros monte, mais il achète moins.",
       },
       {
         id: "fp-inflation-2",

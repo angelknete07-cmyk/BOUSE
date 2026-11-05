@@ -155,7 +155,7 @@ export function LessonView({ lesson, state, update, onNavigate }: Props) {
         ),
       }));
       setNotice(
-        "Cette idée est déjà dans votre incubateur. La compétence y est maintenant reliée.",
+        "Cette idée est déjà dans vos projets. La compétence y est maintenant reliée.",
       );
       return;
     }
@@ -177,7 +177,7 @@ export function LessonView({ lesson, state, update, onNavigate }: Props) {
       ],
     }));
     setNotice(
-      "Idée enregistrée dans votre incubateur. Complétez le client et l’hypothèse à tester.",
+      "Idée enregistrée dans vos projets. Complétez le client et l’hypothèse à tester.",
     );
   }
   function exportMarkdown() {
@@ -537,12 +537,6 @@ export function LessonView({ lesson, state, update, onNavigate }: Props) {
                         </details>
                       ))}
                     </div>
-                    <button
-                      className="button primary"
-                      onClick={() => advanceTo(1)}
-                    >
-                      Passer à la pratique <Icon name="arrow" size={17} />
-                    </button>
                   </div>
                 )}
               </div>
@@ -909,7 +903,7 @@ export function LessonView({ lesson, state, update, onNavigate }: Props) {
                       ),
                     }));
                     setNotice(
-                      "Leçon reliée au projet et prochaine action mise à jour. Vous pouvez la préciser dans l’incubateur.",
+                      "Leçon reliée au projet et prochaine action mise à jour. Vous pouvez la préciser dans le projet.",
                     );
                   }}
                 >
@@ -959,7 +953,7 @@ export function LessonView({ lesson, state, update, onNavigate }: Props) {
                 <h3>{lesson.idea.title}</h3>
                 <p>{lesson.idea.description}</p>
                 <button className="button secondary" onClick={saveIdea}>
-                  Garder cette idée dans l’incubateur{" "}
+                  Garder cette idée dans mes projets{" "}
                   <Icon name="arrow" size={16} />
                 </button>
               </div>
@@ -973,7 +967,7 @@ export function LessonView({ lesson, state, update, onNavigate }: Props) {
                 className="text-button"
                 onClick={() => onNavigate("incubator")}
               >
-                Ouvrir mon incubateur <Icon name="arrow" size={16} />
+                Ouvrir mes projets <Icon name="arrow" size={16} />
               </button>
             </div>
           )}

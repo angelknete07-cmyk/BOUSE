@@ -7,6 +7,14 @@ export const levelOptions = [
   "Intermédiaire",
   "Avancé",
 ] as const;
+/** Stored values stay stable; the learner reads a plain description. */
+const levelLabels: Record<string, string> = {
+  Fondations: "Je découvre",
+  "Débutant++": "J’ai quelques bases",
+  Intermédiaire: "Je pratique déjà",
+  Avancé: "Je veux approfondir",
+};
+export const levelLabel = (level: string) => levelLabels[level] ?? level;
 export const minuteOptions = [10, 20, 40] as const;
 export const goalOptions = [
   "Comprendre et piloter un business",

@@ -215,7 +215,7 @@ export const glossary: GlossaryTerm[] = [
     category: "Risque",
     lessonId: risk,
     definition:
-      "Baisse entre un plus haut et le plus bas suivant. Après −50 %, il faut +100 % pour revenir au départ.",
+      "Baisse entre un plus haut et le plus bas suivant. Après −50 %, il faut +100 % pour revenir au départ.",
   },
   {
     id: "diversification",

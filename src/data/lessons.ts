@@ -83,25 +83,25 @@ const foundationLessons: Lesson[] = [
     ],
     example: {
       title: "Exemple fictif · un atelier de mobilier",
-      body: "L’atelier vend et livre 10 bureaux à 500 € HT : CA de 5 000 €. Bois et transport variables : 2 000 €. Marge sur coûts variables : 3 000 €. Charges fixes du mois : 2 200 €. Résultat simplifié : 800 €. Mais seuls 1 000 € sont encaissés ce mois-ci, contre 4 200 € décaissés. Avec 4 000 € au départ, la trésorerie finale est 800 €. Le résultat positif de 800 € ne signifie pas que les ventes ont apporté 800 € sur le compte.",
+      body: "L’atelier vend et livre 10 bureaux à 500 € HT : CA de 5 000 €. Bois et transport variables : 2 000 €. Marge sur coûts variables : 3 000 €. Charges fixes du mois : 2 200 €. Résultat simplifié : 800 €. Mais seuls 1 000 € sont encaissés ce mois-ci, contre 4 200 € décaissés. Avec 4 000 € au départ, la trésorerie finale est 800 €. Le résultat positif de 800 € ne signifie pas que les ventes ont apporté 800 € sur le compte.",
     },
     exercise: {
       prompt:
-        "Cas fictif, HT : tu vends 20 abonnements à 50 €. Les coûts variables totalisent 300 € et les charges fixes 500 €. Quel est le résultat simplifié, en euros ?",
+        "Cas fictif, HT : tu vends 20 abonnements à 50 €. Les coûts variables totalisent 300 € et les charges fixes 500 €. Quel est le résultat simplifié, en euros ?",
       hint: "Calcule d’abord le chiffre d’affaires, puis enlève les deux catégories de charges.",
       answer: "200",
       explanation:
-        "CA = 20 × 50 = 1 000 €. Marge sur coûts variables = 1 000 − 300 = 700 €. Résultat simplifié = 700 − 500 = 200 €. Sans les dates de paiement, on ne peut pas en déduire la variation de trésorerie.",
+        "CA = 20 × 50 = 1 000 €. Marge sur coûts variables = 1 000 − 300 = 700 €. Résultat simplifié = 700 − 500 = 200 €. Sans les dates de paiement, on ne peut pas en déduire la variation de trésorerie.",
     },
     quiz: [
       {
         id: "finance-1",
         question:
-          "Tu reçois un emprunt bancaire de 10 000 €. Quel effet immédiat est certain ?",
+          "Tu reçois un emprunt bancaire de 10 000 €. Quel effet immédiat est certain ?",
         options: [
-          "Le CA augmente de 10 000 €",
+          "Le CA augmente de 10 000 €",
           "La trésorerie et la dette augmentent",
-          "Le résultat augmente de 10 000 €",
+          "Le résultat augmente de 10 000 €",
         ],
         answer: 1,
         explanation:
@@ -176,7 +176,7 @@ const foundationLessons: Lesson[] = [
       {
         title: "Construire l’économie d’une vente",
         body: [
-          "Prix unitaire HT − coût variable unitaire = marge sur coûts variables unitaire. Pour un produit à 40 € et un coût variable de 16 €, chaque vente contribue pour 24 € à la couverture des charges fixes.",
+          "Prix unitaire HT − coût variable unitaire = marge sur coûts variables unitaire. Pour un produit à 40 € et un coût variable de 16 €, chaque vente contribue pour 24 € à la couverture des charges fixes.",
           "Le coût variable peut inclure matière, livraison, commission et sous-traitance directement liée au volume. Les charges fixes sont relativement stables dans une plage d’activité : loyer, abonnement et salaire permanent, par exemple.",
           "« Fixe » ne veut pas dire éternellement constant : un recrutement ou un nouvel atelier crée un palier de coûts. Classe les coûts selon la décision et la période étudiées.",
         ],
@@ -185,7 +185,7 @@ const foundationLessons: Lesson[] = [
         title: "Les deux formules utiles",
         body: [
           "Seuil en unités = charges fixes ÷ marge sur coûts variables unitaire. Pour des unités indivisibles, arrondis au supérieur afin d’atteindre au moins l’équilibre.",
-          "Taux de marge sur coûts variables = marge sur coûts variables ÷ CA. Seuil de CA = charges fixes ÷ taux de marge sur coûts variables. Avec un taux de 60 % et 3 000 € de charges fixes, le seuil est 5 000 € de CA.",
+          "Taux de marge sur coûts variables = marge sur coûts variables ÷ CA. Seuil de CA = charges fixes ÷ taux de marge sur coûts variables. Avec un taux de 60 % et 3 000 € de charges fixes, le seuil est 5 000 € de CA.",
           "Si la marge unitaire est nulle ou négative, aucune hausse de volume ne couvre des charges fixes positives dans ce modèle. Il faut revoir prix, coûts ou offre avant de calculer un seuil classique.",
         ],
       },
@@ -193,28 +193,28 @@ const foundationLessons: Lesson[] = [
         title: "Passer du calcul à la décision",
         body: [
           "Compare le seuil à une demande réaliste et à ta capacité. Si le seuil est de 200 rendez-vous par mois mais que tu peux en réaliser 120, la question n’est pas seulement de mieux vendre.",
-          "Teste trois scénarios : coûts plus élevés, volume plus faible et remise commerciale. Une remise de 10 % sur le prix peut diminuer la marge unitaire de bien plus de 10 %.",
+          "Teste trois scénarios : coûts plus élevés, volume plus faible et remise commerciale. Une remise de 10 % sur le prix peut diminuer la marge unitaire de bien plus de 10 %.",
           "Limites : plusieurs produits exigent un mix de ventes plausible ; les coûts peuvent évoluer avec le volume. Le point mort exprimé en temps suppose une répartition de l’activité, souvent irrégulière. Sépare enfin seuil de résultat et besoin de cash.",
         ],
       },
     ],
     example: {
       title: "Exemple fictif · un atelier collectif",
-      body: "Une place est vendue 60 € HT. Matériel et commission coûtent 20 € par participant : contribution unitaire de 40 €. Les charges fixes mensuelles sont de 2 000 €. Seuil : 2 000 ÷ 40 = 50 places. À 45 places, résultat simplifié = −200 €. À 60 places, résultat = 400 €. Avec une remise de 10 %, le prix passe à 54 €, la contribution à 34 € : il faut désormais vendre au moins 59 places.",
+      body: "Une place est vendue 60 € HT. Matériel et commission coûtent 20 € par participant : contribution unitaire de 40 €. Les charges fixes mensuelles sont de 2 000 €. Seuil : 2 000 ÷ 40 = 50 places. À 45 places, résultat simplifié = −200 €. À 60 places, résultat = 400 €. Avec une remise de 10 %, le prix passe à 54 €, la contribution à 34 € : il faut désormais vendre au moins 59 places.",
     },
     exercise: {
       prompt:
-        "Cas fictif : un service coûte 80 € HT au client et 30 € de coûts variables. Les charges fixes sont de 1 500 € par mois. Combien de ventes faut-il pour atteindre l’équilibre ?",
-      hint: "Une vente contribue à hauteur de 80 − 30 €. Divise les charges fixes par cette contribution.",
+        "Cas fictif : un service coûte 80 € HT au client et 30 € de coûts variables. Les charges fixes sont de 1 500 € par mois. Combien de ventes faut-il pour atteindre l’équilibre ?",
+      hint: "Une vente contribue à hauteur de 80 − 30 €. Divise les charges fixes par cette contribution.",
       answer: "30",
       explanation:
-        "La contribution est de 50 €. Seuil = 1 500 ÷ 50 = 30 ventes. À 30 ventes, le résultat simplifié vaut 0 €. Les délais de paiement restent une question distincte.",
+        "La contribution est de 50 €. Seuil = 1 500 ÷ 50 = 30 ventes. À 30 ventes, le résultat simplifié vaut 0 €. Les délais de paiement restent une question distincte.",
     },
     quiz: [
       {
         id: "seuil-1",
         question:
-          "Tu vends 20 € un produit qui entraîne 22 € de coûts variables. Les charges fixes sont positives. Que conclure ?",
+          "Tu vends 20 € un produit qui entraîne 22 € de coûts variables. Les charges fixes sont positives. Que conclure ?",
         options: [
           "Vendre davantage suffit forcément",
           "Il n’existe pas de seuil rentable avec ces hypothèses",
@@ -222,7 +222,7 @@ const foundationLessons: Lesson[] = [
         ],
         answer: 1,
         explanation:
-          "Chaque vente ajoute une perte de contribution de 2 €. Augmenter le volume aggrave le résultat dans ce modèle.",
+          "Chaque vente ajoute une perte de contribution de 2 €. Augmenter le volume aggrave le résultat dans ce modèle.",
       },
       {
         id: "seuil-2",
@@ -239,7 +239,7 @@ const foundationLessons: Lesson[] = [
       },
     ],
     application:
-      "Dans ton projet, documente prix HT, coût variable unitaire, charges fixes et capacité mensuelle. Calcule le seuil, puis teste une baisse du prix de 10 %. Quelle hypothèse mérite d’être vérifiée en premier ?",
+      "Dans ton projet, documente prix HT, coût variable unitaire, charges fixes et capacité mensuelle. Calcule le seuil, puis teste une baisse du prix de 10 %. Quelle hypothèse mérite d’être vérifiée en premier ?",
     idea: {
       title: "Simulateur de rentabilité pour ateliers indépendants",
       description:
@@ -321,7 +321,7 @@ const foundationLessons: Lesson[] = [
       hint: "Le comportement observé est le test réalisé : calcule 3 ÷ 12 × 100.",
       answer: "25",
       explanation:
-        "3 ÷ 12 = 25 %. Cela décrit ce groupe et ce protocole ; ce n’est pas un taux de conversion garanti pour le marché. Les 12 avis et les 5 rendez-vous demandés sont d’autres mesures.",
+        "3 ÷ 12 = 25 %. Cela décrit ce groupe et ce protocole ; ce n’est pas un taux de conversion garanti pour le marché. Les 12 avis et les 5 rendez-vous demandés sont d’autres mesures.",
     },
     quiz: [
       {
@@ -547,7 +547,7 @@ const foundationLessons: Lesson[] = [
       hint: "Convertis chaque réussite en pourcentage, puis calcule leur différence.",
       answer: "20",
       explanation:
-        "A : 60 %. B : 80 %. Différence : 20 points de pourcentage. Ce n’est pas une preuve de fiabilité générale ; dix cas restent une petite évaluation, à compléter avec les échecs importants.",
+        "A : 60 %. B : 80 %. Différence : 20 points de pourcentage. Ce n’est pas une preuve de fiabilité générale ; dix cas restent une petite évaluation, à compléter avec les échecs importants.",
     },
     quiz: [
       {
@@ -656,11 +656,11 @@ const foundationLessons: Lesson[] = [
     },
     exercise: {
       prompt:
-        "Cas fictif : un fournisseur facture 0,02 € par appel de modèle et un workflow effectue 4 appels par dossier. Pour 100 dossiers, quel est le coût des seuls appels de modèle, en euros ?",
+        "Cas fictif : un fournisseur facture 0,02 € par appel de modèle et un workflow effectue 4 appels par dossier. Pour 100 dossiers, quel est le coût des seuls appels de modèle, en euros ?",
       hint: "Calcule le nombre total d’appels, puis multiplie par le prix unitaire.",
       answer: "8",
       explanation:
-        "100 × 4 = 400 appels. 400 × 0,02 € = 8 €. C’est un tarif fictif simplifié : ajoute en pratique infrastructure, outils, supervision et échecs. Un agent sans limite d’étapes rend ce budget moins prévisible.",
+        "100 × 4 = 400 appels. 400 × 0,02 € = 8 €. C’est un tarif fictif simplifié : ajoute en pratique infrastructure, outils, supervision et échecs. Un agent sans limite d’étapes rend ce budget moins prévisible.",
     },
     quiz: [
       {

@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import {
   goalOptions,
   interestOptions,
+  levelLabel,
   levelOptions,
   minuteOptions,
   preferenceOptions,
@@ -9,6 +10,8 @@ import {
 import type { Profile } from "../lib/types";
 import { Icon } from "./Icon";
 
+/** Not knowing is a valid answer: it never blocks and never counts as an error. */
+const UNKNOWN = 3;
 const diagnostic = [
   {
     id: "finance",
@@ -103,9 +106,7 @@ export function Onboarding({
           </p>
           <div className="intro-foot">
             <span>01 / Fondations</span>
-            <span>
-              À votre rythme <Icon name="arrow" size={16} />
-            </span>
+            <span>À votre rythme</span>
           </div>
         </div>
         <section className="onboarding-form panel">
@@ -129,13 +130,12 @@ export function Onboarding({
                 Quelques repères pour choisir votre prochaine action.
               </p>
               <label className="field">
-                Votre prénom ou pseudo
+                Votre prénom ou pseudo <small>(facultatif)</small>
                 <input
                   maxLength={40}
                   placeholder="Comment vous appeler ?"
                   value={profile.name}
                   onChange={(e) => patch({ name: e.target.value })}
-                  required
                   autoComplete="given-name"
                 />
               </label>
@@ -147,7 +147,9 @@ export function Onboarding({
                     onChange={(e) => patch({ level: e.target.value })}
                   >
                     {levelOptions.map((option) => (
-                      <option key={option}>{option}</option>
+                      <option key={option} value={option}>
+                        {levelLabel(option)}
+                      </option>
                     ))}
                   </select>
                 </label>
@@ -218,6 +220,12 @@ export function Onboarding({
             <form
               onSubmit={(e) => {
                 e.preventDefault();
+                if (!showResult) {
+                  const filled = { ...profile.diagnostic };
+                  for (const q of diagnostic)
+                    if (filled[q.id] === undefined) filled[q.id] = UNKNOWN;
+                  patch({ diagnostic: filled });
+                }
                 if (showResult)
                   onComplete({
                     ...profile,
@@ -234,7 +242,7 @@ export function Onboarding({
               <p className="muted">
                 {showResult
                   ? `${score}/3 repères identifiés. Ce diagnostic oriente le parcours ; il ne certifie pas un niveau.`
-                  : "Répondez spontanément. Ne pas savoir fait partie du chemin."}
+                  : "Répondez spontanément. « Je ne sais pas encore » est une réponse utile : elle oriente aussi le parcours."}
               </p>
               {diagnostic.map((q, index) => (
                 <fieldset className="question" key={q.id}>
@@ -242,15 +250,14 @@ export function Onboarding({
                     <span className="question-number">0{index + 1}</span>
                     {q.question}
                   </legend>
-                  {q.options.map((option, i) => (
+                  {[...q.options, "Je ne sais pas encore"].map((option, i) => (
                     <label
-                      className={`choice ${showResult && i === q.answer ? "correct" : ""}`}
+                      className={`choice ${showResult && i === q.answer ? "correct" : ""} ${i === UNKNOWN ? "choice-unknown" : ""}`}
                       key={option}
                     >
                       <input
                         type="radio"
                         name={q.id}
-                        required
                         checked={profile.diagnostic[q.id] === i}
                         disabled={showResult}
                         onChange={() =>
@@ -266,7 +273,9 @@ export function Onboarding({
                     <p className="feedback">
                       {profile.diagnostic[q.id] === q.answer
                         ? "Repère identifié."
-                        : `À explorer : ${q.options[q.answer]}`}
+                        : profile.diagnostic[q.id] === UNKNOWN
+                          ? `Une bonne question pour commencer. La réponse : ${q.options[q.answer]}`
+                          : `À explorer : ${q.options[q.answer]}`}
                     </p>
                   )}
                 </fieldset>

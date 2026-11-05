@@ -160,3 +160,9 @@ Contrôles du 5 novembre 2026. `npm run build` réussit sans avertissement : le 
 Contrôles du 5 novembre 2026. `npm run build` réussit sans avertissement (bundle principal 392,21 kB). `npm test` passe avec **189 cas unitaires**. `npx playwright test` passe avec **70 tests** (desktop et Pixel 7 émulé). Prettier passe sur `src/`, `tests/` et `supabase/`.
 
 **159 captures**, archive `2026-11-05_15-34-40-Europe-Paris`. Comparaisons avant/après des cinq écrans prioritaires dans `design-reviews/compare-16/`. Pas d'appareil physique, de Safari/Firefox ni de lecteur d'écran réel. Aucune validation design externe n'est revendiquée : la review externe est attendue.
+
+## Passe 17 — review globale
+
+Contrôles du 5 novembre 2026. `npm run build` réussit sans avertissement. `npm test` passe avec **190 cas unitaires** (nouveau : `tests/typography.test.ts`). `npx playwright test` passe avec **70 tests** (desktop et Pixel 7 émulé), dont l'audit axe. Prettier passe sur `src/`, `tests/` et `supabase/`.
+
+Des scénarios réels ont été rejoués en desktop et en mobile : première visite complète et première leçon avec un quiz échoué. Les comparaisons sont dans `design-reviews/compare-17/`. **159 captures**, archive `2026-11-05_15-59-53-Europe-Paris`. Pas d'appareil physique, de Safari/Firefox ni de lecteur d'écran réel. Aucune validation design externe n'est revendiquée.

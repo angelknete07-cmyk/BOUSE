@@ -1,7 +1,7 @@
 import { useState, type CSSProperties } from "react";
 import { lessons, type Lesson } from "../data/lessons";
-import type { AppState, Attempt } from "../lib/types";
-import { latestCurrentAttempt } from "../lib/portfolio";
+import type { AppState } from "../lib/types";
+import { recommendLesson } from "../lib/recommendation";
 import { Icon } from "./Icon";
 import { lessonShortLabel } from "../data/lessonLabels";
 import { Terrain } from "./Terrain";
@@ -37,50 +37,14 @@ const mapLinks = mapNodes.flatMap((node) => {
   });
 });
 
-function getProgress(state: AppState, now: Date) {
-  const latest = new Map<string, Attempt>();
-  for (const lesson of lessons) {
-    const attempt = latestCurrentAttempt(lesson, state.attempts, now);
-    if (attempt) latest.set(lesson.id, attempt);
-  }
-  const done = new Set(
-    [...latest.values()]
-      .filter((attempt) => attempt.passed)
-      .map((attempt) => attempt.lessonId),
-  );
-  const candidates = lessons.filter(
-    (lesson) =>
-      !done.has(lesson.id) && lesson.prerequisites.every((id) => done.has(id)),
-  );
-  const diagnostic = state.profile?.diagnostic;
-  const gaps = [
-    diagnostic?.finance !== 1 ? "Finance" : "",
-    diagnostic?.business !== 2 ? "Entrepreneuriat" : "",
-    diagnostic?.ai !== 0 ? "Intelligence artificielle" : "",
-  ];
-  const next =
-    candidates.find(
-      (lesson) =>
-        gaps.includes(lesson.domain) &&
-        state.profile?.interests.includes(lesson.domain),
-    ) ||
-    candidates.find((lesson) =>
-      state.profile?.interests.includes(lesson.domain),
-    ) ||
-    candidates[0] ||
-    lessons[0]!;
-  const current =
-    state.lastLessonId && !done.has(state.lastLessonId)
-      ? lessons.find((lesson) => lesson.id === state.lastLessonId) || next
-      : next;
-  return { latest, done, current };
-}
-
 export function Dashboard({ state, onNavigate }: Props) {
   const now = useClock();
   const reviewDeck = buildReviewDeck(lessons, state, now);
   const due = dueReviewCards(reviewDeck, now);
-  const { latest, done, current } = getProgress(state, now);
+  const { latest, done, current, resumed, reason } = recommendLesson(
+    state,
+    now,
+  );
   // The hero already presents the current lesson: the trajectory opens on what follows it.
   const following =
     lessons.find(
@@ -107,10 +71,10 @@ export function Dashboard({ state, onNavigate }: Props) {
     timeZone: "Europe/Paris",
   }).format(new Date());
   const openLesson = (lesson: Lesson) => onNavigate(`lesson/${lesson.id}`);
-  const domainTicks = (domain: Lesson["domain"]) => (
+  const domainTicks = (...domains: Lesson["domain"][]) => (
     <span className="domain-ticks" aria-hidden="true">
       {lessons
-        .filter((lesson) => lesson.domain === domain)
+        .filter((lesson) => domains.includes(lesson.domain))
         .map((lesson) => (
           <i
             key={lesson.id}
@@ -119,15 +83,28 @@ export function Dashboard({ state, onNavigate }: Props) {
         ))}
     </span>
   );
-  const domainCount = (domain: Lesson["domain"]) => {
-    const inDomain = lessons.filter((lesson) => lesson.domain === domain);
+  const domainCount = (...domains: Lesson["domain"][]) => {
+    const inDomain = lessons.filter((lesson) =>
+      domains.includes(lesson.domain),
+    );
     const validated = inDomain.filter((lesson) => done.has(lesson.id)).length;
-    return `${validated} / ${inDomain.length} repères`;
+    return `${validated} / ${inDomain.length} notions validées`;
   };
-  const nextFor = (domain: string) =>
-    lessons.find(
-      (lesson) => lesson.domain === domain && !done.has(lesson.id),
-    ) || lessons.find((lesson) => lesson.domain === domain)!;
+  // The first notion still open in a territory, prerequisites first.
+  const nextFor = (...domains: Lesson["domain"][]) => {
+    const inDomain = lessons.filter((lesson) =>
+      domains.includes(lesson.domain),
+    );
+    return (
+      inDomain.find(
+        (lesson) =>
+          !done.has(lesson.id) &&
+          lesson.prerequisites.every((id) => done.has(id)),
+      ) ||
+      inDomain.find((lesson) => !done.has(lesson.id)) ||
+      inDomain[0]!
+    );
+  };
 
   return (
     <div className="learning-home art-home">
@@ -156,11 +133,15 @@ export function Dashboard({ state, onNavigate }: Props) {
           </div>
           <div className="learning-hero-top">
             <span className="scene-label">
-              {state.lastLessonId
+              {resumed
                 ? "Reprendre le fil"
-                : "Commencer la traversée"}
+                : state.attempts.length || state.lastLessonId
+                  ? "Votre prochaine leçon"
+                  : "Commencer la traversée"}
             </span>
-            <span className="learning-coordinate">BOUSE / FONDATIONS</span>
+            <span className="learning-coordinate">
+              BOUSE / {current.domain.toUpperCase()}
+            </span>
           </div>
           <div className="hero-main learning-hero-content">
             <span className="tag">
@@ -169,6 +150,12 @@ export function Dashboard({ state, onNavigate }: Props) {
             </span>
             <h2 id="current-lesson-title">{current.title}</h2>
             <p>{current.summary}</p>
+            <p className="learning-hero-reason">
+              <Icon name="node" size={14} />
+              <span>
+                <strong>Pourquoi celle-ci ?</strong> {reason}
+              </span>
+            </p>
             <div className="learning-hero-actions">
               <button
                 className="button primary"
@@ -182,6 +169,16 @@ export function Dashboard({ state, onNavigate }: Props) {
               <span>
                 {current.minutes} min<small>pour faire un pas</small>
               </span>
+              {due.length > 0 && (
+                <button
+                  className="text-button learning-hero-reviews"
+                  onClick={() => onNavigate("reviews")}
+                >
+                  {due.length} rappel{due.length > 1 ? "s" : ""} prêt
+                  {due.length > 1 ? "s" : ""} avant de continuer
+                  <Icon name="arrow" size={15} />
+                </button>
+              )}
             </div>
           </div>
           <div className="home-scene-footer">
@@ -289,15 +286,22 @@ export function Dashboard({ state, onNavigate }: Props) {
               <span className="eyebrow">
                 {selectedAttempt
                   ? selectedAttempt.passed
-                    ? "REPÈRE VÉRIFIÉ AU QUIZ"
+                    ? "VÉRIFIÉE AU QUIZ"
                     : "UNE NOTION À REPRENDRE"
-                  : "UN REPÈRE À EXPLORER"}
+                  : selected.id === current.id
+                    ? "VOTRE PROCHAINE LEÇON"
+                    : selected.id === following.id
+                      ? "ENSUITE"
+                      : "UNE NOTION À EXPLORER"}
               </span>
               <h3>{selected.title}</h3>
               <p>
-                {selected.prerequisites.length
-                  ? `S’appuie sur ${selected.prerequisites.length} repère${selected.prerequisites.length > 1 ? "s" : ""} conseillé${selected.prerequisites.length > 1 ? "s" : ""}.`
-                  : "Un point d’entrée. Aucun prérequis."}
+                {selected.id === following.id &&
+                selected.prerequisites.includes(current.id)
+                  ? `Après « ${lessonShortLabel(current.id, current.title)} » : son quiz ouvre la suite.`
+                  : selected.prerequisites.length
+                    ? `S’appuie sur ${selected.prerequisites.length} repère${selected.prerequisites.length > 1 ? "s" : ""} conseillé${selected.prerequisites.length > 1 ? "s" : ""}.`
+                    : "Un point d’entrée. Aucun prérequis."}
               </p>
             </div>
             <button
@@ -331,15 +335,15 @@ export function Dashboard({ state, onNavigate }: Props) {
       <div className="learning-universes">
         <button
           className="path-card domain-folio domain-finance"
-          onClick={() => openLesson(nextFor("Finance"))}
+          onClick={() => openLesson(nextFor("Finance", "Entrepreneuriat"))}
         >
           <span className="domain-ghost" aria-hidden="true">
             01
           </span>
           <div className="domain-kicker">
-            <span className="eyebrow">01 / FINANCE</span>
-            <span>{domainCount("Finance")}</span>
-            {domainTicks("Finance")}
+            <span className="eyebrow">01 / FINANCE ET ENTREPRISE</span>
+            <span>{domainCount("Finance", "Entrepreneuriat")}</span>
+            {domainTicks("Finance", "Entrepreneuriat")}
           </div>
           <div className="finance-signature" aria-hidden="true">
             <svg viewBox="0 0 440 200">

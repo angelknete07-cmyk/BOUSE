@@ -4,6 +4,7 @@ import { domains } from "../data/domains";
 import { normalizeSearch } from "../lib/domain";
 import { latestCurrentAttempt } from "../lib/portfolio";
 import { useClock } from "../lib/useClock";
+import { recommendLesson } from "../lib/recommendation";
 import type { AppState } from "../lib/types";
 import { KnowledgeAtlas } from "./KnowledgeAtlas";
 import { Icon } from "./Icon";
@@ -19,7 +20,9 @@ export function Academy({
   const [filter, setFilter] = useState("Tous");
   const [query, setQuery] = useState("");
   const [view, setView] = useState<"atlas" | "catalog">("atlas");
-  const [selectedId, setSelectedId] = useState(lessons[0]!.id);
+  const [selectedId, setSelectedId] = useState(
+    () => recommendLesson(state, now).current.id,
+  );
   const done = new Set(
     lessons
       .filter((l) => latestCurrentAttempt(l, state.attempts, now)?.passed)
@@ -39,7 +42,7 @@ export function Academy({
       <header className="art-heading">
         <div>
           <span className="instrument-index">
-            Académie <i /> Fondations
+            Académie <i /> Tous les domaines
           </span>
           <h1>
             {lessons.length} notions, {domains.length} domaines.

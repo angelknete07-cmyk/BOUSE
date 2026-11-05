@@ -173,13 +173,13 @@ test("apprendre, prouver, appliquer et retrouver la progression après rechargem
     .getByRole("button", { name: "Appliquer à un projet", exact: true })
     .click();
   await page
-    .getByRole("button", { name: "Garder cette idée dans l’incubateur" })
+    .getByRole("button", { name: "Garder cette idée dans mes projets" })
     .click();
   await expect(
     page.getByRole("status").filter({ hasText: "Idée enregistrée" }),
   ).toBeVisible();
   await page
-    .getByRole("button", { name: "Garder cette idée dans l’incubateur" })
+    .getByRole("button", { name: "Garder cette idée dans mes projets" })
     .click();
   await expect
     .poll(() =>
@@ -189,7 +189,7 @@ test("apprendre, prouver, appliquer et retrouver la progression après rechargem
       ),
     )
     .toBe(1);
-  await page.getByRole("button", { name: "Ouvrir mon incubateur" }).click();
+  await page.getByRole("button", { name: "Ouvrir mes projets" }).click();
   const project = page.locator("article").filter({
     has: page.getByRole("heading", {
       name: firstLesson.idea.title,

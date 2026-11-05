@@ -148,3 +148,15 @@ Règles à garder :
 - sur mobile, aucune action de navigation flottante ne recouvre un contenu interactif ; seules les barres d'action de formulaire restent fixes, avec `scroll-padding-bottom`.
 
 Détail et comparaisons : `design-reviews/AUDIT-16.md`. La direction artistique attend une nouvelle review externe.
+
+## Passe 17 — review globale
+
+Règles d'usage ajoutées, à garder pour tout nouvel écran :
+
+- **Une seule prochaine leçon** dans toute l'application, calculée par `src/lib/recommendation.ts` et accompagnée de sa raison. Un écran qui suggère une suite la présente comme « Ensuite », jamais comme une seconde recommandation.
+- **La navigation s'organise par intentions** : Apprendre, S'exercer, Construire. Chaque espace a une phrase d'usage, visible dans le menu mobile et en infobulle sur le rail. On n'ajoute pas d'entrée sans dire ce qu'elle permet.
+- **Ne pas savoir n'est jamais bloquant** : toute question de diagnostic propose « Je ne sais pas encore ».
+- **Un nombre ne se sépare jamais de son unité ni de ses milliers** : espaces insécables, vérifiées par `tests/typography.test.ts`.
+- **Un même mot pour un même concept** : chantier ouvert pour « repère », qui a encore plusieurs sens.
+
+Détail : `design-reviews/AUDIT-17.md`.

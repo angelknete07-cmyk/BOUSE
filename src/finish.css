@@ -539,3 +539,105 @@
     border-radius: 0;
   }
 }
+
+/* Navigation: three verbs, nine spaces, each with its purpose. */
+.nav-group {
+  margin: var(--space-6) 11px var(--space-2);
+  font-size: var(--type-caption);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+.nav-group:first-child {
+  margin-top: var(--space-2);
+}
+.nav-label {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.nav-hint {
+  font-size: var(--type-caption);
+  color: var(--text-tertiary);
+  font-weight: 400;
+}
+@media (min-width: 701px) {
+  /* On the rail the groups become hairlines and the hint a tooltip. */
+  .sidebar .nav-group {
+    height: 1px;
+    margin: var(--space-2) var(--space-4);
+    overflow: hidden;
+    font-size: 0;
+    background: var(--line);
+  }
+  .sidebar .nav-group:first-child {
+    display: none;
+  }
+  .sidebar .nav-hint {
+    display: none;
+  }
+  .sidebar .nav-label {
+    align-items: center;
+  }
+  .sidebar .nav-link {
+    min-height: 58px;
+    font-size: var(--type-caption);
+    color: var(--muted);
+  }
+}
+
+/* Home: the recommendation explains itself; due reminders are one step away. */
+.learning-hero-reason {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  max-width: 46ch;
+  margin-top: var(--space-4);
+  font-size: var(--type-body-sm);
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+.learning-hero-reason svg {
+  flex: none;
+  margin-top: 3px;
+  color: var(--text-tertiary);
+}
+.learning-hero-reason strong {
+  color: var(--text);
+  font-weight: var(--weight-medium);
+}
+.learning-hero-reviews {
+  font-size: var(--type-body-sm);
+}
+.not-found p {
+  max-width: 46ch;
+  margin: var(--space-3) auto var(--space-6);
+  color: var(--text-secondary);
+}
+.not-found-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-3);
+}
+.choice-unknown {
+  color: var(--text-secondary);
+  border-style: dashed;
+}
+@media (max-width: 700px) {
+  /* The domain is already named above the title. */
+  .learning-hero .learning-coordinate {
+    display: none;
+  }
+}
+.learning-hero-actions {
+  flex-wrap: wrap;
+}
+.learning-hero-actions .button {
+  white-space: nowrap;
+}
+@media (max-width: 700px) {
+  .learning-hero-reviews {
+    flex-basis: 100%;
+  }
+}

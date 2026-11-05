@@ -76,15 +76,15 @@ export const investingLessons: Lesson[] = [
     ],
     example: {
       title: "Exemple fictif · la société Atelier Nord",
-      body: "Atelier Nord compte 1 000 000 d’actions cotées 25 € : sa capitalisation boursière est de 25 millions d’euros. Elle verse un dividende de 0,50 € par action, soit 2 % du cours actuel. Ce dividende n’est pas garanti l’année suivante. En parallèle, elle émet une obligation fictive de 1 000 € à 3 % sur 5 ans : le prêteur reçoit 30 € par an, puis 1 000 € à l’échéance si Atelier Nord peut rembourser.",
+      body: "Atelier Nord compte 1 000 000 d’actions cotées 25 € : sa capitalisation boursière est de 25 millions d’euros. Elle verse un dividende de 0,50 € par action, soit 2 % du cours actuel. Ce dividende n’est pas garanti l’année suivante. En parallèle, elle émet une obligation fictive de 1 000 € à 3 % sur 5 ans : le prêteur reçoit 30 € par an, puis 1 000 € à l’échéance si Atelier Nord peut rembourser.",
     },
     exercise: {
       prompt:
-        "Une société fictive compte 2 000 000 d’actions cotées 15 €. Quelle est sa capitalisation boursière, en millions d’euros ?",
+        "Une société fictive compte 2 000 000 d’actions cotées 15 €. Quelle est sa capitalisation boursière, en millions d’euros ?",
       hint: "Multiplie le cours par le nombre d’actions, puis exprime le résultat en millions.",
       answer: "30",
       explanation:
-        "2 000 000 × 15 € = 30 000 000 €, soit 30 millions d’euros. Cette valeur change à chaque variation du cours ; elle ne dit rien, seule, de la rentabilité de l’entreprise.",
+        "2 000 000 × 15 € = 30 000 000 €, soit 30 millions d’euros. Cette valeur change à chaque variation du cours ; elle ne dit rien, seule, de la rentabilité de l’entreprise.",
     },
     quiz: [
       {
@@ -160,7 +160,7 @@ export const investingLessons: Lesson[] = [
         title: "Les mécanismes",
         body: [
           "Avec des intérêts simples, on gagne chaque année un pourcentage du capital de départ. Avec des intérêts composés, les gains sont réinvestis et produisent à leur tour des gains : capital final = capital initial × (1 + taux)^nombre d’années.",
-          "L’inflation est la hausse générale des prix. Un placement qui rapporte 3 % quand les prix montent de 3 % ne fait que maintenir le pouvoir d’achat. Le rendement réel vaut environ rendement nominal − inflation ; plus précisément (1 + nominal) ÷ (1 + inflation) − 1.",
+          "L’inflation est la hausse générale des prix. Un placement qui rapporte 3 % quand les prix montent de 3 % ne fait que maintenir le pouvoir d’achat. Le rendement réel vaut environ rendement nominal − inflation ; plus précisément (1 + nominal) ÷ (1 + inflation) − 1.",
           "Les frais réduisent le rendement chaque année, sur tout le capital accumulé : ils composent eux aussi, mais contre toi. On distingue notamment les frais d’entrée, les frais de gestion annuels d’un fonds ou d’un contrat, et les frais de courtage à chaque ordre.",
         ],
       },
@@ -181,43 +181,43 @@ export const investingLessons: Lesson[] = [
       },
     ],
     example: {
-      title: "Exemple fictif · 10 000 € pendant 20 ans",
-      body: "À un taux fictif constant de 5 % par an, intérêts réinvestis, 10 000 € deviennent environ 26 533 € en 20 ans. Avec 1 % de frais annuels, le capital final tombe à environ 21 702 € ; avec 2 %, à environ 17 714 €. Si les prix montent de 2 % par an, les 26 533 € n’achètent plus qu’environ ce que 17 856 € achetaient au départ. Ce calcul illustre un mécanisme : ce n’est ni une prévision, ni une promesse.",
+      title: "Exemple fictif · 10 000 € pendant 20 ans",
+      body: "À un taux fictif constant de 5 % par an, intérêts réinvestis, 10 000 € deviennent environ 26 533 € en 20 ans. Avec 1 % de frais annuels, le capital final tombe à environ 21 702 € ; avec 2 %, à environ 17 714 €. Si les prix montent de 2 % par an, les 26 533 € n’achètent plus qu’environ ce que 17 856 € achetaient au départ. Ce calcul illustre un mécanisme : ce n’est ni une prévision, ni une promesse.",
     },
     exercise: {
       prompt:
-        "Tu places 1 000 € à un taux fictif de 10 % par an, intérêts réinvestis. Combien as-tu après deux ans, en euros ?",
-      hint: "La deuxième année, les 10 % s’appliquent aussi aux intérêts de la première année.",
+        "Tu places 1 000 € à un taux fictif de 10 % par an, intérêts réinvestis. Combien as-tu après deux ans, en euros ?",
+      hint: "La deuxième année, les 10 % s’appliquent aussi aux intérêts de la première année.",
       answer: "1210",
       explanation:
-        "Après un an : 1 000 × 1,10 = 1 100 €. Après deux ans : 1 100 × 1,10 = 1 210 €. Avec des intérêts simples, on aurait 1 200 € : les 10 € d’écart sont les intérêts des intérêts.",
+        "Après un an : 1 000 × 1,10 = 1 100 €. Après deux ans : 1 100 × 1,10 = 1 210 €. Avec des intérêts simples, on aurait 1 200 € : les 10 € d’écart sont les intérêts des intérêts.",
     },
     quiz: [
       {
         id: "inv-interets-1",
         question:
-          "Ton placement rapporte 4 % sur un an pendant que les prix augmentent de 4 %. Que devient environ ton pouvoir d’achat ?",
+          "Ton placement rapporte 4 % sur un an pendant que les prix augmentent de 4 %. Que devient environ ton pouvoir d’achat ?",
         options: [
           "Il reste à peu près stable",
-          "Il augmente d’environ 8 %",
-          "Il augmente d’environ 4 %",
+          "Il augmente d’environ 8 %",
+          "Il augmente d’environ 4 %",
         ],
         answer: 0,
         explanation:
-          "Le rendement réel est proche de 4 % − 4 % = 0 %. Tu as plus d’euros, mais ils achètent à peu près la même chose.",
+          "Le rendement réel est proche de 4 % − 4 % = 0 %. Tu as plus d’euros, mais ils achètent à peu près la même chose.",
       },
       {
         id: "inv-interets-2",
         question:
-          "Deux fonds suivent la même stratégie ; l’un prélève 0,2 % de frais par an, l’autre 2 %. Que se passe-t-il sur vingt ans ?",
+          "Deux fonds suivent la même stratégie ; l’un prélève 0,2 % de frais par an, l’autre 2 %. Que se passe-t-il sur vingt ans ?",
         options: [
           "L’écart de frais se cumule et peut peser lourd sur le capital final",
           "Les frais n’agissent que la première année",
-          "L’écart reste toujours inférieur à 2 % du capital final",
+          "L’écart reste toujours inférieur à 2 % du capital final",
         ],
         answer: 0,
         explanation:
-          "Les frais s’appliquent chaque année à tout le capital accumulé : leur effet compose. Sur vingt ans, l’écart dépasse largement 2 % du capital final.",
+          "Les frais s’appliquent chaque année à tout le capital accumulé : leur effet compose. Sur vingt ans, l’écart dépasse largement 2 % du capital final.",
       },
     ],
     application:
@@ -272,7 +272,7 @@ export const investingLessons: Lesson[] = [
         title: "Les mécanismes",
         body: [
           "Rendement espéré et risque vont ensemble : un placement qui promet davantage expose en général à des variations plus fortes et à une possibilité de perte. Un rendement élevé « garanti » est un signal d’alerte.",
-          "La perte maximale mesure la baisse entre un plus haut et le plus bas suivant. Les pertes et les gains ne sont pas symétriques : après une baisse de 50 %, il faut une hausse de 100 % pour revenir au point de départ.",
+          "La perte maximale mesure la baisse entre un plus haut et le plus bas suivant. Les pertes et les gains ne sont pas symétriques : après une baisse de 50 %, il faut une hausse de 100 % pour revenir au point de départ.",
           "Diversifier, c’est répartir entre entreprises, secteurs, pays et types d’actifs. La diversification réduit le risque propre à un émetteur, comme la faillite d’une société. Elle ne supprime pas le risque de marché : lors d’une crise générale, beaucoup d’actifs baissent ensemble.",
           "L’horizon de placement est la durée pendant laquelle l’argent peut rester investi. Plus il est long, plus on peut attendre après une baisse, sans aucune garantie de récupération. L’argent nécessaire à court terme et l’épargne de précaution ne devraient pas dépendre des marchés d’actions.",
         ],
@@ -295,15 +295,15 @@ export const investingLessons: Lesson[] = [
     ],
     example: {
       title: "Exemple fictif · deux portefeuilles",
-      body: "Le portefeuille A détient une seule action fictive ; le portefeuille B répartit le même montant entre vingt sociétés de secteurs et de pays différents. Si l’entreprise de A fait faillite, A perd tout. Dans B, la même faillite coûte environ 5 %. En revanche, si tout le marché baisse de 30 %, A et B baissent fortement : 10 000 € deviennent 7 000 €, et il faudra ensuite une hausse d’environ 43 % pour revenir à 10 000 €.",
+      body: "Le portefeuille A détient une seule action fictive ; le portefeuille B répartit le même montant entre vingt sociétés de secteurs et de pays différents. Si l’entreprise de A fait faillite, A perd tout. Dans B, la même faillite coûte environ 5 %. En revanche, si tout le marché baisse de 30 %, A et B baissent fortement : 10 000 € deviennent 7 000 €, et il faudra ensuite une hausse d’environ 43 % pour revenir à 10 000 €.",
     },
     exercise: {
       prompt:
-        "Un placement perd 50 %. De quel pourcentage doit-il ensuite progresser pour retrouver sa valeur de départ ?",
-      hint: "Pars de 100 €, applique la baisse, puis cherche la hausse qui ramène à 100 €.",
+        "Un placement perd 50 %. De quel pourcentage doit-il ensuite progresser pour retrouver sa valeur de départ ?",
+      hint: "Pars de 100 €, applique la baisse, puis cherche la hausse qui ramène à 100 €.",
       answer: "100",
       explanation:
-        "100 € deviennent 50 €. Pour revenir à 100 €, il faut gagner 50 € sur une base de 50 € : +100 %. Les pertes pèsent plus lourd que les gains de même pourcentage.",
+        "100 € deviennent 50 €. Pour revenir à 100 €, il faut gagner 50 € sur une base de 50 € : +100 %. Les pertes pèsent plus lourd que les gains de même pourcentage.",
     },
     quiz: [
       {
@@ -321,7 +321,7 @@ export const investingLessons: Lesson[] = [
       {
         id: "inv-risque-2",
         question:
-          "On te propose un placement « sans risque » à 15 % par an garanti. Quelle réaction est la plus prudente ?",
+          "On te propose un placement « sans risque » à 15 % par an garanti. Quelle réaction est la plus prudente ?",
         options: [
           "Y voir un signal d’alerte et vérifier l’acteur auprès de l’AMF avant tout versement",
           "Investir vite avant que l’offre disparaisse",
@@ -345,8 +345,8 @@ export const investingLessons: Lesson[] = [
     flashcards: [
       {
         front:
-          "Après une baisse de 50 %, quelle hausse faut-il pour revenir au départ ?",
-        back: "+100 %. Les pertes et les gains ne sont pas symétriques.",
+          "Après une baisse de 50 %, quelle hausse faut-il pour revenir au départ ?",
+        back: "+100 %. Les pertes et les gains ne sont pas symétriques.",
       },
       {
         front: "Que protège la diversification ?",
@@ -408,15 +408,15 @@ export const investingLessons: Lesson[] = [
     ],
     example: {
       title: "Exemple fictif · un même ETF, deux enveloppes",
-      body: "Camille, personnage fictif, veut un ETF « Monde » fictif aux frais courants de 0,2 % par an. Dans un compte-titres, elle détient directement l’ETF. Dans une assurance-vie, le même type de support peut exister en unité de compte : elle paie alors aussi les frais de gestion du contrat. Le support est comparable ; l’enveloppe change les frais, la fiscalité et les conditions de retrait. Les règles exactes sont à vérifier avant toute décision.",
+      body: "Camille, personnage fictif, veut un ETF « Monde » fictif aux frais courants de 0,2 % par an. Dans un compte-titres, elle détient directement l’ETF. Dans une assurance-vie, le même type de support peut exister en unité de compte : elle paie alors aussi les frais de gestion du contrat. Le support est comparable ; l’enveloppe change les frais, la fiscalité et les conditions de retrait. Les règles exactes sont à vérifier avant toute décision.",
     },
     exercise: {
       prompt:
-        "Un fonds fictif affiche des frais courants de 1,5 % par an. Sur un encours de 8 000 €, combien coûtent-ils environ sur une année, en euros ?",
+        "Un fonds fictif affiche des frais courants de 1,5 % par an. Sur un encours de 8 000 €, combien coûtent-ils environ sur une année, en euros ?",
       hint: "Applique le pourcentage annuel à l’encours.",
       answer: "120",
       explanation:
-        "8 000 × 1,5 % = 120 € par an, prélevés dans la valeur du fonds. Si l’encours grandit, le montant des frais grandit avec lui.",
+        "8 000 × 1,5 % = 120 € par an, prélevés dans la valeur du fonds. Si l’encours grandit, le montant des frais grandit avec lui.",
     },
     quiz: [
       {
@@ -520,25 +520,25 @@ export const investingLessons: Lesson[] = [
     ],
     example: {
       title: "Exemple fictif · un carnet d’ordres",
-      body: "Sur une action fictive, le meilleur prix acheteur est 20,00 € et le meilleur prix vendeur 20,10 € : la fourchette est de 0,10 €, soit 0,5 %. Un ordre d’achat au marché de 100 actions s’exécute vers 20,10 € si cette quantité est disponible, plus haut sinon. Un ordre à cours limité à 20,05 € attend qu’un vendeur accepte ce prix ; il peut ne jamais être exécuté.",
+      body: "Sur une action fictive, le meilleur prix acheteur est 20,00 € et le meilleur prix vendeur 20,10 € : la fourchette est de 0,10 €, soit 0,5 %. Un ordre d’achat au marché de 100 actions s’exécute vers 20,10 € si cette quantité est disponible, plus haut sinon. Un ordre à cours limité à 20,05 € attend qu’un vendeur accepte ce prix ; il peut ne jamais être exécuté.",
     },
     exercise: {
       prompt:
-        "Sur une action fictive, le meilleur prix acheteur est 49 € et le meilleur prix vendeur 50 €. Quelle est la fourchette, en euros ?",
+        "Sur une action fictive, le meilleur prix acheteur est 49 € et le meilleur prix vendeur 50 €. Quelle est la fourchette, en euros ?",
       hint: "Soustrais le meilleur prix acheteur du meilleur prix vendeur.",
       answer: "1",
       explanation:
-        "50 − 49 = 1 €, soit environ 2 % du prix. Acheter puis revendre immédiatement coûterait déjà cet écart, avant même les frais de courtage.",
+        "50 − 49 = 1 €, soit environ 2 % du prix. Acheter puis revendre immédiatement coûterait déjà cet écart, avant même les frais de courtage.",
     },
     quiz: [
       {
         id: "inv-ordres-1",
         question:
-          "Tu veux être certain de ne pas payer plus de 30 € par action. Quel ordre choisis-tu ?",
+          "Tu veux être certain de ne pas payer plus de 30 € par action. Quel ordre choisis-tu ?",
         options: [
-          "Un ordre à cours limité à 30 €",
+          "Un ordre à cours limité à 30 €",
           "Un ordre au marché",
-          "Un ordre à seuil de déclenchement à 30 €",
+          "Un ordre à seuil de déclenchement à 30 €",
         ],
         answer: 0,
         explanation:
