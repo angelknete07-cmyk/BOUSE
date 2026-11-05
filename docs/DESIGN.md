@@ -123,3 +123,14 @@ Le diagnostic de reprise du 5 novembre a relevé des défauts visibles et une co
 - **Langue** : libellés en français (Comprendre / Pratiquer / Démontrer / Appliquer, Académie, Projets, Atelier IA). Radar est conservé : « Veille » suggérerait une surveillance automatique.
 
 La passe attend une review design externe avant de poursuivre les fonctionnalités.
+
+## Passe 12 — audit complet et cohérence
+
+L'audit des écrans restants est consigné dans [AUDIT-12.md](../design-reviews/AUDIT-12.md). Les règles suivantes s'ajoutent aux précédentes :
+
+- **Un nom par notion** : les graphes prennent le nom court de `src/data/lessonLabels.ts`. Le titre complet reste celui de la leçon.
+- **Visualisations fidèles** : un graphe ne suggère jamais une variation que les données n'ont pas. Le calendrier des révisions est croissant ; l'échelle racine carrée est un choix de lisibilité qui garde l'ordre et la croissance des écarts.
+- **Pas de décoration muette** : un anneau, un halo ou une forme qui ne porte aucune information est retiré.
+- **Fiches** : libellés discrets en `--text-tertiary`, contenu en `--text-secondary`. Un parcours déclaré se montre comme une frise ; l'étape courante est nommée en texte.
+- **Unités** : une unité suit le nombre qu'elle qualifie.
+- **Reduced motion** : une seule règle globale dans `styles.css`. Ne pas la dupliquer par écran.

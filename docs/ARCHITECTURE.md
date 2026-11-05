@@ -14,7 +14,7 @@ Une application locale convient à ce premier cycle d’apprentissage : pas de s
 | Contenus             | Leçons structurées, prérequis, références, versions, exercices et corrigés ; indépendants du stockage personnel.                                             |
 | `src/lib/types.ts`   | Contrats du profil, des tentatives, des projets et de l’état applicatif.                                                                                     |
 | `src/lib/domain.ts`  | Fonctions pures : évaluation de quiz, calcul économique, normalisation de recherche, grille de prompt et étapes de projet. Aucun accès réseau ou navigateur. |
-| `src/lib/storage.ts` | Lecture/validation de l’état local et export de fichiers ; frontière à remplacer lors de l’ajout d’une persistance distante.                                 |
+| `src/lib/storage.ts` | Validation de l’état (`parseState`), état vide et export de fichiers.                                                                                        |
 | `tests/`             | Cas métier et parcours navigateur critiques. Les assertions doivent vérifier un comportement utile, pas uniquement la présence d’un composant.               |
 
 ## État et progression
@@ -96,3 +96,11 @@ Le hook `useClock` déclenche toujours une actualisation périodique et au retou
 `src/lib/projectLearning.ts` dérive la fermeture des prérequis, l’ordre des étapes, leurs objectifs d’origine et les états selon `latestCurrentAttempt`. Les prérequis partagés n’apparaissent qu’une fois. Les cycles et contenus manquants bloquent leurs descendants ; une branche indépendante peut rester disponible. Les minutes et compteurs sont dérivés, sans état « compétence terminée » persisté.
 
 `project-plan/<id>` ouvre directement Repères sans modifier les routes de dossier existantes. Les leçons relient les objectifs et leurs prérequis au plan ; la carte distingue les objectifs explicitement choisis des apprentissages associés. L’export de dossier utilise `projectLearningMarkdown` ; le portfolio exporte les objectifs exacts sans importer le module de parcours, ce qui évite une dépendance circulaire avec les helpers de quiz.
+
+## Persistance, chargement et intégration continue
+
+`src/lib/persistence.ts` définit `PersistenceAdapter` (`readRaw`, `write`, `clear`) avec un adaptateur `localStorage` et un adaptateur mémoire pour les tests. `readStateFrom` valide via `parseState` et conserve une sauvegarde illisible sans l'effacer. L'interface reste synchrone et locale d'abord. La synchronisation de compte prévue à l'étape 2 répliquera cette copie vers le serveur au lieu de la remplacer, pour qu'une panne réseau ne bloque jamais l'apprentissage. Aucun service distant n'est connecté.
+
+Les écrans secondaires (Académie, compétences, leçon, révisions, projets, simulation, portfolio, outils) sont chargés avec `React.lazy`. L'accueil et l'onboarding restent dans le chunk principal. Les feuilles de style des écrans sont importées dans `main.tsx`, dans l'ordre de cascade historique, avant `art-direction.css`. Ne pas réimporter une feuille depuis un composant chargé à la demande : elle passerait après `art-direction.css` et changerait les priorités.
+
+`.github/workflows/ci.yml` exécute `npm ci`, Prettier, `npm run build`, `npm test`, l'installation de Chromium pour Playwright et `npm run test:e2e`. Les traces sont conservées sept jours en cas d'échec.

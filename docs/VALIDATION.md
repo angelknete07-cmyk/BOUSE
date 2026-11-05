@@ -125,3 +125,15 @@ Après les corrections : `npm run build` réussit (bundle principal 503,08 kB mi
 Les sélecteurs des tests navigateur suivent les nouveaux libellés visibles ; aucune assertion n'a été retirée. **141 captures** fraîches sont enregistrées avec la paire principale sur l'atlas de l'Académie, archive `2026-11-05_06-43-13-Europe-Paris`. Les écrans modifiés ont été inspectés sur desktop et mobile ; les constats et limites sont dans [LATEST.md](../design-reviews/LATEST.md).
 
 Pas d'appareil physique, de Safari/Firefox ni de lecteur d'écran réel. Aucune review design externe n'est revendiquée.
+
+## Passe 12 — audit complet, préférences et dette technique
+
+Contrôles du 5 novembre 2026 sur le conteneur cloud (Chromium de `/opt/pw-browsers`). `npm run build` réussit sans avertissement de taille : le bundle principal fait 341,20 kB (108,07 kB gzip) et les écrans secondaires sont des chunks séparés. La feuille CSS compilée a été comparée à celle d'avant le déplacement des imports : identique à la nouvelle règle `.page-loading` près.
+
+`npm test` passe avec **154 cas unitaires**, dont six sur l'adaptateur de persistance. La suite complète `npx playwright test` passe avec **56 tests** (un nouveau scénario de préférences sur deux viewports), sans échec, test ignoré ni retry. Prettier passe sur `src/` et `tests/`.
+
+Une première exécution après le chargement à la demande a échoué sur cinq tests. Deux tests lisaient un texte d'étape désormais répété par la frise. Mon nouveau test de préférences utilisait un sélecteur de libellé trop strict. Un test choisissait son chemin mobile avant la fin du chargement de la leçon. Les tests ont été adaptés sans retirer d'assertion, et les captures attendent la fin du chargement.
+
+**141 captures** fraîches sont enregistrées avec la paire principale sur les révisions, archive `2026-11-05_10-37-05-Europe-Paris`. Un défaut de chevauchement des libellés du nouveau graphe, vu à l'inspection, a été corrigé avant la génération finale.
+
+Le workflow `.github/workflows/ci.yml` est versionné. Son exécution sur GitHub est rapportée seulement après vérification. Pas d'appareil physique, de Safari/Firefox ni de lecteur d'écran réel. Aucune review design externe n'est revendiquée.

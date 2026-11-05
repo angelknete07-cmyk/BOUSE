@@ -173,21 +173,6 @@ export function parseState(raw: string): AppState {
   }
   return s;
 }
-export function readState(): { state: AppState; error: string | null } {
-  try {
-    const raw = localStorage.getItem(storageKey);
-    return {
-      state: raw ? parseState(raw) : structuredClone(emptyState),
-      error: null,
-    };
-  } catch {
-    return {
-      state: structuredClone(emptyState),
-      error:
-        "La sauvegarde locale est inaccessible ou illisible. Elle a été conservée ; exportez-la avant de réinitialiser. Les changements restent en mémoire.",
-    };
-  }
-}
 export function downloadFile(
   name: string,
   contents: string,

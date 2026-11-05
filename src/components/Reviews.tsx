@@ -50,15 +50,16 @@ const intervalLabel = (days: number) =>
 const plural = (count: number, singular: string, multiple: string) =>
   count === 1 ? singular : multiple;
 
-// Intervals after a card is found without help (24 h, then 3, 7, 14, 30 days),
-// placed on a linear 30-day axis so the growing gaps are drawn to scale.
+// Intervals after a card is found without help (24 h, then 3, 7, 14, 30 days).
+// A square-root day axis keeps the order and the growing gaps faithful while
+// leaving room for the labels of the first, close-together steps.
 const spacingSteps = [
   { days: 1, label: "24 h" },
   { days: 3, label: "3 j" },
   { days: 7, label: "7 j" },
   { days: 14, label: "14 j" },
   { days: 30, label: "30 j" },
-].map((step) => ({ ...step, x: 20 + (step.days / 30) * 300 }));
+].map((step) => ({ ...step, x: 20 + Math.sqrt(step.days / 30) * 300 }));
 
 export function Reviews({ state, update, onNavigate }: Props) {
   const [now, setNow] = useState(() => new Date());
@@ -517,7 +518,7 @@ export function Reviews({ state, update, onNavigate }: Props) {
                 aria-labelledby="review-next-title"
               >
                 <p className="eyebrow">LA DISTANCE QUI SE CONSTRUIT</p>
-                {/* True to the schedule: a linear day axis, each arc spanning the real gap. */}
+                {/* Each arc spans one real interval; its height grows with the gap. */}
                 <svg
                   className="review-spacing-art"
                   viewBox="0 0 340 150"

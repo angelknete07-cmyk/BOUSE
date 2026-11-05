@@ -16,13 +16,8 @@ import {
   preferenceOptions,
   withCurrent,
 } from "./data/profileOptions";
-import {
-  downloadFile,
-  emptyState,
-  parseState,
-  readState,
-  storageKey,
-} from "./lib/storage";
+import { downloadFile, emptyState, parseState } from "./lib/storage";
+import { browserPersistence, readStateFrom } from "./lib/persistence";
 import { normalizeSearch, rankSearchResults } from "./lib/domain";
 import { Icon } from "./components/Icon";
 import { Dashboard } from "./components/Dashboard";
@@ -128,7 +123,9 @@ function restoreFocus(target: Element | null) {
   });
 }
 function App() {
-  const [loaded, setLoaded] = useState(readState);
+  const [loaded, setLoaded] = useState(() =>
+    readStateFrom(browserPersistence()),
+  );
   const [state, setState] = useState(loaded.state);
   const [storageError, setStorageError] = useState<string | null>(loaded.error);
   const [route, navigate] = useRoute();
@@ -161,7 +158,7 @@ function App() {
   useEffect(() => {
     if (loaded.error) return;
     try {
-      localStorage.setItem(storageKey, JSON.stringify(state));
+      browserPersistence().write(state);
       setStorageError(null);
     } catch {
       setStorageError(
@@ -263,7 +260,7 @@ function App() {
                 try {
                   downloadFile(
                     "bouse-sauvegarde-brute.json",
-                    localStorage.getItem(storageKey) || "{}",
+                    browserPersistence().readRaw() || "{}",
                   );
                 } catch {
                   setStorageError(
@@ -283,7 +280,7 @@ function App() {
                     return;
                   }
                   try {
-                    localStorage.removeItem(storageKey);
+                    browserPersistence().clear();
                     setLoaded({
                       state: structuredClone(emptyState),
                       error: null,
@@ -901,7 +898,7 @@ function Settings({
                 className="button danger"
                 onClick={() => {
                   try {
-                    localStorage.removeItem(storageKey);
+                    browserPersistence().clear();
                     update(() => structuredClone(emptyState));
                   } catch {
                     setMessage(
