@@ -105,27 +105,37 @@ export function recommendLesson(state: AppState, now: Date) {
 }
 
 /**
- * What fits in one session of the chosen length. Sequences are equal slices of
- * the lesson's announced duration; reminders take about a minute each.
+ * What fits in one session of the chosen length, starting where the lesson was
+ * left. Sequences are equal slices of the lesson's announced duration;
+ * reminders take about a minute each.
  */
 export function sessionPlan(
   minutes: number,
   lesson: Pick<Lesson, "minutes">,
   dueReminders: number,
   sequences = 7,
+  start = 0,
 ) {
   const reminderMinutes = Math.min(dueReminders, 5);
   const available = Math.max(0, minutes - reminderMinutes);
   const perSequence = lesson.minutes / sequences;
-  const fits = Math.min(sequences, Math.floor(available / perSequence));
+  const left = sequences - start;
+  const fits = Math.min(left, Math.floor(available / perSequence));
   const reminders = reminderMinutes
     ? `${reminderMinutes} rappel${reminderMinutes > 1 ? "s" : ""}, puis `
     : "";
-  if (fits >= sequences)
-    return `Votre séance de ${minutes} min : ${reminders}la leçon en entier${available - lesson.minutes >= 8 ? " et son exercice" : ""}.`;
+  const head = `Votre séance de ${minutes}\u00a0min\u00a0: ${reminders}`;
+  if (fits >= left)
+    return start
+      ? `${head}la fin de la leçon, séquences ${start + 1} à ${sequences}.`
+      : `${head}la leçon en entier${available - lesson.minutes >= 8 ? " et son exercice" : ""}.`;
   if (fits <= 0)
-    return `Votre séance de ${minutes} min : ${reminders.replace(/, puis $/, "")}${reminders ? "" : "une première séquence"}.`;
-  return `Votre séance de ${minutes} min : ${reminders}environ ${fits} séquence${fits > 1 ? "s" : ""} sur ${sequences}. La suite à la prochaine séance.`;
+    return reminders
+      ? `${head.replace(/, puis $/, "")}.`
+      : `${head}une séquence, la ${start + 1}.`;
+  return start
+    ? `${head}les séquences ${start + 1} à ${start + fits} sur ${sequences}. La suite à la prochaine séance.`
+    : `${head}environ ${fits} séquence${fits > 1 ? "s" : ""} sur ${sequences}. La suite à la prochaine séance.`;
 }
 
 /** Practice spaces that extend a domain, for learners who learn by doing. */

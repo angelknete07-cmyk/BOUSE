@@ -104,3 +104,12 @@ test("the way of learning chooses what follows a passed quiz", () => {
     { kind: "apply" },
   );
 });
+
+test("the session plan starts where the lesson was left", () => {
+  const lesson = { minutes: 14 };
+  assert.match(
+    sessionPlan(10, lesson, 0, 7, 3),
+    /la fin de la leçon, séquences 4 à 7\./,
+  );
+  assert.match(sessionPlan(4, lesson, 0, 7, 3), /les séquences 4 à 5 sur 7/);
+});

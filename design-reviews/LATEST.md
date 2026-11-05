@@ -1,3 +1,43 @@
+# Review design — passe 19 : reprise à la séquence exacte, trajectoire sur 5 domaines
+
+**5 novembre 2026, 16:54 Europe/Paris.** Suite demandée par l'utilisateur (« Vas-y go ») : deux points de la liste « ce qui reste imparfait » (`AUDIT-17.md`). **La direction artistique n'est pas déclarée validée.**
+
+## Reprise à la séquence exacte
+
+- **Mémoire de la séquence.** Chaque leçon retient la séquence où elle a été quittée (`lessonPositions`, champ facultatif de la sauvegarde ; les anciennes sauvegardes restent valides).
+- **À la réouverture**, la leçon reprend à cette séquence et l'annonce : « Reprise à la séquence 4, là où vous aviez laissé cette leçon. », avec un bouton « Revenir au début ».
+- **Sur l'accueil**, le découpage de séance part de cette séquence : « la fin de la leçon, séquences 4 à 7 » ou « les séquences 4 à 5 sur 7 ».
+
+## Trajectoire de l'accueil sur les 5 domaines
+
+- **Trois parcours :** Fondations (finance, entreprise, IA), Finance personnelle et Investissement. Chacun affiche son avancement (« 0/4 »).
+- L'accueil s'ouvre sur le parcours de la leçon recommandée.
+- **Changer de parcours** sélectionne la notion utile : la recommandation, sa suite ou la première notion à valider.
+- **Mobile :** la hauteur réservée à la carte (240 px pour une rangée de 96 px) est supprimée.
+
+## Captures (profil Finance personnelle, 10 min)
+
+| Écran                            | Desktop                                          | Mobile                                          |
+| -------------------------------- | ------------------------------------------------ | ----------------------------------------------- |
+| Trajectoire, Finance personnelle | [Voir](parcours-19/desktop-trajectory.png)       | [Voir](parcours-19/mobile-trajectory.png)       |
+| Trajectoire, Investissement      | [Voir](parcours-19/desktop-trajectory-inv.png)   | [Voir](parcours-19/mobile-trajectory-inv.png)   |
+| Accueil après une leçon quittée  | [Voir](parcours-19/desktop-home-after-leave.png) | [Voir](parcours-19/mobile-home-after-leave.png) |
+| Leçon reprise à la séquence 4    | [Voir](parcours-19/desktop-lesson-resumed.png)   | [Voir](parcours-19/mobile-lesson-resumed.png)   |
+
+## Vérifications internes
+
+- `npm test` : 198 cas réussis (nouveaux : validation des positions de lecture, découpage depuis une séquence).
+- `npx playwright test` : 72 tests réussis (desktop et Pixel 7 émulé), dont un nouveau scénario : quitter une leçon, revenir, retrouver la séquence, revenir au début, recharger.
+- Build sans avertissement ; 159 captures, archive `2026-11-05_16-54-17-Europe-Paris`.
+- **Défauts vus à l'écran et corrigés :**
+  - sélecteur de parcours placé loin de la carte ;
+  - formule de reprise genrée (« vous vous étiez arrêté ») ;
+  - espace vide sous la trajectoire sur mobile.
+
+**Limites :** la position est enregistrée par leçon pour l'onglet « Comprendre » seulement. La pratique et le quiz repartent du début, comme avant.
+
+---
+
 # Review design — passe 18 : choix du profil effectifs, vocabulaire unifié
 
 **5 novembre 2026, 16:38 Europe/Paris.** Suite de la passe 17, validée par l'utilisateur (« Oui vas-y go »). Deux chantiers de la liste « ce qui reste imparfait ». **La direction artistique n'est pas déclarée validée.**

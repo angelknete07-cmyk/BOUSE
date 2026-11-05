@@ -488,3 +488,17 @@ test("invalid learning goal shapes are rejected before replacing a backup", () =
     );
   }
 });
+
+test("reading positions are optional, and only whole sequence indexes are kept", () => {
+  const base = { ...emptyState };
+  assert.deepEqual(
+    parseState(JSON.stringify({ ...base, lessonPositions: { "fp-budget": 3 } }))
+      .lessonPositions,
+    { "fp-budget": 3 },
+  );
+  assert.equal(parseState(JSON.stringify(base)).lessonPositions, undefined);
+  for (const lessonPositions of [[], { "fp-budget": -1 }, { "fp-budget": 1.5 }])
+    assert.throws(() =>
+      parseState(JSON.stringify({ ...base, lessonPositions })),
+    );
+});

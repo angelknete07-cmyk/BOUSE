@@ -107,6 +107,16 @@ export function parseState(raw: string): AppState {
     (s.lastLessonId !== null && typeof s.lastLessonId !== "string")
   )
     throw new Error("Notes invalides.");
+  if (
+    s.lessonPositions !== undefined &&
+    (!s.lessonPositions ||
+      typeof s.lessonPositions !== "object" ||
+      Array.isArray(s.lessonPositions) ||
+      !Object.values(s.lessonPositions).every(
+        (n) => Number.isInteger(n) && n >= 0 && n <= 50,
+      ))
+  )
+    throw new Error("Positions de lecture invalides.");
   if (s.reviewEvents !== undefined) {
     if (!Array.isArray(s.reviewEvents) || !s.reviewEvents.every(isReviewEvent))
       throw new Error("Historique de révision invalide.");

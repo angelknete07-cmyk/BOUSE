@@ -117,3 +117,7 @@ Chaque choix du profil a un effet visible, expliqué à l'endroit où il agit (p
 | Façon d'apprendre | Choisit la suite proposée après un quiz réussi : s'exercer (Lab, Atelier IA, projet), la prochaine leçon ou l'application à un projet. Les autres choix restent disponibles. |
 
 Une seule prochaine leçon existe dans l'application (`src/lib/recommendation.ts`). Les prérequis ne sont jamais sautés par la recommandation ; le passage direct au quiz est une proposition, pas une validation.
+
+## Reprendre où l'on s'est arrêté
+
+Une leçon retient la séquence où elle a été quittée et y rouvre, en l'annonçant, avec « Revenir au début » (passe 19). L'accueil découpe la séance à partir de cette séquence. La trajectoire de l'accueil couvre trois parcours (Fondations, Finance personnelle, Investissement), soit les 5 domaines, et s'ouvre sur celui de la leçon recommandée.

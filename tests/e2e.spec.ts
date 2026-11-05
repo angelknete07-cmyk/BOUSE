@@ -428,3 +428,27 @@ test("sans configuration, la synchronisation l’annonce honnêtement et ne prop
   await expect(panel.getByLabel("Adresse e-mail")).toHaveCount(0);
   await expect(page.locator(".local-status")).toHaveText("Données locales");
 });
+
+test("une leçon quittée en cours reprend à la même séquence, et l’accueil découpe la suite", async ({
+  page,
+}) => {
+  await onboard(page);
+  await page.goto("/#lesson/fp-budget");
+  const next = page.getByRole("button", { name: /Séquence suivante/ }).first();
+  await next.click();
+  await next.click();
+  await expect(page.getByText(/SÉQUENCE 03/)).toBeVisible();
+  await page.goto("/#home");
+  await expect(
+    page.getByText(/séquences 3 à|la fin de la leçon, séquences 3/),
+  ).toBeVisible();
+  await page.goto("/#lesson/fp-budget");
+  await expect(page.getByText(/SÉQUENCE 03/)).toBeVisible();
+  await expect(
+    page.getByRole("status").filter({ hasText: "Reprise à la séquence 3" }),
+  ).toBeVisible();
+  await page.getByRole("button", { name: "Revenir au début" }).click();
+  await expect(page.getByText(/SÉQUENCE 01/)).toBeVisible();
+  await page.reload();
+  await expect(page.getByText(/SÉQUENCE 01/)).toBeVisible();
+});

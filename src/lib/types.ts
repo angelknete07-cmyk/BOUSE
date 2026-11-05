@@ -95,5 +95,7 @@ export interface AppState {
   experiments?: ProjectExperiment[];
   decisions?: ProjectDecision[];
   simulations?: SimulationSnapshot[];
+  /** Additive v1 field: the sequence where each lesson was left (0-based). */
+  lessonPositions?: Record<string, number>;
 }
 export type StateUpdater = (updater: (state: AppState) => AppState) => void;

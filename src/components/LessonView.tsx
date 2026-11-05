@@ -31,7 +31,14 @@ const stages = [
 export function LessonView({ lesson, state, update, onNavigate }: Props) {
   const now = useClock();
   const [tab, setTab] = useState(0);
-  const [sequence, setSequence] = useState(0);
+  const savedPosition = (id: string) =>
+    Math.min(
+      Math.max(state.lessonPositions?.[id] ?? 0, 0),
+      lesson.sections.length + 2,
+    );
+  const [sequence, setSequence] = useState(() => savedPosition(lesson.id));
+  // Reopening a lesson resumes where it was left, and says so.
+  const [resumedAt, setResumedAt] = useState(() => savedPosition(lesson.id));
   const [exerciseText, setExerciseText] = useState("");
   const [hintVisible, setHintVisible] = useState(false);
   const [solutionVisible, setSolutionVisible] = useState(false);
@@ -82,7 +89,8 @@ export function LessonView({ lesson, state, update, onNavigate }: Props) {
 
   useEffect(() => {
     setTab(0);
-    setSequence(0);
+    setSequence(savedPosition(lesson.id));
+    setResumedAt(savedPosition(lesson.id));
     setExerciseText("");
     setHintVisible(false);
     setSolutionVisible(false);
@@ -116,8 +124,20 @@ export function LessonView({ lesson, state, update, onNavigate }: Props) {
     setTab(next);
     focusStage();
   }
-  function jumpSequence(next: number) {
+  function rememberSequence(next: number) {
     setSequence(next);
+    setResumedAt(0);
+    update((previous) =>
+      (previous.lessonPositions?.[lesson.id] ?? 0) === next
+        ? previous
+        : {
+            ...previous,
+            lessonPositions: { ...previous.lessonPositions, [lesson.id]: next },
+          },
+    );
+  }
+  function jumpSequence(next: number) {
+    rememberSequence(next);
     focusStage();
   }
   function submitQuiz(event: React.FormEvent<HTMLFormElement>) {
@@ -355,6 +375,22 @@ export function LessonView({ lesson, state, update, onNavigate }: Props) {
                   ))}
                 </div>
               </div>
+              {resumedAt > 0 && sequence === resumedAt && (
+                <p className="learning-resume" role="status">
+                  <Icon name="clock" size={14} />
+                  <span>
+                    Reprise à la séquence {resumedAt + 1}, là où vous aviez
+                    laissé cette leçon.
+                  </span>
+                  <button
+                    type="button"
+                    className="text-button"
+                    onClick={() => jumpSequence(0)}
+                  >
+                    Revenir au début
+                  </button>
+                </p>
+              )}
               <div
                 className={`learning-sequence sequence-${current.type} ${sequence === 0 ? "sequence-concept" : ""}`}
                 key={sequence}
@@ -889,7 +925,7 @@ export function LessonView({ lesson, state, update, onNavigate }: Props) {
                       onClick={() => {
                         if (result.passed && nextAction.kind === "route")
                           return onNavigate(nextAction.route);
-                        setSequence(0);
+                        rememberSequence(0);
                         advanceTo(result.passed ? 3 : 0);
                       }}
                     >

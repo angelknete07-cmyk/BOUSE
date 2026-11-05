@@ -170,3 +170,7 @@ Des scénarios réels ont été rejoués en desktop et en mobile : première vis
 ## Passe 18 — profil effectif et vocabulaire
 
 Contrôles du 5 novembre 2026. `npm run build` réussit sans avertissement. `npm test` passe avec **196 cas unitaires** (nouveau : `tests/recommendation.test.ts`). `npx playwright test` passe avec **70 tests** (desktop et Pixel 7 émulé). Les effets du profil ont été exercés dans un vrai navigateur, en desktop et en mobile ; captures dans `design-reviews/profil-18/`. Archive `2026-11-05_16-38-57-Europe-Paris`. Aucune validation design externe n'est revendiquée.
+
+## Passe 19 — reprise et trajectoire
+
+Contrôles du 5 novembre 2026. `npm run build` réussit sans avertissement. `npm test` passe avec **198 cas unitaires**. `npx playwright test` passe avec **72 tests** (desktop et Pixel 7 émulé), dont le nouveau scénario de reprise de séquence. Parcours exercés en desktop et mobile ; captures dans `design-reviews/parcours-19/`. Archive `2026-11-05_16-54-17-Europe-Paris`. Aucune validation design externe n'est revendiquée.
