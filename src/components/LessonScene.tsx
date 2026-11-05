@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { calculateEconomics } from "../lib/domain";
 import { projectInvestment } from "../lib/investing";
+import { budgetBalance, loanPayment } from "../lib/personalFinance";
 
 const euros = new Intl.NumberFormat("fr-FR", {
   style: "currency",
@@ -16,6 +17,8 @@ export function LessonScene({ lessonId }: { lessonId: string }) {
   if (lessonId === "prompt-structure") return <PromptScene />;
   if (lessonId === "automatisation-agent") return <WorkflowScene />;
   if (lessonId === "inv-interets-composes") return <CompoundScene />;
+  if (lessonId === "fp-budget") return <BudgetScene />;
+  if (lessonId === "fp-credit-taux") return <CreditScene />;
   if (lessonId === "inv-risque-diversification") return <DrawdownScene />;
   return null;
 }
@@ -687,6 +690,225 @@ function DrawdownScene() {
         <strong>
           Plus la chute est profonde, plus la remontée est longue.
         </strong>
+      </p>
+    </section>
+  );
+}
+
+/** Pay yourself first: where 1 800 € go in a fictitious month. */
+function BudgetScene() {
+  const income = 1800;
+  const fixedCharges = 1100;
+  const [savings, setSavings] = useState(150);
+  const [variable, setVariable] = useState(450);
+  const result = budgetBalance({
+    income,
+    fixedCharges,
+    variableSpending: variable,
+    savings,
+  });
+  const width = (amount: number) => (Math.max(0, amount) / income) * 520;
+  let x = 40;
+  const segments = [
+    {
+      label: "Charges fixes",
+      amount: fixedCharges,
+      className: "scene-bar-solid",
+    },
+    { label: "Épargne", amount: savings, className: "scene-bar-silver" },
+    { label: "Variables", amount: variable, className: "scene-bar-soft" },
+  ].map((segment) => {
+    const start = x;
+    x += width(segment.amount);
+    return { ...segment, x: start, w: width(segment.amount) };
+  });
+  return (
+    <section
+      className="scene-workbench"
+      aria-label="Explorer un budget mensuel"
+    >
+      <div className="scene-heading">
+        <div>
+          <span className="eyebrow">RÉPARTISSEZ LE MOIS</span>
+          <h3>Se payer en premier.</h3>
+        </div>
+        <span className="scene-fiction">Budget fictif · 1 800 € nets</span>
+      </div>
+      <div className="scene-number-line">
+        <div>
+          <strong className="scene-number" aria-live="polite">
+            {euros.format(result.remaining)}
+          </strong>
+          <span>
+            {result.remaining >= 0
+              ? "de marge en fin de mois"
+              : "de dépassement : le mois ne tient pas"}
+          </span>
+        </div>
+        <p>
+          Épargne programmée : <strong>{euros.format(savings)}</strong>, soit{" "}
+          {result.savingsRate.toLocaleString("fr-FR")} % des revenus. Charges
+          fixes : {result.fixedShare.toLocaleString("fr-FR")} %.
+        </p>
+      </div>
+      <svg
+        className="scene-break-even"
+        viewBox="0 0 600 155"
+        aria-hidden="true"
+      >
+        <rect x="40" y="50" width="520" height="40" className="scene-bar-dim" />
+        {segments.map((segment) => (
+          <rect
+            key={segment.label}
+            x={segment.x}
+            y="50"
+            width={Math.min(segment.w, Math.max(0, 560 - segment.x))}
+            height="40"
+            className={segment.className}
+          />
+        ))}
+        {segments.map((segment) =>
+          segment.w > 60 ? (
+            <text key={segment.label} x={segment.x + 6} y="112">
+              {segment.label}
+            </text>
+          ) : null,
+        )}
+        <text x="40" y="36">
+          0 €
+        </text>
+        <text x="560" y="36" textAnchor="end">
+          1 800 €
+        </text>
+      </svg>
+      <label className="scene-range">
+        Épargne programmée <strong>{euros.format(savings)}</strong>
+        <input
+          type="range"
+          min="0"
+          max="500"
+          step="10"
+          value={savings}
+          aria-label="Épargne programmée en euros"
+          onChange={(event) => setSavings(Number(event.target.value))}
+        />
+      </label>
+      <label className="scene-range">
+        Dépenses variables <strong>{euros.format(variable)}</strong>
+        <input
+          type="range"
+          min="200"
+          max="900"
+          step="10"
+          value={variable}
+          aria-label="Dépenses variables en euros"
+          onChange={(event) => setVariable(Number(event.target.value))}
+        />
+      </label>
+      <p className="scene-takeaway">
+        L’épargne passe avant les dépenses variables.{" "}
+        <strong>
+          Ce qui reste se dépense ; ce qui est programmé s’épargne.
+        </strong>
+      </p>
+    </section>
+  );
+}
+
+/** Same loan, different durations: monthly payment versus total cost. */
+function CreditScene() {
+  const [months, setMonths] = useState(24);
+  const [rate, setRate] = useState(6);
+  const result = loanPayment({ capital: 3000, annualRate: rate, months });
+  const decimal = new Intl.NumberFormat("fr-FR", {
+    style: "currency",
+    currency: "EUR",
+    minimumFractionDigits: 2,
+  });
+  return (
+    <section
+      className="scene-workbench"
+      aria-label="Explorer la mensualité et le coût d’un crédit"
+    >
+      <div className="scene-heading">
+        <div>
+          <span className="eyebrow">ALLONGEZ OU RACCOURCISSEZ</span>
+          <h3>Moins par mois, plus au total.</h3>
+        </div>
+        <span className="scene-fiction">
+          3 000 € · taux fictif · hors frais
+        </span>
+      </div>
+      <div className="scene-number-line">
+        <div>
+          <strong className="scene-number" aria-live="polite">
+            {decimal.format(result.monthlyPayment)}
+          </strong>
+          <span>par mois pendant {months} mois</span>
+        </div>
+        <p>
+          Coût total des intérêts :{" "}
+          <strong>{decimal.format(result.totalInterest)}</strong>. Total
+          remboursé : {decimal.format(result.totalPaid)}.
+        </p>
+      </div>
+      <svg
+        className="scene-break-even"
+        viewBox="0 0 600 155"
+        aria-hidden="true"
+      >
+        <line x1="40" y1="130" x2="560" y2="130" className="scene-line-dim" />
+        <rect
+          x="90"
+          y={130 - (3000 / 4000) * 110}
+          width="160"
+          height={(3000 / 4000) * 110}
+          className="scene-bar-dim"
+        />
+        <rect
+          x="90"
+          y={130 - (3000 / 4000) * 110 - (result.totalInterest / 4000) * 110}
+          width="160"
+          height={(result.totalInterest / 4000) * 110}
+          className="scene-bar-focus"
+        />
+        <text x="170" y="150" textAnchor="middle">
+          Capital + intérêts
+        </text>
+        <text x="420" y="60" textAnchor="middle">
+          {months} mensualités
+        </text>
+        <text x="420" y="84" textAnchor="middle">
+          de {decimal.format(result.monthlyPayment)}
+        </text>
+      </svg>
+      <label className="scene-range">
+        Durée <strong>{months} mois</strong>
+        <input
+          type="range"
+          min="6"
+          max="60"
+          step="6"
+          value={months}
+          aria-label="Durée du crédit en mois"
+          onChange={(event) => setMonths(Number(event.target.value))}
+        />
+      </label>
+      <label className="scene-range">
+        Taux nominal <strong>{rate.toLocaleString("fr-FR")} %</strong>
+        <input
+          type="range"
+          min="1"
+          max="20"
+          step="0.5"
+          value={rate}
+          aria-label="Taux nominal annuel en pourcentage"
+          onChange={(event) => setRate(Number(event.target.value))}
+        />
+      </label>
+      <p className="scene-takeaway">
+        Le TAEG ajoute frais et assurance exigée.{" "}
+        <strong>Comparez le coût total, pas seulement la mensualité.</strong>
       </p>
     </section>
   );

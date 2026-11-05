@@ -386,7 +386,7 @@ test("les préférences modifient tout le profil, sont conservées et ne touchen
     .getByRole("combobox", { name: /^Objectif/ })
     .selectOption("Construire un projet avec l’IA");
   await page.getByRole("checkbox", { name: "Entrepreneuriat" }).check();
-  await page.getByRole("checkbox", { name: "Finance" }).uncheck();
+  await page.getByRole("checkbox", { name: "Finance", exact: true }).uncheck();
   await page
     .getByLabel("Façon d’apprendre")
     .selectOption("Appliquer à mon projet");

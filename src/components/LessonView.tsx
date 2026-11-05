@@ -234,8 +234,9 @@ export function LessonView({ lesson, state, update, onNavigate }: Props) {
           {String(lessons.indexOf(lesson) + 1).padStart(2, "0")}
           <small>
             /{" "}
-            {lesson.domain === "Investissement"
-              ? "INVESTISSEMENT"
+            {lesson.domain === "Investissement" ||
+            lesson.domain === "Finance personnelle"
+              ? lesson.domain.toUpperCase()
               : "FONDATIONS"}
           </small>
         </span>

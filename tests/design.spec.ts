@@ -113,6 +113,7 @@ async function capture(page: Page, testInfo: TestInfo, name: string) {
       "16-search-keyboard",
       "17-lexique",
       "18-investissement-lecon",
+      "19-finance-perso-budget",
     ].includes(name)
   )
     await page.screenshot({
@@ -269,7 +270,7 @@ test("galerie des écrans et du quiz validé sans débordement", async ({
   // Change the document URL so the init script runs after the empty onboarding.
   await page.goto("/?gallery=1#academy");
   await expect(
-    page.getByRole("heading", { name: "11 notions, 4 domaines." }),
+    page.getByRole("heading", { name: "15 notions, 5 domaines." }),
   ).toBeVisible();
   await neutral(
     page.locator(".catalog-card").first(),
@@ -969,7 +970,7 @@ test("module investissement : lexique, leçon et simulateur de frais", async ({
   await seed(page);
   await page.goto("/#lexique");
   await expect(
-    page.getByRole("heading", { name: "Lexique de la bourse." }),
+    page.getByRole("heading", { name: "Lexique de la finance." }),
   ).toBeVisible();
   await capture(page, testInfo, "17-lexique");
   await page.getByLabel("Chercher un terme").fill("ordre");
@@ -990,6 +991,22 @@ test("module investissement : lexique, leçon et simulateur de frais", async ({
     }),
   ).toBeVisible();
   await capture(page, testInfo, "18-investissement-risque");
+  await page.goto("/#lesson/fp-budget");
+  await expect(
+    page.getByRole("heading", {
+      name: "Construire son budget : revenus, charges, reste à vivre",
+      exact: true,
+    }),
+  ).toBeVisible();
+  await capture(page, testInfo, "19-finance-perso-budget");
+  await page.goto("/#lesson/fp-credit-taux");
+  await expect(
+    page.getByRole("heading", {
+      name: "Crédit : taux, TAEG et coût total",
+      exact: true,
+    }),
+  ).toBeVisible();
+  await capture(page, testInfo, "19-finance-perso-credit");
 });
 
 test("mouvement de page mesuré et préférence de réduction respectée", async ({

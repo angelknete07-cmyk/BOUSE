@@ -228,11 +228,19 @@ h4 {
   color: var(--text);
   font-weight: 500;
 }
+.home-progress > span {
+  white-space: nowrap;
+}
 .home-progress > div {
   display: flex;
   gap: var(--space-1);
+  flex: 0 1 auto;
+  min-width: 0;
 }
+/* One tick per lesson: ticks shrink as the catalogue grows. */
 .home-progress i {
+  flex: 0 1 22px;
+  min-width: 4px;
   width: 22px;
   height: 2px;
   background: var(--line-strong);
@@ -318,8 +326,8 @@ h4 {
 }
 .art-home .learning-universes {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--space-10);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-12) var(--space-16);
 }
 .art-home .domain-folio {
   display: flex;
@@ -782,7 +790,7 @@ h4 {
 .academy-map-canvas {
   position: relative;
   min-width: 680px;
-  height: 790px;
+  height: 980px;
   margin: var(--space-5) 0 var(--space-6);
 }
 .academy-map-canvas > svg {
@@ -908,16 +916,19 @@ h4 {
   left: 2%;
 }
 .atlas-finance {
-  top: 3%;
+  top: 1%;
 }
 .atlas-business {
-  top: 26%;
+  top: 19%;
 }
 .atlas-ai {
-  top: 52%;
+  top: 39%;
+}
+.atlas-personal {
+  top: 59%;
 }
 .atlas-investing {
-  top: 78%;
+  top: 80%;
 }
 .atlas-caption {
   text-align: right;
@@ -1722,6 +1733,9 @@ h4 {
   .home-progress i {
     width: 19px;
   }
+  .home-progress small {
+    white-space: nowrap;
+  }
   .art-home .learning-trajectory {
     display: grid;
     grid-template-columns: 1fr;
@@ -1962,7 +1976,7 @@ h4 {
   .academy-map-canvas {
     /* Five investing nodes share a lane: give them room and let the atlas scroll. */
     min-width: 900px;
-    height: 700px;
+    height: 860px;
     margin: var(--space-5) var(--space-2) var(--space-4);
   }
   .atlas-scroll::after {

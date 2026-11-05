@@ -42,9 +42,9 @@ test("le lexique filtre, cherche et renvoie vers la leçon qui explique le terme
 }) => {
   await seed(page);
   await page.goto("/#academy");
-  await page.getByRole("button", { name: "Lexique de la bourse" }).click();
+  await page.getByRole("button", { name: "Lexique de la finance" }).click();
   await expect(
-    page.getByRole("heading", { name: "Lexique de la bourse." }),
+    page.getByRole("heading", { name: "Lexique de la finance." }),
   ).toBeVisible();
   await expect(page.locator(".glossary-count")).toHaveText(
     `${glossary.length} termes`,
@@ -120,4 +120,22 @@ test("sans serveur configuré, le mentor l’annonce et ne simule aucune répons
     .getByLabel("Votre question", { exact: true })
     .fill("C’est quoi un indice ?");
   await expect(handoff).toBeEnabled();
+});
+
+test("le simulateur de crédit montre qu’allonger la durée baisse la mensualité et augmente le coût", async ({
+  page,
+}) => {
+  await seed(page);
+  await page.goto("/#lesson/fp-credit-taux");
+  const scene = page.getByRole("region", {
+    name: "Explorer la mensualité et le coût d’un crédit",
+  });
+  await scene.getByLabel("Taux nominal annuel en pourcentage").fill("6");
+  await scene.getByLabel("Durée du crédit en mois").fill("12");
+  await expect(scene.locator(".scene-number")).toHaveText(/258,20\s?€/);
+  await expect(scene).toContainText("98,39");
+  await scene.getByLabel("Durée du crédit en mois").fill("24");
+  await expect(scene.locator(".scene-number")).toHaveText(/132,96\s?€/);
+  await expect(scene).toContainText("191,08");
+  await noOverflow(page);
 });

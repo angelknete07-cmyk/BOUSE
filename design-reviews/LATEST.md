@@ -1,3 +1,36 @@
+# Review design — passe 15 : module Finance personnelle
+
+**5 novembre 2026, 12:59 Europe/Paris.** Quatre leçons enchaînées, deux scènes interactives, 15 termes ajoutés au lexique, renommé « Lexique de la finance ». Vérification interne effectuée ; review design externe toujours attendue.
+
+- **Leçons :**
+  - construire son budget ;
+  - l'épargne de précaution ;
+  - crédit : taux, TAEG et coût total ;
+  - inflation et pouvoir d'achat.
+
+  Exemples fictifs, aucun taux réglementé ni plafond chiffré, sources : Banque de France (Mes questions d'argent), service-public.fr, IEFP, Insee.
+
+- **Scènes :**
+  - un budget du mois en trois segments gris, épargne en argent, avec marge ou dépassement affiché ;
+  - le crédit : mensualité et intérêts selon la durée et le taux, avec un moteur pur (`src/lib/personalFinance.ts`) couvert par 7 tests.
+- **Structure à 5 domaines :**
+  - l'atlas passe à 5 rangées et la carte des compétences à 5 colonnes, avec défilement horizontal sur mobile ;
+  - l'accueil affiche 4 cartes en grille 2 × 2 (« Quatre territoires ») ;
+  - l'Académie affiche « 15 notions, 5 domaines ».
+- **Défauts corrigés après inspection :**
+  - barre du budget peu lisible ;
+  - compteur de l'accueil coupé sur mobile avec 15 notions ;
+  - libellés tronqués de la carte des compétences mobile ;
+  - montants coupés sur deux lignes.
+- **Préférences.** La phrase d'aide dit maintenant précisément ce que chaque choix change aujourd'hui : les intérêts orientent la leçon proposée ; le niveau, l'objectif et la façon d'apprendre ne modifient pas encore le parcours.
+- **Captures :** [budget desktop](screens/desktop/19-finance-perso-budget-viewport.png), [budget mobile](screens/mobile/19-finance-perso-budget-viewport.png), [crédit desktop](screens/desktop/19-finance-perso-credit.png), [crédit mobile](screens/mobile/19-finance-perso-credit.png), [atlas](screens/desktop/02-academy.png), [accueil](screens/desktop/01-home.png), [compétences mobile](screens/mobile/09-competences.png). Archive `2026-11-05_12-59-57-Europe-Paris`.
+- **Vérifications :**
+  - `npm test` : 189 cas unitaires réussis ;
+  - `npx playwright test` : 70 tests réussis (nouveau scénario : simulateur de crédit) ;
+  - build sans avertissement.
+
+---
+
 # Review design — passe 14 : application installable et nouveau logo
 
 **5 novembre 2026.** BOUSE devient une application web installable, qui fonctionne hors ligne. Le logo est remplacé par la proposition D, choisie par l'utilisateur parmi quatre ([propositions](logo-propositions.png), [jeu final](logo-final.png)).

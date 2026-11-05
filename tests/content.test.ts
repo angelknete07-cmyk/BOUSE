@@ -2,8 +2,12 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { lessons } from "../src/data/lessons.ts";
 
-test("the catalogue contains six foundations and five investing lessons, all substantial", () => {
-  assert.equal(lessons.length, 11);
+test("the catalogue contains foundations, personal finance and investing lessons, all substantial", () => {
+  assert.equal(lessons.length, 15);
+  assert.equal(
+    lessons.filter((lesson) => lesson.domain === "Finance personnelle").length,
+    4,
+  );
   assert.equal(
     lessons.filter((lesson) => lesson.domain === "Investissement").length,
     5,
@@ -127,5 +131,18 @@ test("the investing module is a single prerequisite chain starting from the mark
     assert.deepEqual(investing[index]!.prerequisites, [
       investing[index - 1]!.id,
     ]);
+  }
+});
+
+test("personal finance lessons stay educational and form a single chain", () => {
+  const personal = lessons.filter(
+    (lesson) => lesson.domain === "Finance personnelle",
+  );
+  assert.deepEqual(personal[0]!.prerequisites, []);
+  for (let index = 1; index < personal.length; index++)
+    assert.deepEqual(personal[index]!.prerequisites, [personal[index - 1]!.id]);
+  for (const lesson of personal) {
+    assert.match(lesson.example.title, /fictif/i, lesson.id);
+    assert.match(lesson.editorialStatus, /aucun conseil personnalisé/);
   }
 });

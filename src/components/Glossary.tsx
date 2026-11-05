@@ -43,9 +43,9 @@ export function Glossary({
       <header className="art-heading">
         <div>
           <span className="instrument-index">
-            Académie <i /> Investissement
+            Académie <i /> Bourse et finance personnelle
           </span>
-          <h1>Lexique de la bourse.</h1>
+          <h1>Lexique de la finance.</h1>
         </div>
         <p>
           {glossary.length} termes, chacun relié à la leçon qui l’explique.

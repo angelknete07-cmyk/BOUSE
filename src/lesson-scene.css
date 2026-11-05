@@ -564,3 +564,15 @@
     y var(--motion-normal) var(--ease-out),
     height var(--motion-normal) var(--ease-out);
 }
+/* Budget bar: three readable greys, savings in silver. */
+.scene-bar-solid {
+  fill: var(--text-tertiary);
+  fill-opacity: 0.55;
+}
+.scene-bar-soft {
+  fill: var(--text-tertiary);
+  fill-opacity: 0.22;
+}
+.scene-bar-silver {
+  fill: var(--accent);
+}

@@ -13,17 +13,21 @@ type Props = {
 
 type Position = { x: number; y: number };
 const positions: Record<string, Position> = {
-  "ca-marge-tresorerie": { x: 12.5, y: 23 },
-  "seuil-rentabilite": { x: 12.5, y: 56 },
-  "validation-client": { x: 37.5, y: 23 },
-  "comprendre-llm": { x: 62.5, y: 23 },
-  "prompt-structure": { x: 62.5, y: 51 },
-  "automatisation-agent": { x: 62.5, y: 78 },
-  "inv-marches-financiers": { x: 87.5, y: 14 },
-  "inv-interets-composes": { x: 87.5, y: 32 },
-  "inv-risque-diversification": { x: 87.5, y: 50 },
-  "inv-fonds-enveloppes": { x: 87.5, y: 68 },
-  "inv-ordres-biais": { x: 87.5, y: 86 },
+  "ca-marge-tresorerie": { x: 10, y: 23 },
+  "seuil-rentabilite": { x: 10, y: 56 },
+  "validation-client": { x: 30, y: 23 },
+  "comprendre-llm": { x: 50, y: 23 },
+  "prompt-structure": { x: 50, y: 51 },
+  "automatisation-agent": { x: 50, y: 78 },
+  "fp-budget": { x: 70, y: 14 },
+  "fp-epargne-precaution": { x: 70, y: 36 },
+  "fp-credit-taux": { x: 70, y: 58 },
+  "fp-inflation-quotidien": { x: 70, y: 80 },
+  "inv-marches-financiers": { x: 90, y: 14 },
+  "inv-interets-composes": { x: 90, y: 32 },
+  "inv-risque-diversification": { x: 90, y: 50 },
+  "inv-fonds-enveloppes": { x: 90, y: 68 },
+  "inv-ordres-biais": { x: 90, y: 86 },
 };
 
 function latestAttempt(state: AppState, id: string, now: Date) {
@@ -136,110 +140,113 @@ export function KnowledgeMap({ state, onNavigate }: Props) {
               <span aria-hidden="true">↺</span> À reprendre
             </span>
           </div>
-          <div
-            className="knowledge-canvas"
-            role="group"
-            aria-label="Notions à explorer sur la carte"
-          >
-            <div className="knowledge-lanes" aria-hidden="true">
-              <span>Finance</span>
-              <span>Entrepreneuriat</span>
-              <span>Intelligence artificielle</span>
-              <span>Investissement</span>
-            </div>
-            <svg
-              className="knowledge-connections"
-              viewBox="0 0 1000 560"
-              preserveAspectRatio="none"
-              fill="none"
-              aria-hidden="true"
+          <div className="knowledge-scroll">
+            <div
+              className="knowledge-canvas"
+              role="group"
+              aria-label="Notions à explorer sur la carte"
             >
-              <defs>
-                <marker
-                  id={markerId}
-                  viewBox="0 0 10 10"
-                  refX="8"
-                  refY="5"
-                  markerWidth="5"
-                  markerHeight="5"
-                  orient="auto-start-reverse"
-                >
-                  <path
-                    d="M 1 1 L 8 5 L 1 9"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.4"
-                  />
-                </marker>
-              </defs>
-              {edges.map((edge) => {
-                const from = positions[edge.from];
-                const to = positions[edge.to];
-                if (!from || !to) return null;
-                const bypass =
-                  edge.from === "comprendre-llm" &&
-                  edge.to === "automatisation-agent";
-                const fromX = from.x * 10;
-                const fromY = from.y * 5.6;
-                const toX = to.x * 10;
-                const toY = to.y * 5.6;
-                const d = bypass
-                  ? `M ${fromX - 18} ${fromY} C ${fromX - 160} ${fromY + 40}, ${toX - 160} ${toY - 40}, ${toX - 20} ${toY}`
-                  : `M ${fromX} ${fromY + 19} L ${toX} ${toY - 23}`;
-                const active =
-                  edge.from === selectedId || edge.to === selectedId;
+              <div className="knowledge-lanes" aria-hidden="true">
+                <span>Finance</span>
+                <span>Entrepreneuriat</span>
+                <span>Intelligence artificielle</span>
+                <span>Finance personnelle</span>
+                <span>Investissement</span>
+              </div>
+              <svg
+                className="knowledge-connections"
+                viewBox="0 0 1000 560"
+                preserveAspectRatio="none"
+                fill="none"
+                aria-hidden="true"
+              >
+                <defs>
+                  <marker
+                    id={markerId}
+                    viewBox="0 0 10 10"
+                    refX="8"
+                    refY="5"
+                    markerWidth="5"
+                    markerHeight="5"
+                    orient="auto-start-reverse"
+                  >
+                    <path
+                      d="M 1 1 L 8 5 L 1 9"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.4"
+                    />
+                  </marker>
+                </defs>
+                {edges.map((edge) => {
+                  const from = positions[edge.from];
+                  const to = positions[edge.to];
+                  if (!from || !to) return null;
+                  const bypass =
+                    edge.from === "comprendre-llm" &&
+                    edge.to === "automatisation-agent";
+                  const fromX = from.x * 10;
+                  const fromY = from.y * 5.6;
+                  const toX = to.x * 10;
+                  const toY = to.y * 5.6;
+                  const d = bypass
+                    ? `M ${fromX - 18} ${fromY} C ${fromX - 160} ${fromY + 40}, ${toX - 160} ${toY - 40}, ${toX - 20} ${toY}`
+                    : `M ${fromX} ${fromY + 19} L ${toX} ${toY - 23}`;
+                  const active =
+                    edge.from === selectedId || edge.to === selectedId;
+                  return (
+                    <path
+                      key={`${edge.from}-${edge.to}`}
+                      d={d}
+                      className={active ? "is-related" : ""}
+                      markerEnd={`url(#${markerId})`}
+                      vectorEffect="non-scaling-stroke"
+                    />
+                  );
+                })}
+              </svg>
+              {lessons.map((lesson) => {
+                const position = positions[lesson.id];
+                if (!position) return null;
+                const attempt = latestAttempt(state, lesson.id, now);
                 return (
-                  <path
-                    key={`${edge.from}-${edge.to}`}
-                    d={d}
-                    className={active ? "is-related" : ""}
-                    markerEnd={`url(#${markerId})`}
-                    vectorEffect="non-scaling-stroke"
-                  />
+                  <button
+                    key={lesson.id}
+                    type="button"
+                    className={`knowledge-node ${selectedId === lesson.id ? "is-selected" : ""} ${attempt?.passed ? "is-verified" : ""}`}
+                    style={
+                      {
+                        "--node-x": `${position.x}%`,
+                        "--node-y": `${position.y}%`,
+                      } as CSSProperties
+                    }
+                    aria-describedby={`knowledge-description-${lesson.id}`}
+                    aria-pressed={selectedId === lesson.id}
+                    aria-controls="knowledge-details"
+                    onClick={() => select(lesson.id)}
+                  >
+                    <span className="knowledge-node-point" aria-hidden="true">
+                      {attempt?.passed ? (
+                        <Icon name="check" size={14} />
+                      ) : attempt ? (
+                        <Icon name="clock" size={14} />
+                      ) : (
+                        <span className="knowledge-node-core" />
+                      )}
+                    </span>
+                    <span className="knowledge-node-label">
+                      {lessonShortLabel(lesson.id, lesson.title)}
+                    </span>
+                    <span hidden id={`knowledge-description-${lesson.id}`}>
+                      {lesson.title}
+                    </span>
+                    <span className="knowledge-node-status">
+                      {statusLabel(attempt)}
+                    </span>
+                  </button>
                 );
               })}
-            </svg>
-            {lessons.map((lesson) => {
-              const position = positions[lesson.id];
-              if (!position) return null;
-              const attempt = latestAttempt(state, lesson.id, now);
-              return (
-                <button
-                  key={lesson.id}
-                  type="button"
-                  className={`knowledge-node ${selectedId === lesson.id ? "is-selected" : ""} ${attempt?.passed ? "is-verified" : ""}`}
-                  style={
-                    {
-                      "--node-x": `${position.x}%`,
-                      "--node-y": `${position.y}%`,
-                    } as CSSProperties
-                  }
-                  aria-describedby={`knowledge-description-${lesson.id}`}
-                  aria-pressed={selectedId === lesson.id}
-                  aria-controls="knowledge-details"
-                  onClick={() => select(lesson.id)}
-                >
-                  <span className="knowledge-node-point" aria-hidden="true">
-                    {attempt?.passed ? (
-                      <Icon name="check" size={14} />
-                    ) : attempt ? (
-                      <Icon name="clock" size={14} />
-                    ) : (
-                      <span className="knowledge-node-core" />
-                    )}
-                  </span>
-                  <span className="knowledge-node-label">
-                    {lessonShortLabel(lesson.id, lesson.title)}
-                  </span>
-                  <span hidden id={`knowledge-description-${lesson.id}`}>
-                    {lesson.title}
-                  </span>
-                  <span className="knowledge-node-status">
-                    {statusLabel(attempt)}
-                  </span>
-                </button>
-              );
-            })}
+            </div>
           </div>
           <p className="knowledge-map-caption">
             <Icon name="arrow" size={14} /> Une flèche relie un prérequis à la

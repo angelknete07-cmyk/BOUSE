@@ -248,7 +248,7 @@ function App() {
     const routeTitle = route.startsWith("lesson/")
       ? lessons.find((item) => item.id === route.slice(7))?.title
       : route === "lexique" || route.startsWith("lexique/")
-        ? "Lexique de la bourse"
+        ? "Lexique de la finance"
         : projectId !== null
           ? state.projects.find((item) => item.id === projectId)?.title
           : navigation.find((item) => item.id === route)?.label;
@@ -824,8 +824,11 @@ function Settings({
             </select>
           </label>
           <p className="muted settings-note">
-            Ces choix orientent la leçon proposée à l’accueil. Ils ne modifient
-            ni vos quiz, ni vos révisions, ni vos projets.
+            Aujourd’hui, vos centres d’intérêt orientent la leçon proposée à
+            l’accueil et le temps par session s’y affiche. Le niveau, l’objectif
+            et la façon d’apprendre sont enregistrés mais ne modifient pas
+            encore le parcours. Rien de tout cela ne change vos quiz, vos
+            révisions ou vos projets, et tout le contenu reste accessible.
           </p>
         </section>
         <section className="panel">
@@ -1010,10 +1013,11 @@ function Search({
       search: `${l.title} ${l.summary} ${l.skills.join(" ")} ${l.id.includes("llm") ? "ia" : ""}`,
     })),
     {
-      title: "Lexique de la bourse",
-      detail: "Académie · Investissement",
+      title: "Lexique de la finance",
+      detail: "Académie · Bourse et finance personnelle",
       route: "lexique",
-      search: "lexique glossaire vocabulaire bourse termes définitions",
+      search:
+        "lexique glossaire vocabulaire bourse budget crédit termes définitions",
     },
     ...glossary.map((entry) => ({
       title: entry.term,

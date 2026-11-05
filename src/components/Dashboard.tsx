@@ -309,7 +309,7 @@ export function Dashboard({ state, onNavigate }: Props) {
       <div className="learning-universes-heading">
         <div>
           <p className="territory-caption">Choisir un territoire</p>
-          <h2>Trois territoires. Un même horizon.</h2>
+          <h2>Quatre territoires. Un même horizon.</h2>
         </div>
         <button className="text-button" onClick={() => onNavigate("academy")}>
           Toute l’Académie
@@ -445,6 +445,50 @@ export function Dashboard({ state, onNavigate }: Props) {
           </div>
           <span className="domain-link">
             Apprendre à investir <Icon name="arrow" size={18} />
+          </span>
+        </button>
+        <button
+          className="path-card domain-folio domain-personal"
+          onClick={() => openLesson(nextFor("Finance personnelle"))}
+        >
+          <div className="domain-kicker">
+            <span className="eyebrow">04 / FINANCE PERSONNELLE</span>
+            <span>{domainCount("Finance personnelle")}</span>
+          </div>
+          <div className="finance-signature" aria-hidden="true">
+            <svg viewBox="0 0 440 200">
+              <path className="finance-axis" d="M20 160H420" />
+              <path className="finance-curve-cash" d="M40 160V60H110V160" />
+              <path className="finance-curve-cash" d="M150 160V96H220V160" />
+              <path className="finance-curve-result" d="M260 160V124H330V160" />
+              <path className="finance-curve-cash" d="M370 160V134H410V160" />
+              <text x="40" y="50">
+                REVENUS
+              </text>
+              <text x="150" y="86">
+                CHARGES
+              </text>
+              <text x="250" y="114">
+                ÉPARGNE
+              </text>
+              <text x="22" y="190">
+                LE MOIS
+              </text>
+            </svg>
+          </div>
+          <div className="domain-copy">
+            <h3>
+              Le budget, la réserve,
+              <br />
+              le crédit.
+            </h3>
+            <p>
+              Garder la main sur son argent
+              <br className="desktop-break" /> avant de le faire travailler.
+            </p>
+          </div>
+          <span className="domain-link">
+            Organiser son argent <Icon name="arrow" size={18} />
           </span>
         </button>
       </div>

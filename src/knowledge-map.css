@@ -60,7 +60,7 @@
   position: absolute;
   inset: var(--space-10) 0 auto;
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   text-align: center;
   gap: var(--space-3);
 }
@@ -92,7 +92,7 @@
   left: var(--node-x);
   top: var(--node-y);
   transform: translate(-50%, -16px);
-  width: 30%;
+  width: 19%;
   min-width: 0;
   display: flex;
   flex-direction: column;
@@ -357,9 +357,20 @@
     gap: var(--space-4);
     font-size: var(--type-micro);
   }
+  /* Five domain columns do not fit a phone: the map scrolls sideways. */
+  .knowledge-scroll {
+    overflow-x: auto;
+    margin-inline: calc(-1 * var(--space-2));
+    mask-image: linear-gradient(
+      to right,
+      var(--bg) calc(100% - var(--space-8)),
+      transparent
+    );
+  }
   .knowledge-canvas {
-    /* Five investing notions stack in one column: leave room for wrapped labels. */
+    min-width: 620px;
     height: 680px;
+    margin-inline: var(--space-2);
   }
   .knowledge-lanes {
     inset-block-start: var(--space-8);
@@ -369,7 +380,7 @@
     font-size: var(--type-micro);
   }
   .knowledge-node {
-    width: 31%;
+    width: 19%;
   }
   .knowledge-node-label {
     font-size: var(--type-small);

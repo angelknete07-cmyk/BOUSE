@@ -4,17 +4,21 @@ import { Icon } from "./Icon";
 import { lessonShortLabel } from "../data/lessonLabels";
 
 const positions: Record<string, { x: number; y: number }> = {
-  "ca-marge-tresorerie": { x: 16, y: 12 },
-  "seuil-rentabilite": { x: 53, y: 12 },
-  "validation-client": { x: 29, y: 36 },
-  "comprendre-llm": { x: 16, y: 62 },
-  "prompt-structure": { x: 53, y: 62 },
-  "automatisation-agent": { x: 86, y: 49 },
-  "inv-marches-financiers": { x: 16, y: 87 },
-  "inv-interets-composes": { x: 34.5, y: 87 },
-  "inv-risque-diversification": { x: 53, y: 87 },
-  "inv-fonds-enveloppes": { x: 69.5, y: 87 },
-  "inv-ordres-biais": { x: 86, y: 87 },
+  "ca-marge-tresorerie": { x: 16, y: 9 },
+  "seuil-rentabilite": { x: 53, y: 9 },
+  "validation-client": { x: 29, y: 27 },
+  "comprendre-llm": { x: 16, y: 47 },
+  "prompt-structure": { x: 53, y: 47 },
+  "automatisation-agent": { x: 86, y: 37 },
+  "fp-budget": { x: 16, y: 68 },
+  "fp-epargne-precaution": { x: 34.5, y: 68 },
+  "fp-credit-taux": { x: 53, y: 68 },
+  "fp-inflation-quotidien": { x: 69.5, y: 68 },
+  "inv-marches-financiers": { x: 16, y: 89 },
+  "inv-interets-composes": { x: 34.5, y: 89 },
+  "inv-risque-diversification": { x: 53, y: 89 },
+  "inv-fonds-enveloppes": { x: 69.5, y: 89 },
+  "inv-ordres-biais": { x: 86, y: 89 },
 };
 export function KnowledgeAtlas({
   selectedId,
@@ -71,7 +75,7 @@ export function KnowledgeAtlas({
               <stop offset="1" stopColor="var(--accent)" stopOpacity="0" />
             </linearGradient>
           </defs>
-          {[0.12, 0.36, 0.62, 0.87].map((y) => (
+          {[0.09, 0.27, 0.47, 0.68, 0.89].map((y) => (
             <path key={y} className="atlas-guide" d={`M0 ${y * 480}H1000`} />
           ))}
           {[0.16, 0.53, 0.86].map((x) => (
@@ -101,6 +105,7 @@ export function KnowledgeAtlas({
         <span className="atlas-domain atlas-finance">Finance</span>
         <span className="atlas-domain atlas-business">Entrepreneuriat</span>
         <span className="atlas-domain atlas-ai">Intelligence artificielle</span>
+        <span className="atlas-domain atlas-personal">Finance personnelle</span>
         <span className="atlas-domain atlas-investing">Investissement</span>
         {lessons.map((lesson, index) => {
           const point = positions[lesson.id]!;

@@ -1,5 +1,5 @@
 /**
- * Lexique de la bourse et de l'investissement. Définitions pédagogiques
+ * Lexique de la finance : bourse, investissement, budget et crédit. Définitions pédagogiques
  * générales ; les règles fiscales et plafonds ne sont volontairement pas
  * chiffrés (à vérifier à la date d'une décision).
  */
@@ -11,6 +11,7 @@ export const glossaryCategories = [
   "Ordres",
   "Enveloppes",
   "Comportement",
+  "Budget et crédit",
 ] as const;
 export type GlossaryCategory = (typeof glossaryCategories)[number];
 
@@ -28,6 +29,10 @@ const interest = "inv-interets-composes";
 const risk = "inv-risque-diversification";
 const funds = "inv-fonds-enveloppes";
 const orders = "inv-ordres-biais";
+const budget = "fp-budget";
+const reserve = "fp-epargne-precaution";
+const credit = "fp-credit-taux";
+const prices = "fp-inflation-quotidien";
 
 export const glossary: GlossaryTerm[] = [
   {
@@ -451,6 +456,126 @@ export const glossary: GlossaryTerm[] = [
     lessonId: orders,
     definition:
       "Chercher et retenir surtout les informations qui confirment ce que l’on pense déjà.",
+  },
+  {
+    id: "reste-a-vivre",
+    term: "Reste à vivre",
+    category: "Budget et crédit",
+    lessonId: budget,
+    definition:
+      "Ce qui reste des revenus après les charges fixes, pour les dépenses variables et l’épargne.",
+  },
+  {
+    id: "charges-fixes",
+    term: "Charges fixes",
+    category: "Budget et crédit",
+    lessonId: budget,
+    definition:
+      "Dépenses qui reviennent chaque mois pour un montant connu : loyer, abonnements, assurances, remboursements.",
+  },
+  {
+    id: "payer-premier",
+    term: "Se payer en premier",
+    category: "Budget et crédit",
+    lessonId: budget,
+    definition:
+      "Programmer l’épargne en début de mois, puis vivre avec le reste.",
+  },
+  {
+    id: "epargne-precaution-terme",
+    term: "Réserve de précaution",
+    category: "Budget et crédit",
+    lessonId: reserve,
+    definition:
+      "Épargne disponible et sans risque de perte, souvent dimensionnée en mois de dépenses essentielles, pour faire face aux imprévus.",
+  },
+  {
+    id: "livret-reglemente",
+    term: "Livret réglementé",
+    category: "Budget et crédit",
+    lessonId: reserve,
+    definition:
+      "Livret d’épargne dont le taux et le plafond sont encadrés par les pouvoirs publics (Livret A, LDDS…). Conditions à vérifier à la date de la décision.",
+  },
+  {
+    id: "mensualite",
+    term: "Mensualité",
+    category: "Budget et crédit",
+    lessonId: credit,
+    definition:
+      "Somme remboursée chaque mois pour un crédit, qui combine intérêts et capital.",
+  },
+  {
+    id: "taux-nominal",
+    term: "Taux nominal",
+    category: "Budget et crédit",
+    lessonId: credit,
+    definition:
+      "Taux qui sert à calculer les intérêts d’un crédit, hors frais et assurance.",
+  },
+  {
+    id: "taeg",
+    term: "TAEG",
+    category: "Budget et crédit",
+    lessonId: credit,
+    definition:
+      "Taux annuel effectif global : inclut intérêts, frais obligatoires et assurance exigée. Indicateur légal pour comparer des offres.",
+  },
+  {
+    id: "cout-total-credit",
+    term: "Coût total du crédit",
+    category: "Budget et crédit",
+    lessonId: credit,
+    definition:
+      "Somme des mensualités moins le capital emprunté, plus frais et assurance exigée.",
+  },
+  {
+    id: "amortissement",
+    term: "Tableau d’amortissement",
+    category: "Budget et crédit",
+    lessonId: credit,
+    definition:
+      "Détail de chaque échéance d’un crédit : part d’intérêts, part de capital et capital restant dû.",
+  },
+  {
+    id: "taux-endettement",
+    term: "Taux d’endettement",
+    category: "Budget et crédit",
+    lessonId: credit,
+    definition:
+      "Part des revenus consacrée aux remboursements de crédits. Les seuils retenus par les banques se vérifient au moment d’emprunter.",
+  },
+  {
+    id: "credit-renouvelable",
+    term: "Crédit renouvelable",
+    category: "Budget et crédit",
+    lessonId: credit,
+    definition:
+      "Réserve d’argent réutilisable, en général à taux élevé, dont le remboursement peut s’étirer longtemps.",
+  },
+  {
+    id: "pouvoir-achat",
+    term: "Pouvoir d’achat",
+    category: "Budget et crédit",
+    lessonId: prices,
+    definition:
+      "Quantité de biens et services qu’un revenu permet d’acheter ; il baisse si les prix montent plus vite que le revenu.",
+  },
+  {
+    id: "salaire-reel",
+    term: "Salaire réel",
+    category: "Budget et crédit",
+    lessonId: prices,
+    definition:
+      "Évolution du salaire corrigée de l’inflation : environ hausse du salaire moins inflation.",
+  },
+  {
+    id: "ipc",
+    term: "Indice des prix à la consommation",
+    category: "Budget et crédit",
+    lessonId: prices,
+    definition:
+      "Indicateur publié par l’Insee qui mesure l’évolution des prix d’un panier représentatif de dépenses.",
   },
 ];
 
