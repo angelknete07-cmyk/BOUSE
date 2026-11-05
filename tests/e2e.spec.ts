@@ -414,3 +414,17 @@ test("les préférences modifient tout le profil, sont conservées et ne touchen
   await expect(page.getByLabel("Niveau")).toHaveValue("Intermédiaire");
   await noHorizontalOverflow(page);
 });
+
+test("sans configuration, la synchronisation l’annonce honnêtement et ne propose aucune connexion", async ({
+  page,
+}) => {
+  await onboard(page);
+  await page.goto("/#settings");
+  const panel = page.getByRole("region", { name: "Compte et synchronisation" });
+  await expect(panel).toContainText("Non configurée");
+  await expect(panel).toContainText(
+    "La synchronisation n’est pas configurée sur cette installation",
+  );
+  await expect(panel.getByLabel("Adresse e-mail")).toHaveCount(0);
+  await expect(page.locator(".local-status")).toHaveText("Données locales");
+});

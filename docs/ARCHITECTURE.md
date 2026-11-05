@@ -104,3 +104,27 @@ Le hook `useClock` déclenche toujours une actualisation périodique et au retou
 Les écrans secondaires (Académie, compétences, leçon, révisions, projets, simulation, portfolio, outils) sont chargés avec `React.lazy`. L'accueil et l'onboarding restent dans le chunk principal. Les feuilles de style des écrans sont importées dans `main.tsx`, dans l'ordre de cascade historique, avant `art-direction.css`. Ne pas réimporter une feuille depuis un composant chargé à la demande : elle passerait après `art-direction.css` et changerait les priorités.
 
 `.github/workflows/ci.yml` exécute `npm ci`, Prettier, `npm run build`, `npm test`, l'installation de Chromium pour Playwright et `npm run test:e2e`. Les traces sont conservées sept jours en cas d'échec.
+
+## Synchronisation de compte et mentor (versions initiales)
+
+**Synchronisation.** `src/lib/cloud.ts` charge `@supabase/supabase-js` à la demande, seulement si `VITE_SUPABASE_URL` et `VITE_SUPABASE_ANON_KEY` sont définies. L’authentification utilise le flux PKCE, compatible avec le routeur par hash. `src/lib/sync.ts` décide de la première réconciliation (fonction pure, testée) :
+
+- envoyer l’état local si le serveur n’a rien ;
+- adopter la copie serveur si le navigateur est vide ;
+- ne rien faire si les deux contenus sont identiques (comparaison JSON canonique) ;
+- sinon, déclarer un conflit tranché par la personne.
+
+`useCloudSync` réplique ensuite chaque changement après 1,5 s. L’écriture est conditionnée par la révision lue : si un autre appareil a écrit entre-temps, l’écriture est refusée et un conflit est affiché au lieu d’écraser son travail. La copie serveur est validée par `parseState`, comme un import.
+
+Le serveur stocke un document JSON par utilisateur (`learning_states`) plutôt qu’un schéma normalisé. Ce choix garde une seule frontière de validation et rend la migration réversible ; la normalisation (tentatives, projets, révisions en tables) reste une étape ultérieure.
+
+**Mentor.** Le contrat `supabase/functions/_shared/mentorContract.ts` est neutre vis-à-vis du fournisseur et partagé par le client, la fonction et les tests. Il contient les limites, la validation, l’invite système stable et la conversion des citations.
+
+La fonction `supabase/functions/mentor` :
+
+- authentifie l’appelant avec son jeton Supabase ;
+- vérifie le quota avec la clé de service ;
+- envoie les extraits de leçon comme documents citables à `claude-opus-5-5` (SDK `@anthropic-ai/sdk` 1.1.0), avec `effort: medium`, une limite de 8 000 jetons par réponse, l’invite système mise en cache et `fallbacks: "default"` en cas de refus ;
+- enregistre la consommation par une fonction SQL atomique.
+
+Changer de fournisseur ne touche que cette fonction. Les questions ne sont ni stockées ni journalisées.

@@ -1178,3 +1178,53 @@
   }
 }
 /* Reduced motion: covered by the global rule in styles.css. */
+/* Mentor: a draft beside the lesson, never mistaken for course content. */
+.mentor-panel {
+  display: grid;
+  gap: var(--space-4);
+}
+.mentor-exchange {
+  border-top: 1px solid var(--line);
+  padding-top: var(--space-3);
+}
+.mentor-question {
+  color: var(--text);
+  font-size: var(--type-body-sm);
+  margin: 0 0 var(--space-2);
+}
+.mentor-draft {
+  display: inline-block;
+  color: var(--text-tertiary);
+  font-size: var(--type-micro);
+  letter-spacing: 0.04em;
+  margin-bottom: var(--space-2);
+}
+.mentor-answer {
+  color: var(--text-secondary);
+  font-size: var(--type-body-sm);
+  line-height: var(--leading-body);
+  white-space: pre-wrap;
+  margin: 0;
+}
+.mentor-citations {
+  list-style: none;
+  padding: 0;
+  margin: var(--space-3) 0 0;
+  display: grid;
+  gap: var(--space-2);
+}
+.mentor-citations li {
+  border-left: 1px solid var(--line-strong);
+  padding-left: var(--space-3);
+  color: var(--muted);
+  font-size: var(--type-caption);
+}
+.mentor-citations small {
+  display: block;
+  color: var(--text-tertiary);
+  margin-top: var(--space-1);
+}
+.mentor-form {
+  display: grid;
+  gap: var(--space-3);
+}

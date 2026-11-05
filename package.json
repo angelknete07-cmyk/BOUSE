@@ -17,6 +17,7 @@
     "review:save": "node scripts/save-design-review.mjs"
   },
   "dependencies": {
+    "@supabase/supabase-js": "2.118.0",
     "react": "19.3.1",
     "react-dom": "19.3.1"
   },

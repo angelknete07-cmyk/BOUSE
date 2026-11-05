@@ -137,3 +137,20 @@ Une première exécution après le chargement à la demande a échoué sur cinq 
 **141 captures** fraîches sont enregistrées avec la paire principale sur les révisions, archive `2026-11-05_10-37-05-Europe-Paris`. Un défaut de chevauchement des libellés du nouveau graphe, vu à l'inspection, a été corrigé avant la génération finale.
 
 Le workflow `.github/workflows/ci.yml` est versionné. Son exécution sur GitHub est rapportée seulement après vérification. Pas d'appareil physique, de Safari/Firefox ni de lecteur d'écran réel. Aucune review design externe n'est revendiquée.
+
+## Passe 13 — module Bourse, comptes et mentor IA
+
+Contrôles du 5 novembre 2026. `npm run build` réussit sans avertissement : le bundle principal fait 366,60 kB et le SDK Supabase est isolé dans un chunk chargé à la demande. `npm test` passe avec **176 cas unitaires**. `npx playwright test` passe avec **68 tests** (desktop et Pixel 7 émulé), sans échec ni retry. Prettier passe sur `src/`, `tests/` et `supabase/`.
+
+**Couvert par des tests :**
+
+- le contenu des cinq leçons (exemples fictifs, statut sans conseil, citation de l'AMF, chaîne de prérequis) ;
+- le moteur de projection (valeurs de référence, frais, inflation, rendement négatif, bornes) ;
+- la décision de première synchronisation (envoi, adoption, identique, conflit) ;
+- la validation et la conversion des citations du contrat du mentor ;
+- le contexte de chaque leçon, accepté par le contrat ;
+- les parcours du lexique, du simulateur, et du mentor et de la synchronisation non configurés.
+
+**Non exécuté :** aucune connexion réelle à Supabase, aucun appel au fournisseur d'IA ni exécution Deno de la fonction. Aucun projet ni aucune clé n'étaient disponibles. La fonction a été vérifiée par TypeScript contre les vrais types de `@anthropic-ai/sdk` 1.1.0 et `@supabase/supabase-js` 2.118.0. La migration SQL n'a pas été appliquée à une base. La procédure d'activation est décrite dans `docs/SETUP.md`.
+
+**153 captures**, archive `2026-11-05_11-15-35-Europe-Paris`, paire principale sur la leçon d'intérêts composés. Aucune review design externe n'est revendiquée.

@@ -1,6 +1,7 @@
 import {
   lazy,
   Suspense,
+  useCallback,
   useEffect,
   useRef,
   useState,
@@ -19,6 +20,8 @@ import {
 } from "./data/profileOptions";
 import { downloadFile, emptyState, parseState } from "./lib/storage";
 import { browserPersistence, readStateFrom } from "./lib/persistence";
+import { useCloudSync, type CloudSync } from "./lib/useCloudSync";
+import { CloudPanel } from "./components/CloudPanel";
 import { normalizeSearch, rankSearchResults } from "./lib/domain";
 import { Icon } from "./components/Icon";
 import { Dashboard } from "./components/Dashboard";
@@ -131,6 +134,8 @@ function App() {
     readStateFrom(browserPersistence()),
   );
   const [state, setState] = useState(loaded.state);
+  const replaceState = useCallback((next: AppState) => setState(next), []);
+  const cloud = useCloudSync(state, replaceState);
   const [storageError, setStorageError] = useState<string | null>(loaded.error);
   const [route, navigate] = useRoute();
   const projectId = projectIdForRoute(route);
@@ -464,7 +469,11 @@ function App() {
           <div>
             <span className="local-status">
               <i />
-              Données locales
+              {cloud.status === "synced"
+                ? "Synchronisé"
+                : cloud.status === "saving"
+                  ? "Synchronisation…"
+                  : "Données locales"}
             </span>
             <button
               className="icon-button"
@@ -565,7 +574,7 @@ function App() {
               ) : route === "radar" ? (
                 <Radar />
               ) : route === "settings" ? (
-                <Settings state={state} update={update} />
+                <Settings state={state} update={update} cloud={cloud} />
               ) : (
                 <div className="empty-state">
                   <h1>Cette page n’existe pas.</h1>
@@ -706,9 +715,11 @@ function Radar() {
 function Settings({
   state,
   update,
+  cloud,
 }: {
   state: AppState;
   update: StateUpdater;
+  cloud: CloudSync;
 }) {
   const [message, setMessage] = useState("");
   const [confirm, setConfirm] = useState(false);
@@ -820,8 +831,10 @@ function Settings({
           <p className="muted">
             Votre profil, vos réponses, notes et projets restent dans le
             stockage local de ce navigateur, sans date d’expiration automatique.
-            Aucun compte, synchronisation cloud, analyse d’audience ou appel IA
-            n’est activé.
+            Aucune analyse d’audience n’est activée.{" "}
+            {cloud.status === "off"
+              ? "Aucun compte, synchronisation ni appel IA n’est configuré sur cette installation."
+              : "Une copie en ligne et le mentor IA ne s’activent qu’après votre connexion."}
           </p>
           <p className="muted">
             Une suppression des données du navigateur peut effacer votre
@@ -898,6 +911,7 @@ function Settings({
           )}
           <p role="status">{message}</p>
         </section>
+        <CloudPanel cloud={cloud} state={state} />
         <section className="panel danger-panel">
           <h2>Repartir de zéro</h2>
           <p className="muted">

@@ -68,3 +68,38 @@ Dans l’exécution cloud restreinte, le lancement de Chromium peut nécessiter 
 Les dépendances et fichiers installés peuvent être conservés par le snapshot de l’environnement. Les processus doivent être redémarrés à chaque nouvelle instance. Le script d’installation et les instructions de démarrage enregistrés dans le brouillon de configuration restent distincts de leur exécution dans cette machine et de la publication par l’utilisateur.
 
 Le code et les rendus sont versionnés dans la branche GitHub `codex/learning-design-review`. La publication de cette branche ne déploie pas l’application. L’authentification, Supabase, les appels réels à un fournisseur IA et la veille automatisée restent à construire. Aucun secret n’est nécessaire au MVP local ; une future intégration sensible devra passer par le serveur et les paramètres sécurisés appropriés.
+
+## Comptes, synchronisation et mentor IA (facultatif)
+
+Sans configuration, l’application reste entièrement locale : la synchronisation affiche « Non configurée » et le mentor « non connecté », sans réponse simulée. Activer ces fonctions demande un projet Supabase **dédié**. Ne pas réutiliser un projet existant sans l’avoir inspecté.
+
+1. **Créer le projet** sur supabase.com et récupérer, dans _Project Settings → API_, l’URL du projet et la clé publique `anon`.
+2. **Appliquer la migration** `supabase/migrations/20261105120000_learning_state_and_mentor.sql`, avec la CLI (`supabase link --project-ref <ref>` puis `supabase db push`) ou dans l’éditeur SQL. Elle crée :
+   - `learning_states`, une copie par utilisateur, avec une révision tenue par le serveur ;
+   - `mentor_usage`, les quotas quotidiens ;
+   - les politiques RLS « chacun ne voit que ses lignes » ;
+   - `delete_my_account()`.
+3. **Activer la connexion par e-mail** (_Authentication → Providers → Email_). Déclarer l’URL de l’application dans _Authentication → URL Configuration_ (Site URL et Redirect URLs). L’application utilise le flux PKCE : le lien de connexion revient avec `?code=…`.
+4. **Configurer le front** avec un fichier `.env.local`, jamais versionné :
+   ```bash
+   VITE_SUPABASE_URL=https://<ref>.supabase.co
+   VITE_SUPABASE_ANON_KEY=<clé anon>
+   ```
+   La clé `anon` est publique par conception ; les politiques RLS protègent les données. Ne jamais placer la clé `service_role` ni une clé de fournisseur d’IA dans une variable `VITE_*`.
+5. **Déployer le mentor** :
+   ```bash
+   supabase secrets set ANTHROPIC_API_KEY=<clé>
+   # facultatif : MENTOR_DAILY_REQUESTS (30 par défaut), MENTOR_MAX_OUTPUT_TOKENS (8000),
+   # MENTOR_ALLOWED_ORIGIN (origine de l’application, « * » par défaut)
+   supabase functions deploy mentor
+   ```
+   La fonction vérifie la session de l’appelant, applique le quota, interroge `claude-opus-5-5` (effort `medium`, repli automatique côté serveur si une demande est refusée) et renvoie une réponse marquée « brouillon » avec les passages de leçon cités. Ses journaux contiennent les statuts et le nombre de jetons, jamais les questions.
+
+Vérification après configuration :
+
+- se connecter depuis _Préférences → Compte et synchronisation_ ;
+- vérifier que la copie en ligne apparaît ;
+- ouvrir l’application dans un autre navigateur et se connecter : la progression doit être récupérée ;
+- poser une question au mentor depuis une leçon.
+
+Ces étapes n’ont pas été exécutées contre un vrai projet dans cette session : aucun projet ni aucune clé n’étaient disponibles.

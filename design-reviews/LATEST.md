@@ -1,65 +1,69 @@
-# Review design — passe 12 : audit DA complet, préférences, dette technique
+# Review design — passe 13 : module Bourse, comptes et mentor IA
 
-**5 novembre 2026, 10:37 Europe/Paris.** L'utilisateur a demandé de vérifier toute la direction artistique, d'améliorer le design et les fonctionnalités existantes, de traiter la dette technique puis de poursuivre la feuille de route. Il a explicitement autorisé la suite **sans attendre la review design externe** des passes 10 et 11. Vérification interne effectuée ; **review design externe toujours attendue** pour les passes 10, 11 et 12.
+**5 novembre 2026, 11:15 Europe/Paris.** À la demande « Oui fais les 3 », cette passe livre trois chantiers :
 
-## Changements
+1. le module Bourse et investissement ;
+2. la synchronisation de compte Supabase ;
+3. le mentor IA.
 
-- **Cohérence.** Un seul nom court par notion dans l'atlas, la trajectoire et la carte des compétences. Les derniers restes d'anglais sont traduits.
-- **Révisions.** Le graphe des intervalles suit maintenant le calendrier réel (arcs croissants sur un axe en jours) au lieu d'une vague. L'anneau décoratif est retiré.
-- **Projets.** Fiche allégée et frise des neuf étapes déclarées.
-- **Préférences.** Niveau, objectif, centres d'intérêt et façon d'apprendre deviennent modifiables.
-- **Petites corrections.** « € » collé au chiffre dans le Lab, légende de l'atlas mobile, libellé du parcours de projet.
-- **Technique.** Chargement des écrans à la demande (bundle principal de 503 à 341 kB), CI GitHub, CSS allégé, adaptateur de persistance.
+La synchronisation et le mentor restent **inactifs tant qu'aucun projet n'est configuré**. Vérification interne effectuée ; **review design externe toujours attendue** pour les passes 10 à 13.
 
-Le détail est dans l'[audit de la passe 12](AUDIT-12.md).
+## Changements visibles
 
-## Captures et comparaison
+- **Académie à quatre domaines.**
+  - « 11 notions, 4 domaines » ;
+  - lien « Lexique de la bourse » ;
+  - atlas à quatre rangées, avec la rangée Investissement en chaîne de cinq notions ;
+  - filtre Investissement.
+- **Leçons d'investissement.** Cinq leçons, avec la mention « / INVESTISSEMENT ». Deux scènes interactives :
+  - intérêts composés et frais (deux courbes, curseurs frais et durée) ;
+  - hausse nécessaire après une baisse (trois barres).
+- **Lexique.** 53 termes classés par lettre :
+  - recherche et filtres par catégorie ;
+  - lien vers la leçon qui explique chaque terme ;
+  - termes trouvables dans la recherche universelle.
+- **Compétences.** Quatrième colonne Investissement ; la hauteur mobile est augmentée pour la pile de cinq notions.
+- **Accueil.** Troisième carte « 03 / Investissement » ; le titre devient « Trois territoires. Un même horizon. » et chaque carte compte les repères de son domaine.
+- **Préférences.** Panneau « Compte et synchronisation », qui affiche « Non configurée » ici. Le texte de confidentialité s'adapte à la configuration.
+- **Leçon.** Volet « Poser une question au mentor ». Ici il indique « Mentor IA non connecté », sans réponse simulée.
 
-Paire principale : [desktop](latest-desktop.png) · [mobile](latest-mobile.png), sur l'écran des révisions et son nouveau graphe.
+## Captures
 
-Avant : passe 11, archive `2026-11-05_06-43-13-Europe-Paris`.
+Paire principale : [desktop](latest-desktop.png) · [mobile](latest-mobile.png), sur la leçon « Intérêts composés, inflation et frais » et son simulateur.
 
-| Écran                 | Avant desktop                                                                                  | Avant mobile                                                                                  | Après desktop                                         | Après mobile                                         |
-| --------------------- | ---------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | ----------------------------------------------------- | ---------------------------------------------------- |
-| Révisions             | [Voir](archive/2026-11-05_06-43-13-Europe-Paris/screens/desktop/11-revisions-viewport.png)     | [Voir](archive/2026-11-05_06-43-13-Europe-Paris/screens/mobile/11-revisions-viewport.png)     | [Voir](screens/desktop/11-revisions-viewport.png)     | [Voir](screens/mobile/11-revisions-viewport.png)     |
-| Révisions disponibles | [Voir](archive/2026-11-05_06-43-13-Europe-Paris/screens/desktop/11-revisions-due.png)          | [Voir](archive/2026-11-05_06-43-13-Europe-Paris/screens/mobile/11-revisions-due.png)          | [Voir](screens/desktop/11-revisions-due.png)          | [Voir](screens/mobile/11-revisions-due.png)          |
-| Projets (liste)       | [Voir](archive/2026-11-05_06-43-13-Europe-Paris/screens/desktop/07-incubator.png)              | [Voir](archive/2026-11-05_06-43-13-Europe-Paris/screens/mobile/07-incubator.png)              | [Voir](screens/desktop/07-incubator.png)              | [Voir](screens/mobile/07-incubator.png)              |
-| Préférences           | [Voir](archive/2026-11-05_06-43-13-Europe-Paris/screens/desktop/10-parametres.png)             | [Voir](archive/2026-11-05_06-43-13-Europe-Paris/screens/mobile/10-parametres.png)             | [Voir](screens/desktop/10-parametres.png)             | [Voir](screens/mobile/10-parametres.png)             |
-| Compétences           | [Voir](archive/2026-11-05_06-43-13-Europe-Paris/screens/desktop/09-competences.png)            | [Voir](archive/2026-11-05_06-43-13-Europe-Paris/screens/mobile/09-competences.png)            | [Voir](screens/desktop/09-competences.png)            | [Voir](screens/mobile/09-competences.png)            |
-| Académie (atlas)      | [Voir](archive/2026-11-05_06-43-13-Europe-Paris/screens/desktop/02-academy-viewport.png)       | [Voir](archive/2026-11-05_06-43-13-Europe-Paris/screens/mobile/02-academy-viewport.png)       | [Voir](screens/desktop/02-academy-viewport.png)       | [Voir](screens/mobile/02-academy-viewport.png)       |
-| Accueil               | [Voir](archive/2026-11-05_06-43-13-Europe-Paris/screens/desktop/01-home.png)                   | [Voir](archive/2026-11-05_06-43-13-Europe-Paris/screens/mobile/01-home.png)                   | [Voir](screens/desktop/01-home.png)                   | [Voir](screens/mobile/01-home.png)                   |
-| Lab financier         | [Voir](archive/2026-11-05_06-43-13-Europe-Paris/screens/desktop/05-lab-financier-viewport.png) | [Voir](archive/2026-11-05_06-43-13-Europe-Paris/screens/mobile/05-lab-financier-viewport.png) | [Voir](screens/desktop/05-lab-financier-viewport.png) | [Voir](screens/mobile/05-lab-financier-viewport.png) |
-| Atelier du projet     | [Voir](archive/2026-11-05_06-43-13-Europe-Paris/screens/desktop/12-project-outcome.png)        | [Voir](archive/2026-11-05_06-43-13-Europe-Paris/screens/mobile/12-project-outcome.png)        | [Voir](screens/desktop/12-project-outcome.png)        | [Voir](screens/mobile/12-project-outcome.png)        |
-| Onboarding            | [Voir](archive/2026-11-05_06-43-13-Europe-Paris/screens/desktop/01-onboarding.png)             | [Voir](archive/2026-11-05_06-43-13-Europe-Paris/screens/mobile/01-onboarding.png)             | [Voir](screens/desktop/01-onboarding.png)             | [Voir](screens/mobile/01-onboarding.png)             |
+| Écran                          | Desktop                                                      | Mobile                                                      |
+| ------------------------------ | ------------------------------------------------------------ | ----------------------------------------------------------- |
+| Lexique                        | [Voir](screens/desktop/17-lexique-viewport.png)              | [Voir](screens/mobile/17-lexique-viewport.png)              |
+| Lexique, recherche « ordre »   | [Voir](screens/desktop/17-lexique-recherche.png)             | [Voir](screens/mobile/17-lexique-recherche.png)             |
+| Leçon intérêts composés        | [Voir](screens/desktop/18-investissement-lecon-viewport.png) | [Voir](screens/mobile/18-investissement-lecon-viewport.png) |
+| Leçon risque (scène de baisse) | [Voir](screens/desktop/18-investissement-risque.png)         | [Voir](screens/mobile/18-investissement-risque.png)         |
+| Académie (atlas à 4 rangées)   | [Voir](screens/desktop/02-academy.png)                       | [Voir](screens/mobile/02-academy.png)                       |
+| Compétences (4 colonnes)       | [Voir](screens/desktop/09-competences.png)                   | [Voir](screens/mobile/09-competences.png)                   |
+| Accueil (3 territoires)        | [Voir](screens/desktop/01-home.png)                          | [Voir](screens/mobile/01-home.png)                          |
+| Préférences (compte)           | [Voir](screens/desktop/10-parametres.png)                    | [Voir](screens/mobile/10-parametres.png)                    |
 
-La galerie complète [desktop](screens/desktop/) / [mobile](screens/mobile/) contient les 141 captures.
+Avant : archive `2026-11-05_10-37-05-Europe-Paris` (passe 12).
 
 ## Inspection interne
 
-- **Révisions.** Cinq arcs de hauteur croissante ; « 24 h », « 3 j », « 7 j », « 14 j » et « 30 j » sont lisibles et séparés. Un premier rendu sur axe linéaire faisait se chevaucher « 24 h » et « 3 j » : l'axe a été corrigé, puis la suite et les captures relancées. Sur mobile, cette colonne garde sa présentation précédente (prochain rendez-vous, sans graphe).
-- **Projets.** Libellés discrets et faits lisibles. « Étape 3 sur 9 · Validation » au-dessus de la frise, étape courante en blanc.
-- **Préférences.** Les cinq champs sont présents et alignés sur la grille ; la note sur la portée des choix est visible.
-- **Noms.** « Marge et trésorerie », « Seuil de rentabilité », etc. sont identiques sur l'accueil, l'atlas et la carte.
-- **Lab.** « 45 € » et « 18 € » : l'unité suit le chiffre.
-- **Palette.** Monochrome conservée. Aucune couleur ajoutée et aucune couleur écrite en dur hors de `tokens.css`.
+- **Atlas.** Les cinq nœuds Investissement sont alignés sur les guides verticaux (1er, 3e, 5e) et leurs liens partent du centre des cercles. Sur mobile, la largeur minimale passe à 900 px et l'atlas défile, avec un fondu, pour que les libellés ne se chevauchent pas.
+- **Compétences mobile.** Un premier rendu montrait le statut « À explorer » chevauchant le point suivant dans la colonne Investissement ; corrigé par la hauteur de la carte.
+- **Leçons.** Un premier rendu affichait « / FONDATIONS » sur les leçons d'investissement ; corrigé.
+- **Simulateur.** « 21 702 € » avec 1 % de frais, « 26 533 € » sans frais : mêmes valeurs que l'exemple écrit et que les tests unitaires du moteur.
+- **Monochrome conservé.** Seule couleur fonctionnelle ajoutée : le point d'état de la synchronisation (succès ou avertissement), jamais visible sans configuration.
 
-**Limites observées.** La capture mobile pleine page de la liste des projets montre le dock fixe au milieu, effet connu des captures longues. Les écrans chargés à la demande affichent « Chargement… » une fraction de seconde au premier accès ; les captures attendent la fin du chargement.
+**Limites.**
+
+- La connexion, la synchronisation entre appareils, la résolution de conflit et une vraie réponse du mentor n'ont **pas** pu être exercées : aucun projet Supabase ni aucune clé n'étaient disponibles.
+- Ces chemins sont couverts par des tests unitaires (décision de synchronisation, contrat du mentor, contexte de leçon) et par une vérification de types contre le vrai SDK, pas par un essai réel.
+- `service-public.fr` était inaccessible depuis cette session : les règles fiscales ne sont pas chiffrées dans le contenu.
 
 ## Vérifications effectuées
 
-- `npm run build` : TypeScript et Vite réussis, **sans avertissement de taille** (bundle principal 341,20 kB, 108,07 kB gzip).
-- `npm test` : **154 cas unitaires réussis** (148 + 6 tests de l'adaptateur de persistance).
-- Suite complète `npx playwright test` : **56 tests réussis** (le test des préférences s'ajoute sur desktop et mobile), aucun échec, test ignoré ni retry.
-- Prettier vérifié sur `src/` et `tests/`.
-- **141 captures** fraîches. Desktop 1440 × 1000 ; mobile Pixel 7 émulé, 412 × 839 CSS px, DPR 2,625.
+- `npm run build` réussit sans avertissement. Bundle principal : 366,60 kB. Le SDK Supabase est un chunk séparé de 214 kB, chargé seulement si la synchronisation est configurée.
+- `npm test` : **176 cas unitaires réussis**. Nouveaux tests : contenu du module, moteur de projection, synchronisation, contrat du mentor, contexte de leçon.
+- `npx playwright test` : **68 tests réussis** sur desktop et mobile. Nouveaux scénarios : lexique, recherche universelle vers un terme, simulateur, mentor non connecté, synchronisation non configurée, captures du module. Une régression vue en cours de route (deux rôles `status` dans les préférences) a été corrigée avant le run final.
+- **Fonction serveur du mentor** : vérifiée par TypeScript avec `@anthropic-ai/sdk` 1.1.0 et `@supabase/supabase-js` 2.118.0. Deno n'est pas installé : elle n'a pas été exécutée.
+- **153 captures** fraîches. Desktop 1440 × 1000 ; mobile Pixel 7 émulé.
 
-Tests navigateur adaptés :
-
-- Le test de projet vérifie l'étape courante via `aria-current="step"` et « Étape 2 sur 9 », au lieu d'un texte devenu présent trois fois.
-- Deux tests attendent la fin du chargement de la leçon et de l'Atelier IA avant de choisir leur chemin desktop ou mobile.
-
-Aucune assertion n'a été retirée.
-
-Chromium headless et Pixel 7 émulé seulement : ni appareil physique, ni Safari/Firefox, ni lecteur d'écran réel. La vérification interne ne vaut pas validation design indépendante.
-
-Archive : `archive/2026-11-05_10-37-05-Europe-Paris/`. Reproduction : `npm run build`, `npm run test:e2e`, puis `node scripts/save-design-review.mjs --primary=11-revisions-viewport`.
+Archive : `archive/2026-11-05_11-15-35-Europe-Paris/`. Reproduction : `npm run build`, `npm run test:e2e`, puis `node scripts/save-design-review.mjs --primary=18-investissement-lecon-viewport`.

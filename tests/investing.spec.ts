@@ -98,3 +98,17 @@ test("le simulateur de la leçon montre le coût des frais et respecte le modèl
   await expect(scene).toContainText("pas une prévision");
   await noOverflow(page);
 });
+
+test("sans serveur configuré, le mentor l’annonce et ne simule aucune réponse", async ({
+  page,
+}) => {
+  await seed(page);
+  await page.goto("/#lesson/inv-marches-financiers");
+  await page.getByText("Poser une question au mentor").click();
+  await expect(
+    page.getByText("Mentor IA non connecté sur cette installation"),
+  ).toBeVisible();
+  await expect(page.getByLabel("Votre question sur cette leçon")).toHaveCount(
+    0,
+  );
+});

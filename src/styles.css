@@ -1856,3 +1856,51 @@ progress {
   font-size: var(--type-small);
   padding: var(--space-8) 0;
 }
+/* Account and sync panel: status in words first, a quiet dot second. */
+.cloud-panel {
+  grid-column: 1 / -1;
+}
+.cloud-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+.cloud-status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--muted);
+  font-size: var(--type-small);
+}
+.cloud-status i {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-round);
+  background: var(--text-tertiary);
+}
+.cloud-status.is-synced i {
+  background: var(--success-text);
+}
+.cloud-status.is-conflict i,
+.cloud-status.is-error i {
+  background: var(--warning-text);
+}
+.cloud-form {
+  display: grid;
+  gap: var(--space-4);
+  max-width: 520px;
+}
+.cloud-account p {
+  margin: 0 0 var(--space-2);
+}
+.cloud-conflict {
+  border-top: 1px solid var(--line);
+  padding-top: var(--space-4);
+  margin-top: var(--space-4);
+}
+.cloud-message {
+  color: var(--text-secondary);
+  font-size: var(--type-small);
+}

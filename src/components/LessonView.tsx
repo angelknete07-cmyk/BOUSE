@@ -5,6 +5,7 @@ import { downloadFile } from "../lib/storage";
 import type { AppState, Attempt, StateUpdater } from "../lib/types";
 import { Icon } from "./Icon";
 import { LessonScene } from "./LessonScene";
+import { MentorPanel } from "./MentorPanel";
 import { latestCurrentAttempt } from "../lib/portfolio";
 import { useClock } from "../lib/useClock";
 import { buildProjectLearningPlan } from "../lib/projectLearning";
@@ -1073,6 +1074,12 @@ export function LessonView({ lesson, state, update, onNavigate }: Props) {
                   {notice}
                 </p>
               )}
+            </details>
+            <details>
+              <summary>
+                Poser une question au mentor <Icon name="plus" size={15} />
+              </summary>
+              <MentorPanel lesson={lesson} onNavigate={onNavigate} />
             </details>
             <details>
               <summary>
