@@ -211,8 +211,7 @@ test("choisir des objectifs explicites dérive les prérequis sans transformer l
   await page.goto("/#skills");
   await page
     .getByRole("button", {
-      name: `${automation.title} · À explorer`,
-      exact: true,
+      name: /Automatisation ou agent.*À explorer/,
     })
     .click();
   const goalLinks = page

@@ -66,6 +66,8 @@ Les mouvements servent la continuité, le contexte et le retour d’action. Cent
 
 Aucune animation continue ne doit attirer inutilement l’attention pendant la lecture. Éviter les effets de sortie qui retardent une action ou donnent une impression de lenteur.
 
+Les noms accessibles des actions doivent inclure leurs libellés visibles, y compris dans les cartes et graphes. Un intitulé complet peut compléter une abréviation via une description, sans remplacer son nom visible. Une commande réduite à une icône sur un breakpoint conserve un nom accessible. Les indices utiles restent contrastés ; les états de focus ne doivent pas être masqués par le dock mobile. Les instructions réservées aux lecteurs d’écran utilisent la classe commune `.sr-only`.
+
 ## Vérification
 
 La refactorisation doit être contrôlée sur ordinateur et mobile pour : onboarding et diagnostic, dashboard, Academy, carte de compétences, leçon et quiz, Lab financier, AI Lab, Incubator, Radar, recherche et paramètres.

@@ -205,3 +205,9 @@
     transition: none;
   }
 }
+/* Keep focused controls above the mobile dock when the browser scrolls to them. */
+@media (max-width: 700px) {
+  html {
+    scroll-padding-bottom: calc(var(--space-24) + env(safe-area-inset-bottom));
+  }
+}

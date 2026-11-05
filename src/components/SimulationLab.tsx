@@ -169,12 +169,15 @@ function CashChart({
           }}
         />
       </div>
-      <div className="simulation-months" aria-label="Explorer les mois">
+      <div
+        className="simulation-months"
+        role="group"
+        aria-label="Explorer les mois"
+      >
         {comparison.scenario.months.map((month) => (
           <button
             key={month.month}
             aria-pressed={selectedMonth === month.month}
-            aria-label={`Mois ${month.month}`}
             onClick={() => onSelect(month.month)}
           >
             <span>Mois {month.month}</span>
@@ -420,7 +423,11 @@ export function SimulationLab({ state, update, onNavigate }: Props) {
         </p>
       </header>
 
-      <div className="simulation-cases" aria-label="Choisir une expérience">
+      <div
+        className="simulation-cases"
+        role="group"
+        aria-label="Choisir une expérience"
+      >
         {presets.map((preset, index) => (
           <button
             key={preset.id}
@@ -565,26 +572,33 @@ export function SimulationLab({ state, update, onNavigate }: Props) {
             <div>
               <dt>Résultat cumulé</dt>
               <dd>
-                <span aria-label="Résultat cumulé de la référence">
+                <span role="group" aria-label="Résultat cumulé de la référence">
                   {money.format(comparison.baseline.totalProfit)}
                 </span>
-                <strong aria-label="Résultat cumulé du scénario">
+                <strong role="group" aria-label="Résultat cumulé du scénario">
                   {money.format(comparison.scenario.totalProfit)}
                 </strong>
               </dd>
-              <small>Ventes − charges sur six mois</small>
+              <dd className="simulation-metric-hint">
+                <small>Ventes − charges sur six mois</small>
+              </dd>
             </div>
             <div>
               <dt>Trésorerie finale</dt>
               <dd>
-                <span aria-label="Trésorerie finale de la référence">
+                <span
+                  role="group"
+                  aria-label="Trésorerie finale de la référence"
+                >
                   {money.format(comparison.baseline.closingCash)}
                 </span>
-                <strong aria-label="Trésorerie finale du scénario">
+                <strong role="group" aria-label="Trésorerie finale du scénario">
                   {money.format(comparison.scenario.closingCash)}
                 </strong>
               </dd>
-              <small>Argent disponible à la fin du mois 6</small>
+              <dd className="simulation-metric-hint">
+                <small>Argent disponible à la fin du mois 6</small>
+              </dd>
             </div>
             <div>
               <dt>Ventes encore à encaisser</dt>
@@ -596,7 +610,9 @@ export function SimulationLab({ state, update, onNavigate }: Props) {
                   {money.format(comparison.scenario.endingReceivables)}
                 </strong>
               </dd>
-              <small>Créances clients à la fin du mois 6</small>
+              <dd className="simulation-metric-hint">
+                <small>Créances clients à la fin du mois 6</small>
+              </dd>
             </div>
           </dl>
           <div className="simulation-funding">

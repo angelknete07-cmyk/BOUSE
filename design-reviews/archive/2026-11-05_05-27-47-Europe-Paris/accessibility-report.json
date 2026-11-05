@@ -1,0 +1,333 @@
+{
+  "testRunStartedAt": "2026-11-05T04:25:59.701Z",
+  "tool": "@axe-core/playwright 4.14.0",
+  "tags": [
+    "wcag2a",
+    "wcag2aa",
+    "wcag21a",
+    "wcag21aa",
+    "wcag22aa"
+  ],
+  "browserTests": {
+    "startTime": "2026-11-05T04:25:59.701Z",
+    "duration": 86960.833,
+    "expected": 54,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "auditedStates": 33,
+  "violationCount": 0,
+  "limitation": "Les règles automatisables sont vérifiées. Les contrastes sur SVG, gradients et éléments partiellement masqués nécessitent une appréciation humaine ; aucun audit WCAG complet ni essai de lecteur d’écran n’est revendiqué.",
+  "audits": [
+    {
+      "project": "desktop-chromium",
+      "screen": "onboarding",
+      "violations": [],
+      "manualChecks": []
+    },
+    {
+      "project": "desktop-chromium",
+      "screen": "home",
+      "violations": [],
+      "manualChecks": [
+        {
+          "rule": "color-contrast",
+          "nodes": 25
+        }
+      ]
+    },
+    {
+      "project": "desktop-chromium",
+      "screen": "academy",
+      "violations": [],
+      "manualChecks": [
+        {
+          "rule": "color-contrast",
+          "nodes": 14
+        }
+      ]
+    },
+    {
+      "project": "desktop-chromium",
+      "screen": "lesson-ca-marge-tresorerie",
+      "violations": [],
+      "manualChecks": [
+        {
+          "rule": "color-contrast",
+          "nodes": 24
+        }
+      ]
+    },
+    {
+      "project": "desktop-chromium",
+      "screen": "ai",
+      "violations": [],
+      "manualChecks": [
+        {
+          "rule": "color-contrast",
+          "nodes": 16
+        }
+      ]
+    },
+    {
+      "project": "desktop-chromium",
+      "screen": "lab",
+      "violations": [],
+      "manualChecks": [
+        {
+          "rule": "color-contrast",
+          "nodes": 18
+        }
+      ]
+    },
+    {
+      "project": "desktop-chromium",
+      "screen": "simulation",
+      "violations": [],
+      "manualChecks": [
+        {
+          "rule": "color-contrast",
+          "nodes": 30
+        }
+      ]
+    },
+    {
+      "project": "desktop-chromium",
+      "screen": "reviews",
+      "violations": [],
+      "manualChecks": [
+        {
+          "rule": "color-contrast",
+          "nodes": 3
+        }
+      ]
+    },
+    {
+      "project": "desktop-chromium",
+      "screen": "skills",
+      "violations": [],
+      "manualChecks": [
+        {
+          "rule": "color-contrast",
+          "nodes": 4
+        }
+      ]
+    },
+    {
+      "project": "desktop-chromium",
+      "screen": "portfolio",
+      "violations": [],
+      "manualChecks": [
+        {
+          "rule": "color-contrast",
+          "nodes": 18
+        }
+      ]
+    },
+    {
+      "project": "desktop-chromium",
+      "screen": "incubator",
+      "violations": [],
+      "manualChecks": []
+    },
+    {
+      "project": "desktop-chromium",
+      "screen": "project-project",
+      "violations": [],
+      "manualChecks": [
+        {
+          "rule": "color-contrast",
+          "nodes": 2
+        }
+      ]
+    },
+    {
+      "project": "desktop-chromium",
+      "screen": "project-plan-project",
+      "violations": [],
+      "manualChecks": [
+        {
+          "rule": "color-contrast",
+          "nodes": 6
+        }
+      ]
+    },
+    {
+      "project": "desktop-chromium",
+      "screen": "radar",
+      "violations": [],
+      "manualChecks": []
+    },
+    {
+      "project": "desktop-chromium",
+      "screen": "settings",
+      "violations": [],
+      "manualChecks": []
+    },
+    {
+      "project": "desktop-chromium",
+      "screen": "recherche",
+      "violations": [],
+      "manualChecks": []
+    },
+    {
+      "project": "mobile-chromium",
+      "screen": "onboarding",
+      "violations": [],
+      "manualChecks": []
+    },
+    {
+      "project": "mobile-chromium",
+      "screen": "home",
+      "violations": [],
+      "manualChecks": [
+        {
+          "rule": "color-contrast",
+          "nodes": 21
+        }
+      ]
+    },
+    {
+      "project": "mobile-chromium",
+      "screen": "academy",
+      "violations": [],
+      "manualChecks": [
+        {
+          "rule": "color-contrast",
+          "nodes": 14
+        }
+      ]
+    },
+    {
+      "project": "mobile-chromium",
+      "screen": "lesson-ca-marge-tresorerie",
+      "violations": [],
+      "manualChecks": [
+        {
+          "rule": "color-contrast",
+          "nodes": 12
+        }
+      ]
+    },
+    {
+      "project": "mobile-chromium",
+      "screen": "ai",
+      "violations": [],
+      "manualChecks": [
+        {
+          "rule": "color-contrast",
+          "nodes": 16
+        }
+      ]
+    },
+    {
+      "project": "mobile-chromium",
+      "screen": "lab",
+      "violations": [],
+      "manualChecks": [
+        {
+          "rule": "color-contrast",
+          "nodes": 17
+        }
+      ]
+    },
+    {
+      "project": "mobile-chromium",
+      "screen": "simulation",
+      "violations": [],
+      "manualChecks": [
+        {
+          "rule": "color-contrast",
+          "nodes": 30
+        }
+      ]
+    },
+    {
+      "project": "mobile-chromium",
+      "screen": "reviews",
+      "violations": [],
+      "manualChecks": [
+        {
+          "rule": "color-contrast",
+          "nodes": 3
+        }
+      ]
+    },
+    {
+      "project": "mobile-chromium",
+      "screen": "skills",
+      "violations": [],
+      "manualChecks": [
+        {
+          "rule": "color-contrast",
+          "nodes": 4
+        }
+      ]
+    },
+    {
+      "project": "mobile-chromium",
+      "screen": "portfolio",
+      "violations": [],
+      "manualChecks": [
+        {
+          "rule": "color-contrast",
+          "nodes": 18
+        }
+      ]
+    },
+    {
+      "project": "mobile-chromium",
+      "screen": "incubator",
+      "violations": [],
+      "manualChecks": []
+    },
+    {
+      "project": "mobile-chromium",
+      "screen": "project-project",
+      "violations": [],
+      "manualChecks": [
+        {
+          "rule": "color-contrast",
+          "nodes": 1
+        }
+      ]
+    },
+    {
+      "project": "mobile-chromium",
+      "screen": "project-plan-project",
+      "violations": [],
+      "manualChecks": [
+        {
+          "rule": "color-contrast",
+          "nodes": 5
+        }
+      ]
+    },
+    {
+      "project": "mobile-chromium",
+      "screen": "radar",
+      "violations": [],
+      "manualChecks": []
+    },
+    {
+      "project": "mobile-chromium",
+      "screen": "settings",
+      "violations": [],
+      "manualChecks": []
+    },
+    {
+      "project": "mobile-chromium",
+      "screen": "recherche",
+      "violations": [],
+      "manualChecks": []
+    },
+    {
+      "project": "mobile-chromium",
+      "screen": "navigation-mobile",
+      "violations": [],
+      "manualChecks": []
+    }
+  ],
+  "renderSourceSha256": "631a19b07e5555dfb260ab3f00f5308402efd6ddce0e443d3341cb8659d21850"
+}

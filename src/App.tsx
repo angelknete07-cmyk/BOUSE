@@ -1,5 +1,5 @@
 import { Academy } from "./components/Academy";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type RefObject } from "react";
 import { lessons } from "./data/lessons";
 import type { AppState, StateUpdater } from "./lib/types";
 import {
@@ -70,6 +70,16 @@ function passedIds(state: AppState) {
       .map((lesson) => lesson.id),
   );
 }
+function restoreFocus(target: Element | null) {
+  const available =
+    target instanceof HTMLElement &&
+    target.isConnected &&
+    !target.closest("[inert]") &&
+    target.getClientRects().length > 0;
+  (available ? target : document.getElementById("main-content"))?.focus({
+    preventScroll: true,
+  });
+}
 function App() {
   const [loaded, setLoaded] = useState(readState);
   const [state, setState] = useState(loaded.state);
@@ -84,6 +94,17 @@ function App() {
   const [resetCorrupt, setResetCorrupt] = useState(false);
   const titleRef = useRef<HTMLElement>(null);
   const sidebarRef = useRef<HTMLElement>(null);
+  const mobileReturnFocus = useRef<HTMLElement | null>(null);
+  const searchReturnFocus = useRef<HTMLElement | null>(null);
+  function openSearch() {
+    searchReturnFocus.current = mobileOpen
+      ? mobileReturnFocus.current
+      : document.activeElement instanceof HTMLElement
+        ? document.activeElement
+        : titleRef.current;
+    setMobileOpen(false);
+    setSearchOpen(true);
+  }
   const update: StateUpdater = (updater) => {
     setState((current) => {
       const next = updater(current);
@@ -113,6 +134,8 @@ function App() {
   useEffect(() => {
     if (!mobileOpen) return;
     const previous = document.activeElement;
+    mobileReturnFocus.current =
+      previous instanceof HTMLElement ? previous : null;
     const controls = () =>
       [
         ...(sidebarRef.current?.querySelectorAll<HTMLElement>(
@@ -143,24 +166,39 @@ function App() {
     return () => {
       document.removeEventListener("keydown", key);
       document.body.style.overflow = previousOverflow;
-      if (previous instanceof HTMLElement) previous.focus();
+      restoreFocus(previous);
     };
   }, [mobileOpen]);
   useEffect(() => {
     const key = (e: KeyboardEvent) => {
-      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") {
+      if (
+        !e.isComposing &&
+        (e.ctrlKey || e.metaKey) &&
+        e.key.toLowerCase() === "k"
+      ) {
         e.preventDefault();
-        setSearchOpen((v) => !v);
+        if (searchOpen) setSearchOpen(false);
+        else openSearch();
       }
     };
     addEventListener("keydown", key);
     return () => removeEventListener("keydown", key);
-  }, []);
+  }, [mobileOpen, searchOpen]);
   useEffect(() => {
     setMobileOpen(false);
+    setSearchOpen(false);
     window.scrollTo({ top: 0 });
-    titleRef.current?.focus({ preventScroll: true });
-    document.title = `${navigation.find((n) => n.id === route)?.label || (route === "portfolio" ? "Portfolio" : route.startsWith("lesson/") ? "Leçon" : projectId !== null ? "Atelier projet" : "Mon espace")} — BOUSE`;
+    // Wait until closed overlays have removed inert and restored their opener.
+    const frame = requestAnimationFrame(() =>
+      titleRef.current?.focus({ preventScroll: true }),
+    );
+    const routeTitle = route.startsWith("lesson/")
+      ? lessons.find((item) => item.id === route.slice(7))?.title
+      : projectId !== null
+        ? state.projects.find((item) => item.id === projectId)?.title
+        : navigation.find((item) => item.id === route)?.label;
+    document.title = `${routeTitle || (route === "portfolio" ? "Portfolio" : route === "settings" ? "Profil et paramètres" : "Mon espace")} — BOUSE`;
+    return () => cancelAnimationFrame(frame);
   }, [route, !!state.profile]);
   const done = passedIds(state);
   function go(next: string) {
@@ -247,12 +285,18 @@ function App() {
         <button
           className="nav-backdrop"
           aria-label="Fermer la navigation"
+          tabIndex={-1}
           onClick={() => setMobileOpen(false)}
         />
       )}
       <aside
         id="main-navigation"
         ref={sidebarRef}
+        role={isMobile && mobileOpen ? "dialog" : undefined}
+        aria-modal={isMobile && mobileOpen ? true : undefined}
+        aria-label={
+          isMobile && mobileOpen ? "Navigation des espaces" : undefined
+        }
         inert={isMobile && !mobileOpen ? true : undefined}
         className={`sidebar ${mobileOpen ? "open" : ""}`}
       >
@@ -271,11 +315,9 @@ function App() {
         </a>
         <button
           className="search-trigger"
-          aria-label="Rechercher dans l’Academy"
-          onClick={() => {
-            setMobileOpen(false);
-            setSearchOpen(true);
-          }}
+          aria-label="Rechercher ⌘ K"
+          aria-keyshortcuts="Control+K Meta+K"
+          onClick={openSearch}
         >
           <Icon name="search" size={16} />
           <span>Rechercher</span>
@@ -319,12 +361,15 @@ function App() {
                 {done.size}/{lessons.length}
               </span>
             </div>
-            <progress value={done.size} max={lessons.length} />
+            <progress
+              aria-label="Quiz de fondations validés"
+              value={done.size}
+              max={lessons.length}
+            />
             <small>Des preuves, une étape à la fois.</small>
           </div>
           <a
             href="#settings"
-            aria-label="Profil et paramètres"
             onClick={() => setMobileOpen(false)}
             className={`profile-link ${route === "settings" ? "active" : ""}`}
           >
@@ -335,6 +380,7 @@ function App() {
               {state.profile.name}
               <small>Espace personnel · local</small>
             </span>
+            <span className="sr-only">Profil et paramètres</span>
             <Icon name="settings" size={17} />
           </a>
         </div>
@@ -372,7 +418,8 @@ function App() {
             <button
               className="icon-button"
               aria-label="Ouvrir la recherche"
-              onClick={() => setSearchOpen(true)}
+              aria-keyshortcuts="Control+K Meta+K"
+              onClick={openSearch}
             >
               <Icon name="search" size={18} />
             </button>
@@ -498,7 +545,7 @@ function App() {
           </a>
         ))}
         <button
-          aria-label="Tous les espaces"
+          aria-label="Explorer tous les espaces"
           aria-expanded={mobileOpen}
           aria-controls="main-navigation"
           onClick={() => setMobileOpen(true)}
@@ -510,8 +557,10 @@ function App() {
       {searchOpen && (
         <Search
           state={state}
+          returnFocusRef={searchReturnFocus}
           onClose={() => setSearchOpen(false)}
           onNavigate={(next) => {
+            searchReturnFocus.current = titleRef.current;
             go(next);
             setSearchOpen(false);
           }}
@@ -775,24 +824,27 @@ function Settings({
 
 function Search({
   state,
+  returnFocusRef,
   onClose,
   onNavigate,
 }: {
   state: AppState;
+  returnFocusRef: RefObject<HTMLElement | null>;
   onClose: () => void;
   onNavigate: (route: string) => void;
 }) {
   const [query, setQuery] = useState("");
   const ref = useRef<HTMLDialogElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const resultsRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const dialog = ref.current;
-    const previous = document.activeElement;
     dialog?.showModal();
     return () => {
       dialog?.close();
-      if (previous instanceof HTMLElement) previous.focus();
+      restoreFocus(returnFocusRef.current);
     };
-  }, []);
+  }, [returnFocusRef]);
   const searchable = (text: string) =>
     normalizeSearch(text)
       .replace(/\b(cash|liquidite)\b/g, "tresorerie")
@@ -840,6 +892,14 @@ function Search({
         search: note,
       })),
   ].filter((i) => !q || searchable(i.search).includes(q));
+  function focusResult(index: number) {
+    const buttons =
+      resultsRef.current?.querySelectorAll<HTMLButtonElement>("button");
+    if (!buttons?.length) return;
+    const button = buttons[Math.max(0, Math.min(index, buttons.length - 1))];
+    button?.focus({ preventScroll: true });
+    button?.scrollIntoView({ block: "nearest", behavior: "instant" });
+  }
   return (
     <dialog
       ref={ref}
@@ -854,10 +914,22 @@ function Search({
         <Icon name="search" />
         <input
           autoFocus
+          ref={inputRef}
           aria-label="Chercher une leçon, un projet ou une note"
+          aria-describedby="search-result-count search-keyboard-hint"
           placeholder="Une notion, un projet, une prochaine étape…"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
+          onKeyDown={(event) => {
+            if (event.nativeEvent.isComposing) return;
+            if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+              event.preventDefault();
+              focusResult(event.key === "ArrowDown" ? 0 : items.length - 1);
+            } else if (event.key === "Enter" && items[0]) {
+              event.preventDefault();
+              onNavigate(items[0].route);
+            }
+          }}
         />
         <button
           className="icon-button"
@@ -867,12 +939,45 @@ function Search({
           <Icon name="close" size={18} />
         </button>
       </div>
-      <div className="palette-results">
-        <p className="eyebrow">{query ? "RÉSULTATS" : "ALLER QUELQUE PART"}</p>
+      <div
+        className="palette-results"
+        ref={resultsRef}
+        role="group"
+        aria-labelledby="search-results-title"
+      >
+        <div className="palette-results-heading">
+          <p className="eyebrow" id="search-results-title">
+            {query ? "RÉSULTATS" : "ALLER QUELQUE PART"}
+          </p>
+          <span id="search-result-count" role="status" aria-atomic="true">
+            {items.length} résultat{items.length > 1 ? "s" : ""}
+          </span>
+        </div>
         {items.map((i, index) => (
           <button
             key={`${i.route}-${index}`}
             onClick={() => onNavigate(i.route)}
+            onKeyDown={(event) => {
+              if (event.key === "ArrowUp" && index === 0) {
+                event.preventDefault();
+                inputRef.current?.focus();
+                return;
+              }
+              const next =
+                event.key === "ArrowDown"
+                  ? index + 1
+                  : event.key === "ArrowUp"
+                    ? index - 1
+                    : event.key === "Home"
+                      ? 0
+                      : event.key === "End"
+                        ? items.length - 1
+                        : null;
+              if (next !== null) {
+                event.preventDefault();
+                focusResult(next);
+              }
+            }}
           >
             <span>
               <strong>{i.title}</strong>
@@ -887,8 +992,8 @@ function Search({
           </p>
         )}
       </div>
-      <div className="palette-footer">
-        Tab pour naviguer · Entrée pour ouvrir · Échap pour fermer
+      <div className="palette-footer" id="search-keyboard-hint">
+        ↑ ↓ pour parcourir · Entrée pour ouvrir · Échap pour fermer
       </div>
     </dialog>
   );

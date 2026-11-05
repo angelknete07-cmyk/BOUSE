@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { Profile } from "../lib/types";
 import { Icon } from "./Icon";
 
@@ -53,6 +53,18 @@ export function Onboarding({
     diagnostic: {},
   });
   const [showResult, setShowResult] = useState(false);
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const previousStep = useRef({ step, showResult });
+  useEffect(() => {
+    if (
+      previousStep.current.step === step &&
+      previousStep.current.showResult === showResult
+    )
+      return;
+    previousStep.current = { step, showResult };
+    headingRef.current?.focus({ preventScroll: true });
+    headingRef.current?.scrollIntoView({ block: "nearest" });
+  }, [step, showResult]);
   const patch = (p: Partial<Profile>) =>
     setProfile((prev) => ({ ...prev, ...p }));
   const score = diagnostic.filter(
@@ -101,7 +113,9 @@ export function Onboarding({
                 setStep(1);
               }}
             >
-              <h2>Faisons connaissance.</h2>
+              <h2 ref={headingRef} tabIndex={-1}>
+                Faisons connaissance.
+              </h2>
               <p className="muted">
                 Quelques repères pour choisir votre prochaine action.
               </p>
@@ -206,7 +220,7 @@ export function Onboarding({
                 else setShowResult(true);
               }}
             >
-              <h2>
+              <h2 ref={headingRef} tabIndex={-1}>
                 {showResult
                   ? "Votre point de départ est posé."
                   : "Trois questions. Aucun jugement."}

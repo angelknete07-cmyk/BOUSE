@@ -49,6 +49,14 @@ La relecture de prompts utilise une grille transparente de mots-clés : objectif
 
 Les commandes et leurs résultats de validation sont rapportés au moment de la livraison. La compilation seule ne démontre ni accessibilité complète, ni sécurité d’un futur backend, ni disponibilité en production.
 
+## Navigation et repères accessibles
+
+Le menu mobile et la recherche sont exclusifs : ouvrir la recherche ferme le menu et mémorise son déclencheur extérieur. Une fermeture rend le focus à ce déclencheur s’il est encore visible et disponible, sinon au contenu principal. Une navigation attend le retrait de `inert` avant de focaliser le nouveau contenu ; le titre du document identifie la leçon ou le projet ouvert.
+
+La recherche conserve des boutons natifs. Tab reste utilisable ; les flèches, Home et End parcourent les résultats et Entrée ouvre le résultat actif (le premier depuis le champ). Aucun résultat ne déclenche aucune navigation. Le compteur est un statut annoncé. Le diagnostic focalise le nouveau titre et le quiz sa correction, puis la séquence suivante.
+
+Les contrôles prennent leur nom dans le texte visible lorsque possible ; les descriptions complémentaires des graphes passent par `aria-describedby`. La classe commune `.sr-only` conserve une information pour les technologies d’assistance sans modifier la composition. Les tests `accessibility.spec.ts` vérifient les parcours clavier et les règles automatisables WCAG A/AA avec axe ; ils ne constituent pas une certification d’accessibilité.
+
 ## Révisions espacées — extension compatible du format v1
 
 `reviewEvents` est un champ facultatif du format existant. Les anciennes sauvegardes qui ne le contiennent pas restent acceptées sans effacement ni migration destructive. Les nouveaux événements portent identifiant, leçon/version, carte, autoévaluation, instant UTC, échéance et palier. La validation de sauvegarde réutilise `isReviewEvent` pour refuser les échéances incohérentes et les identifiants en double.

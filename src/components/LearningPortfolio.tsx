@@ -183,7 +183,11 @@ export function LearningPortfolio({ state, onNavigate }: Props) {
           <small>notions travaillées au quiz</small>
         </div>
       </header>
-      <div className="portfolio-thread" aria-label="Repères de votre dossier">
+      <div
+        className="portfolio-thread"
+        role="group"
+        aria-label="Repères de votre dossier"
+      >
         <p>
           <strong>{summary.quizPassed}</strong>
           <span>
@@ -276,15 +280,11 @@ export function LearningPortfolio({ state, onNavigate }: Props) {
                 <button
                   key={entry.lesson.id}
                   className="portfolio-notion-row"
-                  aria-label={`Voir les traces : ${entry.lesson.title}`}
                   aria-pressed={selected?.lesson.id === entry.lesson.id}
-                  aria-describedby={`${panelId}-status-${index}`}
                   onClick={() => select(entry.lesson.id)}
                 >
                   <span className="portfolio-notion-name">
-                    <small aria-hidden="true">
-                      {String(index + 1).padStart(2, "0")}
-                    </small>
+                    <small>{String(index + 1).padStart(2, "0")}</small>
                     <span>
                       <strong>{entry.lesson.title}</strong>
                       <small>{entry.lesson.domain}</small>

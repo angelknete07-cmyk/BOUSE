@@ -44,7 +44,7 @@ L’AI Lab initial n’envoie pas les prompts à un service externe. Les liens d
 
 ## Feuille de route ordonnée
 
-1. **Consolider les fondations** : affiner les contenus après retours utilisateurs, preuves de compétences, révisions espacées, portfolio et export Markdown/Obsidian (versions locales livrées), puis accessibilité. Étendre les tests aux parcours réellement ajoutés.
+1. **Consolider les fondations** : affiner les contenus après retours utilisateurs, preuves de compétences, révisions espacées, portfolio et export Markdown/Obsidian (versions locales livrées). Navigation clavier, libellés et contrastes consolidés ; compléter les essais avec technologies d’assistance et appareils physiques. Étendre les tests aux parcours réellement ajoutés.
 2. **Persistance et comptes** : Supabase/PostgreSQL, migrations, authentification, politiques d’accès par utilisateur, sauvegardes et suppression de compte. Ne connecter aucun projet existant sans inspection préalable.
 3. **Mentor et recherche IA** : adaptateurs de fournisseurs côté serveur, permissions, budgets, évaluation, citations et distinction entre brouillon et contenu validé. Aucun faux dialogue de mentor en attendant.
 4. **Projets approfondis** : fiches d’idées, validation terrain, journal de décision, parcours d’apprentissage et liens entre objectifs et projets (versions locales livrées), puis analyse contradictoire et applications plus avancées.

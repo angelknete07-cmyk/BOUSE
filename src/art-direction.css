@@ -1258,7 +1258,7 @@ h4 {
 }
 .monthly-equation > span {
   font-size: var(--type-title-lg);
-  color: var(--ink-faint);
+  color: var(--text-tertiary);
 }
 .financial-profit strong {
   color: var(--text);
@@ -1298,6 +1298,7 @@ h4 {
   letter-spacing: var(--tracking-figure);
 }
 .lesson-chapter-index small {
+  color: var(--text-tertiary);
   display: block;
   font: 400 8px/2 var(--font-mono);
   letter-spacing: 0.08em;

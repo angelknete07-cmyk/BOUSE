@@ -153,7 +153,12 @@ export function Dashboard({ state, onNavigate }: Props) {
           <div className="home-scene-footer">
             <div
               className="home-progress"
-              aria-label={`${done.size} quiz validés sur ${lessons.length}`}
+              role="progressbar"
+              aria-label="Quiz validés"
+              aria-valuemin={0}
+              aria-valuemax={lessons.length}
+              aria-valuenow={done.size}
+              aria-valuetext={`${done.size} quiz validés sur ${lessons.length}`}
             >
               <span>
                 <strong>{String(done.size).padStart(2, "0")}</strong> /{" "}
@@ -221,7 +226,7 @@ export function Dashboard({ state, onNavigate }: Props) {
                     } as CSSProperties
                   }
                   aria-pressed={selectedId === node.id}
-                  aria-label={`${node.label} — ${lesson.domain}, ${lesson.minutes} minutes. ${attempt ? `Dernier quiz ${attempt.percent} %.` : "Aucune tentative."} Afficher ce repère.`}
+                  aria-describedby={`trajectory-description-${node.id}`}
                   onFocus={() => setSelectedId(node.id)}
                   onClick={() => setSelectedId(node.id)}
                 >
@@ -234,6 +239,13 @@ export function Dashboard({ state, onNavigate }: Props) {
                   </span>
                   <span className="trajectory-node-label">{node.label}</span>
                   <span className="trajectory-node-index">0{index + 1}</span>
+                  <span hidden id={`trajectory-description-${node.id}`}>
+                    {lesson.domain}, {lesson.minutes} minutes.{" "}
+                    {attempt
+                      ? `Dernier quiz ${attempt.percent} %.`
+                      : "Aucune tentative."}{" "}
+                    Afficher ce repère.
+                  </span>
                 </button>
               );
             })}
@@ -286,7 +298,6 @@ export function Dashboard({ state, onNavigate }: Props) {
         <button
           className="path-card domain-folio domain-finance"
           onClick={() => openLesson(nextFor("Finance"))}
-          aria-label="Explorer le parcours Finance"
         >
           <div className="domain-kicker">
             <span className="eyebrow">01 / FINANCE</span>
@@ -341,7 +352,6 @@ export function Dashboard({ state, onNavigate }: Props) {
         <button
           className="path-card domain-folio domain-intelligence"
           onClick={() => openLesson(nextFor("Intelligence artificielle"))}
-          aria-label="Explorer le parcours Intelligence artificielle"
         >
           <div className="domain-kicker">
             <span className="eyebrow">02 / INTELLIGENCE ARTIFICIELLE</span>

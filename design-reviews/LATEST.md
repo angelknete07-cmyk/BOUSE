@@ -1,39 +1,40 @@
-# Review design — passe 09 : typographie Inter
+# Review design — passe 10 : navigation et accessibilité
 
-**3 novembre 2026, 20:49 Europe/Paris.** Correction après le retour « J’aime pas la police ». Vérification interne effectuée ; **review design externe attendue**.
+**5 novembre 2026, 05:27 Europe/Paris.** Suite autorisée après la proposition Inter. Vérification interne effectuée ; **review design externe attendue** pour cette passe.
 
-## Correction
+## Changements
 
-L’audit a identifié des titres Manrope fins et très serrés, ainsi qu’une référence à Inter sans police Inter chargée pour le texte courant.
+- Recherche utilisable avec ↑/↓, Home/End et Entrée ; compteur de résultats annoncé et état vide explicite.
+- Menu mobile et recherche exclusifs ; fermeture et changement de page rendent le focus au bon endroit. Le document porte le titre de la leçon ou du projet ouvert.
+- Diagnostic et quiz : focus sur la nouvelle étape ou la correction ; sur mobile, cette correction reste au-dessus du dock.
+- Libellés accessibles alignés sur le texte visible de l’accueil, de l’Academy, des compétences, de l’AI Lab, du portfolio et des mois de simulation. Groupes et progression exposent leur rôle réel.
+- Contraste renforcé pour les indices de trajectoire, la mention de chapitre et les opérateurs de l’équation mensuelle, avec les tokens existants. Balisage des résultats financiers corrigé.
 
-- Inter variable remplace Manrope et la police de secours du texte courant. Fichier auto-hébergé, préchargement, taille optique automatique et licence OFL dans le dépôt.
-- Titres principaux à 600, sections à 550, grands nombres à 450, lecture à 400. Les rôles et les approches sont centralisés dans `src/tokens.css`.
-- Espacement des lettres moins comprimé : −0,035 em pour les grands titres, −0,025 em pour les sections, au lieu d’approches allant jusqu’à −0,07 em.
-- Application à l’accueil, AI Lab, Academy, aux leçons/quiz et au Lab financier, avec propagation de la famille aux composants communs. Composition, palette, monogramme et logique métier conservés.
+L’[audit](AUDIT-10.md) détaille les constats. La classe commune destinée aux lecteurs d’écran a aussi été corrigée après inspection d’un rendu intermédiaire : elle ne déforme plus l’avatar latéral. Les rendus ci-dessous proviennent tous de la version finale.
 
-## Comparaison avant / après
+## Captures et comparaison
 
-| Écran         | Avant desktop                                                                                  | Avant mobile                                                                                  | Après desktop                                         | Après mobile                                         |
-| ------------- | ---------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | ----------------------------------------------------- | ---------------------------------------------------- |
-| Accueil       | [Voir](archive/2026-11-03_15-29-31-Europe-Paris/screens/desktop/00-home-viewport.png)          | [Voir](archive/2026-11-03_15-29-31-Europe-Paris/screens/mobile/00-home-viewport.png)          | [Voir](screens/desktop/00-home-viewport.png)          | [Voir](screens/mobile/00-home-viewport.png)          |
-| AI Lab        | [Voir](archive/2026-11-03_15-29-31-Europe-Paris/screens/desktop/06-ai-structure-viewport.png)  | [Voir](archive/2026-11-03_15-29-31-Europe-Paris/screens/mobile/06-ai-structure-viewport.png)  | [Voir](screens/desktop/06-ai-structure-viewport.png)  | [Voir](screens/mobile/06-ai-structure-viewport.png)  |
-| Academy       | [Voir](archive/2026-11-03_15-29-31-Europe-Paris/screens/desktop/02-academy-viewport.png)       | [Voir](archive/2026-11-03_15-29-31-Europe-Paris/screens/mobile/02-academy-viewport.png)       | [Voir](screens/desktop/02-academy-viewport.png)       | [Voir](screens/mobile/02-academy-viewport.png)       |
-| Leçon         | [Voir](archive/2026-11-03_15-29-31-Europe-Paris/screens/desktop/03-lecon-learn-viewport.png)   | [Voir](archive/2026-11-03_15-29-31-Europe-Paris/screens/mobile/03-lecon-learn-viewport.png)   | [Voir](screens/desktop/03-lecon-learn-viewport.png)   | [Voir](screens/mobile/03-lecon-learn-viewport.png)   |
-| Lab financier | [Voir](archive/2026-11-03_15-29-31-Europe-Paris/screens/desktop/05-lab-financier-viewport.png) | [Voir](archive/2026-11-03_15-29-31-Europe-Paris/screens/mobile/05-lab-financier-viewport.png) | [Voir](screens/desktop/05-lab-financier-viewport.png) | [Voir](screens/mobile/05-lab-financier-viewport.png) |
+Paire principale : [desktop](latest-desktop.png) · [mobile](latest-mobile.png). Elle montre le premier résultat de recherche focalisé au clavier.
 
-Paire stable : [latest-desktop.png](latest-desktop.png) et [latest-mobile.png](latest-mobile.png). Galerie complète : [desktop](screens/desktop/) et [mobile](screens/mobile/). Les rendus complets incluent les séquences de leçon, le teach-back, le quiz corrigé, la saisie et la comparaison de prompt, ainsi que les états du calculateur.
+| Écran     | Avant desktop                                                                                | Avant mobile                                                                                | Après desktop                                           | Après mobile                                           |
+| --------- | -------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------ |
+| Recherche | [Voir](archive/2026-11-03_20-49-59-Europe-Paris/screens/desktop/03-recherche.png)            | [Voir](archive/2026-11-03_20-49-59-Europe-Paris/screens/mobile/03-recherche.png)            | [Voir](screens/desktop/16-search-keyboard-viewport.png) | [Voir](screens/mobile/16-search-keyboard-viewport.png) |
+| Accueil   | [Voir](archive/2026-11-03_20-49-59-Europe-Paris/screens/desktop/00-home-viewport.png)        | [Voir](archive/2026-11-03_20-49-59-Europe-Paris/screens/mobile/00-home-viewport.png)        | [Voir](screens/desktop/00-home-viewport.png)            | [Voir](screens/mobile/00-home-viewport.png)            |
+| Leçon     | [Voir](archive/2026-11-03_20-49-59-Europe-Paris/screens/desktop/03-lecon-learn-viewport.png) | [Voir](archive/2026-11-03_20-49-59-Europe-Paris/screens/mobile/03-lecon-learn-viewport.png) | [Voir](screens/desktop/03-lecon-learn-viewport.png)     | [Voir](screens/mobile/03-lecon-learn-viewport.png)     |
 
-À l’inspection, les titres se détachent davantage des explications et les petits textes sont cohérents avec les contrôles. Les chiffres financiers restent distincts des titres par leur poids. Sur mobile, le titre d’accueil passe de deux à trois lignes ; l’action principale et la matière graphique restent dans le premier écran. La comparaison conserve les mêmes données de démonstration « Profil démo ».
+États complémentaires : correction focalisée du quiz [desktop](screens/desktop/04-quiz-feedback-focus-viewport.png) / [mobile](screens/mobile/04-quiz-feedback-focus-viewport.png), recherche vide [desktop](screens/desktop/16-search-empty.png) / [mobile](screens/mobile/16-search-empty.png), [menu mobile](screens/mobile/02-navigation-mobile.png). La galerie [desktop](screens/desktop/) / [mobile](screens/mobile/) contient aussi l’atlas, AI Lab et les deux Labs financiers.
 
-## Vérifications
+La comparaison conserve Inter, les compositions éditoriales, la matière monochrome et les niveaux de surfaces. La recherche ajoute un repère clavier net sans accent coloré ; les résultats financiers gardent leur alignement. Les changements de hiérarchie et de densité restent limités aux informations d’interaction. Les captures de quiz avec focus conservent la position réelle après validation ; les autres vues complètes commencent en haut de page. Le dock fixe apparaît à la limite du premier viewport dans les captures longues.
 
-- Application réellement lancée dans Chromium. Inspection des cinq écrans sur desktop/mobile, du teach-back, du quiz corrigé et de l’onboarding desktop.
-- `npm run build` : TypeScript et Vite réussis.
-- `npx playwright test tests/design.spec.ts` : **8 tests réussis**, dont interactions, surfaces neutres, absence de débordement, motion et `prefers-reduced-motion`.
-- **133 captures fraîches**, avec manifeste et archive. Desktop 1440 × 1000 ; mobile Pixel 7 émulé, 412 × 839 CSS px, DPR 2,625.
-- Contrôle complémentaire des cinq routes à 320, 375, 768, 1024 et 1920 px : aucun débordement du document ni erreur JavaScript observés. Le défilement interne de l’atlas est volontaire.
-- Le protocole Chromium confirme que les glyphes des titres et du texte de leçon utilisent effectivement la police Inter locale.
+## Vérifications effectuées
 
-Les tests métier ne sont pas relancés pour cette correction de styles ; leurs résultats précédents restent documentés dans `docs/VALIDATION.md`. Vérification sur Chromium et mobile émulé, sans appareil physique ni Safari/Firefox.
+- Application réellement lancée dans Chromium ; inspection desktop/mobile de la recherche, du quiz, de la leçon et des résultats financiers, contrôle de la navigation et comparaison aux images de la passe 09.
+- `npm run build` : TypeScript et Vite réussis. Avertissement Vite sur le bundle principal de 502,52 kB minifié ; découpage du chargement à traiter séparément.
+- `npm test` et exécution directe des huit fichiers : **146 cas unitaires réussis**.
+- Suite complète `npm run test:e2e` : **54 tests réussis**, aucun échec, test ignoré ou retry. Inclut les parcours métier, clavier, états interactifs, captures, débordements, motion et `prefers-reduced-motion`.
+- **33 états audités avec axe**, aucune violation automatiquement établie dans les règles WCAG A/AA exécutées. Les annotations ARIA signalées pour examen ont été corrigées. [Rapport synthétique](accessibility-report.json).
+- **141 captures fraîches** vérifiées par le manifeste. Desktop 1440 × 1000 ; mobile Pixel 7 émulé, 412 × 839 CSS px, DPR 2,625.
 
-Archive : `archive/2026-11-03_20-49-59-Europe-Paris/`. Reproduction : `npm run build`, `npx playwright test tests/design.spec.ts`, puis `node scripts/save-design-review.mjs --primary=00-home-viewport`. **Aucune nouvelle fonctionnalité ajoutée ; cette proposition typographique attend la review design.**
+Axe laisse des contrastes à examiner manuellement dans 22 états, notamment sur les SVG, gradients et contenus partiellement masqués par un défilement interne. L’inspection visuelle ne remplace pas une mesure exhaustive de ces contrastes. Aucun audit WCAG complet, essai NVDA/VoiceOver, Safari/Firefox ou appareil physique n’est revendiqué. La vérification interne ne vaut pas validation design indépendante.
+
+Archive : `archive/2026-11-05_05-27-47-Europe-Paris/`. Reproduction : `npm run build`, `npm run test:e2e`, puis `node scripts/save-design-review.mjs --primary=16-search-keyboard-viewport`.

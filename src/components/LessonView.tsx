@@ -42,6 +42,7 @@ export function LessonView({ lesson, state, update, onNavigate }: Props) {
   const [selfReview, setSelfReview] = useState<string[]>([]);
   const submitted = useRef(false);
   const stageRef = useRef<HTMLElement>(null);
+  const feedbackRef = useRef<HTMLDivElement>(null);
   const latest = latestCurrentAttempt(lesson, state.attempts, now);
   const linkedProjects = state.projects.filter((project) =>
     project.lessonIds.includes(lesson.id),
@@ -114,6 +115,10 @@ export function LessonView({ lesson, state, update, onNavigate }: Props) {
     if (selected === undefined || submitted.current) return;
     if (questionIndex < lesson.quiz.length - 1) {
       setAnswerConfirmed(true);
+      requestAnimationFrame(() => {
+        feedbackRef.current?.focus({ preventScroll: true });
+        feedbackRef.current?.scrollIntoView({ block: "nearest" });
+      });
       return;
     }
     if (lesson.quiz.some((item) => answers[item.id] === undefined)) return;
@@ -538,6 +543,7 @@ export function LessonView({ lesson, state, update, onNavigate }: Props) {
               <div className="learning-sequence-footer">
                 <button
                   className="learning-previous"
+                  aria-label="Séquence précédente"
                   type="button"
                   disabled={sequence === 0}
                   onClick={() => jumpSequence(sequence - 1)}
@@ -715,7 +721,12 @@ export function LessonView({ lesson, state, update, onNavigate }: Props) {
                     </fieldset>
                     {answerConfirmed ? (
                       <>
-                        <div className="learning-quiz-feedback" role="status">
+                        <div
+                          className="learning-quiz-feedback"
+                          role="status"
+                          ref={feedbackRef}
+                          tabIndex={-1}
+                        >
                           <span className="learning-feedback-icon">
                             <Icon
                               name={selectionIsCorrect ? "check" : "idea"}

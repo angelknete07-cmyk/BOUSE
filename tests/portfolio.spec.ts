@@ -178,8 +178,7 @@ async function noOverflow(page: Page) {
 async function selectFirstLesson(page: Page) {
   await page
     .getByRole("button", {
-      name: `Voir les traces : ${firstLesson.title}`,
-      exact: true,
+      name: new RegExp(firstLesson.title),
     })
     .first()
     .click();
@@ -192,8 +191,7 @@ test("le portfolio relie le dernier quiz courant aux notes et aux dossiers sans 
   await open(page, initial, "skills");
   await expect(
     page.getByRole("button", {
-      name: `${firstLesson.title} · À reprendre`,
-      exact: true,
+      name: /Marge & trésorerie.*À reprendre/,
     }),
   ).toBeVisible();
   await page
@@ -219,8 +217,7 @@ test("le portfolio relie le dernier quiz courant aux notes et aux dossiers sans 
   await expect(detail).toContainText(projectTitle);
   await page
     .getByRole("button", {
-      name: `Voir les traces : ${secondLesson.title}`,
-      exact: true,
+      name: new RegExp(secondLesson.title),
     })
     .first()
     .click();

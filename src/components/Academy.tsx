@@ -53,7 +53,11 @@ export function Academy({
         </p>
       </header>
       <div className="atlas-toolbar">
-        <div className="atlas-views" aria-label="Présentation de l’Academy">
+        <div
+          className="atlas-views"
+          role="group"
+          aria-label="Présentation de l’Academy"
+        >
           <button
             aria-pressed={view === "atlas"}
             onClick={() => setView("atlas")}
@@ -79,7 +83,11 @@ export function Academy({
           />
         </label>
       </div>
-      <div className="filter-tabs atlas-filters" aria-label="Domaines">
+      <div
+        className="filter-tabs atlas-filters"
+        role="group"
+        aria-label="Domaines"
+      >
         {[
           "Tous",
           "Finance",

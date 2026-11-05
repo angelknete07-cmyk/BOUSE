@@ -1,4 +1,4 @@
-# Validation — mise à jour du 3 novembre 2026
+# Validation — mise à jour du 5 novembre 2026
 
 Validation de l’instance cloud et des fichiers présents dans `/workspace/BOUSE`. Ces résultats ne constituent ni une publication de l’environnement, ni un déploiement, ni une validation dans une nouvelle tâche restaurée.
 
@@ -8,11 +8,11 @@ Validation de l’instance cloud et des fichiers présents dans `/workspace/BOUS
 | Installation reproductible                                | `npm ci --no-audit --no-fund` réussi, lockfile conservé                          |
 | Compilation TypeScript stricte et Vite                    | `npm run build` réussi                                                           |
 | Logique métier, import et structure pédagogique           | **146 cas unitaires réussis** dans les huit fichiers, aucun échec ni test ignoré |
-| Parcours navigateur                                       | **46 tests réussis** sur la version finale, aucun test ignoré                    |
+| Parcours navigateur                                       | **54 tests réussis** sur la version finale, aucun test ignoré                    |
 | Serveur de production local                               | HTML et ressources JavaScript/CSS de la dernière compilation reçus avec succès   |
 | Lisibilité et espaces                                     | Prettier et `git diff --check` réussis                                           |
 
-Dix-neuf scénarios fonctionnels et quatre scénarios de rendu/motion sont exécutés dans Chromium sur ordinateur et en émulation Pixel 7. Les parcours initiaux comprennent :
+Dix-neuf scénarios fonctionnels, quatre scénarios d’accessibilité et quatre scénarios de rendu/motion sont exécutés dans Chromium sur ordinateur et en émulation Pixel 7. Les parcours initiaux comprennent :
 
 1. Onboarding et diagnostic, leçon, exercice avec indice et solution, quiz, création d’idée sans doublon, modification et avancement du projet, rechargement et carte de compétences.
 2. Calcul financier et cas limites, navigation clavier de la palette, synonymes de recherche et grille locale de prompts.
@@ -30,7 +30,7 @@ L’enregistrement du brouillon a été confirmé par l’outil. La revue, l’e
 
 ## Limites
 
-Pas de test sur appareil physique, Safari ou Firefox, ni d’audit d’accessibilité automatisé complet. Le fonctionnement du clavier et les états principaux sont exercés ; cela ne constitue pas une certification d’accessibilité. Les références pédagogiques sont signalées comme non vérifiées. Les intégrations Supabase, authentification, IA distante et veille automatisée restent à construire. Aucun identifiant n’est requis pour la version locale validée.
+Pas de test sur appareil physique, Safari ou Firefox, ni d’essai avec un lecteur d’écran réel. Le clavier, les états principaux et les règles WCAG A/AA automatisables sont exercés avec axe ; les contrastes sur fonds complexes demandent une vérification humaine. Cela ne constitue pas une certification d’accessibilité. Les références pédagogiques sont signalées comme non vérifiées. Les intégrations Supabase, authentification, IA distante et veille automatisée restent à construire. Aucun identifiant n’est requis pour la version locale validée.
 
 ## Passe 03 — rappels espacés
 
@@ -103,3 +103,15 @@ Après le retour utilisateur sur la typographie, Inter variable auto-hébergée 
 L’inspection des cinq écrans prioritaires sur les deux viewports, du teach-back, du quiz corrigé et de l’onboarding desktop confirme la nouvelle hiérarchie. Les cinq routes ont aussi été contrôlées à 320, 375, 768, 1024 et 1920 px, sans débordement du document ni erreur JavaScript. Les glyphes des titres et du texte de leçon ont été vérifiés via le protocole Chromium : police locale Inter réellement utilisée, pas seulement déclarée dans CSS. Le chargement initial des cinq routes desktop/mobile confirme aussi la disponibilité d’Inter.
 
 Les captures, les liens avant/après et les limites sont consignés dans [LATEST.md](../design-reviews/LATEST.md), archive `2026-11-03_20-49-59-Europe-Paris`. Validation design externe encore attendue ; Chromium et Pixel 7 émulé uniquement.
+
+## Passe 10 — accès au clavier et consolidation
+
+La suite demandée après Inter reprend le chantier d’accessibilité de la feuille de route. Le menu mobile et la palette partagent un retour de focus fiable ; les flèches parcourent la recherche, les routes portent un titre précis et le diagnostic/quiz focalise la nouvelle étape. Les noms accessibles reprennent les libellés visibles. Les groupes, indicateurs de progression et descriptions financières exposent des rôles valides. Trois indices de contraste sont corrigés avec les tokens existants.
+
+Le run final du 5 novembre 2026 passe avec **54 tests navigateur** (27 scénarios sur deux viewports), aucun échec, test ignoré ou retry. Les quatre nouveaux scénarios couvrent les audits d’écran, la recherche y compris vide, le menu/recherche et le redimensionnement, le diagnostic et le quiz au clavier. **33 états sont audités avec axe 4.14.0**, sans violation automatiquement établie ni annotation ARIA restant à corriger dans les résultats exécutés. Les 22 états comportant des contrastes indéterminés sont consignés dans `design-reviews/accessibility-report.json` ; ils ne sont pas présentés comme une conformité acquise.
+
+`npm test` passe, et l’exécution directe des huit fichiers confirme **146 cas réussis**. TypeScript et Vite compilent ; Vite signale le bundle principal de 502,52 kB minifié (146,71 kB gzip). La passe ne change ni le modèle de données ni les règles métier. Le chargement par écran reste un chantier distinct.
+
+**141 captures fraîches** sont archivées sous `2026-11-05_05-27-47-Europe-Paris`, avec la paire stable sur la recherche. L’inspection a corrigé un texte d’assistance visible par erreur dans la barre latérale ; la galerie finale a été régénérée. La correction du quiz est focalisée et sa boîte vérifiée au-dessus du dock mobile ; deux rendus de viewport montrent ce comportement. Les tests de motion et de réduction des mouvements passent. Les sélecteurs de tests suivent désormais les libellés visibles des graphes.
+
+Les captures de recherche, quiz, leçon et simulation ont été inspectées sur desktop/mobile et comparées à la passe Inter. Les comptes rendus et limites sont dans [LATEST.md](../design-reviews/LATEST.md). La poursuite a été autorisée par l’utilisateur ; aucune review design indépendante ni certification d’accessibilité n’est revendiquée.

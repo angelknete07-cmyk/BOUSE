@@ -132,7 +132,11 @@ export function AILab() {
           Donnez une forme à votre pensée.
         </p>
       </header>
-      <div className="prompt-mobile-views" aria-label="Vue de l’instrument">
+      <div
+        className="prompt-mobile-views"
+        role="group"
+        aria-label="Vue de l’instrument"
+      >
         <button
           type="button"
           aria-pressed={mobilePane === "structure"}
@@ -235,7 +239,6 @@ export function AILab() {
                 type="button"
                 key={part.name}
                 className={`prompt-part ${found[index] ? "is-found" : ""}`}
-                aria-label={`Repère : ${part.name}`}
                 aria-pressed={selected === index}
                 onClick={() => selectPart(index)}
                 style={

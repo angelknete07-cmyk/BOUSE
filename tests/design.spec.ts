@@ -108,6 +108,7 @@ async function capture(page: Page, testInfo: TestInfo, name: string) {
       "06-ai-structure",
       "05-lab-financier",
       "03-lecon-learn",
+      "16-search-keyboard",
     ].includes(name)
   )
     await page.screenshot({
@@ -188,11 +189,11 @@ test("surfaces neutres et états de navigation sur un véritable rendu", async (
   for (const [selector, property, description] of colors) {
     await neutral(page.locator(selector).first(), property, description);
   }
-  await page.getByRole("button", { name: /^L’équilibre —/ }).click();
+  await page.getByRole("button", { name: /^L’équilibre/ }).click();
   await expect(page.locator(".trajectory-detail h3")).toHaveText(
     "Trouver son seuil de rentabilité",
   );
-  await page.getByRole("button", { name: /^Les chiffres —/ }).click();
+  await page.getByRole("button", { name: /^Les chiffres/ }).click();
   const menu = page.getByRole("button", {
     name: "Ouvrir la navigation",
     exact: true,
@@ -228,6 +229,14 @@ test("surfaces neutres et états de navigation sur un véritable rendu", async (
   await neutral(search, "background-color", "Palette de recherche");
   await neutral(search, "border-top-color", "Bordure de la palette");
   await capture(page, testInfo, "03-recherche");
+  await search.getByRole("textbox").press("ArrowDown");
+  await expect(
+    search.locator(".palette-results > button").first(),
+  ).toBeFocused();
+  await capture(page, testInfo, "16-search-keyboard");
+  await search.getByRole("textbox").fill("zzzz-aucun-resultat");
+  await expect(search.getByRole("status")).toHaveText("0 résultat");
+  await capture(page, testInfo, "16-search-empty");
   await page.keyboard.press("Escape");
   await expect(search).not.toBeVisible();
 });
@@ -304,10 +313,25 @@ test("galerie des écrans et du quiz validé sans débordement", async ({
     if (index < lesson.quiz.length - 1) {
       await page
         .getByRole("button", { name: "Valider cette réponse", exact: true })
-        .click();
+        .press("Enter");
       await expect(
         page.getByText(question.explanation, { exact: false }),
       ).toBeVisible();
+      const feedback = page.locator(".learning-quiz-feedback");
+      await expect(feedback).toBeFocused();
+      const dock = page.locator(".mobile-dock");
+      if (await dock.isVisible()) {
+        const feedbackBox = (await feedback.boundingBox())!;
+        const dockBox = (await dock.boundingBox())!;
+        expect(feedbackBox.y).toBeGreaterThanOrEqual(0);
+        expect(feedbackBox.y + feedbackBox.height).toBeLessThanOrEqual(
+          dockBox.y,
+        );
+      }
+      await page.screenshot({
+        path: testInfo.outputPath("04-quiz-feedback-focus-viewport.png"),
+        fullPage: false,
+      });
       await capture(page, testInfo, "04-quiz-feedback");
       await page
         .getByRole("button", { name: "Question suivante", exact: true })
@@ -390,9 +414,7 @@ test("galerie des écrans et du quiz validé sans débordement", async ({
       const promptLesson = lessons.find(
         (item) => item.id === "prompt-structure",
       )!;
-      await page
-        .getByRole("button", { name: new RegExp(`^${promptLesson.title}`) })
-        .click();
+      await page.getByRole("button", { name: /^Structurer un prompt/ }).click();
       await expect(
         page
           .locator(".knowledge-details")
@@ -620,10 +642,11 @@ test("galerie des écrans et du quiz validé sans débordement", async ({
   await page
     .getByRole("button", { name: "Coûts fournisseurs", exact: true })
     .click();
-  await page.getByRole("button", { name: "Mois 3", exact: true }).click();
-  await expect(
-    page.getByRole("button", { name: "Mois 3", exact: true }),
-  ).toHaveAttribute("aria-pressed", "true");
+  await page.getByRole("button", { name: /^Mois 3/ }).click();
+  await expect(page.getByRole("button", { name: /^Mois 3/ })).toHaveAttribute(
+    "aria-pressed",
+    "true",
+  );
   await capture(page, testInfo, "13-simulation-scenario");
   await page
     .getByRole("button", { name: "Conserver la comparaison", exact: true })
@@ -654,8 +677,7 @@ test("galerie des écrans et du quiz validé sans débordement", async ({
   ).toBeVisible();
   await page
     .getByRole("button", {
-      name: `Voir les traces : ${lesson.title}`,
-      exact: true,
+      name: new RegExp(lesson.title),
     })
     .click();
   await capture(page, testInfo, "14-portfolio-overview");
@@ -769,8 +791,7 @@ test("galerie des écrans et du quiz validé sans débordement", async ({
   await page.goto("/#skills");
   await page
     .getByRole("button", {
-      name: `${learningGoal.title} · Quiz validé`,
-      exact: true,
+      name: /^Seuil de rentabilité.*Quiz validé/,
     })
     .click();
   await expect(
@@ -851,9 +872,7 @@ test("compositions des instruments, atlas et leçon complète", async ({
   const structureView = page.getByRole("button", { name: /^Structure/ });
   if (await structureView.isVisible()) await structureView.click();
   await expect(page.locator(".prompt-part.is-found")).toHaveCount(7);
-  await page
-    .getByRole("button", { name: "Repère : Vérification", exact: true })
-    .click();
+  await page.getByRole("button", { name: /Vérification/ }).click();
   await expect(page.locator(".prompt-lens mark")).toHaveText(
     "Vérifie les sources et signale les incertitudes.",
   );

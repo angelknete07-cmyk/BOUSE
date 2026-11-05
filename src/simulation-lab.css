@@ -432,6 +432,12 @@
   color: var(--text-tertiary);
   font-size: var(--type-caption);
 }
+.simulation-impact dd.simulation-metric-hint {
+  display: block;
+  grid-column: 1 / -1;
+  margin: 0;
+  text-align: left;
+}
 .simulation-funding {
   display: flex;
   align-items: flex-start;

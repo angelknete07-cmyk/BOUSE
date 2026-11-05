@@ -102,7 +102,7 @@ export function KnowledgeAtlas({
               key={lesson.id}
               type="button"
               className={`atlas-node ${visibleIds.has(lesson.id) ? "" : "is-filtered"} ${done.has(lesson.id) ? "is-complete" : ""}`}
-              aria-label={`Explorer la notion : ${lesson.title}`}
+              aria-describedby={`atlas-description-${lesson.id}`}
               aria-pressed={selectedId === lesson.id}
               onClick={() => onSelect(lesson.id)}
               hidden={!visibleIds.has(lesson.id)}
@@ -123,6 +123,9 @@ export function KnowledgeAtlas({
                 </span>
               </span>
               <strong>{point.short}</strong>
+              <span hidden id={`atlas-description-${lesson.id}`}>
+                {lesson.title}
+              </span>
               <small>
                 {done.has(lesson.id)
                   ? "Quiz validé"

@@ -278,6 +278,7 @@ export function ProjectLearningPlan({
         <>
           <div
             className="project-plan-summary"
+            role="group"
             aria-label="Repères du parcours"
           >
             <div className="project-plan-count">

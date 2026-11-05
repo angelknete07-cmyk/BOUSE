@@ -35,7 +35,11 @@ function CashScene() {
         </div>
         <span className="scene-fiction">Cas fictif · HT</span>
       </div>
-      <div className="scene-segment" aria-label="Indicateur à explorer">
+      <div
+        className="scene-segment"
+        role="group"
+        aria-label="Indicateur à explorer"
+      >
         <button
           type="button"
           aria-pressed={view === "cash"}

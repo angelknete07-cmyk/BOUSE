@@ -804,7 +804,7 @@
     display: block;
     font-family: var(--font-mono);
     font-size: var(--type-micro);
-    opacity: 0.5;
+    color: var(--text-tertiary);
   }
   .trajectory-detail {
     min-height: 72px;

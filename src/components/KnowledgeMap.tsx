@@ -102,7 +102,11 @@ export function KnowledgeMap({ state, onNavigate }: Props) {
           Ouvrir mon portfolio <Icon name="arrow" size={16} />
         </button>
       </header>
-      <div className="knowledge-summary" aria-label="Vos repères actuels">
+      <div
+        className="knowledge-summary"
+        role="group"
+        aria-label="Vos repères actuels"
+      >
         <p>
           <strong>{verified}</strong> quiz validé{verified > 1 ? "s" : ""}
         </p>
@@ -116,7 +120,7 @@ export function KnowledgeMap({ state, onNavigate }: Props) {
       </div>
       <div className="knowledge-explorer">
         <section className="knowledge-atlas" aria-label="Carte des prérequis">
-          <div className="knowledge-map-key" aria-label="Légende">
+          <div className="knowledge-map-key" role="group" aria-label="Légende">
             <span>
               <i className="knowledge-key-point" /> À explorer
             </span>
@@ -204,7 +208,7 @@ export function KnowledgeMap({ state, onNavigate }: Props) {
                       "--node-y": `${position.y}%`,
                     } as CSSProperties
                   }
-                  aria-label={`${lesson.title} · ${statusLabel(attempt)}`}
+                  aria-describedby={`knowledge-description-${lesson.id}`}
                   aria-pressed={selectedId === lesson.id}
                   aria-controls="knowledge-details"
                   onClick={() => select(lesson.id)}
@@ -219,6 +223,9 @@ export function KnowledgeMap({ state, onNavigate }: Props) {
                     )}
                   </span>
                   <span className="knowledge-node-label">{position.label}</span>
+                  <span hidden id={`knowledge-description-${lesson.id}`}>
+                    {lesson.title}
+                  </span>
                   <span className="knowledge-node-status">
                     {statusLabel(attempt)}
                   </span>

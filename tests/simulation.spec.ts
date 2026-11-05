@@ -95,10 +95,11 @@ test("un délai de paiement change le cash sans changer le résultat et les flux
   await expectMoney(page, "Résultat cumulé du scénario", "13200");
   await expectMoney(page, "Trésorerie finale de la référence", "13200");
   await expectMoney(page, "Trésorerie finale du scénario", "-10800");
-  await page.getByRole("button", { name: "Mois 2", exact: true }).click();
-  await expect(
-    page.getByRole("button", { name: "Mois 2", exact: true }),
-  ).toHaveAttribute("aria-pressed", "true");
+  await page.getByRole("button", { name: /^Mois 2/ }).click();
+  await expect(page.getByRole("button", { name: /^Mois 2/ })).toHaveAttribute(
+    "aria-pressed",
+    "true",
+  );
   await page
     .getByLabel("Délai de paiement du scénario", { exact: true })
     .selectOption("0");
