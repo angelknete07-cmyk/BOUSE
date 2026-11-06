@@ -83,6 +83,28 @@ export function Glossary({
       <p className="glossary-count" role="status">
         {visible.length} terme{visible.length > 1 ? "s" : ""}
       </p>
+      {groups.size > 3 && (
+        <nav className="glossary-index" aria-label="Aller à une lettre">
+          {[...groups.keys()].map((letter) => (
+            <button
+              key={letter}
+              type="button"
+              onClick={() => {
+                const target = document.getElementById(`lettre-${letter}`);
+                target?.scrollIntoView({
+                  block: "start",
+                  behavior: matchMedia("(prefers-reduced-motion: reduce)")
+                    .matches
+                    ? "instant"
+                    : "smooth",
+                });
+              }}
+            >
+              {letter}
+            </button>
+          ))}
+        </nav>
+      )}
       {visible.length ? (
         <div className="glossary-groups">
           {[...groups].map(([letter, entries]) => (

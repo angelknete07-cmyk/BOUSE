@@ -1,3 +1,28 @@
+# Review design — passe 27 : simulateurs, onglets en pastilles, lexique indexé
+
+**6 novembre 2026, 10:33 Europe/Paris.** Suite du plan après la passe 26. Détail : [AUDIT-27.md](AUDIT-27.md). **La direction artistique n'est pas déclarée validée.**
+
+- **Cinq nouveaux simulateurs** (16 leçons interactives sur 43) :
+  - impôt sur le revenu (barème 2026, à vérifier) ;
+  - BFR et trésorerie ;
+  - louer ou acheter ;
+  - rééquilibrage d'allocation ;
+  - choix du statut.
+- **Moteurs testés :** `src/lib/lessonModels.ts`, avec 7 cas.
+- **Onglets de leçon en pastilles** (référence 1), clavier et rôles inchangés.
+- **Lexique** : index alphabétique collant, fiches resserrées sur mobile (27 212 → 23 365 px).
+- **Captures** :
+  - `simulateurs-27/` : desktop 1440 × 1000 et Pixel 7 ;
+  - paire `latest-*` : leçon avec pastilles ;
+  - archive `2026-11-06_10-33-15-Europe-Paris`.
+- **Contrôles** : `npm test` 220 cas, `npx playwright test` 80 tests, build sans avertissement.
+- **Limites** :
+  - 27 leçons sans scène ;
+  - lexique encore long ;
+  - aucun test sur appareil réel.
+
+---
+
 # Review design — passe 26 : fusion des deux directions artistiques
 
 **6 novembre 2026, 10:07 Europe/Paris.** Brief V2 : identité sombre et premium de la référence 1, avec la profondeur et la richesse des cartes de la référence 2, sans ses couleurs. Review de toute l'application, puis corrections P0 et P1. Détail : [AUDIT-26.md](AUDIT-26.md). **La direction artistique n'est pas déclarée validée** : elle attend votre review.

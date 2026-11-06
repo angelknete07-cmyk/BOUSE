@@ -7,6 +7,13 @@ import {
 } from "../lib/entrepreneurship";
 import { projectInvestment } from "../lib/investing";
 import { budgetBalance, loanPayment } from "../lib/personalFinance";
+import {
+  IncomeTaxScene,
+  RebalanceScene,
+  RentOrBuyScene,
+  StatusScene,
+  WorkingCapitalScene,
+} from "./LessonScenesMore";
 
 const euros = new Intl.NumberFormat("fr-FR", {
   style: "currency",
@@ -26,6 +33,11 @@ export function LessonScene({ lessonId }: { lessonId: string }) {
   if (lessonId === "fp-credit-taux") return <CreditScene />;
   if (lessonId === "inv-risque-diversification") return <DrawdownScene />;
   if (lessonId === "ent-micro-entreprise") return <MicroScene />;
+  if (lessonId === "fp-impot-revenu") return <IncomeTaxScene />;
+  if (lessonId === "fin-bfr-tresorerie") return <WorkingCapitalScene />;
+  if (lessonId === "fp-logement") return <RentOrBuyScene />;
+  if (lessonId === "inv-allocation-profil") return <RebalanceScene />;
+  if (lessonId === "ent-statut-juridique") return <StatusScene />;
   return null;
 }
 

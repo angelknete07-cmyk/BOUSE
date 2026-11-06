@@ -587,3 +587,41 @@ test("deux leçons de suite : question de départ, acquis, suite et retour serei
   );
   await noHorizontalOverflow(page);
 });
+
+test("les simulateurs de leçon calculent et s’expliquent : impôt, statut, louer ou acheter", async ({
+  page,
+}) => {
+  await onboard(page);
+  await page.goto("/#lesson/fp-impot-revenu");
+  const tax = page.getByRole("region", {
+    name: "Calculer un impôt avec le barème progressif",
+  });
+  await tax
+    .getByRole("slider", { name: "Revenu net imposable en euros" })
+    .fill("30000");
+  // (29 579 − 11 600) × 11 % + (30 000 − 29 579) × 30 %, rounded.
+  await expect(tax.locator(".scene-number")).toHaveText(/2\s104\s€/);
+  await expect(tax).toContainText("Taux marginal : 30");
+  await expect(tax).toContainText("gardés");
+  await tax.getByRole("button", { name: "2 parts" }).click();
+  // 15 000 € per share: (15 000 − 11 600) × 11 % × 2 shares.
+  await expect(tax.locator(".scene-number")).toHaveText(/748\s€/);
+
+  await page.goto("/#lesson/ent-statut-juridique");
+  const status = page.getByRole("region", {
+    name: "Voir quels critères orientent le choix d’un statut",
+  });
+  await expect(status).toContainText("régime micro");
+  await status.getByRole("button", { name: /Je m’associe/ }).click();
+  await expect(status.locator(".scene-status-result")).toHaveText("SAS");
+
+  await page.goto("/#lesson/fp-logement");
+  const housing = page.getByRole("region", {
+    name: "Comparer location et achat dans le temps",
+  });
+  await housing.getByRole("slider", { name: /Durée d’occupation/ }).fill("2");
+  await expect(housing).toContainText("d’avantage à la location sur 2 ans");
+  await housing.getByRole("slider", { name: /Durée d’occupation/ }).fill("25");
+  await expect(housing).toContainText("d’avantage à l’achat sur 25 ans");
+  await noHorizontalOverflow(page);
+});
