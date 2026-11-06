@@ -1,0 +1,2315 @@
+/* BOUSE / atlas & instruments. Shared composition, not a collection of tiles. */
+.workspace {
+  background: none;
+}
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+}
+.art-page {
+  max-width: var(--page-max);
+  margin-inline: auto;
+}
+/* Working pages open on a compact, factual heading: the instrument comes first. */
+.art-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: var(--space-12);
+  margin: var(--space-3) 0 var(--space-8);
+}
+.art-heading h1 {
+  font-family: var(--font-display);
+  font-size: var(--type-page-fluid);
+  line-height: 1.1;
+  font-weight: var(--weight-display);
+  letter-spacing: var(--tracking-display);
+  margin: var(--space-5) 0 0;
+}
+.art-heading > p,
+.financial-heading-side > p {
+  color: var(--muted);
+  font-size: var(--type-body);
+  line-height: 1.8;
+  max-width: 38ch;
+  margin: 0 0 var(--space-2);
+}
+.instrument-index {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  color: var(--muted);
+  font-size: var(--type-small);
+}
+.instrument-index i {
+  width: 18px;
+  height: 1px;
+  background: var(--line-strong);
+}
+.instrument-caption {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-4);
+  font-family: var(--font-mono);
+  font-size: var(--type-caption);
+  line-height: 1.6;
+  color: var(--text-tertiary);
+}
+.instrument-caption > span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.instrument-principle {
+  margin-top: var(--space-20);
+  padding: var(--space-8) 0;
+  max-width: 850px;
+}
+.instrument-principle > span {
+  font-size: var(--type-small);
+  color: var(--muted);
+}
+.instrument-principle > p {
+  font: var(--weight-regular) var(--type-heading)/1.5 var(--font-display);
+  letter-spacing: var(--tracking-heading);
+  color: var(--text-secondary);
+  margin: var(--space-5) 0;
+}
+.instrument-principle strong {
+  color: var(--text);
+  font-weight: var(--weight-heading);
+}
+.instrument-principle > small {
+  display: block;
+  color: var(--muted);
+  font-size: var(--type-small);
+  line-height: 1.8;
+  max-width: 95ch;
+}
+@keyframes instrument-reveal {
+  from {
+    opacity: 0.25;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* The home opens with a single, panoramic scene. */
+.art-home .learning-greeting {
+  margin-bottom: var(--space-6);
+}
+.art-home .home-dateline {
+  color: var(--muted);
+  font-size: var(--type-small);
+  margin: 0 0 var(--space-3);
+}
+.art-home .home-dateline span {
+  margin-inline: var(--space-3);
+  color: var(--ink-faint);
+}
+.art-home .learning-greeting h1 {
+  font-size: var(--type-title-lg);
+  font-weight: var(--weight-heading);
+}
+.art-home .learning-stage {
+  display: block;
+}
+.art-home .learning-hero {
+  min-height: 460px;
+  border-radius: var(--radius-xs);
+  background:
+    radial-gradient(ellipse at 76% 65%, var(--light-matter), transparent 60%),
+    var(--bg-secondary);
+  box-shadow: none;
+  display: flex;
+  flex-direction: column;
+}
+.art-home .learning-matter {
+  position: absolute;
+  inset: 0 -8% 0 auto;
+  width: 84%;
+  height: 100%;
+  opacity: 1;
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--accent) 35%,
+    var(--accent) 88%,
+    transparent
+  );
+  color: var(--accent);
+  animation: none;
+}
+.art-home .terrain-artwork {
+  width: 100%;
+  height: 100%;
+}
+.terrain-relief {
+  animation: relief-breathe var(--motion-matter) var(--ease-in-out) infinite
+    alternate;
+  transform-origin: 60% 65%;
+}
+@keyframes relief-breathe {
+  from {
+    transform: translateY(3px);
+  }
+  to {
+    transform: translateY(-3px);
+  }
+}
+.art-home .learning-hero-top {
+  padding: var(--space-8) var(--space-10) 0;
+}
+.scene-label {
+  color: var(--text-secondary);
+  font-size: var(--type-body-sm);
+}
+.art-home .learning-coordinate {
+  font-size: var(--type-caption);
+  letter-spacing: 0.12em;
+  color: var(--ink-faint);
+}
+.art-home .learning-hero-content {
+  width: 61%;
+  padding: var(--space-8) var(--space-10) var(--space-8);
+}
+.art-home .learning-hero-content h2 {
+  font-family: var(--font-display);
+  font-size: var(--type-stage-title);
+  line-height: 1.08;
+  font-weight: var(--weight-display);
+  letter-spacing: var(--tracking-display);
+  max-width: 18ch;
+  margin: var(--space-5) 0;
+  text-wrap: initial;
+}
+.art-home .learning-hero-content p {
+  max-width: 38ch;
+  font-size: var(--type-body-sm);
+  line-height: 1.8;
+  margin-bottom: var(--space-6);
+}
+.art-home .learning-hero-content .tag {
+  font-size: var(--type-small);
+  color: var(--muted);
+}
+.art-home .learning-hero-actions {
+  gap: var(--space-6);
+}
+.home-scene-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-6);
+  margin-top: auto;
+  padding: var(--space-5) var(--space-10);
+  background: linear-gradient(90deg, var(--bg-secondary), transparent);
+}
+.home-scene-footer > span {
+  font-size: var(--type-caption);
+  color: var(--muted);
+}
+.home-progress {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+.home-progress > span {
+  font-family: var(--font-mono);
+  font-size: var(--type-small);
+  color: var(--muted);
+}
+.home-progress strong {
+  color: var(--text);
+  font-weight: 500;
+}
+.home-progress > span {
+  white-space: nowrap;
+}
+.home-progress > div {
+  display: flex;
+  gap: var(--space-1);
+  flex: 0 1 auto;
+  min-width: 0;
+}
+/* One tick per lesson: ticks shrink as the catalogue grows. */
+.home-progress i {
+  flex: 0 1 22px;
+  min-width: 4px;
+  width: 22px;
+  height: 2px;
+  background: var(--line-strong);
+}
+.home-progress i.complete {
+  background: var(--accent);
+}
+.home-progress i.current {
+  background: var(--muted);
+}
+.home-progress small {
+  color: var(--text-tertiary);
+  font-size: var(--type-caption);
+}
+.art-home .learning-trajectory {
+  display: grid;
+  grid-template-columns: 210px minmax(300px, 1fr) 280px;
+  align-items: center;
+  column-gap: var(--space-10);
+  row-gap: 0;
+  padding: 0;
+  margin-top: var(--space-12);
+}
+.art-home .trajectory-heading {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-5);
+  grid-row: 1;
+}
+.trajectory-intro {
+  color: var(--muted);
+  font-size: var(--type-small);
+  margin: 0 0 var(--space-2);
+}
+.art-home .trajectory-heading h2 {
+  font-weight: var(--weight-heading);
+  font-size: var(--type-heading);
+  letter-spacing: var(--tracking-heading);
+}
+.art-home .trajectory-map {
+  margin: 0;
+  min-height: 0;
+  height: 230px;
+  grid-column: 2;
+  grid-row: 1;
+}
+.art-home .trajectory-detail {
+  margin: 0;
+  padding: var(--space-4) 0;
+  border: 0;
+  background: none;
+  grid-column: 3;
+  grid-row: 1;
+}
+.art-home .trajectory-detail h3 {
+  font-size: var(--type-title-md);
+  line-height: 1.4;
+  margin-block: var(--space-3);
+  max-width: 19ch;
+}
+.art-home .trajectory-detail .eyebrow {
+  font-size: var(--type-micro);
+}
+.art-home .trajectory-full-map {
+  grid-column: 3;
+  margin: var(--space-3) 0 0;
+  justify-self: start;
+}
+.art-home .learning-universes-heading {
+  margin-top: var(--space-20);
+  margin-bottom: var(--space-10);
+}
+.territory-caption {
+  color: var(--muted);
+  font-size: var(--type-small);
+  margin: 0 0 var(--space-3);
+}
+.art-home .learning-universes-heading h2 {
+  font-size: clamp(1.8rem, 3vw, 2.75rem);
+  font-weight: var(--weight-heading);
+  letter-spacing: var(--tracking-heading);
+}
+.art-home .learning-universes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-12) var(--space-16);
+}
+.art-home .domain-folio {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  min-height: 0;
+  height: auto;
+  padding: var(--space-5) 0;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  text-align: left;
+  overflow: visible;
+}
+.art-home .domain-folio:hover {
+  background: transparent;
+  box-shadow: none;
+  transform: translateY(-3px);
+}
+.art-home .domain-kicker {
+  order: 0;
+  margin-bottom: var(--space-6);
+}
+.art-home .domain-kicker .eyebrow {
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: var(--type-caption);
+}
+.art-home .domain-copy {
+  order: 1;
+  position: relative;
+  width: 100%;
+}
+.art-home .domain-copy h3 {
+  font-size: clamp(2rem, 3.2vw, 3rem);
+  font-weight: var(--weight-heading);
+  line-height: 1.1;
+  letter-spacing: var(--tracking-heading);
+  max-width: 17ch;
+}
+.art-home .domain-copy p {
+  margin-top: var(--space-4);
+  font-size: var(--type-body-sm);
+}
+.art-home .finance-signature {
+  order: 2;
+  position: static;
+  width: 100%;
+  height: 210px;
+  opacity: 1;
+  transform: none;
+  margin: var(--space-6) 0 0;
+}
+.finance-signature svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+}
+.finance-signature .finance-axis {
+  stroke: var(--line);
+  stroke-width: 1;
+}
+.finance-curve-result {
+  stroke: var(--accent);
+  stroke-width: 1.3;
+}
+.finance-curve-cash {
+  stroke: var(--text-tertiary);
+  stroke-width: 1;
+  stroke-dasharray: 4 5;
+}
+.finance-signature circle {
+  fill: var(--accent);
+}
+.finance-signature text {
+  fill: var(--text-tertiary);
+  font-size: var(--type-annotation);
+  font-family: var(--font-mono);
+  letter-spacing: 0.08em;
+}
+.art-home .intelligence-signature {
+  order: 2;
+  position: relative;
+  inset: auto;
+  align-self: center;
+  width: min(100%, 360px);
+  height: 210px;
+  opacity: 0.9;
+  margin-top: var(--space-6);
+  transform: none;
+}
+.art-home .domain-link {
+  order: 3;
+  position: static;
+  padding-top: var(--space-5);
+  font-size: var(--type-body-sm);
+}
+.art-home .learning-next-actions {
+  margin-top: var(--space-16);
+}
+.art-home .learning-next-action {
+  background: transparent;
+  box-shadow: none;
+  border: 0;
+  padding: var(--space-6) 0;
+}
+
+/* AI Lab: writing and structure remain in one field of view. */
+.prompt-mobile-views,
+.prompt-mobile-write {
+  display: none;
+}
+.prompt-desk {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.78fr) minmax(0, 1.22fr);
+  gap: var(--space-10);
+  align-items: stretch;
+}
+.prompt-writing {
+  background: var(--surface-low);
+  padding: var(--space-6);
+  border-radius: var(--radius-xs);
+  display: flex;
+  flex-direction: column;
+}
+.prompt-writing > label {
+  color: var(--text);
+  font: var(--weight-heading) var(--type-title-md)/1.4 var(--font-display);
+  margin: var(--space-8) 0 var(--space-5);
+  max-width: 23ch;
+}
+.prompt-writing textarea {
+  resize: vertical;
+  min-height: 275px;
+  max-height: 550px;
+  border: 0;
+  border-radius: 0;
+  border-left: 1px solid var(--line-strong);
+  padding: var(--space-2) 0 var(--space-2) var(--space-4);
+  background: transparent;
+  font-size: var(--type-body);
+  line-height: 1.85;
+  color: var(--text-secondary);
+}
+.prompt-writing textarea::placeholder {
+  color: var(--text-tertiary);
+}
+.prompt-writing-footer {
+  margin-top: auto;
+  padding-top: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-5);
+}
+.prompt-writing-footer > span {
+  color: var(--muted);
+  font-size: var(--type-caption);
+}
+.prompt-observatory {
+  min-width: 0;
+  padding-top: var(--space-6);
+}
+.prompt-constellation {
+  position: relative;
+  height: 380px;
+  margin-top: var(--space-5);
+}
+.prompt-constellation > svg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  inset: 0;
+  overflow: visible;
+}
+.prompt-constellation path {
+  stroke: var(--line-strong);
+  stroke-width: 0.16;
+  fill: none;
+  transition:
+    stroke var(--motion-enter) var(--ease-out),
+    opacity var(--motion-enter) var(--ease-out);
+}
+.prompt-constellation path.found {
+  stroke: var(--text-tertiary);
+}
+.prompt-constellation path.selected {
+  stroke: var(--accent);
+  stroke-width: 0.25;
+  stroke-dasharray: 1 1.5;
+}
+.prompt-orbit {
+  fill: none;
+  stroke: var(--line);
+  stroke-width: 0.14;
+  stroke-dasharray: 0.25 1.1;
+}
+.prompt-orbit.inner {
+  stroke-dasharray: none;
+}
+.prompt-constellation .prompt-crosshair {
+  stroke: var(--text-tertiary);
+  stroke-width: 0.18;
+}
+.prompt-core {
+  position: absolute;
+  top: 49%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 126px;
+  height: 126px;
+  border-radius: var(--radius-round);
+  background: radial-gradient(
+    ellipse at 40% 18%,
+    var(--raised),
+    var(--bg-secondary) 70%
+  );
+  box-shadow: var(--highlight-edge), var(--shadow-stage);
+}
+.prompt-core > span {
+  font: var(--weight-figure) 52px/1 var(--font-display);
+  letter-spacing: var(--tracking-figure);
+}
+.prompt-core > small {
+  color: var(--muted);
+  font-size: var(--type-micro);
+  margin-top: var(--space-2);
+}
+.prompt-part {
+  position: absolute;
+  left: var(--part-x);
+  top: var(--part-y);
+  transform: translate(-50%, -50%);
+  width: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  padding: var(--space-2) 0;
+  min-height: 66px;
+  transition:
+    transform var(--motion-normal) var(--ease-out),
+    color var(--motion-normal) var(--ease-out);
+}
+.prompt-part:hover {
+  transform: translate(-50%, -50%) translateY(-3px);
+  color: var(--text);
+}
+.prompt-part-dot {
+  width: 24px;
+  height: 24px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-round);
+  background: var(--bg);
+  display: grid;
+  place-items: center;
+  font: 400 8px var(--font-mono);
+  margin-bottom: 6px;
+  transition:
+    background var(--motion-enter) var(--ease-out),
+    color var(--motion-enter) var(--ease-out);
+}
+.prompt-part.is-found .prompt-part-dot {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--text-inverse);
+}
+.prompt-part[aria-pressed="true"] .prompt-part-dot {
+  outline: 1px solid var(--line-strong);
+  outline-offset: 5px;
+}
+.prompt-part[aria-pressed="true"] strong {
+  color: var(--text);
+}
+.prompt-part strong {
+  font-size: var(--type-small);
+  font-weight: var(--weight-heading);
+}
+.prompt-part small {
+  font-size: var(--type-micro);
+  color: var(--text-tertiary);
+  margin-top: 4px;
+}
+.prompt-lens {
+  display: flex;
+  gap: var(--space-5);
+  min-height: 138px;
+  padding: var(--space-5) var(--space-3) 0;
+  animation: instrument-reveal var(--motion-enter) var(--ease-out) both;
+}
+.prompt-lens-index {
+  font: var(--weight-figure) 36px/1 var(--font-display);
+  color: var(--ink-faint);
+}
+.prompt-lens h2 {
+  font-size: var(--type-title-sm);
+  font-weight: var(--weight-heading);
+  margin: 0 0 var(--space-2);
+  letter-spacing: var(--tracking-heading);
+}
+.prompt-lens p {
+  color: var(--muted);
+  font-size: var(--type-small);
+  margin: 0;
+}
+.prompt-lens blockquote {
+  margin: var(--space-3) 0 0;
+  padding: 0 0 0 var(--space-3);
+  border-left: 1px solid var(--accent);
+  max-height: 110px;
+  overflow-y: auto;
+}
+.prompt-lens mark {
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: var(--type-body-sm);
+  line-height: 1.8;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.prompt-lens .prompt-absence {
+  margin-top: var(--space-3);
+  font-size: var(--type-caption);
+}
+.instrument-disclosure {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  color: var(--muted);
+  font-size: var(--type-caption);
+  line-height: 1.8;
+  max-width: 90ch;
+  margin-top: var(--space-5);
+}
+.instrument-disclosure svg {
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+.prompt-comparison {
+  margin-top: var(--space-20);
+  animation: instrument-reveal var(--motion-enter) var(--ease-out) both;
+}
+.prompt-comparison > header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-6);
+  margin-bottom: var(--space-10);
+}
+.prompt-comparison h2 {
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  font-weight: var(--weight-heading);
+  letter-spacing: var(--tracking-heading);
+  line-height: 1.2;
+  margin: var(--space-4) 0 0;
+}
+.prompt-assessment {
+  text-align: right;
+}
+.prompt-assessment h3 {
+  font-family: var(--font-mono);
+  font-size: var(--type-title-sm);
+  font-weight: 400;
+  margin: 0 0 var(--space-2);
+}
+.prompt-assessment > span {
+  color: var(--muted);
+  font-size: var(--type-caption);
+}
+.prompt-comparison-columns {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: var(--space-12);
+}
+.prompt-comparison-columns > section {
+  min-width: 0;
+}
+.prompt-comparison-columns h3 {
+  font-size: var(--type-body-lg);
+  font-weight: var(--weight-heading);
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+.prompt-comparison-columns h3 span {
+  font-family: var(--font-mono);
+  color: var(--text-tertiary);
+  font-size: var(--type-small);
+}
+.prompt-original {
+  color: var(--muted);
+  font-size: var(--type-body);
+  line-height: 1.9;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.prompt-comparison pre {
+  background: var(--surface-low);
+  border: 0;
+  border-radius: var(--radius-xs);
+  color: var(--text-secondary);
+  font-size: var(--type-small);
+  line-height: 2;
+  padding: var(--space-6);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+/* Academy: the catalogue is a secondary way into a connected territory. */
+.atlas-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-6);
+}
+.atlas-views {
+  display: flex;
+  gap: var(--space-5);
+}
+.atlas-views button {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  border: 0;
+  background: none;
+  color: var(--muted);
+  padding: var(--space-3) 0;
+  font-size: var(--type-body-sm);
+  min-height: 44px;
+}
+.atlas-views button[aria-pressed="true"] {
+  color: var(--text);
+  box-shadow: 0 1px var(--accent);
+}
+.atlas-filters {
+  margin: var(--space-5) 0 0;
+  gap: var(--space-3);
+}
+.atlas-filters button {
+  background: transparent;
+  font-size: var(--type-small);
+}
+.atlas-filters button.active {
+  background: var(--surface);
+}
+.atlas-scroll {
+  overflow-x: auto;
+  scrollbar-color: var(--line-strong) transparent;
+  scrollbar-width: thin;
+  outline-offset: 5px;
+}
+.academy-map-canvas {
+  position: relative;
+  min-width: 680px;
+  height: 980px;
+  margin: var(--space-5) 0 var(--space-6);
+}
+.academy-map-canvas > svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.atlas-guide {
+  stroke: url(#atlas-light);
+  stroke-width: 1;
+  fill: none;
+}
+.atlas-guide.vertical {
+  stroke: var(--line);
+  stroke-dasharray: 2 8;
+}
+.atlas-link {
+  stroke: var(--line-strong);
+  stroke-width: 1;
+  fill: none;
+  transition: stroke var(--motion-enter) var(--ease-out);
+}
+.atlas-link.is-active {
+  stroke: var(--text-tertiary);
+}
+.atlas-levels {
+  position: absolute;
+  top: 0;
+  left: 3%;
+  right: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  color: var(--text-tertiary);
+  font: 400 var(--type-micro) var(--font-mono);
+}
+.atlas-levels span:nth-child(2) {
+  text-align: center;
+}
+.atlas-levels span:last-child {
+  text-align: right;
+}
+.atlas-node {
+  position: absolute;
+  left: var(--atlas-x);
+  top: var(--atlas-y);
+  /* Anchor the orbit centre (76px / 2) on the point, so prerequisite links meet the circles. */
+  transform: translate(-50%, -38px);
+  border: 0;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 190px;
+  padding: 0;
+  text-align: center;
+  transition: transform var(--motion-normal) var(--ease-out);
+}
+.atlas-node:hover {
+  transform: translate(-50%, -38px) translateY(-3px);
+}
+.atlas-node[hidden] {
+  display: none;
+}
+.atlas-node-orbit {
+  position: relative;
+  width: 76px;
+  height: 76px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-round);
+  border: 1px solid transparent;
+}
+.atlas-node-orbit > span {
+  width: 43px;
+  height: 43px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line-strong);
+  background: var(--bg-secondary);
+  border-radius: var(--radius-round);
+  font-family: var(--font-mono);
+  font-size: var(--type-caption);
+  color: var(--muted);
+  transition:
+    background var(--motion-normal) var(--ease-out),
+    box-shadow var(--motion-normal) var(--ease-out);
+}
+.atlas-node[aria-pressed="true"] .atlas-node-orbit {
+  border-color: var(--line);
+}
+.atlas-node[aria-pressed="true"] .atlas-node-orbit > span {
+  width: 54px;
+  height: 54px;
+  background: radial-gradient(ellipse at 35% 20%, var(--text), var(--accent));
+  color: var(--text-inverse);
+  border-color: transparent;
+  box-shadow: 0 0 0 7px var(--surface-low);
+}
+.atlas-node.is-complete:not([aria-pressed="true"]) .atlas-node-orbit > span {
+  color: var(--text);
+  border-color: var(--muted);
+}
+.atlas-node strong {
+  color: var(--text-secondary);
+  font: var(--weight-heading) var(--type-body-sm)/1.4 var(--font-display);
+  background: var(--bg);
+  padding: 2px var(--space-2);
+}
+.atlas-node[aria-pressed="true"] strong {
+  color: var(--text);
+}
+.atlas-node small {
+  color: var(--text-tertiary);
+  font-size: var(--type-caption);
+  padding-top: var(--space-2);
+}
+.atlas-domain {
+  position: absolute;
+  font: 400 var(--type-caption) var(--font-display);
+  color: var(--text-tertiary);
+  left: 2%;
+}
+.atlas-finance {
+  top: 1%;
+}
+.atlas-business {
+  top: 19%;
+}
+.atlas-ai {
+  top: 39%;
+}
+.atlas-personal {
+  top: 59%;
+}
+.atlas-investing {
+  top: 80%;
+}
+.atlas-caption {
+  text-align: right;
+  margin: 0 0 var(--space-4);
+  font-size: var(--type-caption);
+  color: var(--text-tertiary);
+}
+.atlas-lesson {
+  display: grid;
+  grid-template-columns: 90px minmax(0, 1fr) 250px;
+  gap: var(--space-8);
+  padding: var(--space-8) 0;
+  border: 0;
+  box-shadow: none;
+  background: transparent;
+  border-radius: 0;
+  animation: instrument-reveal var(--motion-enter) var(--ease-out) both;
+}
+.atlas-lesson:hover {
+  background: transparent;
+}
+.atlas-lesson-index {
+  font: var(--weight-figure) var(--type-index-sm)/1 var(--font-display);
+  letter-spacing: var(--tracking-figure);
+  color: var(--ink-faint);
+}
+.atlas-lesson h2 {
+  font-size: clamp(1.6rem, 2.6vw, 2.3rem);
+  font-weight: var(--weight-heading);
+  letter-spacing: var(--tracking-heading);
+  line-height: 1.2;
+  margin: var(--space-3) 0 var(--space-4);
+}
+.atlas-lesson-main p {
+  max-width: 58ch;
+  font-size: var(--type-body-sm);
+  line-height: 1.8;
+  color: var(--muted);
+}
+.atlas-lesson-action {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: var(--space-4);
+}
+.atlas-lesson-action > span {
+  color: var(--text-tertiary);
+  font-size: var(--type-small);
+}
+.atlas-lesson-action small {
+  color: var(--muted);
+  font-size: var(--type-caption);
+  line-height: 1.8;
+}
+.atlas-catalog {
+  margin-top: var(--space-8);
+}
+.atlas-catalog .atlas-lesson + .atlas-lesson {
+  border-top: 1px solid var(--line);
+}
+.atlas-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-5);
+  margin-top: var(--space-10);
+  color: var(--muted);
+  font-size: var(--type-small);
+}
+
+/* Finance: the equation is the control surface. */
+.financial-heading-side .text-button {
+  margin-top: var(--space-4);
+  font-size: var(--type-small);
+}
+.unit-economy {
+  padding-block: var(--space-5) var(--space-8);
+}
+.unit-equation {
+  display: grid;
+  grid-template-columns: 1fr 40px 1fr 40px 1fr;
+  gap: var(--space-6);
+  align-items: center;
+  margin-top: var(--space-8);
+}
+.financial-control {
+  min-width: 0;
+}
+.financial-control > label {
+  display: block;
+  font-size: var(--type-small);
+  color: var(--muted);
+  line-height: 1.6;
+}
+.financial-input-value {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+}
+.financial-input-value input {
+  appearance: textfield;
+  -moz-appearance: textfield;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  padding: var(--space-2) 0;
+  font: var(--weight-figure) var(--type-instrument)/1.1 var(--font-display);
+  letter-spacing: var(--tracking-figure);
+  min-width: 0;
+  width: 100%;
+  color: var(--text);
+}
+.financial-input-value input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+.financial-input-value > span {
+  color: var(--text-tertiary);
+  font-size: var(--type-title-md);
+}
+.financial-control input[type="range"] {
+  width: 100%;
+  height: 2px;
+  margin: var(--space-4) 0;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+.math-operator {
+  font: var(--weight-figure) 36px var(--font-display);
+  color: var(--ink-faint);
+  text-align: center;
+}
+.unit-contribution {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-2);
+  padding-bottom: var(--space-5);
+}
+.unit-contribution > span {
+  color: var(--muted);
+  font-size: var(--type-small);
+}
+.unit-contribution > strong {
+  font: var(--weight-figure) var(--type-instrument)/1.1 var(--font-display);
+  letter-spacing: var(--tracking-figure);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  animation: instrument-reveal var(--motion-normal) var(--ease-out);
+}
+.unit-contribution > small {
+  color: var(--text-tertiary);
+  font-size: var(--type-caption);
+  line-height: 1.7;
+  max-width: 28ch;
+}
+.financial-observatory {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 260px;
+  gap: var(--space-12);
+  margin-top: var(--space-8);
+}
+.financial-chart {
+  min-width: 0;
+  padding: var(--space-6);
+  background:
+    radial-gradient(ellipse at 50% 20%, var(--light-stage), transparent 75%),
+    var(--bg-secondary);
+  border-radius: var(--radius-xs);
+}
+.equilibrium-plot {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+  margin-top: var(--space-6);
+}
+.equilibrium-plot text {
+  fill: var(--muted);
+  font: 11px var(--font-mono);
+}
+.equilibrium-plot path {
+  fill: none;
+  transition: d var(--motion-enter) var(--ease-out);
+}
+.equilibrium-plot .plot-area {
+  fill: url(#finance-area);
+}
+.plot-grid {
+  stroke: var(--line);
+  stroke-width: 1;
+}
+.plot-cost {
+  stroke: var(--text-tertiary);
+  stroke-width: 1.4;
+  stroke-dasharray: 5 6;
+}
+.plot-revenue {
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+.plot-threshold path {
+  stroke: var(--line-strong);
+  stroke-width: 1;
+  stroke-dasharray: 2 5;
+}
+.plot-threshold circle {
+  fill: var(--bg);
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+.plot-current circle,
+.plot-threshold circle {
+  fill: var(--accent);
+  transition:
+    cx var(--motion-enter) var(--ease-out),
+    cy var(--motion-enter) var(--ease-out);
+}
+.plot-current path {
+  stroke: var(--accent);
+  stroke-width: 3;
+}
+.financial-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  align-items: center;
+  margin-bottom: var(--space-6);
+}
+.financial-legend > span {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--muted);
+  font-size: var(--type-caption);
+}
+.financial-legend i {
+  width: 18px;
+  height: 1px;
+  background: var(--accent);
+}
+.financial-legend > span:nth-child(2) i {
+  background: none;
+  border-top: 1px dashed var(--muted);
+}
+.financial-legend > span:last-child {
+  margin-left: auto;
+  color: var(--text-tertiary);
+}
+.financial-chart h2 {
+  font-size: var(--type-title-lg);
+  font-weight: var(--weight-heading);
+  letter-spacing: var(--tracking-heading);
+}
+.financial-chart > p {
+  color: var(--muted);
+  font-size: var(--type-small);
+  line-height: 1.8;
+  margin-bottom: 0;
+}
+.financial-levers {
+  padding-top: var(--space-6);
+}
+.financial-levers > .financial-control {
+  margin-top: var(--space-8);
+}
+.financial-levers .financial-input-value input {
+  font-size: var(--type-number);
+}
+.financial-levers .financial-input-value > span {
+  font-size: var(--type-small);
+}
+.financial-levers > p {
+  font-size: var(--type-small);
+  color: var(--text-tertiary);
+  line-height: 1.8;
+  margin-top: var(--space-6);
+}
+.financial-awaiting {
+  min-height: 300px;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: var(--space-6);
+  color: var(--muted);
+}
+.monthly-economy {
+  margin-top: var(--space-12);
+}
+.monthly-equation {
+  display: grid;
+  grid-template-columns: 1fr 30px 1fr 30px 1fr 30px 1.5fr;
+  gap: var(--space-4);
+  align-items: center;
+  padding-block: var(--space-6);
+}
+.monthly-equation > div {
+  min-width: 0;
+}
+.monthly-equation strong {
+  display: block;
+  font: var(--weight-figure) clamp(1.5rem, 3vw, 2.7rem)/1.2 var(--font-display);
+  letter-spacing: var(--tracking-figure);
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}
+.monthly-equation small {
+  display: block;
+  font-size: var(--type-caption);
+  color: var(--muted);
+  margin-top: var(--space-2);
+}
+.monthly-equation > span {
+  font-size: var(--type-title-lg);
+  color: var(--text-tertiary);
+}
+.financial-profit strong {
+  color: var(--text);
+  font-size: clamp(2rem, 4vw, 4rem);
+  animation: instrument-reveal var(--motion-normal) var(--ease-out);
+}
+.financial-reference {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-6);
+  color: var(--muted);
+  font-size: var(--type-caption);
+  margin-top: var(--space-5);
+}
+.financial-reference .text-button {
+  font-size: var(--type-small);
+}
+.financial-saved {
+  color: var(--text-secondary);
+  font-size: var(--type-small);
+  margin-top: var(--space-5);
+}
+
+/* A lesson alternates between an editorial concept and a hands-on scene. */
+.editorial-lesson .learning-header {
+  max-width: none;
+  display: grid;
+  grid-template-columns: 106px minmax(0, 1fr);
+  column-gap: var(--space-8);
+  margin-bottom: var(--space-8);
+}
+.lesson-chapter-index {
+  grid-row: 1 / 4;
+  font: var(--weight-figure) var(--type-index)/1 var(--font-display);
+  color: var(--ink-faint);
+  letter-spacing: var(--tracking-figure);
+}
+.lesson-chapter-index small {
+  color: var(--text-tertiary);
+  display: block;
+  font: 400 8px/2 var(--font-mono);
+  letter-spacing: 0.08em;
+  margin-top: var(--space-2);
+}
+.editorial-lesson .learning-kicker {
+  margin-bottom: var(--space-2);
+}
+.editorial-lesson .learning-header h1 {
+  font-weight: var(--weight-display);
+  font-size: clamp(1.6rem, 2.7vw, 2.5rem);
+  max-width: 32ch;
+  letter-spacing: var(--tracking-display);
+  margin-bottom: var(--space-3);
+}
+.editorial-lesson .learning-header > p {
+  font-size: var(--type-body-sm);
+  max-width: 70ch;
+}
+.editorial-lesson .learning-journey {
+  max-width: none;
+  margin-bottom: var(--space-10);
+}
+.editorial-lesson .learning-stage-tab.is-active {
+  background: transparent;
+}
+.editorial-lesson .learning-workspace {
+  grid-template-columns: minmax(0, 1fr) 180px;
+  gap: var(--space-10);
+}
+.editorial-lesson .sequence-concept {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: var(--space-8);
+  align-items: start;
+}
+.editorial-lesson .sequence-concept .learning-concept-heading {
+  margin: var(--space-8) 0 0;
+}
+.editorial-lesson .learning-section-label {
+  font-family: var(--font-mono);
+  letter-spacing: 0.06em;
+  font-size: var(--type-annotation);
+}
+.editorial-lesson .concept-vocabulary {
+  font-weight: var(--weight-heading);
+  max-width: none;
+  font-size: clamp(1.7rem, 2.7vw, 2.7rem);
+  letter-spacing: var(--tracking-heading);
+  line-height: 1.15;
+  margin-bottom: var(--space-6);
+}
+.concept-vocabulary > span {
+  display: block;
+  position: relative;
+  padding-left: var(--space-5);
+  margin-bottom: var(--space-5);
+}
+.concept-vocabulary i {
+  position: absolute;
+  top: 6px;
+  left: 0;
+  font: 400 8px var(--font-mono);
+  color: var(--text-tertiary);
+  letter-spacing: 0;
+  font-style: normal;
+}
+.concept-vocabulary b {
+  color: var(--ink-faint);
+  font-weight: 400;
+}
+.editorial-lesson .learning-lead {
+  font-size: var(--type-body-sm);
+  line-height: 1.9;
+}
+.editorial-lesson .scene-workbench {
+  padding: var(--space-6);
+  border-radius: var(--radius-xs);
+  box-shadow: none;
+  background:
+    radial-gradient(ellipse at 65% 5%, var(--light-matter), transparent 68%),
+    var(--surface-low);
+}
+.editorial-lesson .scene-workbench::before {
+  display: none;
+}
+.editorial-lesson .scene-heading {
+  flex-wrap: wrap;
+}
+.editorial-lesson .scene-heading h3 {
+  font-size: var(--type-title-md);
+}
+.editorial-lesson .scene-heading > .scene-fiction {
+  margin-top: calc(-1 * var(--space-4));
+  margin-bottom: var(--space-4);
+}
+.editorial-lesson .scene-number-line {
+  grid-template-columns: 1fr;
+  gap: var(--space-3);
+}
+.editorial-lesson .scene-number {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 4vw, 4rem);
+  font-weight: var(--weight-figure);
+  letter-spacing: var(--tracking-figure);
+}
+.editorial-lesson .scene-number-line > p {
+  font-size: var(--type-small);
+  margin-block: 0 var(--space-3);
+}
+.editorial-lesson .scene-takeaway {
+  font-size: var(--type-caption);
+  line-height: 1.8;
+}
+.editorial-lesson .learning-depth {
+  grid-column: 1 / -1;
+  margin-top: 0;
+}
+.editorial-lesson .learning-insights {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: var(--space-10);
+}
+.editorial-lesson .learning-insight {
+  display: block;
+}
+.editorial-lesson .learning-insight > span {
+  display: block;
+  font: var(--weight-figure) 42px/1 var(--font-display);
+  margin-bottom: var(--space-5);
+  color: var(--ink-faint);
+}
+.editorial-lesson .learning-insight p {
+  font-size: var(--type-body);
+}
+.editorial-lesson .learning-insights .learning-recall {
+  grid-column: 1/-1;
+}
+.editorial-lesson .learning-case {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  column-gap: var(--space-10);
+  padding-top: var(--space-5);
+}
+.lesson-case-stamp {
+  font: var(--weight-heading) clamp(2.5rem, 4vw, 4rem)/1.08 var(--font-display);
+  letter-spacing: var(--tracking-display);
+  color: var(--text);
+  grid-row: 1 / 4;
+}
+.lesson-case-stamp > span {
+  display: block;
+  font: 400 var(--type-micro)/1.8 var(--font-mono);
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  margin-top: var(--space-6);
+}
+.editorial-lesson .learning-case > .learning-section-label,
+.editorial-lesson .learning-case > h2,
+.editorial-lesson .learning-case-body {
+  grid-column: 2;
+}
+.editorial-lesson .learning-case h2 {
+  font-size: var(--type-title-lg);
+  line-height: 1.4;
+  max-width: none;
+}
+.editorial-lesson .learning-case-body {
+  padding: 0;
+  background: transparent;
+  border: 0;
+}
+.editorial-lesson .learning-case-mark {
+  display: none;
+}
+.editorial-lesson .learning-case-body p {
+  font-size: var(--type-body-lg);
+  line-height: 1.9;
+  color: var(--text-secondary);
+}
+.editorial-lesson .learning-case > .learning-recall {
+  grid-column: 2;
+}
+.editorial-lesson .learning-case > button {
+  grid-column: 2;
+  justify-self: start;
+}
+.editorial-lesson .learning-teachback {
+  position: relative;
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  column-gap: var(--space-10);
+  padding-top: var(--space-8);
+}
+.lesson-teachback-mark {
+  font: var(--weight-heading) clamp(3rem, 5vw, 5.5rem)/1 var(--font-display);
+  letter-spacing: var(--tracking-display);
+  color: var(--text);
+  grid-column: 1;
+  margin-bottom: var(--space-8);
+}
+.editorial-lesson .learning-teachback > .learning-section-label,
+.editorial-lesson .learning-teachback > h2,
+.editorial-lesson .learning-teachback > .learning-lead {
+  grid-column: 1;
+}
+.editorial-lesson .learning-teachback h2 {
+  font-size: var(--type-title-lg);
+}
+.editorial-lesson .learning-teachback > .field {
+  grid-column: 2;
+  grid-row: 1 / 5;
+  align-self: stretch;
+}
+.editorial-lesson .learning-teachback textarea {
+  flex: 1;
+  min-height: 300px;
+  background:
+    repeating-linear-gradient(
+      transparent 0,
+      transparent 31px,
+      var(--line) 31px,
+      var(--line) 32px
+    ),
+    var(--surface-low);
+  border: 0;
+  border-radius: var(--radius-xs);
+  padding: var(--space-5);
+  line-height: 32px;
+}
+.editorial-lesson .learning-teachback > .actions {
+  grid-column: 2;
+  flex-wrap: wrap;
+  margin-top: var(--space-5);
+}
+.editorial-lesson .learning-self-review {
+  grid-column: 1/-1;
+}
+.editorial-lesson .learning-quiz {
+  position: relative;
+  padding-left: 106px;
+}
+.quiz-ordinal {
+  position: absolute;
+  left: 0;
+  top: var(--space-10);
+  font: var(--weight-figure) var(--type-index-sm)/1 var(--font-display);
+  color: var(--ink-faint);
+  letter-spacing: var(--tracking-figure);
+}
+.editorial-lesson .learning-question legend {
+  font-weight: var(--weight-heading);
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 2.6vw, 2.25rem);
+  letter-spacing: var(--tracking-heading);
+}
+.editorial-lesson .learning-options {
+  gap: var(--space-2);
+}
+.editorial-lesson .learning-option {
+  border: 0;
+  border-radius: var(--radius-xs);
+  box-shadow: none;
+  background: transparent;
+  padding: var(--space-5) var(--space-4);
+}
+.editorial-lesson .learning-option.is-selected {
+  background: var(--surface);
+  box-shadow: inset 2px 0 var(--accent);
+}
+.editorial-lesson .learning-option.is-correct {
+  box-shadow: inset 2px 0 var(--success-line);
+}
+.editorial-lesson .learning-apply h2,
+.editorial-lesson .learning-practice h2 {
+  font-weight: var(--weight-heading);
+  font-size: clamp(2rem, 3.8vw, 3.5rem);
+  line-height: 1.15;
+  max-width: 26ch;
+  letter-spacing: var(--tracking-heading);
+}
+.editorial-lesson .learning-summary-skills {
+  background: transparent;
+  padding: var(--space-6) 0;
+}
+
+@media (max-width: 1100px) {
+  .art-heading h1 {
+    font-size: var(--type-page-fluid);
+  }
+  .art-home .learning-hero-content {
+    width: 68%;
+  }
+  .art-home .learning-trajectory {
+    grid-template-columns: 170px 1fr;
+    gap: var(--space-5);
+  }
+  .art-home .trajectory-detail {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    display: flex;
+    justify-content: space-between;
+  }
+  .art-home .trajectory-detail h3 {
+    max-width: none;
+  }
+  .art-home .trajectory-full-map {
+    grid-column: 1 / -1;
+  }
+  .prompt-desk {
+    gap: var(--space-6);
+    grid-template-columns: minmax(260px, 0.85fr) minmax(0, 1.15fr);
+  }
+  .prompt-constellation {
+    height: 350px;
+  }
+  .prompt-core {
+    width: 100px;
+    height: 100px;
+  }
+  .prompt-core > span {
+    font-size: 2.625rem;
+  }
+  .prompt-part {
+    width: 82px;
+  }
+  .prompt-part strong {
+    font-size: var(--type-caption);
+  }
+  .financial-observatory {
+    grid-template-columns: minmax(0, 1fr) 220px;
+    gap: var(--space-6);
+  }
+  .editorial-lesson .learning-workspace {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .editorial-lesson .learning-sidebar {
+    position: static;
+  }
+  .editorial-lesson .learning-sequence-nav {
+    display: none;
+  }
+  .editorial-lesson .learning-mobile-sequences {
+    display: block;
+  }
+  .editorial-lesson .learning-sequence-dots {
+    display: none;
+  }
+  .editorial-lesson .learning-support {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-6);
+  }
+}
+@media (max-width: 700px) {
+  .art-heading {
+    display: block;
+    margin: var(--space-3) 0 var(--space-8);
+  }
+  .art-heading h1 {
+    font-size: var(--type-hero-fluid);
+    margin-top: var(--space-3);
+    line-height: 1.12;
+  }
+  .art-heading > p,
+  .financial-heading-side {
+    margin-top: var(--space-5);
+  }
+  .instrument-index {
+    font-size: var(--type-caption);
+  }
+  .instrument-caption {
+    font-size: var(--type-annotation);
+    gap: var(--space-2);
+  }
+  .instrument-principle {
+    margin-top: var(--space-12);
+  }
+  .instrument-principle > p {
+    font-size: var(--type-title-lg);
+  }
+  .art-home .learning-greeting {
+    gap: var(--space-3);
+    margin-bottom: var(--space-5);
+  }
+  .art-home .home-dateline {
+    font-size: var(--type-micro);
+  }
+  .art-home .home-dateline span {
+    margin-inline: var(--space-1);
+  }
+  .art-home .learning-greeting h1 {
+    font-size: var(--type-title-md);
+  }
+  .art-home .learning-session {
+    display: none;
+  }
+  .art-home .learning-hero {
+    min-height: 0;
+  }
+  .art-home .learning-hero-top {
+    padding: var(--space-5) var(--space-5) 0;
+  }
+  .scene-label {
+    font-size: var(--type-small);
+  }
+  .art-home .learning-coordinate {
+    font-size: var(--type-coordinate);
+  }
+  .art-home .learning-hero-content {
+    width: 100%;
+    padding: var(--space-6) var(--space-5) var(--space-8);
+  }
+  .art-home .learning-hero-content h2 {
+    font-size: var(--type-hero-fluid);
+    max-width: 16ch;
+    line-height: 1.12;
+    margin: var(--space-4) 0;
+  }
+  .art-home .learning-hero-content p {
+    max-width: 34ch;
+    font-size: var(--type-small);
+    margin-bottom: var(--space-5);
+  }
+  .art-home .learning-hero-actions {
+    gap: var(--space-4);
+  }
+  .art-home .learning-hero-actions > span {
+    font-size: var(--type-caption);
+  }
+  .art-home .learning-matter {
+    inset: auto -30% 25px auto;
+    width: 140%;
+    height: 150px;
+    mask-image: linear-gradient(180deg, transparent, var(--accent) 28%);
+    opacity: 0.55;
+  }
+  .home-scene-footer {
+    padding: var(--space-5);
+    background: transparent;
+  }
+  .home-scene-footer > span {
+    display: none;
+  }
+  .home-progress {
+    gap: var(--space-3);
+  }
+  .home-progress i {
+    width: 19px;
+  }
+  .home-progress small {
+    white-space: nowrap;
+  }
+  .art-home .learning-trajectory {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+    margin-top: var(--space-10);
+  }
+  .art-home .trajectory-heading {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+  .art-home .trajectory-heading h2 {
+    font-size: var(--type-title-lg);
+  }
+  .art-home .trajectory-map {
+    grid-column: 1;
+    grid-row: 2;
+    height: 240px;
+  }
+  .art-home .trajectory-detail {
+    grid-column: 1;
+    grid-row: 3;
+    padding: var(--space-2) 0;
+  }
+  .art-home .trajectory-detail h3 {
+    font-size: var(--type-title-sm);
+  }
+  .art-home .trajectory-full-map {
+    grid-column: 1;
+    grid-row: 4;
+  }
+  .art-home .learning-universes-heading {
+    margin-top: var(--space-12);
+    margin-bottom: var(--space-6);
+    align-items: flex-start;
+  }
+  .art-home .learning-universes-heading h2 {
+    font-size: var(--type-heading);
+  }
+  .art-home .learning-universes-heading > button {
+    font-size: var(--type-caption);
+  }
+  .art-home .learning-universes {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: var(--space-8);
+    padding-bottom: var(--space-3);
+    scrollbar-width: thin;
+    scrollbar-color: var(--line-strong) transparent;
+  }
+  .art-home .domain-folio {
+    flex: 0 0 90%;
+    scroll-snap-align: start;
+    padding-inline: 0;
+  }
+  .art-home .domain-copy h3 {
+    font-size: 2.25rem;
+  }
+  .art-home .domain-kicker {
+    margin-bottom: var(--space-5);
+  }
+  .art-home .domain-kicker .eyebrow {
+    font-size: var(--type-annotation);
+  }
+  .art-home .domain-kicker > span:last-child {
+    font-size: var(--type-annotation);
+  }
+  .art-home .finance-signature,
+  .art-home .intelligence-signature {
+    height: 190px;
+  }
+  .art-home .learning-next-actions {
+    margin-top: var(--space-8);
+  }
+  .art-home .learning-next-action {
+    padding-block: var(--space-4);
+  }
+  .prompt-desk {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+  .prompt-mobile-views {
+    display: flex;
+    gap: var(--space-6);
+    margin-bottom: var(--space-5);
+  }
+  .prompt-mobile-views button {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    min-height: 44px;
+    padding: var(--space-2) 0;
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid transparent;
+    border-radius: 0;
+    color: var(--muted);
+    font-size: var(--type-body-sm);
+  }
+  .prompt-mobile-views button[aria-pressed="true"] {
+    color: var(--text);
+    border-bottom-color: var(--accent);
+  }
+  .prompt-mobile-views button span {
+    font: 400 var(--type-caption) var(--font-mono);
+    color: var(--text-tertiary);
+  }
+  .prompt-desk[data-mobile-pane="structure"] .prompt-writing,
+  .prompt-desk[data-mobile-pane="writing"] .prompt-observatory {
+    display: none;
+  }
+  .prompt-mobile-write {
+    display: flex;
+    margin-top: var(--space-5);
+    width: 100%;
+    justify-content: center;
+  }
+  .prompt-writing {
+    padding: var(--space-5);
+  }
+  .prompt-writing > label {
+    margin-top: var(--space-5);
+    max-width: none;
+    font-size: var(--type-title-sm);
+  }
+  .prompt-writing textarea {
+    min-height: 190px;
+    height: 220px;
+    font-size: var(--type-body-sm);
+  }
+  .prompt-writing-footer {
+    gap: var(--space-4);
+  }
+  .prompt-observatory {
+    padding-top: 0;
+    animation: instrument-reveal var(--motion-enter) var(--ease-out);
+  }
+  .prompt-constellation {
+    height: 355px;
+    margin-top: var(--space-5);
+  }
+  .prompt-core {
+    width: 92px;
+    height: 92px;
+  }
+  .prompt-core > span {
+    font-size: 2.25rem;
+  }
+  .prompt-core small {
+    font-size: var(--type-coordinate);
+  }
+  .prompt-part {
+    width: 78px;
+  }
+  .prompt-part strong {
+    font-size: var(--type-caption);
+  }
+  .prompt-part small {
+    font-size: var(--type-coordinate);
+  }
+  .prompt-lens {
+    padding-inline: 0;
+    min-height: 0;
+    margin-top: var(--space-3);
+  }
+  .prompt-lens-index {
+    font-size: 1.875rem;
+  }
+  .prompt-comparison {
+    margin-top: var(--space-12);
+  }
+  .prompt-comparison > header {
+    display: block;
+    margin-bottom: var(--space-6);
+  }
+  .prompt-comparison h2 {
+    font-size: var(--type-heading);
+  }
+  .prompt-assessment {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    text-align: left;
+    margin-top: var(--space-5);
+  }
+  .prompt-assessment h3 {
+    margin: 0;
+    font-size: var(--type-body);
+  }
+  .prompt-assessment > span {
+    font-size: var(--type-caption);
+  }
+  .prompt-comparison-columns {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+  .prompt-comparison-columns h3 {
+    margin-bottom: var(--space-4);
+  }
+  .prompt-comparison pre {
+    padding: var(--space-5);
+    font-size: var(--type-caption);
+  }
+  .atlas-toolbar {
+    gap: var(--space-4);
+  }
+  .atlas-toolbar .search-field {
+    width: 48%;
+  }
+  .atlas-toolbar input {
+    min-width: 0;
+    width: 100%;
+  }
+  .atlas-views {
+    gap: var(--space-4);
+  }
+  .atlas-views button {
+    font-size: var(--type-small);
+  }
+  .atlas-views button svg {
+    display: none;
+  }
+  .atlas-filters {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    max-width: 100%;
+    padding-bottom: var(--space-2);
+  }
+  .atlas-filters button {
+    flex: 0 0 auto;
+    padding-inline: var(--space-3);
+    font-size: var(--type-caption);
+  }
+  .atlas-scroll {
+    margin-inline: calc(-1 * var(--space-2));
+  }
+  .academy-map-canvas {
+    /* Five investing nodes share a lane: give them room and let the atlas scroll. */
+    min-width: 900px;
+    height: 860px;
+    margin: var(--space-5) var(--space-2) var(--space-4);
+  }
+  .atlas-scroll::after {
+    content: "Glissez pour explorer le territoire →";
+    display: block;
+    position: sticky;
+    left: 0;
+    color: var(--muted);
+    font-size: var(--type-caption);
+    padding: var(--space-2);
+  }
+  .atlas-node {
+    width: 160px;
+  }
+  .atlas-node strong {
+    font-size: var(--type-small);
+  }
+  .atlas-node small {
+    font-size: var(--type-micro);
+  }
+  .atlas-lesson {
+    grid-template-columns: 44px minmax(0, 1fr);
+    gap: var(--space-4);
+    padding: var(--space-6) 0;
+  }
+  .atlas-lesson-index {
+    font-size: var(--type-number);
+  }
+  .atlas-lesson h2 {
+    font-size: var(--type-title-lg);
+  }
+  .atlas-lesson-main .instrument-index {
+    font-size: var(--type-caption);
+  }
+  .atlas-lesson-action {
+    grid-column: 2;
+    gap: var(--space-3);
+  }
+  .atlas-lesson-action > span {
+    display: none;
+  }
+  .atlas-foot {
+    margin-top: var(--space-5);
+    font-size: var(--type-caption);
+  }
+  .atlas-foot .text-button {
+    font-size: var(--type-caption);
+  }
+  .unit-economy {
+    padding-top: 0;
+  }
+  .unit-equation {
+    grid-template-columns: 1fr 18px 1fr;
+    gap: var(--space-3);
+    margin-top: var(--space-5);
+  }
+  .financial-control > label {
+    font-size: var(--type-caption);
+  }
+  .financial-input-value input {
+    font-size: var(--type-mark);
+  }
+  .financial-input-value > span {
+    font-size: var(--type-body);
+  }
+  .unit-equation > .math-operator:nth-of-type(2) {
+    display: none;
+  }
+  .unit-contribution {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: var(--space-4);
+    align-items: center;
+    margin-top: var(--space-5);
+    padding: 0;
+  }
+  .unit-contribution > strong {
+    font-size: 3rem;
+    grid-column: 2;
+    grid-row: 1 / 3;
+    text-align: right;
+  }
+  .unit-contribution > small {
+    font-size: var(--type-micro);
+  }
+  .financial-observatory {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+    margin-top: var(--space-4);
+  }
+  .financial-chart {
+    padding: var(--space-5) var(--space-3);
+    margin-inline: calc(-1 * var(--space-2));
+  }
+  .equilibrium-plot {
+    min-height: 200px;
+    margin-top: var(--space-4);
+  }
+  .equilibrium-plot text {
+    font-size: var(--type-title-sm);
+  }
+  .financial-legend {
+    gap: var(--space-3);
+  }
+  .financial-legend > span {
+    font-size: var(--type-micro);
+  }
+  .financial-legend > span:last-child {
+    display: none;
+  }
+  .financial-chart h2 {
+    font-size: var(--type-title-md);
+  }
+  .financial-chart > p {
+    font-size: var(--type-small);
+  }
+  .financial-levers {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-5);
+    padding-top: 0;
+  }
+  .financial-levers > .instrument-caption {
+    grid-column: 1 / -1;
+  }
+  .financial-levers > .financial-control {
+    margin-top: 0;
+  }
+  .financial-levers > p {
+    display: none;
+  }
+  .financial-levers .financial-input-value input {
+    font-size: var(--type-hero);
+  }
+  .financial-levers .financial-input-value > span {
+    font-size: var(--type-micro);
+  }
+  .monthly-economy {
+    margin-top: var(--space-8);
+  }
+  .monthly-economy > .instrument-caption {
+    flex-wrap: wrap;
+  }
+  .monthly-equation {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    padding-top: var(--space-5);
+  }
+  .monthly-equation strong {
+    font-size: var(--type-title-lg);
+  }
+  .monthly-equation small {
+    font-size: var(--type-micro);
+  }
+  .monthly-equation > div {
+    flex: 1;
+  }
+  .monthly-equation > span {
+    font-size: var(--type-body-lg);
+  }
+  .monthly-equation > span:nth-of-type(3) {
+    display: none;
+  }
+  .monthly-equation .financial-profit {
+    flex: 0 0 100%;
+    margin-top: var(--space-4);
+  }
+  .financial-profit strong {
+    font-size: var(--type-number-lg);
+  }
+  .financial-reference {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-4);
+    margin-top: 0;
+  }
+  .editorial-lesson .learning-header {
+    grid-template-columns: 46px 1fr;
+    column-gap: var(--space-4);
+    margin-bottom: var(--space-6);
+  }
+  .lesson-chapter-index {
+    font-size: var(--type-mark);
+  }
+  .lesson-chapter-index small {
+    font-size: 6px;
+    letter-spacing: 0;
+  }
+  .editorial-lesson .learning-header h1 {
+    font-size: var(--type-title-lg);
+    line-height: 1.2;
+  }
+  .editorial-lesson .learning-header > p {
+    display: none;
+  }
+  .editorial-lesson .learning-kicker {
+    gap: var(--space-3);
+    font-size: var(--type-micro);
+  }
+  .editorial-lesson .learning-journey {
+    margin-bottom: var(--space-8);
+  }
+  .editorial-lesson .learning-workspace {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+  }
+  .editorial-lesson .learning-stage {
+    width: 100%;
+  }
+  .editorial-lesson .sequence-concept {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+  .editorial-lesson .sequence-concept .scene-workbench {
+    grid-row: 1;
+  }
+  .editorial-lesson .sequence-concept .learning-concept-heading {
+    margin-top: 0;
+  }
+  .editorial-lesson .concept-vocabulary {
+    font-size: clamp(1.85rem, 8vw, 2.25rem);
+    margin-bottom: var(--space-4);
+  }
+  .concept-vocabulary > span {
+    margin-bottom: var(--space-2);
+    padding-left: var(--space-5);
+  }
+  .editorial-lesson .scene-workbench {
+    padding: var(--space-5);
+  }
+  .editorial-lesson .learning-section-label {
+    font-size: var(--type-coordinate);
+  }
+  .editorial-lesson .learning-insights {
+    grid-template-columns: 1fr;
+  }
+  .editorial-lesson .learning-case {
+    display: block;
+    padding-top: 0;
+  }
+  .lesson-case-stamp {
+    font-size: var(--type-hero);
+    margin-bottom: var(--space-6);
+  }
+  .lesson-case-stamp > span {
+    margin-top: var(--space-4);
+  }
+  .editorial-lesson .learning-case h2 {
+    font-size: var(--type-title-lg);
+  }
+  .editorial-lesson .learning-case-body p {
+    font-size: var(--type-body);
+  }
+  .editorial-lesson .learning-teachback {
+    display: block;
+    padding-top: 0;
+  }
+  .lesson-teachback-mark {
+    display: block;
+    font-size: var(--type-number-xl);
+    margin-bottom: var(--space-6);
+  }
+  .editorial-lesson .learning-teachback > .field {
+    margin-top: var(--space-6);
+  }
+  .editorial-lesson .learning-teachback textarea {
+    min-height: 240px;
+  }
+  .editorial-lesson .learning-quiz {
+    padding-left: 0;
+  }
+  .quiz-ordinal {
+    position: static;
+    display: block;
+    font-size: var(--type-number-xl);
+    margin-bottom: var(--space-5);
+  }
+  .editorial-lesson .learning-question legend {
+    font-size: var(--type-title-lg);
+  }
+  .editorial-lesson .learning-option {
+    padding: var(--space-4) var(--space-3);
+  }
+  .editorial-lesson .learning-apply h2,
+  .editorial-lesson .learning-practice h2 {
+    font-size: var(--type-heading);
+  }
+  .editorial-lesson .learning-support {
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+  .editorial-lesson .learning-sidebar {
+    width: 100%;
+  }
+}
+/* Reduced motion: covered by the global rule in styles.css. */
+
+/* Mobile: filters, atlas and trajectory scroll sideways; a fade replaces the hard cut. */
+@media (max-width: 700px) {
+  .art-home .trajectory-map {
+    mask-image: linear-gradient(
+      to right,
+      var(--bg) calc(100% - var(--space-10)),
+      transparent
+    );
+    padding-inline-end: var(--space-10);
+  }
+  .atlas-filters {
+    mask-image: linear-gradient(
+      to right,
+      var(--bg) calc(100% - var(--space-10)),
+      transparent
+    );
+    padding-inline-end: var(--space-10);
+  }
+  .atlas-scroll {
+    mask-image: linear-gradient(
+      to right,
+      var(--bg) calc(100% - var(--space-8)),
+      transparent
+    );
+  }
+}
+
+/* The unit follows the figure instead of floating at the far end of the field. */
+@supports (field-sizing: content) {
+  .financial-input-value input {
+    field-sizing: content;
+    width: auto;
+    min-width: 2ch;
+    max-width: 100%;
+  }
+}
