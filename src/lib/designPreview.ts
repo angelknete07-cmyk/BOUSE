@@ -28,8 +28,21 @@ export function readDesignPreview(search: string) {
   return chosen;
 }
 
-export function applyDesignPreview(search: string, root: HTMLElement) {
+/**
+ * Une variante d'accueil (?da=…) se montre avec le système recommandé au
+ * jalon B (palette apaisée, Inter affiné), sauf choix explicite dans l'adresse.
+ */
+export function resolveDesignPreview(search: string) {
   const chosen = readDesignPreview(search);
+  if (chosen.da) {
+    chosen.palette ??= "apaisee";
+    chosen.type ??= "affine";
+  }
+  return chosen;
+}
+
+export function applyDesignPreview(search: string, root: HTMLElement) {
+  const chosen = resolveDesignPreview(search);
   for (const [key, value] of Object.entries(chosen)) root.dataset[key] = value;
   return chosen;
 }

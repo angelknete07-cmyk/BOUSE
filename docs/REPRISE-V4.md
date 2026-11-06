@@ -2,7 +2,13 @@
 
 Note de passage de relais écrite le 6 novembre 2026 par la session cloud « BOUSE : design V4 », devenue trop longue. **La nouvelle discussion reprend ici, sur le Mac.**
 
-## Où on en est
+## État au 6 novembre 2026, soir (session Mac)
+
+- **Jalons A, B et C terminés**, voir `design-reviews/V4_INVENTORY.md`, `V4_STYLE_SAMPLES.md`, `V4_HOME_VARIANTS.md`. **On attend le choix de l'utilisateur** entre les accueils A, B et C (`?da=a|b|c`) avant le jalon D (propagation par groupes d'écrans).
+- Outils locaux : Chrome installé est utilisé par Playwright (`channel: "chrome"`) pour les captures ; le serveur de dev se lance depuis la config « bouse » de `~/claude/.claude/launch.json`.
+- Page interne `#labo-design` (développement seulement) pour comparer palettes et typographies.
+
+## Où on en était (session cloud)
 
 - Dépôt `angelknete07-cmyk/BOUSE`, branche `claude/bouse-development-resume-gktqqs` (PR #2 brouillon, ouverte). Production : https://bouse.vercel.app (déploiement Vercel manuel ou via l'intégration GitHub ; projet `bouse`).
 - Dernière passe livrée : **32** (commit `c6ffd8d`) : accueil en tableau de bord, logo B, barre latérale large, accents violet/bleu/émeraude **jugés trop vifs** depuis.

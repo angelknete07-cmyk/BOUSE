@@ -41,3 +41,4 @@ Fichier vivant : chaque passe y ajoute les préférences confirmées par l'utili
 | Passe 31 (V3.2) | Petits accents désaturés autorisés (lavande). Jugé trop timide et trop éloigné des images.                                                          |
 | Passe 32        | Planche 03 retenue (composition, logo B). Une montagne générée a remplacé la vague → refusé, vague rétablie. Accents violet/bleu/émeraude lumineux. |
 | V4              | Recentrage : sobre, premium, 94–97 % neutre ; violets trop vifs à apaiser ; vague et fonctions intouchables ; jalons avec validation.               |
+| V4 jalons A–C   | Proposé (non validé) : palette apaisée, Inter affiné (Manrope écarté : titres plus larges sans gain), trois accueils A/B/C. **En attente du choix.** |

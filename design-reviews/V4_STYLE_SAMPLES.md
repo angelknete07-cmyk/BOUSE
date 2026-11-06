@@ -53,7 +53,7 @@ Planches : [typo-home](v4/jalon-b/typo-home-1440x900.png), [typo-leçon](v4/jalo
 - **Rendu par défaut identique au pixel près** : 8 écrans (accueil, Lab, Atelier IA, Scénarios, Compétences, leçon 01, Préférences, Révisions) × 2 formats (1440 × 900, 390 × 844), comparés à une copie du code d'avant (commit `d574809`) lancée sur le même Mac : **0 pixel différent** sur les 16 paires. (La correction S1 n'affecte que 320 px.)
 - `Terrain.tsx` et `BrandLogo.tsx` : empreintes SHA-256 inchangées.
 - `npm test` : 248 cas (245 + 3 nouveaux), 0 échec. `npm run build` sans avertissement. Prettier OK.
-- Non lancés à ce jalon : `npx playwright test` (86 tests e2e/design) — prévu avant toute fusion.
+- `npx playwright test` : 86 tests passés (lancés au jalon C, après toutes les modifications).
 
 ## 5. Page de contrôle
 

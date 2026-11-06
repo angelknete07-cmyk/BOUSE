@@ -1,3 +1,16 @@
+# Review design — V4, jalons A, B et C (en attente du choix de l'utilisateur)
+
+**6 novembre 2026, sur le Mac.** **La direction artistique n'est pas déclarée validée.** Aucun changement visible par défaut, sauf deux corrections de débordement à 320 px.
+
+- **Jalon A** — [V4_INVENTORY.md](V4_INVENTORY.md) : 312 captures du pack reprises une par une ([tableau](v4/V4_INVENTORY_CAPTURES.csv)), constats mesurés, registre de préservation, contrastes.
+- **Jalon B** — [V4_STYLE_SAMPLES.md](V4_STYLE_SAMPLES.md) : accents centralisés (canaux RGB + coefficients de lueur/voile), essais `?palette=apaisee`, `?type=manrope|affine`, page interne `#labo-design` (développement seulement). Recommandé : palette apaisée + Inter affiné ; Manrope écarté.
+- **Jalon C** — [V4_HOME_VARIANTS.md](V4_HOME_VARIANTS.md) : trois accueils réels `?da=a|b|c`, même vague, mêmes données ; planches dans `v4/jalon-c/comparaisons/`.
+- **Corrections** : Préférences et Académie ne débordent plus à 320 px (`minmax(0, 1fr)`).
+- **Contrôles de l'agent** : rendu par défaut identique au pixel près (18 captures), `npm test` 249 cas, build, Prettier, 0 débordement à 320 px. `npx playwright test` 86 tests passés (bureau et mobile) ; 52 combinaisons pages × versions sans débordement à 320 px.
+- **Limites** : pas de vrai téléphone, pas de test avec des débutants, pas de validation externe. Les autres pages ne changent qu'après le choix.
+
+---
+
 # Review design — passe 32 : planche 03, accueil en tableau de bord, graphiques premium
 
 **6 novembre 2026, 15:35 Europe/Paris.** Détail : [AUDIT-32.md](AUDIT-32.md). **La direction artistique n'est pas déclarée validée.**
