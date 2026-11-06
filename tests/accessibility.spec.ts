@@ -258,6 +258,9 @@ test("le diagnostic et le quiz gardent un repère clavier à chaque étape", asy
   await expect(page.getByRole("tabpanel")).toBeFocused();
   await previous.press("Enter");
   await expect(previous).toBeDisabled();
+  // Le changement de séquence replace le focus sur le panneau à l'image
+  // suivante : l'attendre, sinon il peut voler le focus de l'onglet.
+  await expect(page.getByRole("tabpanel")).toBeFocused();
   await page.getByRole("tab", { name: /Comprendre/ }).focus();
   await page.keyboard.press("End");
   await expect(page.getByRole("tab", { name: /Appliquer/ })).toBeFocused();

@@ -863,158 +863,141 @@
 }
 
 /* ==========================================================================
-   V4 jalon C — trois variantes de l'accueil, actives seulement avec ?da=a|b|c
-   (voir src/lib/designPreview.ts). Même vague Terrain.tsx, mêmes données.
-   A : épurée, B : riche et professionnelle, C : proche de la référence,
-   couleurs atténuées. Rien ici ne s'applique sans le paramètre.
-   ========================================================================== */
+   V4 — accueil retenu par l'utilisateur (variante B, 6 novembre 2026) :
+   une couleur par bloc, panneau « Votre séance », carte de leçon pleine
+   largeur sur tablette, bouton de reprise dans le premier écran mobile.
+   ==========================================================================*/
 
-/* ---------- Communs aux trois : une seule couleur par bloc ---------- */
-:root[data-da] .progress-ring.tone-spectrum .progress-ring-value {
-  stroke: var(--accent-violet) !important;
+/* ---------- Couleurs et lumières : planches de l'utilisateur (6 nov.) ----------
+   Violet pour la progression et l'étape en cours, cyan en second tracé des
+   anneaux, vert pour ce qui est réussi. Lueurs douces, jamais de fond coloré. */
+.progress-bar > i {
+  background: linear-gradient(
+    90deg,
+    rgb(var(--accent-violet-rgb) / 0.75),
+    var(--accent-violet)
+  ) !important;
+  box-shadow: 0 0 10px
+    rgb(var(--accent-violet-rgb) / calc(0.55 * var(--glow-k)));
 }
-:root[data-da] .console-progress .progress-ring {
-  filter: none;
+.console-badge {
+  color: rgb(var(--accent-violet-ink));
+  background: rgb(var(--accent-violet-rgb) / calc(0.12 * var(--wash-k)));
+  border-color: rgb(var(--accent-violet-rgb) / calc(0.35 * var(--wash-k)));
 }
-:root[data-da] .progress-bar > i {
-  background: var(--accent-violet) !important;
-  box-shadow: none;
+.console-badge svg {
+  color: var(--accent-violet);
 }
-:root[data-da] .console-badge {
-  color: var(--text-secondary);
+.console-tile .console-tile-icon {
+  color: var(--text);
   background: rgb(255 255 255 / 0.04);
-  border-color: rgb(255 255 255 / 0.1);
+  border-color: rgb(255 255 255 / 0.08);
 }
-:root[data-da] .console-badge svg {
-  color: var(--text-secondary);
+.console-tile.tone-violet .console-tile-icon,
+.console-tile.tone-blue .console-tile-icon {
+  color: var(--accent-violet);
 }
-:root[data-da] .console-tile .console-tile-icon {
-  color: var(--text-secondary);
-  background: rgb(255 255 255 / 0.035);
-  border-color: rgb(255 255 255 / 0.07);
+.console-tile.tone-emerald .console-tile-icon {
+  color: var(--accent-emerald);
 }
-:root[data-da] .console-steps::before {
-  background: rgb(255 255 255 / 0.1);
+.console-step.is-current small {
+  color: rgb(var(--accent-violet-ink));
 }
-:root[data-da] .console-step.is-done .console-step-mark {
-  color: var(--text);
-  border-color: rgb(255 255 255 / 0.28);
-  background: #17171b;
-}
-:root[data-da] .console-step.is-current .console-step-mark {
-  color: var(--text);
-  border-color: var(--accent-violet);
-  background: rgb(var(--accent-violet-deep));
-  box-shadow: 0 0 0 4px rgb(var(--accent-violet-rgb) / 0.1);
-}
-:root[data-da] .console-step.is-current small {
-  color: var(--text-secondary);
-}
-:root[data-da] .art-home .console-greeting .home-last-step > svg {
-  color: var(--text-tertiary);
-}
-:root[data-da] .console-hero-meta,
-:root[data-da] .console-hero .learning-hero-reason {
+.console-hero-meta,
+.console-hero .learning-hero-reason {
   color: var(--text-secondary);
 }
 
-/* ---------- Communs : tablette, la carte de leçon garde toute la largeur ---------- */
+/* ---------- Tablette : la carte de leçon garde toute la largeur ---------- */
 @media (min-width: 701px) and (max-width: 1100px) {
-  :root[data-da] .console-top {
+  .console-top {
     grid-template-columns: minmax(0, 1fr);
   }
-  :root[data-da] .console-hero-content {
+  .console-hero-content {
     max-width: min(520px, 62%);
   }
-  :root[data-da] .console-progress {
+  .console-progress {
     flex-direction: row;
     justify-content: flex-start;
     gap: 18px;
     padding: 16px 22px;
   }
-  :root[data-da] .console-progress .progress-ring {
+  .console-progress .progress-ring {
     width: 64px !important;
     height: 64px !important;
   }
-  :root[data-da] .console-progress .progress-ring svg {
+  .console-progress .progress-ring svg {
     width: 100%;
     height: 100%;
   }
-  :root[data-da] .console-progress .progress-ring-label {
+  .console-progress .progress-ring-label {
     font-size: 15px;
   }
-  :root[data-da] .console-progress-text {
+  .console-progress-text {
     text-align: left;
   }
 }
 
-/* ---------- Communs : mobile, l'action dans le premier écran ---------- */
+/* ---------- Mobile : l'action dans le premier écran ---------- */
 @media (max-width: 700px) {
-  :root[data-da] .topbar > div:first-child {
+  .topbar > div:first-child {
     min-width: 0;
   }
-  :root[data-da] .topbar > div:first-child > span:last-child,
-  :root[data-da] .local-status {
+  .topbar > div:first-child > span:last-child,
+  .local-status {
     white-space: nowrap;
   }
-  :root[data-da] .art-home .console-greeting h1 {
+  .art-home .console-greeting h1 {
     font-size: 23px;
   }
-  :root[data-da] .art-home .console-greeting .home-last-step {
+  .art-home .console-greeting .home-last-step {
     display: none;
   }
   /* La vague reste en tête de carte, en bande plus basse (150 px au lieu de
      210) : le titre chevauche son fondu et le bouton remonte. */
-  :root[data-da] .console-hero-art {
+  .console-hero-art {
     height: 150px;
   }
-  :root[data-da="c"] .console-hero-art {
-    height: 168px;
-  }
-  :root[data-da] .console-hero-art .terrain-artwork {
+
+  .console-hero-art .terrain-artwork {
     mask-image: linear-gradient(180deg, #000 38%, transparent 100%);
   }
-  :root[data-da] .console-hero-content {
+  .console-hero-content {
     padding: 96px 18px 18px;
   }
-  :root[data-da="c"] .console-hero-content {
-    padding-top: 112px;
-  }
-  :root[data-da] .console-hero-meta {
+
+  .console-hero-meta {
     margin-top: 12px;
   }
-  :root[data-da] .console-hero .learning-hero-reason {
+  .console-hero .learning-hero-reason {
     margin-bottom: 12px;
   }
-  :root[data-da] .console-hero .learning-hero-reason + .learning-hero-reason {
-    display: none;
-  }
-  :root[data-da] .console-hero-progress {
+  .console-hero-progress {
     margin-top: 16px;
   }
-  :root[data-da] .console-progress {
+  .console-progress {
     padding: 14px 16px;
     gap: 14px;
   }
-  :root[data-da] .console-progress .progress-ring {
+  .console-progress .progress-ring {
     width: 52px !important;
     height: 52px !important;
   }
-  :root[data-da] .console-progress .progress-ring svg {
+  .console-progress .progress-ring svg {
     width: 100%;
     height: 100%;
   }
-  :root[data-da] .console-progress .progress-ring-label {
+  .console-progress .progress-ring-label {
     font-size: 13px;
   }
-  :root[data-da] .console-progress-text {
+  .console-progress-text {
     text-align: left;
   }
-  :root[data-da] .console-tiles {
+  .console-tiles {
     gap: 10px;
     margin-top: 12px;
   }
-  :root[data-da] .console-tile {
+  .console-tile {
     padding: 14px 16px;
   }
 }
@@ -1022,130 +1005,49 @@
 /* Très petits écrans : le titre de page reste entier, l'indicateur se
    raccourcit en « Local » (le libellé complet reste lu par les lecteurs). */
 @media (max-width: 360px) {
-  :root[data-da] .local-status {
+  .local-status {
     font-size: 0;
   }
-  :root[data-da] .local-status::after {
+  .local-status::after {
     content: "Local";
     font-size: var(--type-caption);
   }
 }
 
-/* ---------- Variante A : épurée ---------- */
-:root[data-da="a"] .console-hero,
-:root[data-da="a"] .console-progress,
-:root[data-da="a"] .console-path,
-:root[data-da="a"] .console-activity,
-:root[data-da="a"] .console-tiles {
-  background: linear-gradient(180deg, #121215, #0c0c0e);
-  border-color: rgb(255 255 255 / 0.065);
-  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.045);
-}
-:root[data-da="a"] .console-tiles {
-  gap: 0;
-  border: 1px solid rgb(255 255 255 / 0.065);
-  border-radius: 14px;
-}
-:root[data-da="a"] .console-tiles > li {
-  display: flex;
-}
-:root[data-da="a"] .console-tile {
-  background: none;
-  border: 0;
-  border-left: 1px solid rgb(255 255 255 / 0.06);
-  border-radius: 0;
-  box-shadow: none;
-}
-:root[data-da="a"] .console-tiles > li:first-child .console-tile {
-  border-left: 0;
-}
-:root[data-da="a"] .console-tile:hover {
-  background: rgb(255 255 255 / 0.025);
-}
-:root[data-da="a"] .console-tile-icon {
-  width: auto;
-  height: auto;
-  background: none !important;
-  border: 0 !important;
-  color: var(--text-tertiary) !important;
-}
-@media (min-width: 1101px) {
-  :root[data-da="a"] .learning-stage {
-    display: grid;
-    grid-template-columns: 252px minmax(0, 1fr);
-    align-items: stretch;
-  }
-  :root[data-da="a"] .learning-stage > * {
-    grid-column: 1 / -1;
-  }
-  :root[data-da="a"] .console-top {
-    display: contents;
-  }
-  :root[data-da="a"] .console-hero {
-    grid-column: 1 / -1;
-    min-height: 330px;
-  }
-  :root[data-da="a"] .console-progress {
-    grid-column: 1;
-    margin-top: 18px;
-    flex-direction: row;
-    justify-content: flex-start;
-    gap: 16px;
-    padding: 16px 20px;
-    border-radius: 14px 0 0 14px;
-  }
-  :root[data-da="a"] .console-progress > svg {
-    display: none;
-  }
-  :root[data-da="a"] .console-progress .progress-ring {
-    width: 60px !important;
-    height: 60px !important;
-  }
-  :root[data-da="a"] .console-progress .progress-ring svg {
-    width: 100%;
-    height: 100%;
-  }
-  :root[data-da="a"] .console-progress .progress-ring-label {
-    font-size: 15px;
-  }
-  :root[data-da="a"] .console-progress-text {
-    text-align: left;
-  }
-  :root[data-da="a"] .console-tiles {
-    grid-column: 2;
-    border-left: 0;
-    border-radius: 0 14px 14px 0;
-  }
-}
-
-/* ---------- Variante B : riche et professionnelle ---------- */
-:root[data-da="b"] .console-hero,
-:root[data-da="b"] .console-session,
-:root[data-da="b"] .console-tile,
-:root[data-da="b"] .console-path,
-:root[data-da="b"] .console-activity {
+/* ---------- Profondeur des cartes et panneau « Votre séance » ---------- */
+.console-hero,
+.console-session,
+.console-tile,
+.console-path,
+.console-activity {
   box-shadow:
     inset 0 1px 0 rgb(255 255 255 / 0.07),
     0 1px 0 rgb(0 0 0 / 0.6),
     0 22px 44px rgb(0 0 0 / 0.42);
 }
-:root[data-da="b"] .console-top {
+.console-top {
   grid-template-columns: minmax(0, 1fr) 336px;
 }
-:root[data-da="b"] .console-hero .learning-hero-reason + .learning-hero-reason,
-:root[data-da="b"] .console-reviews {
+.console-reviews {
   display: none;
 }
-:root[data-da="b"] .console-hero-art::after {
+.console-hero-art::after {
+  /* « multiply » : le noir reste noir, seuls les fils argentés se teintent. */
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(
-    40% 50% at 64% 40%,
-    rgb(var(--accent-violet-rgb) / 0.22),
-    transparent 70%
-  );
-  mix-blend-mode: color;
+  background:
+    radial-gradient(
+      34% 44% at 66% 40%,
+      rgb(var(--accent-violet-rgb) / 0.95),
+      transparent 75%
+    ),
+    radial-gradient(
+      24% 32% at 90% 60%,
+      rgb(var(--accent-blue-rgb) / 0.7),
+      transparent 75%
+    );
+  mix-blend-mode: multiply;
   pointer-events: none;
 }
 .console-session {
@@ -1179,6 +1081,12 @@
   color: var(--text-tertiary);
   font-size: var(--type-caption);
   font-variant-numeric: tabular-nums;
+}
+.console-session-summary {
+  margin: -6px 4px 0;
+  color: var(--text-secondary);
+  font-size: var(--type-caption);
+  line-height: 1.5;
 }
 .console-session-progress {
   display: grid;
@@ -1267,100 +1175,35 @@
   background: rgb(var(--accent-violet-deep));
 }
 @media (max-width: 1100px) {
-  :root[data-da="b"] .console-top {
+  .console-top {
     grid-template-columns: minmax(0, 1fr);
   }
 }
 @media (min-width: 701px) and (max-width: 1100px) {
-  :root[data-da="b"] .console-session {
+  .console-session {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
     column-gap: 22px;
   }
-  :root[data-da="b"] .console-session-head {
+  .console-session-summary,
+  .console-session-head {
     grid-column: 1 / -1;
   }
 }
 @media (max-width: 700px) {
-  :root[data-da="b"] .console-session {
+  .console-session {
     border-radius: 16px;
     padding: 18px 16px 8px;
   }
-  :root[data-da="b"] .console-session-progress .progress-ring {
+  .console-session-progress .progress-ring {
     width: 56px !important;
     height: 56px !important;
   }
-  :root[data-da="b"] .console-session-progress .progress-ring svg {
+  .console-session-progress .progress-ring svg {
     width: 100%;
     height: 100%;
   }
-  :root[data-da="b"] .console-session-progress .progress-ring-label {
+  .console-session-progress .progress-ring-label {
     font-size: 13px;
-  }
-}
-
-/* ---------- Variante C : proche de la référence, couleurs atténuées ---------- */
-:root[data-da="c"] .console-top {
-  grid-template-columns: minmax(0, 1fr) 260px;
-}
-:root[data-da="c"] .console-hero-art::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(
-      42% 52% at 62% 40%,
-      rgb(var(--accent-violet-rgb) / 0.4),
-      transparent 72%
-    ),
-    radial-gradient(
-      30% 42% at 88% 62%,
-      rgb(var(--accent-blue-rgb) / 0.3),
-      transparent 72%
-    );
-  mix-blend-mode: color;
-  pointer-events: none;
-}
-:root[data-da="c"] .console-badge {
-  color: rgb(var(--accent-violet-ink));
-  border-color: rgb(var(--accent-violet-rgb) / 0.3);
-  background: rgb(var(--accent-violet-rgb) / 0.08);
-}
-:root[data-da="c"] .console-badge svg {
-  color: var(--accent-violet);
-}
-:root[data-da="c"] .console-progress .progress-ring {
-  filter: drop-shadow(0 0 10px rgb(var(--accent-violet-rgb) / 0.12));
-}
-/* La rangée de chiffres : une seule teinte, sur ce qui demande un geste. */
-:root[data-da="c"] .console-tile.tone-blue .console-tile-icon {
-  color: var(--accent-violet);
-  background: rgb(var(--accent-violet-rgb) / 0.08);
-  border-color: rgb(var(--accent-violet-rgb) / 0.22);
-}
-@media (max-width: 1100px) {
-  :root[data-da="c"] .console-top {
-    grid-template-columns: minmax(0, 1fr);
-  }
-}
-@media (max-width: 700px) {
-  :root[data-da="c"] .console-tiles {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 8px;
-  }
-  :root[data-da="c"] .console-tile {
-    padding: 12px 16px;
-  }
-  :root[data-da="c"] .console-tile-text {
-    display: flex;
-    align-items: baseline;
-    gap: 10px;
-  }
-  :root[data-da="c"] .console-tile-text strong {
-    font-size: 18px;
-  }
-  :root[data-da="c"] .console-tile-icon {
-    width: 36px;
-    height: 36px;
   }
 }

@@ -1316,7 +1316,8 @@
     var(--accent-lavender-dim),
     var(--accent-lavender-strong)
   );
-  box-shadow: 0 0 10px rgb(155 138 203 / 0.35);
+  box-shadow: 0 0 10px
+    rgb(var(--accent-violet-rgb) / calc(0.35 * var(--glow-k)));
 }
 .progress-ring-value {
   stroke: var(--accent-lavender);
@@ -1329,7 +1330,7 @@
   box-shadow: 0 0 0 4px var(--accent-lavender-wash);
 }
 .academy-path-step.is-next {
-  border-color: rgb(155 138 203 / 0.45);
+  border-color: rgb(var(--accent-violet-rgb) / calc(0.45 * var(--wash-k)));
 }
 .academy-path-step.is-next small {
   color: var(--text-primary);

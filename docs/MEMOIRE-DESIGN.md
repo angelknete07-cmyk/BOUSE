@@ -4,6 +4,8 @@ Fichier vivant : chaque passe y ajoute les préférences confirmées par l'utili
 
 ## Ce qu'il aime (à protéger)
 
+- **L'accueil B** (V4) : richesse « professionnelle », cartes en relief, un panneau qui montre le vrai plan de la séance plutôt qu'un anneau isolé.
+
 - **La vague filaire** de `src/components/Terrain.tsx` : signature du produit. Ne jamais la remplacer (montagne, photo, image générée). On peut retravailler sa lumière, son opacité et un très léger reflet coloré, pas sa géométrie.
 - **Le « B » argenté** en rubans (`src/components/BrandLogo.tsx`, passe 32) et « BOUSE » en capitales espacées.
 - **Le bouton principal blanc argenté** ; jamais de bouton violet.
@@ -17,11 +19,11 @@ Fichier vivant : chaque passe y ajoute les préférences confirmées par l'utili
 - **Qu'on retire ce qui existe** pour coller à une image : « garde ce qui existe, améliore la couleur et la finition ».
 - Les grands titres éditoriaux qui mangent l'écran et les micro-textes illisibles.
 
-## Couleur (état au 6 novembre 2026, brief V4)
+## Couleur (état au 6 novembre 2026, brief V4 — système adopté)
 
 - Rendu perçu **94 à 97 % neutre** (noir, anthracite, argent, blanc cassé).
 - **Une seule couleur dominante discrète par bloc**, sur une information à la fois : courbe active, étape en cours, point sélectionné, progression.
-- Teintes désaturées à tester : lavande `#9A8AB7`, bleu glacier gris `#839CAF`, vert d'eau `#7FA69C`. Le violet `#A78BFA` et la lueur `0 0 22px` à 45 % de la passe 32 sont **jugés trop vifs**.
+- Teintes désaturées **adoptées** (choix de l'accueil B) : lavande `#9A8AB7`, bleu glacier gris `#839CAF`, vert d'eau `#7FA69C` ; lueurs × 0,15, voiles × 0,55 (`--glow-k`, `--wash-k` dans `tokens.css`). Le violet `#A78BFA` et la lueur `0 0 22px` à 45 % de la passe 32 sont **jugés trop vifs**.
 - Les graphiques doivent rester lisibles en niveaux de gris (pointillé/plein, épaisseur, libellés).
 
 ## Méthode de travail qu'il attend
@@ -41,4 +43,7 @@ Fichier vivant : chaque passe y ajoute les préférences confirmées par l'utili
 | Passe 31 (V3.2) | Petits accents désaturés autorisés (lavande). Jugé trop timide et trop éloigné des images.                                                          |
 | Passe 32        | Planche 03 retenue (composition, logo B). Une montagne générée a remplacé la vague → refusé, vague rétablie. Accents violet/bleu/émeraude lumineux. |
 | V4              | Recentrage : sobre, premium, 94–97 % neutre ; violets trop vifs à apaiser ; vague et fonctions intouchables ; jalons avec validation.               |
-| V4 jalons A–C   | Proposé (non validé) : palette apaisée, Inter affiné (Manrope écarté : titres plus larges sans gain), trois accueils A/B/C. **En attente du choix.** |
+| V4 jalons A–C   | Proposé : palette apaisée, Inter affiné (Manrope écarté : titres plus larges sans gain), trois accueils A/B/C.                                       |
+| 6 nov. 2026     | **Choix de l'utilisateur : accueil B « riche et professionnel »** (panneau « Votre séance » avec le plan réel), avec palette apaisée et Inter affiné, devenus le système par défaut. A (épurée) et C (proche de la référence) non retenues. |
+| 6 nov., soir    | **Correction de l'utilisateur** : la palette « apaisée » est trop grise. Il veut se rapprocher **au maximum, pour les couleurs et la lumière, de ses planches** (« Pack review V2 » et « Direction artistique cible ») : violet `#9B87F5`, cyan `#56C4E8`, vert `#5ECD96`, lueurs douces (× 0,6), vague argentée éclairée de violet puis cyan sur la crête. **Sans** reprendre leurs objets (montagne, etc.) ni changer la structure ou les fonctions. |
+

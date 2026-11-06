@@ -115,11 +115,6 @@ export function Dashboard({ state, onNavigate }: Props) {
     (lesson) => latest.has(lesson.id) && !latest.get(lesson.id)!.passed,
   );
   const percentDone = Math.round((done.size / lessons.length) * 100);
-  // V4 jalon C : variante d'accueil demandée par l'adresse (?da=a|b|c), sinon aucune.
-  const da =
-    typeof document === "undefined"
-      ? undefined
-      : document.documentElement.dataset.da;
   const practice = practiceFor(current.id);
   const currentIndex =
     lessons.findIndex((lesson) => lesson.id === current.id) + 1;
@@ -273,18 +268,6 @@ export function Dashboard({ state, onNavigate }: Props) {
                   <strong>Pourquoi celle-ci ?</strong> {reason}
                 </span>
               </p>
-              <p className="learning-hero-reason">
-                <Icon name="clock" size={14} />
-                <span>
-                  {sessionPlan(
-                    state.profile?.minutes || 20,
-                    current,
-                    due.length,
-                    current.sections.length + 3,
-                    state.lessonPositions?.[current.id] ?? 0,
-                  )}
-                </span>
-              </p>
               <div className="console-hero-actions">
                 <button
                   className="button primary console-play"
@@ -333,118 +316,100 @@ export function Dashboard({ state, onNavigate }: Props) {
             </div>
           </section>
 
-          {da === "b" ? (
-            <section
-              className="console-session"
-              aria-labelledby="console-session-title"
+          <section
+            className="console-session"
+            aria-labelledby="console-session-title"
+          >
+            <div className="console-session-head">
+              <h2 id="console-session-title">Votre séance</h2>
+            </div>
+            <p className="console-session-summary">
+              {sessionPlan(
+                state.profile?.minutes || 20,
+                current,
+                due.length,
+                current.sections.length + 3,
+                state.lessonPositions?.[current.id] ?? 0,
+              )}
+            </p>
+            <button
+              type="button"
+              className="console-session-progress"
+              onClick={() => onNavigate("skills")}
             >
-              <div className="console-session-head">
-                <h2 id="console-session-title">Votre séance</h2>
-                <small>{state.profile?.minutes || 20} min</small>
-              </div>
-              <button
-                type="button"
-                className="console-session-progress"
-                onClick={() => onNavigate("skills")}
-              >
-                <ProgressRing
-                  value={done.size / lessons.length}
-                  size={76}
-                  stroke={5}
-                  tone="violet"
-                  label={`${percentDone}\u00a0%`}
-                />
-                <span>
-                  <strong>
-                    {done.size} / {lessons.length} notions validées
-                  </strong>
-                  <small>Voir mes compétences</small>
-                </span>
-                <Icon name="chevron" size={16} />
-              </button>
-              <ol className="console-session-plan">
-                {due.length > 0 && (
-                  <li>
-                    <button type="button" onClick={() => onNavigate("reviews")}>
-                      <span className="console-session-step">1</span>
-                      <span>
-                        <strong>
-                          {due.length} rappel{due.length > 1 ? "s" : ""} prêt
-                          {due.length > 1 ? "s" : ""}
-                        </strong>
-                        <small>
-                          ≈{"\u00a0"}
-                          {Math.max(1, Math.min(due.length, 5))}
-                          {"\u00a0"}min · rappel espacé
-                        </small>
-                      </span>
-                      <Icon name="chevron" size={16} />
-                    </button>
-                  </li>
-                )}
-                <li className="is-current">
-                  <button type="button" onClick={() => openLesson(current)}>
+              <ProgressRing
+                value={done.size / lessons.length}
+                size={76}
+                stroke={5}
+                tone="spectrum"
+                label={`${percentDone}\u00a0%`}
+              />
+              <span>
+                <strong>
+                  {done.size} / {lessons.length} notions validées
+                </strong>
+                <small>Voir mes compétences</small>
+              </span>
+              <Icon name="chevron" size={16} />
+            </button>
+            <ol className="console-session-plan">
+              {due.length > 0 && (
+                <li>
+                  <button type="button" onClick={() => onNavigate("reviews")}>
+                    <span className="console-session-step">1</span>
+                    <span>
+                      <strong>
+                        {due.length} rappel{due.length > 1 ? "s" : ""} prêt
+                        {due.length > 1 ? "s" : ""}
+                      </strong>
+                      <small>
+                        ≈{"\u00a0"}
+                        {Math.max(1, Math.min(due.length, 5))}
+                        {"\u00a0"}min · rappel espacé
+                      </small>
+                    </span>
+                    <Icon name="chevron" size={16} />
+                  </button>
+                </li>
+              )}
+              <li className="is-current">
+                <button type="button" onClick={() => openLesson(current)}>
+                  <span className="console-session-step">
+                    {due.length > 0 ? 2 : 1}
+                  </span>
+                  <span>
+                    <strong>
+                      {lessonShortLabel(current.id, current.title)}
+                    </strong>
+                    <small>
+                      En cours · {current.minutes}
+                      {"\u00a0"}min
+                    </small>
+                  </span>
+                  <Icon name="chevron" size={16} />
+                </button>
+              </li>
+              {following.id !== current.id && (
+                <li>
+                  <button type="button" onClick={() => openLesson(following)}>
                     <span className="console-session-step">
-                      {due.length > 0 ? 2 : 1}
+                      {due.length > 0 ? 3 : 2}
                     </span>
                     <span>
                       <strong>
-                        {lessonShortLabel(current.id, current.title)}
+                        {lessonShortLabel(following.id, following.title)}
                       </strong>
                       <small>
-                        En cours · {current.minutes}
+                        Ensuite · {following.minutes}
                         {"\u00a0"}min
                       </small>
                     </span>
                     <Icon name="chevron" size={16} />
                   </button>
                 </li>
-                {following.id !== current.id && (
-                  <li>
-                    <button type="button" onClick={() => openLesson(following)}>
-                      <span className="console-session-step">
-                        {due.length > 0 ? 3 : 2}
-                      </span>
-                      <span>
-                        <strong>
-                          {lessonShortLabel(following.id, following.title)}
-                        </strong>
-                        <small>
-                          Ensuite · {following.minutes}
-                          {"\u00a0"}min
-                        </small>
-                      </span>
-                      <Icon name="chevron" size={16} />
-                    </button>
-                  </li>
-                )}
-              </ol>
-            </section>
-          ) : (
-            <button
-              type="button"
-              className="console-progress"
-              onClick={() => onNavigate("skills")}
-            >
-              <ProgressRing
-                value={done.size / lessons.length}
-                size={112}
-                stroke={7}
-                tone="spectrum"
-                label={`${percentDone}\u00a0%`}
-              />
-              <span className="console-progress-text">
-                <strong>Ma progression</strong>
-                <small>
-                  {done.size} / {lessons.length} leçons
-                </small>
-                <span className="sr-only">
-                  {percentDone} %. Voir mes compétences.
-                </span>
-              </span>
-              <Icon name="chevron" size={16} />
-            </button>
-          )}
+              )}
+            </ol>
+          </section>
         </div>
 
         <ConsoleTiles

@@ -208,3 +208,15 @@ L’utilisateur a retenu la planche 03 (« Pack review V2 ») pour la couleur, l
 - **Garde-fous** : surfaces noires et argent, aucun bouton ni fond de carte coloré ; ne pas retirer un élément existant sans demande.
 
 Détail : `design-reviews/AUDIT-32.md`. La direction artistique attend la review de l’utilisateur.
+
+## V4 — système adopté (6 novembre 2026)
+
+Choix de l’utilisateur : **accueil B « riche et professionnel »**, palette apaisée et Inter affiné. Cette section remplace, pour la couleur et les petites tailles, les règles des passes 31 et 32 ci-dessus. Détail : `design-reviews/V4_INVENTORY.md`, `V4_STYLE_SAMPLES.md`, `V4_HOME_VARIANTS.md`.
+
+- **Rendu perçu 94–97 % neutre** ; une seule couleur par bloc, sur une information à la fois (progression, étape en cours, courbe active).
+- **Accents** définis seulement par leurs canaux dans `tokens.css` : lavande `154 138 183`, glacier `131 156 175`, vert d’eau `127 166 156`. Les feuilles écrivent `rgb(var(--accent-…-rgb) / calc(alpha * var(--glow-k)))` pour une lueur, `… var(--wash-k)` pour un voile ou une bordure teintée. Jamais de couleur d’accent en dur.
+- **Lueurs** × 0,15 (halo ≤ 0,13), **voiles** × 0,55 (aires sous les courbes ≤ 8 %). Progression en lavande pleine, plus de dégradé violet → bleu.
+- **Typographie** : Inter seul ; plancher 12 px pour toute information utile, 11 px pour les axes ; corps 15 px ; interlignes 1,6 (interface) et 1,75 (lecture). Manrope testé et écarté.
+- **Grilles** : toujours `minmax(0, 1fr)` pour une colonne qui doit pouvoir rétrécir (un `1fr` seul s’élargit au contenu et fait déborder la page à 320 px).
+- Page de contrôle interne : `#labo-design` (développement seulement).
+

@@ -1,3 +1,16 @@
+# Review design — V4 : accueil B adopté, couleurs des planches de l'utilisateur
+
+**6 novembre 2026, 17 h 22 Europe/Paris.** **La direction artistique n'est pas déclarée validée.**
+
+- Choix de l'utilisateur : **accueil B** (panneau « Votre séance » avec le plan réel), devenu la version par défaut ; variantes A et C retirées du code.
+- Puis correction de l'utilisateur : couleurs rapprochées de ses planches (violet `#9B87F5`, cyan `#56C4E8`, vert `#5ECD96`, lueurs × 0,6) ; la vague reste celle de `Terrain.tsx` (empreinte inchangée), éclairée de violet puis cyan sur la crête par un calque CSS en mode « multiply » (le noir reste noir).
+- Inter avec plancher 12 px pour les textes utiles ; Manrope écarté et retiré.
+- Corrections : régression trouvée par les tests (le détail « séquences 3 à 7 » réaffiché dans le panneau) ; test clavier des onglets stabilisé (attente du focus du panneau).
+- **Contrôles de l'agent** : `npm test` 245 cas, `npx playwright test` 86 tests, Prettier, build ; galerie régénérée (archive `2026-11-06_17-22-31-Europe-Paris`) ; 0 débordement à 320 px sur 14 pages.
+- **Limites** : les autres pages ont pris les nouvelles couleurs et tailles par les jetons, sans retouche page par page (jalon D) ; pas de vrai téléphone ; pas de validation externe.
+
+---
+
 # Review design — V4, jalons A, B et C (en attente du choix de l'utilisateur)
 
 **6 novembre 2026, sur le Mac.** **La direction artistique n'est pas déclarée validée.** Aucun changement visible par défaut, sauf deux corrections de débordement à 320 px.

@@ -19,11 +19,6 @@ import "./art-direction.css";
 import "./finish.css";
 import "./fusion.css";
 import "./console.css";
-import { applyDesignPreview } from "./lib/designPreview";
-
-// V4 : essais de direction artistique activables par l'adresse
-// (?palette=…, ?type=…, ?da=…). Sans paramètre, rien ne change.
-applyDesignPreview(location.search, document.documentElement);
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <App />

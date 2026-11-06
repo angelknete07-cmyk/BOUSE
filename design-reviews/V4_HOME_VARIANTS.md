@@ -1,6 +1,6 @@
 # BOUSE V4 — Jalon C : trois variantes réelles de l'accueil
 
-**6 novembre 2026. En attente du choix de l'utilisateur : rien n'est propagé aux autres pages.**
+**6 novembre 2026. Choix de l'utilisateur : B.** B, la palette apaisée et l'Inter affiné sont devenus la version par défaut ; les variantes A et C ont été retirées du code (captures conservées ici pour mémoire, et les adresses `?da=…` ne fonctionnent plus).
 
 Suite de [V4_INVENTORY.md](V4_INVENTORY.md) (jalon A) et [V4_STYLE_SAMPLES.md](V4_STYLE_SAMPLES.md) (jalon B).
 

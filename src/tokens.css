@@ -14,11 +14,11 @@
   --font-mono: ui-monospace, "SFMono-Regular", Consolas, monospace;
   --font-mark: Georgia, serif;
 
-  --bg: #050505;
-  --bg-secondary: #09090a;
-  --surface-low: #0d0d0f;
-  --surface: #141416;
-  --raised: #1a1a1d;
+  --bg: #0a0a0b;
+  --bg-secondary: #0d0d0f;
+  --surface-low: #101012;
+  --surface: #121214;
+  --raised: #1a1a1e;
   --surface-hover: #252528;
   --surface-selected: #29292d;
   --text: #f3f2ee;
@@ -43,16 +43,20 @@
   /* V4 jalon B : une seule source. Chaque accent est défini par ses canaux
      RGB ; les feuilles écrivent rgb(var(--accent-…-rgb) / alpha) au lieu de
      valeurs en dur. --glow-k règle toutes les lueurs, --wash-k tous les
-     voiles et bordures teintés. Valeurs par défaut = passe 32 (inchangée tant
-     que l'utilisateur n'a pas choisi). */
-  --accent-violet-rgb: 167 139 250;
-  --accent-blue-rgb: 107 166 242;
-  --accent-emerald-rgb: 63 203 155;
-  --accent-violet-ink: 221 213 255; /* texte clair teinté (badge, pastille) */
-  --accent-violet-deep: 42 33 64; /* fond sombre teinté (pastille active) */
-  --accent-emerald-deep: 16 20 19;
-  --glow-k: 1;
-  --wash-k: 1;
+     voiles et bordures teintés. Valeurs du 6 novembre 2026, soir : accueil B
+     et couleurs rapprochées des planches de l'utilisateur (violet #9B87F5,
+     cyan #56C4E8, vert #5ECD96, lueurs × 0,6), après une palette « apaisée »
+     jugée trop grise. Les anciennes
+     valeurs passe 32 étaient 167 139 250 / 107 166 242 / 63 203 155,
+     --glow-k 1 et --wash-k 1. */
+  --accent-violet-rgb: 155 135 245; /* violet #9B87F5 (planche V2 de l'utilisateur) */
+  --accent-blue-rgb: 86 196 232;
+  --accent-emerald-rgb: 94 205 150;
+  --accent-violet-ink: 222 214 255; /* texte clair teinté (badge, pastille) */
+  --accent-violet-deep: 38 30 66; /* fond sombre teinté (pastille active) */
+  --accent-emerald-deep: 14 26 20;
+  --glow-k: 0.6;
+  --wash-k: 0.9;
   --accent-violet: rgb(
     var(--accent-violet-rgb)
   ); /* progression, étape en cours */
@@ -69,8 +73,8 @@
     rgb(var(--accent-violet-rgb) / calc(0.45 * var(--glow-k)));
   /* Passe 31 names, kept as aliases of the violet. */
   --accent-lavender: var(--accent-violet);
-  --accent-lavender-strong: #c4b5fd;
-  --accent-lavender-dim: #7c6bd6;
+  --accent-lavender-strong: #c3b6fb;
+  --accent-lavender-dim: #7b69d9;
   --accent-lavender-wash: var(--accent-violet-wash);
   --accent-glacier: var(--accent-blue);
   --accent-teal: var(--accent-emerald);
@@ -87,11 +91,11 @@
   --type-editorial: clamp(2.75rem, 5.2vw, 5rem);
   --type-instrument: clamp(2.5rem, 5.4vw, 5.5rem);
   --type-scene: clamp(2.6rem, 5.3vw, 5.25rem);
-  --type-micro: 0.625rem;
-  --type-caption: 0.6875rem;
-  --type-small: 0.75rem;
-  --type-body-sm: 0.8125rem;
-  --type-body: 0.875rem;
+  --type-micro: 0.75rem;
+  --type-caption: 0.75rem;
+  --type-small: 0.8125rem;
+  --type-body-sm: 0.875rem;
+  --type-body: 0.9375rem;
   --type-body-lg: 1rem;
   --type-title-sm: 1.125rem;
   --type-title-md: 1.25rem;
@@ -103,8 +107,8 @@
   --type-number-xl: 3.75rem;
   --type-index: 5.375rem;
   --type-index-sm: 4.75rem;
-  --type-annotation: 0.5625rem;
-  --type-coordinate: 0.5rem;
+  --type-annotation: 0.6875rem;
+  --type-coordinate: 0.6875rem;
   --type-mark: 2.75rem;
   --type-display: 4rem;
   --type-page-fluid: clamp(2rem, 3vw, 2.75rem);
@@ -126,12 +130,12 @@
   --weight-display: 600;
   --weight-heading: 550;
   --weight-figure: 450;
-  --tracking-display: -0.035em;
-  --tracking-heading: -0.025em;
-  --tracking-figure: -0.035em;
+  --tracking-display: -0.028em;
+  --tracking-heading: -0.02em;
+  --tracking-figure: -0.03em;
   --leading-tight: 1.22;
-  --leading-body: 1.7;
-  --leading-reading: 1.9;
+  --leading-body: 1.6;
+  --leading-reading: 1.75;
 
   /* One reading frame for every page root, so content edges never jump between screens. */
   --page-max: 1366px; /* .main-content 1450px minus its 2 × 42px gutters */
@@ -176,49 +180,4 @@
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
   --ease-settle: cubic-bezier(0.2, 0.8, 0.3, 1.04);
-}
-
-/* ---------- V4 jalon B : essais activables, jamais par défaut ----------
-   ?palette=apaisee  → teintes désaturées du brief V4, lueurs et voiles réduits.
-   ?type=manrope     → titres en Manrope (OFL, fichier local), lecture en Inter.
-   ?type=affine      → Inter, tailles et rythme revus (plancher 12 px utile).
-   Le choix final de l'utilisateur deviendra la valeur par défaut. */
-:root[data-palette="apaisee"] {
-  --accent-violet-rgb: 154 138 183; /* lavande #9A8AB7 */
-  --accent-blue-rgb: 131 156 175; /* glacier #839CAF */
-  --accent-emerald-rgb: 127 166 156; /* vert d'eau #7FA69C */
-  --accent-violet-ink: 222 216 232;
-  --accent-violet-deep: 34 31 41;
-  --accent-emerald-deep: 18 21 20;
-  --accent-lavender-strong: #b9adcf;
-  --accent-lavender-dim: #7a6d94;
-  --glow-k: 0.15;
-  --wash-k: 0.55;
-}
-
-@font-face {
-  font-family: "Manrope";
-  font-style: normal;
-  font-weight: 200 800;
-  font-display: swap;
-  src: url("/fonts/manrope-latin-variable.woff2") format("woff2");
-}
-:root[data-type="manrope"] {
-  --font-display: "Manrope", var(--font-sans);
-  --tracking-display: -0.02em;
-  --tracking-heading: -0.015em;
-}
-:root[data-type="affine"] {
-  --type-coordinate: 0.6875rem;
-  --type-annotation: 0.6875rem;
-  --type-micro: 0.75rem;
-  --type-caption: 0.75rem;
-  --type-small: 0.8125rem;
-  --type-body-sm: 0.875rem;
-  --type-body: 0.9375rem;
-  --tracking-display: -0.028em;
-  --tracking-heading: -0.02em;
-  --tracking-figure: -0.03em;
-  --leading-body: 1.6;
-  --leading-reading: 1.75;
 }

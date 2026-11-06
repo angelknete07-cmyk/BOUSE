@@ -6,19 +6,9 @@ import { Terrain } from "./Terrain";
 /**
  * V4 jalon B — page de contrôle visuel interne (#labo-design).
  * Chargée seulement en développement : jamais présente dans le site publié.
- * Elle montre les vrais composants avec chaque palette et chaque essai
- * typographique, et calcule les contrastes à partir des jetons réels.
+ * Elle montre les vrais composants et calcule les contrastes à partir des
+ * jetons réels.
  */
-
-const palettes = [
-  ["", "Passe 32 (actuelle)"],
-  ["apaisee", "Apaisée V4"],
-] as const;
-const types = [
-  ["", "Inter actuel"],
-  ["manrope", "Titres Manrope"],
-  ["affine", "Inter affiné"],
-] as const;
 
 const swatches = [
   ["--bg", "Fond"],
@@ -78,31 +68,11 @@ function Chart() {
 }
 
 export function StyleLab() {
-  const root = document.documentElement;
-  const [palette, setPalette] = useState(root.dataset.palette || "");
-  const [type, setType] = useState(root.dataset.type || "");
   const [rows, setRows] = useState<
     { token: string; label: string; value: string; bg: number; card: number }[]
   >([]);
 
   useEffect(() => {
-    if (palette) root.dataset.palette = palette;
-    else delete root.dataset.palette;
-    if (type) root.dataset.type = type;
-    else delete root.dataset.type;
-    const params = new URLSearchParams(location.search);
-    for (const [key, value] of [
-      ["palette", palette],
-      ["type", type],
-    ] as const)
-      if (value) params.set(key, value);
-      else params.delete(key);
-    const search = params.toString();
-    history.replaceState(
-      null,
-      "",
-      `${search ? `?${search}` : location.pathname}${location.hash}`,
-    );
     const bg = resolve("--bg");
     const card = resolve("--surface");
     setRows(
@@ -117,7 +87,7 @@ export function StyleLab() {
         };
       }),
     );
-  }, [palette, type, root]);
+  }, []);
 
   return (
     <div className="style-lab">
@@ -126,39 +96,9 @@ export function StyleLab() {
         <p className="eyebrow">Interne · développement seulement</p>
         <h1>Labo de style V4</h1>
         <p>
-          Les vrais composants de BOUSE avec chaque essai. Rien ici n’est
+          Les vrais composants de BOUSE avec les jetons actuels. Rien ici n’est
           visible dans le site publié.
         </p>
-        <div className="style-lab-switches">
-          <fieldset>
-            <legend>Couleurs</legend>
-            {palettes.map(([value, label]) => (
-              <button
-                key={value || "p32"}
-                type="button"
-                className={`button ${palette === value ? "primary" : "secondary"}`}
-                aria-pressed={palette === value}
-                onClick={() => setPalette(value)}
-              >
-                {label}
-              </button>
-            ))}
-          </fieldset>
-          <fieldset>
-            <legend>Typographie</legend>
-            {types.map(([value, label]) => (
-              <button
-                key={value || "inter"}
-                type="button"
-                className={`button ${type === value ? "primary" : "secondary"}`}
-                aria-pressed={type === value}
-                onClick={() => setType(value)}
-              >
-                {label}
-              </button>
-            ))}
-          </fieldset>
-        </div>
       </header>
 
       <section className="style-lab-block">

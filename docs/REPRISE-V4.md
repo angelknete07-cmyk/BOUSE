@@ -4,9 +4,9 @@ Note de passage de relais écrite le 6 novembre 2026 par la session cloud « BOU
 
 ## État au 6 novembre 2026, soir (session Mac)
 
-- **Jalons A, B et C terminés**, voir `design-reviews/V4_INVENTORY.md`, `V4_STYLE_SAMPLES.md`, `V4_HOME_VARIANTS.md`. **On attend le choix de l'utilisateur** entre les accueils A, B et C (`?da=a|b|c`) avant le jalon D (propagation par groupes d'écrans).
+- **Jalons A, B et C terminés**, voir `design-reviews/V4_INVENTORY.md`, `V4_STYLE_SAMPLES.md`, `V4_HOME_VARIANTS.md`. **Choix de l'utilisateur : accueil B**, devenu la version par défaut avec la palette apaisée et l'Inter affiné (A et C retirés). Prochaine étape : **jalon D**, groupe 1 (Académie, atlas, compétences, portfolio), avec captures avant/après et validation avant le groupe suivant.
 - Outils locaux : Chrome installé est utilisé par Playwright (`channel: "chrome"`) pour les captures ; le serveur de dev se lance depuis la config « bouse » de `~/claude/.claude/launch.json`.
-- Page interne `#labo-design` (développement seulement) pour comparer palettes et typographies.
+- Page interne `#labo-design` (développement seulement) : planche des jetons et contrastes.
 
 ## Où on en était (session cloud)
 
