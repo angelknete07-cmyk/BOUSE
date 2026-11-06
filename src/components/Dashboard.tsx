@@ -9,7 +9,7 @@ import {
 import { domains } from "../data/domains";
 import { domainIdentity } from "../lib/domainIdentity";
 import { ProgressBar, ProgressRing } from "./ProgressRing";
-import { byDomain, trackLayout } from "../lib/mapLayout";
+import { byDomain, trackLayout, trackWindow } from "../lib/mapLayout";
 import { Icon } from "./Icon";
 import { lessonShortLabel } from "../data/lessonLabels";
 import { Terrain } from "./Terrain";
@@ -80,7 +80,19 @@ export function Dashboard({ state, onNavigate }: Props) {
   const [selectedId, setSelectedId] = useState(following.id);
   const [trackId, setTrackId] = useState(trackOf(current.id).id);
   const track = tracks.find((item) => item.id === trackId) || tracks[0]!;
-  const mapNodes = track.nodes;
+  // A long track shows a readable window of seven notions around the next one.
+  const windowFocus =
+    [current.id, following.id].find((id) =>
+      track.nodes.some((node) => node.id === id),
+    ) || track.nodes.find((node) => !done.has(node.id))?.id;
+  const shown = trackWindow(
+    track.nodes.map((node) => node.id),
+    windowFocus,
+  );
+  const mapNodes = trackLayout(shown.ids).map((point) => ({
+    ...point,
+    icon: track.nodes.find((node) => node.id === point.id)!.icon,
+  }));
   const mapLinks = trackLinks(mapNodes);
   function chooseTrack(id: string) {
     const nodes = tracks.find((item) => item.id === id)!.nodes;
@@ -482,7 +494,9 @@ export function Dashboard({ state, onNavigate }: Props) {
                   <span className="trajectory-node-label">
                     {lessonShortLabel(node.id, lesson.title)}
                   </span>
-                  <span className="trajectory-node-index">0{index + 1}</span>
+                  <span className="trajectory-node-index">
+                    {String(shown.start + index + 1).padStart(2, "0")}
+                  </span>
                   <span hidden id={`trajectory-description-${node.id}`}>
                     {lesson.domain}, {lesson.minutes} minutes.{" "}
                     {attempt
@@ -529,7 +543,9 @@ export function Dashboard({ state, onNavigate }: Props) {
             className="text-button trajectory-full-map"
             onClick={() => onNavigate("skills")}
           >
-            Explorer mes compétences
+            {shown.total > shown.ids.length
+              ? `Notions ${shown.start + 1} à ${shown.start + shown.ids.length} sur ${shown.total} · voir toute la carte`
+              : "Explorer mes compétences"}
             <Icon name="arrow" size={15} />
           </button>
         </section>

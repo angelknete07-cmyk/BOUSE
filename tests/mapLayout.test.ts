@@ -50,3 +50,19 @@ test("long home tracks zigzag, short ones stay on one line", () => {
   assert.notEqual(long[0]!.y, long[1]!.y);
   assert.equal(long[0]!.y, long[2]!.y);
 });
+
+test("a long track shows a window around the next notion", async () => {
+  const { trackWindow } = await import("../src/lib/mapLayout.ts");
+  const ids = Array.from({ length: 11 }, (_, index) => `n${index}`);
+  assert.deepEqual(trackWindow(ids.slice(0, 5), "n2"), {
+    ids: ids.slice(0, 5),
+    start: 0,
+    total: 5,
+  });
+  const middle = trackWindow(ids, "n5");
+  assert.equal(middle.start, 3);
+  assert.equal(middle.ids.length, 7);
+  assert.ok(middle.ids.includes("n5"));
+  assert.equal(trackWindow(ids, "n10").start, 4);
+  assert.equal(trackWindow(ids, "missing").start, 0);
+});

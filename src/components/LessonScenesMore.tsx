@@ -16,16 +16,16 @@ import {
   type StatusNeeds,
 } from "../lib/lessonModels";
 
-const euros = new Intl.NumberFormat("fr-FR", {
+export const euros = new Intl.NumberFormat("fr-FR", {
   style: "currency",
   currency: "EUR",
   maximumFractionDigits: 0,
 });
-const percent = (rate: number, digits = 0) =>
+export const percent = (rate: number, digits = 0) =>
   `${(rate * 100).toLocaleString("fr-FR", { maximumFractionDigits: digits })} %`;
 
 /** A row of choices sharing the scene segment style. */
-function Choices<T extends string | number>({
+export function Choices<T extends string | number>({
   label,
   options,
   value,
@@ -58,7 +58,7 @@ function Choices<T extends string | number>({
 }
 
 /** Two alternatives side by side: a bar each, never stacked into a sum. */
-function CompareBars({
+export function CompareBars({
   rows,
 }: {
   rows: { label: string; amount: number; display: string; className: string }[];
@@ -82,7 +82,7 @@ function CompareBars({
   );
 }
 
-function Range({
+export function Range({
   label,
   shown,
   ariaLabel,
@@ -118,7 +118,7 @@ function Range({
 }
 
 /** A horizontal stacked bar; each part keeps a readable text label. */
-function StackedBar({
+export function StackedBar({
   parts,
   total,
 }: {
@@ -911,7 +911,7 @@ export function BalanceSheetScene() {
 
 /* ---------- Jeux de repérage ---------- */
 
-type SortingItem = {
+export type SortingItem = {
   id: string;
   text: string;
   answer: boolean;
@@ -919,7 +919,7 @@ type SortingItem = {
   why: string;
 };
 
-function SortingGame({
+export function SortingGame({
   label,
   eyebrow,
   title,
@@ -1070,7 +1070,7 @@ export function ScamScene() {
     <SortingGame
       label="Repérer les signaux d’une arnaque au placement"
       eyebrow="À VOUS DE TRIER"
-      title="Signal d’alerte, ou pas ?"
+      title="Signal d’alerte, ou pas ?"
       fiction="Messages fictifs"
       items={scamItems}
       yes="Signal d’alerte"

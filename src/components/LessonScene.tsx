@@ -8,6 +8,30 @@ import {
 import { projectInvestment } from "../lib/investing";
 import { budgetBalance, loanPayment } from "../lib/personalFinance";
 import {
+  AiActGame,
+  AiDataGame,
+  AiUseCaseGame,
+  BankFraudGame,
+  BiasGame,
+  CreationStepsGame,
+  CryptoRecoveryScene,
+  DashboardScene,
+  EmergencyFundScene,
+  FeeDragScene,
+  FinancingPlanScene,
+  FunnelScene,
+  InflationScene,
+  InsuranceGame,
+  InvestmentTaxScene,
+  InvoiceGame,
+  LifetimeValueScene,
+  MarketsGame,
+  PaybackScene,
+  PricingScene,
+  RentalYieldScene,
+  RetirementScene,
+} from "./LessonScenesExtra";
+import {
   AiTestScene,
   BalanceSheetScene,
   BondScene,
@@ -48,6 +72,28 @@ export function LessonScene({ lessonId }: { lessonId: string }) {
   if (lessonId === "fin-etats-financiers") return <BalanceSheetScene />;
   if (lessonId === "inv-arnaques-placement") return <ScamScene />;
   if (lessonId === "ia-evaluer-fiabilite") return <AiTestScene />;
+  if (lessonId === "fp-epargne-precaution") return <EmergencyFundScene />;
+  if (lessonId === "fp-inflation-quotidien") return <InflationScene />;
+  if (lessonId === "fp-retraite") return <RetirementScene />;
+  if (lessonId === "inv-fonds-enveloppes") return <FeeDragScene />;
+  if (lessonId === "inv-immobilier-scpi") return <RentalYieldScene />;
+  if (lessonId === "inv-crypto-actifs") return <CryptoRecoveryScene />;
+  if (lessonId === "inv-fiscalite-placements") return <InvestmentTaxScene />;
+  if (lessonId === "ent-modele-economique") return <LifetimeValueScene />;
+  if (lessonId === "ent-trouver-clients") return <FunnelScene />;
+  if (lessonId === "ent-fixer-prix") return <PricingScene />;
+  if (lessonId === "ent-financer-projet") return <FinancingPlanScene />;
+  if (lessonId === "fin-investir-amortir") return <PaybackScene />;
+  if (lessonId === "fin-piloter-indicateurs") return <DashboardScene />;
+  if (lessonId === "inv-marches-financiers") return <MarketsGame />;
+  if (lessonId === "inv-ordres-biais") return <BiasGame />;
+  if (lessonId === "ent-creer-etapes") return <CreationStepsGame />;
+  if (lessonId === "ent-facturer-declarer") return <InvoiceGame />;
+  if (lessonId === "fp-banque-arnaques") return <BankFraudGame />;
+  if (lessonId === "fp-assurances") return <InsuranceGame />;
+  if (lessonId === "ia-donnees-confidentialite") return <AiDataGame />;
+  if (lessonId === "ia-cas-usage") return <AiUseCaseGame />;
+  if (lessonId === "ia-cadre-legal") return <AiActGame />;
   return null;
 }
 

@@ -88,3 +88,19 @@ export function trackLayout(ids: readonly string[]) {
     y: n <= 5 ? 50 : index % 2 ? 76 : 24,
   }));
 }
+
+/**
+ * A readable slice of a long track: at most `size` notions, starting two
+ * before the focused one, so the next step always shows with some context.
+ */
+export function trackWindow(
+  ids: readonly string[],
+  focusId: string | undefined,
+  size = 7,
+) {
+  const total = ids.length;
+  if (total <= size) return { ids: [...ids], start: 0, total };
+  const focus = Math.max(0, focusId ? ids.indexOf(focusId) : 0);
+  const start = Math.min(Math.max(0, focus - 2), total - size);
+  return { ids: ids.slice(start, start + size), start, total };
+}

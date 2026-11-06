@@ -672,3 +672,35 @@ test("bilan à l’équilibre, tri des arnaques et lexique repliable", async ({
   }
   await noHorizontalOverflow(page);
 });
+
+test("chaque leçon a sa scène : prix TTC, fiscalité des placements, assurances", async ({
+  page,
+}) => {
+  await onboard(page);
+  await page.goto("/#lesson/ent-fixer-prix");
+  const pricing = page.getByRole("region", {
+    name: "Construire un prix du coût de revient au prix TTC",
+  });
+  // 60 € of cost with 40 % margin on the price: 100 € HT, 120 € TTC.
+  await expect(pricing.locator(".scene-number")).toHaveText(/120,00\s€/);
+  await pricing.getByRole("button", { name: "Franchise en base" }).click();
+  await expect(pricing.locator(".scene-number")).toHaveText(/100,00\s€/);
+  await expect(pricing).toContainText("293 B du CGI");
+
+  await page.goto("/#lesson/inv-fiscalite-placements");
+  const tax = page.getByRole("region", {
+    name: "Comparer un gain après impôt selon l’enveloppe",
+  });
+  await expect(tax.locator(".scene-number")).toHaveText(/1\s280\s€/);
+
+  await page.goto("/#lesson/fp-assurances");
+  const insurance = page.getByRole("region", {
+    name: "Distinguer les assurances obligatoires des facultatives",
+  });
+  await insurance
+    .getByRole("group", { name: /locataire/ })
+    .getByRole("button", { name: "Obligatoire" })
+    .click();
+  await expect(insurance).toContainText("Bien vu.");
+  await noHorizontalOverflow(page);
+});

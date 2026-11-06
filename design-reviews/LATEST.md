@@ -1,3 +1,18 @@
+# Review design — passe 29 : une scène dans chaque leçon
+
+**6 novembre 2026, 11:49 Europe/Paris.** Détail : [AUDIT-29.md](AUDIT-29.md). **La direction artistique n'est pas déclarée validée.**
+
+- **43 leçons sur 43 ont une scène interactive**, contre 11 avant la passe 26. Cette passe en ajoute 22 : 13 à curseurs (moteurs testés) et 9 jeux de tri.
+- **Trajectoire de l'accueil** : une fenêtre de 7 notions autour de la prochaine quand un domaine en compte plus.
+- **Contrôles** : `npm test` 238 cas, `npx playwright test` 84 tests (les 43 scènes ouvertes sans erreur ni débordement), build sans avertissement.
+- **Captures** : `simulateurs-29/` (desktop 1440 × 1000, Pixel 7) ; archive `2026-11-06_11-49-24-Europe-Paris`.
+- **Limites** :
+  - lexique mobile encore long ;
+  - fiscalité 2026 « à vérifier » ;
+  - aucun test sur appareil réel.
+
+---
+
 # Review design — passe 28 : cinq simulateurs de plus, lexique repliable
 
 **6 novembre 2026, 10:59 Europe/Paris.** Détail : [AUDIT-28.md](AUDIT-28.md). **La direction artistique n'est pas déclarée validée.**
