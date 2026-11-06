@@ -30,6 +30,7 @@ import {
   searchExcerpt,
 } from "./lib/domain";
 import { Icon } from "./components/Icon";
+import { BrandLogo } from "./components/BrandLogo";
 import { Dashboard } from "./components/Dashboard";
 import { Onboarding } from "./components/Onboarding";
 import { latestCurrentAttempt } from "./lib/portfolio";
@@ -425,11 +426,9 @@ function App() {
           <Icon name="close" size={18} />
         </button>
         <a className="brand" href="#home" onClick={() => setMobileOpen(false)}>
-          <span className="brand-mark">
-            b<span className="brand-dot">.</span>
-          </span>
+          <BrandLogo />
           <span>
-            BOUSE<small>ACADÉMIE BUSINESS & IA</small>
+            BOUSE<small>Apprendre · Comprendre · Agir</small>
           </span>
         </a>
         <button
@@ -556,13 +555,26 @@ function App() {
                   : "Données locales"}
             </span>
             <button
-              className="icon-button"
+              className="icon-button topbar-search"
               aria-label="Ouvrir la recherche"
               aria-keyshortcuts="Control+K Meta+K"
               onClick={openSearch}
             >
               <Icon name="search" size={18} />
+              {/* Drawn by CSS so the accessible name stays « Ouvrir la recherche ». */}
+              <span
+                className="topbar-search-hint"
+                data-hint="Rechercher une leçon, un outil, un terme…"
+              />
+              <span className="topbar-search-key" data-hint="⌘ K" />
             </button>
+            <a
+              href="#settings"
+              className="topbar-avatar"
+              aria-label="Profil et paramètres"
+            >
+              {state.profile.name.slice(0, 1).toUpperCase()}
+            </a>
           </div>
         </header>
         <main

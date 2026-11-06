@@ -196,3 +196,15 @@ Garde-fous :
 - l’information ne dépend jamais de la teinte : valeur écrite, libellé ou forme l’accompagnent.
 
 Les images conceptuelles 03 et 04 du brief sont des explorations, pas des spécifications. Détail et comparaisons avant/après : `design-reviews/AUDIT-31.md` et `design-reviews/accents-31/`. La direction artistique attend la review externe.
+
+## Passe 32 — planche 03 : accueil en tableau de bord, graphiques premium
+
+L’utilisateur a retenu la planche 03 (« Pack review V2 ») pour la couleur, les courbes et graphiques, et le logo. Cette passe **remplace la règle d’accent de la passe 31** :
+
+- **Accents** : violet `#A78BFA` (progression, série manipulée, étape en cours), bleu `#6BA6F2` (données, révisions), émeraude `#3FCB9B` (réussite). Les anneaux passent du violet au bleu ; les courbes principales sont violettes avec une lueur, l’aire sous la courbe en dégradé violet ; références en gris.
+- **Marque** : « B » argenté en rubans (`BrandLogo`) et « BOUSE » en capitales espacées dans une barre latérale large (248 px au-delà de 1100 px, rail en dessous, dock sur mobile).
+- **En-tête** : champ de recherche et avatar.
+- **Accueil** : salutation (« Bienvenue » au premier passage, « Bon retour » ensuite), carte de la leçon avec **la vague d’origine**, raison, plan de séance et barre de parcours ; carte « Ma progression » (anneau) ; quatre tuiles (compétences, simulations, révisions, projets) ; « Mon parcours » en étapes (parcours suivi, sinon les cinq domaines) ; « Mon activité (7 jours) ». Les sections existantes (objectifs, domaines, trajectoire) restent dessous.
+- **Garde-fous** : surfaces noires et argent, aucun bouton ni fond de carte coloré ; ne pas retirer un élément existant sans demande.
+
+Détail : `design-reviews/AUDIT-32.md`. La direction artistique attend la review de l’utilisateur.

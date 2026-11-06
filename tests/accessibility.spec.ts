@@ -82,7 +82,9 @@ test("les écrans principaux conservent leurs noms accessibles et leurs contrast
   }, fixture);
   await page.reload();
   await expect(
-    page.getByRole("heading", { name: "À vous de jouer, Profil démo." }),
+    page.getByRole("heading", {
+      name: /^(Bienvenue|Bon retour), Profil démo !$/,
+    }),
   ).toBeVisible();
   for (const route of [
     "home",
@@ -202,9 +204,11 @@ test("les menus et la recherche ne superposent pas leurs pièges de focus", asyn
     await expect(page.getByRole("main")).toBeFocused();
     await expect(menu).toHaveCount(0);
   } else {
-    const trigger = page
-      .locator(".sidebar")
-      .getByRole("button", { name: /^Rechercher/ });
+    // Passe 32 : sur grand écran, la recherche est le champ de la barre du haut.
+    const trigger = page.getByRole("button", {
+      name: "Ouvrir la recherche",
+      exact: true,
+    });
     await trigger.focus();
     await trigger.press("Enter");
     await expect(search.getByRole("textbox")).toBeFocused();

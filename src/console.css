@@ -1,0 +1,838 @@
+/* ==========================================================================
+   Passe 32 — composition de la planche 03 retenue par l'utilisateur :
+   barre latérale large, en-tête avec recherche, tableau de bord dense
+   (parcours, progression, quatre chiffres, étapes, activité).
+   Chargé en dernier.
+   ========================================================================== */
+
+/* ---------- Marque ---------- */
+.brand-logo {
+  flex: 0 0 auto;
+  filter: drop-shadow(0 2px 6px rgb(0 0 0 / 0.6));
+}
+.sidebar .brand > span:last-child {
+  font-size: 17px;
+  letter-spacing: 0.32em;
+  font-weight: 500;
+}
+.sidebar .brand small {
+  letter-spacing: 0.06em;
+  text-transform: none;
+}
+
+/* ---------- En-tête : recherche et avatar ---------- */
+.topbar-search > span {
+  display: none;
+}
+.topbar-search-hint::after,
+.topbar-search-key::after {
+  content: attr(data-hint);
+}
+.topbar-avatar {
+  display: none;
+}
+
+/* ---------- Barre latérale large (desktop) ---------- */
+@media (min-width: 1101px) {
+  .sidebar {
+    width: 248px;
+    padding: 26px var(--space-4) 0;
+    background: linear-gradient(180deg, #0c0c0f, #08080a);
+    border-right: 1px solid rgb(255 255 255 / 0.05);
+  }
+  .sidebar .brand {
+    justify-content: flex-start;
+    gap: 12px;
+    padding: 0 10px;
+  }
+  .sidebar .brand > span:last-child {
+    display: block;
+  }
+  .sidebar .brand small {
+    display: none;
+  }
+  .sidebar .search-trigger {
+    display: none;
+  }
+  .sidebar nav {
+    margin-top: var(--space-8);
+    gap: 4px;
+  }
+  .sidebar .nav-link {
+    flex-direction: row;
+    justify-content: flex-start;
+    text-align: left;
+    gap: 12px;
+    min-height: 42px;
+    padding: 9px 14px;
+    border: 1px solid transparent;
+    border-radius: 12px;
+    font-size: var(--type-body-sm);
+    color: var(--text-secondary);
+  }
+  .sidebar .nav-link svg {
+    width: 18px;
+    height: 18px;
+    flex: 0 0 auto;
+  }
+  .sidebar .nav-label {
+    align-items: flex-start;
+  }
+  .sidebar .nav-link.active {
+    color: var(--text);
+    background: linear-gradient(
+      180deg,
+      rgb(255 255 255 / 0.07),
+      rgb(255 255 255 / 0.03)
+    );
+    border-color: rgb(167 139 250 / 0.38);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.06),
+      0 0 18px rgb(107 166 242 / 0.08);
+  }
+  .sidebar .nav-group {
+    margin: var(--space-3) 14px;
+  }
+  .sidebar .profile-link {
+    justify-content: flex-start;
+    gap: 12px;
+    padding: var(--space-4) 10px;
+  }
+  .sidebar .profile-meta {
+    display: block;
+  }
+  .workspace {
+    margin-left: 248px;
+  }
+  .topbar {
+    height: 76px;
+  }
+  /* The search becomes a real field, as on the reference. */
+  .topbar-search {
+    width: min(400px, 34vw);
+    height: 42px;
+    justify-content: flex-start;
+    gap: 10px;
+    padding: 0 14px;
+    border: 1px solid rgb(255 255 255 / 0.08);
+    border-radius: 12px;
+    background: rgb(255 255 255 / 0.03);
+    color: var(--text-tertiary);
+    font-size: var(--type-body-sm);
+  }
+  .topbar-search:hover {
+    border-color: rgb(255 255 255 / 0.16);
+    background: rgb(255 255 255 / 0.05);
+  }
+  .topbar-search > .topbar-search-hint {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .topbar-search > .topbar-search-key {
+    display: block;
+    margin-left: auto;
+    font-size: var(--type-caption);
+    padding: 2px 6px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+  }
+  .topbar-avatar {
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #3a3a42, #17171b);
+    border: 1px solid rgb(255 255 255 / 0.14);
+    color: var(--text);
+    font-weight: 600;
+    font-size: var(--type-body-sm);
+    text-decoration: none;
+  }
+}
+
+/* ---------- Accueil ---------- */
+.art-home .console-greeting {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: var(--space-6);
+  margin-bottom: var(--space-6);
+}
+.art-home .console-greeting h1 {
+  font-size: clamp(26px, 2.3vw, 32px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin: 0 0 6px;
+}
+.art-home .console-greeting p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--type-body-sm);
+}
+.art-home .console-greeting p strong {
+  color: var(--text);
+  font-weight: 500;
+}
+.art-home .console-greeting .home-last-step {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin: 10px 0 0;
+  font-size: var(--type-caption);
+  color: var(--text-tertiary);
+}
+.art-home .console-greeting .home-last-step > svg {
+  flex: 0 0 auto;
+  align-self: center;
+  color: var(--accent-emerald);
+}
+
+/* Card matter shared by every block of the console. */
+.console-hero,
+.console-progress,
+.console-tile,
+.console-path,
+.console-activity {
+  position: relative;
+  background:
+    radial-gradient(
+      120% 80% at 80% 0%,
+      rgb(255 255 255 / 0.045),
+      transparent 60%
+    ),
+    linear-gradient(180deg, #141418, #0d0d10);
+  border: 1px solid rgb(255 255 255 / 0.075);
+  border-radius: 18px;
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.06),
+    0 18px 40px rgb(0 0 0 / 0.45);
+}
+
+.console-top {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 280px;
+  gap: 18px;
+}
+.console-hero {
+  min-height: 300px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+.console-hero-art {
+  position: absolute;
+  inset: 0 0 0 auto;
+  width: 74%;
+  pointer-events: none;
+}
+.console-hero-art .terrain-artwork {
+  width: 100%;
+  height: 100%;
+  mask-image: linear-gradient(90deg, transparent 0, #000 30%);
+}
+.console-hero-content {
+  position: relative;
+  max-width: min(520px, 58%);
+  padding: 30px 32px;
+}
+.console-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 11px;
+  border-radius: 999px;
+  font-size: var(--type-caption);
+  color: #ddd5ff;
+  background: var(--accent-violet-wash);
+  border: 1px solid rgb(167 139 250 / 0.35);
+}
+.console-badge svg {
+  color: var(--accent-violet);
+  fill: currentColor;
+}
+.console-hero-meta {
+  margin: 16px 0 4px;
+  font-size: var(--type-caption);
+  color: var(--text-tertiary);
+}
+.console-hero h2 {
+  margin: 0 0 10px;
+  font-size: clamp(24px, 2.2vw, 30px);
+  line-height: 1.12;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+.console-hero-summary {
+  margin: 0 0 10px;
+  color: var(--text-secondary);
+  font-size: var(--type-body-sm);
+  line-height: 1.55;
+}
+.console-hero .learning-hero-reason {
+  display: flex;
+  gap: 8px;
+  margin: 0 0 20px;
+  font-size: var(--type-caption);
+  color: var(--text-tertiary);
+  line-height: 1.5;
+}
+.console-hero .learning-hero-reason strong {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+.console-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+.console-play {
+  border-radius: 999px;
+  gap: 8px;
+  padding-inline: 18px 20px;
+}
+.console-play svg {
+  fill: currentColor;
+}
+.console-play small {
+  font-weight: 400;
+  opacity: 0.7;
+}
+.console-reviews {
+  border-radius: 999px;
+}
+
+.console-progress {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 24px;
+  color: var(--text);
+  cursor: pointer;
+  text-align: center;
+  transition:
+    border-color var(--motion-normal) var(--ease-out),
+    background var(--motion-normal) var(--ease-out);
+}
+.console-progress:hover,
+.console-tile:hover {
+  border-color: rgb(255 255 255 / 0.16);
+}
+.console-progress .progress-ring-label {
+  font-size: 24px;
+  font-weight: 600;
+}
+.console-progress .progress-ring {
+  filter: drop-shadow(0 0 14px rgb(167 139 250 / 0.28));
+}
+.console-progress-text {
+  display: grid;
+  gap: 4px;
+}
+.console-progress-text strong {
+  font-size: var(--type-body);
+  font-weight: 500;
+}
+.console-progress-text small {
+  color: var(--text-tertiary);
+  font-size: var(--type-caption);
+}
+.console-progress > svg {
+  position: absolute;
+  right: 18px;
+  bottom: 22px;
+  color: var(--text-tertiary);
+}
+
+/* Tones used by rings and tiles: violet, blue, emerald, neutral. */
+.progress-ring.tone-violet .progress-ring-value {
+  stroke: var(--accent-violet);
+}
+.progress-ring.tone-blue .progress-ring-value {
+  stroke: var(--accent-blue);
+}
+.progress-ring.tone-emerald .progress-ring-value {
+  stroke: var(--accent-emerald);
+}
+.progress-ring-value {
+  stroke-linecap: round;
+}
+
+.console-tiles {
+  list-style: none;
+  margin: 18px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+.console-tile {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px 20px;
+  border-radius: 14px;
+  color: var(--text);
+  text-align: left;
+  cursor: pointer;
+  transition: border-color var(--motion-normal) var(--ease-out);
+}
+.console-tile-text {
+  display: grid;
+  gap: 6px;
+}
+.console-tile-text small {
+  font-size: var(--type-caption);
+  color: var(--text-secondary);
+}
+.console-tile-text strong {
+  font-size: 22px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.console-tile-text strong span {
+  font-size: var(--type-caption);
+  font-weight: 400;
+  color: var(--text-tertiary);
+}
+.console-tile-icon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgb(255 255 255 / 0.04);
+  border: 1px solid rgb(255 255 255 / 0.06);
+  color: var(--text-secondary);
+}
+.console-tile.tone-violet .console-tile-icon {
+  color: var(--accent-violet);
+  background: var(--accent-violet-wash);
+}
+.console-tile.tone-blue .console-tile-icon {
+  color: var(--accent-blue);
+  background: var(--accent-blue-wash);
+}
+.console-tile.tone-emerald .console-tile-icon {
+  color: var(--accent-emerald);
+  background: var(--accent-emerald-wash);
+}
+
+.console-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr);
+  gap: 18px;
+  margin-top: 18px;
+}
+.console-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-4);
+}
+.console-card-head h2 {
+  margin: 0;
+  font-size: var(--type-body);
+  font-weight: 600;
+}
+.console-card-head h2 small {
+  font-weight: 400;
+  color: var(--text-tertiary);
+  font-size: var(--type-caption);
+}
+.console-card-head .text-button {
+  font-size: var(--type-caption);
+  color: var(--text-secondary);
+  gap: 6px;
+}
+.console-path,
+.console-activity {
+  padding: 22px 24px;
+}
+
+.console-steps {
+  list-style: none;
+  margin: 26px 0 4px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  position: relative;
+}
+/* The thread that links the steps. */
+.console-steps::before {
+  content: "";
+  position: absolute;
+  top: 20px;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    rgb(63 203 155 / 0.4),
+    rgb(167 139 250 / 0.45) 30%,
+    rgb(255 255 255 / 0.1) 50%
+  );
+}
+.console-step button {
+  position: relative;
+  width: 100%;
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  padding: 0 4px;
+  background: none;
+  border: 0;
+  color: var(--text);
+  cursor: pointer;
+  text-align: center;
+}
+.console-step-mark {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  margin-bottom: 6px;
+  border-radius: 50%;
+  background: #121216;
+  border: 1px solid rgb(255 255 255 / 0.12);
+  color: var(--text-tertiary);
+}
+.console-step strong {
+  font-size: var(--type-caption);
+  font-weight: 500;
+}
+.console-step small {
+  font-size: 11px;
+  color: var(--text-tertiary);
+}
+.console-step.is-done .console-step-mark {
+  color: var(--accent-emerald);
+  border-color: rgb(63 203 155 / 0.55);
+  background: radial-gradient(circle, rgb(63 203 155 / 0.18), #101413 70%);
+}
+.console-step.is-current .console-step-mark {
+  color: #fff;
+  border-color: var(--accent-violet);
+  background: radial-gradient(circle, rgb(167 139 250 / 0.55), #2a2140 75%);
+  box-shadow:
+    0 0 0 5px rgb(167 139 250 / 0.12),
+    var(--accent-violet-glow);
+}
+.console-step.is-current .console-step-mark svg {
+  fill: currentColor;
+}
+.console-step.is-current small {
+  color: #cfc3ff;
+}
+.console-step button:hover .console-step-mark {
+  border-color: rgb(255 255 255 / 0.3);
+}
+
+.console-activity {
+  display: flex;
+  flex-direction: column;
+}
+.console-activity-count {
+  font-size: var(--type-caption);
+  color: var(--text-secondary);
+}
+.console-activity svg {
+  width: 100%;
+  height: auto;
+  margin-top: 14px;
+  overflow: visible;
+}
+.console-activity svg text {
+  fill: var(--text-tertiary);
+  font-size: 10px;
+}
+.console-activity .home-activity-line {
+  fill: none;
+  stroke: var(--accent-violet);
+  stroke-width: 2;
+  filter: drop-shadow(0 0 6px rgb(167 139 250 / 0.55));
+}
+.console-activity .home-activity-base {
+  stroke: rgb(255 255 255 / 0.08);
+}
+.console-activity .home-activity-dot {
+  fill: #fff;
+  stroke: var(--accent-violet);
+  stroke-width: 2;
+  filter: drop-shadow(0 0 6px rgb(167 139 250 / 0.8));
+}
+.console-activity p {
+  margin: auto 0 0;
+  padding-top: 8px;
+  font-size: var(--type-caption);
+  color: var(--text-tertiary);
+}
+
+/* The rest of the home keeps its blocks, at the console rhythm. */
+.art-home .home-objectives {
+  margin-top: var(--space-10);
+}
+
+/* ---------- Tablette ---------- */
+@media (max-width: 1100px) {
+  .console-top {
+    grid-template-columns: minmax(0, 1fr) 220px;
+  }
+  .console-tiles {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .console-row {
+    grid-template-columns: 1fr;
+  }
+  .art-home .console-greeting {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 700px) {
+  .art-home .console-greeting {
+    margin-bottom: var(--space-4);
+    gap: var(--space-2);
+  }
+  .art-home .console-greeting h1 {
+    font-size: 24px;
+  }
+  .console-top {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .console-hero {
+    min-height: 0;
+    align-items: flex-end;
+    border-radius: 16px;
+  }
+  .console-hero-art {
+    width: 100%;
+    height: 210px;
+    inset: 0 0 auto 0;
+  }
+  .console-hero-art .terrain-artwork {
+    mask-image: linear-gradient(180deg, #000 45%, transparent 100%);
+  }
+  .console-hero-content {
+    max-width: none;
+    padding: 150px 20px 20px;
+  }
+  .console-hero h2 {
+    font-size: 22px;
+  }
+  .console-hero-summary {
+    display: none;
+  }
+  .console-play {
+    flex: 1 1 100%;
+    justify-content: center;
+  }
+  .console-reviews {
+    flex: 1 1 100%;
+  }
+  .console-progress {
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 16px;
+    padding: 14px 18px;
+    text-align: left;
+    border-radius: 14px;
+  }
+  .console-progress .progress-ring {
+    width: 60px !important;
+    height: 60px !important;
+  }
+  .console-progress .progress-ring svg {
+    width: 60px;
+    height: 60px;
+  }
+  .console-progress .progress-ring-label {
+    font-size: 14px;
+  }
+  .console-progress > svg {
+    position: static;
+    margin-left: auto;
+  }
+  .console-tiles {
+    margin-top: 12px;
+    gap: 12px;
+  }
+  .console-tile {
+    padding: 14px;
+  }
+  .console-tile-icon {
+    width: 36px;
+    height: 36px;
+  }
+  .console-tile-text strong {
+    font-size: 19px;
+  }
+  .console-row {
+    margin-top: 12px;
+    gap: 12px;
+  }
+  .console-path,
+  .console-activity {
+    padding: 18px;
+  }
+  .console-steps {
+    margin-top: 20px;
+  }
+  .console-step-mark {
+    width: 34px;
+    height: 34px;
+  }
+  .console-steps::before {
+    top: 17px;
+  }
+  .console-step small {
+    display: none;
+  }
+}
+
+/* Éléments d'origine conservés dans la carte principale. */
+.console-coordinate {
+  position: absolute;
+  top: 28px;
+  right: 30px;
+  z-index: 1;
+  font-family: var(--font-mono);
+  font-size: var(--type-micro);
+  letter-spacing: 0.18em;
+  color: var(--text-tertiary);
+}
+.console-hero-progress {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 26px;
+  max-width: 460px;
+}
+.console-hero-progress .home-progress-label {
+  font-size: var(--type-caption);
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+.console-hero-progress .progress-bar {
+  flex: 1;
+}
+.console-hero-progress .home-progress-value {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  white-space: nowrap;
+}
+.console-hero-progress .home-progress-value small {
+  font-size: var(--type-caption);
+  color: var(--text-tertiary);
+}
+@media (max-width: 700px) {
+  .console-coordinate {
+    display: none;
+  }
+  .console-hero-progress {
+    flex-wrap: wrap;
+    gap: 8px 12px;
+  }
+}
+
+/* ==========================================================================
+   Courbes, graphiques et progressions premium (planche 03) : la série que
+   l'on manipule est violette et lumineuse, les références restent grises,
+   la progression passe du violet au bleu.
+   ========================================================================== */
+.progress-bar {
+  background: rgb(255 255 255 / 0.07);
+  border-radius: 999px;
+  overflow: visible;
+}
+.progress-bar > i {
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    var(--accent-violet),
+    var(--accent-blue)
+  ) !important;
+  box-shadow: 0 0 12px rgb(167 139 250 / 0.45);
+}
+.progress-ring-track {
+  stroke: rgb(255 255 255 / 0.07);
+}
+
+/* Main series: violet line with a soft glow. */
+.plot-revenue,
+.simulation-scenario-path,
+.scene-revenue-curve,
+.scene-line-focus {
+  stroke: var(--accent-violet) !important;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 5px rgb(167 139 250 / 0.55));
+}
+.simulation-scenario-path {
+  stroke-width: 1.4;
+}
+/* References stay quiet. */
+.plot-cost,
+.scene-cost-curve,
+.scene-line-dim,
+.simulation-reference-path {
+  stroke: rgb(255 255 255 / 0.38);
+}
+/* Points read as lights on the curve. */
+.scene-workbench svg .scene-point-focus,
+.plot-current circle {
+  fill: #fff;
+  stroke: var(--accent-violet);
+  stroke-width: 2.5;
+  filter: drop-shadow(0 0 6px rgb(167 139 250 / 0.85));
+}
+.simulation-chart-point {
+  background: #fff !important;
+  box-shadow:
+    0 0 0 3px var(--accent-violet),
+    0 0 14px rgb(167 139 250 / 0.8) !important;
+}
+.plot-threshold circle {
+  fill: var(--accent-blue);
+  stroke: #fff;
+  filter: drop-shadow(0 0 6px rgb(107 166 242 / 0.8));
+}
+/* Bars: the bar in focus is violet, the compared one blue. */
+.scene-bar-focus {
+  fill: var(--accent-violet);
+  filter: drop-shadow(0 0 6px rgb(167 139 250 / 0.4));
+}
+.scene-bar-silver {
+  fill: var(--accent-blue) !important;
+}
+.scene-compare-track i.is-silver {
+  background: linear-gradient(
+    90deg,
+    var(--accent-violet),
+    var(--accent-blue)
+  ) !important;
+  box-shadow: 0 0 10px rgb(167 139 250 / 0.4);
+}
+.simulation-legend i:not(.reference) {
+  background: var(--accent-violet);
+  box-shadow: 0 0 6px rgb(167 139 250 / 0.7);
+}
+/* Domain and skill rings take the gradient and a faint halo. */
+.home-domain .progress-ring,
+.skills-summary-card .progress-ring,
+.academy-domain .progress-ring {
+  filter: drop-shadow(0 0 8px rgb(167 139 250 / 0.22));
+}

@@ -1,3 +1,21 @@
+# Review design — passe 32 : planche 03, accueil en tableau de bord, graphiques premium
+
+**6 novembre 2026, 15:35 Europe/Paris.** Détail : [AUDIT-32.md](AUDIT-32.md). **La direction artistique n'est pas déclarée validée.**
+
+- Suite au retour de l'utilisateur (planche 03 préférée, garder la vague et l'existant, travailler couleurs et graphiques) :
+  - barre latérale large avec le « B » argenté ;
+  - recherche dans l'en-tête ;
+  - accueil en tableau de bord : leçon avec la vague, anneau de progression, 4 tuiles, « Mon parcours », activité.
+- Courbes et graphiques en violet lumineux, aires en dégradé, progressions violet → bleu, réussite en émeraude.
+- **Contrôles de l'agent** : `npm test` 245 cas, `npx playwright test` 86 tests, Prettier, build sans avertissement.
+- **Captures** :
+  - paire principale = accueil (`00-home-viewport`) ;
+  - avant/après dans `console-32/` ;
+  - archive `2026-11-06_15-35-30-Europe-Paris`.
+- **Limites** : composition de la leçon inchangée (couleurs seulement) ; curseurs argent.
+
+---
+
 # Review design — passe 31 : accents colorés subtils (brief V3.2)
 
 **6 novembre 2026, 15:11 Europe/Paris.** Détail : [AUDIT-31.md](AUDIT-31.md). **La direction artistique n'est pas déclarée validée ; la rétention n'est pas mesurée.**

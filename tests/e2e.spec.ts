@@ -64,7 +64,7 @@ async function onboard(page: Page) {
   ).toBeVisible();
   await page.getByRole("button", { name: "Entrer dans l’Académie" }).click();
   await expect(
-    page.getByRole("heading", { name: "À vous de jouer, Camille." }),
+    page.getByRole("heading", { name: /^(Bienvenue|Bon retour), Camille !$/ }),
   ).toBeVisible();
   await expect.poll(() => page.evaluate(() => scrollY)).toBe(0);
   await noHorizontalOverflow(page);
@@ -530,7 +530,7 @@ test("deux leçons de suite : question de départ, acquis, suite et retour serei
   });
   await page.goto("/#home");
   await expect(
-    page.getByRole("heading", { name: "À vous de jouer.", exact: true }),
+    page.getByRole("heading", { name: "Bienvenue !", exact: true }),
   ).toBeVisible();
   const pass = async (id: string) => {
     const lesson = lessons.find((item) => item.id === id)!;
@@ -563,7 +563,7 @@ test("deux leçons de suite : question de départ, acquis, suite et retour serei
       await expect(gained).toContainText(skill);
   };
   await page
-    .getByRole("button", { name: "Ouvrir la leçon", exact: true })
+    .getByRole("button", { name: /^(Commencer|Continuer) la leçon/ })
     .click();
   await expect(page).toHaveURL(/#lesson\/ca-marge-tresorerie$/);
   await pass("ca-marge-tresorerie");

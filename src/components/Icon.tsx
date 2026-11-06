@@ -117,6 +117,15 @@ export function Icon({ name, size = 20 }: { name: string; size?: number }) {
         <circle cx="12" cy="12" r="1" />
       </>
     ),
+    bars: <path d="M5 20v-6M10 20V9M15 20v-8M20 20V4" />,
+    layers: <path d="m12 3 9 5-9 5-9-5zM3 13l9 5 9-5M3 17.5l9 5 9-5" />,
+    calendar: (
+      <>
+        <rect x="3.5" y="5" width="17" height="15.5" rx="2.5" />
+        <path d="M8 3v4M16 3v4M3.5 10h17M8 14h2M14 14h2M8 17h2" />
+      </>
+    ),
+    chevron: <path d="m9 5 7 7-7 7" />,
     play: <path d="M8 5.5v13l10-6.5z" />,
   };
   return (

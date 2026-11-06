@@ -1,20 +1,21 @@
 import { useState, type CSSProperties } from "react";
 import { lessons, type Lesson } from "../data/lessons";
-import type { AppState, Attempt } from "../lib/types";
+import type { AppState } from "../lib/types";
 import {
   practiceFor,
   recommendLesson,
   sessionPlan,
 } from "../lib/recommendation";
 import { domains } from "../data/domains";
+import { goalPathById } from "../data/goalPaths";
 import { domainIdentity } from "../lib/domainIdentity";
 import { ProgressBar, ProgressRing } from "./ProgressRing";
 import { byDomain, trackLayout, trackWindow } from "../lib/mapLayout";
 import { Icon } from "./Icon";
 import { lessonShortLabel } from "../data/lessonLabels";
-import { Terrain } from "./Terrain";
 import { buildReviewDeck, dueReviewCards } from "../lib/reviews";
 import { useClock } from "../lib/useClock";
+import { Terrain } from "./Terrain";
 
 type Props = { state: AppState; onNavigate: (route: string) => void };
 
@@ -138,18 +139,84 @@ export function Dashboard({ state, onNavigate }: Props) {
     );
   };
 
+  const activePath = goalPathById(state.activePathId);
+  // « Mon parcours » : the followed goal path, else the five domains in order.
+  const pathSteps = activePath
+    ? (() => {
+        const ids = activePath.lessonIds;
+        const at = Math.max(0, ids.indexOf(current.id));
+        const from = Math.max(0, Math.min(at - 1, ids.length - 5));
+        return ids.slice(from, from + 5).flatMap((id) => {
+          const lesson = lessons.find((item) => item.id === id);
+          if (!lesson) return [];
+          const status: "done" | "current" | "next" = done.has(id)
+            ? "done"
+            : id === current.id
+              ? "current"
+              : "next";
+          return [
+            {
+              id,
+              lesson,
+              label: lessonShortLabel(lesson.id, lesson.title),
+              icon: domainIdentity[lesson.domain].icon,
+              status,
+              statusLabel:
+                status === "done"
+                  ? "Validée"
+                  : status === "current"
+                    ? "En cours"
+                    : "À venir",
+            },
+          ];
+        });
+      })()
+    : domains.map((domain) => {
+        const inDomain = lessons.filter((lesson) => lesson.domain === domain);
+        const validated = inDomain.filter((lesson) => done.has(lesson.id));
+        const status: "done" | "current" | "next" =
+          validated.length === inDomain.length
+            ? "done"
+            : domain === current.domain
+              ? "current"
+              : "next";
+        return {
+          id: domain,
+          lesson: domain === current.domain ? current : nextFor(domain),
+          label: domainIdentity[domain].short,
+          icon: domainIdentity[domain].icon,
+          status,
+          statusLabel:
+            status === "done"
+              ? "Terminé"
+              : status === "current"
+                ? "En cours"
+                : validated.length
+                  ? `${validated.length} / ${inDomain.length}`
+                  : "À venir",
+        };
+      });
+
   return (
     <div className="learning-home art-home">
-      <header className="learning-greeting">
+      <header className="console-greeting">
         <div>
-          <p className="home-dateline">
-            Votre atelier personnel <span>/</span> {date}
-          </p>
           <h1>
-            {greetingName
-              ? `À vous de jouer, ${greetingName}.`
-              : "À vous de jouer."}
+            {`${state.attempts.length || state.lastLessonId ? "Bon retour" : "Bienvenue"}${greetingName ? `, ${greetingName}` : ""}\u00a0!`}
           </h1>
+          <p>
+            {activePath ? (
+              <>
+                Vous progressez vers votre objectif{"\u00a0"}:{" "}
+                <strong>{activePath.title}</strong>.
+              </>
+            ) : (
+              <>
+                {date.charAt(0).toUpperCase() + date.slice(1)} ·{" "}
+                {state.profile?.minutes || 20} min pour faire un pas.
+              </>
+            )}
+          </p>
           {lastValidated && !reason.startsWith("Elle prolonge") && (
             <p className="home-last-step">
               <Icon name="check" size={14} />
@@ -167,110 +234,175 @@ export function Dashboard({ state, onNavigate }: Props) {
             </p>
           )}
         </div>
-        <span className="learning-session">
-          <Icon name="clock" size={15} />
-          <span>
-            {state.profile?.minutes || 20} min <small>pour faire un pas</small>
-          </span>
-        </span>
       </header>
 
       <div className="learning-stage">
-        <section
-          className="hero-card learning-hero"
-          aria-labelledby="current-lesson-title"
-        >
-          <div className="hero-visual learning-matter" aria-hidden="true">
-            <Terrain />
-          </div>
-          <div className="learning-hero-top">
-            <span className="scene-label">
-              {resumed
-                ? "Reprendre le fil"
-                : state.attempts.length || state.lastLessonId
-                  ? "Votre prochaine leçon"
-                  : "Commencer la traversée"}
-            </span>
-            <span className="learning-coordinate">
+        <div className="console-top">
+          <section
+            className="console-hero"
+            aria-labelledby="current-lesson-title"
+          >
+            <div className="console-hero-art" aria-hidden="true">
+              <Terrain />
+            </div>
+            <span className="learning-coordinate console-coordinate">
               BOUSE / {current.domain.toUpperCase()}
             </span>
-          </div>
-          <div className="hero-main learning-hero-content">
-            <span className="tag">
-              {current.domain} <span>·</span> Leçon{" "}
-              {String(currentIndex).padStart(2, "0")}
-            </span>
-            <h2 id="current-lesson-title">{current.title}</h2>
-            <p>{current.summary}</p>
-            <p className="learning-hero-reason">
-              <Icon name="node" size={14} />
-              <span>
-                <strong>Pourquoi celle-ci ?</strong> {reason}
+            <div className="console-hero-content">
+              <span className="console-badge">
+                <Icon name="play" size={12} />
+                {resumed
+                  ? "Reprendre le fil"
+                  : state.attempts.length || state.lastLessonId
+                    ? "Continuer ma progression"
+                    : "Commencer la traversée"}
               </span>
-            </p>
-            <p className="learning-hero-reason">
-              <Icon name="clock" size={14} />
-              <span>
-                {sessionPlan(
-                  state.profile?.minutes || 20,
-                  current,
-                  due.length,
-                  current.sections.length + 3,
-                  state.lessonPositions?.[current.id] ?? 0,
-                )}
-              </span>
-            </p>
-            <div className="learning-hero-actions">
-              <button
-                className="button primary"
-                onClick={() => openLesson(current)}
-              >
-                {done.size === lessons.length
-                  ? "Revoir la leçon"
-                  : "Ouvrir la leçon"}
-                <Icon name="arrow" size={17} />
-              </button>
-              <span>
-                {current.minutes} min<small>pour faire un pas</small>
-              </span>
-              {due.length > 0 && (
+              <p className="console-hero-meta">
+                {current.domain} · Leçon {String(currentIndex).padStart(2, "0")}
+              </p>
+              <h2 id="current-lesson-title">{current.title}</h2>
+              <p className="console-hero-summary">{current.summary}</p>
+              <p className="learning-hero-reason">
+                <Icon name="node" size={14} />
+                <span>
+                  <strong>Pourquoi celle-ci ?</strong> {reason}
+                </span>
+              </p>
+              <p className="learning-hero-reason">
+                <Icon name="clock" size={14} />
+                <span>
+                  {sessionPlan(
+                    state.profile?.minutes || 20,
+                    current,
+                    due.length,
+                    current.sections.length + 3,
+                    state.lessonPositions?.[current.id] ?? 0,
+                  )}
+                </span>
+              </p>
+              <div className="console-hero-actions">
                 <button
-                  className="text-button learning-hero-reviews"
-                  onClick={() => onNavigate("reviews")}
+                  className="button primary console-play"
+                  onClick={() => openLesson(current)}
                 >
-                  {due.length} rappel{due.length > 1 ? "s" : ""} prêt
-                  {due.length > 1 ? "s" : ""} avant de continuer
-                  <Icon name="arrow" size={15} />
+                  <Icon name="play" size={14} />
+                  {done.size === lessons.length
+                    ? "Revoir la leçon"
+                    : state.lessonPositions?.[current.id] ||
+                        latest.has(current.id)
+                      ? "Continuer la leçon"
+                      : "Commencer la leçon"}
+                  <small>· {current.minutes} min</small>
                 </button>
-              )}
+                {due.length > 0 && (
+                  <button
+                    className="button secondary console-reviews"
+                    onClick={() => onNavigate("reviews")}
+                  >
+                    {due.length} rappel{due.length > 1 ? "s" : ""} prêt
+                    {due.length > 1 ? "s" : ""} avant de continuer
+                  </button>
+                )}
+              </div>
+              <div
+                className="home-progress console-hero-progress"
+                role="progressbar"
+                aria-label="Votre parcours"
+                aria-valuemin={0}
+                aria-valuemax={lessons.length}
+                aria-valuenow={done.size}
+                aria-valuetext={`${done.size} notions validées sur ${lessons.length}`}
+              >
+                <span className="home-progress-label">Votre parcours</span>
+                <ProgressBar value={done.size / lessons.length} />
+                <span className="home-progress-value">
+                  <strong>
+                    {percentDone}
+                    {"\u00a0"}%
+                  </strong>
+                  <small>
+                    {done.size} / {lessons.length} notions
+                  </small>
+                </span>
+              </div>
             </div>
-          </div>
-          <div className="home-scene-footer">
-            <div
-              className="home-progress"
-              role="progressbar"
-              aria-label="Votre parcours"
-              aria-valuemin={0}
-              aria-valuemax={lessons.length}
-              aria-valuenow={done.size}
-              aria-valuetext={`${done.size} notions validées sur ${lessons.length}`}
-            >
-              <span className="home-progress-label">Votre parcours</span>
-              <ProgressBar value={done.size / lessons.length} />
-              <span className="home-progress-value">
-                <strong>
-                  {percentDone}
-                  {"\u00a0"}%
-                </strong>
-                <small>
-                  {done.size} / {lessons.length} notions
-                </small>
-              </span>
-            </div>
-          </div>
-        </section>
+          </section>
 
-        <HomeStats state={state} done={done} now={now} />
+          <button
+            type="button"
+            className="console-progress"
+            onClick={() => onNavigate("skills")}
+          >
+            <ProgressRing
+              value={done.size / lessons.length}
+              size={112}
+              stroke={7}
+              tone="spectrum"
+              label={`${percentDone}\u00a0%`}
+            />
+            <span className="console-progress-text">
+              <strong>Ma progression</strong>
+              <small>
+                {done.size} / {lessons.length} leçons
+              </small>
+              <span className="sr-only">
+                {percentDone} %. Voir mes compétences.
+              </span>
+            </span>
+            <Icon name="chevron" size={16} />
+          </button>
+        </div>
+
+        <ConsoleTiles
+          state={state}
+          done={done}
+          due={due.length}
+          onNavigate={onNavigate}
+        />
+
+        <div className="console-row">
+          <section
+            className="console-path"
+            aria-labelledby="console-path-title"
+          >
+            <div className="console-card-head">
+              <h2 id="console-path-title">Mon parcours</h2>
+              <button
+                type="button"
+                className="text-button"
+                onClick={() => onNavigate("academy")}
+              >
+                Voir le plan complet <Icon name="arrow" size={14} />
+              </button>
+            </div>
+            <ol className="console-steps">
+              {pathSteps.map((step) => (
+                <li key={step.id} className={`console-step is-${step.status}`}>
+                  <button type="button" onClick={() => openLesson(step.lesson)}>
+                    <span className="console-step-mark" aria-hidden="true">
+                      <Icon
+                        name={
+                          step.status === "done"
+                            ? "check"
+                            : step.status === "current"
+                              ? "play"
+                              : step.icon
+                        }
+                        size={step.status === "current" ? 14 : 16}
+                      />
+                    </span>
+                    <strong>{step.label}</strong>
+                    <small>{step.statusLabel}</small>
+                    <span className="sr-only">
+                      . Ouvrir « {step.lesson.title} »
+                    </span>
+                  </button>
+                </li>
+              ))}
+            </ol>
+          </section>
+          <ActivityCard state={state} now={now} />
+        </div>
 
         <section className="home-objectives" aria-labelledby="objectives-title">
           <h2 id="objectives-title">Vos prochains objectifs</h2>
@@ -556,37 +688,91 @@ export function Dashboard({ state, onNavigate }: Props) {
   );
 }
 
-/**
- * Progress told as skills and real activity: what you can do now, and the
- * days you actually came back. Built only from recorded quizzes and reviews.
- */
-function HomeStats({
+/** Four figures to read at a glance, each one opening the space it counts. */
+function ConsoleTiles({
   state,
   done,
-  now,
+  due,
+  onNavigate,
 }: {
   state: AppState;
   done: Set<string>;
-  now: Date;
+  due: number;
+  onNavigate: (route: string) => void;
 }) {
-  const skillsTotal = lessons.reduce(
-    (sum, lesson) => sum + lesson.skills.length,
-    0,
-  );
   const skillsAcquired = lessons
     .filter((lesson) => done.has(lesson.id))
     .reduce((sum, lesson) => sum + lesson.skills.length, 0);
-  // The most recent passed quiz on a lesson still validated today.
-  const lastPassed = state.attempts
-    .filter((attempt) => attempt.passed && done.has(attempt.lessonId))
-    .reduce<Attempt | null>(
-      (latest, attempt) =>
-        !latest || attempt.at > latest.at ? attempt : latest,
-      null,
-    );
-  const lastSkill = lessons
-    .find((lesson) => lesson.id === lastPassed?.lessonId)
-    ?.skills.at(-1);
+  const saved = state.simulations?.length ?? 0;
+  const projects = state.projects.length;
+  const tiles = [
+    {
+      id: "skills",
+      label: "Compétences",
+      value: String(skillsAcquired),
+      unit: skillsAcquired > 1 ? "acquises" : "acquise",
+      icon: "bars",
+      tone: "violet",
+    },
+    {
+      id: "simulation",
+      label: "Simulations",
+      value: saved ? String(saved) : "2",
+      unit: saved
+        ? saved > 1
+          ? "enregistrées"
+          : "enregistrée"
+        : "instruments",
+      icon: "layers",
+      tone: "neutral",
+    },
+    {
+      id: "reviews",
+      label: "Révisions",
+      value: String(due),
+      unit: "à faire",
+      icon: "calendar",
+      tone: "blue",
+    },
+    {
+      id: "incubator",
+      label: "Projets",
+      value: String(projects),
+      unit: "en cours",
+      icon: "target",
+      tone: "emerald",
+    },
+  ];
+  return (
+    <ul className="console-tiles" aria-label="Vos chiffres">
+      {tiles.map((tile) => (
+        <li key={tile.id}>
+          <button
+            type="button"
+            className={`console-tile tone-${tile.tone}`}
+            onClick={() => onNavigate(tile.id)}
+          >
+            <span className="console-tile-text">
+              <small>{tile.label}</small>
+              <strong>
+                {tile.value} <span>{tile.unit}</span>
+              </strong>
+            </span>
+            <span className="console-tile-icon" aria-hidden="true">
+              <Icon name={tile.icon} size={22} />
+            </span>
+          </button>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+/**
+ * The days you actually came back over the last week, from recorded quizzes
+ * and reviews only. No streak to keep.
+ */
+function ActivityCard({ state, now }: { state: AppState; now: Date }) {
   // Calendar days in the learner's own time zone.
   const dayKey = (date: Date) =>
     `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
@@ -596,81 +782,78 @@ function HomeStats({
     day.setDate(day.getDate() - (6 - index));
     return day;
   });
-  const events = [
+  const eventDays = [
     ...state.attempts.map((attempt) => attempt.at),
     ...(state.reviewEvents ?? []).map((event) => event.at),
-  ];
-  const eventDays = events.map((at) => dayKey(new Date(at)));
+  ].map((at) => dayKey(new Date(at)));
   const counts = days.map(
     (day) => eventDays.filter((key) => key === dayKey(day)).length,
   );
   const activeDays = counts.filter(Boolean).length;
   const peak = Math.max(1, ...counts);
   const points = counts.map((count, index) => [
-    8 + index * (184 / 6),
-    56 - (count / peak) * 44,
+    10 + index * (280 / 6),
+    70 - (count / peak) * 54,
   ]);
+  // A smooth curve through the seven days.
   const line = points
-    .map(
-      ([x, y], index) =>
-        `${index ? "L" : "M"}${x!.toFixed(1)} ${y!.toFixed(1)}`,
-    )
+    .map(([x, y], index) => {
+      if (!index) return `M${x} ${y}`;
+      const [px, py] = points[index - 1]!;
+      const mid = (px! + x!) / 2;
+      return `C${mid} ${py} ${mid} ${y} ${x} ${y}`;
+    })
     .join(" ");
+  const last = points.findLastIndex((_, index) => counts[index]! > 0);
   const weekday = new Intl.DateTimeFormat("fr-FR", { weekday: "narrow" });
   return (
-    <section className="home-stats" aria-label="Vos progrès">
-      <div className="home-stat">
-        <ProgressRing
-          value={skillsAcquired / skillsTotal}
-          size={52}
-          label={`${Math.round((skillsAcquired / skillsTotal) * 100)}%`}
-        />
-        <div>
-          <small>Compétences acquises</small>
-          <strong>
-            {skillsAcquired} <span>/ {skillsTotal}</span>
-          </strong>
-          <em>
-            {lastSkill
-              ? `Dernière : ${lastSkill}`
-              : "La première arrive avec un quiz réussi."}
-          </em>
-        </div>
+    <section className="console-activity" aria-labelledby="activity-title">
+      <div className="console-card-head">
+        <h2 id="activity-title">
+          Mon activité <small>(7 jours)</small>
+        </h2>
+        <span className="console-activity-count">
+          {activeDays} jour{activeDays > 1 ? "s" : ""} actif
+          {activeDays > 1 ? "s" : ""}
+        </span>
       </div>
-      <div className="home-stat home-stat-activity">
-        <div>
-          <small>Activité sur 7 jours</small>
-          <strong>
-            {activeDays}{" "}
-            <span>
-              jour{activeDays > 1 ? "s" : ""} actif{activeDays > 1 ? "s" : ""}
-            </span>
-          </strong>
-          <em>Quiz et révisions enregistrés, sans série à tenir.</em>
-        </div>
-        <svg viewBox="0 0 200 72" aria-hidden="true">
-          {activeDays > 0 && (
-            <>
-              <path
-                className="home-activity-area"
-                d={`${line} L192 60 L8 60 Z`}
-              />
-              <path className="home-activity-line" d={line} />
-            </>
-          )}
-          <path className="home-activity-base" d="M8 60H192" />
-          {points.map(([x, y], index) => (
-            <g key={dayKey(days[index]!)}>
-              {counts[index]! > 0 && (
-                <circle cx={x} cy={y} r="2.6" className="home-activity-dot" />
-              )}
-              <text x={x} y="71" textAnchor="middle">
-                {weekday.format(days[index])}
-              </text>
-            </g>
-          ))}
-        </svg>
-      </div>
+      <svg viewBox="0 0 300 92" aria-hidden="true">
+        <defs>
+          <linearGradient id="activity-fill" x1="0" y1="0" x2="0" y2="1">
+            <stop
+              offset="0"
+              stopColor="var(--accent-violet)"
+              stopOpacity="0.32"
+            />
+            <stop offset="1" stopColor="var(--accent-violet)" stopOpacity="0" />
+          </linearGradient>
+        </defs>
+        <path className="home-activity-base" d="M10 72H290" />
+        {activeDays > 0 && (
+          <>
+            <path
+              className="home-activity-area"
+              d={`${line} L290 72 L10 72 Z`}
+              fill="url(#activity-fill)"
+            />
+            <path className="home-activity-line" d={line} />
+          </>
+        )}
+        {last >= 0 && (
+          <circle
+            cx={points[last]![0]}
+            cy={points[last]![1]}
+            r="4"
+            className="home-activity-dot"
+          />
+        )}
+        {points.map(([x], index) => (
+          <text key={dayKey(days[index]!)} x={x} y="88" textAnchor="middle">
+            {weekday.format(days[index])}
+          </text>
+        ))}
+      </svg>
+      <p>Quiz et révisions enregistrés, sans série à tenir.</p>
     </section>
   );
 }
