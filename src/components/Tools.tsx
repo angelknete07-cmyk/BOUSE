@@ -259,6 +259,23 @@ export function Incubator({
             Créez une fiche ou sauvegardez une idée depuis une leçon. Vos
             apprentissages pourront ensuite enrichir ce projet, étape par étape.
           </p>
+          <ol className="project-empty-steps">
+            <li>
+              <strong>Une hypothèse</strong>
+              <span>« Les artisans perdent du temps sur leurs devis. »</span>
+            </li>
+            <li>
+              <strong>Un premier test</strong>
+              <span>Cinq entretiens, une page, une offre à prix réel.</span>
+            </li>
+            <li>
+              <strong>Ce que vous avez appris</strong>
+              <span>Une décision : continuer, ajuster ou arrêter.</span>
+            </li>
+          </ol>
+          <button className="button primary" onClick={() => setFormOpen(true)}>
+            Commencer ma première fiche <Icon name="arrow" size={16} />
+          </button>
         </section>
       )}
       {state.projects.map((project) => (

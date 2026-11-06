@@ -160,3 +160,18 @@ Règles d'usage ajoutées, à garder pour tout nouvel écran :
 - **Un même mot pour un même concept** (passe 18) : une **notion** est le sujet d'une leçon ; une **carte** est un rappel de révision ; un **élément** est une partie d'une demande à l'IA ; un **point clé** est ce qu'une réponse doit contenir ; un **indice** aide pendant l'exercice. « Repère » ne garde que son sens courant.
 
 Détail : `design-reviews/AUDIT-17.md`.
+
+## Passe 26 — fusion des deux directions artistiques
+
+Brief V2 : garder l'identité de la référence 1 (noir profond, argent, sobriété) et reprendre de la référence 2 la profondeur, la richesse des cartes et la hiérarchie, **sans ses couleurs**. Les règles suivantes remplacent, pour les cartes, la règle « rayons de 3, 5 et 8 px » des passes précédentes :
+
+- **Matière de carte** (`src/fusion.css`) : dégradé neutre du haut vers le bas, bord fin `--card-border`, lumière intérieure en haut, ombre profonde `--card-shadow`. Rayon de **14 px** pour une carte, **18 px** pour un grand panneau, **10 px** pour un contrôle.
+- **Survol** : la carte s'éclaire (fond, bord, ombre) ; elle ne se déplace jamais sous le pointeur (passe 23).
+- **Progression** : barres et anneaux argent (`ProgressBar`, `ProgressRing`). La valeur est toujours écrite en texte à côté ; le dessin reste décoratif pour les lecteurs d'écran.
+- **Icônes de domaine** dans un puits sombre de 42 px (`--icon-well`) : Finance `chart`, Entrepreneuriat `building`, IA `ai`, Finance personnelle `wallet`, Investissement `trend`. Les promesses de domaine sont dans `src/lib/domainIdentity.ts`.
+- **Relief** : le relief topographique de l'accueil peut habiter une carte d'entrée (Académie). Il est masqué sur les bords et ne porte jamais d'information.
+- **Bouton principal** : blanc argenté légèrement bombé ; secondaire translucide bordé.
+- **L'essentiel d'abord** : chaque écran ouvre sur où l'on en est et l'action suivante (accueil : parcours et objectifs ; Académie : « Commencer ici » ; Compétences : acquis, en cours, ensuite ; Portfolio : synthèse). La vue complète (atlas, graphe, registre de 43 notions) reste à un clic.
+- **Aucune couleur de marque** : succès, avertissement et erreur gardent leurs seuls jetons fonctionnels.
+
+Détail, matrice et comparaisons : `design-reviews/AUDIT-26.md` et `design-reviews/fusion-26/`. La direction artistique attend la review externe de l'utilisateur.

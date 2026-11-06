@@ -90,6 +90,34 @@ export function Icon({ name, size = 20 }: { name: string; size?: number }) {
         <path d="M8 10V7a4 4 0 0 1 8 0v3" />
       </>
     ),
+    // Domain icons (passe 26): one fine line drawing per domain.
+    building: (
+      <>
+        <path d="M4 21V5l8-3v19M12 9h8v12M3 21h18" />
+        <path d="M7.5 7v.01M7.5 11v.01M7.5 15v.01M15.5 13v.01M15.5 17v.01" />
+      </>
+    ),
+    wallet: (
+      <>
+        <path d="M4 7a2 2 0 0 1 2-2h12v4" />
+        <rect x="3" y="7" width="18" height="13" rx="2" />
+        <path d="M16 13.5h2" />
+      </>
+    ),
+    trend: (
+      <>
+        <path d="m3 17 6-6 4 4 8-8" />
+        <path d="M15 7h6v6" />
+      </>
+    ),
+    target: (
+      <>
+        <circle cx="12" cy="12" r="9" />
+        <circle cx="12" cy="12" r="5" />
+        <circle cx="12" cy="12" r="1" />
+      </>
+    ),
+    play: <path d="M8 5.5v13l10-6.5z" />,
   };
   return (
     <svg

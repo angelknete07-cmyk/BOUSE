@@ -335,8 +335,8 @@ test("une erreur alimente la révision ; export et import nécessitent un rempla
   ).toBeVisible();
   await navigate(page, "Vue d’ensemble");
   await expect(
-    page.getByRole("button", { name: /01 notion à consolider/i }),
-  ).toContainText("01");
+    page.getByRole("button", { name: /Consolider 1 notion/i }),
+  ).toBeVisible();
   await page.goto("/#settings");
   await expect(
     page.getByRole("heading", { name: "Vous gardez la main." }),

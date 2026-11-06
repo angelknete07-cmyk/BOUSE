@@ -1,3 +1,52 @@
+# Review design — passe 26 : fusion des deux directions artistiques
+
+**6 novembre 2026, 10:07 Europe/Paris.** Brief V2 : identité sombre et premium de la référence 1, avec la profondeur et la richesse des cartes de la référence 2, sans ses couleurs. Review de toute l'application, puis corrections P0 et P1. Détail : [AUDIT-26.md](AUDIT-26.md). **La direction artistique n'est pas déclarée validée** : elle attend votre review.
+
+## Changements
+
+- **Matière commune** (`src/fusion.css`) : cartes en relief (dégradé neutre, bord éclairé, ombre profonde, rayon de 14 px), boutons argentés, barres et anneaux de progression argent, icônes de domaine.
+- **Accueil** :
+  - parcours en % dans la scène ;
+  - « Vos prochains objectifs » (3 cartes) ;
+  - « Vos cinq domaines » avec anneaux, à la place de quatre grands folios ;
+  - 2 910 → 1 758 px en desktop.
+- **Académie** :
+  - vue par défaut « Commencer ici » : reprise, chemin pas à pas, 5 domaines ;
+  - atlas et catalogue à un clic ;
+  - **bug corrigé :** « / 06 quiz validés » devient « / 43 ».
+- **Compétences** : « Acquis / En cours / Ensuite » avant la carte complète.
+- **Portfolio** : synthèse vivante, registre limité aux notions travaillées ; 5 188 → 1 711 px en desktop, 5 937 → 2 669 px sur mobile.
+- **Atelier IA** : l'écriture d'abord (mobile ouvert sur « Écrire »), trois exemples de départ.
+- **Lab** : encadré « Ce que ça veut dire », qui suit les curseurs.
+- **Projets** : état vide en trois étapes, avec un appel à l'action.
+
+## Captures
+
+- `latest-desktop.png` / `latest-mobile.png` : accueil (rendus du test de design), 1440 × 1000 et Pixel 7.
+- `fusion-26/avant/` et `fusion-26/apres/` : 13 écrans, desktop 1440 × 1000 et Pixel 7, à l'écran et en page entière, avec un profil de démonstration (3 quiz validés, 1 à reprendre).
+- `fusion-26/comparaisons/` : 14 planches avant/après (accueil, Académie, compétences, portfolio, Atelier IA, projets, Lab ; desktop et mobile).
+- Archive `2026-11-06_10-07-01-Europe-Paris`.
+
+## Contrôles
+
+- `npm test` : 213 cas réussis.
+- `npx playwright test` : 78 tests réussis, dont l'accessibilité axe des écrans principaux et le parcours du catalogue entier.
+- Build sans avertissement ; Prettier conforme.
+- Défauts trouvés en cours de passe et corrigés :
+  - grille mobile de l'Atelier IA ;
+  - police du libellé de progression ;
+  - noms accessibles des cartes de domaine et des étapes du chemin ;
+  - doublon dans « Ensuite ».
+
+## Limites
+
+- 32 leçons sur 43 n'ont pas encore de scène interactive.
+- Le lexique reste très long sur mobile.
+- Les onglets de leçon ne sont pas encore en pastilles.
+- Aucun test sur appareil réel, Safari, Firefox ou lecteur d'écran réel.
+
+---
+
 # Review design — passe 25 : engagement et envie de revenir
 
 **6 novembre 2026, 06:37 Europe/Paris.** Audit de l'engagement sur trois leçons consécutives, comme débutant, sur mobile et desktop. Détail : [AUDIT-25.md](AUDIT-25.md). **Ni la direction artistique ni l'engagement ne sont déclarés validés** : il faut un test avec de vraies personnes.

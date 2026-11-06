@@ -5,6 +5,9 @@ import type { AppState, Attempt } from "../lib/types";
 import { downloadFile } from "../lib/storage";
 import { useClock } from "../lib/useClock";
 import { Icon } from "./Icon";
+import { ProgressBar, ProgressRing } from "./ProgressRing";
+import { domains } from "../data/domains";
+import { domainIdentity } from "../lib/domainIdentity";
 
 type Props = { state: AppState; onNavigate: (route: string) => void };
 type Tab = "notions" | "projects" | "notes";
@@ -69,6 +72,8 @@ export function LearningPortfolio({ state, onNavigate }: Props) {
   const portfolio = buildPortfolio(lessons, state, now);
   const { summary } = portfolio;
   const [tab, setTab] = useState<Tab>("notions");
+  // The register opens on what was actually worked; all notions stay one click away.
+  const [showAll, setShowAll] = useState(false);
   const [selectedId, setSelectedId] = useState(
     () =>
       portfolio.lessons.find((entry) => entry.lesson.id === state.lastLessonId)
@@ -98,6 +103,18 @@ export function LearningPortfolio({ state, onNavigate }: Props) {
       portfolio.archivedAttempts.length ===
     0;
 
+  const worked = (entry: (typeof portfolio.lessons)[number]) =>
+    Boolean(entry.latest || entry.note.trim() || entry.projects.length);
+  const workedCount = portfolio.lessons.filter(worked).length;
+  const registerRows = portfolio.lessons
+    .map((entry, index) => ({ entry, index }))
+    .filter(
+      ({ entry }) =>
+        showAll ||
+        !workedCount ||
+        worked(entry) ||
+        entry.lesson.id === selectedId,
+    );
   function select(id: string) {
     setSelectedId(id);
     if (matchMedia("(max-width: 950px)").matches) {
@@ -212,6 +229,7 @@ export function LearningPortfolio({ state, onNavigate }: Props) {
           </span>
         </p>
       </div>
+      <PortfolioSynthesis portfolio={portfolio} />
       {empty && (
         <div className="portfolio-first-step">
           <Icon name="book" size={23} />
@@ -266,7 +284,11 @@ export function LearningPortfolio({ state, onNavigate }: Props) {
                   LE REGISTRE / {String(summary.totalLessons).padStart(2, "0")}{" "}
                   NOTIONS
                 </p>
-                <span>Choisissez une notion</span>
+                <span>
+                  {showAll || !workedCount
+                    ? "Choisissez une notion"
+                    : `${workedCount} notion${workedCount > 1 ? "s" : ""} travaillée${workedCount > 1 ? "s" : ""}`}
+                </span>
               </div>
               <div className="portfolio-column-headings" aria-hidden="true">
                 <span>Notion</span>
@@ -275,7 +297,7 @@ export function LearningPortfolio({ state, onNavigate }: Props) {
                 <span>Projets</span>
                 <span />
               </div>
-              {portfolio.lessons.map((entry, index) => (
+              {registerRows.map(({ entry, index }) => (
                 <button
                   key={entry.lesson.id}
                   className="portfolio-notion-row"
@@ -320,6 +342,18 @@ export function LearningPortfolio({ state, onNavigate }: Props) {
                   <Icon name="arrow" size={14} />
                 </button>
               ))}
+              {workedCount > 0 && workedCount < portfolio.lessons.length && (
+                <button
+                  className="text-button portfolio-register-toggle"
+                  aria-expanded={showAll}
+                  onClick={() => setShowAll((value) => !value)}
+                >
+                  {showAll
+                    ? `Ne montrer que les ${workedCount} notions travaillées`
+                    : `Voir les ${portfolio.lessons.length} notions`}
+                  <Icon name={showAll ? "back" : "arrow"} size={15} />
+                </button>
+              )}
               <p className="portfolio-register-note">
                 Le dernier quiz daté de la version courante fait foi. Une
                 tentative plus ancienne reste dans l’historique.
@@ -767,5 +801,86 @@ export function LearningPortfolio({ state, onNavigate }: Props) {
         </div>
       </footer>
     </div>
+  );
+}
+
+/** A living summary of what was learned, before the detailed register. */
+function PortfolioSynthesis({
+  portfolio,
+}: {
+  portfolio: ReturnType<typeof buildPortfolio>;
+}) {
+  const passed = portfolio.lessons.filter((entry) => entry.status === "passed");
+  const total = portfolio.lessons.length;
+  const recent = portfolio.lessons
+    .filter((entry) => entry.latest)
+    .sort((a, b) => b.latest!.at.localeCompare(a.latest!.at))
+    .slice(0, 3);
+  return (
+    <section
+      className="portfolio-synthesis"
+      aria-label="Synthèse de vos acquis"
+    >
+      <div className="portfolio-synthesis-card portfolio-synthesis-main">
+        <ProgressRing
+          value={passed.length / total}
+          size={96}
+          stroke={6}
+          label={`${passed.length}/${total}`}
+        />
+        <div>
+          <strong>
+            {passed.length} notion{passed.length > 1 ? "s" : ""} acquise
+            {passed.length > 1 ? "s" : ""}
+          </strong>
+          <p>
+            sur {total}, chacune prouvée par un quiz réussi dans sa version
+            actuelle.
+          </p>
+        </div>
+      </div>
+      <div className="portfolio-synthesis-card portfolio-synthesis-domains">
+        <h2>Par domaine</h2>
+        {domains.map((domain) => {
+          const inDomain = portfolio.lessons.filter(
+            (entry) => entry.lesson.domain === domain,
+          );
+          const ok = inDomain.filter(
+            (entry) => entry.status === "passed",
+          ).length;
+          return (
+            <div key={domain} className="portfolio-domain-line">
+              <span>{domainIdentity[domain].short}</span>
+              <ProgressBar value={ok / inDomain.length} />
+              <small>
+                {ok}/{inDomain.length}
+              </small>
+            </div>
+          );
+        })}
+      </div>
+      <div className="portfolio-synthesis-card portfolio-synthesis-recent">
+        <h2>Dernières preuves</h2>
+        {recent.length ? (
+          <ul>
+            {recent.map((entry) => (
+              <li key={entry.lesson.id}>
+                <Icon
+                  name={entry.status === "passed" ? "check" : "clock"}
+                  size={14}
+                />
+                <span>{entry.lesson.title}</span>
+                <small>
+                  {entry.latest!.percent}
+                  {"\u00a0"}% · {displayDate(entry.latest!.at)}
+                </small>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>Votre premier quiz apparaîtra ici, daté.</p>
+        )}
+      </div>
+    </section>
   );
 }

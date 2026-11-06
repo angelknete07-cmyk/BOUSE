@@ -184,7 +184,8 @@ test("surfaces neutres et états de navigation sur un véritable rendu", async (
     ["body", "background-color", "Corps de page"],
     [".hero-card", "background-color", "Leçon à reprendre"],
     [".button.primary", "background-color", "Action principale"],
-    [".path-card", "background-color", "Parcours"],
+    [".home-domain", "background-color", "Domaine"],
+    [".home-objective", "background-color", "Objectif"],
     [".hero-main .tag", "background-color", "Étiquette de domaine"],
     [".hero-main .tag", "border-top-color", "Bordure de l’étiquette"],
     [".hero-visual", "color", "Décoration topographique"],
@@ -272,10 +273,14 @@ test("galerie des écrans et du quiz validé sans débordement", async ({
   await expect(
     page.getByRole("heading", { name: "43 notions, 5 domaines." }),
   ).toBeVisible();
+  // A beginner starts on one guided path, with the real catalogue total.
   await neutral(
-    page.locator(".catalog-card").first(),
+    page.locator(".academy-start-card"),
     "background-color",
-    "Catalogue",
+    "Commencer ici",
+  );
+  await expect(page.locator(".atlas-foot")).toContainText(
+    `/ ${lessons.length} quiz validés`,
   );
   await capture(page, testInfo, "02-academy");
   await page.goto(`/#lesson/${lesson.id}`);
@@ -840,6 +845,7 @@ test("compositions des instruments, atlas et leçon complète", async ({
 }, testInfo) => {
   await seed(page);
   await page.goto("/#academy");
+  await page.getByRole("button", { name: "Atlas", exact: true }).click();
   const nodes = page.locator(".atlas-node");
   await nodes.last().click();
   await expect(page.locator(".atlas-focus h2")).toHaveText(

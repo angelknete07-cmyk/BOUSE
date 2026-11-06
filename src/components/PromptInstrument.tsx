@@ -64,10 +64,27 @@ function hasSignal(text: string, index: number) {
     : reviewPrompt(text).checks[part.check]!.passed;
 }
 
+/** Partial requests to complete: each one leaves elements to add. */
+const starters = [
+  {
+    label: "Comparer des offres",
+    text: "Objectif : comparer trois offres de logiciel de facturation.\nContexte : je suis micro-entrepreneur, je facture une dizaine de clients par mois.\nDonnées : …\nFormat : un tableau, puis une recommandation en trois lignes.",
+  },
+  {
+    label: "Analyser un marché",
+    text: "Objectif : estimer si une offre de cours de cuisine à domicile a un marché dans ma ville.\nContexte : …\nContraintes : sources publiques uniquement, pas de chiffres inventés.\nCritères et vérification : signale chaque hypothèse à vérifier.",
+  },
+  {
+    label: "Répondre à un client",
+    text: "Objectif : rédiger une réponse à un client qui conteste une facture.\nContexte : la prestation a été livrée avec deux jours de retard.\nFormat : un e-mail de dix lignes maximum, ton courtois et ferme.",
+  },
+];
+
 export function AILab() {
   const [prompt, setPrompt] = useState("");
+  // People come here to write a request: the writing pane opens first.
   const [mobilePane, setMobilePane] = useState<"structure" | "writing">(
-    "structure",
+    "writing",
   );
   const [selected, setSelected] = useState(0);
   const [analysis, setAnalysis] = useState<ReturnType<
@@ -135,19 +152,19 @@ export function AILab() {
       >
         <button
           type="button"
-          aria-pressed={mobilePane === "structure"}
-          aria-controls="prompt-observatory"
-          onClick={() => setMobilePane("structure")}
-        >
-          <Icon name="node" size={16} /> Structure <span>{count}/7</span>
-        </button>
-        <button
-          type="button"
           aria-pressed={mobilePane === "writing"}
           aria-controls="prompt-writing"
           onClick={() => setMobilePane("writing")}
         >
           <Icon name="edit" size={16} /> Écrire
+        </button>
+        <button
+          type="button"
+          aria-pressed={mobilePane === "structure"}
+          aria-controls="prompt-observatory"
+          onClick={() => setMobilePane("structure")}
+        >
+          <Icon name="node" size={16} /> Structure <span>{count}/7</span>
         </button>
       </div>
       <div className="prompt-desk" data-mobile-pane={mobilePane}>
@@ -159,6 +176,28 @@ export function AILab() {
           <label htmlFor="prompt-text">
             Quel travail voulez-vous confier à l’IA ?
           </label>
+          {!prompt && (
+            <div
+              className="prompt-starters"
+              role="group"
+              aria-label="Partir d’un exemple"
+            >
+              <span>Partir d’un exemple :</span>
+              {starters.map((starter) => (
+                <button
+                  key={starter.label}
+                  type="button"
+                  onClick={() => {
+                    setPrompt(starter.text);
+                    setAnalysis(null);
+                    requestAnimationFrame(() => textRef.current?.focus());
+                  }}
+                >
+                  {starter.label}
+                </button>
+              ))}
+            </div>
+          )}
           <textarea
             id="prompt-text"
             ref={textRef}

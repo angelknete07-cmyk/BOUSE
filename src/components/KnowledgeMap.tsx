@@ -91,30 +91,23 @@ export function KnowledgeMap({ state, onNavigate }: Props) {
           <p className="eyebrow">VOTRE CARTE DE CONNAISSANCES</p>
           <h1>Relier les idées. Trouver la suite.</h1>
           <p>
-            Les notions se construisent les unes sur les autres. Sélectionnez un
-            point pour voir vos preuves et le prochain pas.
+            D’abord où vous en êtes. Ensuite, la carte complète relie chaque
+            notion à ses prérequis : sélectionnez un point pour voir vos
+            preuves.
           </p>
         </div>
         <button className="text-button" onClick={() => onNavigate("portfolio")}>
           Ouvrir mon portfolio <Icon name="arrow" size={16} />
         </button>
       </header>
-      <div
-        className="knowledge-summary"
-        role="group"
-        aria-label="Vos notions actuelles"
-      >
-        <p>
-          <strong>{verified}</strong> quiz validé{verified > 1 ? "s" : ""}
-        </p>
-        <p>
-          <strong>{toReview}</strong> notion{toReview > 1 ? "s" : ""} à
-          reprendre
-        </p>
-        <p>
-          <strong>{lessons.length}</strong> notions reliées
-        </p>
-      </div>
+      <SkillsSummary state={state} now={now} onNavigate={onNavigate} />
+      <h2 className="knowledge-full-title">
+        La carte complète{" "}
+        <small>
+          {verified} validée{verified > 1 ? "s" : ""} · {toReview} à reprendre ·{" "}
+          {lessons.length} notions reliées
+        </small>
+      </h2>
       <div className="knowledge-explorer">
         <section className="knowledge-atlas" aria-label="Carte des prérequis">
           <div className="knowledge-map-key" role="group" aria-label="Légende">
@@ -376,5 +369,108 @@ export function KnowledgeMap({ state, onNavigate }: Props) {
         </article>
       </div>
     </>
+  );
+}
+
+/**
+ * Where you stand before the map: what is acquired, what is in progress, and
+ * what comes next. The map below keeps every relation.
+ */
+function SkillsSummary({
+  state,
+  now,
+  onNavigate,
+}: {
+  state: AppState;
+  now: Date;
+  onNavigate: (route: string) => void;
+}) {
+  const { done, latest, current } = recommendLesson(state, now);
+  const acquired = lessons.filter((lesson) => done.has(lesson.id));
+  const inProgress = lessons.filter(
+    (lesson) =>
+      !done.has(lesson.id) &&
+      (latest.has(lesson.id) || (state.lessonPositions?.[lesson.id] ?? 0) > 0),
+  );
+  // « Ensuite » never repeats what is already in progress.
+  const nextUp = [
+    ...(inProgress.includes(current) ? [] : [current]),
+    ...lessons.filter(
+      (lesson) =>
+        lesson.id !== current.id &&
+        !done.has(lesson.id) &&
+        !inProgress.includes(lesson) &&
+        lesson.prerequisites.length > 0 &&
+        lesson.prerequisites.every((id) => done.has(id)),
+    ),
+  ].slice(0, 3);
+  const column = (
+    title: string,
+    count: number,
+    items: Lesson[],
+    note: (lesson: Lesson) => string,
+    empty: string,
+    icon: string,
+  ) => (
+    <section className="skills-summary-card">
+      <h2>
+        <span className="skills-summary-icon">
+          <Icon name={icon} size={16} />
+        </span>
+        {title} <strong>{count}</strong>
+      </h2>
+      {items.length ? (
+        <ul>
+          {items.slice(0, 4).map((lesson) => (
+            <li key={lesson.id}>
+              <button onClick={() => onNavigate(`lesson/${lesson.id}`)}>
+                <span>{lessonShortLabel(lesson.id, lesson.title)}</span>
+                <small>{note(lesson)}</small>
+              </button>
+            </li>
+          ))}
+          {items.length > 4 && (
+            <li className="skills-summary-more">
+              et {items.length - 4} autre{items.length - 4 > 1 ? "s" : ""} sur
+              la carte
+            </li>
+          )}
+        </ul>
+      ) : (
+        <p>{empty}</p>
+      )}
+    </section>
+  );
+  return (
+    <div className="skills-summary" role="group" aria-label="Où vous en êtes">
+      {column(
+        "Acquis",
+        acquired.length,
+        [...acquired].reverse(),
+        (lesson) => lesson.domain,
+        "Votre premier quiz réussi apparaîtra ici.",
+        "check",
+      )}
+      {column(
+        "En cours",
+        inProgress.length,
+        inProgress,
+        (lesson) =>
+          latest.has(lesson.id)
+            ? "Quiz à reprendre"
+            : `Séquence ${(state.lessonPositions?.[lesson.id] ?? 0) + 1}`,
+        "Rien en suspens : tout ce que vous avez ouvert est validé.",
+        "clock",
+      )}
+      {column(
+        "Ensuite",
+        nextUp.length,
+        nextUp,
+        (lesson) =>
+          lesson.id === current.id ? "Votre prochaine leçon" : "Accessible",
+        "Tout est validé.",
+        "arrow",
+      )}
+    </div>
   );
 }

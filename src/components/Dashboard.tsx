@@ -1,7 +1,14 @@
 import { useState, type CSSProperties } from "react";
 import { lessons, type Lesson } from "../data/lessons";
 import type { AppState } from "../lib/types";
-import { recommendLesson, sessionPlan } from "../lib/recommendation";
+import {
+  practiceFor,
+  recommendLesson,
+  sessionPlan,
+} from "../lib/recommendation";
+import { domains } from "../data/domains";
+import { domainIdentity } from "../lib/domainIdentity";
+import { ProgressBar, ProgressRing } from "./ProgressRing";
 import { byDomain, trackLayout } from "../lib/mapLayout";
 import { Icon } from "./Icon";
 import { lessonShortLabel } from "../data/lessonLabels";
@@ -94,6 +101,8 @@ export function Dashboard({ state, onNavigate }: Props) {
   const revisions = lessons.filter(
     (lesson) => latest.has(lesson.id) && !latest.get(lesson.id)!.passed,
   );
+  const percentDone = Math.round((done.size / lessons.length) * 100);
+  const practice = practiceFor(current.id);
   const currentIndex =
     lessons.findIndex((lesson) => lesson.id === current.id) + 1;
   const date = new Intl.DateTimeFormat("fr-FR", {
@@ -103,30 +112,9 @@ export function Dashboard({ state, onNavigate }: Props) {
     timeZone: "Europe/Paris",
   }).format(new Date());
   const openLesson = (lesson: Lesson) => onNavigate(`lesson/${lesson.id}`);
-  const domainTicks = (...domains: Lesson["domain"][]) => (
-    <span className="domain-ticks" aria-hidden="true">
-      {lessons
-        .filter((lesson) => domains.includes(lesson.domain))
-        .map((lesson) => (
-          <i
-            key={lesson.id}
-            className={done.has(lesson.id) ? "complete" : ""}
-          />
-        ))}
-    </span>
-  );
-  const domainCount = (...domains: Lesson["domain"][]) => {
-    const inDomain = lessons.filter((lesson) =>
-      domains.includes(lesson.domain),
-    );
-    const validated = inDomain.filter((lesson) => done.has(lesson.id)).length;
-    return `${validated} / ${inDomain.length} notions validées`;
-  };
   // The first notion still open in a territory, prerequisites first.
-  const nextFor = (...domains: Lesson["domain"][]) => {
-    const inDomain = lessons.filter((lesson) =>
-      domains.includes(lesson.domain),
-    );
+  const nextFor = (...wanted: Lesson["domain"][]) => {
+    const inDomain = lessons.filter((lesson) => wanted.includes(lesson.domain));
     return (
       inDomain.find(
         (lesson) =>
@@ -249,33 +237,173 @@ export function Dashboard({ state, onNavigate }: Props) {
             <div
               className="home-progress"
               role="progressbar"
-              aria-label="Quiz validés"
+              aria-label="Votre parcours"
               aria-valuemin={0}
               aria-valuemax={lessons.length}
               aria-valuenow={done.size}
-              aria-valuetext={`${done.size} quiz validés sur ${lessons.length}`}
+              aria-valuetext={`${done.size} notions validées sur ${lessons.length}`}
             >
-              <span>
-                <strong>{String(done.size).padStart(2, "0")}</strong> /{" "}
-                {String(lessons.length).padStart(2, "0")}
+              <span className="home-progress-label">Votre parcours</span>
+              <ProgressBar value={done.size / lessons.length} />
+              <span className="home-progress-value">
+                <strong>
+                  {percentDone}
+                  {"\u00a0"}%
+                </strong>
+                <small>
+                  {done.size} / {lessons.length} notions
+                </small>
               </span>
-              <div aria-hidden="true">
-                {lessons.map((l) => (
-                  <i
-                    key={l.id}
-                    className={
-                      done.has(l.id)
-                        ? "complete"
-                        : l.id === current.id
-                          ? "current"
-                          : ""
-                    }
-                  />
-                ))}
-              </div>
-              <small>quiz validés</small>
             </div>
-            <span>Comprendre. Manipuler. Appliquer.</span>
+          </div>
+        </section>
+
+        <section className="home-objectives" aria-labelledby="objectives-title">
+          <h2 id="objectives-title">Vos prochains objectifs</h2>
+          <div className="home-objective-grid">
+            <button
+              className="home-objective"
+              onClick={() => onNavigate("reviews")}
+            >
+              <span className="home-objective-icon">
+                <Icon name="clock" size={20} />
+              </span>
+              <span className="home-objective-text">
+                <strong>
+                  {revisions.length
+                    ? `Consolider ${revisions.length} notion${revisions.length > 1 ? "s" : ""}`
+                    : due.length
+                      ? `Revoir ${due.length} carte${due.length > 1 ? "s" : ""}`
+                      : reviewDeck.length
+                        ? "Révisions à jour"
+                        : "Votre premier rappel"}
+                </strong>
+                <small>
+                  {due.length
+                    ? `≈\u00a0${Math.max(1, Math.min(due.length, 5))}\u00a0min · rappel espacé`
+                    : reviewDeck.length
+                      ? "Le prochain rappel est planifié"
+                      : "Après votre premier quiz"}
+                </small>
+              </span>
+              <Icon name="arrow" size={16} />
+            </button>
+            <button
+              className="home-objective"
+              onClick={() => openLesson(following)}
+            >
+              <span className="home-objective-icon">
+                <Icon name="book" size={20} />
+              </span>
+              <span className="home-objective-text">
+                <strong>
+                  Ensuite : {lessonShortLabel(following.id, following.title)}
+                </strong>
+                <small>
+                  {following.minutes}
+                  {"\u00a0"}min · {domainIdentity[following.domain].short}
+                </small>
+              </span>
+              <Icon name="arrow" size={16} />
+            </button>
+            {practice ? (
+              <button
+                className="home-objective"
+                onClick={() => onNavigate(practice.route)}
+              >
+                <span className="home-objective-icon">
+                  <Icon name="lab" size={20} />
+                </span>
+                <span className="home-objective-text">
+                  <strong>{practice.label}</strong>
+                  <small>
+                    Manipuler «{"\u00a0"}
+                    {lessonShortLabel(current.id, current.title)}
+                    {"\u00a0"}»
+                  </small>
+                </span>
+                <Icon name="arrow" size={16} />
+              </button>
+            ) : (
+              <button
+                className="home-objective"
+                onClick={() => onNavigate("incubator")}
+              >
+                <span className="home-objective-icon">
+                  <Icon name="idea" size={20} />
+                </span>
+                <span className="home-objective-text">
+                  <strong>
+                    {state.projects.length
+                      ? `${state.projects.length} projet${state.projects.length > 1 ? "s" : ""} en cours`
+                      : "Lancer un premier projet"}
+                  </strong>
+                  <small>
+                    {state.projects.length
+                      ? "Relier une leçon à une action"
+                      : "Une hypothèse, un client, un test"}
+                  </small>
+                </span>
+                <Icon name="arrow" size={16} />
+              </button>
+            )}
+          </div>
+        </section>
+
+        <section className="home-domains" aria-labelledby="domains-title">
+          <div className="home-section-heading">
+            <h2 id="domains-title">Vos cinq domaines</h2>
+            <button
+              className="text-button"
+              onClick={() => onNavigate("academy")}
+            >
+              Toute l’Académie <Icon name="arrow" size={15} />
+            </button>
+          </div>
+          <div className="home-domain-grid">
+            {domains.map((domain) => {
+              const inDomain = lessons.filter(
+                (lesson) => lesson.domain === domain,
+              );
+              const validated = inDomain.filter((lesson) =>
+                done.has(lesson.id),
+              ).length;
+              const next = nextFor(domain);
+              const identity = domainIdentity[domain];
+              return (
+                <button
+                  key={domain}
+                  className="home-domain"
+                  onClick={() => openLesson(next)}
+                >
+                  <span className="home-domain-top">
+                    <span className="home-domain-icon">
+                      <Icon name={identity.icon} size={22} />
+                    </span>
+                    <ProgressRing
+                      value={validated / inDomain.length}
+                      size={46}
+                      label={`${Math.round((validated / inDomain.length) * 100)}%`}
+                    />
+                  </span>
+                  <strong>{domain}</strong>
+                  <span className="home-domain-promise">
+                    {identity.promise}
+                  </span>
+                  <span className="home-domain-foot">
+                    <small>
+                      {validated} / {inDomain.length} notions
+                    </small>
+                    <span className="home-domain-next">
+                      {done.size && validated === inDomain.length
+                        ? "Tout est validé"
+                        : lessonShortLabel(next.id, next.title)}
+                      <Icon name="arrow" size={14} />
+                    </span>
+                  </span>
+                </button>
+              );
+            })}
           </div>
         </section>
 
@@ -406,263 +534,6 @@ export function Dashboard({ state, onNavigate }: Props) {
           </button>
         </section>
       </div>
-
-      <div className="learning-universes-heading">
-        <div>
-          <p className="territory-caption">Choisir un territoire</p>
-          <h2>Quatre territoires. Un même horizon.</h2>
-        </div>
-        <button className="text-button" onClick={() => onNavigate("academy")}>
-          Toute l’Académie
-          <Icon name="arrow" size={16} />
-        </button>
-      </div>
-      <div className="learning-universes">
-        <button
-          className="path-card domain-folio domain-finance"
-          onClick={() => openLesson(nextFor("Finance", "Entrepreneuriat"))}
-        >
-          <span className="domain-ghost" aria-hidden="true">
-            01
-          </span>
-          <div className="domain-kicker">
-            <span className="eyebrow">01 / FINANCE ET ENTREPRISE</span>
-            <span>{domainCount("Finance", "Entrepreneuriat")}</span>
-            {domainTicks("Finance", "Entrepreneuriat")}
-          </div>
-          <div className="finance-signature" aria-hidden="true">
-            <svg viewBox="0 0 440 200">
-              <path className="finance-axis" d="M20 160H420M20 40V160" />
-              <path
-                className="finance-curve-result"
-                d="M20 145C95 143 130 70 200 68S310 38 420 32"
-              />
-              <path
-                className="finance-curve-cash"
-                d="M20 154H115V121H210V95H310V61H420"
-              />
-              <circle cx="210" cy="95" r="4" />
-              <text x="22" y="190">
-                TEMPS
-              </text>
-              <text x="323" y="22">
-                RÉSULTAT
-              </text>
-              <text x="340" y="85">
-                TRÉSORERIE
-              </text>
-            </svg>
-          </div>
-          <div className="domain-copy">
-            <h3>
-              Les chiffres ont
-              <br />
-              plus d’une histoire.
-            </h3>
-            <p>
-              Lire l’activité, comprendre la marge,
-              <br className="desktop-break" /> anticiper le cash.
-            </p>
-          </div>
-          <span className="domain-link">
-            Comprendre l’entreprise <Icon name="arrow" size={18} />
-          </span>
-        </button>
-        <button
-          className="path-card domain-folio domain-intelligence"
-          onClick={() => openLesson(nextFor("Intelligence artificielle"))}
-        >
-          <span className="domain-ghost" aria-hidden="true">
-            02
-          </span>
-          <div className="domain-kicker">
-            <span className="eyebrow">02 / INTELLIGENCE ARTIFICIELLE</span>
-            <span>{domainCount("Intelligence artificielle")}</span>
-            {domainTicks("Intelligence artificielle")}
-          </div>
-          <div className="intelligence-signature" aria-hidden="true">
-            <svg viewBox="0 0 310 180">
-              <path d="M40 90 140 35 250 90 140 145 40 90M140 35V145M40 90H250" />
-              <circle cx="40" cy="90" r="4" />
-              <circle cx="140" cy="35" r="4" />
-              <circle cx="250" cy="90" r="4" />
-              <circle cx="140" cy="145" r="4" />
-            </svg>
-            <span className="intelligence-word word-context">CONTEXTE</span>
-            <span className="intelligence-model">
-              <Icon name="ai" size={29} />
-            </span>
-            <span className="intelligence-word word-verification">
-              VÉRIFIER
-            </span>
-          </div>
-          <div className="domain-copy">
-            <h3>
-              De l’intention
-              <br />à l’action.
-            </h3>
-            <p>
-              Comprendre les modèles.
-              <br className="desktop-break" /> Construire des usages qui
-              tiennent.
-            </p>
-          </div>
-          <span className="domain-link">
-            Penser avec l’IA <Icon name="arrow" size={18} />
-          </span>
-        </button>
-        <button
-          className="path-card domain-folio domain-investing"
-          onClick={() => openLesson(nextFor("Investissement"))}
-        >
-          <span className="domain-ghost" aria-hidden="true">
-            03
-          </span>
-          <div className="domain-kicker">
-            <span className="eyebrow">03 / INVESTISSEMENT</span>
-            <span>{domainCount("Investissement")}</span>
-            {domainTicks("Investissement")}
-          </div>
-          <div className="finance-signature" aria-hidden="true">
-            <svg viewBox="0 0 440 200">
-              <path className="finance-axis" d="M20 160H420M20 40V160" />
-              <path
-                className="finance-curve-result"
-                d="M20 150C120 146 220 128 300 98S390 50 420 36"
-              />
-              <path
-                className="finance-curve-cash"
-                d="M20 150C120 148 220 136 300 116S390 86 420 76"
-              />
-              <text x="22" y="190">
-                TEMPS
-              </text>
-              <text x="318" y="28">
-                SANS FRAIS
-              </text>
-              <text x="330" y="110">
-                AVEC FRAIS
-              </text>
-            </svg>
-          </div>
-          <div className="domain-copy">
-            <h3>
-              Le temps, le risque,
-              <br />
-              les frais.
-            </h3>
-            <p>
-              Comprendre la bourse
-              <br className="desktop-break" /> avant d’y placer un euro.
-            </p>
-          </div>
-          <span className="domain-link">
-            Apprendre à investir <Icon name="arrow" size={18} />
-          </span>
-        </button>
-        <button
-          className="path-card domain-folio domain-personal"
-          onClick={() => openLesson(nextFor("Finance personnelle"))}
-        >
-          <span className="domain-ghost" aria-hidden="true">
-            04
-          </span>
-          <div className="domain-kicker">
-            <span className="eyebrow">04 / FINANCE PERSONNELLE</span>
-            <span>{domainCount("Finance personnelle")}</span>
-            {domainTicks("Finance personnelle")}
-          </div>
-          <div className="finance-signature" aria-hidden="true">
-            <svg viewBox="0 0 440 200">
-              <path className="finance-axis" d="M20 160H420" />
-              <path className="finance-curve-cash" d="M40 160V60H110V160" />
-              <path className="finance-curve-cash" d="M150 160V96H220V160" />
-              <path className="finance-curve-result" d="M260 160V124H330V160" />
-              <path className="finance-curve-cash" d="M370 160V134H410V160" />
-              <text x="40" y="50">
-                REVENUS
-              </text>
-              <text x="150" y="86">
-                CHARGES
-              </text>
-              <text x="250" y="114">
-                ÉPARGNE
-              </text>
-              <text x="22" y="190">
-                LE MOIS
-              </text>
-            </svg>
-          </div>
-          <div className="domain-copy">
-            <h3>
-              Le budget, la réserve,
-              <br />
-              le crédit.
-            </h3>
-            <p>
-              Garder la main sur son argent
-              <br className="desktop-break" /> avant de le faire travailler.
-            </p>
-          </div>
-          <span className="domain-link">
-            Organiser son argent <Icon name="arrow" size={18} />
-          </span>
-        </button>
-      </div>
-
-      <section
-        className="learning-next-actions"
-        aria-label="Votre atelier en mouvement"
-      >
-        <button
-          className="learning-next-action"
-          onClick={() => onNavigate("reviews")}
-        >
-          <span className="learning-action-icon">
-            <Icon name="clock" size={21} />
-          </span>
-          <span>
-            <small>FAIRE DURER CE QUE VOUS APPRENEZ</small>
-            <strong>
-              {revisions.length
-                ? `${String(revisions.length).padStart(2, "0")} notion${revisions.length > 1 ? "s" : ""} à consolider`
-                : due.length
-                  ? `${String(due.length).padStart(2, "0")} carte${due.length > 1 ? "s" : ""} à revoir`
-                  : reviewDeck.length
-                    ? "Vos prochaines révisions sont planifiées."
-                    : "Une première notion, puis un rappel."}
-            </strong>
-            <span>
-              {due.length
-                ? `${due.length} carte${due.length > 1 ? "s" : ""} disponible${due.length > 1 ? "s" : ""} · une courte session de rappel.`
-                : "Quiz, rappel, espacement : chaque étape garde sa propre preuve."}
-            </span>
-          </span>
-          <Icon name="arrow" size={18} />
-        </button>
-        <button
-          className="learning-next-action"
-          onClick={() => onNavigate("incubator")}
-        >
-          <span className="learning-action-icon">
-            <Icon name="idea" size={21} />
-          </span>
-          <span>
-            <small>DU SAVOIR AU TERRAIN</small>
-            <strong>
-              {state.projects.length
-                ? `${state.projects.length} projet${state.projects.length > 1 ? "s" : ""} en construction`
-                : "Votre premier projet commence ici."}
-            </strong>
-            <span>
-              {state.projects.length
-                ? "Reliez un apprentissage à votre prochaine action."
-                : "Une hypothèse. Un client. Un premier test."}
-            </span>
-          </span>
-          <Icon name="arrow" size={18} />
-        </button>
-      </section>
     </div>
   );
 }

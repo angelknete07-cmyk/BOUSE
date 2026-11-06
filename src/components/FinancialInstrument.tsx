@@ -300,6 +300,17 @@ export function Lab({ onNavigate }: { onNavigate: (route: string) => void }) {
                   ? "Le prix ne dépasse pas le coût variable unitaire. Vendre davantage ne finance pas les charges fixes."
                   : `À ${number.format(Number(values.units))} ventes, le résultat simplifié est de ${euros.format(result.profit)}. Le seuil est arrondi à l’unité supérieure.`}
               </p>
+              {result.breakEvenUnits !== null && (
+                <p className="financial-reading" aria-live="polite">
+                  <Icon name="idea" size={15} />
+                  <span>
+                    <strong>Ce que ça veut dire :</strong>{" "}
+                    {Number(values.units) >= result.breakEvenUnits
+                      ? `vous êtes ${number.format(Number(values.units) - result.breakEvenUnits)} ventes au-dessus du seuil. Si les ventes baissaient de ${Math.round(((Number(values.units) - result.breakEvenUnits) / Math.max(Number(values.units), 1)) * 100)} %, vous seriez à l’équilibre. Chaque vente en plus ajoute ${euros.format(Number(values.price) - Number(values.unitCost))} au résultat.`
+                      : `il manque ${number.format(result.breakEvenUnits - Number(values.units))} ventes pour couvrir les charges fixes. Pistes à tester : un prix plus élevé, un coût variable plus bas, ou des charges fixes réduites.`}
+                  </span>
+                </p>
+              )}
             </>
           ) : (
             <div className="financial-awaiting">

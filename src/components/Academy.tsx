@@ -8,6 +8,11 @@ import { recommendLesson } from "../lib/recommendation";
 import type { AppState } from "../lib/types";
 import { KnowledgeAtlas } from "./KnowledgeAtlas";
 import { Icon } from "./Icon";
+import { ProgressBar } from "./ProgressRing";
+import { Terrain } from "./Terrain";
+import { domainIdentity } from "../lib/domainIdentity";
+import { lessonShortLabel } from "../data/lessonLabels";
+import type { Domain } from "../data/domains";
 
 export function Academy({
   state,
@@ -19,9 +24,12 @@ export function Academy({
   const now = useClock();
   const [filter, setFilter] = useState("Tous");
   const [query, setQuery] = useState("");
-  const [view, setView] = useState<"atlas" | "catalog">("atlas");
-  const [selectedId, setSelectedId] = useState(
-    () => recommendLesson(state, now).current.id,
+  // A beginner starts with one guided path; the full atlas is one click away.
+  const [view, setView] = useState<"start" | "atlas" | "catalog">("start");
+  const recommendation = recommendLesson(state, now);
+  const [selectedId, setSelectedId] = useState(() => recommendation.current.id);
+  const [pathDomain, setPathDomain] = useState<Domain>(
+    recommendation.current.domain,
   );
   const done = new Set(
     lessons
@@ -50,8 +58,9 @@ export function Academy({
         </div>
         <div className="financial-heading-side">
           <p>
-            Chaque ligne relie une notion à ses prérequis. Choisissez un point
-            d’entrée.
+            {view === "start"
+              ? "Commencez par la leçon proposée, ou choisissez un domaine : le chemin s’affiche dans l’ordre."
+              : "Chaque ligne relie une notion à ses prérequis. Choisissez un point d’entrée."}
           </p>
           <button className="text-button" onClick={() => onNavigate("lexique")}>
             Lexique de l’Académie <Icon name="arrow" size={16} />
@@ -64,6 +73,13 @@ export function Academy({
           role="group"
           aria-label="Présentation de l’Académie"
         >
+          <button
+            aria-pressed={view === "start"}
+            onClick={() => setView("start")}
+          >
+            <Icon name="play" size={16} />
+            Commencer ici
+          </button>
           <button
             aria-pressed={view === "atlas"}
             onClick={() => setView("atlas")}
@@ -85,26 +101,43 @@ export function Academy({
             aria-label="Rechercher une leçon"
             placeholder="Une notion à explorer…"
             value={query}
-            onChange={(e) => setQuery(e.target.value)}
+            onChange={(e) => {
+              setQuery(e.target.value);
+              // Searching means looking for something precise: show the list.
+              if (view === "start" && e.target.value) setView("catalog");
+            }}
           />
         </label>
       </div>
-      <div
-        className="filter-tabs atlas-filters"
-        role="group"
-        aria-label="Domaines"
-      >
-        {["Tous", ...domains].map((d) => (
-          <button
-            key={d}
-            aria-pressed={filter === d}
-            className={filter === d ? "active" : ""}
-            onClick={() => setFilter(d)}
-          >
-            {d}
-          </button>
-        ))}
-      </div>
+      {view === "start" && (
+        <AcademyStart
+          state={state}
+          done={done}
+          recommendation={recommendation}
+          pathDomain={pathDomain}
+          onPathDomain={setPathDomain}
+          onNavigate={onNavigate}
+          onAtlas={() => setView("atlas")}
+        />
+      )}
+      {view !== "start" && (
+        <div
+          className="filter-tabs atlas-filters"
+          role="group"
+          aria-label="Domaines"
+        >
+          {["Tous", ...domains].map((d) => (
+            <button
+              key={d}
+              aria-pressed={filter === d}
+              className={filter === d ? "active" : ""}
+              onClick={() => setFilter(d)}
+            >
+              {d}
+            </button>
+          ))}
+        </div>
+      )}
       {view === "atlas" && selected && (
         <KnowledgeAtlas
           selectedId={selected.id}
@@ -113,42 +146,44 @@ export function Academy({
           visibleIds={new Set(visible.map((l) => l.id))}
         />
       )}
-      <div className={view === "atlas" ? "atlas-focus" : "atlas-catalog"}>
-        {shown.map((l) => (
-          <article className="catalog-card atlas-lesson" key={l.id}>
-            <span className="atlas-lesson-index" aria-hidden="true">
-              {String(lessons.indexOf(l) + 1).padStart(2, "0")}
-            </span>
-            <div className="atlas-lesson-main">
-              <span className="instrument-index">
-                {l.domain} · Niveau {l.level}{" "}
-                {done.has(l.id) ? "· Quiz validé" : ""}
+      {view !== "start" && (
+        <div className={view === "atlas" ? "atlas-focus" : "atlas-catalog"}>
+          {shown.map((l) => (
+            <article className="catalog-card atlas-lesson" key={l.id}>
+              <span className="atlas-lesson-index" aria-hidden="true">
+                {String(lessons.indexOf(l) + 1).padStart(2, "0")}
               </span>
-              <h2>{l.title}</h2>
-              <p>{l.summary}</p>
-            </div>
-            <div className="atlas-lesson-action">
-              <span>{l.minutes} min de découverte</span>
-              <button
-                className="button primary"
-                onClick={() => onNavigate(`lesson/${l.id}`)}
-              >
-                {done.has(l.id) ? "Revoir" : "Explorer"} · {l.minutes} min{" "}
-                <Icon name="arrow" size={16} />
-              </button>
-              {l.prerequisites.length > 0 && (
-                <small>
-                  Après{" "}
-                  {l.prerequisites
-                    .map((id) => lessons.find((x) => x.id === id)?.title)
-                    .join(" · ")}
-                </small>
-              )}
-            </div>
-          </article>
-        ))}
-      </div>
-      {!visible.length && (
+              <div className="atlas-lesson-main">
+                <span className="instrument-index">
+                  {l.domain} · Niveau {l.level}{" "}
+                  {done.has(l.id) ? "· Quiz validé" : ""}
+                </span>
+                <h2>{l.title}</h2>
+                <p>{l.summary}</p>
+              </div>
+              <div className="atlas-lesson-action">
+                <span>{l.minutes} min de découverte</span>
+                <button
+                  className="button primary"
+                  onClick={() => onNavigate(`lesson/${l.id}`)}
+                >
+                  {done.has(l.id) ? "Revoir" : "Explorer"} · {l.minutes} min{" "}
+                  <Icon name="arrow" size={16} />
+                </button>
+                {l.prerequisites.length > 0 && (
+                  <small>
+                    Après{" "}
+                    {l.prerequisites
+                      .map((id) => lessons.find((x) => x.id === id)?.title)
+                      .join(" · ")}
+                  </small>
+                )}
+              </div>
+            </article>
+          ))}
+        </div>
+      )}
+      {view !== "start" && !visible.length && (
         <div className="empty-state">
           <h2>Aucune leçon pour cette recherche.</h2>
           <p>Essayez « marge », « client » ou « IA ».</p>
@@ -164,11 +199,170 @@ export function Academy({
         </div>
       )}
       <footer className="atlas-foot">
-        <span>{String(done.size).padStart(2, "0")} / 06 quiz validés</span>
+        <span>
+          {String(done.size).padStart(2, "0")} / {lessons.length} quiz validés
+        </span>
         <button className="text-button" onClick={() => onNavigate("skills")}>
           Voir mes connaissances <Icon name="arrow" size={16} />
         </button>
       </footer>
+    </div>
+  );
+}
+
+/**
+ * « Commencer ici » : the recommended lesson, its path in order, and the five
+ * domains to switch path. Nothing here is hidden elsewhere: the atlas and the
+ * catalogue show everything.
+ */
+function AcademyStart({
+  done,
+  recommendation,
+  pathDomain,
+  onPathDomain,
+  onNavigate,
+  onAtlas,
+}: {
+  state: AppState;
+  done: Set<string>;
+  recommendation: ReturnType<typeof recommendLesson>;
+  pathDomain: Domain;
+  onPathDomain: (domain: Domain) => void;
+  onNavigate: (route: string) => void;
+  onAtlas: () => void;
+}) {
+  const { current, reason, resumed } = recommendation;
+  const path = lessons.filter((lesson) => lesson.domain === pathDomain);
+  const firstOpen = path.find(
+    (lesson) =>
+      !done.has(lesson.id) && lesson.prerequisites.every((id) => done.has(id)),
+  );
+  return (
+    <div className="academy-start">
+      <section
+        className="academy-start-card"
+        aria-labelledby="academy-start-title"
+      >
+        <span className="academy-start-relief" aria-hidden="true">
+          <Terrain />
+        </span>
+        <span className="eyebrow">
+          {resumed ? "REPRENDRE ICI" : "COMMENCER ICI"}
+        </span>
+        <span className="academy-start-meta">
+          {current.domain} · Niveau {current.level} · {current.minutes}
+          {"\u00a0"}min
+        </span>
+        <h2 id="academy-start-title">{current.title}</h2>
+        <p>{current.summary}</p>
+        <p className="academy-start-reason">
+          <Icon name="node" size={14} />
+          <span>{reason}</span>
+        </p>
+        <button
+          className="button primary"
+          onClick={() => onNavigate(`lesson/${current.id}`)}
+        >
+          Ouvrir la leçon <Icon name="arrow" size={16} />
+        </button>
+      </section>
+      <section className="academy-path" aria-labelledby="academy-path-title">
+        <div className="academy-path-heading">
+          <h2 id="academy-path-title">
+            Le chemin · {domainIdentity[pathDomain].short}
+          </h2>
+          <small>
+            {path.filter((lesson) => done.has(lesson.id)).length} /{" "}
+            {path.length} validées
+          </small>
+        </div>
+        <ol>
+          {path.map((lesson, index) => {
+            const isDone = done.has(lesson.id);
+            const ready = lesson.prerequisites.every((id) => done.has(id));
+            const isNext =
+              lesson.id === current.id ||
+              (!path.some((item) => item.id === current.id) &&
+                lesson.id === firstOpen?.id);
+            const status = isDone
+              ? "Validée"
+              : isNext
+                ? "À faire maintenant"
+                : ready
+                  ? "Accessible"
+                  : "Après ses prérequis";
+            return (
+              <li key={lesson.id}>
+                <button
+                  className={`academy-path-step ${isDone ? "is-done" : ""} ${isNext ? "is-next" : ""} ${!isDone && !ready ? "is-later" : ""}`}
+                  onClick={() => onNavigate(`lesson/${lesson.id}`)}
+                >
+                  <span className="academy-path-mark" aria-hidden="true">
+                    {isDone ? (
+                      <Icon name="check" size={15} />
+                    ) : isNext ? (
+                      <Icon name="play" size={13} />
+                    ) : ready ? (
+                      index + 1
+                    ) : (
+                      <Icon name="lock" size={13} />
+                    )}
+                  </span>
+                  <span className="academy-path-title">
+                    {lessonShortLabel(lesson.id, lesson.title)}
+                    {!isNext && <span className="sr-only">, {status}</span>}
+                  </span>
+                  <small>
+                    {isNext ? status : `${lesson.minutes}\u00a0min`}
+                  </small>
+                </button>
+              </li>
+            );
+          })}
+        </ol>
+        <button className="text-button" onClick={onAtlas}>
+          Voir comment les notions se relient <Icon name="arrow" size={15} />
+        </button>
+      </section>
+      <section
+        className="academy-domains"
+        aria-labelledby="academy-domains-title"
+      >
+        <h2 id="academy-domains-title">Choisir un autre chemin</h2>
+        <div className="academy-domain-grid">
+          {(Object.keys(domainIdentity) as Domain[]).map((domain) => {
+            const inDomain = lessons.filter(
+              (lesson) => lesson.domain === domain,
+            );
+            const validated = inDomain.filter((lesson) =>
+              done.has(lesson.id),
+            ).length;
+            const identity = domainIdentity[domain];
+            return (
+              <button
+                key={domain}
+                className="academy-domain"
+                aria-pressed={pathDomain === domain}
+                onClick={() => onPathDomain(domain)}
+              >
+                <span className="academy-domain-icon">
+                  <Icon name={identity.icon} size={20} />
+                </span>
+                <strong>{domain}</strong>
+                <span className="academy-domain-promise">
+                  {identity.promise}
+                </span>
+                <span className="academy-domain-count">
+                  <ProgressBar value={validated / inDomain.length} />
+                  <small>
+                    {validated} / {inDomain.length} notions
+                  </small>
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      </section>
     </div>
   );
 }
