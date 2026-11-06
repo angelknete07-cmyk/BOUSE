@@ -36,6 +36,25 @@
   --decorative-line: rgb(255 255 255 / 0.14);
   --overlay: rgb(0 0 0 / 0.72);
 
+  /* Passe 31 (brief V3.2) — rare, desaturated accents. One per screen at
+     most; they mark progress, the active step or the selected data series,
+     never a surface, a button or a whole card. Distinct from success. */
+  /* Passe 32 (planche 03 retenue par l'utilisateur) : trois accents ponctuels. */
+  --accent-violet: #a78bfa; /* progression, étape en cours */
+  --accent-blue: #6ba6f2; /* données, révisions */
+  --accent-emerald: #3fcb9b; /* réussite, validation */
+  --accent-violet-wash: rgb(167 139 250 / 0.14);
+  --accent-blue-wash: rgb(107 166 242 / 0.12);
+  --accent-emerald-wash: rgb(63 203 155 / 0.12);
+  --accent-violet-glow: 0 0 22px rgb(167 139 250 / 0.45);
+  /* Passe 31 names, kept as aliases of the violet. */
+  --accent-lavender: var(--accent-violet);
+  --accent-lavender-strong: #c4b5fd;
+  --accent-lavender-dim: #7c6bd6;
+  --accent-lavender-wash: var(--accent-violet-wash);
+  --accent-glacier: var(--accent-blue);
+  --accent-teal: var(--accent-emerald);
+
   --success-text: #a9c8b2;
   --success-surface: #17221b;
   --success-line: #405e49;

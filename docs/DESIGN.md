@@ -4,7 +4,7 @@
 
 BOUSE doit donner l’impression d’un logiciel professionnel sobre, actuel et haut de gamme. Sa palette de marque est presque entièrement noire, blanche et grise. La hiérarchie vient de la typographie, de l’espace, des niveaux de surface et de détails d’interaction précis.
 
-**Le vert n’est pas une couleur de marque ni un accent décoratif.** Ne pas réintroduire de palette verte, violette ou bleue pour évoquer l’IA, distinguer des catégories ou remplir une interface. Une couleur sémantique n’est permise que lorsqu’elle transmet une information fonctionnelle : vert pour une réussite ou validation, rouge pour une erreur ou un danger, orange pour un avertissement.
+**Le vert n’est pas une couleur de marque ni un accent décoratif.** Ne pas réintroduire de palette verte, violette ou bleue pour évoquer l’IA, distinguer des catégories ou remplir une interface. Exception encadrée depuis la passe 31 : de rares accents désaturés sur des marques fines (voir « Passe 31 — accents colorés subtils »). Une couleur sémantique n’est permise que lorsqu’elle transmet une information fonctionnelle : vert pour une réussite ou validation, rouge pour une erreur ou un danger, orange pour un avertissement.
 
 Cette exigence s’applique aux nouveaux écrans, aux variantes de composants et aux illustrations comme aux écrans existants.
 
@@ -175,3 +175,36 @@ Brief V2 : garder l'identité de la référence 1 (noir profond, argent, sobrié
 - **Aucune couleur de marque** : succès, avertissement et erreur gardent leurs seuls jetons fonctionnels.
 
 Détail, matrice et comparaisons : `design-reviews/AUDIT-26.md` et `design-reviews/fusion-26/`. La direction artistique attend la review externe de l'utilisateur.
+
+## Passe 31 — accents colorés subtils
+
+Brief V3.2 : fusionner la référence noire premium et le dashboard aux petites couleurs. **Cette règle modifie l’interdiction absolue des accents bleu, violet et cyan des passes précédentes ; elle n’autorise pas une palette vive.**
+
+| Avant (passes 08–30)                        | Depuis la passe 31                                                                                                             |
+| ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| Aucun accent coloré hors états fonctionnels | Accents désaturés permis : lavande `#9B8ACB` (et variantes `-strong`, `-dim`, `-wash`), bleu glacier `#79A6CD`, teal `#66B5AD` |
+| Progression argent                          | Remplissage de barre et d’anneau en lavande ; piste et texte restent neutres                                                   |
+| Étape active blanche                        | Marque de l’étape suivante, point de séquence courant et numéro d’onglet actif en lavande                                      |
+| Courbe principale argent                    | Courbe sélectionnée ou scénario en lavande ; référence et repères restent gris                                                 |
+
+Garde-fous :
+
+- rendu perçu à 90–95 % monochrome ; **au plus une couleur dominante par écran** (lavande par défaut, glacier et teal réservés à un second tracé si un écran en a réellement besoin) ;
+- la couleur se limite à des **marques fines** : trait, anneau, point, numéro. Jamais d’aplat, de bouton, de carte, de fond, de bordure de carte ni de texte courant coloré. Un lavis sous une courbe reste sous 15 % d’opacité (`--accent-lavender-wash`) ;
+- jamais pour coder une catégorie ou un domaine ; les icônes de domaine restent argent ;
+- succès, avertissement et erreur gardent leurs jetons et leur sens ; une sélection non validée reste neutre ;
+- l’information ne dépend jamais de la teinte : valeur écrite, libellé ou forme l’accompagnent.
+
+Les images conceptuelles 03 et 04 du brief sont des explorations, pas des spécifications. Détail et comparaisons avant/après : `design-reviews/AUDIT-31.md` et `design-reviews/accents-31/`. La direction artistique attend la review externe.
+
+## Passe 32 — planche 03 : accueil en tableau de bord, graphiques premium
+
+L’utilisateur a retenu la planche 03 (« Pack review V2 ») pour la couleur, les courbes et graphiques, et le logo. Cette passe **remplace la règle d’accent de la passe 31** :
+
+- **Accents** : violet `#A78BFA` (progression, série manipulée, étape en cours), bleu `#6BA6F2` (données, révisions), émeraude `#3FCB9B` (réussite). Les anneaux passent du violet au bleu ; les courbes principales sont violettes avec une lueur, l’aire sous la courbe en dégradé violet ; références en gris.
+- **Marque** : « B » argenté en rubans (`BrandLogo`) et « BOUSE » en capitales espacées dans une barre latérale large (248 px au-delà de 1100 px, rail en dessous, dock sur mobile).
+- **En-tête** : champ de recherche et avatar.
+- **Accueil** : salutation (« Bienvenue » au premier passage, « Bon retour » ensuite), carte de la leçon avec **la vague d’origine**, raison, plan de séance et barre de parcours ; carte « Ma progression » (anneau) ; quatre tuiles (compétences, simulations, révisions, projets) ; « Mon parcours » en étapes (parcours suivi, sinon les cinq domaines) ; « Mon activité (7 jours) ». Les sections existantes (objectifs, domaines, trajectoire) restent dessous.
+- **Garde-fous** : surfaces noires et argent, aucun bouton ni fond de carte coloré ; ne pas retirer un élément existant sans demande.
+
+Détail : `design-reviews/AUDIT-32.md`. La direction artistique attend la review de l’utilisateur.

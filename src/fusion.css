@@ -55,8 +55,7 @@
 .review-invitation,
 .review-session-result,
 .scene-workbench,
-.financial-chart,
-.simulation-chart {
+.financial-chart {
   background: var(--card-bg);
   border: 1px solid var(--card-border);
   border-radius: var(--radius-card);
@@ -1122,5 +1121,344 @@
     text-decoration: underline;
     text-underline-offset: 3px;
     text-decoration-color: var(--line-strong);
+  }
+}
+
+/* ---------- Passe 30 : parcours par objectif ---------- */
+.academy-goals {
+  margin-top: var(--space-6);
+}
+.academy-goal {
+  padding: 0;
+  gap: 0;
+}
+.academy-goal-main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  flex: 1;
+  width: 100%;
+  padding: var(--space-5) var(--space-5) var(--space-3);
+  border: 0;
+  background: none;
+  color: inherit;
+  text-align: left;
+}
+.academy-goal-main[aria-pressed="true"] strong {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-color: var(--line-strong);
+}
+.academy-goal-follow {
+  margin: 0 var(--space-5) var(--space-4);
+  padding: 6px 0;
+  font-size: var(--type-small);
+  color: var(--text-secondary);
+}
+.academy-goal.is-following {
+  border-color: rgb(255 255 255 / 0.32);
+  box-shadow:
+    var(--card-shadow),
+    0 0 0 1px rgb(255 255 255 / 0.12);
+}
+.academy-goal.is-following .academy-goal-follow {
+  color: var(--text);
+}
+
+/* ---------- Leçon : date de vérification ---------- */
+.lesson-verified {
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  font-size: var(--type-caption);
+  color: var(--text-secondary);
+}
+.lesson-verified.is-stale {
+  border-color: var(--warning-line);
+  background: var(--warning-surface);
+  color: var(--warning-text);
+}
+
+/* ---------- Leçon : entraînement libre ---------- */
+.practice-drill {
+  margin-top: var(--space-10);
+  padding: var(--space-6);
+  border-radius: var(--radius-card);
+  border: 1px solid var(--card-border);
+  background: var(--card-bg);
+  box-shadow: var(--card-shadow);
+}
+.practice-drill-heading {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+}
+.practice-drill-heading h3 {
+  margin: var(--space-2) 0 0;
+  font-size: var(--type-title-md);
+  font-weight: var(--weight-heading);
+}
+.practice-drill-heading small,
+.practice-drill li small {
+  font-size: var(--type-small);
+  color: var(--muted);
+}
+.practice-drill ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-4);
+}
+.practice-drill li p {
+  margin: 0 0 var(--space-2);
+  font-size: var(--type-body-sm);
+  line-height: 1.6;
+  color: var(--text);
+}
+.practice-drill [role="group"] {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+.practice-drill [role="group"] button {
+  padding: 7px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: var(--type-small);
+}
+.practice-drill [role="group"] button:disabled {
+  opacity: 0.5;
+}
+.practice-drill [role="group"] button.is-right {
+  opacity: 1;
+  border-color: var(--success-line);
+  color: var(--success-text);
+}
+.practice-drill [role="group"] button.is-wrong {
+  opacity: 1;
+  border-color: var(--warning-line);
+  color: var(--warning-text);
+}
+.practice-drill li small {
+  display: block;
+  margin-top: var(--space-2);
+}
+.practice-drill-foot {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-5);
+  font-size: var(--type-small);
+  color: var(--text-secondary);
+}
+
+/* ---------- Leçon : fiche pratique ---------- */
+.practical-sheet {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin: var(--space-6) 0;
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-card);
+  border: 1px solid var(--card-border);
+  background: var(--card-bg);
+}
+.practical-sheet > div {
+  display: grid;
+  gap: 4px;
+}
+.practical-sheet strong {
+  font-size: var(--type-body);
+  font-weight: var(--weight-medium);
+}
+.practical-sheet small {
+  font-size: var(--type-small);
+  color: var(--muted);
+}
+.practical-sheet-done {
+  flex-basis: 100%;
+}
+
+/* Passe 31 — the scene faces the explanation on desktop instead of being
+   pushed under it into a narrow column (the starting question took its place). */
+@media (min-width: 1101px) {
+  .editorial-lesson .sequence-concept > .learning-concept-heading,
+  .editorial-lesson .sequence-concept > .learning-start-question,
+  .editorial-lesson .sequence-concept > .learning-depth {
+    grid-column: 1;
+  }
+  .editorial-lesson .sequence-concept > .scene-workbench {
+    grid-column: 2;
+    grid-row: 1 / span 4;
+    align-self: start;
+    position: sticky;
+    top: var(--space-6);
+  }
+  .editorial-lesson .sequence-concept > .learning-start-question {
+    margin-top: 0;
+  }
+}
+
+/* ---------- Passe 31 : micro-accents (lavande) ---------- */
+.progress-bar > i {
+  background: linear-gradient(
+    90deg,
+    var(--accent-lavender-dim),
+    var(--accent-lavender-strong)
+  );
+  box-shadow: 0 0 10px rgb(155 138 203 / 0.35);
+}
+.progress-ring-value {
+  stroke: var(--accent-lavender);
+}
+/* The step to do now carries the accent; done steps stay success-green. */
+.academy-path-step.is-next .academy-path-mark {
+  background: var(--accent-lavender);
+  border-color: var(--accent-lavender);
+  color: #0b0a10;
+  box-shadow: 0 0 0 4px var(--accent-lavender-wash);
+}
+.academy-path-step.is-next {
+  border-color: rgb(155 138 203 / 0.45);
+}
+.academy-path-step.is-next small {
+  color: var(--text-primary);
+}
+/* Lesson: the active step and the current sequence. */
+.editorial-lesson .learning-stage-tab.is-active .learning-stage-number {
+  color: var(--accent-lavender-strong);
+}
+.learning-sequence-dots i.is-complete:last-of-type,
+.learning-sequence-dots i.is-complete:not(:has(~ i.is-complete)) {
+  background: var(--accent-lavender);
+}
+/* Scenes: the key value of a figure (selected series, compared option). */
+.scene-bar-silver {
+  fill: var(--accent-lavender);
+}
+.scene-compare-track i.is-silver {
+  background: linear-gradient(
+    90deg,
+    var(--accent-lavender-dim),
+    var(--accent-lavender-strong)
+  );
+}
+/* Home trajectory: the selected notion. */
+.art-home .trajectory-node.selected .trajectory-node-core {
+  box-shadow:
+    0 0 0 1px var(--accent-lavender),
+    0 0 0 6px var(--accent-lavender-wash);
+}
+/* AI workshop: structure clues found in the text. */
+.prompt-part.is-found .prompt-part-dot {
+  background: var(--accent-lavender);
+  border-color: var(--accent-lavender);
+  box-shadow: 0 0 0 4px var(--accent-lavender-wash);
+}
+/* Charts: the series the learner moves takes the accent; references stay grey. */
+.plot-revenue,
+.simulation-scenario-path {
+  stroke: var(--accent-lavender);
+}
+.simulation-legend i:not(.reference) {
+  background: var(--accent-lavender);
+}
+.simulation-chart-point {
+  background: var(--accent-lavender-strong);
+  box-shadow: 0 0 0 5px var(--accent-lavender-wash);
+}
+
+/* ---------- Accueil : progrès en compétences et activité réelle ---------- */
+.home-stats {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+}
+.home-stat {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-card);
+  border: 1px solid var(--card-border);
+  background: var(--card-bg);
+  box-shadow: var(--card-shadow);
+  min-width: 0;
+}
+.home-stat > div {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+.home-stat small {
+  font-size: var(--type-small);
+  color: var(--muted);
+}
+.home-stat strong {
+  font-size: var(--type-title-lg);
+  font-weight: var(--weight-figure);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: var(--tracking-figure);
+}
+.home-stat strong span {
+  font-size: var(--type-body-sm);
+  color: var(--muted);
+  letter-spacing: 0;
+}
+.home-stat em {
+  font-style: normal;
+  font-size: var(--type-caption);
+  color: var(--text-tertiary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.home-stat-activity {
+  justify-content: space-between;
+}
+.home-stat-activity em {
+  white-space: normal;
+}
+.home-stat-activity svg {
+  width: 46%;
+  min-width: 150px;
+  height: 72px;
+  flex: none;
+}
+.home-activity-area {
+  fill: var(--accent-lavender-wash);
+}
+.home-activity-line {
+  fill: none;
+  stroke: var(--accent-lavender);
+  stroke-width: 1.8;
+  stroke-linejoin: round;
+}
+.home-activity-base {
+  stroke: var(--line-strong);
+}
+.home-activity-dot {
+  fill: var(--accent-lavender-strong);
+}
+.home-stat-activity text {
+  fill: var(--text-tertiary);
+  font-size: 9px;
+}
+
+@media (max-width: 700px) {
+  .home-stats {
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
   }
 }

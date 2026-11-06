@@ -177,19 +177,20 @@ test("surfaces neutres et états de navigation sur un véritable rendu", async (
   await seed(page);
   await page.goto("/#home");
   await expect(
-    page.getByRole("heading", { name: "À vous de jouer, Profil démo." }),
+    page.getByRole("heading", {
+      name: /^(Bienvenue|Bon retour), Profil démo !$/,
+    }),
   ).toBeVisible();
   const colors: [string, string, string][] = [
     ["html", "background-color", "Fond de page"],
     ["body", "background-color", "Corps de page"],
-    [".hero-card", "background-color", "Leçon à reprendre"],
+    [".console-hero", "background-color", "Leçon à reprendre"],
     [".button.primary", "background-color", "Action principale"],
     [".home-domain", "background-color", "Domaine"],
     [".home-objective", "background-color", "Objectif"],
-    [".hero-main .tag", "background-color", "Étiquette de domaine"],
-    [".hero-main .tag", "border-top-color", "Bordure de l’étiquette"],
-    [".hero-visual", "color", "Décoration topographique"],
-    [".hero-visual path", "stroke", "Tracé topographique"],
+    [".console-tile", "background-color", "Tuile chiffrée"],
+    [".console-hero-art", "color", "Décoration topographique"],
+    [".console-hero-art path", "stroke", "Tracé topographique"],
     [".eyebrow", "color", "Texte secondaire"],
   ];
   for (const [selector, property, description] of colors) {
@@ -216,11 +217,7 @@ test("surfaces neutres et états de navigation sur un véritable rendu", async (
     "background-color",
     "Navigation active",
   );
-  await neutral(
-    page.locator(".nav-link.active"),
-    "border-top-color",
-    "Bordure de navigation active",
-  );
+  // Passe 32 : la bordure active porte l'accent violet de la planche 03.
   if (mobile) {
     await capture(page, testInfo, "02-navigation-mobile");
     await page.keyboard.press("Escape");
@@ -271,7 +268,7 @@ test("galerie des écrans et du quiz validé sans débordement", async ({
   // Change the document URL so the init script runs after the empty onboarding.
   await page.goto("/?gallery=1#academy");
   await expect(
-    page.getByRole("heading", { name: "43 notions, 5 domaines." }),
+    page.getByRole("heading", { name: "Que voulez-vous apprendre ?" }),
   ).toBeVisible();
   // A beginner starts on one guided path, with the real catalogue total.
   await neutral(
@@ -1029,7 +1026,9 @@ test("mouvement de page mesuré et préférence de réduction respectée", async
   await page.emulateMedia({ reducedMotion: "no-preference" });
   await page.goto("/#home");
   await expect(
-    page.getByRole("heading", { name: "À vous de jouer, Profil démo." }),
+    page.getByRole("heading", {
+      name: /^(Bienvenue|Bon retour), Profil démo !$/,
+    }),
   ).toBeVisible();
   const motion = await page.locator(".main-content").evaluate((main) => {
     const elements = [main, ...main.querySelectorAll("*")];

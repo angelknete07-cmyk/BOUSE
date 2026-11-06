@@ -4,7 +4,9 @@ Lire `docs/PRODUCT.md`, `docs/ARCHITECTURE.md` et `docs/DESIGN.md` avant de modi
 
 ## Direction artistique
 
-Interface très sombre, premium et minimaliste, presque monochrome : noir, anthracite, gris et blanc cassé. Aucun vert de marque, aucun accent IA violet/bleu/vert. Les couleurs sont réservées aux états fonctionnels : succès, erreur/danger, avertissement. Employer les tokens de `src/tokens.css` ; ne pas recréer une palette, des ombres ou une motion par écran. Conserver des rayons modérés, des séparateurs discrets, une typographie lisible et `prefers-reduced-motion`.
+Interface très sombre, premium et minimaliste, perçue à 94–97 % monochrome : noir, anthracite, gris et blanc cassé. Aucun vert de marque, aucune palette IA vive. Les couleurs fonctionnelles (succès, erreur/danger, avertissement) restent réservées à leurs états.
+
+**Règle d’accent (brief V4, 6 novembre 2026 — remplace la règle de la passe 32)** : rendu perçu **94 à 97 % neutre**. Une seule couleur dominante **désaturée** par bloc (lavande d’essai `#9A8AB7`), sur une information à la fois : courbe active, étape en cours, point sélectionné, progression. Halo nul ou très faible (alpha ≤ 0,15), aires sous 8 % d’opacité, aucun bouton, menu, fond ou carte coloré, aucune lueur multicolore. Les accents vifs de la passe 32 (`#A78BFA`, `#6BA6F2`, `#3FCB9B`, halo 22 px à 45 %) sont jugés trop saturés et doivent être recalibrés (jalons V4, validation de l’utilisateur). **Ne jamais remplacer la vague `Terrain.tsx` ni retirer un élément existant** : on améliore sa couleur et sa finition. Les références de l’utilisateur sont des inspirations, pas des spécifications. Mémoire des préférences : `docs/MEMOIRE-DESIGN.md`. L’information reste lisible sans la couleur (valeur écrite, libellé, forme).
 
 ## Définition de terminé : revue visuelle obligatoire
 

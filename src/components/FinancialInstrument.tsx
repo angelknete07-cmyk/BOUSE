@@ -91,8 +91,8 @@ function EquilibriumPlot({
     >
       <defs>
         <linearGradient id="finance-area" x1="0" y1="0" x2="0" y2="1">
-          <stop stopColor="var(--accent)" stopOpacity=".15" />
-          <stop offset="1" stopColor="var(--accent)" stopOpacity=".01" />
+          <stop stopColor="var(--accent-violet)" stopOpacity=".3" />
+          <stop offset="1" stopColor="var(--accent-violet)" stopOpacity="0" />
         </linearGradient>
       </defs>
       {[0, 0.25, 0.5, 0.75, 1].map((t) => (

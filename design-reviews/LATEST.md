@@ -1,3 +1,56 @@
+# Review design — passe 32 : planche 03, accueil en tableau de bord, graphiques premium
+
+**6 novembre 2026, 15:35 Europe/Paris.** Détail : [AUDIT-32.md](AUDIT-32.md). **La direction artistique n'est pas déclarée validée.**
+
+- Suite au retour de l'utilisateur (planche 03 préférée, garder la vague et l'existant, travailler couleurs et graphiques) :
+  - barre latérale large avec le « B » argenté ;
+  - recherche dans l'en-tête ;
+  - accueil en tableau de bord : leçon avec la vague, anneau de progression, 4 tuiles, « Mon parcours », activité.
+- Courbes et graphiques en violet lumineux, aires en dégradé, progressions violet → bleu, réussite en émeraude.
+- **Contrôles de l'agent** : `npm test` 245 cas, `npx playwright test` 86 tests, Prettier, build sans avertissement.
+- **Captures** :
+  - paire principale = accueil (`00-home-viewport`) ;
+  - avant/après dans `console-32/` ;
+  - archive `2026-11-06_15-35-30-Europe-Paris`.
+- **Limites** : composition de la leçon inchangée (couleurs seulement) ; curseurs argent.
+
+---
+
+# Review design — passe 31 : accents colorés subtils (brief V3.2)
+
+**6 novembre 2026, 15:11 Europe/Paris.** Détail : [AUDIT-31.md](AUDIT-31.md). **La direction artistique n'est pas déclarée validée ; la rétention n'est pas mesurée.**
+
+- **Règle modifiée et écrite avant implémentation** (`AGENTS.md`, `docs/DESIGN.md`) : de rares accents désaturés sont permis, une seule couleur dominante par écran (lavande `#9B8ACB`), uniquement sur des marques fines (progression, courbe ou point sélectionné, étape active). Aucun aplat, bouton, carte ni texte coloré. Glacier et teal sont définis mais non employés.
+- **Leçon desktop** : la scène est de nouveau en regard de l'explication (elle était repoussée dans une colonne étroite).
+- **Accueil** : progression en compétences (10 / 138 sur le profil de démonstration) et activité réelle sur 7 jours, sans série à tenir ; carte en double retirée.
+- **Académie** : « Que voulez-vous apprendre ? » ; étape à faire marquée en lavande, libellé neutre.
+- **Et si ?** : carte imbriquée du graphique retirée, légende accordée à la courbe.
+- **README** corrigé (43 leçons, diagnostic de cinq questions, cinq parcours).
+- **Contrôles de l'agent** : `npm test` 245 cas, `npx playwright test` 86 tests (puis design et e2e relancés après la dernière retouche : 34 tests), Prettier, build sans avertissement.
+- **Captures** :
+  - paire principale `latest-desktop.png` / `latest-mobile.png` = leçon (`03-lecon-learn-viewport`) ;
+  - avant/après : `accents-31/avant/`, `accents-31/apres/`, planches `accents-31/comparaisons/` (desktop 1440 × 1000, Pixel 7) ;
+  - archive `2026-11-06_15-11-22-Europe-Paris`.
+- **Limites** :
+  - quiz (banque plus large, options mélangées) et diversité des formats d'activité : après review ;
+  - la barre de parcours de l'accueil compte encore les notions ;
+  - aucun test sur appareil réel ni avec des débutants (protocole proposé dans l'audit).
+
+---
+
+# Review design — passe 30 : parcours, entraînement, vérification, fiches
+
+**6 novembre 2026.** Détail : [AUDIT-30.md](AUDIT-30.md). **La direction artistique n'est pas déclarée validée.**
+
+- **Cinq parcours par objectif** à suivre depuis l'Académie ; la prochaine leçon suit alors leur ordre.
+- **Entraînement libre** à partir du lexique, sans aucun enregistrement.
+- **Date de vérification** sur les 14 leçons à règles datées, avec un avertissement au-delà de 12 mois.
+- **Quatre fiches pratiques** à télécharger.
+- **Contrôles** : `npm test` 245 cas, `npx playwright test` 86 tests, build sans avertissement.
+- **Captures** : `passe-30/` (desktop 1440 × 1000, Pixel 7).
+
+---
+
 # Review design — passe 29 : une scène dans chaque leçon
 
 **6 novembre 2026, 11:49 Europe/Paris.** Détail : [AUDIT-29.md](AUDIT-29.md). **La direction artistique n'est pas déclarée validée.**

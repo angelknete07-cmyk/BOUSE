@@ -97,5 +97,7 @@ export interface AppState {
   simulations?: SimulationSnapshot[];
   /** Additive v1 field: the sequence where each lesson was left (0-based). */
   lessonPositions?: Record<string, number>;
+  /** Additive v1 field: the guided path the learner chose to follow. */
+  activePathId?: string | null;
 }
 export type StateUpdater = (updater: (state: AppState) => AppState) => void;
