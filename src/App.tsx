@@ -598,7 +598,7 @@ function App() {
               {route === "home" ? (
                 <Dashboard state={state} onNavigate={go} />
               ) : route === "academy" ? (
-                <Academy state={state} onNavigate={go} />
+                <Academy state={state} update={update} onNavigate={go} />
               ) : lesson ? (
                 <LessonView
                   key={lesson.id}

@@ -117,6 +117,12 @@ export function parseState(raw: string): AppState {
       ))
   )
     throw new Error("Positions de lecture invalides.");
+  if (
+    s.activePathId !== undefined &&
+    s.activePathId !== null &&
+    (typeof s.activePathId !== "string" || s.activePathId.length > 80)
+  )
+    throw new Error("Parcours choisi invalide.");
   if (s.reviewEvents !== undefined) {
     if (!Array.isArray(s.reviewEvents) || !s.reviewEvents.every(isReviewEvent))
       throw new Error("Historique de révision invalide.");

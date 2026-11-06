@@ -5,7 +5,8 @@ import { normalizeSearch } from "../lib/domain";
 import { latestCurrentAttempt } from "../lib/portfolio";
 import { useClock } from "../lib/useClock";
 import { recommendLesson } from "../lib/recommendation";
-import type { AppState } from "../lib/types";
+import type { AppState, StateUpdater } from "../lib/types";
+import { goalPathById, goalPaths } from "../data/goalPaths";
 import { KnowledgeAtlas } from "./KnowledgeAtlas";
 import { Icon } from "./Icon";
 import { ProgressBar } from "./ProgressRing";
@@ -16,9 +17,11 @@ import type { Domain } from "../data/domains";
 
 export function Academy({
   state,
+  update,
   onNavigate,
 }: {
   state: AppState;
+  update?: StateUpdater;
   onNavigate: (route: string) => void;
 }) {
   const now = useClock();
@@ -28,8 +31,9 @@ export function Academy({
   const [view, setView] = useState<"start" | "atlas" | "catalog">("start");
   const recommendation = recommendLesson(state, now);
   const [selectedId, setSelectedId] = useState(() => recommendation.current.id);
-  const [pathDomain, setPathDomain] = useState<Domain>(
-    recommendation.current.domain,
+  // The path shown: a chosen guided path, else the domain of the next lesson.
+  const [pathDomain, setPathDomain] = useState<string>(
+    () => state.activePathId ?? recommendation.current.domain,
   );
   const done = new Set(
     lessons
@@ -116,6 +120,15 @@ export function Academy({
           recommendation={recommendation}
           pathDomain={pathDomain}
           onPathDomain={setPathDomain}
+          activePathId={state.activePathId ?? null}
+          onFollow={
+            update
+              ? (id) => {
+                  update((previous) => ({ ...previous, activePathId: id }));
+                  if (id) setPathDomain(id);
+                }
+              : undefined
+          }
           onNavigate={onNavigate}
           onAtlas={() => setView("atlas")}
         />
@@ -220,19 +233,26 @@ function AcademyStart({
   recommendation,
   pathDomain,
   onPathDomain,
+  activePathId,
+  onFollow,
   onNavigate,
   onAtlas,
 }: {
   state: AppState;
   done: Set<string>;
   recommendation: ReturnType<typeof recommendLesson>;
-  pathDomain: Domain;
-  onPathDomain: (domain: Domain) => void;
+  pathDomain: string;
+  onPathDomain: (key: string) => void;
+  activePathId: string | null;
+  onFollow?: (id: string | null) => void;
   onNavigate: (route: string) => void;
   onAtlas: () => void;
 }) {
   const { current, reason, resumed } = recommendation;
-  const path = lessons.filter((lesson) => lesson.domain === pathDomain);
+  const goal = goalPathById(pathDomain);
+  const path = goal
+    ? goal.lessonIds.map((id) => lessons.find((lesson) => lesson.id === id)!)
+    : lessons.filter((lesson) => lesson.domain === pathDomain);
   const firstOpen = path.find(
     (lesson) =>
       !done.has(lesson.id) && lesson.prerequisites.every((id) => done.has(id)),
@@ -269,7 +289,8 @@ function AcademyStart({
       <section className="academy-path" aria-labelledby="academy-path-title">
         <div className="academy-path-heading">
           <h2 id="academy-path-title">
-            Le chemin · {domainIdentity[pathDomain].short}
+            Le chemin ·{" "}
+            {goal ? goal.title : domainIdentity[pathDomain as Domain].short}
           </h2>
           <small>
             {path.filter((lesson) => done.has(lesson.id)).length} /{" "}
@@ -323,6 +344,57 @@ function AcademyStart({
         <button className="text-button" onClick={onAtlas}>
           Voir comment les notions se relient <Icon name="arrow" size={15} />
         </button>
+      </section>
+      <section
+        className="academy-domains academy-goals"
+        aria-labelledby="academy-goals-title"
+      >
+        <h2 id="academy-goals-title">Parcours par objectif</h2>
+        <div className="academy-domain-grid">
+          {goalPaths.map((item) => {
+            const validated = item.lessonIds.filter((id) =>
+              done.has(id),
+            ).length;
+            const following = activePathId === item.id;
+            return (
+              <div
+                key={item.id}
+                className={`academy-domain academy-goal ${following ? "is-following" : ""}`}
+              >
+                <button
+                  type="button"
+                  className="academy-goal-main"
+                  aria-pressed={pathDomain === item.id}
+                  onClick={() => onPathDomain(item.id)}
+                >
+                  <span className="academy-domain-icon">
+                    <Icon name={item.icon} size={20} />
+                  </span>
+                  <strong>{item.title}</strong>
+                  <span className="academy-domain-promise">{item.promise}</span>
+                  <span className="academy-domain-count">
+                    <ProgressBar value={validated / item.lessonIds.length} />
+                    <small>
+                      {validated} / {item.lessonIds.length} étapes
+                    </small>
+                  </span>
+                </button>
+                {onFollow && (
+                  <button
+                    type="button"
+                    className="text-button academy-goal-follow"
+                    aria-pressed={following}
+                    onClick={() => onFollow(following ? null : item.id)}
+                  >
+                    {following
+                      ? "Parcours suivi · arrêter"
+                      : "Suivre ce parcours"}
+                  </button>
+                )}
+              </div>
+            );
+          })}
+        </div>
       </section>
       <section
         className="academy-domains"

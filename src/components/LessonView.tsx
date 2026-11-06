@@ -6,6 +6,11 @@ import type { AppState, Attempt, StateUpdater } from "../lib/types";
 import { Icon } from "./Icon";
 import { GlossaryText } from "./GlossaryText";
 import { LessonScene } from "./LessonScene";
+import {
+  PracticalSheetButton,
+  PracticeDrill,
+  VerificationBadge,
+} from "./LessonExtras";
 import { MentorPanel } from "./MentorPanel";
 import { latestCurrentAttempt } from "../lib/portfolio";
 import {
@@ -280,6 +285,7 @@ export function LessonView({ lesson, state, update, onNavigate }: Props) {
           <span>{lesson.domain}</span>
           <span>Niveau {lesson.level}</span>
           <span>{lesson.minutes} min</span>
+          <VerificationBadge lessonId={lesson.id} />
         </div>
         <h1>{lesson.title}</h1>
         <p>{lesson.summary}</p>
@@ -1096,6 +1102,7 @@ export function LessonView({ lesson, state, update, onNavigate }: Props) {
               )}
             </div>
           )}
+          {tab === 1 && <PracticeDrill lesson={lesson} />}
           {tab === 3 && (
             <div className="learning-apply">
               <span className="eyebrow">DE LA NOTION À LA DÉCISION</span>
@@ -1105,6 +1112,7 @@ export function LessonView({ lesson, state, update, onNavigate }: Props) {
                 votre prochain mouvement.
               </h2>
               <p className="learning-lead">{lesson.application}</p>
+              <PracticalSheetButton lessonId={lesson.id} />
               {state.projects.length > 0 ? (
                 <form
                   className="learning-project-link"

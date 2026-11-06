@@ -1,6 +1,7 @@
 import { lessons, type Lesson } from "../data/lessons.ts";
 import { lessonShortLabel } from "../data/lessonLabels.ts";
 import { latestCurrentAttempt } from "./portfolio.ts";
+import { goalPathById } from "../data/goalPaths.ts";
 import type { AppState, Attempt } from "./types";
 
 /** Each goal names the domains that serve it first, in order. */
@@ -73,8 +74,15 @@ export function recommendLesson(state: AppState, now: Date) {
       : interested(lesson)
         ? 1
         : 2;
+  // A chosen guided path comes first: its next accessible step, in order.
+  const path = goalPathById(state.activePathId);
+  const pathRank = (lesson: Lesson) => {
+    const index = path ? path.lessonIds.indexOf(lesson.id) : -1;
+    return index === -1 ? Number.MAX_SAFE_INTEGER : index;
+  };
   const ranked = [...candidates].sort(
     (a, b) =>
+      pathRank(a) - pathRank(b) ||
       tier(a) - tier(b) ||
       goalRank(a) - goalRank(b) ||
       (beginner ? a.level - b.level : 0) ||
@@ -108,15 +116,17 @@ export function recommendLesson(state: AppState, now: Date) {
       : "Vous l’avez ouverte en dernier."
     : !candidates.length
       ? "Tout est validé : revoir garde les idées vivantes."
-      : continues
-        ? `Elle prolonge «\u00a0${lessonShortLabel(continues.id, continues.title)}\u00a0», que vous venez de valider.${goalNote}`
-        : tier(next) === 0
-          ? `Votre point de départ signale une notion à poser en ${next.domain.toLowerCase()}, l’un de vos centres d’intérêt.${goalNote}`
-          : tier(next) === 1
-            ? `Dans vos centres d’intérêt${next.prerequisites.length ? ", et ses prérequis sont validés" : ", sans prérequis"}.${goalNote}`
-            : servesGoal
-              ? `Elle sert votre objectif\u00a0: «\u00a0${profile!.goal}\u00a0».`
-              : "La prochaine notion accessible du parcours.";
+      : path && pathRank(next) !== Number.MAX_SAFE_INTEGER
+        ? `Étape ${pathRank(next) + 1} sur ${path.lessonIds.length} de votre parcours «\u00a0${path.title}\u00a0».`
+        : continues
+          ? `Elle prolonge «\u00a0${lessonShortLabel(continues.id, continues.title)}\u00a0», que vous venez de valider.${goalNote}`
+          : tier(next) === 0
+            ? `Votre point de départ signale une notion à poser en ${next.domain.toLowerCase()}, l’un de vos centres d’intérêt.${goalNote}`
+            : tier(next) === 1
+              ? `Dans vos centres d’intérêt${next.prerequisites.length ? ", et ses prérequis sont validés" : ", sans prérequis"}.${goalNote}`
+              : servesGoal
+                ? `Elle sert votre objectif\u00a0: «\u00a0${profile!.goal}\u00a0».`
+                : "La prochaine notion accessible du parcours.";
   return {
     latest,
     done,
