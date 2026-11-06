@@ -1280,3 +1280,168 @@
     flex: 0 0 auto;
   }
 }
+
+/* ==========================================================================
+   V4 — la DA des planches de l'utilisateur, appliquée de A à Z.
+   Même grammaire partout : pastilles d'icônes en relief, violet pour ce qui
+   avance ou ce qu'on manipule, cyan pour un second tracé, vert pour ce qui
+   est réussi, gris pointillé pour les références. Lueurs douces (--glow-k).
+   ========================================================================== */
+
+/* ---------- Pastilles d'icônes (compétences, révisions, objectifs…) ---------- */
+.home-objective-icon,
+.home-domain-icon,
+.academy-domain-icon,
+.skills-summary-icon,
+.project-plan-next-icon,
+.portfolio-exploration-icon,
+.learning-action-icon,
+.console-tile-icon {
+  border-radius: 12px;
+  background:
+    radial-gradient(
+      120% 90% at 30% 0%,
+      rgb(255 255 255 / 0.1),
+      transparent 60%
+    ),
+    linear-gradient(180deg, #1c1c21, #121215);
+  border: 1px solid rgb(255 255 255 / 0.09);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.08),
+    0 6px 16px rgb(0 0 0 / 0.35);
+  color: var(--text);
+  transition:
+    color var(--motion-normal) var(--ease-out),
+    box-shadow var(--motion-normal) var(--ease-out);
+}
+.home-objective:hover .home-objective-icon,
+.home-domain:hover .home-domain-icon,
+.academy-domain:hover .academy-domain-icon,
+.console-tile:hover .console-tile-icon {
+  color: var(--accent-violet);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.08),
+    0 0 18px rgb(var(--accent-violet-rgb) / calc(0.35 * var(--glow-k))),
+    0 6px 16px rgb(0 0 0 / 0.35);
+}
+/* Le domaine ou l'objectif qui suit porte la couleur. */
+.academy-goal.is-following .academy-domain-icon {
+  color: var(--accent-violet);
+  border-color: rgb(var(--accent-violet-rgb) / calc(0.4 * var(--wash-k)));
+}
+
+/* ---------- Curseurs : la piste se remplit en violet ---------- */
+input[type="range"],
+.financial-control input[type="range"],
+.simulation-control > input[type="range"] {
+  accent-color: var(--accent-violet);
+}
+
+/* ---------- Graphiques ---------- */
+.plot-grid,
+.review-spacing-axis {
+  stroke: rgb(255 255 255 / 0.07);
+}
+.equilibrium-plot .plot-area {
+  fill: rgb(var(--accent-violet-rgb) / calc(0.16 * var(--wash-k)));
+}
+.finance-curve-result {
+  stroke: var(--accent-violet);
+  filter: drop-shadow(
+    0 0 5px rgb(var(--accent-violet-rgb) / calc(0.55 * var(--glow-k)))
+  );
+}
+.finance-curve-cash {
+  stroke: var(--accent-blue);
+}
+.scene-bar-focus {
+  fill: var(--accent-violet);
+}
+.scene-bar-soft,
+.scene-bar-dim-fill {
+  fill: rgb(var(--accent-violet-rgb) / calc(0.3 * var(--wash-k)));
+}
+.scene-compare-track i,
+.scene-micro-bar,
+.scene-segment.is-active {
+  background: linear-gradient(
+    90deg,
+    rgb(var(--accent-violet-rgb) / 0.7),
+    var(--accent-violet)
+  );
+  box-shadow: 0 0 10px
+    rgb(var(--accent-violet-rgb) / calc(0.45 * var(--glow-k)));
+}
+/* Anneaux : violet → cyan comme sur les planches, halo léger. */
+.progress-ring {
+  filter: drop-shadow(
+    0 0 8px rgb(var(--accent-violet-rgb) / calc(0.3 * var(--glow-k)))
+  );
+}
+
+/* ---------- Leçons ---------- */
+.editorial-lesson .learning-stage-tab.is-active {
+  border-color: rgb(var(--accent-violet-rgb) / calc(0.45 * var(--wash-k)));
+  box-shadow:
+    inset 0 -2px 0 var(--accent-violet),
+    0 0 22px rgb(var(--accent-violet-rgb) / calc(0.18 * var(--glow-k))),
+    var(--card-shadow);
+}
+.editorial-lesson .learning-stage-tab.is-active .learning-stage-number {
+  color: var(--accent-violet);
+}
+.learning-sequence-dots i.is-complete {
+  background: var(--accent-violet);
+  box-shadow: 0 0 8px rgb(var(--accent-violet-rgb) / calc(0.5 * var(--glow-k)));
+}
+.learning-sequence-nav button.is-active .learning-nav-point {
+  background: var(--accent-violet);
+  border-color: var(--accent-violet);
+  color: #15121f; /* contraste ≥ 4,5 sur le violet */
+  box-shadow:
+    0 0 0 4px rgb(var(--accent-violet-rgb) / 0.16),
+    0 0 14px rgb(var(--accent-violet-rgb) / calc(0.6 * var(--glow-k)));
+}
+.learning-quiz-progress > i.is-current {
+  background: var(--accent-violet);
+}
+.learning-result-orbit {
+  border-color: rgb(var(--accent-violet-rgb) / calc(0.5 * var(--wash-k)));
+  box-shadow:
+    0 0 0 6px rgb(var(--accent-violet-rgb) / 0.06),
+    0 0 30px rgb(var(--accent-violet-rgb) / calc(0.3 * var(--glow-k)));
+}
+.learning-option.is-selected {
+  border-color: rgb(var(--accent-violet-rgb) / calc(0.55 * var(--wash-k)));
+}
+
+/* ---------- Académie, carte des compétences, trajectoire ---------- */
+.academy-path-step.is-next {
+  border-color: rgb(var(--accent-violet-rgb) / calc(0.45 * var(--wash-k)));
+  box-shadow: 0 0 20px
+    rgb(var(--accent-violet-rgb) / calc(0.14 * var(--glow-k)));
+}
+.knowledge-node.is-selected .knowledge-node-point,
+.trajectory-node.selected .trajectory-node-core {
+  background: var(--accent-violet);
+  border-color: var(--accent-violet);
+  color: #15121f;
+  box-shadow:
+    0 0 0 5px rgb(var(--accent-violet-rgb) / 0.16),
+    0 0 18px rgb(var(--accent-violet-rgb) / calc(0.7 * var(--glow-k)));
+}
+.knowledge-node.is-selected .knowledge-node-core {
+  background: #fff;
+}
+.atlas-node.is-complete .atlas-node-orbit {
+  border-color: rgb(var(--accent-emerald-rgb) / calc(0.6 * var(--wash-k)));
+}
+.knowledge-connections .is-related,
+.atlas-link.is-active {
+  stroke: var(--accent-violet);
+}
+
+/* ---------- Atelier IA : constellation ---------- */
+.prompt-part.is-found {
+  border-color: rgb(var(--accent-violet-rgb) / calc(0.5 * var(--wash-k)));
+}

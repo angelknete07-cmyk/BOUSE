@@ -1,3 +1,16 @@
+# Review design — V4 : la DA des planches de A à Z
+
+**6 novembre 2026, soir.** **La direction artistique n'est pas déclarée validée.** Paire principale : leçon (`03-lecon-learn-viewport`).
+
+- **Une seule grammaire visuelle partout** (fin de `src/console.css`) : pastilles d'icônes en relief (objectifs, domaines, compétences, projets, portfolio, actions de leçon, tuiles) qui s'éclairent de violet au survol ; curseurs à piste violette ; anneaux violet → cyan avec halo léger ; courbes principales violettes lumineuses, flux de trésorerie en cyan, références en gris ; barres et jauges en dégradé violet.
+- **Leçons** : onglet actif souligné de violet, points de séquence et point actif du fil lumineux, quiz en cours et orbite du résultat violets.
+- **Académie, compétences, trajectoire** : étape suivante, nœud choisi et liens actifs en violet ; notions acquises en vert.
+- **Contraste** : numéro du fil de leçon en encre sombre sur le violet (le test d'accessibilité a refusé le blanc à 2,9:1).
+- **Contrôles de l'agent** : `npm test` 245 cas, `npx playwright test` 86 tests (contrastes axe compris), Prettier, build ; galerie régénérée ; 0 débordement à 320 px sur 13 pages.
+- **Limites** : les 43 scènes reçoivent la DA par leurs classes communes, sans retouche une par une ; pas de vrai téléphone ni de validation externe.
+
+---
+
 # Review design — V4 jalon D : la DA des planches dans toute l'application
 
 **6 novembre 2026, 17 h 32 Europe/Paris.** **La direction artistique n'est pas déclarée validée.**
