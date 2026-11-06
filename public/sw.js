@@ -19,8 +19,7 @@ self.addEventListener("install", (event) => {
   event.waitUntil(
     caches
       .open(VERSION)
-      .then((cache) => cache.addAll([...new Set([...SHELL, ...PRECACHE])]))
-      .then(() => self.skipWaiting()),
+      .then((cache) => cache.addAll([...new Set([...SHELL, ...PRECACHE])])),
   );
 });
 
@@ -31,7 +30,7 @@ self.addEventListener("activate", (event) => {
       .then((keys) =>
         Promise.all(
           keys
-            .filter((key) => key !== VERSION)
+            .filter((key) => key.startsWith("bouse-") && key !== VERSION)
             .map((key) => caches.delete(key)),
         ),
       )
@@ -46,17 +45,15 @@ self.addEventListener("fetch", (event) => {
   if (url.origin !== self.location.origin) return;
 
   if (request.mode === "navigate") {
+    // Keep the shell and its hashed assets on the same release. An update
+    // waits until existing tabs close; it never evicts assets under a live tab.
     event.respondWith(
-      fetch(request)
-        .then((response) => {
-          const copy = response.clone();
-          caches.open(VERSION).then((cache) => cache.put("/", copy));
-          return response;
-        })
-        .catch(() =>
-          caches
+      caches
+        .open(VERSION)
+        .then((cache) =>
+          cache
             .match("/", { ignoreVary: true })
-            .then((cached) => cached || Response.error()),
+            .then((cached) => cached || fetch(request)),
         ),
     );
     return;

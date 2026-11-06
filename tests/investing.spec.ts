@@ -4,7 +4,7 @@ import { glossary } from "../src/data/investingGlossary";
 async function seed(page: Page) {
   await page.addInitScript(() => {
     localStorage.setItem(
-      "bouse.academy.v1",
+      "bouse.academy.v1:guest",
       JSON.stringify({
         schemaVersion: 1,
         profile: {

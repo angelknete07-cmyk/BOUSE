@@ -173,7 +173,8 @@ test("apprendre, prouver, appliquer et retrouver la progression après rechargem
     .poll(() =>
       page.evaluate(
         () =>
-          JSON.parse(localStorage.getItem("bouse.academy.v1")!).attempts.length,
+          JSON.parse(localStorage.getItem("bouse.academy.v1:guest")!).attempts
+            .length,
       ),
     )
     .toBe(1);
@@ -193,7 +194,8 @@ test("apprendre, prouver, appliquer et retrouver la progression après rechargem
     .poll(() =>
       page.evaluate(
         () =>
-          JSON.parse(localStorage.getItem("bouse.academy.v1")!).projects.length,
+          JSON.parse(localStorage.getItem("bouse.academy.v1:guest")!).projects
+            .length,
       ),
     )
     .toBe(1);
@@ -403,7 +405,7 @@ test("les préférences modifient tout le profil, sont conservées et ne touchen
   await page.reload();
   const saved = await page.evaluate(
     () =>
-      JSON.parse(localStorage.getItem("bouse.academy.v1")!) as {
+      JSON.parse(localStorage.getItem("bouse.academy.v1:guest")!) as {
         profile: Record<string, unknown>;
         attempts: unknown[];
         projects: unknown[];
@@ -431,7 +433,7 @@ test("sans configuration, la synchronisation l’annonce honnêtement et ne prop
   await onboard(page);
   await page.goto("/#settings");
   const panel = page.getByRole("region", { name: "Compte et synchronisation" });
-  await expect(panel).toContainText("Non configurée");
+  await expect(panel).toContainText(/Non configurée|Non connecté/);
   await expect(panel).toContainText(
     "La synchronisation n’est pas configurée sur cette installation",
   );
@@ -503,9 +505,9 @@ test("deux leçons de suite : question de départ, acquis, suite et retour serei
   page,
 }) => {
   await page.addInitScript(() => {
-    if (localStorage.getItem("bouse.academy.v1")) return;
+    if (localStorage.getItem("bouse.academy.v1:guest")) return;
     localStorage.setItem(
-      "bouse.academy.v1",
+      "bouse.academy.v1:guest",
       JSON.stringify({
         schemaVersion: 1,
         profile: {
@@ -732,7 +734,9 @@ test("suivre un parcours, s’entraîner sans toucher aux quiz, télécharger un
   await drill.getByRole("group").first().getByRole("button").first().click();
   await expect(drill.getByRole("status").first()).toBeVisible();
   const attempts = await page.evaluate(
-    () => JSON.parse(localStorage.getItem("bouse.academy.v1")!).attempts.length,
+    () =>
+      JSON.parse(localStorage.getItem("bouse.academy.v1:guest")!).attempts
+        .length,
   );
   expect(attempts).toBe(0);
 

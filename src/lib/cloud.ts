@@ -9,7 +9,8 @@ import type { RemoteCopy } from "./sync";
  * row-level security policies in supabase/migrations.
  */
 const url = import.meta.env.VITE_SUPABASE_URL as string | undefined;
-const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined;
+const anonKey = (import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY ||
+  import.meta.env.VITE_SUPABASE_ANON_KEY) as string | undefined;
 
 export function isCloudConfigured(): boolean {
   return Boolean(url && anonKey);
@@ -23,6 +24,10 @@ export function cloudClient(): Promise<SupabaseClient> {
     return Promise.reject(new Error("Synchronisation non configurée."));
   clientPromise ??= import("@supabase/supabase-js").then(({ createClient }) =>
     createClient(url!, anonKey!, {
+      global: {
+        fetch: (input, init) =>
+          fetch(input, { ...init, signal: AbortSignal.timeout(20000) }),
+      },
       auth: {
         persistSession: true,
         autoRefreshToken: true,
@@ -65,7 +70,8 @@ export async function onAuthChange(
 
 export async function currentUser(): Promise<User | null> {
   const client = await cloudClient();
-  const { data } = await client.auth.getSession();
+  const { data, error } = await client.auth.getSession();
+  if (error) throw error;
   return data.session?.user ?? null;
 }
 
@@ -81,7 +87,7 @@ export async function sendSignInLink(email: string): Promise<void> {
 
 export async function signOut(): Promise<void> {
   const client = await cloudClient();
-  const { error } = await client.auth.signOut();
+  const { error } = await client.auth.signOut({ scope: "local" });
   if (error) throw new Error(error.message);
 }
 
@@ -149,5 +155,4 @@ export async function deleteAccount(): Promise<void> {
   const client = await cloudClient();
   const { error } = await client.rpc("delete_my_account");
   if (error) throw new Error(error.message);
-  await client.auth.signOut();
 }

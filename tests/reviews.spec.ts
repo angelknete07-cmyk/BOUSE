@@ -5,7 +5,7 @@ import type { AppState } from "../src/lib/types";
 
 const lesson = lessons.find((item) => item.id === "ca-marge-tresorerie")!;
 const fixedNow = "2026-11-03T10:00:00.000Z";
-const storageKey = "bouse.academy.v1";
+const storageKey = "bouse.academy.v1:guest";
 
 function savedState(studied = true): AppState {
   return {

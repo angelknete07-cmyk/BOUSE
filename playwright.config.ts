@@ -15,7 +15,7 @@ export default defineConfig({
   timeout: 45000,
   expect: { timeout: 7000 },
   use: {
-    baseURL: "http://127.0.0.1:5173",
+    baseURL: process.env.BOUSE_TEST_URL || "http://127.0.0.1:5173",
     trace: "retain-on-failure",
     screenshot: "only-on-failure",
     reducedMotion: "reduce",
@@ -31,10 +31,12 @@ export default defineConfig({
     },
     { name: "mobile-chromium", use: { ...devices["Pixel 7"] } },
   ],
-  webServer: {
-    command: "npm run dev -- --port 5173 --strictPort",
-    url: "http://127.0.0.1:5173",
-    reuseExistingServer: true,
-    timeout: 30000,
-  },
+  webServer: process.env.BOUSE_TEST_URL
+    ? undefined
+    : {
+        command: "npm run dev -- --port 5173 --strictPort",
+        url: "http://127.0.0.1:5173",
+        reuseExistingServer: true,
+        timeout: 30000,
+      },
 });

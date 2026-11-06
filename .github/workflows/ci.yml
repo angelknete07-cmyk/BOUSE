@@ -34,6 +34,12 @@ jobs:
         run: npx playwright install --with-deps chromium
       - name: Browser tests (desktop and Pixel 7)
         run: npm run test:e2e
+      - name: Account isolation and sync browser tests (mock transport)
+        run: npx playwright test tests/accounts.spec.ts
+        env:
+          BOUSE_ACCOUNT_TESTS: '1'
+          VITE_SUPABASE_URL: https://bouse-test.invalid
+          VITE_SUPABASE_PUBLISHABLE_KEY: sb_publishable_test
       - name: Keep failure traces
         if: failure()
         uses: actions/upload-artifact@v4
