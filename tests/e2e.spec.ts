@@ -704,3 +704,41 @@ test("chaque leçon a sa scène : prix TTC, fiscalité des placements, assurance
   await expect(insurance).toContainText("Bien vu.");
   await noHorizontalOverflow(page);
 });
+
+test("suivre un parcours, s’entraîner sans toucher aux quiz, télécharger une fiche", async ({
+  page,
+}) => {
+  await onboard(page);
+  await page.goto("/#academy");
+  await page
+    .getByRole("region", { name: "Parcours par objectif" })
+    .getByRole("button", { name: "Suivre ce parcours" })
+    .first()
+    .click();
+  await expect(page.getByText("Parcours suivi · arrêter")).toBeVisible();
+  await page.goto("/#home");
+  await expect(page.locator(".learning-hero-reason").first()).toContainText(
+    "de votre parcours « Créer mon entreprise »",
+  );
+
+  await page.goto("/#lesson/ent-creer-etapes");
+  await expect(page.locator(".lesson-verified")).toContainText(
+    "Règles vérifiées en",
+  );
+  await page.getByRole("tab", { name: /Pratiquer/ }).click();
+  const drill = page.getByRole("region", { name: "Quel terme correspond ?" });
+  await drill.getByRole("group").first().getByRole("button").first().click();
+  await expect(drill.getByRole("status").first()).toBeVisible();
+  const attempts = await page.evaluate(
+    () => JSON.parse(localStorage.getItem("bouse.academy.v1")!).attempts.length,
+  );
+  expect(attempts).toBe(0);
+
+  await page.getByRole("tab", { name: /Appliquer/ }).click();
+  const download = page.waitForEvent("download");
+  await page.getByRole("button", { name: /Télécharger/ }).click();
+  expect((await download).suggestedFilename()).toBe(
+    "bouse-creation-entreprise.md",
+  );
+  await noHorizontalOverflow(page);
+});

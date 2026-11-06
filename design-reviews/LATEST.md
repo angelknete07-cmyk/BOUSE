@@ -1,3 +1,16 @@
+# Review design — passe 30 : parcours, entraînement, vérification, fiches
+
+**6 novembre 2026.** Détail : [AUDIT-30.md](AUDIT-30.md). **La direction artistique n'est pas déclarée validée.**
+
+- **Cinq parcours par objectif** à suivre depuis l'Académie ; la prochaine leçon suit alors leur ordre.
+- **Entraînement libre** à partir du lexique, sans aucun enregistrement.
+- **Date de vérification** sur les 14 leçons à règles datées, avec un avertissement au-delà de 12 mois.
+- **Quatre fiches pratiques** à télécharger.
+- **Contrôles** : `npm test` 245 cas, `npx playwright test` 86 tests, build sans avertissement.
+- **Captures** : `passe-30/` (desktop 1440 × 1000, Pixel 7).
+
+---
+
 # Review design — passe 29 : une scène dans chaque leçon
 
 **6 novembre 2026, 11:49 Europe/Paris.** Détail : [AUDIT-29.md](AUDIT-29.md). **La direction artistique n'est pas déclarée validée.**
