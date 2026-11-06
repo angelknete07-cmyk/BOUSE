@@ -8,6 +8,11 @@ import {
 import { projectInvestment } from "../lib/investing";
 import { budgetBalance, loanPayment } from "../lib/personalFinance";
 import {
+  AiTestScene,
+  BalanceSheetScene,
+  BondScene,
+  ForecastScene,
+  ScamScene,
   IncomeTaxScene,
   RebalanceScene,
   RentOrBuyScene,
@@ -38,6 +43,11 @@ export function LessonScene({ lessonId }: { lessonId: string }) {
   if (lessonId === "fp-logement") return <RentOrBuyScene />;
   if (lessonId === "inv-allocation-profil") return <RebalanceScene />;
   if (lessonId === "ent-statut-juridique") return <StatusScene />;
+  if (lessonId === "inv-obligations-taux") return <BondScene />;
+  if (lessonId === "fin-previsionnel") return <ForecastScene />;
+  if (lessonId === "fin-etats-financiers") return <BalanceSheetScene />;
+  if (lessonId === "inv-arnaques-placement") return <ScamScene />;
+  if (lessonId === "ia-evaluer-fiabilite") return <AiTestScene />;
   return null;
 }
 

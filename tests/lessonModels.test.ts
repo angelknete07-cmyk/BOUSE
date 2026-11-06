@@ -112,3 +112,61 @@ test("status suggestion follows the criteria and says why", () => {
   assert.equal(suggestStatus({ ...none, highRevenue: true }).status, "eurl");
   assert.ok(suggestStatus({ ...none, highRevenue: true }).reasons.length >= 1);
 });
+
+test("a bond's price falls when market rates rise (lesson example: about 850 €)", async () => {
+  const { bondPrice } = await import("../src/lib/lessonModels.ts");
+  assert.equal(bondPrice(1_000, 0.02, 9, 0.04).price, 851);
+  assert.equal(bondPrice(1_000, 0.02, 9, 0.02).price, 1_000);
+  assert.ok(bondPrice(1_000, 0.02, 9, 0.01).price > 1_000);
+  const cheap = bondPrice(1_000, 0.03, 5, 0.05);
+  assert.ok(cheap.currentYield > 0.03);
+});
+
+test("a forecast gives three scenarios and a break-even number of customers", async () => {
+  const { forecastScenarios } = await import("../src/lib/lessonModels.ts");
+  const result = forecastScenarios({
+    customers: 400,
+    basket: 150,
+    variableShare: 0.4,
+    fixedCosts: 30_000,
+  });
+  assert.equal(result.central.revenue, 60_000);
+  assert.equal(result.central.result, 6_000);
+  assert.equal(result.pessimistic.result, Math.round(240 * 150 * 0.6 - 30_000));
+  assert.ok(result.optimistic.result > result.central.result);
+  assert.equal(result.breakEvenCustomers, Math.ceil(30_000 / 90));
+});
+
+test("every balance sheet operation keeps assets equal to liabilities", async () => {
+  const { balanceOperations, emptySheet, sheetTotals } =
+    await import("../src/lib/lessonModels.ts");
+  let sheet = emptySheet;
+  for (const key of [
+    "creation",
+    "loan",
+    "machine",
+    "stockOnCredit",
+    "sale",
+    "repay",
+  ] as const) {
+    sheet = balanceOperations[key].apply(sheet);
+    assert.ok(sheetTotals(sheet).balanced, key);
+  }
+  assert.equal(sheet.cash, 10_000 + 20_000 - 15_000 + 9_000 - 5_000);
+  assert.equal(sheet.equity, 13_000);
+});
+
+test("sorting games count answers and serious misses", async () => {
+  const { scoreSorting } = await import("../src/lib/lessonModels.ts");
+  const items = [
+    { id: "a", answer: true, serious: true },
+    { id: "b", answer: false },
+  ];
+  assert.deepEqual(scoreSorting(items, { a: false }), {
+    answered: 1,
+    correct: 0,
+    seriousMisses: 1,
+    done: false,
+  });
+  assert.equal(scoreSorting(items, { a: true, b: false }).correct, 2);
+});

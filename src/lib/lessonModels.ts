@@ -302,3 +302,181 @@ export function suggestStatus(needs: StatusNeeds) {
     );
   return { status, label: statusLabels[status], reasons };
 }
+
+/* ---------- Obligations : prix et taux en sens inverse ---------- */
+
+/**
+ * Present value of a fixed-coupon bond: each coupon and the nominal are
+ * discounted at the market rate of comparable new bonds.
+ */
+export function bondPrice(
+  nominal: number,
+  couponRate: number,
+  yearsLeft: number,
+  marketRate: number,
+) {
+  assertAmounts({ nominal, couponRate, yearsLeft, marketRate });
+  const coupon = nominal * couponRate;
+  const years = Math.round(yearsLeft);
+  let price = 0;
+  for (let year = 1; year <= years; year++)
+    price += coupon / Math.pow(1 + marketRate, year);
+  price += nominal / Math.pow(1 + marketRate, years);
+  return {
+    price: Math.round(price),
+    coupon: cents(coupon),
+    /** Coupon divided by the market price. */
+    currentYield: price ? coupon / price : 0,
+  };
+}
+
+/* ---------- Prévisionnel : trois scénarios ---------- */
+
+export interface ForecastInput {
+  /** Customers in the first year, central scenario. */
+  customers: number;
+  /** Average yearly basket per customer. */
+  basket: number;
+  /** Variable costs as a share of revenue. */
+  variableShare: number;
+  fixedCosts: number;
+}
+
+/**
+ * The same plan under three assumptions on the number of customers:
+ * a forecast is a set of scenarios, not a promise.
+ */
+export function forecastScenarios(input: ForecastInput) {
+  assertAmounts({ ...input });
+  if (input.variableShare > 1) {
+    throw new RangeError("Les coûts variables ne peuvent dépasser 100 %.");
+  }
+  const build = (factor: number) => {
+    const revenue = input.customers * factor * input.basket;
+    const result = revenue * (1 - input.variableShare) - input.fixedCosts;
+    return { revenue: Math.round(revenue), result: Math.round(result) };
+  };
+  const margin = input.basket * (1 - input.variableShare);
+  return {
+    pessimistic: build(0.6),
+    central: build(1),
+    optimistic: build(1.3),
+    /** Customers needed to cover fixed costs. */
+    breakEvenCustomers:
+      margin > 0 ? Math.ceil(input.fixedCosts / margin) : null,
+  };
+}
+
+/* ---------- Bilan : chaque opération garde l'équilibre ---------- */
+
+export interface BalanceSheet {
+  fixedAssets: number;
+  stock: number;
+  cash: number;
+  equity: number;
+  debt: number;
+  suppliers: number;
+}
+
+export type BalanceOperation =
+  "creation" | "loan" | "machine" | "stockOnCredit" | "sale" | "repay";
+
+/** What each operation changes, in a fictitious company. */
+export const balanceOperations: Record<
+  BalanceOperation,
+  {
+    label: string;
+    apply: (sheet: BalanceSheet) => BalanceSheet;
+    explain: string;
+  }
+> = {
+  creation: {
+    label: "Apport de 10 000 €",
+    apply: (s) => ({ ...s, cash: s.cash + 10_000, equity: s.equity + 10_000 }),
+    explain:
+      "Les associés apportent de l’argent : la trésorerie et les capitaux propres montent ensemble.",
+  },
+  loan: {
+    label: "Emprunt de 20 000 €",
+    apply: (s) => ({ ...s, cash: s.cash + 20_000, debt: s.debt + 20_000 }),
+    explain:
+      "La banque prête : plus de trésorerie à l’actif, autant de dette au passif.",
+  },
+  machine: {
+    label: "Achat d’une machine 15 000 €",
+    apply: (s) => ({
+      ...s,
+      cash: s.cash - 15_000,
+      fixedAssets: s.fixedAssets + 15_000,
+    }),
+    explain:
+      "L’argent devient une machine : l’actif change de forme, le total ne bouge pas.",
+  },
+  stockOnCredit: {
+    label: "Stock acheté à crédit 6 000 €",
+    apply: (s) => ({
+      ...s,
+      stock: s.stock + 6_000,
+      suppliers: s.suppliers + 6_000,
+    }),
+    explain:
+      "Le fournisseur sera payé plus tard : le stock monte, la dette fournisseur aussi.",
+  },
+  sale: {
+    label: "Vente de ce stock 9 000 €",
+    apply: (s) => {
+      const sold = Math.min(6_000, s.stock);
+      return {
+        ...s,
+        stock: s.stock - sold,
+        cash: s.cash + 9_000,
+        equity: s.equity + 9_000 - sold,
+      };
+    },
+    explain:
+      "Le stock sort, la trésorerie entre : la marge de la vente augmente les capitaux propres (le résultat).",
+  },
+  repay: {
+    label: "Remboursement de 5 000 €",
+    apply: (s) => {
+      const paid = Math.min(5_000, s.debt, Math.max(0, s.cash));
+      return { ...s, cash: s.cash - paid, debt: s.debt - paid };
+    },
+    explain:
+      "Rembourser n’est pas une charge : la trésorerie et la dette baissent ensemble.",
+  },
+};
+
+export const emptySheet: BalanceSheet = {
+  fixedAssets: 0,
+  stock: 0,
+  cash: 0,
+  equity: 0,
+  debt: 0,
+  suppliers: 0,
+};
+
+export function sheetTotals(sheet: BalanceSheet) {
+  const assets = sheet.fixedAssets + sheet.stock + sheet.cash;
+  const liabilities = sheet.equity + sheet.debt + sheet.suppliers;
+  return { assets, liabilities, balanced: assets === liabilities };
+}
+
+/* ---------- Jeux de repérage : arnaques et test d'une IA ---------- */
+
+/** Share of correct answers and the misses that matter most. */
+export function scoreSorting<
+  T extends { id: string; answer: boolean; serious?: boolean },
+>(items: T[], choices: Record<string, boolean | undefined>) {
+  const answered = items.filter((item) => choices[item.id] !== undefined);
+  const correct = answered.filter((item) => choices[item.id] === item.answer);
+  const seriousMisses = answered.filter(
+    (item) => item.serious && choices[item.id] !== item.answer,
+  );
+  return {
+    answered: answered.length,
+    correct: correct.length,
+    seriousMisses: seriousMisses.length,
+    done: answered.length === items.length,
+  };
+}

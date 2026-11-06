@@ -1,3 +1,23 @@
+# Review design — passe 28 : cinq simulateurs de plus, lexique repliable
+
+**6 novembre 2026, 10:59 Europe/Paris.** Détail : [AUDIT-28.md](AUDIT-28.md). **La direction artistique n'est pas déclarée validée.**
+
+- **Simulateurs** (21 leçons interactives sur 43) :
+  - prix d'une obligation selon les taux (retrouve l'exemple de la leçon, 851 €) ;
+  - prévisionnel en trois scénarios ;
+  - bilan opération par opération, toujours à l'équilibre ;
+  - jeu de tri des signaux d'arnaque ;
+  - jeu de test d'un assistant IA.
+- **Lexique mobile** : définitions repliées à deux lignes ; une recherche ou un terme ciblé les ouvre.
+- **Contrôles** : `npm test` 224 cas, `npx playwright test` 82 tests, build sans avertissement.
+- **Captures** : `simulateurs-28/` (desktop 1440 × 1000, Pixel 7) ; archive `2026-11-06_10-59-45-Europe-Paris`.
+- **Limites** :
+  - 22 leçons sans scène ;
+  - trajectoire de l'accueil dense ;
+  - aucun test sur appareil réel.
+
+---
+
 # Review design — passe 27 : simulateurs, onglets en pastilles, lexique indexé
 
 **6 novembre 2026, 10:33 Europe/Paris.** Suite du plan après la passe 26. Détail : [AUDIT-27.md](AUDIT-27.md). **La direction artistique n'est pas déclarée validée.**

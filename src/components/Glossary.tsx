@@ -19,12 +19,19 @@ export function Glossary({
 }) {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState<GlossaryCategory | "Tous">("Tous");
+  // On a phone, definitions open on demand; the targeted term is open.
+  const [open, setOpen] = useState<Set<string>>(
+    () => new Set(focusId ? [focusId] : []),
+  );
   const q = normalizeSearch(query);
   const visible = sortedGlossary(glossary).filter(
     (entry) =>
       (category === "Tous" || entry.category === category) &&
       (!q || normalizeSearch(`${entry.term} ${entry.definition}`).includes(q)),
   );
+  // Looking a term up means reading it: a search or a short list opens everything.
+  const isOpen = (id: string) =>
+    open.has(id) || Boolean(q) || visible.length <= 3;
   const groups = new Map<string, typeof visible>();
   for (const entry of visible) {
     const letter = normalizeSearch(entry.term).charAt(0).toUpperCase();
@@ -33,6 +40,7 @@ export function Glossary({
 
   useEffect(() => {
     if (!focusId) return;
+    setOpen((current) => new Set(current).add(focusId));
     const target = document.getElementById(`terme-${focusId}`);
     target?.scrollIntoView({ block: "center" });
     target?.focus({ preventScroll: true });
@@ -132,8 +140,34 @@ export function Glossary({
                         {entry.term}
                         <span>{entry.category}</span>
                       </dt>
-                      <dd>
-                        <p>{entry.definition}</p>
+                      <dd
+                        className={
+                          open.has(entry.id)
+                            ? "is-open"
+                            : isOpen(entry.id)
+                              ? "is-open is-forced"
+                              : ""
+                        }
+                      >
+                        <p id={`definition-${entry.id}`}>{entry.definition}</p>
+                        <button
+                          type="button"
+                          className="glossary-toggle"
+                          aria-expanded={isOpen(entry.id)}
+                          aria-controls={`definition-${entry.id}`}
+                          onClick={() =>
+                            setOpen((current) => {
+                              const next = new Set(current);
+                              if (next.has(entry.id)) next.delete(entry.id);
+                              else next.add(entry.id);
+                              return next;
+                            })
+                          }
+                        >
+                          {open.has(entry.id)
+                            ? "Replier"
+                            : "Lire la définition"}
+                        </button>
                         {lesson && (
                           <button
                             type="button"

@@ -1,5 +1,12 @@
 import { useState } from "react";
 import {
+  balanceOperations,
+  bondPrice,
+  emptySheet,
+  forecastScenarios,
+  scoreSorting,
+  sheetTotals,
+  type BalanceOperation,
   incomeTax,
   raiseEffect,
   rebalance,
@@ -629,5 +636,522 @@ export function StatusScene() {
         </strong>
       </p>
     </section>
+  );
+}
+
+/* ---------- Obligations ---------- */
+
+export function BondScene() {
+  const [marketRate, setMarketRate] = useState(4);
+  const [years, setYears] = useState(9);
+  const result = bondPrice(1_000, 0.02, years, marketRate / 100);
+  const gap = result.price - 1_000;
+  return (
+    <section
+      className="scene-workbench scene-micro"
+      aria-label="Voir le prix d’une obligation quand les taux changent"
+    >
+      <div className="scene-heading">
+        <div>
+          <span className="eyebrow">LA BALANÇOIRE</span>
+          <h3>Quand les taux montent, le prix baisse.</h3>
+        </div>
+        <span className="scene-fiction">1 000 € · coupon 2 % · fictif</span>
+      </div>
+      <div className="scene-number-line">
+        <div>
+          <strong className="scene-number" aria-live="polite">
+            {euros.format(result.price)}
+          </strong>
+          <span>prix de marché de l’obligation</span>
+        </div>
+        <p>
+          {gap === 0
+            ? "Taux du marché égal au coupon : l’obligation vaut son nominal."
+            : gap < 0
+              ? `${euros.format(-gap)} sous le nominal : son coupon de ${euros.format(result.coupon)} paraît faible face aux nouvelles obligations à ${marketRate} %.`
+              : `${euros.format(gap)} au-dessus du nominal : son coupon de ${euros.format(result.coupon)} est plus généreux que le marché.`}{" "}
+          Rendement pour un acheteur à ce prix :{" "}
+          <strong>{percent(result.currentYield, 1)}</strong> par an en coupons.
+        </p>
+      </div>
+      <CompareBars
+        rows={[
+          {
+            label: "Nominal remboursé",
+            amount: 1_000,
+            display: euros.format(1_000),
+            className: "is-soft",
+          },
+          {
+            label: "Prix aujourd’hui",
+            amount: result.price,
+            display: euros.format(result.price),
+            className: "is-silver",
+          },
+        ]}
+      />
+      <Range
+        label="Taux des nouvelles obligations comparables"
+        shown={`${marketRate.toLocaleString("fr-FR")} %`}
+        ariaLabel="Taux du marché en pourcentage"
+        min={0}
+        max={7}
+        step={0.5}
+        value={marketRate}
+        onChange={setMarketRate}
+      />
+      <Range
+        label="Années avant l’échéance"
+        shown={`${years} an${years > 1 ? "s" : ""}`}
+        ariaLabel="Années avant l’échéance"
+        min={1}
+        max={20}
+        step={1}
+        value={years}
+        onChange={setYears}
+      />
+      <p className="scene-takeaway">
+        Gardée jusqu’à l’échéance, si l’émetteur paie, l’obligation rembourse 1
+        000 € quel que soit son prix entre-temps.{" "}
+        <strong>
+          Plus l’échéance est lointaine, plus le prix réagit aux taux.
+        </strong>
+      </p>
+    </section>
+  );
+}
+
+/* ---------- Prévisionnel ---------- */
+
+export function ForecastScene() {
+  const [customers, setCustomers] = useState(400);
+  const [basket, setBasket] = useState(150);
+  const result = forecastScenarios({
+    customers,
+    basket,
+    variableShare: 0.4,
+    fixedCosts: 30_000,
+  });
+  const rows = [
+    { label: "Pessimiste (−40 % de clients)", value: result.pessimistic },
+    { label: "Central", value: result.central },
+    { label: "Optimiste (+30 %)", value: result.optimistic },
+  ];
+  return (
+    <section
+      className="scene-workbench scene-micro"
+      aria-label="Tester un prévisionnel sur trois scénarios"
+    >
+      <div className="scene-heading">
+        <div>
+          <span className="eyebrow">TROIS SCÉNARIOS</span>
+          <h3>Un prévisionnel est une fourchette, pas une promesse.</h3>
+        </div>
+        <span className="scene-fiction">Charges fixes 30 000 € · fictif</span>
+      </div>
+      <div className="scene-number-line">
+        <div>
+          <strong className="scene-number" aria-live="polite">
+            {result.breakEvenCustomers === null
+              ? "—"
+              : result.breakEvenCustomers.toLocaleString("fr-FR")}
+          </strong>
+          <span>clients nécessaires pour couvrir les charges fixes</span>
+        </div>
+        <p>
+          Avec une marge de {euros.format(basket * 0.6)} par client (coûts
+          variables : 40 % du panier), le résultat de la première année dépend
+          surtout du nombre de clients.
+        </p>
+      </div>
+      <div className="scene-forecast" aria-live="polite">
+        {rows.map((row) => (
+          <div
+            key={row.label}
+            className={row.value.result < 0 ? "is-negative" : ""}
+          >
+            <span>{row.label}</span>
+            <small>Chiffre d’affaires {euros.format(row.value.revenue)}</small>
+            <strong>
+              {row.value.result >= 0 ? "+" : "−"}
+              {euros.format(Math.abs(row.value.result))}
+            </strong>
+          </div>
+        ))}
+      </div>
+      <Range
+        label="Clients la première année (central)"
+        shown={customers.toLocaleString("fr-FR")}
+        ariaLabel="Nombre de clients du scénario central"
+        min={100}
+        max={1_000}
+        step={20}
+        value={customers}
+        onChange={setCustomers}
+      />
+      <Range
+        label="Panier moyen annuel par client"
+        shown={euros.format(basket)}
+        ariaLabel="Panier moyen en euros"
+        min={50}
+        max={400}
+        step={10}
+        value={basket}
+        onChange={setBasket}
+      />
+      <p className="scene-takeaway">
+        Un banquier regarde d’abord si le projet tient dans le scénario
+        pessimiste.{" "}
+        <strong>
+          Chaque hypothèse doit pouvoir se justifier par une preuve : devis,
+          entretiens, ventes test.
+        </strong>
+      </p>
+    </section>
+  );
+}
+
+/* ---------- Bilan ---------- */
+
+export function BalanceSheetScene() {
+  const [steps, setSteps] = useState<BalanceOperation[]>([]);
+  const sheet = steps.reduce(
+    (current, step) => balanceOperations[step].apply(current),
+    emptySheet,
+  );
+  const totals = sheetTotals(sheet);
+  const last = steps.at(-1);
+  const next = (Object.keys(balanceOperations) as BalanceOperation[]).find(
+    (key) => !steps.includes(key),
+  );
+  const line = (label: string, amount: number) => (
+    <div className="scene-sheet-line">
+      <span>{label}</span>
+      <strong>{euros.format(amount)}</strong>
+    </div>
+  );
+  return (
+    <section
+      className="scene-workbench scene-micro"
+      aria-label="Construire un bilan opération par opération"
+    >
+      <div className="scene-heading">
+        <div>
+          <span className="eyebrow">OPÉRATION PAR OPÉRATION</span>
+          <h3>Le bilan reste toujours à l’équilibre.</h3>
+        </div>
+        <span className="scene-fiction">Entreprise fictive</span>
+      </div>
+      <div className="scene-sheet">
+        <div>
+          <h4>Actif · ce qu’elle possède</h4>
+          {line("Immobilisations", sheet.fixedAssets)}
+          {line("Stock", sheet.stock)}
+          {line("Trésorerie", sheet.cash)}
+          <div className="scene-sheet-total">
+            <span>Total</span>
+            <strong>{euros.format(totals.assets)}</strong>
+          </div>
+        </div>
+        <div>
+          <h4>Passif · d’où vient l’argent</h4>
+          {line("Capitaux propres", sheet.equity)}
+          {line("Emprunts", sheet.debt)}
+          {line("Fournisseurs", sheet.suppliers)}
+          <div className="scene-sheet-total">
+            <span>Total</span>
+            <strong>{euros.format(totals.liabilities)}</strong>
+          </div>
+        </div>
+      </div>
+      <p className="financial-reading" aria-live="polite">
+        <span>
+          {last ? (
+            <>
+              <strong>{balanceOperations[last].label} :</strong>{" "}
+              {balanceOperations[last].explain}
+            </>
+          ) : (
+            "Une entreprise vient d’être immatriculée : rien à l’actif, rien au passif. Ajoutez la première opération."
+          )}
+        </span>
+      </p>
+      <div className="scene-sheet-actions">
+        {next ? (
+          <button
+            type="button"
+            className="button secondary"
+            onClick={() => setSteps((current) => [...current, next])}
+          >
+            {balanceOperations[next].label}
+          </button>
+        ) : (
+          <span>Les six opérations sont passées.</span>
+        )}
+        {steps.length > 0 && (
+          <button
+            type="button"
+            className="text-button"
+            onClick={() => setSteps([])}
+          >
+            Recommencer
+          </button>
+        )}
+      </div>
+      <p className="scene-takeaway">
+        Le résultat de l’année rejoint les capitaux propres.{" "}
+        <strong>
+          Une entreprise peut être riche en actifs et pauvre en trésorerie.
+        </strong>
+      </p>
+    </section>
+  );
+}
+
+/* ---------- Jeux de repérage ---------- */
+
+type SortingItem = {
+  id: string;
+  text: string;
+  answer: boolean;
+  serious?: boolean;
+  why: string;
+};
+
+function SortingGame({
+  label,
+  eyebrow,
+  title,
+  fiction,
+  items,
+  yes,
+  no,
+  summary,
+  takeaway,
+}: {
+  label: string;
+  eyebrow: string;
+  title: string;
+  fiction: string;
+  items: SortingItem[];
+  yes: string;
+  no: string;
+  summary: (score: ReturnType<typeof scoreSorting>) => string;
+  takeaway: React.ReactNode;
+}) {
+  const [choices, setChoices] = useState<Record<string, boolean | undefined>>(
+    {},
+  );
+  const score = scoreSorting(items, choices);
+  return (
+    <section className="scene-workbench scene-micro" aria-label={label}>
+      <div className="scene-heading">
+        <div>
+          <span className="eyebrow">{eyebrow}</span>
+          <h3>{title}</h3>
+        </div>
+        <span className="scene-fiction">{fiction}</span>
+      </div>
+      <ol className="scene-sorting">
+        {items.map((item) => {
+          const choice = choices[item.id];
+          const answered = choice !== undefined;
+          return (
+            <li
+              key={item.id}
+              className={
+                answered
+                  ? choice === item.answer
+                    ? "is-right"
+                    : "is-wrong"
+                  : ""
+              }
+            >
+              <p>{item.text}</p>
+              <div role="group" aria-label={`Votre avis : ${item.text}`}>
+                {[
+                  { value: true, text: yes },
+                  { value: false, text: no },
+                ].map((option) => (
+                  <button
+                    key={option.text}
+                    type="button"
+                    aria-pressed={choice === option.value}
+                    disabled={answered}
+                    onClick={() =>
+                      setChoices((current) => ({
+                        ...current,
+                        [item.id]: option.value,
+                      }))
+                    }
+                  >
+                    {option.text}
+                  </button>
+                ))}
+              </div>
+              {answered && (
+                <small role="status">
+                  {choice === item.answer ? "Bien vu. " : "Pas tout à fait. "}
+                  {item.why}
+                </small>
+              )}
+            </li>
+          );
+        })}
+      </ol>
+      <p className="financial-reading" aria-live="polite">
+        <span>
+          <strong>
+            {score.correct} / {items.length}
+          </strong>{" "}
+          {score.done
+            ? summary(score)
+            : `bien classés pour l’instant · ${items.length - score.answered} à examiner.`}
+        </span>
+      </p>
+      {score.answered > 0 && (
+        <button
+          type="button"
+          className="text-button"
+          onClick={() => setChoices({})}
+        >
+          Recommencer
+        </button>
+      )}
+      <p className="scene-takeaway">{takeaway}</p>
+    </section>
+  );
+}
+
+const scamItems: SortingItem[] = [
+  {
+    id: "garanti",
+    text: "« Rendement garanti de 12 % par mois, sans aucun risque. »",
+    answer: true,
+    serious: true,
+    why: "Rendement élevé et absence de risque ne vont jamais ensemble.",
+  },
+  {
+    id: "urgence",
+    text: "« Offre réservée : plus que 24 heures pour en profiter. »",
+    answer: true,
+    why: "L’urgence sert à empêcher de vérifier.",
+  },
+  {
+    id: "dic",
+    text: "Le document d’informations clés indique un risque de perte en capital.",
+    answer: false,
+    why: "Un produit sérieux affiche ses risques ; c’est l’inverse d’un signal d’alerte.",
+  },
+  {
+    id: "whatsapp",
+    text: "Un « conseiller » vous écrit sur WhatsApp après une publicité sur un réseau social.",
+    answer: true,
+    serious: true,
+    why: "Démarchage par messagerie après une publicité : schéma classique d’escroquerie.",
+  },
+  {
+    id: "liste",
+    text: "La société n’est pas sur les listes de l’AMF mais se dit « enregistrée à Chypre ».",
+    answer: true,
+    why: "Une société autorisée à proposer ses services en France apparaît dans les registres officiels.",
+  },
+  {
+    id: "passe",
+    text: "« Les performances passées ne préjugent pas des performances futures. »",
+    answer: false,
+    why: "Mention réglementaire normale.",
+  },
+];
+
+export function ScamScene() {
+  return (
+    <SortingGame
+      label="Repérer les signaux d’une arnaque au placement"
+      eyebrow="À VOUS DE TRIER"
+      title="Signal d’alerte, ou pas ?"
+      fiction="Messages fictifs"
+      items={scamItems}
+      yes="Signal d’alerte"
+      no="Pas un signal"
+      summary={(score) =>
+        score.seriousMisses
+          ? `bien classés. ${score.seriousMisses} signal grave manqué : relisez les deux messages les plus dangereux.`
+          : "bien classés, sans manquer de signal grave. Le réflexe : vérifier sur les listes de l’AMF avant tout versement."
+      }
+      takeaway={
+        <>
+          En cas de doute : ne rien verser, vérifier sur amf-france.org,
+          signaler. <strong>Une seule alerte suffit pour s’arrêter.</strong>
+        </>
+      }
+    />
+  );
+}
+
+const aiItems: SortingItem[] = [
+  {
+    id: "montant",
+    text: "Montant TTC de la facture n°12 → l’IA répond 1 200 €. (Facture : 1 200 €.)",
+    answer: true,
+    why: "Réponse exacte.",
+  },
+  {
+    id: "echeance",
+    text: "Date d’échéance → l’IA répond 30 juin. (Facture : 30 juillet.)",
+    answer: false,
+    serious: true,
+    why: "Erreur grave : elle déclencherait une relance injustifiée.",
+  },
+  {
+    id: "client",
+    text: "Nom du client → l’IA répond SARL Dupont. (Facture : SARL Dupont.)",
+    answer: true,
+    why: "Réponse exacte.",
+  },
+  {
+    id: "tva",
+    text: "TVA appliquée → l’IA répond 20 %. (Facture : franchise en base, pas de TVA.)",
+    answer: false,
+    serious: true,
+    why: "Erreur grave : un montant de TVA inventé.",
+  },
+  {
+    id: "resume",
+    text: "Résumé en une phrase → « Facture de 1 200 € pour la refonte du site, à régler en juillet. »",
+    answer: true,
+    why: "Résumé fidèle.",
+  },
+  {
+    id: "siren",
+    text: "Numéro SIREN du client → l’IA donne un numéro plausible, absent de la facture.",
+    answer: false,
+    serious: true,
+    why: "Invention : l’information n’existe pas dans le document.",
+  },
+];
+
+export function AiTestScene() {
+  return (
+    <SortingGame
+      label="Tester une IA sur des cas dont on connaît la réponse"
+      eyebrow="UN JEU DE CAS DE TEST"
+      title="Juste ou faux ? Vérifiez l’assistant."
+      fiction="Assistant et factures fictifs"
+      items={aiItems}
+      yes="Juste"
+      no="Faux"
+      summary={() =>
+        "bien évalués. Ici, l’assistant se trompe 3 fois sur 6, dont 3 erreurs graves : il ne doit pas traiter ces factures sans relecture."
+      }
+      takeaway={
+        <>
+          Avant d’automatiser, testez sur des cas dont vous connaissez la
+          réponse, et comptez à part les erreurs graves.{" "}
+          <strong>Une IA convaincante n’est pas une IA fiable.</strong>
+        </>
+      }
+    />
   );
 }

@@ -625,3 +625,50 @@ test("les simulateurs de leçon calculent et s’expliquent : impôt, statut, lo
   await expect(housing).toContainText("d’avantage à l’achat sur 25 ans");
   await noHorizontalOverflow(page);
 });
+
+test("bilan à l’équilibre, tri des arnaques et lexique repliable", async ({
+  page,
+}, testInfo) => {
+  await onboard(page);
+  await page.goto("/#lesson/fin-etats-financiers");
+  const sheet = page.getByRole("region", {
+    name: "Construire un bilan opération par opération",
+  });
+  for (const label of [
+    "Apport de 10 000 €",
+    "Emprunt de 20 000 €",
+    "Achat d’une machine 15 000 €",
+  ])
+    await sheet.getByRole("button", { name: label }).click();
+  const totals = sheet.locator(".scene-sheet-total strong");
+  await expect(totals.first()).toHaveText(/30\s000\s€/);
+  await expect(totals.last()).toHaveText(/30\s000\s€/);
+  await expect(sheet).toContainText("l’actif change de forme");
+
+  await page.goto("/#lesson/inv-arnaques-placement");
+  const scams = page.getByRole("region", {
+    name: "Repérer les signaux d’une arnaque au placement",
+  });
+  await scams
+    .getByRole("group", { name: /Rendement garanti/ })
+    .getByRole("button", { name: "Pas un signal" })
+    .click();
+  await expect(scams).toContainText("Pas tout à fait.");
+  await expect(scams).toContainText("0 / 6");
+
+  await page.goto("/#lexique");
+  const toggle = page
+    .getByRole("button", { name: "Lire la définition" })
+    .first();
+  if (testInfo.project.name.includes("mobile")) {
+    await expect(toggle).toHaveAttribute("aria-expanded", "false");
+    await toggle.click();
+    await expect(
+      page.getByRole("button", { name: "Replier" }).first(),
+    ).toBeVisible();
+  } else {
+    // Wide screens always show definitions in full.
+    await expect(toggle).toBeHidden();
+  }
+  await noHorizontalOverflow(page);
+});

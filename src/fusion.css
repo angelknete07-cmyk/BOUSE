@@ -1095,3 +1095,32 @@
     margin-bottom: 2px;
   }
 }
+.glossary-toggle {
+  display: none;
+}
+@media (max-width: 700px) {
+  .glossary-entry dd:not(.is-open) p {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .glossary-entry dd:not(.is-open) .text-button {
+    display: none;
+  }
+  .glossary-entry dd.is-forced .glossary-toggle {
+    display: none;
+  }
+  .glossary-toggle {
+    display: inline-block;
+    margin: 2px 0 var(--space-1);
+    padding: 6px 0;
+    border: 0;
+    background: none;
+    color: var(--text-secondary);
+    font-size: var(--type-small);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: var(--line-strong);
+  }
+}
