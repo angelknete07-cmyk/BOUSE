@@ -486,13 +486,13 @@ function App() {
         <div className="sidebar-bottom">
           <div className="sidebar-progress">
             <div>
-              <span>Vos fondations</span>
+              <span>Votre parcours</span>
               <span>
                 {done.size}/{lessons.length}
               </span>
             </div>
             <progress
-              aria-label="Quiz de fondations validés"
+              aria-label="Quiz validés sur l’ensemble du parcours"
               value={done.size}
               max={lessons.length}
             />

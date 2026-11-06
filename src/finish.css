@@ -827,3 +827,35 @@
     height: 1040px;
   }
 }
+
+/*
+ * No hover lift on clickable surfaces: moving the element under the pointer
+ * makes it leave and re-enter the hover state every frame at its edge, a
+ * visible flicker (found by the catalogue sweep). Light and shadow carry the
+ * hover instead.
+ */
+.button:hover,
+.button:active,
+.path-card:hover,
+.review-rating-choices > button:hover {
+  transform: none;
+}
+.button:hover {
+  box-shadow: var(--highlight-edge);
+}
+/* Same rule for the atlas and the prompt constellation: the button stays put,
+   only its circle rises. */
+.atlas-node:hover {
+  transform: translate(-50%, -38px);
+}
+.atlas-node:hover .atlas-node-orbit,
+.prompt-part:hover .prompt-part-dot {
+  transform: translateY(-3px);
+}
+.prompt-part:hover {
+  transform: translate(-50%, calc(-1 * var(--space-2) - 14px));
+}
+.atlas-node-orbit,
+.prompt-part-dot {
+  transition: transform var(--motion-normal) var(--ease-out);
+}

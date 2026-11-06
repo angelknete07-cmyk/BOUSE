@@ -1,3 +1,19 @@
+# Review design — passe 23 : balayage de test complet
+
+**6 novembre 2026, 05:47 Europe/Paris.** Toutes les routes et toutes les leçons (chaque séquence, chaque onglet), desktop et mobile, plus les fonctions clés sur la version compilée. Détail : [AUDIT-23.md](AUDIT-23.md). **La direction artistique n'est pas déclarée validée.**
+
+- **Résultat :** environ 900 états parcourus. Après corrections, aucune erreur JavaScript, aucune requête en échec, aucun débordement (y compris à 768 et 1024 px) et aucune violation axe sur l'échantillon.
+- **Bug principal corrigé :** les boutons clignotaient quand le pointeur s'arrêtait sur leur bord, parce que le survol les déplaçait d'un pixel. Plus aucun élément cliquable ne se déplace sous le pointeur.
+- **Autres corrections :**
+  - « / FONDATIONS » sous le numéro des nouvelles leçons ;
+  - rôle `progressbar` de la progression du quiz ;
+  - « Votre parcours » à la place de « Vos fondations ».
+- **Fonctions vérifiées :** hors ligne, quiz et recommandation, lexique au clavier, recherche, export Markdown, « Copier et demander à mon Claude », performance (LCP 220 ms en local).
+- **Nouveau test permanent :** `tests/catalogue.spec.ts`, qui parcourt chaque leçon en entier.
+- **Vérifications :** `npm test` 207 cas, `npx playwright test` 74 tests, build sans avertissement, archive `2026-11-06_05-47-32-Europe-Paris`.
+
+---
+
 # Review design — passe 22 (vagues 2 à 5) : leçons complètes dans tous les domaines
 
 **6 novembre 2026, 05:19 Europe/Paris.** Suite de la demande « leçons archi-complètes, dans tous les domaines, en prenant le temps des recherches ». Le catalogue passe de 23 à **43 leçons** et le lexique à **165 termes**. **La direction artistique n'est pas déclarée validée.**

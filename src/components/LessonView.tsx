@@ -263,13 +263,7 @@ export function LessonView({ lesson, state, update, onNavigate }: Props) {
       <header className="learning-header">
         <span className="lesson-chapter-index" aria-hidden="true">
           {String(lessons.indexOf(lesson) + 1).padStart(2, "0")}
-          <small>
-            /{" "}
-            {lesson.domain === "Investissement" ||
-            lesson.domain === "Finance personnelle"
-              ? lesson.domain.toUpperCase()
-              : "FONDATIONS"}
-          </small>
+          <small>/ {lesson.domain.toUpperCase()}</small>
         </span>
         <div className="learning-kicker">
           <span>{lesson.domain}</span>
@@ -754,6 +748,10 @@ export function LessonView({ lesson, state, update, onNavigate }: Props) {
                   </div>
                   <div
                     className="learning-quiz-progress"
+                    role="progressbar"
+                    aria-valuemin={1}
+                    aria-valuemax={lesson.quiz.length}
+                    aria-valuenow={questionIndex + 1}
                     aria-label={`Question ${questionIndex + 1} sur ${lesson.quiz.length}`}
                   >
                     {lesson.quiz.map((_, index) => (

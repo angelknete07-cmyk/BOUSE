@@ -186,3 +186,7 @@ Contrôles du 5 novembre 2026. `npm run build` réussit sans avertissement. `npm
 ## Passe 22 — leçons complètes
 
 Contrôles du 6 novembre 2026. `npm run build` réussit sans avertissement (paquet principal 78 kB, contenu des cours dans un fichier séparé). `npm test` passe avec **207 cas unitaires** (nouveau : `tests/mapLayout.test.ts`). `npx playwright test` passe avec **72 tests**. Atlas, carte des compétences, trajectoire et leçons de chaque domaine vérifiés en desktop et mobile ; captures dans `design-reviews/lecons-22/` et `design-reviews/lecons-22b/`. Aucune validation design externe n'est revendiquée.
+
+## Passe 23 — balayage complet
+
+Contrôles du 6 novembre 2026. Balayage de 13 écrans et de 43 leçons (chaque séquence et chaque onglet), desktop et Pixel 7 : 0 erreur, 0 requête en échec, 0 débordement, 0 violation axe sur l'échantillon après corrections. Largeurs 768 et 1024 px sans débordement. Fonctions vérifiées sur la version compilée : hors ligne, quiz, lexique au clavier, recherche, export, presse-papiers. `npm test` 207 cas, `npx playwright test` **74 tests** (nouveau : `tests/catalogue.spec.ts`). Rapport : `design-reviews/AUDIT-23.md`.
