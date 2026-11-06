@@ -971,7 +971,7 @@ function Settings({
             accessible.
           </p>
         </section>
-        <section className="panel">
+        <section className="panel settings-data">
           <h2>Vos données, ici.</h2>
           <p className="muted">
             Votre profil, vos réponses, notes et projets restent dans le

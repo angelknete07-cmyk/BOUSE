@@ -160,20 +160,18 @@ export function Onboarding({
                   autoComplete="given-name"
                 />
               </label>
+              <label className="field">
+                Votre objectif
+                <select
+                  value={profile.goal}
+                  onChange={(e) => patch({ goal: e.target.value })}
+                >
+                  {goalOptions.map((option) => (
+                    <option key={option}>{option}</option>
+                  ))}
+                </select>
+              </label>
               <div className="field-grid">
-                <label className="field">
-                  Votre niveau
-                  <select
-                    value={profile.level}
-                    onChange={(e) => patch({ level: e.target.value })}
-                  >
-                    {levelOptions.map((option) => (
-                      <option key={option} value={option}>
-                        {levelLabel(option)}
-                      </option>
-                    ))}
-                  </select>
-                </label>
                 <label className="field">
                   Temps par session
                   <select
@@ -188,47 +186,52 @@ export function Onboarding({
                   </select>
                 </label>
               </div>
-              <label className="field">
-                Votre objectif
-                <select
-                  value={profile.goal}
-                  onChange={(e) => patch({ goal: e.target.value })}
-                >
-                  {goalOptions.map((option) => (
-                    <option key={option}>{option}</option>
+              <details className="onboarding-more">
+                <summary>Préciser mon profil (facultatif)</summary>
+                <label className="field">
+                  Votre niveau
+                  <select
+                    value={profile.level}
+                    onChange={(e) => patch({ level: e.target.value })}
+                  >
+                    {levelOptions.map((option) => (
+                      <option key={option} value={option}>
+                        {levelLabel(option)}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+                <fieldset className="interest-fields">
+                  <legend>Vos centres d’intérêt</legend>
+                  {interestOptions.map((i) => (
+                    <label key={i}>
+                      <input
+                        type="checkbox"
+                        checked={profile.interests.includes(i)}
+                        onChange={(e) =>
+                          patch({
+                            interests: e.target.checked
+                              ? [...profile.interests, i]
+                              : profile.interests.filter((x) => x !== i),
+                          })
+                        }
+                      />
+                      {i}
+                    </label>
                   ))}
-                </select>
-              </label>
-              <fieldset className="interest-fields">
-                <legend>Vos centres d’intérêt</legend>
-                {interestOptions.map((i) => (
-                  <label key={i}>
-                    <input
-                      type="checkbox"
-                      checked={profile.interests.includes(i)}
-                      onChange={(e) =>
-                        patch({
-                          interests: e.target.checked
-                            ? [...profile.interests, i]
-                            : profile.interests.filter((x) => x !== i),
-                        })
-                      }
-                    />
-                    {i}
-                  </label>
-                ))}
-              </fieldset>
-              <label className="field">
-                Votre façon d’apprendre
-                <select
-                  value={profile.preference}
-                  onChange={(e) => patch({ preference: e.target.value })}
-                >
-                  {preferenceOptions.map((option) => (
-                    <option key={option}>{option}</option>
-                  ))}
-                </select>
-              </label>
+                </fieldset>
+                <label className="field">
+                  Votre façon d’apprendre
+                  <select
+                    value={profile.preference}
+                    onChange={(e) => patch({ preference: e.target.value })}
+                  >
+                    {preferenceOptions.map((option) => (
+                      <option key={option}>{option}</option>
+                    ))}
+                  </select>
+                </label>
+              </details>
               <button className="button primary full" type="submit">
                 Trouver mon point de départ <Icon name="arrow" size={18} />
               </button>

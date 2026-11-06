@@ -1445,3 +1445,82 @@ input[type="range"],
 .prompt-part.is-found {
   border-color: rgb(var(--accent-violet-rgb) / calc(0.5 * var(--wash-k)));
 }
+
+/* ---------- Académie mobile : la leçon à reprendre vient d'abord ---------- */
+@media (max-width: 700px) {
+  .academy-atlas {
+    display: flex;
+    flex-direction: column;
+  }
+  .academy-atlas > * {
+    order: 3;
+  }
+  .academy-atlas > .art-heading {
+    order: 0;
+  }
+  .academy-atlas > .academy-start {
+    order: 1;
+    margin-top: 0;
+  }
+  .academy-atlas > .atlas-toolbar {
+    order: 2;
+    margin-top: var(--space-6);
+  }
+}
+
+/* ---------- Compétences mobile : les trois états en une rangée ---------- */
+@media (max-width: 700px) {
+  .skills-summary {
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: 82%;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: var(--space-3);
+    margin-bottom: var(--space-6);
+    mask-image: linear-gradient(to right, #000 calc(100% - 32px), transparent);
+    padding-inline-end: 32px;
+  }
+  .skills-summary > * {
+    scroll-snap-align: start;
+  }
+}
+
+/* ---------- Leçon : en-tête compact une fois la leçon lancée ---------- */
+.editorial-lesson.is-under-way .learning-header > p {
+  display: none;
+}
+.editorial-lesson.is-under-way .lesson-chapter-index {
+  font-size: clamp(36px, 4vw, 52px);
+}
+.editorial-lesson.is-under-way .learning-header h1 {
+  font-size: clamp(22px, 2.2vw, 28px);
+}
+
+/* ---------- Préférences : ce qui protège vos progrès d'abord sur mobile ---------- */
+@media (max-width: 700px) {
+  .settings-layout > .settings-data {
+    order: -1;
+  }
+}
+
+/* ---------- Premier lancement : le reste du profil, replié ---------- */
+.onboarding-more {
+  border: 1px solid rgb(255 255 255 / 0.08);
+  border-radius: 12px;
+  padding: 0 var(--space-4);
+  margin: var(--space-2) 0 var(--space-5);
+  background: rgb(255 255 255 / 0.02);
+}
+.onboarding-more > summary {
+  cursor: pointer;
+  padding: var(--space-4) 0;
+  color: var(--text-secondary);
+  font-size: var(--type-body-sm);
+}
+.onboarding-more > summary:hover {
+  color: var(--text);
+}
+.onboarding-more[open] {
+  padding-bottom: var(--space-4);
+}

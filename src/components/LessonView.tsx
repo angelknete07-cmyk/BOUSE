@@ -259,7 +259,9 @@ export function LessonView({ lesson, state, update, onNavigate }: Props) {
   }
 
   return (
-    <div className="learning-experience editorial-lesson">
+    <div
+      className={`learning-experience editorial-lesson${tab > 0 || sequence > 0 ? " is-under-way" : ""}`}
+    >
       <div className="learning-topline">
         <button
           className="text-button"
