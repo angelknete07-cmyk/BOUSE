@@ -18,6 +18,14 @@ export const lessonShortLabels: Record<string, string> = {
   "inv-risque-diversification": "Risque et diversification",
   "inv-fonds-enveloppes": "Fonds et enveloppes",
   "inv-ordres-biais": "Ordres et biais",
+  "ent-modele-economique": "Modèle économique",
+  "ent-trouver-clients": "Premiers clients",
+  "ent-fixer-prix": "Fixer son prix",
+  "ent-statut-juridique": "Choisir son statut",
+  "ent-creer-etapes": "Créer, étape par étape",
+  "ent-micro-entreprise": "Micro-entreprise",
+  "ent-facturer-declarer": "Facturer et déclarer",
+  "ent-financer-projet": "Financer son projet",
 };
 
 export function lessonShortLabel(id: string, fallback: string): string {

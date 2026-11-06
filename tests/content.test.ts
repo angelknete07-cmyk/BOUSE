@@ -3,7 +3,11 @@ import assert from "node:assert/strict";
 import { lessons } from "../src/data/lessons.ts";
 
 test("the catalogue contains foundations, personal finance and investing lessons, all substantial", () => {
-  assert.equal(lessons.length, 15);
+  assert.equal(lessons.length, 23);
+  assert.equal(
+    lessons.filter((lesson) => lesson.domain === "Entrepreneuriat").length,
+    9,
+  );
   assert.equal(
     lessons.filter((lesson) => lesson.domain === "Finance personnelle").length,
     4,

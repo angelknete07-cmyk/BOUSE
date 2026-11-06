@@ -6,30 +6,16 @@ import { Icon } from "./Icon";
 import { currentQuizAttempts, latestCurrentAttempt } from "../lib/portfolio";
 import { useClock } from "../lib/useClock";
 import { recommendLesson } from "../lib/recommendation";
+import { columnLayout } from "../lib/mapLayout";
 
 type Props = {
   state: AppState;
   onNavigate: (route: string) => void;
 };
 
-type Position = { x: number; y: number };
-const positions: Record<string, Position> = {
-  "ca-marge-tresorerie": { x: 10, y: 23 },
-  "seuil-rentabilite": { x: 10, y: 56 },
-  "validation-client": { x: 30, y: 23 },
-  "comprendre-llm": { x: 50, y: 23 },
-  "prompt-structure": { x: 50, y: 51 },
-  "automatisation-agent": { x: 50, y: 78 },
-  "fp-budget": { x: 70, y: 14 },
-  "fp-epargne-precaution": { x: 70, y: 36 },
-  "fp-credit-taux": { x: 70, y: 58 },
-  "fp-inflation-quotidien": { x: 70, y: 80 },
-  "inv-marches-financiers": { x: 90, y: 14 },
-  "inv-interets-composes": { x: 90, y: 32 },
-  "inv-risque-diversification": { x: 90, y: 50 },
-  "inv-fonds-enveloppes": { x: 90, y: 68 },
-  "inv-ordres-biais": { x: 90, y: 86 },
-};
+// One column per domain, laid out from the catalogue: new lessons find their place.
+const { positions, height: canvasHeight } = columnLayout(lessons);
+const columnStep = (88 / canvasHeight) * 100;
 
 function latestAttempt(state: AppState, id: string, now: Date) {
   const lesson = lessons.find((entry) => entry.id === id);
@@ -145,6 +131,7 @@ export function KnowledgeMap({ state, onNavigate }: Props) {
           <div className="knowledge-scroll">
             <div
               className="knowledge-canvas"
+              style={{ "--map-height": `${canvasHeight}px` } as CSSProperties}
               role="group"
               aria-label="Notions à explorer sur la carte"
             >
@@ -157,7 +144,7 @@ export function KnowledgeMap({ state, onNavigate }: Props) {
               </div>
               <svg
                 className="knowledge-connections"
-                viewBox="0 0 1000 560"
+                viewBox={`0 0 1000 ${canvasHeight}`}
                 preserveAspectRatio="none"
                 fill="none"
                 aria-hidden="true"
@@ -184,16 +171,20 @@ export function KnowledgeMap({ state, onNavigate }: Props) {
                   const from = positions[edge.from];
                   const to = positions[edge.to];
                   if (!from || !to) return null;
+                  const scale = canvasHeight / 100;
+                  // A link that skips notions in its column bows around them.
                   const bypass =
-                    edge.from === "comprendre-llm" &&
-                    edge.to === "automatisation-agent";
+                    from.x === to.x &&
+                    Math.abs(to.y - from.y) > columnStep * 1.5;
                   const fromX = from.x * 10;
-                  const fromY = from.y * 5.6;
+                  const fromY = from.y * scale;
                   const toX = to.x * 10;
-                  const toY = to.y * 5.6;
+                  const toY = to.y * scale;
                   const d = bypass
                     ? `M ${fromX - 18} ${fromY} C ${fromX - 160} ${fromY + 40}, ${toX - 160} ${toY - 40}, ${toX - 20} ${toY}`
-                    : `M ${fromX} ${fromY + 19} L ${toX} ${toY - 23}`;
+                    : from.x === to.x
+                      ? `M ${fromX} ${fromY + 19} L ${toX} ${toY - 23}`
+                      : `M ${fromX + 20} ${fromY} C ${(fromX + toX) / 2} ${fromY}, ${(fromX + toX) / 2} ${toY}, ${toX - 22} ${toY}`;
                   const active =
                     edge.from === selectedId || edge.to === selectedId;
                   return (

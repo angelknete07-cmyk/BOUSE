@@ -1,4 +1,4 @@
-import { useId, useMemo } from "react";
+import { Fragment, useId, useMemo, type ReactNode } from "react";
 import { lessons } from "../data/lessons";
 import {
   glossaryFor,
@@ -22,22 +22,37 @@ export function GlossaryText({
 }) {
   const terms = useMemo(() => glossaryFor(lesson), [lesson]);
   const segments = useMemo(() => linkGlossary(text, terms), [text, terms]);
-  return (
-    <>
-      {segments.map((segment, index) =>
-        typeof segment === "string" ? (
-          segment
-        ) : (
-          <GlossaryTerm
-            key={index}
-            segment={segment}
-            currentLessonId={lesson.id}
-            onNavigate={onNavigate}
-          />
-        ),
-      )}
-    </>
-  );
+  // An elided article (« l’ », « d’ ») stays glued to the term it introduces.
+  const parts: ReactNode[] = [];
+  segments.forEach((segment, index) => {
+    if (typeof segment === "string") {
+      parts.push(segment);
+      return;
+    }
+    const previous = parts[parts.length - 1];
+    const elision =
+      typeof previous === "string" ? /(\p{L}{1,3}’)$/u.exec(previous) : null;
+    if (elision && typeof previous === "string")
+      parts[parts.length - 1] = previous.slice(0, -elision[1]!.length);
+    const term = (
+      <GlossaryTerm
+        segment={segment}
+        currentLessonId={lesson.id}
+        onNavigate={onNavigate}
+      />
+    );
+    parts.push(
+      elision ? (
+        <span key={index} className="glossary-nowrap">
+          {elision[1]}
+          {term}
+        </span>
+      ) : (
+        <Fragment key={index}>{term}</Fragment>
+      ),
+    );
+  });
+  return <>{parts}</>;
 }
 
 function GlossaryTerm({

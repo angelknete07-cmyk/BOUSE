@@ -764,6 +764,190 @@ export const glossary: GlossaryTerm[] = [
     definition:
       "Propriété d’une action que l’on peut répéter sans effet supplémentaire : traiter deux fois le même événement ne produit pas deux remboursements.",
   },
+  {
+    id: "micro-entreprise",
+    term: "Micro-entreprise",
+    category: "Entreprise",
+    lessonId: "ent-micro-entreprise",
+    definition:
+      "Régime fiscal et social simplifié de l’entreprise individuelle : cotisations calculées sur le chiffre d’affaires encaissé, comptabilité allégée, charges réelles non déduites.",
+  },
+  {
+    id: "entreprise-individuelle",
+    term: "Entreprise individuelle",
+    category: "Entreprise",
+    lessonId: "ent-statut-juridique",
+    definition:
+      "Activité exercée en son nom propre, sans créer de société. Depuis mai 2022, le patrimoine personnel est en principe séparé du patrimoine professionnel.",
+  },
+  {
+    id: "eurl",
+    term: "EURL",
+    category: "Entreprise",
+    lessonId: "ent-statut-juridique",
+    definition:
+      "Société à responsabilité limitée à associé unique. Son gérant majoritaire relève du régime des travailleurs indépendants.",
+  },
+  {
+    id: "sasu",
+    term: "SASU",
+    category: "Entreprise",
+    lessonId: "ent-statut-juridique",
+    definition:
+      "Société par actions simplifiée à associé unique. Son président est assimilé salarié et cotise au régime général, sans assurance chômage.",
+  },
+  {
+    id: "sas",
+    term: "SAS",
+    category: "Entreprise",
+    lessonId: "ent-statut-juridique",
+    definition:
+      "Société par actions simplifiée à plusieurs associés, aux statuts très libres, souvent choisie pour accueillir des investisseurs.",
+  },
+  {
+    id: "assimile-salarie",
+    term: "Assimilé salarié",
+    category: "Entreprise",
+    lessonId: "ent-statut-juridique",
+    definition:
+      "Dirigeant (président de SAS ou SASU) affilié au régime général de la sécurité sociale, sans assurance chômage.",
+  },
+  {
+    id: "impot-societes",
+    term: "Impôt sur les sociétés (IS)",
+    category: "Entreprise",
+    lessonId: "ent-statut-juridique",
+    definition:
+      "Impôt payé par une société sur son bénéfice. Le dirigeant est imposé à part sur ce qu’il perçoit : rémunération et dividendes.",
+  },
+  {
+    id: "franchise-tva",
+    term: "Franchise en base de TVA",
+    category: "Entreprise",
+    lessonId: "ent-micro-entreprise",
+    definition:
+      "Dispense de facturer la TVA sous certains seuils de chiffre d’affaires ; en contrepartie, la TVA payée sur les achats n’est pas récupérable.",
+  },
+  {
+    id: "versement-liberatoire",
+    term: "Versement libératoire",
+    category: "Entreprise",
+    lessonId: "ent-micro-entreprise",
+    definition:
+      "Option du micro-entrepreneur, sous condition de revenu du foyer : payer l’impôt sur le revenu en même temps que les cotisations, en pourcentage du chiffre d’affaires.",
+  },
+  {
+    id: "abattement-forfaitaire",
+    term: "Abattement forfaitaire",
+    category: "Entreprise",
+    lessonId: "ent-micro-entreprise",
+    definition:
+      "Réduction appliquée au chiffre d’affaires d’un micro-entrepreneur pour calculer son revenu imposable, censée représenter ses charges.",
+  },
+  {
+    id: "guichet-unique",
+    term: "Guichet unique",
+    category: "Entreprise",
+    lessonId: "ent-creer-etapes",
+    definition:
+      "Site officiel opéré par l’INPI où se font, depuis 2023, toutes les formalités de création, modification et cessation d’entreprise.",
+  },
+  {
+    id: "siret",
+    term: "SIRET",
+    category: "Entreprise",
+    lessonId: "ent-creer-etapes",
+    definition:
+      "Numéro qui identifie chaque établissement d’une entreprise ; il commence par le numéro SIREN de l’entreprise.",
+  },
+  {
+    id: "pret-honneur",
+    term: "Prêt d’honneur",
+    category: "Entreprise",
+    lessonId: "ent-financer-projet",
+    definition:
+      "Prêt personnel au créateur, sans intérêt ni garantie, accordé par des réseaux d’accompagnement pour renforcer son apport.",
+  },
+  {
+    id: "dilution",
+    term: "Dilution",
+    category: "Entreprise",
+    lessonId: "ent-financer-projet",
+    definition:
+      "Baisse de la part de capital d’un associé lorsque de nouveaux investisseurs entrent dans la société.",
+  },
+  {
+    id: "cout-acquisition",
+    term: "Coût d’acquisition client",
+    category: "Entreprise",
+    lessonId: "ent-modele-economique",
+    definition:
+      "Dépense moyenne nécessaire pour obtenir un nouveau client : publicité, temps commercial, remises de bienvenue.",
+  },
+  {
+    id: "valeur-vie-client",
+    term: "Valeur vie client",
+    category: "Entreprise",
+    lessonId: "ent-modele-economique",
+    definition:
+      "Marge totale qu’un client laisse pendant toute sa relation avec l’entreprise ; à comparer au coût d’acquisition.",
+  },
+  {
+    id: "produit-minimum-viable",
+    term: "Produit minimum viable",
+    category: "Entreprise",
+    lessonId: "ent-modele-economique",
+    definition:
+      "Plus petite version d’une offre qui permet d’apprendre si les clients l’utilisent et la paient.",
+  },
+  {
+    id: "taux-conversion",
+    term: "Taux de conversion",
+    category: "Entreprise",
+    lessonId: "ent-trouver-clients",
+    definition:
+      "Part des personnes qui passent d’une étape du parcours d’achat à la suivante, par exemple de la visite à la demande de devis.",
+  },
+  {
+    id: "cout-revient",
+    term: "Coût de revient",
+    category: "Entreprise",
+    lessonId: "ent-fixer-prix",
+    definition:
+      "Coûts variables d’une unité vendue, auxquels s’ajoute sa part des charges fixes.",
+  },
+  {
+    id: "tva-collectee",
+    term: "TVA collectée",
+    category: "Entreprise",
+    lessonId: "ent-facturer-declarer",
+    definition:
+      "TVA facturée aux clients et encaissée pour le compte de l’État.",
+  },
+  {
+    id: "tva-deductible",
+    term: "TVA déductible",
+    category: "Entreprise",
+    lessonId: "ent-facturer-declarer",
+    definition:
+      "TVA payée sur les achats professionnels, que l’entreprise assujettie déduit de la TVA collectée avant de reverser la différence.",
+  },
+  {
+    id: "avoir",
+    term: "Avoir",
+    category: "Entreprise",
+    lessonId: "ent-facturer-declarer",
+    definition:
+      "Document qui annule ou corrige tout ou partie d’une facture déjà émise ; une facture émise ne se supprime pas.",
+  },
+  {
+    id: "facture-electronique",
+    term: "Facture électronique",
+    category: "Entreprise",
+    lessonId: "ent-facturer-declarer",
+    definition:
+      "Facture émise, transmise et reçue sous forme de données structurées via une plateforme agréée, obligatoire progressivement entre entreprises.",
+  },
 ];
 
 /** Alphabetical order in French, ignoring accents and case. */

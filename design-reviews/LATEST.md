@@ -1,3 +1,68 @@
+# Review design — passe 22 (vague 1) : parcours Entrepreneuriat complet
+
+**6 novembre 2026, 04:56 Europe/Paris.** Demande de l'utilisateur : des leçons « archi-complètes » dans tous les domaines, en prenant le temps des recherches. Le travail est livré par vagues ; voici la première. **La direction artistique n'est pas déclarée validée.**
+
+## Infrastructure : des cartes qui grandissent avec le catalogue
+
+- **Mise en page automatique** (`src/lib/mapLayout.ts`, 4 tests) :
+  - atlas : une rangée par domaine, la largeur suit la rangée la plus longue ;
+  - carte des compétences : une colonne par domaine, la hauteur suit ;
+  - trajectoire de l'accueil : un parcours par domaine, en zigzag au-delà de cinq notions.
+- **Atlas :**
+  - les liens qui sautent des notions s'arquent sans quitter leur rangée ;
+  - les libellés passent sur deux lignes ;
+  - un fondu signale quand l'atlas défile.
+
+## Entrepreneuriat : de 1 à 9 leçons
+
+Les huit nouvelles leçons, dans l'ordre du parcours :
+
+1. De l'idée au modèle économique (canvas, coût d'acquisition, valeur vie client, MVP).
+2. Trouver ses premiers clients (canaux, positionnement, entonnoir, cadre RGPD).
+3. Fixer son prix (coût de revient, HT et TTC, tarif d'indépendant, effet des remises).
+4. Choisir son statut (EI depuis 2022, micro, EURL, SASU, SAS ; TNS ou assimilé salarié ; IR ou IS).
+5. Créer son entreprise, étape par étape (étude, prévisionnel, guichet unique INPI, RNE, SIREN et SIRET, faux courriers officiels).
+6. La micro-entreprise de A à Z (plafonds, cotisations, abattements, versement libératoire, franchise de TVA, obligations).
+7. Facturer, encaisser, déclarer (mentions, facturation électronique, délais de paiement, TVA collectée et déductible, avoir).
+8. Financer son projet (besoin de démarrage, dette ou fonds propres, prêt d'honneur, banque, financement participatif, dilution, caution).
+
+Chaque leçon comprend quatre séquences, un cas fictif, un exercice corrigé, deux questions de quiz, des cartes de révision et des sources officielles. Le lexique gagne 23 termes (114 au total).
+
+**Faits datés, vérifiés en ligne le 6 novembre 2026 sur des sources concordantes :**
+
+- plafonds micro 2026-2028 : 203 100 € et 83 600 € ;
+- franchise de TVA : 85 000 € et 37 500 € ;
+- cotisations micro : environ 12,3 % (vente) et 21,2 % (services) ;
+- ACRE réformée (réduction de 50 % à 25 % à partir de juillet 2026) ;
+- facturation électronique : réception obligatoire depuis septembre 2026, émission en septembre 2027 pour les PME et micro-entreprises.
+
+Les sites officiels (economie.gouv.fr, service-public) n'étaient pas accessibles depuis cette session. Chaque chiffre est daté et marqué « à vérifier » dans les leçons, et le taux des activités libérales n'est pas chiffré, faute de concordance entre les sources.
+
+## Captures
+
+| Écran                                    | Desktop                                  | Mobile                                  |
+| ---------------------------------------- | ---------------------------------------- | --------------------------------------- |
+| Atlas (9 notions en Entrepreneuriat)     | [Voir](lecons-22/desktop-atlas.png)      | [Voir](lecons-22/mobile-atlas.png)      |
+| Carte des compétences                    | [Voir](lecons-22/desktop-skills.png)     | [Voir](lecons-22/mobile-skills.png)     |
+| Trajectoire « Entreprendre »             | [Voir](lecons-22/desktop-trajectory.png) | [Voir](lecons-22/mobile-trajectory.png) |
+| Leçon « Choisir son statut », séquence 2 | [Voir](lecons-22/desktop-statut-2.png)   | [Voir](lecons-22/mobile-statut-2.png)   |
+
+## Vérifications internes
+
+- `npm test` : 207 cas réussis, dont la mise en page et la cohérence du catalogue (23 leçons, prérequis sans cycle, identifiants uniques).
+- `npx playwright test` : 72 tests réussis (desktop et Pixel 7 émulé).
+- Build sans avertissement. Archive `2026-11-06_04-56-24-Europe-Paris`.
+- **Défauts vus à l'écran et corrigés :**
+  - arcs de l'atlas qui montaient dans la rangée Finance ;
+  - neuvième notion coupée sans signal ;
+  - libellés collés ;
+  - vide en haut de la carte des compétences ;
+  - « l’ » séparé du terme du lexique en fin de ligne.
+
+**Vagues suivantes :** finance d'entreprise, finance personnelle, investissement, IA, puis le balayage de test complet.
+
+---
+
 # Review design — passe 21 : lexique des fondations, cas pratiques reliés
 
 **5 novembre 2026, 17:26 Europe/Paris.** Suite demandée par l'utilisateur (« Vas-y go »). **La direction artistique n'est pas déclarée validée.**

@@ -783,3 +783,38 @@
     margin: auto var(--space-4) calc(var(--space-4) + 76px);
   }
 }
+
+/* The atlas grows with its longest lane and scrolls when it must. */
+.academy-map-canvas {
+  width: max(100%, var(--atlas-width, 1000px));
+}
+
+/* Skills map: as tall as its longest column needs. */
+.knowledge-canvas {
+  height: var(--map-height, 560px);
+}
+@media (max-width: 700px) {
+  .knowledge-canvas {
+    height: calc(var(--map-height, 560px) * 1.2);
+  }
+}
+.glossary-nowrap {
+  white-space: nowrap;
+}
+@media (min-width: 701px) {
+  .atlas-scroll[data-overflow] {
+    mask-image: linear-gradient(
+      to right,
+      var(--bg) calc(100% - var(--space-12)),
+      transparent
+    );
+  }
+}
+/* Atlas labels wrap on two lines so neighbours never touch. */
+.atlas-node strong {
+  display: block;
+  max-width: 7.25rem;
+  white-space: normal;
+  text-align: center;
+  text-wrap: balance;
+}

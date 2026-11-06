@@ -2,24 +2,10 @@ import { useEffect, useRef, type CSSProperties } from "react";
 import { lessons } from "../data/lessons";
 import { Icon } from "./Icon";
 import { lessonShortLabel } from "../data/lessonLabels";
+import { atlasLayout, atlasLinkPath } from "../lib/mapLayout";
 
-const positions: Record<string, { x: number; y: number }> = {
-  "ca-marge-tresorerie": { x: 16, y: 9 },
-  "seuil-rentabilite": { x: 53, y: 9 },
-  "validation-client": { x: 29, y: 27 },
-  "comprendre-llm": { x: 16, y: 47 },
-  "prompt-structure": { x: 53, y: 47 },
-  "automatisation-agent": { x: 86, y: 37 },
-  "fp-budget": { x: 16, y: 68 },
-  "fp-epargne-precaution": { x: 34.5, y: 68 },
-  "fp-credit-taux": { x: 53, y: 68 },
-  "fp-inflation-quotidien": { x: 69.5, y: 68 },
-  "inv-marches-financiers": { x: 16, y: 89 },
-  "inv-interets-composes": { x: 34.5, y: 89 },
-  "inv-risque-diversification": { x: 53, y: 89 },
-  "inv-fonds-enveloppes": { x: 69.5, y: 89 },
-  "inv-ordres-biais": { x: 86, y: 89 },
-};
+// Laid out from the catalogue: a new lesson finds its place in its domain lane.
+const { positions, width: atlasWidth } = atlasLayout(lessons);
 export function KnowledgeAtlas({
   selectedId,
   onSelect,
@@ -58,6 +44,23 @@ export function KnowledgeAtlas({
       ? "is-available"
       : "is-waiting";
   };
+  // Say when the atlas is wider than its frame, so a fade can hint at the rest.
+  useEffect(() => {
+    const region = scrollRef.current;
+    if (!region) return;
+    const update = () =>
+      region.toggleAttribute(
+        "data-overflow",
+        region.scrollWidth - region.clientWidth - region.scrollLeft > 8,
+      );
+    update();
+    region.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    return () => {
+      region.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
+  }, []);
   useEffect(() => {
     const region = scrollRef.current;
     const node = region?.querySelector<HTMLElement>('[aria-pressed="true"]');
@@ -83,12 +86,10 @@ export function KnowledgeAtlas({
       aria-label="Atlas des connaissances, domaines et prérequis"
       tabIndex={0}
     >
-      <div className="academy-map-canvas">
-        <div className="atlas-levels" aria-hidden="true">
-          <span>01 / Fondations</span>
-          <span>02 / Relations</span>
-          <span>03 / Application</span>
-        </div>
+      <div
+        className="academy-map-canvas"
+        style={{ "--atlas-width": `${atlasWidth}px` } as CSSProperties}
+      >
         <svg
           viewBox="0 0 1000 480"
           preserveAspectRatio="none"
@@ -104,13 +105,6 @@ export function KnowledgeAtlas({
           {[0.09, 0.27, 0.47, 0.68, 0.89].map((y) => (
             <path key={y} className="atlas-guide" d={`M0 ${y * 480}H1000`} />
           ))}
-          {[0.16, 0.53, 0.86].map((x) => (
-            <path
-              key={x}
-              className="atlas-guide vertical"
-              d={`M${x * 1000} 35V470`}
-            />
-          ))}
           {lessons.flatMap((lesson) =>
             lesson.prerequisites.map((id) => {
               const a = positions[id],
@@ -122,7 +116,7 @@ export function KnowledgeAtlas({
                 <path
                   key={`${id}-${lesson.id}`}
                   className={`atlas-link ${active ? "is-active" : ""}`}
-                  d={`M${a.x * 10} ${a.y * 4.8} C${(a.x + b.x) * 5} ${a.y * 4.8},${(a.x + b.x) * 5} ${b.y * 4.8},${b.x * 10} ${b.y * 4.8}`}
+                  d={atlasLinkPath(a, b)}
                 />
               );
             }),

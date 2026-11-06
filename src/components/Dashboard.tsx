@@ -2,6 +2,7 @@ import { useState, type CSSProperties } from "react";
 import { lessons, type Lesson } from "../data/lessons";
 import type { AppState } from "../lib/types";
 import { recommendLesson, sessionPlan } from "../lib/recommendation";
+import { byDomain, trackLayout } from "../lib/mapLayout";
 import { Icon } from "./Icon";
 import { lessonShortLabel } from "../data/lessonLabels";
 import { Terrain } from "./Terrain";
@@ -11,45 +12,29 @@ import { useClock } from "../lib/useClock";
 type Props = { state: AppState; onNavigate: (route: string) => void };
 
 type TrackNode = { id: string; x: number; y: number; icon: string };
-// Columns follow the depth of prerequisites, rows follow the domains — the same
-// grammar as the Académie atlas. Links are drawn from the real prerequisites.
-// Three tracks cover the five domains; the home opens on the one of the
-// recommended lesson.
-const tracks: { id: string; label: string; nodes: TrackNode[] }[] = [
-  {
-    id: "fondations",
-    label: "Fondations",
-    nodes: [
-      { id: "ca-marge-tresorerie", x: 12, y: 16, icon: "chart" },
-      { id: "seuil-rentabilite", x: 50, y: 16, icon: "lab" },
-      { id: "validation-client", x: 12, y: 50, icon: "idea" },
-      { id: "comprendre-llm", x: 12, y: 84, icon: "ai" },
-      { id: "prompt-structure", x: 50, y: 84, icon: "book" },
-      { id: "automatisation-agent", x: 88, y: 50, icon: "node" },
-    ],
-  },
-  {
-    id: "finance-perso",
-    label: "Finance personnelle",
-    nodes: [
-      { id: "fp-budget", x: 10, y: 50, icon: "chart" },
-      { id: "fp-epargne-precaution", x: 36, y: 50, icon: "clock" },
-      { id: "fp-credit-taux", x: 62, y: 50, icon: "lab" },
-      { id: "fp-inflation-quotidien", x: 88, y: 50, icon: "node" },
-    ],
-  },
-  {
-    id: "investissement",
-    label: "Investissement",
-    nodes: [
-      { id: "inv-marches-financiers", x: 8, y: 50, icon: "book" },
-      { id: "inv-interets-composes", x: 29, y: 50, icon: "chart" },
-      { id: "inv-risque-diversification", x: 50, y: 50, icon: "lab" },
-      { id: "inv-fonds-enveloppes", x: 71, y: 50, icon: "node" },
-      { id: "inv-ordres-biais", x: 92, y: 50, icon: "idea" },
-    ],
-  },
-];
+const trackIcons = ["chart", "lab", "idea", "node", "book", "clock", "ai"];
+const trackLabels: Record<string, string> = {
+  Finance: "Finance",
+  Entrepreneuriat: "Entreprendre",
+  "Intelligence artificielle": "IA",
+  "Finance personnelle": "Finance personnelle",
+  Investissement: "Investissement",
+};
+// One track per domain, built from the catalogue: a new lesson joins its track.
+const tracks: { id: string; label: string; nodes: TrackNode[] }[] = byDomain(
+  lessons,
+)
+  .filter((group) => group.length)
+  .map((group) => ({
+    id: group[0]!.domain,
+    label: trackLabels[group[0]!.domain] ?? group[0]!.domain,
+    nodes: trackLayout(group.map((lesson) => lesson.id)).map(
+      (point, index) => ({
+        ...point,
+        icon: trackIcons[index % trackIcons.length]!,
+      }),
+    ),
+  }));
 const trackLinks = (nodes: TrackNode[]) =>
   nodes.flatMap((node) => {
     const lesson = lessons.find((item) => item.id === node.id);
