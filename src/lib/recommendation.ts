@@ -86,6 +86,17 @@ export function recommendLesson(state: AppState, now: Date) {
       ? lessons.find((lesson) => lesson.id === state.lastLessonId)
       : undefined;
   const current = resumed || next;
+  // The notion validated most recently: the home and the quiz result build on it.
+  const lastPassed = [...latest.values()]
+    .filter((attempt) => attempt.passed)
+    .sort((a, b) => b.at.localeCompare(a.at))[0];
+  const lastValidated = lastPassed
+    ? lessons.find((lesson) => lesson.id === lastPassed.lessonId)
+    : undefined;
+  const continues =
+    lastValidated && current.prerequisites.includes(lastValidated.id)
+      ? lastValidated
+      : undefined;
   const servesGoal = goalOrder.slice(0, 2).includes(current.domain);
   const goalNote = servesGoal
     ? ` Elle sert votre objectif\u00a0: «\u00a0${profile!.goal}\u00a0».`
@@ -97,14 +108,23 @@ export function recommendLesson(state: AppState, now: Date) {
       : "Vous l’avez ouverte en dernier."
     : !candidates.length
       ? "Tout est validé : revoir garde les idées vivantes."
-      : tier(next) === 0
-        ? `Votre point de départ signale une notion à poser en ${next.domain.toLowerCase()}, l’un de vos centres d’intérêt.${goalNote}`
-        : tier(next) === 1
-          ? `Dans vos centres d’intérêt${next.prerequisites.length ? ", et ses prérequis sont validés" : ", sans prérequis"}.${goalNote}`
-          : servesGoal
-            ? `Elle sert votre objectif\u00a0: «\u00a0${profile!.goal}\u00a0».`
-            : "La prochaine notion accessible du parcours.";
-  return { latest, done, current, resumed: Boolean(resumed), reason };
+      : continues
+        ? `Elle prolonge «\u00a0${lessonShortLabel(continues.id, continues.title)}\u00a0», que vous venez de valider.${goalNote}`
+        : tier(next) === 0
+          ? `Votre point de départ signale une notion à poser en ${next.domain.toLowerCase()}, l’un de vos centres d’intérêt.${goalNote}`
+          : tier(next) === 1
+            ? `Dans vos centres d’intérêt${next.prerequisites.length ? ", et ses prérequis sont validés" : ", sans prérequis"}.${goalNote}`
+            : servesGoal
+              ? `Elle sert votre objectif\u00a0: «\u00a0${profile!.goal}\u00a0».`
+              : "La prochaine notion accessible du parcours.";
+  return {
+    latest,
+    done,
+    current,
+    resumed: Boolean(resumed),
+    reason,
+    lastValidated,
+  };
 }
 
 /**
@@ -141,17 +161,33 @@ export function sessionPlan(
     : `${head}environ ${fits} séquence${fits > 1 ? "s" : ""} sur ${sequences}. La suite à la prochaine séance.`;
 }
 
-/** Practice spaces that extend a domain, for learners who learn by doing. */
-const practiceSpace: Partial<
-  Record<Lesson["domain"], { route: string; label: string }>
-> = {
-  Finance: { route: "lab", label: "S’exercer au Lab financier" },
-  "Intelligence artificielle": {
-    route: "ai",
-    label: "S’exercer à l’Atelier IA",
-  },
-  Entrepreneuriat: { route: "incubator", label: "Tester sur un projet" },
+/**
+ * Practice spaces where a lesson's notion is really handled. A lesson without
+ * one moves on to the next lesson: sending someone who just read a balance
+ * sheet to a break-even calculator would be practice in name only.
+ */
+const lab = { route: "lab", label: "S’exercer au Lab financier" };
+const scenarios = { route: "simulation", label: "S’exercer dans Scénarios" };
+const studio = { route: "ai", label: "S’exercer à l’Atelier IA" };
+const projects = { route: "incubator", label: "Tester sur un projet" };
+const lessonPractice: Record<string, { route: string; label: string }> = {
+  "ca-marge-tresorerie": lab,
+  "seuil-rentabilite": lab,
+  "ent-modele-economique": lab,
+  "ent-fixer-prix": lab,
+  "fin-bfr-tresorerie": scenarios,
+  "fin-previsionnel": scenarios,
+  "ent-facturer-declarer": scenarios,
+  "comprendre-llm": studio,
+  "prompt-structure": studio,
+  "automatisation-agent": studio,
+  "ia-cas-usage": studio,
+  "ia-evaluer-fiabilite": studio,
+  "validation-client": projects,
+  "ent-trouver-clients": projects,
 };
+
+export const practiceFor = (lessonId: string) => lessonPractice[lessonId];
 
 /**
  * The first action offered after a passed quiz, chosen by the way the learner
@@ -165,7 +201,7 @@ export function afterQuizAction(
 ): { kind: "apply" } | { kind: "route"; route: string; label: string } {
   if (preference === "Appliquer à mon projet") return { kind: "apply" };
   if (preference === "Exemples puis pratique") {
-    const space = practiceSpace[lesson.domain];
+    const space = practiceFor(lesson.id);
     if (space) return { kind: "route", ...space };
   }
   return next && next.id !== lesson.id

@@ -878,3 +878,140 @@
     padding-top: 0;
   }
 }
+
+/* Pass 25 — engagement loop: a question to answer, then what was gained and what comes next. */
+.learning-start-question {
+  margin: var(--space-6) 0;
+  padding: var(--space-4) var(--space-5);
+  border-left: 2px solid var(--line-strong);
+  background: var(--surface-low);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+.learning-start-question .eyebrow {
+  color: var(--text-tertiary);
+  font-size: var(--type-micro);
+}
+.learning-start-question p {
+  margin: var(--space-2) 0;
+  color: var(--text);
+  font-size: var(--type-body);
+  line-height: 1.55;
+}
+.learning-start-question small {
+  color: var(--muted);
+  font-size: var(--type-caption);
+}
+.learning-result-skills {
+  clear: both;
+  list-style: none;
+  padding: 0;
+  margin: var(--space-6) 0 var(--space-3);
+  display: grid;
+  gap: var(--space-2);
+}
+.learning-result-skills li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  color: var(--text);
+  font-size: var(--type-body-sm);
+}
+.learning-result-skills svg {
+  color: var(--success-text);
+  flex: none;
+}
+.learning-result-progress {
+  color: var(--muted);
+  font-size: var(--type-caption);
+  font-variant-numeric: tabular-nums;
+}
+.learning-next {
+  margin: var(--space-6) 0 var(--space-5);
+  padding: var(--space-5);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface-low);
+  box-shadow: var(--highlight-edge);
+}
+.learning-next .eyebrow {
+  color: var(--text-tertiary);
+  font-size: var(--type-micro);
+}
+.learning-next h3 {
+  margin: var(--space-2) 0 var(--space-2);
+  font-size: var(--type-title-md);
+  font-weight: var(--weight-medium);
+  letter-spacing: -0.4px;
+}
+.learning-next p {
+  margin: 0;
+  color: var(--muted);
+  font-size: var(--type-body-sm);
+  line-height: 1.6;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.learning-next p.learning-next-meta {
+  margin-top: var(--space-3);
+  color: var(--text-tertiary);
+  font-size: var(--type-caption);
+}
+.learning-result-pause {
+  margin-top: var(--space-6);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: var(--type-caption);
+  line-height: 1.6;
+}
+.learning-result-pause .text-button {
+  font-size: var(--type-caption);
+  padding: 0;
+}
+.text-button.inline {
+  display: inline;
+  padding: 0;
+  font-size: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--line-strong);
+}
+.learning-quiz-result.is-passed .learning-result-review {
+  margin: var(--space-5) 0;
+}
+@media (max-width: 760px) {
+  .learning-quiz-result .actions .button.primary {
+    order: -1;
+  }
+  .learning-start-question {
+    margin: var(--space-5) 0;
+    padding: var(--space-4);
+  }
+}
+.home-last-step {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  margin: var(--space-2) 0 0;
+  color: var(--muted);
+  font-size: var(--type-small);
+}
+.home-last-step svg {
+  color: var(--success-text);
+  flex: none;
+  transform: translateY(2px);
+}
+.home-last-step .text-button.inline {
+  color: var(--text-secondary);
+}
+/* 43 ticks: the label keeps its line instead of being pushed out of the hero. */
+.home-progress {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+.home-progress small {
+  white-space: nowrap;
+  flex: none;
+}

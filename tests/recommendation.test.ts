@@ -105,6 +105,49 @@ test("the way of learning chooses what follows a passed quiz", () => {
     afterQuizAction(first, "Concepts puis cas professionnel", first),
     { kind: "apply" },
   );
+  // Practice is offered only where the notion is really handled.
+  const sheet = lessons.find((item) => item.id === "fin-etats-financiers")!;
+  const moveOn = afterQuizAction(sheet, "Exemples puis pratique", next);
+  assert.equal(
+    moveOn.kind === "route" && moveOn.route,
+    "lesson/comprendre-llm",
+  );
+  const cash = lessons.find((item) => item.id === "fin-bfr-tresorerie")!;
+  const scenario = afterQuizAction(cash, "Exemples puis pratique", next);
+  assert.equal(scenario.kind === "route" && scenario.route, "simulation");
+});
+
+test("the next lesson says it continues the notion just validated", () => {
+  const passed = (lessonId: string, at: string) => ({
+    lessonId,
+    lessonVersion: "1.0.0",
+    answers: {},
+    correct: 2,
+    total: 2,
+    percent: 100,
+    passed: true,
+    at,
+  });
+  const state = {
+    schemaVersion: 1,
+    profile: {
+      name: "Profil démo",
+      level: "Débutant++",
+      goal: "Comprendre et piloter un business",
+      interests: ["Finance"],
+      minutes: 20,
+      preference: "Exemples puis pratique",
+      diagnostic: { finance: 0, business: 2, ai: 0, personal: 1, investing: 1 },
+    },
+    attempts: [passed("ca-marge-tresorerie", "2026-11-06T08:00:00.000Z")],
+    notes: {},
+    projects: [],
+    lastLessonId: null,
+  } as unknown as AppState;
+  const result = recommendLesson(state, new Date("2026-11-06T09:00:00Z"));
+  assert.equal(result.lastValidated?.id, "ca-marge-tresorerie");
+  assert.equal(result.current.id, "seuil-rentabilite");
+  assert.match(result.reason, /^Elle prolonge/);
 });
 
 test("the session plan starts where the lesson was left", () => {

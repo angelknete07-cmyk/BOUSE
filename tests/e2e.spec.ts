@@ -493,3 +493,97 @@ test("la recherche trouve un passage de leçon et le simulateur micro réagit", 
   await scene.getByRole("button", { name: "Versement libératoire" }).click();
   await expect(scene).toContainText("impôt déjà payé");
 });
+
+// Engagement loop over consecutive lessons: a question to answer, what was
+// gained, the next lesson in view, a calm way to stop, and the home that
+// builds on the last success. No streak, no countdown.
+test("deux leçons de suite : question de départ, acquis, suite et retour serein", async ({
+  page,
+}) => {
+  await page.addInitScript(() => {
+    if (localStorage.getItem("bouse.academy.v1")) return;
+    localStorage.setItem(
+      "bouse.academy.v1",
+      JSON.stringify({
+        schemaVersion: 1,
+        profile: {
+          name: "Vous",
+          level: "Fondations",
+          goal: "Comprendre et piloter un business",
+          interests: ["Finance"],
+          minutes: 20,
+          preference: "Concepts puis cas professionnel",
+          diagnostic: {
+            finance: 3,
+            business: 3,
+            ai: 3,
+            personal: 3,
+            investing: 3,
+          },
+        },
+        attempts: [],
+        notes: {},
+        projects: [],
+        lastLessonId: null,
+      }),
+    );
+  });
+  await page.goto("/#home");
+  await expect(
+    page.getByRole("heading", { name: "À vous de jouer.", exact: true }),
+  ).toBeVisible();
+  const pass = async (id: string) => {
+    const lesson = lessons.find((item) => item.id === id)!;
+    await expect(
+      page.getByRole("complementary", { name: "La question de départ" }),
+    ).toContainText(lesson.quiz[0]!.question);
+    await page.getByRole("tab", { name: /Démontrer/ }).click();
+    await expect(page.getByText("Votre question de départ")).toBeVisible();
+    for (const [index, question] of lesson.quiz.entries()) {
+      await page
+        .getByRole("radio", {
+          name: question.options[question.answer],
+          exact: true,
+        })
+        .locator("..")
+        .click();
+      const last = index === lesson.quiz.length - 1;
+      await page
+        .getByRole("button", {
+          name: last ? "Vérifier mes réponses" : "Valider cette réponse",
+        })
+        .click();
+      if (!last)
+        await page.getByRole("button", { name: "Question suivante" }).click();
+    }
+    const gained = page.getByRole("list", {
+      name: "Ce que vous maîtrisez maintenant",
+    });
+    for (const skill of lesson.skills)
+      await expect(gained).toContainText(skill);
+  };
+  await page
+    .getByRole("button", { name: "Ouvrir la leçon", exact: true })
+    .click();
+  await expect(page).toHaveURL(/#lesson\/ca-marge-tresorerie$/);
+  await pass("ca-marge-tresorerie");
+  const next = page.getByRole("region", {
+    name: "Trouver son seuil de rentabilité",
+  });
+  await expect(next).toContainText("prolonge cette leçon");
+  await expect(page.getByText("sans rappel ni compte à rebours")).toBeVisible();
+  await expect(page.getByText(/série|streak|ne perdez pas/i)).toHaveCount(0);
+  await page
+    .getByRole("button", { name: "Commencer la leçon suivante" })
+    .click();
+  await expect(page).toHaveURL(/#lesson\/seuil-rentabilite$/);
+  await pass("seuil-rentabilite");
+  await expect(
+    page.getByText(/Finance\s:\s2 notions validées sur/),
+  ).toBeVisible();
+  await page.getByRole("button", { name: "Revenir à l’accueil" }).click();
+  await expect(page.getByText(/Dernière notion validée/)).toContainText(
+    "Trouver son seuil de rentabilité",
+  );
+  await noHorizontalOverflow(page);
+});

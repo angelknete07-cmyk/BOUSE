@@ -131,3 +131,15 @@ Passe 21 : le lexique devient le « Lexique de l'Académie » (91 termes, dont l
 ## Catalogue (passe 22)
 
 43 leçons réparties en cinq domaines : Finance (7), Entrepreneuriat (9), Intelligence artificielle (7), Finance personnelle (9), Investissement (11). Les nouvelles leçons sont ajoutées en fin de catalogue pour que les numéros des leçons existantes restent stables. L'atlas, la carte des compétences et la trajectoire de l'accueil se construisent automatiquement à partir du catalogue (`src/lib/mapLayout.ts`). Les faits réglementaires récents sont datés de novembre 2026 et marqués « à vérifier ».
+
+## Boucle d'engagement (passe 25)
+
+Chaque leçon suit la même boucle : **découvrir → comprendre → manipuler → réussir → voir sa progression → avoir envie de la suite**.
+
+- **Découvrir.** La première séquence pose une question de départ (la première question du quiz). La leçon promet d'y répondre, et le quiz la signale comme « votre question de départ ».
+- **Réussir et voir sa progression.** Un quiz réussi affiche les notions acquises, le compte du domaine et du parcours, puis la leçon suivante avec son résumé et sa durée.
+- **Pratique pertinente seulement.** Un espace d'exercice n'est proposé que s'il manipule vraiment la notion. Sinon, la suite est la leçon suivante.
+- **Continuité.** L'accueil explique qu'une leçon « prolonge » celle qui vient d'être validée, ou rappelle la dernière notion validée.
+- **S'arrêter sans culpabilité.** L'écran de réussite dit que c'est un bon point d'arrêt, que tout est enregistré et que la suite attendra, sans rappel ni compte à rebours.
+
+Interdits : séries de jours, compte à rebours, formulation de perte, notification insistante, récompense sans apprentissage.

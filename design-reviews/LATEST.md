@@ -1,3 +1,40 @@
+# Review design — passe 25 : engagement et envie de revenir
+
+**6 novembre 2026, 06:37 Europe/Paris.** Audit de l'engagement sur trois leçons consécutives, comme débutant, sur mobile et desktop. Détail : [AUDIT-25.md](AUDIT-25.md). **Ni la direction artistique ni l'engagement ne sont déclarés validés** : il faut un test avec de vraies personnes.
+
+## Changements
+
+- **Question de départ** au début de chaque leçon, reprise dans le quiz (« Votre question de départ »). En cas de réussite : « C'est acquis. La question de départ est résolue. »
+- **Écran de réussite** : les notions acquises, la progression du domaine et du parcours, puis une carte « La suite » avec la leçon suivante. Sur mobile, l'action principale passe en premier. Les notes sont réduites.
+- **Pratique pertinente seulement** : le Lab, les Scénarios, l'Atelier IA ou les Projets ne sont proposés qu'aux 14 leçons qu'ils manipulent vraiment. Avant, « Lire un compte de résultat » menait au calculateur de seuil.
+- **Continuité à l'accueil** : « Elle prolonge « Marge et trésorerie », que vous venez de valider », ou « Dernière notion validée : … ».
+- **Point d'arrêt serein** : « la suite vous attendra, sans rappel ni compte à rebours ».
+- **Défauts corrigés :**
+  - « À vous de jouer, Vous. » sans prénom ;
+  - libellé « quiz validés » coupé au bord de l'accueil.
+
+## Captures
+
+- `latest-desktop.png` / `latest-mobile.png` : quiz validé (desktop 1440 px, Pixel 7, page entière).
+  - Sur la capture mobile pleine page, la barre de navigation fixe apparaît au milieu de l'image : c'est un artefact de capture.
+- `engagement-25/` : parcours avant correction (accueil, ouverture, séquences, résultat, suite) sur trois leçons.
+- `engagement-25/apres/` : même parcours après correction, mobile sur trois leçons et desktop sur deux.
+- Archive `2026-11-06_06-36-49-Europe-Paris`.
+
+## Contrôles
+
+- `npm test` : 213 cas réussis, dont pratique pertinente et raison « Elle prolonge ».
+- `npx playwright test` : 78 tests réussis, dont un nouveau test qui enchaîne deux leçons (question de départ, acquis, suite, point d'arrêt, accueil, absence de « série » ou « streak »).
+- Build sans avertissement ; Prettier conforme.
+
+## Limites
+
+- 32 leçons sur 43 n'ont pas encore de scène interactive.
+- Les quiz restent à deux questions.
+- La motivation réelle n'est pas mesurable par des tests automatiques.
+
+---
+
 # Review design — passe 24 : recherche plein texte et simulateur de micro-entreprise
 
 **6 novembre 2026, 06:13 Europe/Paris.** Suite du plan après la passe 23. **La direction artistique n'est pas déclarée validée.**

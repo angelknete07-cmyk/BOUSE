@@ -11,6 +11,7 @@ import { latestCurrentAttempt } from "../lib/portfolio";
 import {
   afterQuizAction,
   canSkipToQuiz,
+  practiceFor,
   recommendLesson,
 } from "../lib/recommendation";
 import { useClock } from "../lib/useClock";
@@ -57,11 +58,21 @@ export function LessonView({ lesson, state, update, onNavigate }: Props) {
   const stageRef = useRef<HTMLElement>(null);
   const feedbackRef = useRef<HTMLDivElement>(null);
   const latest = latestCurrentAttempt(lesson, state.attempts, now);
+  const recommendation = recommendLesson(state, now);
+  const nextLesson =
+    recommendation.current.id === lesson.id
+      ? undefined
+      : recommendation.current;
   const nextAction = afterQuizAction(
     lesson,
     state.profile?.preference,
-    recommendLesson(state, now).current,
+    recommendation.current,
   );
+  const practice = practiceFor(lesson.id);
+  const domainLessons = lessons.filter((item) => item.domain === lesson.domain);
+  const domainDone = domainLessons.filter((item) =>
+    recommendation.done.has(item.id),
+  ).length;
   const linkedProjects = state.projects.filter((project) =>
     project.lessonIds.includes(lesson.id),
   );
@@ -425,6 +436,18 @@ export function LessonView({ lesson, state, update, onNavigate }: Props) {
                     </div>
                     {sequence === 0 ? (
                       <>
+                        {/* Curiosity first: the question the lesson will answer. */}
+                        <aside
+                          className="learning-start-question"
+                          aria-label="La question de départ"
+                        >
+                          <span className="eyebrow">LA QUESTION DE DÉPART</span>
+                          <p>{lesson.quiz[0]!.question}</p>
+                          <small>
+                            Gardez-la en tête : vous saurez y répondre à la fin
+                            de la leçon.
+                          </small>
+                        </aside>
                         <LessonScene lessonId={lesson.id} />
                         {section.body.length > 1 && (
                           <details className="learning-depth">
@@ -743,7 +766,9 @@ export function LessonView({ lesson, state, update, onNavigate }: Props) {
                       {String(lesson.quiz.length).padStart(2, "0")}
                     </span>
                     <span className="learning-footnote">
-                      Une preuve, pas une certification
+                      {questionIndex === 0
+                        ? "Votre question de départ"
+                        : "Une preuve, pas une certification"}
                     </span>
                   </div>
                   <div
@@ -865,7 +890,9 @@ export function LessonView({ lesson, state, update, onNavigate }: Props) {
                   </form>
                 </>
               ) : (
-                <div className="learning-quiz-result">
+                <div
+                  className={`learning-quiz-result ${result.passed ? "is-passed" : ""}`}
+                >
                   <div className="learning-result-orbit" aria-hidden="true">
                     <span>
                       {result.percent}
@@ -877,28 +904,125 @@ export function LessonView({ lesson, state, update, onNavigate }: Props) {
                   <span className="eyebrow">VOTRE POINT D’ÉTAPE</span>
                   <h2>
                     {result.passed
-                      ? "L’idée est comprise.\nFaites-en quelque chose."
+                      ? "C’est acquis.\nLa question de départ est résolue."
                       : "Une erreur utile.\nUne notion à reprendre."}
                   </h2>
                   <p className="learning-result-score" role="status">
                     {result.correct}/{result.total} · {result.percent} %
                   </p>
-                  <p className="learning-lead">
-                    {result.passed
-                      ? "Quiz validé. La prochaine preuve se construit dans une situation concrète."
-                      : "Votre prochaine révision ciblera cette notion. Comparez votre raisonnement aux explications, puis réessayez."}
-                  </p>
-                  <p className="learning-footnote">
-                    Les cartes de rappel de cette leçon rejoignent votre
-                    calendrier. Les autoévaluations de révision restent
-                    distinctes de ce quiz.
-                  </p>
-                  <button
-                    className="text-button"
-                    onClick={() => onNavigate("reviews")}
-                  >
-                    Ouvrir mes révisions <Icon name="arrow" size={16} />
-                  </button>
+                  {result.passed ? (
+                    <>
+                      <ul
+                        className="learning-result-skills"
+                        aria-label="Ce que vous maîtrisez maintenant"
+                      >
+                        {lesson.skills.map((skill) => (
+                          <li key={skill}>
+                            <Icon name="check" size={16} />
+                            {skill}
+                          </li>
+                        ))}
+                      </ul>
+                      <p className="learning-result-progress">
+                        {lesson.domain}
+                        {"\u00a0"}: {domainDone} notion
+                        {domainDone > 1 ? "s" : ""} validée
+                        {domainDone > 1 ? "s" : ""} sur {domainLessons.length}
+                        {" · "}votre parcours{"\u00a0"}:{" "}
+                        {recommendation.done.size}/{lessons.length}
+                      </p>
+                      {nextLesson && (
+                        <section
+                          className="learning-next"
+                          aria-labelledby="learning-next-title"
+                        >
+                          <span className="eyebrow">LA SUITE</span>
+                          <h3 id="learning-next-title">{nextLesson.title}</h3>
+                          <p>{nextLesson.summary}</p>
+                          <p className="learning-next-meta">
+                            {nextLesson.minutes}
+                            {"\u00a0"}min · {nextLesson.domain}
+                            {nextLesson.prerequisites.includes(lesson.id)
+                              ? " · prolonge cette leçon"
+                              : ""}
+                          </p>
+                        </section>
+                      )}
+                      <div className="actions">
+                        {nextAction.kind === "route" &&
+                          !nextAction.route.startsWith("lesson/") &&
+                          nextLesson && (
+                            <button
+                              className="button secondary"
+                              onClick={() =>
+                                onNavigate(`lesson/${nextLesson.id}`)
+                              }
+                            >
+                              Commencer la leçon suivante
+                            </button>
+                          )}
+                        {nextAction.kind === "route" &&
+                          nextAction.route.startsWith("lesson/") &&
+                          practice && (
+                            <button
+                              className="button secondary"
+                              onClick={() => onNavigate(practice.route)}
+                            >
+                              {practice.label}
+                            </button>
+                          )}
+                        {nextAction.kind === "route" && (
+                          <button
+                            className="button secondary"
+                            onClick={() => advanceTo(3)}
+                          >
+                            Appliquer à un projet
+                          </button>
+                        )}
+                        <button
+                          className="button primary"
+                          onClick={() =>
+                            nextAction.kind === "route"
+                              ? onNavigate(nextAction.route)
+                              : advanceTo(3)
+                          }
+                        >
+                          {nextAction.kind === "route"
+                            ? nextAction.route.startsWith("lesson/")
+                              ? "Commencer la leçon suivante"
+                              : nextAction.label
+                            : "Appliquer à un projet"}
+                          <Icon name="arrow" size={17} />
+                        </button>
+                      </div>
+                      {state.profile?.preference && (
+                        <p className="learning-footnote">
+                          Suite proposée selon votre façon d’apprendre
+                          {"\u00a0"}: «{"\u00a0"}
+                          {state.profile.preference}
+                          {"\u00a0"}». Modifiable dans les préférences.
+                        </p>
+                      )}
+                      {/* Stopping here is a good outcome, not a failure to retain. */}
+                      <p className="learning-result-pause">
+                        Bon point d’arrêt. Tout est enregistré dans ce
+                        navigateur ; la suite vous attendra, sans rappel ni
+                        compte à rebours.{" "}
+                        <button
+                          type="button"
+                          className="text-button"
+                          onClick={() => onNavigate("home")}
+                        >
+                          Revenir à l’accueil
+                        </button>
+                      </p>
+                    </>
+                  ) : (
+                    <p className="learning-lead">
+                      Votre prochaine révision ciblera cette notion. Comparez
+                      votre raisonnement aux explications, puis réessayez.
+                    </p>
+                  )}
                   <div className="learning-result-review">
                     {lesson.quiz.map((item, index) => (
                       <details key={item.id}>
@@ -927,56 +1051,46 @@ export function LessonView({ lesson, state, update, onNavigate }: Props) {
                       </details>
                     ))}
                   </div>
-                  <div className="actions">
-                    <button
-                      className="button secondary"
-                      onClick={() => {
-                        setResult(null);
-                        setAnswers({});
-                        setQuestionIndex(0);
-                        setAnswerConfirmed(false);
-                        submitted.current = false;
-                        focusStage();
-                      }}
-                    >
-                      Nouvelle tentative
-                    </button>
-                    {result.passed && nextAction.kind === "route" && (
+                  {!result.passed && (
+                    <div className="actions">
                       <button
                         className="button secondary"
-                        onClick={() => advanceTo(3)}
+                        onClick={() => {
+                          setResult(null);
+                          setAnswers({});
+                          setQuestionIndex(0);
+                          setAnswerConfirmed(false);
+                          submitted.current = false;
+                          focusStage();
+                        }}
                       >
-                        Appliquer à un projet
+                        Nouvelle tentative
                       </button>
-                    )}
-                    <button
-                      className="button primary"
-                      onClick={() => {
-                        if (result.passed && nextAction.kind === "route")
-                          return onNavigate(nextAction.route);
-                        rememberSequence(0);
-                        advanceTo(result.passed ? 3 : 0);
-                      }}
-                    >
-                      {!result.passed
-                        ? "Revoir la leçon"
-                        : nextAction.kind === "route"
-                          ? nextAction.label
-                          : "Appliquer à un projet"}
-                      <Icon name="arrow" size={17} />
-                    </button>
-                  </div>
-                  {result.passed && state.profile?.preference && (
-                    <p className="learning-footnote">
-                      Suite proposée selon votre façon d’apprendre{"\u00a0"}: «
-                      {"\u00a0"}
-                      {state.profile.preference}
-                      {"\u00a0"}». Modifiable dans les préférences.
-                    </p>
+                      <button
+                        className="button primary"
+                        onClick={() => {
+                          rememberSequence(0);
+                          advanceTo(0);
+                        }}
+                      >
+                        Revoir la leçon
+                        <Icon name="arrow" size={17} />
+                      </button>
+                    </div>
                   )}
                   <p className="learning-footnote">
-                    Seuil de réussite : 80 %. Avec deux questions, les deux
-                    réponses sont nécessaires.
+                    Les cartes de rappel de cette leçon rejoignent vos{" "}
+                    <button
+                      type="button"
+                      className="text-button inline"
+                      onClick={() => onNavigate("reviews")}
+                    >
+                      révisions
+                    </button>
+                    .
+                    {result.passed
+                      ? ""
+                      : " Seuil de réussite : 80 %. Avec deux questions, les deux réponses sont nécessaires."}
                   </p>
                 </div>
               )}

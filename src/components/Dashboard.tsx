@@ -55,10 +55,11 @@ export function Dashboard({ state, onNavigate }: Props) {
   const now = useClock();
   const reviewDeck = buildReviewDeck(lessons, state, now);
   const due = dueReviewCards(reviewDeck, now);
-  const { latest, done, current, resumed, reason } = recommendLesson(
-    state,
-    now,
-  );
+  const { latest, done, current, resumed, reason, lastValidated } =
+    recommendLesson(state, now);
+  // « Vous » is the stand-in for an empty name: never greet « À vous de jouer, Vous ».
+  const name = state.profile?.name?.trim();
+  const greetingName = name && name.toLowerCase() !== "vous" ? name : "";
   // The hero already presents the current lesson: the trajectory opens on what follows it.
   const following =
     lessons.find(
@@ -144,7 +145,27 @@ export function Dashboard({ state, onNavigate }: Props) {
           <p className="home-dateline">
             Votre atelier personnel <span>/</span> {date}
           </p>
-          <h1>À vous de jouer, {state.profile?.name || "vous"}.</h1>
+          <h1>
+            {greetingName
+              ? `À vous de jouer, ${greetingName}.`
+              : "À vous de jouer."}
+          </h1>
+          {lastValidated && !reason.startsWith("Elle prolonge") && (
+            <p className="home-last-step">
+              <Icon name="check" size={14} />
+              <span>
+                Dernière notion validée{"\u00a0"}:{" "}
+                <button
+                  type="button"
+                  className="text-button inline"
+                  onClick={() => openLesson(lastValidated)}
+                >
+                  {lastValidated.title}
+                </button>
+                .
+              </span>
+            </p>
+          )}
         </div>
         <span className="learning-session">
           <Icon name="clock" size={15} />
