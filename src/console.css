@@ -85,10 +85,10 @@
       rgb(255 255 255 / 0.07),
       rgb(255 255 255 / 0.03)
     );
-    border-color: rgb(167 139 250 / 0.38);
+    border-color: rgb(var(--accent-violet-rgb) / calc(0.38 * var(--wash-k)));
     box-shadow:
       inset 0 1px 0 rgb(255 255 255 / 0.06),
-      0 0 18px rgb(107 166 242 / 0.08);
+      0 0 18px rgb(var(--accent-blue-rgb) / calc(0.08 * var(--glow-k)));
   }
   .sidebar .nav-group {
     margin: var(--space-3) 14px;
@@ -245,9 +245,9 @@
   padding: 5px 11px;
   border-radius: 999px;
   font-size: var(--type-caption);
-  color: #ddd5ff;
+  color: rgb(var(--accent-violet-ink));
   background: var(--accent-violet-wash);
-  border: 1px solid rgb(167 139 250 / 0.35);
+  border: 1px solid rgb(var(--accent-violet-rgb) / calc(0.35 * var(--wash-k)));
 }
 .console-badge svg {
   color: var(--accent-violet);
@@ -329,7 +329,9 @@
   font-weight: 600;
 }
 .console-progress .progress-ring {
-  filter: drop-shadow(0 0 14px rgb(167 139 250 / 0.28));
+  filter: drop-shadow(
+    0 0 14px rgb(var(--accent-violet-rgb) / calc(0.28 * var(--glow-k)))
+  );
 }
 .console-progress-text {
   display: grid;
@@ -476,8 +478,8 @@
   height: 1px;
   background: linear-gradient(
     90deg,
-    rgb(63 203 155 / 0.4),
-    rgb(167 139 250 / 0.45) 30%,
+    rgb(var(--accent-emerald-rgb) / calc(0.4 * var(--wash-k))),
+    rgb(var(--accent-violet-rgb) / calc(0.45 * var(--wash-k))) 30%,
     rgb(255 255 255 / 0.1) 50%
   );
 }
@@ -515,22 +517,30 @@
 }
 .console-step.is-done .console-step-mark {
   color: var(--accent-emerald);
-  border-color: rgb(63 203 155 / 0.55);
-  background: radial-gradient(circle, rgb(63 203 155 / 0.18), #101413 70%);
+  border-color: rgb(var(--accent-emerald-rgb) / calc(0.55 * var(--wash-k)));
+  background: radial-gradient(
+    circle,
+    rgb(var(--accent-emerald-rgb) / calc(0.18 * var(--wash-k))),
+    rgb(var(--accent-emerald-deep)) 70%
+  );
 }
 .console-step.is-current .console-step-mark {
   color: #fff;
   border-color: var(--accent-violet);
-  background: radial-gradient(circle, rgb(167 139 250 / 0.55), #2a2140 75%);
+  background: radial-gradient(
+    circle,
+    rgb(var(--accent-violet-rgb) / calc(0.55 * var(--wash-k))),
+    rgb(var(--accent-violet-deep)) 75%
+  );
   box-shadow:
-    0 0 0 5px rgb(167 139 250 / 0.12),
+    0 0 0 5px rgb(var(--accent-violet-rgb) / calc(0.12 * var(--glow-k))),
     var(--accent-violet-glow);
 }
 .console-step.is-current .console-step-mark svg {
   fill: currentColor;
 }
 .console-step.is-current small {
-  color: #cfc3ff;
+  color: rgb(var(--accent-violet-ink));
 }
 .console-step button:hover .console-step-mark {
   border-color: rgb(255 255 255 / 0.3);
@@ -558,7 +568,9 @@
   fill: none;
   stroke: var(--accent-violet);
   stroke-width: 2;
-  filter: drop-shadow(0 0 6px rgb(167 139 250 / 0.55));
+  filter: drop-shadow(
+    0 0 6px rgb(var(--accent-violet-rgb) / calc(0.55 * var(--glow-k)))
+  );
 }
 .console-activity .home-activity-base {
   stroke: rgb(255 255 255 / 0.08);
@@ -567,7 +579,9 @@
   fill: #fff;
   stroke: var(--accent-violet);
   stroke-width: 2;
-  filter: drop-shadow(0 0 6px rgb(167 139 250 / 0.8));
+  filter: drop-shadow(
+    0 0 6px rgb(var(--accent-violet-rgb) / calc(0.8 * var(--glow-k)))
+  );
 }
 .console-activity p {
   margin: auto 0 0;
@@ -764,7 +778,8 @@
     var(--accent-violet),
     var(--accent-blue)
   ) !important;
-  box-shadow: 0 0 12px rgb(167 139 250 / 0.45);
+  box-shadow: 0 0 12px
+    rgb(var(--accent-violet-rgb) / calc(0.45 * var(--glow-k)));
 }
 .progress-ring-track {
   stroke: rgb(255 255 255 / 0.07);
@@ -779,7 +794,9 @@
   stroke-width: 2.4;
   stroke-linecap: round;
   stroke-linejoin: round;
-  filter: drop-shadow(0 0 5px rgb(167 139 250 / 0.55));
+  filter: drop-shadow(
+    0 0 5px rgb(var(--accent-violet-rgb) / calc(0.55 * var(--glow-k)))
+  );
 }
 .simulation-scenario-path {
   stroke-width: 1.4;
@@ -797,23 +814,29 @@
   fill: #fff;
   stroke: var(--accent-violet);
   stroke-width: 2.5;
-  filter: drop-shadow(0 0 6px rgb(167 139 250 / 0.85));
+  filter: drop-shadow(
+    0 0 6px rgb(var(--accent-violet-rgb) / calc(0.85 * var(--glow-k)))
+  );
 }
 .simulation-chart-point {
   background: #fff !important;
   box-shadow:
     0 0 0 3px var(--accent-violet),
-    0 0 14px rgb(167 139 250 / 0.8) !important;
+    0 0 14px rgb(var(--accent-violet-rgb) / calc(0.8 * var(--glow-k))) !important;
 }
 .plot-threshold circle {
   fill: var(--accent-blue);
   stroke: #fff;
-  filter: drop-shadow(0 0 6px rgb(107 166 242 / 0.8));
+  filter: drop-shadow(
+    0 0 6px rgb(var(--accent-blue-rgb) / calc(0.8 * var(--glow-k)))
+  );
 }
 /* Bars: the bar in focus is violet, the compared one blue. */
 .scene-bar-focus {
   fill: var(--accent-violet);
-  filter: drop-shadow(0 0 6px rgb(167 139 250 / 0.4));
+  filter: drop-shadow(
+    0 0 6px rgb(var(--accent-violet-rgb) / calc(0.4 * var(--glow-k)))
+  );
 }
 .scene-bar-silver {
   fill: var(--accent-blue) !important;
@@ -824,15 +847,17 @@
     var(--accent-violet),
     var(--accent-blue)
   ) !important;
-  box-shadow: 0 0 10px rgb(167 139 250 / 0.4);
+  box-shadow: 0 0 10px rgb(var(--accent-violet-rgb) / calc(0.4 * var(--glow-k)));
 }
 .simulation-legend i:not(.reference) {
   background: var(--accent-violet);
-  box-shadow: 0 0 6px rgb(167 139 250 / 0.7);
+  box-shadow: 0 0 6px rgb(var(--accent-violet-rgb) / calc(0.7 * var(--glow-k)));
 }
 /* Domain and skill rings take the gradient and a faint halo. */
 .home-domain .progress-ring,
 .skills-summary-card .progress-ring,
 .academy-domain .progress-ring {
-  filter: drop-shadow(0 0 8px rgb(167 139 250 / 0.22));
+  filter: drop-shadow(
+    0 0 8px rgb(var(--accent-violet-rgb) / calc(0.22 * var(--glow-k)))
+  );
 }

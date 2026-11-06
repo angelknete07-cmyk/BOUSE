@@ -40,13 +40,33 @@
      most; they mark progress, the active step or the selected data series,
      never a surface, a button or a whole card. Distinct from success. */
   /* Passe 32 (planche 03 retenue par l'utilisateur) : trois accents ponctuels. */
-  --accent-violet: #a78bfa; /* progression, étape en cours */
-  --accent-blue: #6ba6f2; /* données, révisions */
-  --accent-emerald: #3fcb9b; /* réussite, validation */
-  --accent-violet-wash: rgb(167 139 250 / 0.14);
-  --accent-blue-wash: rgb(107 166 242 / 0.12);
-  --accent-emerald-wash: rgb(63 203 155 / 0.12);
-  --accent-violet-glow: 0 0 22px rgb(167 139 250 / 0.45);
+  /* V4 jalon B : une seule source. Chaque accent est défini par ses canaux
+     RGB ; les feuilles écrivent rgb(var(--accent-…-rgb) / alpha) au lieu de
+     valeurs en dur. --glow-k règle toutes les lueurs, --wash-k tous les
+     voiles et bordures teintés. Valeurs par défaut = passe 32 (inchangée tant
+     que l'utilisateur n'a pas choisi). */
+  --accent-violet-rgb: 167 139 250;
+  --accent-blue-rgb: 107 166 242;
+  --accent-emerald-rgb: 63 203 155;
+  --accent-violet-ink: 221 213 255; /* texte clair teinté (badge, pastille) */
+  --accent-violet-deep: 42 33 64; /* fond sombre teinté (pastille active) */
+  --accent-emerald-deep: 16 20 19;
+  --glow-k: 1;
+  --wash-k: 1;
+  --accent-violet: rgb(
+    var(--accent-violet-rgb)
+  ); /* progression, étape en cours */
+  --accent-blue: rgb(var(--accent-blue-rgb)); /* données, révisions */
+  --accent-emerald: rgb(var(--accent-emerald-rgb)); /* réussite, validation */
+  --accent-violet-wash: rgb(
+    var(--accent-violet-rgb) / calc(0.14 * var(--wash-k))
+  );
+  --accent-blue-wash: rgb(var(--accent-blue-rgb) / calc(0.12 * var(--wash-k)));
+  --accent-emerald-wash: rgb(
+    var(--accent-emerald-rgb) / calc(0.12 * var(--wash-k))
+  );
+  --accent-violet-glow: 0 0 22px
+    rgb(var(--accent-violet-rgb) / calc(0.45 * var(--glow-k)));
   /* Passe 31 names, kept as aliases of the violet. */
   --accent-lavender: var(--accent-violet);
   --accent-lavender-strong: #c4b5fd;
@@ -156,4 +176,49 @@
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
   --ease-settle: cubic-bezier(0.2, 0.8, 0.3, 1.04);
+}
+
+/* ---------- V4 jalon B : essais activables, jamais par défaut ----------
+   ?palette=apaisee  → teintes désaturées du brief V4, lueurs et voiles réduits.
+   ?type=manrope     → titres en Manrope (OFL, fichier local), lecture en Inter.
+   ?type=affine      → Inter, tailles et rythme revus (plancher 12 px utile).
+   Le choix final de l'utilisateur deviendra la valeur par défaut. */
+:root[data-palette="apaisee"] {
+  --accent-violet-rgb: 154 138 183; /* lavande #9A8AB7 */
+  --accent-blue-rgb: 131 156 175; /* glacier #839CAF */
+  --accent-emerald-rgb: 127 166 156; /* vert d'eau #7FA69C */
+  --accent-violet-ink: 222 216 232;
+  --accent-violet-deep: 34 31 41;
+  --accent-emerald-deep: 18 21 20;
+  --accent-lavender-strong: #b9adcf;
+  --accent-lavender-dim: #7a6d94;
+  --glow-k: 0.15;
+  --wash-k: 0.55;
+}
+
+@font-face {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+  src: url("/fonts/manrope-latin-variable.woff2") format("woff2");
+}
+:root[data-type="manrope"] {
+  --font-display: "Manrope", var(--font-sans);
+  --tracking-display: -0.02em;
+  --tracking-heading: -0.015em;
+}
+:root[data-type="affine"] {
+  --type-coordinate: 0.6875rem;
+  --type-annotation: 0.6875rem;
+  --type-micro: 0.75rem;
+  --type-caption: 0.75rem;
+  --type-small: 0.8125rem;
+  --type-body-sm: 0.875rem;
+  --type-body: 0.9375rem;
+  --tracking-display: -0.028em;
+  --tracking-heading: -0.02em;
+  --tracking-figure: -0.03em;
+  --leading-body: 1.6;
+  --leading-reading: 1.75;
 }

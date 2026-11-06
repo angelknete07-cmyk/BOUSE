@@ -74,6 +74,12 @@ const Incubator = lazy(() =>
 const Glossary = lazy(() =>
   import("./components/Glossary").then((m) => ({ default: m.Glossary })),
 );
+// V4 : page de contrôle visuel interne, absente du site publié.
+const StyleLab = import.meta.env.DEV
+  ? lazy(() =>
+      import("./components/StyleLab").then((m) => ({ default: m.StyleLab })),
+    )
+  : null;
 const Lab = lazy(() =>
   import("./components/Tools").then((m) => ({ default: m.Lab })),
 );
@@ -667,6 +673,8 @@ function App() {
                 <Radar />
               ) : route === "settings" ? (
                 <Settings state={state} update={update} cloud={cloud} />
+              ) : StyleLab && route === "labo-design" ? (
+                <StyleLab />
               ) : (
                 <div className="empty-state not-found">
                   <h1>Cette page n’existe pas.</h1>

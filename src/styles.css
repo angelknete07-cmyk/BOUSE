@@ -1592,7 +1592,8 @@ progress {
     grid-template-columns: 1fr;
   }
   .settings-layout {
-    grid-template-columns: 1fr;
+    /* minmax(0, …) : un select long ne doit pas élargir la page (320 px). */
+    grid-template-columns: minmax(0, 1fr);
   }
   .onboarding-layout {
     grid-template-columns: minmax(0, 1fr);
