@@ -127,3 +127,7 @@ Une leçon retient la séquence où elle a été quittée et y rouvre, en l'anno
 Dans le texte des leçons, les termes du lexique ouvrent une définition courte sur place, avec un lien vers le lexique et vers la leçon qui les explique (passe 20). Les mots courants ne sont reconnus que dans les leçons qui les définissent ou s'appuient dessus. Le point de départ compte cinq questions, une par domaine principal.
 
 Passe 21 : le lexique devient le « Lexique de l'Académie » (91 termes, dont les notions de base en entreprise et en IA). Les cas pratiques et les énoncés d'exercice sont reliés au lexique ; les quiz ne le sont pas, pour ne pas souffler la réponse. Les quiz restent à deux questions : en ajouter changerait la version des leçons et ferait repasser « à revoir » les quiz déjà validés.
+
+## Catalogue (passe 22)
+
+43 leçons réparties en cinq domaines : Finance (7), Entrepreneuriat (9), Intelligence artificielle (7), Finance personnelle (9), Investissement (11). Les nouvelles leçons sont ajoutées en fin de catalogue pour que les numéros des leçons existantes restent stables. L'atlas, la carte des compétences et la trajectoire de l'accueil se construisent automatiquement à partir du catalogue (`src/lib/mapLayout.ts`). Les faits réglementaires récents sont datés de novembre 2026 et marqués « à vérifier ».

@@ -1,3 +1,67 @@
+# Review design — passe 22 (vagues 2 à 5) : leçons complètes dans tous les domaines
+
+**6 novembre 2026, 05:19 Europe/Paris.** Suite de la demande « leçons archi-complètes, dans tous les domaines, en prenant le temps des recherches ». Le catalogue passe de 23 à **43 leçons** et le lexique à **165 termes**. **La direction artistique n'est pas déclarée validée.**
+
+## Nouvelles leçons
+
+| Domaine                   | Avant | Après | Leçons ajoutées                                                                                                                       |
+| ------------------------- | ----- | ----- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| Finance (entreprise)      | 2     | 7     | Compte de résultat et bilan ; BFR et plan de trésorerie ; prévisionnel crédible ; investir et amortir ; indicateurs de pilotage       |
+| Entrepreneuriat (vague 1) | 1     | 9     | voir l'entrée précédente                                                                                                              |
+| Intelligence artificielle | 3     | 7     | Données et confidentialité (RGPD) ; choisir un cas d'usage ; évaluer et tester une IA ; cadre légal européen (AI Act)                 |
+| Finance personnelle       | 4     | 9     | Banque et arnaques ; impôt sur le revenu ; assurances ; louer ou acheter ; préparer sa retraite                                       |
+| Investissement            | 5     | 11    | Obligations et taux ; repérer une arnaque ; immobilier et SCPI ; crypto-actifs ; construire son allocation ; fiscalité des placements |
+
+Chaque leçon suit la même structure :
+
+- quatre séquences ;
+- un cas fictif ;
+- un exercice corrigé avec ses calculs vérifiés ;
+- deux questions de quiz ;
+- des cartes de révision ;
+- des sources officielles.
+
+**Faits récents vérifiés en ligne (sources concordantes), datés et marqués « à vérifier » dans les leçons :**
+
+- **Retraite :** suspension du relèvement de l'âge légal (62 ans et 9 mois, 170 trimestres) pour les départs entre septembre 2026 et fin 2027 (LFSS 2026).
+- **Flat tax :** PFU à 31,4 % en 2026 (prélèvements sociaux à 18,6 %), l'assurance-vie restant à 17,2 %.
+- **Règlement européen sur l'IA :** obligations « haut risque » reportées au 2 décembre 2027 (annexe III) et au 2 août 2028 (produits réglementés) par l'omnibus numérique de 2026.
+- **Assurance emprunteur :** loi Lemoine (résiliation à tout moment).
+- **Crédit immobilier :** recommandations du HCSF (35 % de taux d'effort, 25 ans).
+- **Crypto-actifs :** fin de la période transitoire MiCA en France en juillet 2026.
+
+Les sites officiels n'étaient pas joignables depuis cette session.
+
+## Corrections techniques de la vague
+
+- **Paquet JavaScript :** les leçons faisaient dépasser 500 kB au paquet principal. Le contenu des cours et React ont désormais leur propre fichier : le paquet principal passe de 596 à 78 kB, sans avertissement.
+- **Atlas :** rangées plus hautes pour les libellés sur deux lignes.
+- **Tests :** ceux qui comptaient les leçons en dur calculent désormais à partir du catalogue (atlas Finance, nombre de notions).
+
+## Captures
+
+| Écran                           | Desktop                                           | Mobile                                           |
+| ------------------------------- | ------------------------------------------------- | ------------------------------------------------ |
+| Atlas complet, 43 notions       | [Voir](lecons-22b/desktop-atlas-complet.png)      | [Voir](lecons-22b/mobile-atlas-complet.png)      |
+| BFR et trésorerie, séquence 2   | [Voir](lecons-22b/desktop-fin-bfr-tresorerie.png) | [Voir](lecons-22b/mobile-fin-bfr-tresorerie.png) |
+| Impôt sur le revenu, séquence 2 | [Voir](lecons-22b/desktop-fp-impot-revenu.png)    | [Voir](lecons-22b/mobile-fp-impot-revenu.png)    |
+| Crypto-actifs, séquence 2       | [Voir](lecons-22b/desktop-inv-crypto-actifs.png)  | [Voir](lecons-22b/mobile-inv-crypto-actifs.png)  |
+| Cadre légal de l'IA, séquence 2 | [Voir](lecons-22b/desktop-ia-cadre-legal.png)     | [Voir](lecons-22b/mobile-ia-cadre-legal.png)     |
+
+## Vérifications internes
+
+- `npm test` : 207 cas réussis (catalogue cohérent, prérequis sans cycle, identifiants uniques, typographie des chiffres, lexique).
+- `npx playwright test` : 72 tests réussis (desktop et Pixel 7 émulé).
+- Build sans avertissement. Archive `2026-11-06_05-19-05-Europe-Paris`.
+
+**Limites :**
+
+- Les nouvelles leçons n'ont pas de scène interactive dédiée.
+- Les quiz restent à deux questions.
+- Les règles fiscales et sociales devront être revues à chaque loi de finances.
+
+---
+
 # Review design — passe 22 (vague 1) : parcours Entrepreneuriat complet
 
 **6 novembre 2026, 04:56 Europe/Paris.** Demande de l'utilisateur : des leçons « archi-complètes » dans tous les domaines, en prenant le temps des recherches. Le travail est livré par vagues ; voici la première. **La direction artistique n'est pas déclarée validée.**

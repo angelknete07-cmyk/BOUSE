@@ -53,4 +53,18 @@ function precacheServiceWorker(): Plugin {
   };
 }
 
-export default defineConfig({ plugins: [react(), precacheServiceWorker()] });
+export default defineConfig({
+  plugins: [react(), precacheServiceWorker()],
+  build: {
+    rollupOptions: {
+      output: {
+        // Course content changes more often than the app shell: its own file
+        // keeps the main bundle small and lets browsers cache each separately.
+        manualChunks(id) {
+          if (id.includes("/src/data/")) return "course";
+          if (id.includes("/node_modules/react")) return "react";
+        },
+      },
+    },
+  },
+});

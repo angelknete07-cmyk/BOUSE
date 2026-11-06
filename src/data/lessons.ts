@@ -2,6 +2,10 @@ import type { Domain } from "./domains";
 import { investingLessons } from "./investingLessons.ts";
 import { personalFinanceLessons } from "./personalFinanceLessons.ts";
 import { entrepreneurshipLessons } from "./entrepreneurshipLessons.ts";
+import { businessFinanceLessons } from "./businessFinanceLessons.ts";
+import { personalFinanceMoreLessons } from "./personalFinanceMoreLessons.ts";
+import { investingMoreLessons } from "./investingMoreLessons.ts";
+import { aiMoreLessons } from "./aiMoreLessons.ts";
 
 export interface Lesson {
   id: string;
@@ -733,4 +737,8 @@ export const lessons: Lesson[] = [
   ...investingLessons,
   // Appended so the numbers of existing lessons stay stable for learners.
   ...entrepreneurshipLessons,
+  ...businessFinanceLessons,
+  ...personalFinanceMoreLessons,
+  ...investingMoreLessons,
+  ...aiMoreLessons,
 ];

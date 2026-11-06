@@ -270,7 +270,7 @@ test("galerie des écrans et du quiz validé sans débordement", async ({
   // Change the document URL so the init script runs after the empty onboarding.
   await page.goto("/?gallery=1#academy");
   await expect(
-    page.getByRole("heading", { name: "23 notions, 5 domaines." }),
+    page.getByRole("heading", { name: "43 notions, 5 domaines." }),
   ).toBeVisible();
   await neutral(
     page.locator(".catalog-card").first(),
@@ -858,8 +858,15 @@ test("compositions des instruments, atlas et leçon complète", async ({
   await page.getByRole("button", { name: "Voir toutes les leçons" }).click();
   await page.getByRole("button", { name: "Atlas", exact: true }).click();
   await page.getByRole("button", { name: "Finance", exact: true }).click();
-  await expect(page.locator(".atlas-node:visible")).toHaveCount(2);
-  await expect(page.locator(".atlas-link")).toHaveCount(1);
+  // Counted from the catalogue, so new Finance lessons keep this check honest.
+  const finance = lessons.filter((lesson) => lesson.domain === "Finance");
+  const financeIds = new Set(finance.map((lesson) => lesson.id));
+  await expect(page.locator(".atlas-node:visible")).toHaveCount(finance.length);
+  await expect(page.locator(".atlas-link")).toHaveCount(
+    finance.flatMap((lesson) =>
+      lesson.prerequisites.filter((id) => financeIds.has(id)),
+    ).length,
+  );
 
   await page.goto("/#ai");
   await expect(

@@ -632,7 +632,7 @@ export const glossary: GlossaryTerm[] = [
     id: "bfr",
     term: "Besoin en fonds de roulement (BFR)",
     category: "Entreprise",
-    lessonId: "ca-marge-tresorerie",
+    lessonId: "fin-bfr-tresorerie",
     definition:
       "Argent immobilisé notamment dans les stocks et les créances clients, diminué des dettes d’exploitation. Il grandit souvent avec la croissance.",
   },
@@ -947,6 +947,413 @@ export const glossary: GlossaryTerm[] = [
     lessonId: "ent-facturer-declarer",
     definition:
       "Facture émise, transmise et reçue sous forme de données structurées via une plateforme agréée, obligatoire progressivement entre entreprises.",
+  },
+  {
+    id: "compte-resultat",
+    term: "Compte de résultat",
+    category: "Entreprise",
+    lessonId: "fin-etats-financiers",
+    definition:
+      "Document qui compare les produits et les charges d’une période pour en déduire le bénéfice ou la perte.",
+  },
+  {
+    id: "bilan",
+    term: "Bilan",
+    category: "Entreprise",
+    lessonId: "fin-etats-financiers",
+    definition:
+      "Photographie à une date de ce que l’entreprise possède (actif) et de la façon dont c’est financé (capitaux propres et dettes).",
+  },
+  {
+    id: "capitaux-propres",
+    term: "Capitaux propres",
+    category: "Entreprise",
+    lessonId: "fin-etats-financiers",
+    definition:
+      "Ressources qui appartiennent aux associés : capital apporté, réserves et résultat de l’exercice.",
+  },
+  {
+    id: "ebe",
+    term: "Excédent brut d’exploitation (EBE)",
+    category: "Entreprise",
+    lessonId: "fin-etats-financiers",
+    definition:
+      "Ce que dégage le métier avant amortissements, intérêts et impôt ; un repère de la capacité à produire de la trésorerie.",
+  },
+  {
+    id: "plan-tresorerie",
+    term: "Plan de trésorerie",
+    category: "Entreprise",
+    lessonId: "fin-bfr-tresorerie",
+    definition:
+      "Tableau mensuel des encaissements et décaissements prévus, à leur date réelle et TVA comprise.",
+  },
+  {
+    id: "fonds-roulement",
+    term: "Fonds de roulement",
+    category: "Entreprise",
+    lessonId: "fin-bfr-tresorerie",
+    definition:
+      "Excédent des ressources durables (capitaux propres, emprunts longs) sur les immobilisations.",
+  },
+  {
+    id: "analyse-sensibilite",
+    term: "Analyse de sensibilité",
+    category: "Entreprise",
+    lessonId: "fin-previsionnel",
+    definition:
+      "Faire varier une hypothèse à la fois pour voir laquelle menace le plus le projet.",
+  },
+  {
+    id: "immobilisation",
+    term: "Immobilisation",
+    category: "Entreprise",
+    lessonId: "fin-investir-amortir",
+    definition:
+      "Bien destiné à servir durablement à l’entreprise, inscrit à l’actif du bilan plutôt qu’en charge immédiate.",
+  },
+  {
+    id: "amortissement-comptable",
+    term: "Amortissement",
+    category: "Entreprise",
+    lessonId: "fin-investir-amortir",
+    definition:
+      "Répartition du coût d’une immobilisation sur sa durée d’utilisation ; en linéaire, coût ÷ durée chaque année.",
+  },
+  {
+    id: "caf",
+    term: "Capacité d’autofinancement (CAF)",
+    category: "Entreprise",
+    lessonId: "fin-investir-amortir",
+    definition:
+      "Trésorerie potentielle dégagée par l’activité ; simplement, résultat net plus dotations aux amortissements.",
+  },
+  {
+    id: "delai-recuperation",
+    term: "Délai de récupération",
+    category: "Entreprise",
+    lessonId: "fin-investir-amortir",
+    definition:
+      "Temps nécessaire pour que les gains d’un investissement remboursent son coût.",
+  },
+  {
+    id: "taux-marge",
+    term: "Taux de marge",
+    category: "Entreprise",
+    lessonId: "fin-piloter-indicateurs",
+    definition: "Marge rapportée au chiffre d’affaires hors taxes.",
+  },
+  {
+    id: "agios",
+    term: "Agios",
+    category: "Budget et crédit",
+    lessonId: "fp-banque-arnaques",
+    definition:
+      "Intérêts et frais payés sur un découvert, qu’il soit autorisé ou non.",
+  },
+  {
+    id: "hameconnage",
+    term: "Hameçonnage",
+    category: "Budget et crédit",
+    lessonId: "fp-banque-arnaques",
+    definition:
+      "Fraude par message (SMS, courriel) qui imite un organisme connu pour récupérer identifiants ou données bancaires.",
+  },
+  {
+    id: "taux-marginal",
+    term: "Taux marginal d’imposition",
+    category: "Budget et crédit",
+    lessonId: "fp-impot-revenu",
+    definition:
+      "Taux de la dernière tranche du barème atteinte ; il ne s’applique qu’aux euros situés au-dessus du seuil de cette tranche.",
+  },
+  {
+    id: "taux-moyen",
+    term: "Taux moyen d’imposition",
+    category: "Budget et crédit",
+    lessonId: "fp-impot-revenu",
+    definition:
+      "Impôt total divisé par le revenu imposable ; toujours inférieur au taux marginal.",
+  },
+  {
+    id: "quotient-familial",
+    term: "Quotient familial",
+    category: "Budget et crédit",
+    lessonId: "fp-impot-revenu",
+    definition:
+      "Revenu imposable divisé par le nombre de parts du foyer, auquel s’applique le barème.",
+  },
+  {
+    id: "prelevement-source",
+    term: "Prélèvement à la source",
+    category: "Budget et crédit",
+    lessonId: "fp-impot-revenu",
+    definition:
+      "Paiement de l’impôt sur le revenu chaque mois, sur le salaire ou par acomptes, depuis 2019 ; la déclaration annuelle reste obligatoire.",
+  },
+  {
+    id: "credit-impot",
+    term: "Crédit d’impôt",
+    category: "Budget et crédit",
+    lessonId: "fp-impot-revenu",
+    definition:
+      "Avantage fiscal déduit de l’impôt et remboursé s’il dépasse le montant dû, contrairement à une réduction d’impôt.",
+  },
+  {
+    id: "franchise-assurance",
+    term: "Franchise",
+    category: "Budget et crédit",
+    lessonId: "fp-assurances",
+    definition:
+      "Part de chaque sinistre qui reste à la charge de l’assuré, déduite de l’indemnisation.",
+  },
+  {
+    id: "frais-acquisition",
+    term: "Frais d’acquisition",
+    category: "Budget et crédit",
+    lessonId: "fp-logement",
+    definition:
+      "Droits et frais payés lors d’un achat immobilier, souvent appelés « frais de notaire ».",
+  },
+  {
+    id: "repartition",
+    term: "Retraite par répartition",
+    category: "Budget et crédit",
+    lessonId: "fp-retraite",
+    definition:
+      "Système où les cotisations des actifs financent les pensions des retraités de la même période.",
+  },
+  {
+    id: "taux-plein",
+    term: "Taux plein",
+    category: "Budget et crédit",
+    lessonId: "fp-retraite",
+    definition:
+      "Pension de base calculée sans décote, avec le nombre de trimestres requis ou à partir de l’âge d’annulation de la décote.",
+  },
+  {
+    id: "plan-epargne-retraite",
+    term: "PER (plan d’épargne retraite)",
+    category: "Budget et crédit",
+    lessonId: "fp-retraite",
+    definition:
+      "Épargne bloquée jusqu’à la retraite, sauf exceptions ; les versements volontaires sont en principe déductibles et l’impôt est payé à la sortie.",
+  },
+  {
+    id: "duration",
+    term: "Duration",
+    category: "Risque",
+    lessonId: "inv-obligations-taux",
+    definition:
+      "Mesure de la sensibilité du prix d’une obligation aux variations de taux : plus elle est longue, plus le prix réagit.",
+  },
+  {
+    id: "spread-credit",
+    term: "Spread de crédit",
+    category: "Risque",
+    lessonId: "inv-obligations-taux",
+    definition:
+      "Écart de rendement entre une obligation risquée et un emprunt d’État de référence, qui rémunère le risque de défaut.",
+  },
+  {
+    id: "notation",
+    term: "Notation financière",
+    category: "Risque",
+    lessonId: "inv-obligations-taux",
+    definition:
+      "Évaluation par une agence de la capacité d’un émetteur à rembourser ses dettes, de la catégorie « investissement » à « spéculative ».",
+  },
+  {
+    id: "liste-noire",
+    term: "Liste noire de l’AMF",
+    category: "Comportement",
+    lessonId: "inv-arnaques-placement",
+    definition:
+      "Liste publique des sites et entités non autorisés à proposer des placements en France, à consulter avant tout versement.",
+  },
+  {
+    id: "orias",
+    term: "ORIAS",
+    category: "Comportement",
+    lessonId: "inv-arnaques-placement",
+    definition:
+      "Registre officiel des intermédiaires en assurance, banque et finance, où vérifier qu’un conseiller est enregistré.",
+  },
+  {
+    id: "scpi",
+    term: "SCPI",
+    category: "Produits",
+    lessonId: "inv-immobilier-scpi",
+    definition:
+      "Société civile de placement immobilier : parts d’un parc d’immeubles géré, frais d’entrée élevés, capital non garanti.",
+  },
+  {
+    id: "rendement-locatif",
+    term: "Rendement locatif net",
+    category: "Coûts et rendement",
+    lessonId: "inv-immobilier-scpi",
+    definition:
+      "Loyers annuels diminués des charges, taxe foncière et vacance, rapportés au coût total d’achat.",
+  },
+  {
+    id: "micro-foncier",
+    term: "Micro-foncier",
+    category: "Coûts et rendement",
+    lessonId: "inv-immobilier-scpi",
+    definition:
+      "Régime des petits revenus fonciers de location nue : abattement forfaitaire de 30 % sur les loyers.",
+  },
+  {
+    id: "blockchain",
+    term: "Blockchain",
+    category: "Produits",
+    lessonId: "inv-crypto-actifs",
+    definition:
+      "Registre partagé, tenu par un réseau d’ordinateurs, qui enregistre des transactions de façon difficile à falsifier.",
+  },
+  {
+    id: "crypto-actif",
+    term: "Crypto-actif",
+    category: "Produits",
+    lessonId: "inv-crypto-actifs",
+    definition:
+      "Actif numérique enregistré sur une blockchain, sans bénéfice ni revenu sous-jacent, au prix très volatil.",
+  },
+  {
+    id: "stablecoin",
+    term: "Stablecoin",
+    category: "Produits",
+    lessonId: "inv-crypto-actifs",
+    definition:
+      "Crypto-actif qui vise une valeur stable en suivant une monnaie, grâce à des réserves dont la qualité varie.",
+  },
+  {
+    id: "mica",
+    term: "MiCA",
+    category: "Produits",
+    lessonId: "inv-crypto-actifs",
+    definition:
+      "Règlement européen qui encadre les prestataires de services sur crypto-actifs et l’émission de certains jetons.",
+  },
+  {
+    id: "profil-risque",
+    term: "Profil de risque",
+    category: "Risque",
+    lessonId: "inv-allocation-profil",
+    definition:
+      "Combinaison de l’horizon, de la capacité à supporter une perte et de la tolérance aux baisses d’un épargnant.",
+  },
+  {
+    id: "allocation-actifs",
+    term: "Allocation d’actifs",
+    category: "Risque",
+    lessonId: "inv-allocation-profil",
+    definition:
+      "Répartition de l’épargne entre grandes catégories (liquidités, obligations, actions, immobilier).",
+  },
+  {
+    id: "pfu",
+    term: "Prélèvement forfaitaire unique (PFU)",
+    category: "Enveloppes",
+    lessonId: "inv-fiscalite-placements",
+    definition:
+      "Imposition par défaut des revenus du capital : impôt sur le revenu à 12,8 % plus prélèvements sociaux, soit 31,4 % en 2026 selon les sources.",
+  },
+  {
+    id: "prelevements-sociaux",
+    term: "Prélèvements sociaux",
+    category: "Enveloppes",
+    lessonId: "inv-fiscalite-placements",
+    definition:
+      "CSG, CRDS et prélèvement de solidarité appliqués aux revenus du capital, en plus de l’impôt sur le revenu.",
+  },
+  {
+    id: "rgpd",
+    term: "RGPD",
+    category: "Intelligence artificielle",
+    lessonId: "ia-donnees-confidentialite",
+    definition:
+      "Règlement général sur la protection des données : règles européennes applicables à toute information sur une personne identifiable.",
+  },
+  {
+    id: "minimisation",
+    term: "Minimisation des données",
+    category: "Intelligence artificielle",
+    lessonId: "ia-donnees-confidentialite",
+    definition:
+      "Principe du RGPD : ne traiter que les données strictement nécessaires à la finalité poursuivie.",
+  },
+  {
+    id: "pseudonymisation",
+    term: "Pseudonymisation",
+    category: "Intelligence artificielle",
+    lessonId: "ia-donnees-confidentialite",
+    definition:
+      "Remplacement des éléments identifiants par des étiquettes ; les données restent personnelles si l’on peut retrouver la personne.",
+  },
+  {
+    id: "cas-usage",
+    term: "Cas d’usage",
+    category: "Intelligence artificielle",
+    lessonId: "ia-cas-usage",
+    definition:
+      "Tâche précise pour laquelle on envisage d’utiliser un outil d’IA, évaluée sur sa fréquence, sa vérifiabilité et le risque d’erreur.",
+  },
+  {
+    id: "projet-pilote",
+    term: "Projet pilote",
+    category: "Intelligence artificielle",
+    lessonId: "ia-cas-usage",
+    definition:
+      "Essai limité dans le temps, avec une mesure de départ et des critères de succès, avant de généraliser un outil.",
+  },
+  {
+    id: "jeu-cas-test",
+    term: "Jeu de cas de test",
+    category: "Intelligence artificielle",
+    lessonId: "ia-evaluer-fiabilite",
+    definition:
+      "Ensemble d’exemples réels, avec résultat attendu, utilisé pour mesurer la fiabilité d’un outil ou d’une consigne.",
+  },
+  {
+    id: "biais",
+    term: "Biais algorithmique",
+    category: "Intelligence artificielle",
+    lessonId: "ia-evaluer-fiabilite",
+    definition:
+      "Différence de traitement injustifiée entre des cas comparables, selon un critère non pertinent comme le genre ou l’origine.",
+  },
+  {
+    id: "supervision-humaine",
+    term: "Supervision humaine",
+    category: "Intelligence artificielle",
+    lessonId: "ia-evaluer-fiabilite",
+    definition:
+      "Contrôle par une personne compétente, qui a le temps et l’autorité de corriger ou refuser le résultat d’une IA.",
+  },
+  {
+    id: "ai-act",
+    term: "AI Act",
+    category: "Intelligence artificielle",
+    lessonId: "ia-cadre-legal",
+    definition:
+      "Règlement européen sur l’intelligence artificielle, entré en vigueur en 2024, qui encadre les usages selon leur niveau de risque.",
+  },
+  {
+    id: "haut-risque",
+    term: "IA à haut risque",
+    category: "Intelligence artificielle",
+    lessonId: "ia-cadre-legal",
+    definition:
+      "Usage de l’IA ayant un effet important sur les personnes (emploi, crédit, éducation, santé), soumis à des obligations renforcées.",
+  },
+  {
+    id: "hypertrucage",
+    term: "Hypertrucage",
+    category: "Intelligence artificielle",
+    lessonId: "ia-cadre-legal",
+    definition:
+      "Contenu (image, son, vidéo) généré ou manipulé par IA pour paraître authentique ; il doit être signalé comme tel.",
   },
 ];
 

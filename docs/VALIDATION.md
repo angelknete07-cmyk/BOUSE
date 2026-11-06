@@ -182,3 +182,7 @@ Contrôles du 5 novembre 2026. `npm run build` réussit sans avertissement. `npm
 ## Passe 21 — lexique des fondations, cas pratiques reliés
 
 Contrôles du 5 novembre 2026. `npm run build` réussit sans avertissement. `npm test` passe avec **203 cas unitaires**. `npx playwright test` passe avec **72 tests**. Termes des leçons de base, cas pratique et page du lexique exercés dans un vrai navigateur en desktop et mobile ; captures dans `design-reviews/parcours-21/`. Aucune validation design externe n'est revendiquée.
+
+## Passe 22 — leçons complètes
+
+Contrôles du 6 novembre 2026. `npm run build` réussit sans avertissement (paquet principal 78 kB, contenu des cours dans un fichier séparé). `npm test` passe avec **207 cas unitaires** (nouveau : `tests/mapLayout.test.ts`). `npx playwright test` passe avec **72 tests**. Atlas, carte des compétences, trajectoire et leçons de chaque domaine vérifiés en desktop et mobile ; captures dans `design-reviews/lecons-22/` et `design-reviews/lecons-22b/`. Aucune validation design externe n'est revendiquée.

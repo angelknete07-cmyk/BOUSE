@@ -3,18 +3,27 @@ import assert from "node:assert/strict";
 import { lessons } from "../src/data/lessons.ts";
 
 test("the catalogue contains foundations, personal finance and investing lessons, all substantial", () => {
-  assert.equal(lessons.length, 23);
+  assert.equal(lessons.length, 43);
+  assert.equal(
+    lessons.filter((lesson) => lesson.domain === "Intelligence artificielle")
+      .length,
+    7,
+  );
+  assert.equal(
+    lessons.filter((lesson) => lesson.domain === "Finance").length,
+    7,
+  );
   assert.equal(
     lessons.filter((lesson) => lesson.domain === "Entrepreneuriat").length,
     9,
   );
   assert.equal(
     lessons.filter((lesson) => lesson.domain === "Finance personnelle").length,
-    4,
+    9,
   );
   assert.equal(
     lessons.filter((lesson) => lesson.domain === "Investissement").length,
-    5,
+    11,
   );
   for (const lesson of lessons) {
     assert.ok(lesson.title.trim());
@@ -126,10 +135,10 @@ test("investing lessons stay educational: fictitious examples and an explicit no
   }
 });
 
-test("the investing module is a single prerequisite chain starting from the markets lesson", () => {
-  const investing = lessons.filter(
-    (lesson) => lesson.domain === "Investissement",
-  );
+test("the first investing module is a single prerequisite chain starting from the markets lesson", () => {
+  const investing = lessons
+    .filter((lesson) => lesson.domain === "Investissement")
+    .slice(0, 5);
   assert.deepEqual(investing[0]!.prerequisites, []);
   for (let index = 1; index < investing.length; index++) {
     assert.deepEqual(investing[index]!.prerequisites, [
@@ -138,13 +147,16 @@ test("the investing module is a single prerequisite chain starting from the mark
   }
 });
 
-test("personal finance lessons stay educational and form a single chain", () => {
+test("personal finance lessons stay educational; the first module forms a chain", () => {
   const personal = lessons.filter(
     (lesson) => lesson.domain === "Finance personnelle",
   );
-  assert.deepEqual(personal[0]!.prerequisites, []);
-  for (let index = 1; index < personal.length; index++)
-    assert.deepEqual(personal[index]!.prerequisites, [personal[index - 1]!.id]);
+  const firstModule = personal.slice(0, 4);
+  assert.deepEqual(firstModule[0]!.prerequisites, []);
+  for (let index = 1; index < firstModule.length; index++)
+    assert.deepEqual(firstModule[index]!.prerequisites, [
+      firstModule[index - 1]!.id,
+    ]);
   for (const lesson of personal) {
     assert.match(lesson.example.title, /fictif/i, lesson.id);
     assert.match(lesson.editorialStatus, /aucun conseil personnalisé/);

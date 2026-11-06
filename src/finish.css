@@ -818,3 +818,12 @@
   text-align: center;
   text-wrap: balance;
 }
+/* Two-line labels need taller lanes. */
+.academy-map-canvas {
+  height: 1140px;
+}
+@media (max-width: 700px) {
+  .academy-map-canvas {
+    height: 1040px;
+  }
+}
