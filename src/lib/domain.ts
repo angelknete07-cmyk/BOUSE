@@ -26,7 +26,48 @@ export function searchRank(
   if (name.startsWith(query)) return 1;
   if (name.split(/[^a-z0-9]+/).some((word) => word.startsWith(query))) return 2;
   if (name.includes(query)) return 3;
-  return normalizeSearch(description).includes(query) ? 4 : -1;
+  // Descriptions now hold whole lessons: a short query such as « ia » must
+  // start a word there, or it would match « social » and « financier ».
+  const text = normalizeSearch(description);
+  if (wordStarts(text, query)) return 4;
+  return query.length >= 4 && text.includes(query) ? 5 : -1;
+}
+
+function wordStarts(text: string, query: string): boolean {
+  let from = text.indexOf(query);
+  while (from !== -1) {
+    if (from === 0 || !/[a-z0-9]/.test(text[from - 1]!)) return true;
+    from = text.indexOf(query, from + 1);
+  }
+  return false;
+}
+
+/**
+ * The sentence of a long text that contains the query, shortened around the
+ * match, so a result found inside a lesson shows why it was found.
+ */
+export function searchExcerpt(
+  paragraphs: string[],
+  query: string,
+  normalize: (text: string) => string = normalizeSearch,
+  maxLength = 110,
+): string | null {
+  if (!query) return null;
+  for (const paragraph of paragraphs) {
+    for (const sentence of paragraph.split(/(?<=[.!?…])\s+/)) {
+      const at = normalize(sentence).indexOf(query);
+      if (at === -1) continue;
+      const text = sentence.trim();
+      if (text.length <= maxLength) return text;
+      const start = Math.max(0, Math.min(at - 30, text.length - maxLength));
+      const cut = text.slice(start, start + maxLength);
+      const from = start > 0 ? cut.indexOf(" ") + 1 : 0;
+      const to =
+        start + maxLength < text.length ? cut.lastIndexOf(" ") : cut.length;
+      return `${start > 0 ? "…" : ""}${cut.slice(from, to)}${to < cut.length ? "…" : ""}`;
+    }
+  }
+  return null;
 }
 
 /** Stable relevance ordering: equal ranks keep their declared order. */

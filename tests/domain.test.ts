@@ -200,6 +200,10 @@ test("search ranks exact and leading title matches before mere mentions", () => 
     4,
   );
   assert.equal(searchRank("Radar", "sources", "tresorerie"), -1);
+  // Short queries must start a word of a long description.
+  assert.equal(searchRank("Budget", "aides sociales", "ia"), -1);
+  assert.equal(searchRank("Prompts", "usages de l’IA au travail", "ia"), 4);
+  assert.equal(searchRank("Marge", "autofinancement", "financement"), 5);
   assert.equal(searchRank("Radar", "sources", ""), 0);
 });
 

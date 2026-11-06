@@ -8,7 +8,7 @@ import {
   useState,
   type RefObject,
 } from "react";
-import { lessons } from "./data/lessons";
+import { lessons, type Lesson } from "./data/lessons";
 import { glossary } from "./data/investingGlossary";
 import type { AppState, Profile, StateUpdater } from "./lib/types";
 import {
@@ -24,7 +24,11 @@ import { downloadFile, emptyState, parseState } from "./lib/storage";
 import { browserPersistence, readStateFrom } from "./lib/persistence";
 import { useCloudSync, type CloudSync } from "./lib/useCloudSync";
 import { CloudPanel } from "./components/CloudPanel";
-import { normalizeSearch, rankSearchResults } from "./lib/domain";
+import {
+  normalizeSearch,
+  rankSearchResults,
+  searchExcerpt,
+} from "./lib/domain";
 import { Icon } from "./components/Icon";
 import { Dashboard } from "./components/Dashboard";
 import { Onboarding } from "./components/Onboarding";
@@ -1088,7 +1092,11 @@ function Search({
   const searchable = (text: string) =>
     normalizeSearch(text)
       .replace(/\b(cash|liquidite)\b/g, "tresorerie")
-      .replace(/\b(ai|llm)\b/g, "ia");
+      .replace(/\b(ai|llm)\b/g, "ia")
+      // Everyday words for what the lessons name officially.
+      .replace(/\bauto[- ]?entrepr\w*/g, "micro-entrepr")
+      .replace(/\bk ?bis\b/g, "immatriculation")
+      .replace(/\bphishing\b/g, "hameconnage");
   const q = searchable(query);
   const entries = [
     {
@@ -1113,7 +1121,9 @@ function Search({
       title: l.title,
       detail: `Leçon · ${l.domain}`,
       route: `lesson/${l.id}`,
-      search: `${l.title} ${l.summary} ${l.skills.join(" ")} ${l.id.includes("llm") ? "ia" : ""}`,
+      // The whole lesson is searchable; title matches still rank first.
+      search: `${l.title} ${l.summary} ${l.skills.join(" ")} ${l.id.includes("llm") ? "ia" : ""} ${lessonText(l).join(" ")}`,
+      paragraphs: lessonText(l),
     })),
     {
       title: "Lexique de l’Académie",
@@ -1155,6 +1165,11 @@ function Search({
     ),
     description: searchable(entry.search),
   }));
+  // A lesson found only inside its text shows the passage that matched.
+  const excerptFor = (entry: (typeof items)[number]) =>
+    "paragraphs" in entry && !searchable(entry.title).includes(q)
+      ? searchExcerpt(entry.paragraphs as string[], q, searchable)
+      : null;
   function focusResult(index: number) {
     const buttons =
       resultsRef.current?.querySelectorAll<HTMLButtonElement>("button");
@@ -1245,6 +1260,9 @@ function Search({
             <span>
               <strong>{i.title}</strong>
               <small>{i.detail}</small>
+              {excerptFor(i) && (
+                <small className="palette-excerpt">{excerptFor(i)}</small>
+              )}
             </span>
             <Icon name="arrow" size={17} />
           </button>
@@ -1262,3 +1280,14 @@ function Search({
   );
 }
 export default App;
+
+/** Everything a learner reads in a lesson, for the universal search. */
+function lessonText(lesson: Lesson): string[] {
+  return [
+    lesson.summary,
+    ...lesson.sections.flatMap((section) => [section.title, ...section.body]),
+    lesson.example.title,
+    lesson.example.body,
+    ...lesson.flashcards.flatMap((card) => [card.front, card.back]),
+  ];
+}

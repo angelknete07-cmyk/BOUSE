@@ -460,3 +460,36 @@ test("une leçon quittée en cours reprend à la même séquence, et l’accueil
   await page.reload();
   await expect(page.getByText(/SÉQUENCE 01/)).toBeVisible();
 });
+
+test("la recherche trouve un passage de leçon et le simulateur micro réagit", async ({
+  page,
+}) => {
+  await onboard(page);
+  await page.keyboard.press("Control+k");
+  const dialog = page.getByRole("dialog", { name: "Recherche universelle" });
+  await dialog.getByRole("textbox").fill("auto-entrepreneur");
+  const result = dialog
+    .getByRole("button")
+    .filter({ hasText: "La micro-entreprise de A à Z" });
+  await expect(result).toBeVisible();
+  await dialog.getByRole("textbox").fill("versement libératoire");
+  await expect(
+    dialog
+      .getByRole("button")
+      .filter({ hasText: "La micro-entreprise de A à Z" })
+      .locator(".palette-excerpt"),
+  ).toContainText("versement libératoire");
+  await page.keyboard.press("Escape");
+
+  await page.goto("/#lesson/ent-micro-entreprise");
+  const scene = page.getByRole("region", {
+    name: "Simuler une année de micro-entreprise",
+  });
+  await expect(scene.locator(".scene-number")).toHaveText(/20\s640\s€/);
+  await scene
+    .getByRole("slider", { name: "Charges réelles annuelles en euros" })
+    .fill("20000");
+  await expect(scene).toContainText("dépassent l’abattement de 50");
+  await scene.getByRole("button", { name: "Versement libératoire" }).click();
+  await expect(scene).toContainText("impôt déjà payé");
+});

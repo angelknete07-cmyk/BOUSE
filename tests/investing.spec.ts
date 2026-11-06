@@ -73,6 +73,8 @@ test("le lexique filtre, cherche et renvoie vers la leçon qui explique le terme
 test("la recherche universelle ouvre un terme du lexique", async ({ page }) => {
   await seed(page);
   await page.goto("/#home");
+  // Effects have run (focus moved to main): the shortcut listener is attached.
+  await expect(page.getByRole("main")).toBeFocused();
   await page.keyboard.press("Control+k");
   const palette = page.getByRole("dialog", { name: "Recherche universelle" });
   await palette.getByRole("textbox").fill("dividende");

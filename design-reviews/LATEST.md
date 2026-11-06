@@ -1,3 +1,43 @@
+# Review design — passe 24 : recherche plein texte et simulateur de micro-entreprise
+
+**6 novembre 2026, 06:13 Europe/Paris.** Suite du plan après la passe 23. **La direction artistique n'est pas déclarée validée.**
+
+## Changements
+
+- **Recherche universelle dans le texte des leçons.**
+  - Avant, elle ne trouvait que les titres, les résumés et le lexique. Elle trouve désormais les séquences, les cas pratiques et les cartes de révision.
+  - Un résultat trouvé dans le texte affiche le passage concerné, pour qu'on comprenne pourquoi il apparaît.
+  - Les mots courts (« ia ») doivent commencer un mot, sinon ils remontaient « social » ou « financier ».
+  - Synonymes du quotidien : « auto-entrepreneur » trouve la micro-entreprise, « Kbis » l'immatriculation, « phishing » l'hameçonnage.
+- **Simulateur de micro-entreprise** (leçon 21, première scène des nouvelles leçons).
+  - Choix vente ou services, impôt au barème ou versement libératoire, chiffre d'affaires et charges réelles réglables.
+  - Affiche ce qui reste sur l'année, les cotisations et le bénéfice retenu par le fisc, avec les repères TVA et plafond sur la barre.
+  - Alertes : plafond dépassé, seuil de TVA dépassé, charges réelles supérieures à l'abattement (le régime réel peut alors coûter moins).
+  - Règles 2026 sourcées (12,3 % / 21,2 % ; versement libératoire 1 % / 1,7 % ; abattements 71 % / 50 % ; plafonds 203 100 € / 83 600 € ; franchise de TVA 85 000 € / 37 500 €), marquées « à vérifier ». Activités libérales exclues : leur taux dépend de la caisse.
+  - Moteur pur `src/lib/entrepreneurship.ts`, 5 tests unitaires.
+- **Défaut corrigé sur toutes les scènes mobiles :** l'étiquette « Cas fictif… » était forcée dans une colonne de 75 px alignée à droite et se cassait sur trois lignes. Elle passe sur sa propre ligne, alignée à gauche.
+- **Test fragile corrigé :** la recherche du lexique (investissement) appuyait sur Ctrl+K avant le montage de l'application ; le test attend désormais le focus sur le contenu principal (stable sur 12 répétitions).
+
+## Captures
+
+- `latest-desktop.png` : leçon micro-entreprise, 1440 × 1000 (densité 2).
+- `latest-mobile.png` : simulateur, Pixel 7.
+- `passe-24/` : simulateur par défaut et avec alertes (desktop, mobile), recherche avec extrait (desktop, mobile), étiquette des scènes sur mobile (micro et crédit).
+- Archive `2026-11-06_06-13-47-Europe-Paris`.
+
+## Contrôles
+
+- `npm test` : 212 cas réussis.
+- `npx playwright test` : 76 tests réussis, dont un nouveau test e2e recherche + simulateur, et le parcours complet du catalogue.
+- Build sans avertissement ; Prettier conforme.
+
+## Limites
+
+- Les 27 autres nouvelles leçons n'ont pas encore de scène interactive.
+- Le simulateur ne calcule pas l'impôt au barème : il dépend de tout le foyer. Il ne prend pas en compte l'ACRE, la contribution à la formation professionnelle ni les seuils majorés de TVA.
+
+---
+
 # Review design — passe 23 : balayage de test complet
 
 **6 novembre 2026, 05:47 Europe/Paris.** Toutes les routes et toutes les leçons (chaque séquence, chaque onglet), desktop et mobile, plus les fonctions clés sur la version compilée. Détail : [AUDIT-23.md](AUDIT-23.md). **La direction artistique n'est pas déclarée validée.**

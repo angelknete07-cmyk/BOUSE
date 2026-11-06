@@ -1,5 +1,10 @@
 import { useState } from "react";
 import { calculateEconomics } from "../lib/domain";
+import {
+  MICRO_RULES_2026,
+  microEstimate,
+  type MicroActivity,
+} from "../lib/entrepreneurship";
 import { projectInvestment } from "../lib/investing";
 import { budgetBalance, loanPayment } from "../lib/personalFinance";
 
@@ -20,6 +25,7 @@ export function LessonScene({ lessonId }: { lessonId: string }) {
   if (lessonId === "fp-budget") return <BudgetScene />;
   if (lessonId === "fp-credit-taux") return <CreditScene />;
   if (lessonId === "inv-risque-diversification") return <DrawdownScene />;
+  if (lessonId === "ent-micro-entreprise") return <MicroScene />;
   return null;
 }
 
@@ -915,6 +921,245 @@ function CreditScene() {
       <p className="scene-takeaway">
         Le TAEG ajoute frais et assurance exigée.{" "}
         <strong>Comparez le coût total, pas seulement la mensualité.</strong>
+      </p>
+    </section>
+  );
+}
+
+const MICRO_SAMPLES: Record<
+  MicroActivity,
+  {
+    label: string;
+    revenue: number;
+    charges: number;
+    maxRevenue: number;
+    maxCharges: number;
+    step: number;
+  }
+> = {
+  services: {
+    label: "Prestations de services",
+    revenue: 30_000,
+    charges: 3_000,
+    maxRevenue: 100_000,
+    maxCharges: 50_000,
+    step: 1_000,
+  },
+  vente: {
+    label: "Vente de marchandises",
+    revenue: 60_000,
+    charges: 36_000,
+    maxRevenue: 220_000,
+    maxCharges: 160_000,
+    step: 2_000,
+  },
+};
+
+const percent = (rate: number) =>
+  `${(rate * 100).toLocaleString("fr-FR", { maximumFractionDigits: 1 })} %`;
+
+/** One year of a micro-entreprise: what the revenue really leaves. */
+function MicroScene() {
+  const [activity, setActivity] = useState<MicroActivity>("services");
+  const sample = MICRO_SAMPLES[activity];
+  const [revenue, setRevenue] = useState(sample.revenue);
+  const [charges, setCharges] = useState(sample.charges);
+  const [liberatoire, setLiberatoire] = useState(false);
+  const rule = MICRO_RULES_2026[activity];
+  const result = microEstimate({
+    revenue,
+    activity,
+    realCharges: charges,
+    liberatoire,
+  });
+  function choose(next: MicroActivity) {
+    setActivity(next);
+    setRevenue(MICRO_SAMPLES[next].revenue);
+    setCharges(MICRO_SAMPLES[next].charges);
+  }
+  const scale = (amount: number) =>
+    (Math.max(0, amount) / sample.maxRevenue) * 520;
+  let x = 40;
+  const end = 40 + scale(revenue);
+  const segments = [
+    {
+      label: "Cotisations",
+      amount: result.contributions,
+      className: "scene-bar-silver",
+    },
+    {
+      label: "Impôt",
+      amount: result.liberatoireTax,
+      className: "scene-bar-focus",
+    },
+    { label: "Charges", amount: charges, className: "scene-bar-soft" },
+    {
+      label: "Reste",
+      amount: Math.max(0, result.remaining),
+      className: "scene-bar-solid",
+    },
+  ].map((segment) => {
+    const start = Math.min(x, end);
+    x += scale(segment.amount);
+    return { ...segment, x: start, w: Math.max(0, Math.min(x, end) - start) };
+  });
+  const marks = [
+    { label: "TVA", amount: rule.vatThreshold },
+    { label: "Plafond", amount: rule.ceiling },
+  ].filter((mark) => mark.amount <= sample.maxRevenue);
+  const warnings = [
+    result.overCeiling &&
+      `Au-dessus du plafond micro (${euros.format(rule.ceiling)}) : une année isolée est tolérée, deux années de suite font sortir du régime.`,
+    result.overVatThreshold &&
+      `Au-dessus du seuil de franchise (${euros.format(rule.vatThreshold)}) : vous facturez la TVA et la reversez, en plus des cotisations.`,
+    result.chargesExceedAllowance &&
+      `Vos charges réelles dépassent l’abattement de ${percent(rule.allowance)} : l’impôt porte sur un bénéfice plus élevé que le vrai. Le régime réel peut alors coûter moins.`,
+  ].filter((warning): warning is string => Boolean(warning));
+  return (
+    <section
+      className="scene-workbench scene-micro"
+      aria-label="Simuler une année de micro-entreprise"
+    >
+      <div className="scene-heading">
+        <div>
+          <span className="eyebrow">SIMULEZ UNE ANNÉE</span>
+          <h3>Ce que le chiffre d’affaires laisse vraiment.</h3>
+        </div>
+        <span className="scene-fiction">Cas fictif · 2026</span>
+      </div>
+      <div className="scene-micro-choices">
+        <div className="scene-segment" role="group" aria-label="Activité">
+          {(Object.keys(MICRO_SAMPLES) as MicroActivity[]).map((key) => (
+            <button
+              key={key}
+              type="button"
+              aria-pressed={activity === key}
+              onClick={() => choose(key)}
+            >
+              {MICRO_SAMPLES[key].label}
+            </button>
+          ))}
+        </div>
+        <div
+          className="scene-segment"
+          role="group"
+          aria-label="Impôt sur le revenu"
+        >
+          <button
+            type="button"
+            aria-pressed={!liberatoire}
+            onClick={() => setLiberatoire(false)}
+          >
+            Impôt au barème
+          </button>
+          <button
+            type="button"
+            aria-pressed={liberatoire}
+            onClick={() => setLiberatoire(true)}
+          >
+            Versement libératoire
+          </button>
+        </div>
+      </div>
+      <div className="scene-number-line">
+        <div>
+          <strong className="scene-number" aria-live="polite">
+            {euros.format(result.remaining)}
+          </strong>
+          <span>
+            {liberatoire
+              ? "restent sur l’année, impôt déjà payé"
+              : "restent sur l’année, avant impôt sur le revenu"}
+          </span>
+        </div>
+        <p>
+          Cotisations : <strong>{euros.format(result.contributions)}</strong> (
+          {percent(rule.contribution)} du chiffre d’affaires).{" "}
+          {liberatoire
+            ? `Impôt libératoire : ${euros.format(result.liberatoireTax)} (${percent(rule.liberatoire)}).`
+            : `Bénéfice retenu par le fisc : ${euros.format(result.taxableProfit)}, après l’abattement de ${percent(rule.allowance)}.`}
+        </p>
+      </div>
+      <svg className="scene-micro-bar" viewBox="0 0 600 150" aria-hidden="true">
+        <rect x="40" y="62" width="520" height="40" className="scene-bar-dim" />
+        {segments.map((segment) =>
+          segment.w > 0 ? (
+            <rect
+              key={segment.label}
+              x={segment.x}
+              y="62"
+              width={segment.w}
+              height="40"
+              className={segment.className}
+            />
+          ) : null,
+        )}
+        {marks.map((mark) => (
+          <g key={mark.label}>
+            <line
+              x1={40 + scale(mark.amount)}
+              y1="48"
+              x2={40 + scale(mark.amount)}
+              y2="112"
+              className="scene-line-focus"
+            />
+            <text x={40 + scale(mark.amount)} y="38" textAnchor="middle">
+              {mark.label} {euros.format(mark.amount)}
+            </text>
+          </g>
+        ))}
+        {segments.map((segment) =>
+          segment.w > 78 ? (
+            <text key={segment.label} x={segment.x + 6} y="132">
+              {segment.label}
+            </text>
+          ) : null,
+        )}
+      </svg>
+      <label className="scene-range">
+        Chiffre d’affaires encaissé sur l’année{" "}
+        <strong>{euros.format(revenue)}</strong>
+        <input
+          type="range"
+          min="0"
+          max={sample.maxRevenue}
+          step={sample.step}
+          value={revenue}
+          aria-label="Chiffre d’affaires annuel en euros"
+          onChange={(event) => setRevenue(Number(event.target.value))}
+        />
+      </label>
+      <label className="scene-range">
+        Charges réelles (achats, outils, déplacements){" "}
+        <strong>{euros.format(charges)}</strong>
+        <input
+          type="range"
+          min="0"
+          max={sample.maxCharges}
+          step={sample.step / 2}
+          value={charges}
+          aria-label="Charges réelles annuelles en euros"
+          onChange={(event) => setCharges(Number(event.target.value))}
+        />
+      </label>
+      <div className="scene-micro-warnings" aria-live="polite">
+        {warnings.length ? (
+          warnings.map((warning) => <p key={warning}>{warning}</p>)
+        ) : (
+          <p className="scene-micro-ok">
+            Dans les seuils : pas de TVA à facturer, et l’abattement couvre vos
+            charges réelles.
+          </p>
+        )}
+      </div>
+      <p className="scene-takeaway">
+        Les cotisations se calculent sur le chiffre d’affaires, pas sur le
+        bénéfice. Taux 2026 à vérifier sur le site de l’Urssaf ; hors
+        contribution à la formation professionnelle et activités libérales, dont
+        le taux dépend de la caisse.{" "}
+        <strong>
+          Plus vos charges sont lourdes, moins la micro est avantageuse.
+        </strong>
       </p>
     </section>
   );

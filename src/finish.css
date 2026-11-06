@@ -859,3 +859,22 @@
 .prompt-part-dot {
   transition: transform var(--motion-normal) var(--ease-out);
 }
+
+/* Search: a lesson found inside its text shows the matching passage. */
+.palette-results small.palette-excerpt {
+  margin-top: 4px;
+  color: var(--text-secondary, var(--muted));
+  line-height: 1.45;
+  max-width: 62ch;
+}
+
+/* Mobile scene label: the heading wraps, so the label sits on its own line,
+   left-aligned, instead of a 75px right-aligned column. */
+@media (max-width: 700px) {
+  .editorial-lesson .scene-heading > .scene-fiction {
+    max-width: none;
+    white-space: normal;
+    text-align: left;
+    padding-top: 0;
+  }
+}
