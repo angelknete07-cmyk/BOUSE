@@ -21,7 +21,12 @@ import {
   withCurrent,
 } from "./data/profileOptions";
 import { downloadFile, emptyState, parseState } from "./lib/storage";
-import { browserPersistence, readStateFrom } from "./lib/persistence";
+import { readStateFrom } from "./lib/persistence";
+import {
+  AccountBoundary,
+  type AccountUser,
+} from "./components/AccountBoundary";
+import type { AccountPersistence } from "./lib/accountStorage";
 import { useCloudSync, type CloudSync } from "./lib/useCloudSync";
 import { CloudPanel } from "./components/CloudPanel";
 import {
@@ -198,14 +203,18 @@ function restoreFocus(target: Element | null) {
     preventScroll: true,
   });
 }
-function App() {
-  const [loaded, setLoaded] = useState(() =>
-    readStateFrom(browserPersistence()),
-  );
+function App({
+  user,
+  disk,
+}: {
+  user: AccountUser | null;
+  disk: AccountPersistence;
+}) {
+  const [loaded, setLoaded] = useState(() => readStateFrom(disk));
   const [state, setState] = useState(loaded.state);
   const replaceState = useCallback((next: AppState) => setState(next), []);
-  const cloud = useCloudSync(state, replaceState);
   const [storageError, setStorageError] = useState<string | null>(loaded.error);
+  const cloud = useCloudSync(state, replaceState, user, disk, storageError);
   const [route, navigate] = useRoute();
   const projectId = projectIdForRoute(route);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -236,11 +245,13 @@ function App() {
   useEffect(() => {
     if (loaded.error) return;
     try {
-      browserPersistence().write(state);
+      disk.write(state);
       setStorageError(null);
-    } catch {
+    } catch (error) {
       setStorageError(
-        "Le navigateur ne peut pas enregistrer vos changements. Exportez vos données avant de fermer cette page.",
+        error instanceof Error
+          ? error.message
+          : "Le navigateur ne peut pas enregistrer vos changements. Exportez vos données avant de fermer cette page.",
       );
     }
   }, [state, loaded.error]);
@@ -340,7 +351,7 @@ function App() {
                 try {
                   downloadFile(
                     "bouse-sauvegarde-brute.json",
-                    browserPersistence().readRaw() || "{}",
+                    disk.readRaw() || "{}",
                   );
                 } catch {
                   setStorageError(
@@ -360,7 +371,7 @@ function App() {
                     return;
                   }
                   try {
-                    browserPersistence().clear();
+                    disk.clear();
                     setLoaded({
                       state: structuredClone(emptyState),
                       error: null,
@@ -381,6 +392,9 @@ function App() {
             )}
           </div>
         )}
+        <div className="account-entry">
+          <CloudPanel cloud={cloud} state={state} />
+        </div>
         <Onboarding
           onComplete={(profile) => update((s) => ({ ...s, profile }))}
         />
@@ -687,7 +701,12 @@ function App() {
               ) : route === "radar" ? (
                 <Radar />
               ) : route === "settings" ? (
-                <Settings state={state} update={update} cloud={cloud} />
+                <Settings
+                  state={state}
+                  update={update}
+                  cloud={cloud}
+                  disk={disk}
+                />
               ) : StyleLab && route === "labo-design" ? (
                 <StyleLab />
               ) : (
@@ -852,10 +871,12 @@ function Settings({
   state,
   update,
   cloud,
+  disk,
 }: {
   state: AppState;
   update: StateUpdater;
   cloud: CloudSync;
+  disk: AccountPersistence;
 }) {
   const [message, setMessage] = useState("");
   const [confirm, setConfirm] = useState(false);
@@ -1060,8 +1081,9 @@ function Settings({
         <section className="panel danger-panel">
           <h2>Repartir de zéro</h2>
           <p className="muted">
-            Supprime le profil, les notes, les projets et la progression de ce
-            navigateur.
+            Efface les données de cet espace. Si vous êtes connecté, cette
+            remise à zéro sera aussi synchronisée avec votre compte. Exportez
+            une sauvegarde avant de confirmer.
           </p>
           {confirm ? (
             <div className="actions">
@@ -1069,7 +1091,7 @@ function Settings({
                 className="button danger"
                 onClick={() => {
                   try {
-                    browserPersistence().clear();
+                    disk.clear();
                     update(() => structuredClone(emptyState));
                   } catch {
                     setMessage(
@@ -1314,7 +1336,15 @@ function Search({
     </dialog>
   );
 }
-export default App;
+export default function AccountApp() {
+  return (
+    <AccountBoundary>
+      {(user, disk) => (
+        <App key={user?.id ?? "guest"} user={user} disk={disk} />
+      )}
+    </AccountBoundary>
+  );
+}
 
 /** Everything a learner reads in a lesson, for the universal search. */
 function lessonText(lesson: Lesson): string[] {

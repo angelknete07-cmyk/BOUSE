@@ -11,6 +11,7 @@ const dateFormat = new Intl.DateTimeFormat("fr-FR", {
 
 const statusText: Record<CloudSync["status"], string> = {
   off: "Non configurée",
+  offline: "Hors connexion",
   "signed-out": "Non connecté",
   checking: "Vérification…",
   synced: "Synchronisé",
@@ -32,6 +33,7 @@ export function CloudPanel({
   const [busy, setBusy] = useState(false);
   const [localError, setLocalError] = useState<string | null>(null);
   const [confirmDelete, setConfirmDelete] = useState(false);
+  const [confirmLocal, setConfirmLocal] = useState(false);
   const [confirmRemote, setConfirmRemote] = useState(false);
 
   async function run(action: () => Promise<void>) {
@@ -78,8 +80,10 @@ export function CloudPanel({
         <form className="cloud-form" onSubmit={submit}>
           <p className="muted">
             Connectez-vous pour retrouver votre progression sur un autre
-            appareil. Vos données restent d’abord dans ce navigateur, puis une
-            copie est enregistrée dans votre compte.
+            appareil. Chaque compte possède son propre espace. Le mode invité
+            reste séparé : aucune ancienne sauvegarde ne sera transférée
+            automatiquement. Pour la reprendre, exportez-la en invité puis
+            importez-la volontairement dans votre compte.
           </p>
           <label className="field">
             Adresse e-mail
@@ -139,16 +143,20 @@ export function CloudPanel({
               className="button secondary"
               type="button"
               disabled={busy}
-              onClick={() => run(cloud.keepLocal)}
+              onClick={() =>
+                confirmLocal ? run(cloud.keepLocal) : setConfirmLocal(true)
+              }
             >
-              Garder ce navigateur
+              {confirmLocal
+                ? "Confirmer : remplacer la copie en ligne"
+                : "Garder ce navigateur"}
             </button>
             {confirmRemote ? (
               <button
                 className="button danger"
                 type="button"
                 onClick={() => {
-                  cloud.keepRemote();
+                  void run(cloud.keepRemote);
                   setConfirmRemote(false);
                 }}
               >
@@ -186,6 +194,13 @@ export function CloudPanel({
           <button
             className="button secondary"
             type="button"
+            onClick={cloud.exportRecoveries}
+          >
+            Exporter les copies de récupération
+          </button>
+          <button
+            className="button secondary"
+            type="button"
             disabled={busy}
             onClick={() => run(cloud.signOut)}
           >
@@ -206,15 +221,17 @@ export function CloudPanel({
               type="button"
               onClick={() => setConfirmDelete(true)}
             >
-              Supprimer mon compte en ligne
+              Supprimer mon compte et mes données
             </button>
           )}
         </div>
       )}
       {confirmDelete && (
         <p className="muted">
-          Supprime le compte et la copie en ligne. Les données de ce navigateur
-          sont conservées.
+          Supprime définitivement le compte, les données en ligne et les copies
+          de ce compte sur cet appareil. Le mode invité est conservé. Sur les
+          autres appareils, effacez aussi les données du site ; un appareil hors
+          ligne ne peut pas être effacé à distance.
         </p>
       )}
     </section>

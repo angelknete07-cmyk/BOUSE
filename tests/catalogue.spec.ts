@@ -30,8 +30,8 @@ test("chaque leçon du catalogue s’ouvre entièrement sans erreur", async ({
     if (message.type() === "error") errors.push(message.text());
   });
   await page.addInitScript((saved) => {
-    if (!localStorage.getItem("bouse.academy.v1"))
-      localStorage.setItem("bouse.academy.v1", JSON.stringify(saved));
+    if (!localStorage.getItem("bouse.academy.v1:guest"))
+      localStorage.setItem("bouse.academy.v1:guest", JSON.stringify(saved));
   }, state);
   for (const lesson of lessons) {
     await page.goto(`/#lesson/${lesson.id}`);

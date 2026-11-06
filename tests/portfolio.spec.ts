@@ -7,7 +7,7 @@ import {
   defaultSimulationInput,
 } from "../src/lib/simulation";
 
-const storageKey = "bouse.academy.v1";
+const storageKey = "bouse.academy.v1:guest";
 const fixedNow = "2026-11-03T10:00:00.000Z";
 const firstLesson = lessons.find(
   (lesson) => lesson.id === "ca-marge-tresorerie",

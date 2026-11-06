@@ -3,7 +3,7 @@ import { test, expect, type Page } from "@playwright/test";
 import { lessons, type Lesson } from "../src/data/lessons";
 import type { AppState, Attempt } from "../src/lib/types";
 
-const storageKey = "bouse.academy.v1";
+const storageKey = "bouse.academy.v1:guest";
 const fixedNow = "2026-11-03T10:00:00.000Z";
 const projectId = "learning-project-demo";
 const finance = lessons.find((lesson) => lesson.id === "seuil-rentabilite")!;

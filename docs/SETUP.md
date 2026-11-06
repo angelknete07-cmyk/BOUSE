@@ -74,7 +74,7 @@ Le code et les rendus sont versionnés dans la branche GitHub `codex/learning-de
 Sans configuration, l’application reste entièrement locale : la synchronisation affiche « Non configurée » et le mentor « non connecté », sans réponse simulée. Activer ces fonctions demande un projet Supabase **dédié**. Ne pas réutiliser un projet existant sans l’avoir inspecté.
 
 1. **Créer le projet** sur supabase.com et récupérer, dans _Project Settings → API_, l’URL du projet et la clé publique `anon`.
-2. **Appliquer la migration** `supabase/migrations/20261105120000_learning_state_and_mentor.sql`, avec la CLI (`supabase link --project-ref <ref>` puis `supabase db push`) ou dans l’éditeur SQL. Elle crée :
+2. **Appliquer la migration** `supabase/migrations/20261106165607_learning_state_and_mentor.sql`, avec la CLI (`supabase link --project-ref <ref>` puis `supabase db push`) ou dans l’éditeur SQL. Elle crée :
    - `learning_states`, une copie par utilisateur, avec une révision tenue par le serveur ;
    - `mentor_usage`, les quotas quotidiens ;
    - les politiques RLS « chacun ne voit que ses lignes » ;

@@ -2,7 +2,7 @@ import { readFile } from "node:fs/promises";
 import { test, expect, type Page } from "@playwright/test";
 import type { AppState, ProjectExperiment } from "../src/lib/types";
 
-const storageKey = "bouse.academy.v1";
+const storageKey = "bouse.academy.v1:guest";
 const fixedNow = "2026-11-03T10:00:00.000Z";
 const projectId = "terrain-demo";
 const experimentInput = {

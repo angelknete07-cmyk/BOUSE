@@ -171,5 +171,5 @@ await b.close();
 
 ## Autres sujets ouverts
 
-- Supabase : migration `supabase/migrations/20261105120000_learning_state_and_mentor.sql` à appliquer sur le projet `uyrrsiufhynyhwdsyvlg`, puis variables `VITE_SUPABASE_URL` / `VITE_SUPABASE_ANON_KEY` dans Vercel ; la clé Anthropic du mentor va uniquement dans les secrets Supabase, saisie par l'utilisateur.
+- Supabase : migration `supabase/migrations/20261106165607_learning_state_and_mentor.sql` à appliquer sur le projet `uyrrsiufhynyhwdsyvlg`, puis variables `VITE_SUPABASE_URL` / `VITE_SUPABASE_ANON_KEY` dans Vercel ; la clé Anthropic du mentor va uniquement dans les secrets Supabase, saisie par l'utilisateur.
 - PR #2 : ne la fusionner que si l'utilisateur le demande.

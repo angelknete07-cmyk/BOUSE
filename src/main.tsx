@@ -29,8 +29,10 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 // be shadowed by a cached copy.
 if (import.meta.env.PROD && "serviceWorker" in navigator) {
   addEventListener("load", () => {
-    void navigator.serviceWorker.register("/sw.js").catch(() => {
-      // Without a service worker the app still works online.
-    });
+    void navigator.serviceWorker
+      .register("/sw.js", { updateViaCache: "none" })
+      .catch(() => {
+        // Without a service worker the app still works online.
+      });
   });
 }

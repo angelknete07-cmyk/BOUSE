@@ -35,7 +35,7 @@ const fixture: AppState = {
 };
 async function seed(page: Page) {
   await page.addInitScript((state) => {
-    localStorage.setItem("bouse.academy.v1", JSON.stringify(state));
+    localStorage.setItem("bouse.academy.v1:guest", JSON.stringify(state));
   }, fixture);
 }
 async function audit(page: Page, info: TestInfo, screen: string) {
@@ -78,7 +78,7 @@ test("les écrans principaux conservent leurs noms accessibles et leurs contrast
   ).toBeVisible();
   await audit(page, info, "onboarding");
   await page.evaluate((state) => {
-    localStorage.setItem("bouse.academy.v1", JSON.stringify(state));
+    localStorage.setItem("bouse.academy.v1:guest", JSON.stringify(state));
   }, fixture);
   await page.reload();
   await expect(

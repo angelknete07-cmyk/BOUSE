@@ -1920,3 +1920,9 @@ progress {
   color: var(--text-secondary);
   font-size: var(--type-small);
 }
+
+.account-entry {
+  max-width: 760px;
+  margin: 24px auto;
+  padding: 0 20px;
+}
