@@ -4,7 +4,9 @@ Lire `docs/PRODUCT.md`, `docs/ARCHITECTURE.md` et `docs/DESIGN.md` avant de modi
 
 ## Direction artistique
 
-Interface très sombre, premium et minimaliste, presque monochrome : noir, anthracite, gris et blanc cassé. Aucun vert de marque, aucun accent IA violet/bleu/vert. Les couleurs sont réservées aux états fonctionnels : succès, erreur/danger, avertissement. Employer les tokens de `src/tokens.css` ; ne pas recréer une palette, des ombres ou une motion par écran. Conserver des rayons modérés, des séparateurs discrets, une typographie lisible et `prefers-reduced-motion`.
+Interface très sombre, premium et minimaliste, perçue à 90–95 % monochrome : noir, anthracite, gris et blanc cassé. Aucun vert de marque, aucune palette IA vive. Les couleurs fonctionnelles (succès, erreur/danger, avertissement) restent réservées à leurs états.
+
+**Règle d’accent (brief V3.2, 6 novembre 2026 — remplace l’interdiction absolue des accents bleu/violet/cyan)** : de rares accents désaturés sont permis, via les seuls tokens `--accent-lavender*`, `--accent-glacier` et `--accent-teal` de `src/tokens.css`. Au plus **une couleur dominante par écran** (la lavande par défaut), uniquement sur une marque fine porteuse d’information : remplissage de barre ou d’anneau de progression, courbe ou point sélectionné, étape active, numéro de l’onglet courant. Jamais d’aplat coloré, jamais sur un bouton, une carte, un fond ou un texte courant ; jamais pour distinguer des catégories. L’information reste lisible sans la couleur (valeur écrite, libellé, forme). Employer les tokens de `src/tokens.css` ; ne pas recréer une palette, des ombres ou une motion par écran. Conserver des rayons modérés, des séparateurs discrets, une typographie lisible et `prefers-reduced-motion`.
 
 ## Définition de terminé : revue visuelle obligatoire
 

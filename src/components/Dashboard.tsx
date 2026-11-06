@@ -1,6 +1,6 @@
 import { useState, type CSSProperties } from "react";
 import { lessons, type Lesson } from "../data/lessons";
-import type { AppState } from "../lib/types";
+import type { AppState, Attempt } from "../lib/types";
 import {
   practiceFor,
   recommendLesson,
@@ -269,6 +269,8 @@ export function Dashboard({ state, onNavigate }: Props) {
             </div>
           </div>
         </section>
+
+        <HomeStats state={state} done={done} now={now} />
 
         <section className="home-objectives" aria-labelledby="objectives-title">
           <h2 id="objectives-title">Vos prochains objectifs</h2>
@@ -551,5 +553,124 @@ export function Dashboard({ state, onNavigate }: Props) {
         </section>
       </div>
     </div>
+  );
+}
+
+/**
+ * Progress told as skills and real activity: what you can do now, and the
+ * days you actually came back. Built only from recorded quizzes and reviews.
+ */
+function HomeStats({
+  state,
+  done,
+  now,
+}: {
+  state: AppState;
+  done: Set<string>;
+  now: Date;
+}) {
+  const skillsTotal = lessons.reduce(
+    (sum, lesson) => sum + lesson.skills.length,
+    0,
+  );
+  const skillsAcquired = lessons
+    .filter((lesson) => done.has(lesson.id))
+    .reduce((sum, lesson) => sum + lesson.skills.length, 0);
+  // The most recent passed quiz on a lesson still validated today.
+  const lastPassed = state.attempts
+    .filter((attempt) => attempt.passed && done.has(attempt.lessonId))
+    .reduce<Attempt | null>(
+      (latest, attempt) =>
+        !latest || attempt.at > latest.at ? attempt : latest,
+      null,
+    );
+  const lastSkill = lessons
+    .find((lesson) => lesson.id === lastPassed?.lessonId)
+    ?.skills.at(-1);
+  // Calendar days in the learner's own time zone.
+  const dayKey = (date: Date) =>
+    `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
+  const days = Array.from({ length: 7 }, (_, index) => {
+    const day = new Date(now);
+    day.setHours(12, 0, 0, 0);
+    day.setDate(day.getDate() - (6 - index));
+    return day;
+  });
+  const events = [
+    ...state.attempts.map((attempt) => attempt.at),
+    ...(state.reviewEvents ?? []).map((event) => event.at),
+  ];
+  const eventDays = events.map((at) => dayKey(new Date(at)));
+  const counts = days.map(
+    (day) => eventDays.filter((key) => key === dayKey(day)).length,
+  );
+  const activeDays = counts.filter(Boolean).length;
+  const peak = Math.max(1, ...counts);
+  const points = counts.map((count, index) => [
+    8 + index * (184 / 6),
+    56 - (count / peak) * 44,
+  ]);
+  const line = points
+    .map(
+      ([x, y], index) =>
+        `${index ? "L" : "M"}${x!.toFixed(1)} ${y!.toFixed(1)}`,
+    )
+    .join(" ");
+  const weekday = new Intl.DateTimeFormat("fr-FR", { weekday: "narrow" });
+  return (
+    <section className="home-stats" aria-label="Vos progrès">
+      <div className="home-stat">
+        <ProgressRing
+          value={skillsAcquired / skillsTotal}
+          size={52}
+          label={`${Math.round((skillsAcquired / skillsTotal) * 100)}%`}
+        />
+        <div>
+          <small>Compétences acquises</small>
+          <strong>
+            {skillsAcquired} <span>/ {skillsTotal}</span>
+          </strong>
+          <em>
+            {lastSkill
+              ? `Dernière : ${lastSkill}`
+              : "La première arrive avec un quiz réussi."}
+          </em>
+        </div>
+      </div>
+      <div className="home-stat home-stat-activity">
+        <div>
+          <small>Activité sur 7 jours</small>
+          <strong>
+            {activeDays}{" "}
+            <span>
+              jour{activeDays > 1 ? "s" : ""} actif{activeDays > 1 ? "s" : ""}
+            </span>
+          </strong>
+          <em>Quiz et révisions enregistrés, sans série à tenir.</em>
+        </div>
+        <svg viewBox="0 0 200 72" aria-hidden="true">
+          {activeDays > 0 && (
+            <>
+              <path
+                className="home-activity-area"
+                d={`${line} L192 60 L8 60 Z`}
+              />
+              <path className="home-activity-line" d={line} />
+            </>
+          )}
+          <path className="home-activity-base" d="M8 60H192" />
+          {points.map(([x, y], index) => (
+            <g key={dayKey(days[index]!)}>
+              {counts[index]! > 0 && (
+                <circle cx={x} cy={y} r="2.6" className="home-activity-dot" />
+              )}
+              <text x={x} y="71" textAnchor="middle">
+                {weekday.format(days[index])}
+              </text>
+            </g>
+          ))}
+        </svg>
+      </div>
+    </section>
   );
 }

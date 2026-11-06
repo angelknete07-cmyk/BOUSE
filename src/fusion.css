@@ -55,8 +55,7 @@
 .review-invitation,
 .review-session-result,
 .scene-workbench,
-.financial-chart,
-.simulation-chart {
+.financial-chart {
   background: var(--card-bg);
   border: 1px solid var(--card-border);
   border-radius: var(--radius-card);
@@ -1288,4 +1287,178 @@
 }
 .practical-sheet-done {
   flex-basis: 100%;
+}
+
+/* Passe 31 — the scene faces the explanation on desktop instead of being
+   pushed under it into a narrow column (the starting question took its place). */
+@media (min-width: 1101px) {
+  .editorial-lesson .sequence-concept > .learning-concept-heading,
+  .editorial-lesson .sequence-concept > .learning-start-question,
+  .editorial-lesson .sequence-concept > .learning-depth {
+    grid-column: 1;
+  }
+  .editorial-lesson .sequence-concept > .scene-workbench {
+    grid-column: 2;
+    grid-row: 1 / span 4;
+    align-self: start;
+    position: sticky;
+    top: var(--space-6);
+  }
+  .editorial-lesson .sequence-concept > .learning-start-question {
+    margin-top: 0;
+  }
+}
+
+/* ---------- Passe 31 : micro-accents (lavande) ---------- */
+.progress-bar > i {
+  background: linear-gradient(
+    90deg,
+    var(--accent-lavender-dim),
+    var(--accent-lavender-strong)
+  );
+  box-shadow: 0 0 10px rgb(155 138 203 / 0.35);
+}
+.progress-ring-value {
+  stroke: var(--accent-lavender);
+}
+/* The step to do now carries the accent; done steps stay success-green. */
+.academy-path-step.is-next .academy-path-mark {
+  background: var(--accent-lavender);
+  border-color: var(--accent-lavender);
+  color: #0b0a10;
+  box-shadow: 0 0 0 4px var(--accent-lavender-wash);
+}
+.academy-path-step.is-next {
+  border-color: rgb(155 138 203 / 0.45);
+}
+.academy-path-step.is-next small {
+  color: var(--text-primary);
+}
+/* Lesson: the active step and the current sequence. */
+.editorial-lesson .learning-stage-tab.is-active .learning-stage-number {
+  color: var(--accent-lavender-strong);
+}
+.learning-sequence-dots i.is-complete:last-of-type,
+.learning-sequence-dots i.is-complete:not(:has(~ i.is-complete)) {
+  background: var(--accent-lavender);
+}
+/* Scenes: the key value of a figure (selected series, compared option). */
+.scene-bar-silver {
+  fill: var(--accent-lavender);
+}
+.scene-compare-track i.is-silver {
+  background: linear-gradient(
+    90deg,
+    var(--accent-lavender-dim),
+    var(--accent-lavender-strong)
+  );
+}
+/* Home trajectory: the selected notion. */
+.art-home .trajectory-node.selected .trajectory-node-core {
+  box-shadow:
+    0 0 0 1px var(--accent-lavender),
+    0 0 0 6px var(--accent-lavender-wash);
+}
+/* AI workshop: structure clues found in the text. */
+.prompt-part.is-found .prompt-part-dot {
+  background: var(--accent-lavender);
+  border-color: var(--accent-lavender);
+  box-shadow: 0 0 0 4px var(--accent-lavender-wash);
+}
+/* Charts: the series the learner moves takes the accent; references stay grey. */
+.plot-revenue,
+.simulation-scenario-path {
+  stroke: var(--accent-lavender);
+}
+.simulation-legend i:not(.reference) {
+  background: var(--accent-lavender);
+}
+.simulation-chart-point {
+  background: var(--accent-lavender-strong);
+  box-shadow: 0 0 0 5px var(--accent-lavender-wash);
+}
+
+/* ---------- Accueil : progrès en compétences et activité réelle ---------- */
+.home-stats {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+}
+.home-stat {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-card);
+  border: 1px solid var(--card-border);
+  background: var(--card-bg);
+  box-shadow: var(--card-shadow);
+  min-width: 0;
+}
+.home-stat > div {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+.home-stat small {
+  font-size: var(--type-small);
+  color: var(--muted);
+}
+.home-stat strong {
+  font-size: var(--type-title-lg);
+  font-weight: var(--weight-figure);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: var(--tracking-figure);
+}
+.home-stat strong span {
+  font-size: var(--type-body-sm);
+  color: var(--muted);
+  letter-spacing: 0;
+}
+.home-stat em {
+  font-style: normal;
+  font-size: var(--type-caption);
+  color: var(--text-tertiary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.home-stat-activity {
+  justify-content: space-between;
+}
+.home-stat-activity em {
+  white-space: normal;
+}
+.home-stat-activity svg {
+  width: 46%;
+  min-width: 150px;
+  height: 72px;
+  flex: none;
+}
+.home-activity-area {
+  fill: var(--accent-lavender-wash);
+}
+.home-activity-line {
+  fill: none;
+  stroke: var(--accent-lavender);
+  stroke-width: 1.8;
+  stroke-linejoin: round;
+}
+.home-activity-base {
+  stroke: var(--line-strong);
+}
+.home-activity-dot {
+  fill: var(--accent-lavender-strong);
+}
+.home-stat-activity text {
+  fill: var(--text-tertiary);
+  font-size: 9px;
+}
+
+@media (max-width: 700px) {
+  .home-stats {
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+  }
 }

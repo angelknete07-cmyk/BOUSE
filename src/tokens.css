@@ -36,6 +36,16 @@
   --decorative-line: rgb(255 255 255 / 0.14);
   --overlay: rgb(0 0 0 / 0.72);
 
+  /* Passe 31 (brief V3.2) — rare, desaturated accents. One per screen at
+     most; they mark progress, the active step or the selected data series,
+     never a surface, a button or a whole card. Distinct from success. */
+  --accent-lavender: #9b8acb;
+  --accent-lavender-strong: #b4a6e0;
+  --accent-lavender-dim: #7a6aa8;
+  --accent-lavender-wash: rgb(155 138 203 / 0.14);
+  --accent-glacier: #79a6cd;
+  --accent-teal: #66b5ad;
+
   --success-text: #a9c8b2;
   --success-surface: #17221b;
   --success-line: #405e49;

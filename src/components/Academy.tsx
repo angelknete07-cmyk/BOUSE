@@ -54,11 +54,9 @@ export function Academy({
       <header className="art-heading">
         <div>
           <span className="instrument-index">
-            Académie <i /> Tous les domaines
+            Académie <i /> {lessons.length} notions · {domains.length} domaines
           </span>
-          <h1>
-            {lessons.length} notions, {domains.length} domaines.
-          </h1>
+          <h1>Que voulez-vous apprendre&nbsp;?</h1>
         </div>
         <div className="financial-heading-side">
           <p>

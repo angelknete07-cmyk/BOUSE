@@ -16,8 +16,10 @@ Le serveur de développement utilise le port 5173. Aucune clé API n’est néce
 
 ## Fonctionnalités
 
-- Onboarding court et diagnostic de trois questions.
-- Tableau de bord, six leçons de fondations, prérequis, quiz corrigés, flashcards, notes et progression par compétence.
+- Onboarding court et diagnostic de cinq questions, qui oriente le parcours sans certifier de niveau.
+- Tableau de bord, 43 leçons dans cinq domaines (finance d’entreprise, entrepreneuriat, IA, finance personnelle, investissement), chacune avec une scène manipulable, prérequis, quiz corrigés, flashcards, notes et progression par compétence.
+- Cinq parcours par objectif (créer mon entreprise, gérer mon argent, commencer à investir, piloter une entreprise, travailler avec l’IA).
+- Entraînement libre tiré du lexique, fiches pratiques à télécharger et date de vérification des règles fiscales.
 - Lab de rentabilité : prix, coûts, volume et seuil de rentabilité.
 - Mode « Et si ? » : comparaison de scénarios sur six mois, délais de paiement, courbe de trésorerie, hypothèses sauvegardées et export Markdown.
 - AI Lab : relecture de prompts par grille explicite et déterministe.

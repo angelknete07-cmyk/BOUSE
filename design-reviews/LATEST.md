@@ -1,3 +1,25 @@
+# Review design — passe 31 : accents colorés subtils (brief V3.2)
+
+**6 novembre 2026, 15:11 Europe/Paris.** Détail : [AUDIT-31.md](AUDIT-31.md). **La direction artistique n'est pas déclarée validée ; la rétention n'est pas mesurée.**
+
+- **Règle modifiée et écrite avant implémentation** (`AGENTS.md`, `docs/DESIGN.md`) : de rares accents désaturés sont permis, une seule couleur dominante par écran (lavande `#9B8ACB`), uniquement sur des marques fines (progression, courbe ou point sélectionné, étape active). Aucun aplat, bouton, carte ni texte coloré. Glacier et teal sont définis mais non employés.
+- **Leçon desktop** : la scène est de nouveau en regard de l'explication (elle était repoussée dans une colonne étroite).
+- **Accueil** : progression en compétences (10 / 138 sur le profil de démonstration) et activité réelle sur 7 jours, sans série à tenir ; carte en double retirée.
+- **Académie** : « Que voulez-vous apprendre ? » ; étape à faire marquée en lavande, libellé neutre.
+- **Et si ?** : carte imbriquée du graphique retirée, légende accordée à la courbe.
+- **README** corrigé (43 leçons, diagnostic de cinq questions, cinq parcours).
+- **Contrôles de l'agent** : `npm test` 245 cas, `npx playwright test` 86 tests (puis design et e2e relancés après la dernière retouche : 34 tests), Prettier, build sans avertissement.
+- **Captures** :
+  - paire principale `latest-desktop.png` / `latest-mobile.png` = leçon (`03-lecon-learn-viewport`) ;
+  - avant/après : `accents-31/avant/`, `accents-31/apres/`, planches `accents-31/comparaisons/` (desktop 1440 × 1000, Pixel 7) ;
+  - archive `2026-11-06_15-11-22-Europe-Paris`.
+- **Limites** :
+  - quiz (banque plus large, options mélangées) et diversité des formats d'activité : après review ;
+  - la barre de parcours de l'accueil compte encore les notions ;
+  - aucun test sur appareil réel ni avec des débutants (protocole proposé dans l'audit).
+
+---
+
 # Review design — passe 30 : parcours, entraînement, vérification, fiches
 
 **6 novembre 2026.** Détail : [AUDIT-30.md](AUDIT-30.md). **La direction artistique n'est pas déclarée validée.**

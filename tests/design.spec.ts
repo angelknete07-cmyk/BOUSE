@@ -271,7 +271,7 @@ test("galerie des écrans et du quiz validé sans débordement", async ({
   // Change the document URL so the init script runs after the empty onboarding.
   await page.goto("/?gallery=1#academy");
   await expect(
-    page.getByRole("heading", { name: "43 notions, 5 domaines." }),
+    page.getByRole("heading", { name: "Que voulez-vous apprendre ?" }),
   ).toBeVisible();
   // A beginner starts on one guided path, with the real catalogue total.
   await neutral(
