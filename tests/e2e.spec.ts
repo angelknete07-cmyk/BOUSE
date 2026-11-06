@@ -287,7 +287,9 @@ test("calcul financier, limites du modèle et recherche au clavier vers l’Atel
       "Objectif : compare les offres. Contexte : entreprise de cinq salariés. Données : fichier ci-dessous. Contrainte : maximum 200 mots. Format : tableau. Critère de réussite : vérifie et signale chaque incertitude.",
     );
   await page.getByRole("button", { name: "Examiner la structure" }).click();
-  await expect(page.getByRole("heading", { name: "100 / 100" })).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: /^(\d+) \/ \1 critères$/ }),
+  ).toBeVisible();
   await expect(
     page.getByText("Une indication, pas une note de qualité", { exact: true }),
   ).toBeVisible();

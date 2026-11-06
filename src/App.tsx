@@ -31,6 +31,7 @@ import {
 } from "./lib/domain";
 import { Icon } from "./components/Icon";
 import { BrandLogo } from "./components/BrandLogo";
+import { Terrain } from "./components/Terrain";
 import { Dashboard } from "./components/Dashboard";
 import { Onboarding } from "./components/Onboarding";
 import { latestCurrentAttempt } from "./lib/portfolio";
@@ -606,6 +607,20 @@ function App() {
             </div>
           )}
           <div className="page-view" key={route}>
+            {/* V4 : la vague de BOUSE, en lumière discrète, en tête des pages
+                d'outils. Ni sur l'accueil ni dans l'Académie (qui l'ont déjà),
+                ni dans les leçons (lecture). */}
+            {!lesson && route !== "home" && route !== "academy" && (
+              <div className="page-aura" aria-hidden="true">
+                <Terrain />
+                <span className="wave-light wave-light-violet">
+                  <Terrain />
+                </span>
+                <span className="wave-light wave-light-cyan">
+                  <Terrain />
+                </span>
+              </div>
+            )}
             <Suspense
               fallback={
                 <p className="page-loading" role="status">

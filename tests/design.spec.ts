@@ -373,7 +373,9 @@ test("galerie des écrans et du quiz validé sans débordement", async ({
       "Objectif : comparer trois outils pour mon atelier. Contexte : petite entreprise. Données : tableau ci-dessous. Contrainte : maximum 200 mots. Format : liste. Critère : signale les incertitudes.",
     );
   await page.getByRole("button", { name: "Examiner la structure" }).click();
-  await expect(page.getByRole("heading", { name: "100 / 100" })).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: /^(\d+) \/ \1 critères$/ }),
+  ).toBeVisible();
   await capture(page, testInfo, "06-ai-lab");
   await page.goto("/#incubator");
   await expect(
@@ -903,7 +905,7 @@ test("compositions des instruments, atlas et leçon complète", async ({
     .getByRole("button", { name: "Examiner la structure", exact: true })
     .click();
   await expect(
-    page.getByRole("heading", { name: "100 / 100", exact: true }),
+    page.getByRole("heading", { name: /^(\d+) \/ \1 critères$/ }),
   ).toBeVisible();
   await capture(page, testInfo, "06-ai-comparison");
   if (await writeView.isVisible()) await writeView.click();

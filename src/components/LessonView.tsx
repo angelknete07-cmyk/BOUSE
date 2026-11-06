@@ -910,7 +910,7 @@ export function LessonView({ lesson, state, update, onNavigate }: Props) {
                   <span className="eyebrow">VOTRE POINT D’ÉTAPE</span>
                   <h2>
                     {result.passed
-                      ? "C’est acquis.\nLa question de départ est résolue."
+                      ? "Quiz réussi.\nLa question de départ est résolue."
                       : "Une erreur utile.\nUne notion à reprendre."}
                   </h2>
                   <p className="learning-result-score" role="status">

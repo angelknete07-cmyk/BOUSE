@@ -1207,3 +1207,76 @@
     font-size: 13px;
   }
 }
+
+/* ---------- La vague partout, avec mesure (V4, planches de l'utilisateur) ----------
+   Même dessin que l'accueil (Terrain.tsx), en tête des pages d'outils, très
+   atténué ; la lumière violette puis cyan ne touche que les fils. */
+.page-view {
+  position: relative;
+}
+.page-aura {
+  position: absolute;
+  top: -40px;
+  right: -48px;
+  width: min(820px, 64%);
+  height: 320px;
+  z-index: -1;
+  color: var(--accent);
+  opacity: 0.3;
+  pointer-events: none;
+  mask-image: radial-gradient(75% 85% at 72% 30%, #000 25%, transparent 78%);
+}
+.page-aura .terrain-artwork {
+  width: 100%;
+  height: 100%;
+}
+/* Lumière : une copie de la même vague, colorée, visible seulement autour
+   de la crête (aucun mélange de calques, donc aucune tache sur le fond). */
+.wave-light {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.wave-light .terrain-artwork {
+  width: 100%;
+  height: 100%;
+}
+.wave-light-violet {
+  color: var(--accent-violet);
+  mask-image: radial-gradient(30% 40% at 64% 42%, #000 15%, transparent 75%);
+}
+.wave-light-cyan {
+  color: var(--accent-blue);
+  mask-image: radial-gradient(20% 30% at 88% 60%, #000 10%, transparent 75%);
+}
+@media (max-width: 700px) {
+  .page-aura {
+    top: -24px;
+    right: -16px;
+    width: 100%;
+    height: 210px;
+    opacity: 0.22;
+  }
+}
+
+/* ---------- Lab mobile : une commande par rangée (précision au doigt) ---------- */
+@media (max-width: 700px) {
+  .unit-equation {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .unit-equation > .math-operator {
+    display: none;
+  }
+}
+
+/* ---------- Scénarios mobile : on voit que les cas défilent ---------- */
+@media (max-width: 760px) {
+  .simulation-cases {
+    overflow-x: auto;
+    mask-image: linear-gradient(to right, #000 calc(100% - 40px), transparent);
+    padding-inline-end: 40px;
+  }
+  .simulation-cases button {
+    flex: 0 0 auto;
+  }
+}

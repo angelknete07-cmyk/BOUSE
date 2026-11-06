@@ -362,7 +362,10 @@ export function AILab() {
               </h2>
             </div>
             <div className="prompt-assessment">
-              <h3>{analysis.score} / 100</h3>
+              <h3>
+                {analysis.checks.filter((check) => check.passed).length} /{" "}
+                {analysis.checks.length} critères
+              </h3>
               <span>Une indication, pas une note de qualité</span>
             </div>
           </header>

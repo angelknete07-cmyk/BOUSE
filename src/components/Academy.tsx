@@ -263,6 +263,12 @@ function AcademyStart({
       >
         <span className="academy-start-relief" aria-hidden="true">
           <Terrain />
+          <span className="wave-light wave-light-violet">
+            <Terrain />
+          </span>
+          <span className="wave-light wave-light-cyan">
+            <Terrain />
+          </span>
         </span>
         <span className="eyebrow">
           {resumed ? "REPRENDRE ICI" : "COMMENCER ICI"}

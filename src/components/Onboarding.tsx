@@ -1,3 +1,4 @@
+import { BrandLogo } from "./BrandLogo";
 import { useEffect, useRef, useState } from "react";
 import {
   goalOptions,
@@ -105,9 +106,7 @@ export function Onboarding({
   return (
     <main className="onboarding">
       <div className="onboarding-brand">
-        <span className="brand-mark">
-          b<span className="brand-dot">.</span>
-        </span>
+        <BrandLogo size={40} />
         <span>
           BOUSE <small>ACADÉMIE BUSINESS & IA</small>
         </span>

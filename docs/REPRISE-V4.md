@@ -4,7 +4,7 @@ Note de passage de relais écrite le 6 novembre 2026 par la session cloud « BOU
 
 ## État au 6 novembre 2026, soir (session Mac)
 
-- **Jalons A, B et C terminés**, voir `design-reviews/V4_INVENTORY.md`, `V4_STYLE_SAMPLES.md`, `V4_HOME_VARIANTS.md`. **Choix de l'utilisateur : accueil B**, devenu la version par défaut avec la palette apaisée et l'Inter affiné (A et C retirés). Prochaine étape : **jalon D**, groupe 1 (Académie, atlas, compétences, portfolio), avec captures avant/après et validation avant le groupe suivant.
+- **Jalons A, B et C terminés**, voir `design-reviews/V4_INVENTORY.md`, `V4_STYLE_SAMPLES.md`, `V4_HOME_VARIANTS.md`. **Choix de l'utilisateur : accueil B**, devenu la version par défaut avec la palette apaisée et l'Inter affiné (A et C retirés). Jalon D commencé le soir même : couleurs et lumière des planches de l'utilisateur partout, vague discrète en tête des pages d'outils, quiz et Atelier IA plus honnêtes, logo B à l'onboarding, Lab et Scénarios mobiles. Reste : Académie et compétences mobiles, en-tête de leçon compact, onboarding en 2 étapes, paramètres (voir `design-reviews/LATEST.md`). Idées pour plus tard : `docs/IDEES.md`.
 - Outils locaux : Chrome installé est utilisé par Playwright (`channel: "chrome"`) pour les captures ; le serveur de dev se lance depuis la config « bouse » de `~/claude/.claude/launch.json`.
 - Page interne `#labo-design` (développement seulement) : planche des jetons et contrastes.
 

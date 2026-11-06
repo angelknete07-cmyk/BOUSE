@@ -1,3 +1,16 @@
+# Review design — V4 jalon D : la DA des planches dans toute l'application
+
+**6 novembre 2026, 17 h 32 Europe/Paris.** **La direction artistique n'est pas déclarée validée.**
+
+- **La vague partout, avec mesure** : la même vague (`Terrain.tsx`, empreinte inchangée) en tête des pages d'outils (compétences, révisions, Lab, scénarios, Atelier IA, projets, sources, lexique, préférences), très atténuée ; pas dans les leçons (lecture). Lumière violette puis cyan sur la crête par une **copie colorée de la même vague** masquée autour de la crête (aucun mélange de calques, donc aucune tache) ; même lumière sur la vague de l'Académie.
+- **Honnêteté** : « C'est acquis » → « Quiz réussi » ; Atelier IA « 100 / 100 » → « 6 / 6 critères ».
+- **Onboarding** : logo « B » argenté à la place de l'ancien « b. ».
+- **Mobile** : Lab, une commande par rangée ; Scénarios, fondu au bord des cas pour montrer qu'ils défilent.
+- **Contrôles de l'agent** : `npm test` 245 cas, `npx playwright test` 86 tests, Prettier, build ; galerie régénérée (archive `2026-11-06_17-32-33-Europe-Paris`) ; 0 débordement à 320 px sur 13 pages.
+- **Restent** (voir `V4_INVENTORY.md`) : Académie mobile (reprise après les onglets), compétences mobile (3 cartes avant la carte), en-tête de leçon compact, onboarding en 2 étapes, paramètres (export en tête). Pas de vrai téléphone ni de validation externe.
+
+---
+
 # Review design — V4 : accueil B adopté, couleurs des planches de l'utilisateur
 
 **6 novembre 2026, 17 h 22 Europe/Paris.** **La direction artistique n'est pas déclarée validée.**
