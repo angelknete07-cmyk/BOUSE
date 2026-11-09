@@ -11,3 +11,11 @@ Idées voisines proposées par Claude :
 4. **Teach-back à l'oral** : expliquer la notion à voix haute, transcrire, puis comparer aux points clés comme aujourd'hui.
 5. **Résumé audio de 60 secondes** à la fin de chaque leçon et dans les révisions.
 6. **Mode « mains libres » des révisions** : la question est lue, on répond à voix haute.
+
+## Idées de l'utilisateur du 9 novembre 2026 (à faire après les bulles et les scènes)
+
+7. **Refaire l'arbre de compétences pour qu'on le comprenne** (priorité) : aujourd'hui « on ne comprend rien », les fils se croisent et passent les uns entre les autres, on ne voit pas où ils vont. Le vouloir grand, beau et agréable à utiliser : un clic l'agrandit avec une petite animation soignée, puis on s'y promène (glisser, zoomer). Liens lisibles (pas de croisements, direction claire), dans la DA.
+8. **Une petite animation au lancement de l'application** (écran d'ouverture court, dans la DA, respectant « réduire les animations »).
+9. **Plus tard : revoir toute l'ergonomie sur téléphone** selon tous les critères de design : sur téléphone, « c'est trop compliqué ».
+10. **Une appli compréhensible tout de suite par un vrai débutant** (priorité, redit par l'utilisateur) : les onglets sont trop difficiles à comprendre (« Lab financier », on ne sait pas à quoi ça sert). Chaque onglet doit dire en mots simples à quoi il sert, ce qu'il va apprendre et comment s'en servir.
+11. **Un didacticiel à la première visite**, comme dans un jeu ou une nouvelle appli : des étapes courtes qui montrent petit à petit comment se servir de l'application (passable, rejouable depuis les préférences).

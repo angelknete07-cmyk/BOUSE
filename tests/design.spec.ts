@@ -1019,6 +1019,23 @@ test("module investissement : lexique, leçon et simulateur de frais", async ({
     }),
   ).toBeVisible();
   await capture(page, testInfo, "19-finance-perso-credit");
+  // Definition bubbles: a term opens in place, a nested term on top of it.
+  await page.goto("/#lesson/inv-fonds-enveloppes");
+  const etf = page.getByRole("button", { name: "ETF : voir la définition" });
+  await etf.scrollIntoViewIfNeeded();
+  await etf.click();
+  await page
+    .getByRole("dialog", { name: "ETF (tracker)" })
+    .getByRole("button", { name: "indice boursier : voir la définition" })
+    .click();
+  await expect(
+    page.getByRole("dialog", { name: "Indice boursier" }),
+  ).toBeVisible();
+  await noOverflow(page);
+  await page.mouse.move(0, 0);
+  await page.screenshot({
+    path: testInfo.outputPath("20-bulles-definition-viewport.png"),
+  });
 });
 
 test("mouvement de page mesuré et préférence de réduction respectée", async ({

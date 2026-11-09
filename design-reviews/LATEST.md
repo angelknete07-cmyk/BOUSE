@@ -1,3 +1,17 @@
+# Review design — Bulles de définition dans les leçons (comme Wikipédia)
+
+**9 novembre 2026.** **La direction artistique n'est pas déclarée validée.** Paire principale : bulles en cascade (`20-bulles-definition-viewport`), archive `2026-11-09_16-53-28-Europe-Paris`.
+
+- **Sur place, sans changer de page** : un terme du lexique (pointillé violet discret) ouvre une petite bulle collée au mot, au clic, à l'appui ou au survol sur ordinateur. Carte sombre en relief, point violet devant la catégorie, ouverture douce (200 ms, aucune animation si « réduire les animations »).
+- **Pour tous** : chaque terme (165) a une définition simple en mots de tous les jours (`src/data/glossarySimple.ts`) ; la définition précise reste à un clic (« Plus précis »).
+- **En cascade** : un mot technique dans une définition est lui-même cliquable et ouvre sa bulle par-dessus (ETF → indice boursier → CAC 40), celle du dessous s'assombrit ; « Retour : … » revient à la précédente. Les pluriels sont reconnus (« actions »).
+- **Accessible** : rôle `dialog` nommé par le terme, `aria-expanded` et `aria-controls` sur le mot, focus dans la bulle à l'ouverture, Échap ferme la dernière et rend le focus au mot, clic ailleurs ferme tout.
+- **Mobile** : la bulle se place sous le mot ou au-dessus, toujours entière à 320 px (marge 12 px) et jamais sous le dock.
+- **Contrôles de l'agent** : `npm test` 259 cas (dont pile, cascade et placement à 320 px), `npx playwright test` 89 passés (dont `tests/glossaryBubbles.spec.ts` ordinateur et téléphone), Prettier, `tsc`, build ; empreinte de `Terrain.tsx` inchangée (`2c0c2a6c…`).
+- **Limites** : pas de vrai téléphone ; les définitions simples sont à relire par l'utilisateur ; pas de validation externe.
+
+---
+
 # Review design — V4 : la DA des planches de A à Z
 
 **6 novembre 2026, soir.** **La direction artistique n'est pas déclarée validée.** Paire principale : leçon (`03-lecon-learn-viewport`).
