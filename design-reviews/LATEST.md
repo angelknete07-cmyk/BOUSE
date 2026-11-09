@@ -1,6 +1,6 @@
 # Review design — Bulles de définition dans les leçons (comme Wikipédia)
 
-**9 novembre 2026.** **La direction artistique n'est pas déclarée validée.** Paire principale : bulles en cascade (`20-bulles-definition-viewport`), archive `2026-11-09_16-53-28-Europe-Paris`.
+**9 novembre 2026, scènes et bulles regroupées.** **La direction artistique n’est pas déclarée validée.** Après fusion avec les 43 scènes : `npm test` 259, `npx playwright test` 89 passés, galerie régénérée. Paire principale : bulles en cascade (`20-bulles-definition-viewport`), archive `2026-11-09_16-53-28-Europe-Paris`.
 
 - **Sur place, sans changer de page** : un terme du lexique (pointillé violet discret) ouvre une petite bulle collée au mot, au clic, à l'appui ou au survol sur ordinateur. Carte sombre en relief, point violet devant la catégorie, ouverture douce (200 ms, aucune animation si « réduire les animations »).
 - **Pour tous** : chaque terme (165) a une définition simple en mots de tous les jours (`src/data/glossarySimple.ts`) ; la définition précise reste à un clic (« Plus précis »).
