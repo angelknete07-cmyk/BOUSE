@@ -1,0 +1,1104 @@
+{
+ "ca-marge-tresorerie/mobile": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 350,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "ca-marge-tresorerie/desktop": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 455,
+  "over": [],
+  "small": [
+   "9.7:J15 · −800 €",
+   "9.7:J60 · +1 000"
+  ],
+  "nSmall": 2
+ },
+ "ca-marge-tresorerie/320": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 280,
+  "over": [],
+  "small": [
+   "9.5:J15 · −800 €",
+   "9.5:J60 · +1 000"
+  ],
+  "nSmall": 2
+ },
+ "seuil-rentabilite/320": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 280,
+  "over": [],
+  "small": [
+   "9.5:0 vente",
+   "9.5:300 ventes"
+  ],
+  "nSmall": 2
+ },
+ "seuil-rentabilite/desktop": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 455,
+  "over": [],
+  "small": [
+   "9.7:0 vente",
+   "9.7:300 ventes"
+  ],
+  "nSmall": 2
+ },
+ "seuil-rentabilite/mobile": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 350,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "validation-client/mobile": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 350,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "validation-client/desktop": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 455,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "validation-client/320": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 280,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "comprendre-llm/desktop": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 455,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "comprendre-llm/mobile": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 350,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "comprendre-llm/320": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 280,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "prompt-structure/320": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 280,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "prompt-structure/desktop": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 455,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "prompt-structure/mobile": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 350,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "automatisation-agent/desktop": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 455,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "automatisation-agent/320": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 280,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "automatisation-agent/mobile": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 350,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "inv-interets-composes/320": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 280,
+  "over": [],
+  "small": [
+   "9.5:Aujourd’hui",
+   "9.5:20 ans"
+  ],
+  "nSmall": 2
+ },
+ "inv-interets-composes/desktop": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 455,
+  "over": [],
+  "small": [
+   "9.7:Aujourd’hui",
+   "9.7:20 ans"
+  ],
+  "nSmall": 2
+ },
+ "inv-interets-composes/mobile": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 350,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "fp-budget/desktop": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 455,
+  "over": [],
+  "small": [
+   "9.7:Charges fixe",
+   "9.7:Variables",
+   "9.7:0 €",
+   "9.7:1 800 €"
+  ],
+  "nSmall": 4
+ },
+ "fp-budget/mobile": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 350,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "fp-budget/320": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 280,
+  "over": [],
+  "small": [
+   "9.5:Charges fixe",
+   "9.5:Variables",
+   "9.5:0 €",
+   "9.5:1 800 €"
+  ],
+  "nSmall": 4
+ },
+ "fp-credit-taux/320": {
+  "overlaps": [
+   "24 mensualit × de 132,96 €"
+  ],
+  "docOverflow": false,
+  "secWidth": 280,
+  "over": [],
+  "small": [
+   "9.5:Capital + in",
+   "9.5:24 mensualit",
+   "9.5:de 132,96 €"
+  ],
+  "nSmall": 3
+ },
+ "fp-credit-taux/desktop": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 455,
+  "over": [],
+  "small": [
+   "9.7:Capital + in",
+   "9.7:24 mensualit",
+   "9.7:de 132,96 €"
+  ],
+  "nSmall": 3
+ },
+ "fp-credit-taux/mobile": {
+  "overlaps": [
+   "24 mensualit × de 132,96 €"
+  ],
+  "docOverflow": false,
+  "secWidth": 350,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "inv-risque-diversification/320": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 280,
+  "over": [],
+  "small": [
+   "9.5:Départ",
+   "9.5:Après −30 %",
+   "9.5:Retour"
+  ],
+  "nSmall": 3
+ },
+ "inv-risque-diversification/desktop": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 455,
+  "over": [],
+  "small": [
+   "9.7:Départ",
+   "9.7:Après −30 %",
+   "9.7:Retour"
+  ],
+  "nSmall": 3
+ },
+ "inv-risque-diversification/mobile": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 350,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "ent-micro-entreprise/desktop": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 455,
+  "over": [],
+  "small": [
+   "9.7:TVA 37 500 €",
+   "9.7:Plafond 83 6",
+   "9.7:Reste"
+  ],
+  "nSmall": 3
+ },
+ "ent-micro-entreprise/mobile": {
+  "overlaps": [],
+  "docOverflow": true,
+  "secWidth": 350,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "ent-micro-entreprise/320": {
+  "overlaps": [],
+  "docOverflow": true,
+  "secWidth": 280,
+  "over": [],
+  "small": [
+   "9.5:TVA 37 500 €",
+   "9.5:Plafond 83 6",
+   "9.5:Reste"
+  ],
+  "nSmall": 3
+ },
+ "fp-impot-revenu/desktop": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 455,
+  "over": [],
+  "small": [
+   "9.7:0 %",
+   "9.7:11 %",
+   "9.7:30 %"
+  ],
+  "nSmall": 3
+ },
+ "fp-impot-revenu/mobile": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 350,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "fp-impot-revenu/320": {
+  "overlaps": [],
+  "docOverflow": true,
+  "secWidth": 280,
+  "over": [],
+  "small": [
+   "9.5:0 %",
+   "9.5:11 %",
+   "9.5:30 %"
+  ],
+  "nSmall": 3
+ },
+ "fin-bfr-tresorerie/desktop": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 455,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "fin-bfr-tresorerie/320": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 280,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "fin-bfr-tresorerie/mobile": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 350,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "fp-logement/320": {
+  "overlaps": [],
+  "docOverflow": true,
+  "secWidth": 280,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "fp-logement/desktop": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 455,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "fp-logement/mobile": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 350,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "inv-allocation-profil/320": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 280,
+  "over": [],
+  "small": [
+   "9.5:Actions",
+   "9.5:Obligations"
+  ],
+  "nSmall": 2
+ },
+ "inv-allocation-profil/mobile": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 350,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "inv-allocation-profil/desktop": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 455,
+  "over": [],
+  "small": [
+   "9.7:Actions",
+   "9.7:Obligations"
+  ],
+  "nSmall": 2
+ },
+ "ent-statut-juridique/320": {
+  "overlaps": [],
+  "docOverflow": true,
+  "secWidth": 280,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "ent-statut-juridique/mobile": {
+  "overlaps": [],
+  "docOverflow": true,
+  "secWidth": 350,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "ent-statut-juridique/desktop": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 455,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "inv-obligations-taux/320": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 280,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "inv-obligations-taux/mobile": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 350,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "inv-obligations-taux/desktop": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 455,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "fin-previsionnel/320": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 280,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "fin-previsionnel/mobile": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 350,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "fin-previsionnel/desktop": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 455,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "fin-etats-financiers/320": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 280,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "fin-etats-financiers/mobile": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 350,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "fin-etats-financiers/desktop": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 455,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "inv-arnaques-placement/320": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 280,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "inv-arnaques-placement/mobile": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 350,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "inv-arnaques-placement/desktop": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 455,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "ia-evaluer-fiabilite/320": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 280,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "ia-evaluer-fiabilite/mobile": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 350,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "ia-evaluer-fiabilite/desktop": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 455,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "fp-epargne-precaution/320": {
+  "overlaps": [],
+  "docOverflow": true,
+  "secWidth": 280,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "fp-epargne-precaution/mobile": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 350,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "fp-epargne-precaution/desktop": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 455,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "fp-inflation-quotidien/320": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 280,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "fp-inflation-quotidien/mobile": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 350,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "fp-inflation-quotidien/desktop": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 455,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "fp-retraite/320": {
+  "overlaps": [],
+  "docOverflow": true,
+  "secWidth": 280,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "fp-retraite/mobile": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 350,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "fp-retraite/desktop": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 455,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "inv-fonds-enveloppes/320": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 280,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "inv-fonds-enveloppes/mobile": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 350,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "inv-fonds-enveloppes/desktop": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 455,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "inv-immobilier-scpi/320": {
+  "overlaps": [],
+  "docOverflow": true,
+  "secWidth": 280,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "inv-immobilier-scpi/mobile": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 350,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "inv-immobilier-scpi/desktop": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 455,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "inv-crypto-actifs/320": {
+  "overlaps": [],
+  "docOverflow": true,
+  "secWidth": 280,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "inv-crypto-actifs/mobile": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 350,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "inv-crypto-actifs/desktop": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 455,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "inv-fiscalite-placements/320": {
+  "overlaps": [],
+  "docOverflow": true,
+  "secWidth": 280,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "inv-fiscalite-placements/mobile": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 350,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "inv-fiscalite-placements/desktop": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 455,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "ent-modele-economique/320": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 280,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "ent-modele-economique/mobile": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 350,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "ent-modele-economique/desktop": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 455,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "ent-trouver-clients/320": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 280,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "ent-trouver-clients/mobile": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 350,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "ent-trouver-clients/desktop": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 455,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "ent-fixer-prix/320": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 280,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "ent-fixer-prix/mobile": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 350,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "ent-fixer-prix/desktop": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 455,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "ent-financer-projet/320": {
+  "overlaps": [],
+  "docOverflow": true,
+  "secWidth": 280,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "ent-financer-projet/mobile": {
+  "overlaps": [],
+  "docOverflow": true,
+  "secWidth": 350,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "ent-financer-projet/desktop": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 455,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "fin-investir-amortir/320": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 280,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "fin-investir-amortir/mobile": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 350,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "fin-investir-amortir/desktop": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 455,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "fin-piloter-indicateurs/320": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 280,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "fin-piloter-indicateurs/mobile": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 350,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "fin-piloter-indicateurs/desktop": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 455,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "inv-marches-financiers/320": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 280,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "inv-marches-financiers/mobile": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 350,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "inv-marches-financiers/desktop": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 455,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "inv-ordres-biais/320": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 280,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "inv-ordres-biais/mobile": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 350,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "inv-ordres-biais/desktop": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 455,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "ent-creer-etapes/320": {
+  "overlaps": [],
+  "docOverflow": true,
+  "secWidth": 280,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "ent-creer-etapes/mobile": {
+  "overlaps": [],
+  "docOverflow": true,
+  "secWidth": 350,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "ent-creer-etapes/desktop": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 455,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "ent-facturer-declarer/320": {
+  "overlaps": [],
+  "docOverflow": true,
+  "secWidth": 280,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "ent-facturer-declarer/mobile": {
+  "overlaps": [],
+  "docOverflow": true,
+  "secWidth": 350,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "ent-facturer-declarer/desktop": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 455,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "fp-banque-arnaques/320": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 280,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "fp-banque-arnaques/mobile": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 350,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "fp-banque-arnaques/desktop": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 455,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "fp-assurances/320": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 280,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "fp-assurances/mobile": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 350,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "fp-assurances/desktop": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 455,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "ia-donnees-confidentialite/320": {
+  "overlaps": [],
+  "docOverflow": true,
+  "secWidth": 280,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "ia-donnees-confidentialite/mobile": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 350,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "ia-donnees-confidentialite/desktop": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 455,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "ia-cas-usage/320": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 280,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "ia-cas-usage/mobile": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 350,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "ia-cas-usage/desktop": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 455,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "ia-cadre-legal/320": {
+  "overlaps": [],
+  "docOverflow": true,
+  "secWidth": 280,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "ia-cadre-legal/mobile": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 350,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "ia-cadre-legal/desktop": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 455,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ }
+}

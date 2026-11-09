@@ -50,7 +50,49 @@ const euros = new Intl.NumberFormat("fr-FR", {
   maximumFractionDigits: 0,
 });
 
+/** Dégradés partagés des barres SVG (violet, cyan, gris), référencés en CSS. */
+function SceneGradients() {
+  const stops = (color: string, from: number, to: number) => (
+    <>
+      <stop offset="0" style={{ stopColor: color, stopOpacity: from }} />
+      <stop offset="1" style={{ stopColor: color, stopOpacity: to }} />
+    </>
+  );
+  return (
+    <svg
+      width="0"
+      height="0"
+      aria-hidden="true"
+      focusable="false"
+      style={{ position: "absolute" }}
+    >
+      <defs>
+        <linearGradient id="scene-grad-violet" x1="0" y1="0" x2="0" y2="1">
+          {stops("var(--accent-violet)", 1, 0.62)}
+        </linearGradient>
+        <linearGradient id="scene-grad-cyan" x1="0" y1="0" x2="0" y2="1">
+          {stops("var(--accent-blue)", 1, 0.62)}
+        </linearGradient>
+        <linearGradient id="scene-grad-grey" x1="0" y1="0" x2="0" y2="1">
+          {stops("var(--text-tertiary)", 0.75, 0.4)}
+        </linearGradient>
+      </defs>
+    </svg>
+  );
+}
+
 export function LessonScene({ lessonId }: { lessonId: string }) {
+  const scene = pickScene(lessonId);
+  if (!scene) return null;
+  return (
+    <>
+      <SceneGradients />
+      {scene}
+    </>
+  );
+}
+
+function pickScene(lessonId: string) {
   if (lessonId === "ca-marge-tresorerie") return <CashScene />;
   if (lessonId === "seuil-rentabilite") return <BreakEvenScene />;
   if (lessonId === "validation-client") return <EvidenceScene />;
@@ -241,7 +283,7 @@ function BreakEvenScene() {
         <line x1="40" y1="130" x2="560" y2="130" className="scene-line-dim" />
         <path
           d={`M40 ${y(2400)} L560 ${y(7200)}`}
-          className="scene-cost-curve"
+          className="scene-cost-curve scene-curve-cyan"
         />
         <path
           d={`M40 130 L560 ${y(price * 300)}`}
@@ -267,7 +309,7 @@ function BreakEvenScene() {
           300 ventes
         </text>
       </svg>
-      <div className="scene-legend">
+      <div className="scene-legend scene-legend-cyan">
         <span>
           <i />
           Chiffre d’affaires
@@ -955,10 +997,10 @@ function CreditScene() {
         <text x="170" y="150" textAnchor="middle">
           Capital + intérêts
         </text>
-        <text x="420" y="60" textAnchor="middle">
+        <text className="scene-note-a" x="420" y="60" textAnchor="middle">
           {months} mensualités
         </text>
-        <text x="420" y="84" textAnchor="middle">
+        <text className="scene-note-b" x="420" y="84" textAnchor="middle">
           de {decimal.format(result.monthlyPayment)}
         </text>
       </svg>

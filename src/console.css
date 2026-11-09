@@ -1524,3 +1524,327 @@ input[type="range"],
 .onboarding-more[open] {
   padding-bottom: var(--space-4);
 }
+
+/* ==========================================================================
+   V4 — les 43 scènes de leçon, une par une, dans la DA des planches.
+   Violet lumineux = ce qu'on manipule ; cyan = second tracé ; gris pointillé =
+   repères et références ; barres en dégradé. Les jetons de tokens.css règlent
+   tout (aucune couleur en dur). Calculs et textes inchangés.
+   ========================================================================== */
+
+/* Le fond violet d'un bloc de barres SVG était une erreur de sélecteur
+   (règle des barres HTML appliquée à un <svg>). */
+svg.scene-micro-bar {
+  background: none;
+  box-shadow: none;
+}
+
+/* ---------- Texte des graphiques : jamais sous 11 px à l'écran ----------
+   (le graphique est réduit à la largeur de la carte : 600 unités → ~390 px sur
+   ordinateur, ~310 px sur mobile, ~240 px à 320 px). */
+.scene-workbench svg text,
+.editorial-lesson .scene-workbench svg text {
+  font-size: 17.5px;
+  fill: var(--text-secondary);
+  letter-spacing: 0.1px;
+}
+@media (max-width: 700px) {
+  .scene-workbench svg text,
+  .editorial-lesson .scene-workbench svg text {
+    font-size: 22px;
+  }
+}
+@media (max-width: 360px) {
+  .scene-workbench svg text,
+  .editorial-lesson .scene-workbench svg text {
+    font-size: 28px;
+  }
+}
+
+/* ---------- Tracés : violet lumineux, cyan en second, gris pointillé ---------- */
+.scene-workbench .scene-revenue-curve {
+  stroke: var(--accent-violet);
+  stroke-width: 2.75;
+  stroke-linecap: round;
+  filter: drop-shadow(
+    0 0 5px rgb(var(--accent-violet-rgb) / calc(0.55 * var(--glow-k)))
+  );
+}
+.scene-workbench .scene-cost-curve {
+  stroke: var(--text-tertiary);
+  stroke-width: 1.75;
+  stroke-dasharray: 6 5;
+}
+.scene-workbench .scene-cost-curve.scene-curve-cyan {
+  stroke: var(--accent-blue);
+  stroke-width: 2.25;
+  stroke-dasharray: none;
+  filter: drop-shadow(
+    0 0 4px rgb(var(--accent-blue-rgb) / calc(0.5 * var(--glow-k)))
+  );
+}
+.scene-workbench .scene-line-dim {
+  stroke: rgb(255 255 255 / 0.16);
+}
+.scene-workbench .scene-crosshair {
+  stroke: var(--text-tertiary);
+  stroke-dasharray: 3 5;
+}
+.scene-workbench svg .scene-point-focus {
+  fill: var(--accent-violet);
+  stroke: #fff;
+  stroke-width: 2;
+  filter: drop-shadow(
+    0 0 6px rgb(var(--accent-violet-rgb) / calc(0.8 * var(--glow-k)))
+  );
+}
+/* Frise du règlement client : le trajet en violet, les repères en gris. */
+.scene-timeline .scene-line-focus {
+  stroke: var(--accent-violet);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  filter: drop-shadow(
+    0 0 4px rgb(var(--accent-violet-rgb) / calc(0.55 * var(--glow-k)))
+  );
+}
+/* Repères verticaux (seuils de la micro-entreprise) : gris pointillé. */
+.scene-micro-bar .scene-line-focus {
+  stroke: var(--text-tertiary);
+  stroke-width: 1;
+  stroke-dasharray: 3 4;
+}
+.scene-timeline svg {
+  height: 96px;
+}
+.scene-legend {
+  font-size: var(--type-caption);
+  color: var(--text-secondary);
+}
+.scene-legend i {
+  width: 18px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--accent-violet);
+  box-shadow: 0 0 8px rgb(var(--accent-violet-rgb) / calc(0.55 * var(--glow-k)));
+}
+.scene-legend span:last-child i {
+  height: 0;
+  border-top: 2px dashed var(--text-tertiary);
+  background: none;
+  box-shadow: none;
+}
+.scene-legend-cyan span:last-child i {
+  height: 3px;
+  border: 0;
+  background: var(--accent-blue);
+  box-shadow: 0 0 8px rgb(var(--accent-blue-rgb) / calc(0.5 * var(--glow-k)));
+}
+
+/* ---------- Barres SVG : dégradés, coins arrondis, références en pointillé ---------- */
+.scene-workbench .scene-bar-focus {
+  fill: url(#scene-grad-violet);
+  stroke: none;
+  rx: 5px;
+  filter: drop-shadow(
+    0 0 8px rgb(var(--accent-violet-rgb) / calc(0.5 * var(--glow-k)))
+  );
+}
+.scene-workbench .scene-bar-silver {
+  fill: url(#scene-grad-cyan) !important;
+  rx: 5px;
+  filter: drop-shadow(
+    0 0 8px rgb(var(--accent-blue-rgb) / calc(0.45 * var(--glow-k)))
+  );
+}
+.scene-workbench .scene-bar-solid {
+  fill: url(#scene-grad-grey);
+  fill-opacity: 1;
+  rx: 5px;
+}
+.scene-workbench .scene-bar-soft {
+  fill: rgb(var(--accent-violet-rgb) / calc(0.3 * var(--wash-k)));
+  fill-opacity: 1;
+  rx: 5px;
+}
+.scene-workbench .scene-bar-dim,
+.scene-workbench .scene-bar-dim-fill {
+  rx: 5px;
+}
+.scene-workbench .scene-bar-dim {
+  stroke: var(--text-tertiary);
+  stroke-opacity: 0.55;
+  stroke-width: 1;
+  stroke-dasharray: 4 5;
+}
+.scene-workbench .scene-bar-dim-fill {
+  fill: rgb(255 255 255 / 0.05);
+  fill-opacity: 1;
+}
+
+/* ---------- Barres de comparaison HTML : fines, dégradées, lumineuses ---------- */
+.scene-compare-track {
+  height: 12px;
+  border-radius: 999px;
+}
+.scene-compare-track i {
+  border-radius: 999px;
+}
+.scene-compare-track i.is-solid {
+  background: linear-gradient(
+    90deg,
+    rgb(255 255 255 / 0.18),
+    rgb(255 255 255 / 0.34)
+  );
+}
+.scene-compare-track i.is-soft {
+  background: linear-gradient(
+    90deg,
+    rgb(255 255 255 / 0.1),
+    rgb(255 255 255 / 0.22)
+  );
+}
+.scene-compare-row {
+  font-size: var(--type-small);
+}
+
+/* ---------- Commandes : l'état actif porte le violet ---------- */
+.scene-segment {
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.06);
+}
+.scene-segment button[aria-pressed="true"] {
+  box-shadow:
+    var(--highlight-edge),
+    inset 0 -2px 0 var(--accent-violet);
+}
+.scene-evidence-track button[aria-pressed="true"] > span,
+.scene-pipeline button[aria-pressed="true"] .scene-pipeline-node {
+  color: rgb(var(--accent-violet-ink));
+  background: rgb(var(--accent-violet-deep));
+  border-color: rgb(var(--accent-violet-rgb) / 0.7);
+  box-shadow: 0 0 16px
+    rgb(var(--accent-violet-rgb) / calc(0.55 * var(--glow-k)));
+}
+.scene-prompt-layers button[aria-pressed="true"] {
+  box-shadow: inset 0 -2px 0 var(--accent-violet);
+}
+.scene-prompt-layers button[aria-pressed="true"] span {
+  color: var(--accent-violet);
+}
+.scene-workflow-map > div > span {
+  background:
+    radial-gradient(
+      120% 90% at 30% 0%,
+      rgb(255 255 255 / 0.1),
+      transparent 60%
+    ),
+    var(--surface);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.08);
+}
+.scene-range {
+  font-size: var(--type-caption);
+  color: var(--text-secondary);
+}
+.scene-range strong {
+  color: var(--text);
+}
+
+/* ---------- Jeux de tri : pastilles tactiles, états lisibles sans la couleur ---------- */
+.scene-sorting li {
+  transition:
+    border-color var(--motion-normal) var(--ease-out),
+    background var(--motion-normal) var(--ease-out);
+}
+.scene-sorting button {
+  min-height: 36px;
+  transition:
+    border-color var(--motion-normal) var(--ease-out),
+    background var(--motion-normal) var(--ease-out),
+    color var(--motion-normal) var(--ease-out),
+    box-shadow var(--motion-normal) var(--ease-out);
+}
+.scene-sorting button:not(:disabled):hover {
+  border-color: rgb(var(--accent-violet-rgb) / 0.6);
+  color: var(--text);
+}
+.scene-sorting button[aria-pressed="true"] {
+  background: rgb(var(--accent-violet-deep));
+  border-color: rgb(var(--accent-violet-rgb) / 0.75);
+  color: rgb(var(--accent-violet-ink));
+  box-shadow: 0 0 14px rgb(var(--accent-violet-rgb) / calc(0.4 * var(--glow-k)));
+}
+.scene-sorting li.is-right {
+  border-color: rgb(var(--accent-emerald-rgb) / calc(0.55 * var(--wash-k)));
+  background: rgb(var(--accent-emerald-rgb) / calc(0.06 * var(--wash-k)));
+}
+.scene-sorting li.is-wrong {
+  background: var(--warning-surface);
+}
+.scene-status-criteria button[aria-pressed="true"] {
+  border-color: rgb(var(--accent-violet-rgb) / 0.55);
+  background: rgb(var(--accent-violet-rgb) / calc(0.1 * var(--wash-k)));
+}
+.scene-status-criteria button[aria-pressed="true"] > span {
+  background: var(--accent-violet);
+  border-color: var(--accent-violet);
+  color: rgb(var(--accent-violet-deep));
+}
+
+/* ---------- Cartes de chiffres (scénarios, bilan) ---------- */
+.scene-forecast > div,
+.scene-sheet > div {
+  box-shadow: var(--highlight-edge);
+  background: linear-gradient(
+    180deg,
+    rgb(255 255 255 / 0.045),
+    rgb(255 255 255 / 0.015)
+  );
+}
+.scene-forecast > div.is-negative {
+  background: var(--warning-surface);
+}
+
+/* ---------- Mobile : une commande par rangée, rien ne dépasse ---------- */
+@media (max-width: 700px) {
+  .scene-segment {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+  .scene-segment button {
+    flex: 1 1 auto;
+    min-height: 40px;
+  }
+  .scene-micro-choices,
+  .scene-choice-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-2);
+  }
+  .scene-sorting button {
+    flex: 1 1 auto;
+    min-height: 40px;
+  }
+  .scene-sorting [role="group"] {
+    flex-wrap: wrap;
+  }
+  .scene-workbench {
+    min-width: 0;
+  }
+  .scene-heading > .scene-fiction {
+    max-width: 96px;
+  }
+  .scene-legend {
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-4);
+  }
+}
+
+/* Crédit : les deux lignes de la note du graphique ne se chevauchent pas,
+   même quand le texte grossit pour rester lisible sur mobile. */
+@media (max-width: 700px) {
+  .scene-workbench svg text.scene-note-a {
+    transform: translateY(-14px);
+  }
+  .scene-workbench svg text.scene-note-b {
+    transform: translateY(16px);
+  }
+}
