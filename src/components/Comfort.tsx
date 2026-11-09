@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { BrandLogo } from "./BrandLogo";
 import { Terrain } from "./Terrain";
 import { Icon } from "./Icon";
@@ -154,46 +154,332 @@ export function EasyReadingToggle() {
 }
 
 const SPLASH = "bouse.splash.seen";
+let splashDecision: boolean | null = null;
+/** Une fois par visite, jamais si l'on a demandé moins d'animations. */
+function shouldPlaySplash() {
+  if (splashDecision !== null) return splashDecision;
+  splashDecision = false;
+  if (typeof window === "undefined" || document.hidden) return false;
+  if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches)
+    return false;
+  if (read(SPLASH, () => sessionStorage)) return false;
+  write(SPLASH, "1", () => sessionStorage);
+  splashDecision = true;
+  return true;
+}
+
+const visible = (rect: DOMRect) =>
+  rect.width > 0 &&
+  rect.height > 0 &&
+  rect.right > 0 &&
+  rect.bottom > 0 &&
+  rect.left < innerWidth &&
+  rect.top < innerHeight;
+
+/** Le rectangle du texte seul, sans l'espace qui le suit. */
+const textRect = (node: Node | null | undefined) => {
+  if (!node) return null;
+  const range = document.createRange();
+  if (node.nodeType === Node.TEXT_NODE) {
+    range.setStart(node, 0);
+    range.setEnd(node, (node.textContent ?? "").trimEnd().length);
+  } else range.selectNodeContents(node);
+  return range.getBoundingClientRect();
+};
+
+/** Déplacement d'un rectangle vers un autre, depuis le coin haut gauche. */
+const flip = (from: DOMRect, to: DOMRect, keepRatio = true) => {
+  const sx = to.width / from.width;
+  const sy = keepRatio ? sx : to.height / from.height;
+  return `translate(${to.left - from.left}px, ${to.top - from.top}px) scale(${sx}, ${sy})`;
+};
+
+const WORD = "BOUSE";
+const EASE_OUT = "cubic-bezier(0.22, 1, 0.36, 1)";
+const EASE_IN_OUT = "cubic-bezier(0.65, 0, 0.35, 1)";
+
 /**
- * Ouverture animée (1,6 s) : la vague s'allume, le B et « BOUSE » apparaissent,
- * puis tout s'efface. Une fois par visite, jamais si l'on a demandé moins
- * d'animations ; un clic ou une touche la passe.
+ * Ouverture animée (≈ 3 s). Sur fond noir, une lumière balaie la vague et
+ * l'allume de violet puis de cyan ; le B se dessine ruban par ruban ;
+ * « BOUSE » apparaît lettre à lettre. Puis le B et le nom s'envolent se poser
+ * à leur vraie place dans la barre de gauche, la vague glisse jusqu'au décor
+ * de la page, et l'appli sort du noir. Une fois par visite ; un clic ou une
+ * touche la passe ; rien si l'on a demandé moins d'animations.
  */
 export function SplashIntro() {
-  const [phase, setPhase] = useState<"on" | "out" | "off">(() => {
-    if (typeof window === "undefined") return "off";
-    const reduced = window.matchMedia?.(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-    if (reduced || read(SPLASH, () => sessionStorage)) return "off";
-    write(SPLASH, "1", () => sessionStorage);
-    return "on";
-  });
+  const [on, setOn] = useState(shouldPlaySplash);
+  const layerRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
-    if (phase === "off") return;
-    if (phase === "out") {
-      const timer = window.setTimeout(() => setPhase("off"), 420);
-      return () => window.clearTimeout(timer);
-    }
-    const timer = window.setTimeout(() => setPhase("out"), 1250);
-    const skip = () => setPhase("out");
-    window.addEventListener("keydown", skip, { once: true });
-    window.addEventListener("pointerdown", skip, { once: true });
-    return () => {
-      window.clearTimeout(timer);
-      window.removeEventListener("keydown", skip);
-      window.removeEventListener("pointerdown", skip);
+    const layer = layerRef.current;
+    if (!on || !layer) return;
+    const veil = layer.querySelector<HTMLElement>(".splash-veil")!;
+    const wave = layer.querySelector<HTMLElement>(".splash-wave")!;
+    const lights = layer.querySelectorAll<HTMLElement>(
+      ".splash-wave .wave-light",
+    );
+    const mark = layer.querySelector<HTMLElement>(".splash-mark")!;
+    const logo = layer.querySelector<SVGSVGElement>(".splash-mark svg")!;
+    const word = layer.querySelector<HTMLElement>(".splash-word")!;
+    const letters = word.querySelectorAll<HTMLElement>("span");
+    const animations: Animation[] = [];
+    const reveals: Animation[] = [];
+    let stopped = false;
+    let skip = () => {};
+    const skipped = new Promise<void>((resolve) => (skip = resolve));
+    const run = (
+      target: Element,
+      keyframes: Keyframe[],
+      options: KeyframeAnimationOptions,
+    ) => {
+      const animation = target.animate(keyframes, { fill: "both", ...options });
+      animations.push(animation);
+      return animation;
     };
-  }, [phase]);
-  if (phase === "off") return null;
+    const wait = (ms: number) =>
+      new Promise<void>((resolve) => window.setTimeout(resolve, ms));
+    const hurry = () => {
+      layer.dataset.fast = "";
+      animations.forEach((animation) => animation.finish());
+      reveals.forEach((animation) => animation.finish());
+      skip();
+    };
+    window.addEventListener("keydown", hurry);
+    layer.addEventListener("pointerdown", hurry);
+
+    // 1. La lumière balaie la vague, puis l'éclaire de violet et de cyan.
+    run(
+      wave,
+      [
+        { maskPosition: "100% 0", opacity: 0.2 },
+        { maskPosition: "0% 0", opacity: 1 },
+      ],
+      { duration: 1500, easing: EASE_OUT },
+    );
+    lights.forEach((light, index) =>
+      run(light, [{ opacity: 0 }, { opacity: 1 }], {
+        duration: 900,
+        delay: 650 + index * 300,
+        easing: "ease-out",
+      }),
+    );
+
+    // 2. Le B se dessine ruban par ruban, s'allume doucement, se pose.
+    logo.querySelectorAll("path").forEach((path, index) => {
+      const length = path.getTotalLength();
+      path.style.strokeDasharray = `${length}`;
+      run(path, [{ strokeDashoffset: length }, { strokeDashoffset: 0 }], {
+        duration: 760,
+        delay: 250 + index * 130,
+        easing: EASE_IN_OUT,
+      });
+    });
+    run(
+      logo,
+      [
+        {
+          transform: "scale(0.88)",
+          filter: "drop-shadow(0 0 0 rgb(155 135 245 / 0))",
+        },
+        {
+          transform: "scale(1.02)",
+          filter: "drop-shadow(0 0 18px rgb(155 135 245 / 0.34))",
+          offset: 0.6,
+        },
+        {
+          transform: "scale(1)",
+          filter: "drop-shadow(0 4px 10px rgb(0 0 0 / 0.6))",
+        },
+      ],
+      { duration: 1500, delay: 250, easing: EASE_OUT },
+    );
+
+    // 3. « BOUSE » lettre à lettre, qui sort du flou.
+    letters.forEach((letter, index) =>
+      run(
+        letter,
+        [
+          { opacity: 0, transform: "translateY(0.35em)", filter: "blur(8px)" },
+          { opacity: 1, transform: "none", filter: "blur(0)" },
+        ],
+        { duration: 640, delay: 900 + index * 65, easing: EASE_OUT },
+      ),
+    );
+
+    // 4. Tout s'envole à sa place et l'appli sort du noir.
+    const land = async () => {
+      await Promise.race([wait(2050), skipped]);
+      if (stopped) return;
+      const fast = "fast" in layer.dataset;
+      const flight = fast ? 560 : 1000;
+      layer.dataset.leaving = "";
+      const landed = new Promise<void>((resolve) => (skip = resolve));
+
+      const brand = [
+        ...document.querySelectorAll<HTMLElement>(
+          ".sidebar .brand, .onboarding-brand",
+        ),
+      ].find((node) => visible(node.getBoundingClientRect()));
+      const brandLogo = brand?.querySelector<SVGSVGElement>(".brand-logo");
+      const brandWord = brand?.querySelector("span")?.firstChild;
+      const logoTo = brandLogo?.getBoundingClientRect();
+      const wordTo = textRect(brandWord);
+      const decor = [
+        ...document.querySelectorAll<SVGSVGElement>(
+          ".page-view .terrain-artwork",
+        ),
+      ].find(
+        (svg) =>
+          !svg.closest(".wave-light") && visible(svg.getBoundingClientRect()),
+      );
+
+      if (brand && logoTo && wordTo && visible(logoTo)) {
+        // Ordinateur : le B et le nom se posent pile sur ceux de la barre.
+        brand.style.visibility = "hidden";
+        run(
+          logo,
+          [
+            { transform: "none" },
+            { transform: flip(logo.getBoundingClientRect(), logoTo) },
+          ],
+          {
+            duration: flight,
+            easing: EASE_IN_OUT,
+          },
+        );
+        const wordFrom = textRect(word)!;
+        run(
+          word,
+          [{ transform: "none" }, { transform: flip(wordFrom, wordTo) }],
+          {
+            duration: flight,
+            easing: EASE_IN_OUT,
+          },
+        );
+      } else {
+        // Téléphone : la marque monte et se fond dans la page.
+        run(
+          mark,
+          [
+            { opacity: 1, transform: "none", filter: "blur(0)" },
+            {
+              opacity: 0,
+              transform: "translateY(-48px) scale(0.6)",
+              filter: "blur(6px)",
+            },
+          ],
+          { duration: flight * 0.8, easing: EASE_IN_OUT },
+        );
+      }
+
+      if (decor) {
+        // La vague glisse jusqu'au décor de la page et s'y fond.
+        run(
+          wave,
+          [
+            { transform: "none", opacity: 1 },
+            { opacity: 0.85, offset: 0.55 },
+            {
+              transform: flip(
+                wave.getBoundingClientRect(),
+                decor.getBoundingClientRect(),
+                false,
+              ),
+              opacity: 0,
+            },
+          ],
+          { duration: flight * 1.1, easing: EASE_IN_OUT },
+        );
+      } else {
+        run(
+          wave,
+          [
+            { transform: "none", opacity: 1 },
+            { transform: "translateY(12%)", opacity: 0 },
+          ],
+          { duration: flight, easing: EASE_IN_OUT },
+        );
+      }
+
+      run(veil, [{ opacity: 1 }, { opacity: 0 }], {
+        duration: flight * 0.9,
+        delay: flight * 0.1,
+        easing: "ease-in-out",
+      });
+      const reveal = (selector: string, from: Keyframe, delay: number) => {
+        const node = document.querySelector(selector);
+        if (!node || !visible(node.getBoundingClientRect())) return;
+        reveals.push(
+          node.animate([from, { opacity: 1, transform: "none" }], {
+            duration: flight,
+            delay: flight * delay,
+            easing: EASE_OUT,
+            fill: "backwards",
+          }),
+        );
+      };
+      reveal(".sidebar", { opacity: 0, transform: "translateX(-14px)" }, 0.15);
+      reveal(".topbar", { opacity: 0, transform: "translateY(-8px)" }, 0.25);
+      reveal(
+        ".page-view",
+        { opacity: 0, transform: "translateY(16px) scale(0.985)" },
+        0.3,
+      );
+      reveal(
+        ".mobile-bottom-nav",
+        { opacity: 0, transform: "translateY(24px)" },
+        0.35,
+      );
+      reveal(
+        ".account-entry",
+        { opacity: 0, transform: "translateY(-8px)" },
+        0.2,
+      );
+      reveal(
+        ".onboarding-layout",
+        { opacity: 0, transform: "translateY(16px) scale(0.985)" },
+        0.3,
+      );
+
+      await Promise.race([wait(flight * 1.1 + 40), landed]);
+      if (brand) brand.style.visibility = "";
+      if (!stopped) setOn(false);
+    };
+    const guard = window.setTimeout(() => setOn(false), 7000);
+    land();
+
+    return () => {
+      stopped = true;
+      window.clearTimeout(guard);
+      window.removeEventListener("keydown", hurry);
+      layer.removeEventListener("pointerdown", hurry);
+      animations.forEach((animation) => animation.cancel());
+      document
+        .querySelectorAll<HTMLElement>(".sidebar .brand, .onboarding-brand")
+        .forEach((node) => (node.style.visibility = ""));
+    };
+  }, [on]);
+
+  if (!on) return null;
   return (
-    <div className="splash" data-phase={phase} aria-hidden="true">
+    <div className="splash" ref={layerRef} aria-hidden="true">
+      <div className="splash-veil" />
       <div className="splash-wave">
         <Terrain />
+        <span className="wave-light wave-light-violet">
+          <Terrain />
+        </span>
+        <span className="wave-light wave-light-cyan">
+          <Terrain />
+        </span>
       </div>
       <div className="splash-mark">
-        <BrandLogo size={64} />
-        <span>BOUSE</span>
+        <BrandLogo size={72} />
+        <span className="splash-word">
+          {[...WORD].map((letter, index) => (
+            <span key={index}>{letter}</span>
+          ))}
+        </span>
       </div>
     </div>
   );

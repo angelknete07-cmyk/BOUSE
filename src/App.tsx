@@ -397,6 +397,7 @@ function App({
             )}
           </div>
         )}
+        <SplashIntro />
         <div className="account-entry">
           <CloudPanel cloud={cloud} state={state} />
         </div>

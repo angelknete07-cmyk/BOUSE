@@ -171,7 +171,9 @@
   outline-offset: 2px;
 }
 
-/* Ouverture : la vague s'allume, le B apparaît, puis tout s'efface. */
+/* Ouverture : la lumière balaie la vague, le B se dessine, « BOUSE » sort du
+   flou ; puis tout s'envole à sa place et l'appli sort du noir. Les mouvements
+   sont joués par SplashIntro (Web Animations) ; ici, la mise en place. */
 .splash {
   position: fixed;
   z-index: 100;
@@ -179,68 +181,87 @@
   display: grid;
   place-items: center;
   overflow: hidden;
-  background: var(--bg, #050506);
-  pointer-events: none;
-  transition: opacity 420ms var(--ease-in-out);
+  cursor: default;
 }
-.splash[data-phase="out"] {
-  opacity: 0;
+.splash[data-leaving] {
+  pointer-events: none;
+}
+.splash-veil {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      60% 45% at 50% 46%,
+      rgb(var(--accent-violet-rgb) / 0.05),
+      transparent 70%
+    ),
+    var(--bg, #050506);
 }
 .splash-wave {
   position: absolute;
-  inset: auto -10% -8% -10%;
-  height: 62%;
-  opacity: 0;
-  transform: translateY(24px);
-  animation: splash-wave 1100ms var(--ease-out) 80ms forwards;
+  left: -8%;
+  right: -8%;
+  bottom: -6%;
+  height: 64%;
+  color: var(--accent);
+  transform-origin: 0 0;
+  will-change: transform, opacity;
+  /* La lumière qui balaie : un dégradé de masque qui glisse de gauche à droite. */
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    #000 0 40%,
+    rgb(0 0 0 / 0.35) 50%,
+    transparent 60%
+  );
+  mask-image: linear-gradient(
+    90deg,
+    #000 0 40%,
+    rgb(0 0 0 / 0.35) 50%,
+    transparent 60%
+  );
+  -webkit-mask-size: 260% 100%;
+  mask-size: 260% 100%;
+  -webkit-mask-position: 0% 0;
+  mask-position: 0% 0;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
 }
-.splash-wave svg {
+.splash-wave .terrain-artwork {
   width: 100%;
   height: 100%;
+}
+.splash-wave .wave-light {
+  opacity: 0;
 }
 .splash-mark {
   position: relative;
   display: grid;
   justify-items: center;
-  gap: var(--space-4);
-  opacity: 0;
-  transform: scale(0.94);
-  animation: splash-mark 700ms var(--ease-settle) 260ms forwards;
+  gap: 22px;
+  margin-top: -6vh;
 }
-.splash-mark span {
+.splash-mark svg {
+  transform-origin: 0 0;
+  overflow: visible;
+  will-change: transform;
+}
+.splash-word {
+  display: block;
   color: var(--text);
-  font: 500 var(--type-body) / 1 var(--font-display);
-  letter-spacing: 0.42em;
-  margin-right: -0.42em;
+  /* Mêmes proportions que « BOUSE » dans la barre (17 px, 0,32 em) : il s'y pose pile. */
+  font: 500 26px / 1 var(--font-sans, inherit);
+  letter-spacing: 0.32em;
+  margin-right: -0.32em;
+  white-space: nowrap;
+  transform-origin: 0 0;
+  will-change: transform;
+}
+.splash-word span {
+  display: inline-block;
   opacity: 0;
-  animation: splash-word 600ms var(--ease-out) 520ms forwards;
-}
-@keyframes splash-wave {
-  to {
-    opacity: 0.55;
-    transform: none;
-  }
-}
-@keyframes splash-mark {
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-@keyframes splash-word {
-  from {
-    letter-spacing: 0.7em;
-  }
-  to {
-    opacity: 1;
-    letter-spacing: 0.42em;
-  }
 }
 @media (prefers-reduced-motion: reduce) {
-  .page-guide,
-  .splash-wave,
-  .splash-mark,
-  .splash-mark span {
+  .page-guide {
     animation: none;
     opacity: 1;
     transform: none;

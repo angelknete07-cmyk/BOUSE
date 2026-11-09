@@ -1096,11 +1096,18 @@ test("confort du débutant : guide de page, lecture facile et ouverture", async 
   await seed(intro);
   await intro.goto(page.url().replace(/#.*$/, "#home"));
   await expect(intro.locator(".splash")).toBeVisible();
-  await intro.waitForTimeout(700);
+  await intro.waitForTimeout(1900);
   await intro.screenshot({
     path: testInfo.outputPath("23-ouverture-viewport.png"),
   });
-  await expect(intro.locator(".splash")).toHaveCount(0, { timeout: 4000 });
+  // Then the B and the name fly to their place and the app comes out of the dark.
+  await expect(intro.locator(".splash[data-leaving]")).toHaveCount(1);
+  await intro.waitForTimeout(450);
+  await intro.screenshot({
+    path: testInfo.outputPath("23-ouverture-envol-viewport.png"),
+  });
+  await expect(intro.locator(".splash")).toHaveCount(0, { timeout: 5000 });
+  await expect(intro.locator(".page-view")).toHaveCSS("opacity", "1");
   await intro.reload();
   await expect(intro.locator(".app-shell")).toBeVisible();
   await expect(intro.locator(".splash")).toHaveCount(0);
