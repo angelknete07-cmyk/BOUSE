@@ -9,7 +9,8 @@
 - **Commandes** : état actif souligné de violet, étapes actives en pastille violette sombre à halo, jeux de tri avec pastilles tactiles (40 px sur mobile), bonne réponse en vert d'eau, à revoir en ambre. Mobile : une commande par rangée (choix pleine largeur, pastilles qui se répartissent), rien ne dépasse dans les cartes à 320 px.
 - **Code** : `src/console.css` (fin du fichier), `src/components/LessonScene.tsx` (dégradés partagés `SceneGradients`, classes `scene-curve-cyan`, `scene-legend-cyan`, `scene-note-a/b`).
 - **Contrôles de l'agent** : `npx tsc -b`, `npm run build`, `npm test` 254 cas, `npx playwright test` 86 réussis (4 ignorés, comme avant), Prettier propre ; `Terrain.tsx` inchangé (empreinte `2c0c2a6c`) ; galerie régénérée (archive `2026-11-09_17-03-30-Europe-Paris`).
-- **Limites** : l'en-tête de leçon (kicker, titre, onglets « Comprendre / Pratiquer ») dépasse encore à 320 px sur certaines leçons (page, hors scènes, non touchée) ; les graphiques restent petits (viewBox 600×155) ; pas de vrai téléphone ; aucune validation externe ni retour d'Angel.
+- **En-tête de leçon (ajouté après coup)** : à 320 px il débordait sur plusieurs leçons (colonne de texte « 1fr » poussée par le bandeau domaine · niveau · durée · vérifié, onglets « Comprendre / Pratiquer » qui se touchaient). Corrigé dans `src/console.css` (`minmax(0, 1fr)`, bandeau qui passe à la ligne, onglets à 11 px sous 360 px) ; mesuré sur les 43 leçons : largeur de page = largeur d'écran à 320 et 390 px. Capture : `v4/scenes/etats/entete-lecon-320-apres.png`.
+- **Limites** : les graphiques restent petits (viewBox 600×155) ; pas de vrai téléphone ; aucune validation externe ni retour d'Angel.
 
 ---
 

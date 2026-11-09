@@ -1848,3 +1848,36 @@ svg.scene-micro-bar {
     transform: translateY(16px);
   }
 }
+
+/* ---------- En-tête de leçon : rien ne dépasse à 320 px ----------
+   La colonne de texte était « 1fr » (largeur minimale = contenu) : le bandeau
+   « domaine · niveau · durée · vérifié » la poussait hors de l'écran. */
+@media (max-width: 700px) {
+  .editorial-lesson .learning-header {
+    grid-template-columns: 46px minmax(0, 1fr);
+  }
+  .editorial-lesson .learning-kicker {
+    flex-wrap: wrap;
+    min-width: 0;
+    row-gap: var(--space-1);
+  }
+  .editorial-lesson .learning-header h1 {
+    overflow-wrap: anywhere;
+  }
+}
+@media (max-width: 700px) {
+  .editorial-lesson .learning-kicker span:first-child {
+    max-width: none;
+    min-width: 0;
+  }
+}
+@media (max-width: 360px) {
+  .learning-stage-tab {
+    min-width: 0;
+    padding-inline: 0;
+  }
+  .learning-stage-tab strong {
+    font-size: 0.6875rem;
+    letter-spacing: -0.2px;
+  }
+}
