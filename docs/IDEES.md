@@ -8,9 +8,8 @@ Idées de l'utilisateur, à reprendre après le design V4. Rien n'est commencé.
 Idées voisines proposées par Claude :
 
 3. **Écouter une leçon** sans vidéo (lecture audio du texte, vitesse réglable), pour le trajet ou le sport.
-4. **Teach-back à l'oral** : expliquer la notion à voix haute, transcrire, puis comparer aux points clés comme aujourd'hui.
+4. **Teach-back à l'oral** : expliquer la notion à voix haute, transcrire, puis comparer aux points clés comme aujourd'hui. **À changer** (tri du 9/11 : l’utilisateur précisera quoi).
 5. **Résumé audio de 60 secondes** à la fin de chaque leçon et dans les révisions.
-6. **Mode « mains libres » des révisions** : la question est lue, on répond à voix haute.
 
 ## Idées de l'utilisateur du 9 novembre 2026 (à faire après les bulles et les scènes)
 
@@ -29,9 +28,9 @@ Idées voisines proposées par Claude :
 Apprendre : 16. test de niveau par domaine pour sauter ce qu'on sait ; 17. bouton « Explique-moi autrement » (mentor IA : analogie, exemple, plus simple) ; 18. scènes avec ses propres chiffres (salaire, loyer) ; 19. carnet « Mes pièges » (chaque erreur de quiz, revue en priorité) ; 20. défi du jour de 2 minutes ; 21. l'actu de la semaine expliquée et reliée aux leçons.
 Pratiquer : 22. boîte à outils de modèles à remplir (devis, facture, budget, prévisionnel) exportables en PDF/Excel ; 23. calculatrices du quotidien hors leçon (brut → net, TTC, crédit, intérêts composés, rentabilité locative) ; 24. listes « Vérifier avant de signer » (crédit, contrat, placement, arnaque) ; 25. déposer un document (devis, fiche de paie) pour que le mentor l'explique ligne par ligne, sans conserver les données.
 Progresser : 26. compétences en « je sais faire » avec attestation PDF ; 27. plan de la semaine selon le temps disponible, avec rappel ; 28. bilan du mois (appris, appliqué, à revoir).
-Ensemble : 29. apprendre à plusieurs (inviter un ami, défi commun) ; 30. partager une notion en belle image.
+Ensemble : 29. apprendre à plusieurs (inviter un ami, défi commun).
 Confort : 31. mode lecture facile (texte plus grand, phrases courtes) ; 32. hors ligne complet.
-Produit : 33. contenu daté et vérifié, avec alerte quand une règle change (impôts, plafonds) ; 34. version écoles et entreprises (parcours d'un formateur, suivi d'un groupe) ; 35. mesure anonyme des endroits où les gens bloquent.
+Produit : 33. contenu daté et vérifié, avec alerte quand une règle change (impôts, plafonds) ; 34. version écoles et entreprises (parcours d'un formateur, suivi d'un groupe) — **à changer** (tri du 9/11, précisions à venir) ; 35. mesure anonyme des endroits où les gens bloquent.
 Priorités conseillées : 22, 17, 16, 19, 33.
 
 ## Apprendre à sa façon (idée de l'utilisateur, 9/11) — reprend et précise les idées 1 et 3
@@ -39,4 +38,8 @@ Priorités conseillées : 22, 17, 16, 19, 33.
 36. **Choisir sa façon d'apprendre** au questionnaire du début (lire, écouter, regarder, faire), changeable à tout moment, même au milieu d'une leçon.
 37. **Mode podcast** : un bouton « Écouter » lit toute la leçon avec une belle voix (service payant choisi par l'utilisateur), vitesse réglable, reprise là où on s'est arrêté, écran éteint possible.
 38. **Mode vidéo interactive** : la leçon en vraie vidéo animée, voix et sous-titres ; aux moments pratiques, la vidéo se met en pause et la scène ou la question apparaît **par-dessus, dans le même lecteur** (on ne quitte pas la vidéo), puis elle reprend seule. Piste technique : Remotion Player, qui joue l'animation en direct dans l'appli à partir des données de la leçon (pas de gros fichiers vidéo, 43 leçons générées d'un même modèle).
-39. Autres façons proposées par Claude : **dialogue à l'oral avec un prof IA** ; **la leçon racontée comme une histoire** avec un personnage ; **jeux de rôle** (négocier avec un client, rendez-vous avec un banquier) ; **schéma visuel** de toute la leçon ; **mode 5 minutes** (l'essentiel seulement) ; **pratique d'abord**, explication ensuite ; cartes de révision qu'on fait glisser.
+39. Autres façons proposées par Claude : **dialogue à l'oral avec un prof IA** ; **la leçon racontée comme une histoire** avec un personnage ; **jeux de rôle** (négocier avec un client, rendez-vous avec un banquier) ; **schéma visuel** de toute la leçon ; **mode 5 minutes** (l'essentiel seulement) ; **pratique d'abord**, explication ensuite ; cartes de révision qu'on fait glisser. **À changer** (tri du 9/11 : l’utilisateur précisera quoi).
+
+## Tri du 9 novembre 2026 (choix de l’utilisateur)
+
+Enlevées : 6 (révisions mains libres) et 30 (partager une notion en image). À garder mais **à changer**, précisions de l’utilisateur à venir : 4 (expliquer à l’oral), 34 (version écoles et entreprises), 39 (autres façons d’apprendre). Toutes les autres sont gardées telles quelles.
