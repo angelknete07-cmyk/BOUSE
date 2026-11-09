@@ -1,3 +1,16 @@
+# Review design — Confort du débutant : guide de page, lecture facile, ouverture
+
+**9 novembre 2026, idées 8, 10 et 31.** **La direction artistique n’est pas déclarée validée.** Paire principale : guide de l’Académie (`21-guide-de-page-viewport`), archive `2026-11-09_18-20-31-Europe-Paris`.
+
+- **Guide de page (idée 10, version légère)** : en haut de chaque page (accueil, Académie, révisions, compétences, portfolio, lab, scénarios, atelier IA, projets, sources, lexique, préférences), un bandeau d’une phrase dit à quoi elle sert et comment s’en servir. Bord fin, léger voile violet, icône ampoule violette. Une croix masque tous les guides ; « À quoi sert cette page ? » les fait revenir. Rien dans les leçons ni dans un projet ouvert.
+- **Lecture facile (idée 31)** : interrupteur dans Préférences → « Confort de lecture ». Texte 12,5 % plus grand, lignes plus aérées, paragraphes de leçon limités à 62 caractères. Gardé au rechargement. Sur un téléphone, le dock et les étapes de la leçon gardent leur taille pour ne rien faire déborder.
+- **Ouverture (idée 8)** : au premier lancement de la visite, la vague s’allume, le B et « BOUSE » apparaissent, puis tout s’efface (≈ 1,7 s). Un clic ou une touche la passe ; jamais si « réduire les animations » est demandé ; une seule fois par visite. Vague et logo réutilisés tels quels.
+- **Captures** : `21-guide-de-page-viewport`, `22-lecture-facile-reglage-viewport`, `22-lecture-facile-lecon-viewport`, `23-ouverture-viewport` (ordinateur 1440×1000 et Pixel 7) ; vérification à part à 320 px : aucun débordement.
+- **Contrôles de l’agent** : `npm test` 259, `npx playwright test` 91 passés (5 ignorés prévus), dont le nouveau test « confort du débutant » ; `tsc`, build, Prettier sur les fichiers modifiés ; empreinte de `Terrain.tsx` inchangée (`2c0c2a6c…`).
+- **Limites** : textes des guides à relire par l’utilisateur ; pas de vrai téléphone ; pas de validation externe.
+
+---
+
 # Review design — Bulles de définition dans les leçons (comme Wikipédia)
 
 **9 novembre 2026, scènes et bulles regroupées.** **La direction artistique n’est pas déclarée validée.** Après fusion avec les 43 scènes : `npm test` 259, `npx playwright test` 89 passés, galerie régénérée. Paire principale : bulles en cascade (`20-bulles-definition-viewport`), archive `2026-11-09_16-53-28-Europe-Paris`.

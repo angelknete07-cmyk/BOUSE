@@ -1038,6 +1038,75 @@ test("module investissement : lexique, leçon et simulateur de frais", async ({
   });
 });
 
+test("confort du débutant : guide de page, lecture facile et ouverture", async ({
+  page,
+}, testInfo) => {
+  await seed(page);
+  // Each page says in one sentence what it is for; it can be hidden and shown again.
+  await page.goto("/#academy");
+  const guide = page.getByRole("complementary", {
+    name: "À quoi sert cette page",
+  });
+  await expect(guide).toContainText("Toutes les leçons");
+  await expect(page.locator(".page-loading")).toHaveCount(0);
+  await expect(page.locator(".page-view h1").first()).toBeVisible();
+  await noOverflow(page);
+  await page.screenshot({
+    path: testInfo.outputPath("21-guide-de-page-viewport.png"),
+  });
+  await page
+    .getByRole("button", { name: "Masquer les explications des pages" })
+    .click();
+  await expect(guide).toHaveCount(0);
+  await page.goto("/#lab");
+  const show = page.getByRole("button", { name: "À quoi sert cette page ?" });
+  await expect(show).toBeVisible();
+  await show.click();
+  await expect(guide).toContainText("bac à sable");
+
+  // Easy reading: a switch in settings, kept after a reload, nothing overflows.
+  await page.goto("/#settings");
+  const easy = page.getByRole("switch", { name: /Lecture facile/ });
+  await easy.scrollIntoViewIfNeeded();
+  await easy.check();
+  await expect(page.locator("html")).toHaveAttribute("data-reading", "easy");
+  await page.screenshot({
+    path: testInfo.outputPath("22-lecture-facile-reglage-viewport.png"),
+  });
+  await page.goto("/#lesson/inv-fonds-enveloppes");
+  await page.reload();
+  await expect(page.locator("html")).toHaveAttribute("data-reading", "easy");
+  await expect(page.locator(".page-loading")).toHaveCount(0);
+  await expect(page.locator(".learning-journey")).toBeVisible();
+  await noOverflow(page);
+  await page.screenshot({
+    path: testInfo.outputPath("22-lecture-facile-lecon-viewport.png"),
+  });
+
+  // The launch animation plays once per visit, never with reduced motion.
+  await expect(page.locator(".splash")).toHaveCount(0);
+  const fresh = await page
+    .context()
+    .browser()!
+    .newContext({
+      ...(testInfo.project.use as object),
+      reducedMotion: "no-preference",
+    });
+  const intro = await fresh.newPage();
+  await seed(intro);
+  await intro.goto(page.url().replace(/#.*$/, "#home"));
+  await expect(intro.locator(".splash")).toBeVisible();
+  await intro.waitForTimeout(700);
+  await intro.screenshot({
+    path: testInfo.outputPath("23-ouverture-viewport.png"),
+  });
+  await expect(intro.locator(".splash")).toHaveCount(0, { timeout: 4000 });
+  await intro.reload();
+  await expect(intro.locator(".app-shell")).toBeVisible();
+  await expect(intro.locator(".splash")).toHaveCount(0);
+  await fresh.close();
+});
+
 test("mouvement de page mesuré et préférence de réduction respectée", async ({
   page,
 }) => {

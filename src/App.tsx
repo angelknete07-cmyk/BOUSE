@@ -36,6 +36,11 @@ import {
 } from "./lib/domain";
 import { Icon } from "./components/Icon";
 import { BrandLogo } from "./components/BrandLogo";
+import {
+  EasyReadingToggle,
+  PageGuide,
+  SplashIntro,
+} from "./components/Comfort";
 import { Terrain } from "./components/Terrain";
 import { Dashboard } from "./components/Dashboard";
 import { Onboarding } from "./components/Onboarding";
@@ -410,6 +415,7 @@ function App({
       : undefined;
   return (
     <div className="app-shell">
+      <SplashIntro />
       <a
         className="skip-link"
         href="#main-content"
@@ -634,6 +640,17 @@ function App({
                   <Terrain />
                 </span>
               </div>
+            )}
+            {!lesson && projectId === null && (
+              <PageGuide
+                route={
+                  inGlossary
+                    ? "lexique"
+                    : route === "portfolio"
+                      ? "portfolio"
+                      : route
+                }
+              />
             )}
             <Suspense
               fallback={
@@ -991,6 +1008,10 @@ function Settings({
             quiz, vos révisions ou vos projets, et tout le contenu reste
             accessible.
           </p>
+        </section>
+        <section className="panel settings-comfort">
+          <h2>Confort de lecture</h2>
+          <EasyReadingToggle />
         </section>
         <section className="panel settings-data">
           <h2>Vos données, ici.</h2>

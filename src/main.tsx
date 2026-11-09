@@ -19,6 +19,10 @@ import "./art-direction.css";
 import "./finish.css";
 import "./fusion.css";
 import "./console.css";
+import "./comfort.css";
+import { restoreEasyReading } from "./components/Comfort";
+
+restoreEasyReading();
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <App />
