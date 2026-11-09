@@ -33,3 +33,10 @@ Ensemble : 29. apprendre à plusieurs (inviter un ami, défi commun) ; 30. parta
 Confort : 31. mode lecture facile (texte plus grand, phrases courtes) ; 32. hors ligne complet.
 Produit : 33. contenu daté et vérifié, avec alerte quand une règle change (impôts, plafonds) ; 34. version écoles et entreprises (parcours d'un formateur, suivi d'un groupe) ; 35. mesure anonyme des endroits où les gens bloquent.
 Priorités conseillées : 22, 17, 16, 19, 33.
+
+## Apprendre à sa façon (idée de l'utilisateur, 9/11) — reprend et précise les idées 1 et 3
+
+36. **Choisir sa façon d'apprendre** au questionnaire du début (lire, écouter, regarder, faire), changeable à tout moment, même au milieu d'une leçon.
+37. **Mode podcast** : un bouton « Écouter » lit toute la leçon avec une belle voix (service payant choisi par l'utilisateur), vitesse réglable, reprise là où on s'est arrêté, écran éteint possible.
+38. **Mode vidéo interactive** : la leçon en vraie vidéo animée, voix et sous-titres ; aux moments pratiques, la vidéo se met en pause et la scène ou la question apparaît **par-dessus, dans le même lecteur** (on ne quitte pas la vidéo), puis elle reprend seule. Piste technique : Remotion Player, qui joue l'animation en direct dans l'appli à partir des données de la leçon (pas de gros fichiers vidéo, 43 leçons générées d'un même modèle).
+39. Autres façons proposées par Claude : **dialogue à l'oral avec un prof IA** ; **la leçon racontée comme une histoire** avec un personnage ; **jeux de rôle** (négocier avec un client, rendez-vous avec un banquier) ; **schéma visuel** de toute la leçon ; **mode 5 minutes** (l'essentiel seulement) ; **pratique d'abord**, explication ensuite ; cartes de révision qu'on fait glisser.
