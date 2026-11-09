@@ -12,6 +12,22 @@
 
 ---
 
+# Review design — V4 : les 43 scènes de leçon, une par une
+
+**9 novembre 2026.** **La direction artistique n'est pas déclarée validée.** Branche `claude/bouse-scenes-da` (partie de `986a909`). Paire principale : leçon avec la scène « Une vente. Deux horloges. » (`03-lecon-learn-viewport`).
+
+- **Les 43 scènes ont été revues à la main** (captures avant/après à 1440×900, 390×844 et 320×700, plus les états cochés/triés) ; calculs et textes inchangés, aucune fonction retirée. Fichiers : `design-reviews/v4/scenes/avant/`, `.../apres/` (`<id-de-leçon>-desktop|mobile|320.png`, rapport de mesures `_rapport.json`) et `.../etats/` (jeux de tri, étapes, cases cochées). Script : `scripts/capture-scenes.mjs`.
+- **Défaut corrigé** : cinq scènes à barres (micro-entreprise, impôt sur le revenu, allocation, budget, etc.) avaient un grand aplat violet derrière le graphique (règle des barres HTML appliquée par erreur à un `<svg>`) ; le fond est supprimé.
+- **Courbes et barres** : courbe principale violette lumineuse (halo léger `--glow-k`), second tracé cyan (charges du seuil de rentabilité), références en gris pointillé (sans frais, repères de seuil), barres SVG en dégradé violet/cyan/gris (dégradés partagés, couleurs par jetons), coins arrondis, point actif à anneau blanc. Légendes dessinées comme les tracés.
+- **Lisibilité** : tous les libellés de graphiques ≥ 11 px à l'écran (avant : 9,5 à 9,7 px sur 9 scènes) ; la note du graphique « Crédit » ne se chevauche plus sur mobile.
+- **Commandes** : état actif souligné de violet, étapes actives en pastille violette sombre à halo, jeux de tri avec pastilles tactiles (40 px sur mobile), bonne réponse en vert d'eau, à revoir en ambre. Mobile : une commande par rangée (choix pleine largeur, pastilles qui se répartissent), rien ne dépasse dans les cartes à 320 px.
+- **Code** : `src/console.css` (fin du fichier), `src/components/LessonScene.tsx` (dégradés partagés `SceneGradients`, classes `scene-curve-cyan`, `scene-legend-cyan`, `scene-note-a/b`).
+- **Contrôles de l'agent** : `npx tsc -b`, `npm run build`, `npm test` 254 cas, `npx playwright test` 86 réussis (4 ignorés, comme avant), Prettier propre ; `Terrain.tsx` inchangé (empreinte `2c0c2a6c`) ; galerie régénérée (archive `2026-11-09_17-03-30-Europe-Paris`).
+- **En-tête de leçon (ajouté après coup)** : à 320 px il débordait sur plusieurs leçons (colonne de texte « 1fr » poussée par le bandeau domaine · niveau · durée · vérifié, onglets « Comprendre / Pratiquer » qui se touchaient). Corrigé dans `src/console.css` (`minmax(0, 1fr)`, bandeau qui passe à la ligne, onglets à 11 px sous 360 px) ; mesuré sur les 43 leçons : largeur de page = largeur d'écran à 320 et 390 px. Capture : `v4/scenes/etats/entete-lecon-320-apres.png`.
+- **Limites** : les graphiques restent petits (viewBox 600×155) ; pas de vrai téléphone ; aucune validation externe ni retour d'Angel.
+
+---
+
 # Review design — V4 : la DA des planches de A à Z
 
 **6 novembre 2026, soir.** **La direction artistique n'est pas déclarée validée.** Paire principale : leçon (`03-lecon-learn-viewport`).

@@ -1,0 +1,74 @@
+{
+ "fp-credit-taux/mobile": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 350,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "fp-credit-taux/320": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 280,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "fp-credit-taux/desktop": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 455,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "fp-budget/320": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 280,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "fp-budget/mobile": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 350,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "fp-budget/desktop": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 455,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "ent-micro-entreprise/320": {
+  "overlaps": [],
+  "docOverflow": true,
+  "secWidth": 280,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "ent-micro-entreprise/mobile": {
+  "overlaps": [],
+  "docOverflow": true,
+  "secWidth": 350,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ },
+ "ent-micro-entreprise/desktop": {
+  "overlaps": [],
+  "docOverflow": false,
+  "secWidth": 455,
+  "over": [],
+  "small": [],
+  "nSmall": 0
+ }
+}
