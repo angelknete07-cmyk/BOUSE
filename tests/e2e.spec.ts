@@ -63,6 +63,10 @@ async function onboard(page: Page) {
     page.getByText("5/5 bonnes réponses.", { exact: false }),
   ).toBeVisible();
   await page.getByRole("button", { name: "Entrer dans l’Académie" }).click();
+  // La visite guidée s'ouvre d'elle-même après le questionnaire.
+  await expect(page.getByRole("dialog", { name: "Tes espaces" })).toBeVisible();
+  await page.getByRole("button", { name: "Passer" }).click();
+  await expect(page.getByRole("dialog")).toHaveCount(0);
   await expect(
     page.getByRole("heading", { name: /^(Bienvenue|Bon retour), Camille !$/ }),
   ).toBeVisible();

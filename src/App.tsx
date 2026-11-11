@@ -44,6 +44,12 @@ import {
 import { Terrain } from "./components/Terrain";
 import { Dashboard } from "./components/Dashboard";
 import { Onboarding } from "./components/Onboarding";
+import {
+  TourHost,
+  TourReplay,
+  queueWelcomeTour,
+  useFirstStepsActive,
+} from "./components/Guide";
 import { latestCurrentAttempt } from "./lib/portfolio";
 
 // Secondary screens load on demand; home and onboarding stay in the entry chunk.
@@ -341,6 +347,7 @@ function App({
     return () => cancelAnimationFrame(frame);
   }, [route, !!state.profile]);
   const done = passedIds(state);
+  const firstStepsOn = useFirstStepsActive(state);
   function go(next: string) {
     navigate(next);
   }
@@ -402,7 +409,10 @@ function App({
           <CloudPanel cloud={cloud} state={state} />
         </div>
         <Onboarding
-          onComplete={(profile) => update((s) => ({ ...s, profile }))}
+          onComplete={(profile) => {
+            queueWelcomeTour();
+            update((s) => ({ ...s, profile }));
+          }}
         />
       </>
     );
@@ -417,6 +427,7 @@ function App({
   return (
     <div className="app-shell">
       <SplashIntro />
+      <TourHost />
       <a
         className="skip-link"
         href="#main-content"
@@ -642,17 +653,21 @@ function App({
                 </span>
               </div>
             )}
-            {!lesson && projectId === null && (
-              <PageGuide
-                route={
-                  inGlossary
-                    ? "lexique"
-                    : route === "portfolio"
-                      ? "portfolio"
-                      : route
-                }
-              />
-            )}
+            {/* Sur l'accueil, « Tes premiers pas » remplace la phrase d'aide
+                tant qu'ils ne sont pas finis. */}
+            {!lesson &&
+              projectId === null &&
+              !(route === "home" && firstStepsOn) && (
+                <PageGuide
+                  route={
+                    inGlossary
+                      ? "lexique"
+                      : route === "portfolio"
+                        ? "portfolio"
+                        : route
+                  }
+                />
+              )}
             <Suspense
               fallback={
                 <p className="page-loading" role="status">
@@ -1013,6 +1028,7 @@ function Settings({
         <section className="panel settings-comfort">
           <h2>Confort de lecture</h2>
           <EasyReadingToggle />
+          <TourReplay />
         </section>
         <section className="panel settings-data">
           <h2>Vos données, ici.</h2>

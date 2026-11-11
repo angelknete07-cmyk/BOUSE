@@ -20,6 +20,7 @@ import "./finish.css";
 import "./fusion.css";
 import "./console.css";
 import "./comfort.css";
+import "./guide.css";
 import { restoreEasyReading } from "./components/Comfort";
 
 restoreEasyReading();

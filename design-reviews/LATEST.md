@@ -1,3 +1,17 @@
+# Review design — Didacticiel : visite guidée, visites des espaces, premiers pas
+
+**11 novembre 2026.** **La direction artistique n’est pas déclarée validée.** Maquette (`maquette/didacticiel.html`, posée sur la vraie appli) **validée par l’utilisateur** (« Oui, construis-le ») ; il a demandé en plus que **chaque onglet soit expliqué**, parce qu’ils sont compliqués à utiliser. Paire principale : visite de bienvenue (`24-visite-accueil-viewport`), archive `2026-11-11_16-27-14-Europe-Paris`.
+
+- **Visite de bienvenue** (5 étapes) : s’ouvre seule juste après le questionnaire. Une lumière (bord violet fin, voile noir à 78 %) glisse d’une cible à l’autre (480 ms) : les espaces, le bouton blanc de la leçon, un mot souligné à essayer dans la bulle (démonstration « ETF »), Révisions, la recherche. Bulle sombre en relief, points d’avancement (le courant en pastille violette), « Passer » et bouton blanc « Suivant ». Échap, flèches, focus gardé dans la bulle puis rendu. Relançable depuis « Tes premiers pas » et Préférences → Confort de lecture.
+- **Visites des espaces (demande de l’utilisateur)** : bouton « Me montrer » dans la phrase d’aide de chaque espace (Académie, Révisions, Compétences, Lab financier, Scénarios, Atelier IA, Projets, Sources) ; 2 à 4 étapes qui éclairent chaque partie de la page et disent à quoi elle sert et comment s’en servir. Point violet qui respire tant que la visite n’a pas été faite. Sur téléphone, un bloc plus haut que l’écran n’est éclairé que par le haut et la bulle se pose dessous, jamais sous le dock.
+- **Tes premiers pas** : carte sur l’accueil (remplace la phrase d’aide tant qu’elle n’est pas finie) ; 5 pas qui se cochent d’après ce qui est vraiment fait (leçon ouverte, mot souligné touché, quiz réussi, révision, projet créé). Un pas fait depuis la dernière visite se coche sous les yeux (pastille qui rebondit, coche dessinée, trait lavande). « Y aller » mène au bon endroit ; × la range ; une fois tout fait : « Bravo », puis elle se replie.
+- **Code** : `src/components/Guide.tsx`, `src/guide.css` ; branchements dans `App.tsx`, `Dashboard.tsx`, `Comfort.tsx`. Réglages gardés dans le navigateur seulement (`bouse.tour.seen`, `bouse.tours.seen`, `bouse.firststeps.*`), aucune donnée d’apprentissage modifiée. Vague et logo intouchés.
+- **Captures** : `24-premiers-pas-viewport`, `24-visite-accueil-viewport`, `25-visite-espace-viewport` (ordinateur 1440×1000 et Pixel 7) ; essais à la main de toutes les visites à 903×983 et 375×812.
+- **Contrôles de l’agent** : `npm test` 259 ; `npx playwright test` complet (dont `tests/guide.spec.ts` : 11 cas × 2 appareils, et le questionnaire qui ouvre la visite) ; `tsc`, build, Prettier.
+- **Limites** : textes des visites à relire par l’utilisateur ; pas de vrai téléphone ; pas de validation externe.
+
+---
+
 # Review design — Confort du débutant : guide de page, lecture facile, ouverture
 
 **9 novembre 2026, idées 8, 10 et 31.** **La direction artistique n’est pas déclarée validée.** Paire principale : guide de l’Académie (`21-guide-de-page-viewport`), archive `2026-11-09_18-20-31-Europe-Paris`.

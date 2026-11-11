@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-09T17:31:52.468Z",
-  "generatedAtParis": "2026-11-09_18-31-52-Europe-Paris",
-  "testRunCompletedAt": "2026-11-09T17:31:45.202Z",
+  "generatedAt": "2026-11-11T15:27:14.035Z",
+  "generatedAtParis": "2026-11-11_16-27-14-Europe-Paris",
+  "testRunCompletedAt": "2026-11-11T15:27:10.408Z",
   "testRunStatus": "passed",
   "captureMode": "latest: viewport; screens: full-page and viewport",
-  "primaryScreen": "21-guide-de-page-viewport",
+  "primaryScreen": "24-visite-accueil-viewport",
   "viewports": {
     "desktop": {
       "project": "desktop-chromium",
@@ -30,7 +30,7 @@
       "browser": "chromium"
     }
   },
-  "sourceSha256": "8209cb8d347aabe07410fda403c8c9e03b61ad78f65e52fd0efb537f4450c9b3",
+  "sourceSha256": "7186fb521e44bac6f1298bbb9490d55f72b5ee1b382b141f8a2fe64b6b142abf",
   "sourceFiles": [
     {
       "path": "index.html",
@@ -94,7 +94,7 @@
     },
     {
       "path": "src/App.tsx",
-      "sha256": "988220d481e5a698dc8c076a431e27d4bf555c29d11bd931e77652bebe002687"
+      "sha256": "3cac3435f7cd535bf49c7f93544a6312fa503d0c8fb7f2099d4c713185d456a3"
     },
     {
       "path": "src/art-direction.css",
@@ -122,11 +122,11 @@
     },
     {
       "path": "src/components/Comfort.tsx",
-      "sha256": "a26d11e0f5548034e375660226234dbe7263eb053741fce7a43109026a4141cf"
+      "sha256": "ba5c29322388f45ece740065392c15dc583c6cbb351863b869f07e57ea5c607e"
     },
     {
       "path": "src/components/Dashboard.tsx",
-      "sha256": "c82e5cd8258e0cc4704b9c6197fcb981ac8a972552ae5f0ba8a691d92739373a"
+      "sha256": "6ac80e7103294e1cce87833923e1a60092fd904a4636d250562de6274928a4b4"
     },
     {
       "path": "src/components/FinancialInstrument.tsx",
@@ -139,6 +139,10 @@
     {
       "path": "src/components/GlossaryText.tsx",
       "sha256": "a404b51896cdc6d92aa4f09567aa4b0eb3683b2dab7ca9ea294ab61f4f0db47b"
+    },
+    {
+      "path": "src/components/Guide.tsx",
+      "sha256": "270100d17a92c7d7088854c4ba77c045552014a2d86d77c8948800ae10d9e144"
     },
     {
       "path": "src/components/Icon.tsx",
@@ -305,6 +309,10 @@
       "sha256": "f6c89dbbffda000a566bae6b6a61c29e9cb39e095464772cb0d33d56b10f0508"
     },
     {
+      "path": "src/guide.css",
+      "sha256": "c03f1f9a080e29d2d245319783e0554c10f9cc74e8a8bbd47a2af649a6201565"
+    },
+    {
       "path": "src/knowledge-map.css",
       "sha256": "721c626233ff2d2876e5a302cbd57cb679f3386a8eb956959a4288734f54a6be"
     },
@@ -434,7 +442,7 @@
     },
     {
       "path": "src/main.tsx",
-      "sha256": "5aab70255c2160519ec4306102e94a9e76f74d98f939f88abd5e492152bac4d6"
+      "sha256": "473476b2c48ac5ff1c44023c682a07f532f925a2999fe2691a99c6e6dca2da93"
     },
     {
       "path": "src/project-learning-plan.css",
@@ -466,7 +474,7 @@
     },
     {
       "path": "tests/design.spec.ts",
-      "sha256": "67ef12d62538f00c76ed270cae374f9e542873f14bb70ef2ff5607515ba4ea68"
+      "sha256": "a8235a61776b20eb0f9012c944b834d2bef0e5790c9fac98803d4e490de065bc"
     }
   ],
   "internalReview": "Captures issues d’un run réussi ; inspection visuelle à consigner dans LATEST.md.",
@@ -475,79 +483,79 @@
     {
       "path": "screens/desktop/00-home-viewport.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:29:50.127Z",
+      "capturedAt": "2026-11-11T15:26:15.734Z",
       "width": 1440,
       "height": 1000,
-      "sha256": "f4ef9fc868db0d9a43fca2db1e622e9ac9b962f78f3f24f43e258e6e20cfabbe",
+      "sha256": "0f0e28c91f42990d735a1d1851ec6d9e0fd715b0fecf4512ffe708e1e571b8d7",
       "source": "test-results/design-surfaces-neutres-et-8fa7d-tion-sur-un-véritable-rendu-desktop-chromium/00-home-viewport.png"
     },
     {
       "path": "screens/desktop/01-home.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:29:50.059Z",
+      "capturedAt": "2026-11-11T15:26:15.631Z",
       "width": 1440,
-      "height": 2033,
-      "sha256": "cfaf30519fc84793225446204f2be88b7b835335686827998047a96b851cb66d",
+      "height": 2199,
+      "sha256": "ae7826c6afafc466448c0ca98723abcd47d158511a1892c0c390e49c14dbaf5d",
       "source": "test-results/design-surfaces-neutres-et-8fa7d-tion-sur-un-véritable-rendu-desktop-chromium/01-home.png"
     },
     {
       "path": "screens/desktop/01-onboarding.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:29:51.387Z",
+      "capturedAt": "2026-11-11T15:26:14.965Z",
       "width": 1440,
       "height": 1126,
-      "sha256": "1b6900e4096bf35fa2fc493e29b76f7f7784648e233818a72d735ec3f5a64dd7",
+      "sha256": "3b4a272265c00fbb0b4d6e7623f657c300e81977a6b93ffc2899f1a65d85c389",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-desktop-chromium/01-onboarding.png"
     },
     {
       "path": "screens/desktop/02-academy-catalogue.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:29:58.631Z",
+      "capturedAt": "2026-11-11T15:26:19.324Z",
       "width": 1440,
       "height": 10667,
-      "sha256": "9767030daa4c3e5ac626ff89521d62257fc619d85cbe17e75d1433242bf18b3e",
+      "sha256": "09bbae722761bb3d82068dafcf64cbcc5d2d940e1ea9cc3f6fd4218d8c42fff3",
       "source": "test-results/design-compositions-des-instruments-atlas-et-leçon-complète-desktop-chromium/02-academy-catalogue.png"
     },
     {
       "path": "screens/desktop/02-academy-selection.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:29:57.986Z",
+      "capturedAt": "2026-11-11T15:26:18.599Z",
       "width": 1440,
       "height": 2097,
-      "sha256": "0a77aa52ab6c7b9f5121fe3575aed5db193c301459fcf7bc83fc169da09c4b7c",
+      "sha256": "deec3b21958b86795f79fc41aa7eafeacda30920a0e3fa52865bcce61684dc3e",
       "source": "test-results/design-compositions-des-instruments-atlas-et-leçon-complète-desktop-chromium/02-academy-selection.png"
     },
     {
       "path": "screens/desktop/02-academy-viewport.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:29:52.094Z",
+      "capturedAt": "2026-11-11T15:26:15.940Z",
       "width": 1440,
       "height": 1000,
-      "sha256": "2a338152ef1c1c9f4dd206a6442a06054f2bbf1eb22860404d16d7a0bc3c5d69",
+      "sha256": "26dd1225f1c6f2dd332c12116dcbfdb2df6742c2a2200662e75ab808014f79ff",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-desktop-chromium/02-academy-viewport.png"
     },
     {
       "path": "screens/desktop/02-academy.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:29:52.034Z",
+      "capturedAt": "2026-11-11T15:26:15.846Z",
       "width": 1440,
       "height": 1752,
-      "sha256": "7d197f82654303a8cd17a116be2c6ff5173327549e60cb30985fcb43ce2f085a",
+      "sha256": "1e9170080ba7fa2263b4e789d15ef47bb389c278bb9c16801442837bde738fd3",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-desktop-chromium/02-academy.png"
     },
     {
       "path": "screens/desktop/03-lecon-application.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:30:02.594Z",
+      "capturedAt": "2026-11-11T15:26:24.561Z",
       "width": 1440,
       "height": 1480,
-      "sha256": "602955f8afc33ab2b516d903ba383acef7b9ba1b0abf87c44feac815d2675ff3",
+      "sha256": "47c7067d65d4d4231165b079a25de67d45b9b18aa6c552ce00d4d2b3e08835bf",
       "source": "test-results/design-compositions-des-instruments-atlas-et-leçon-complète-desktop-chromium/03-lecon-application.png"
     },
     {
       "path": "screens/desktop/03-lecon-case.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:30:02.085Z",
+      "capturedAt": "2026-11-11T15:26:23.736Z",
       "width": 1440,
       "height": 1084,
       "sha256": "6acb1ea5f2c258310841f1b32e03c4b689dcfa7cc9fd8b4c1ecb1117bab7b310",
@@ -556,7 +564,7 @@
     {
       "path": "screens/desktop/03-lecon-learn-viewport.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:29:52.803Z",
+      "capturedAt": "2026-11-11T15:26:16.826Z",
       "width": 1440,
       "height": 1000,
       "sha256": "41a7546105b58f50d0157421223fbcba93cbfbdc26ad7a7572c3e436af977683",
@@ -565,7 +573,7 @@
     {
       "path": "screens/desktop/03-lecon-learn.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:29:52.741Z",
+      "capturedAt": "2026-11-11T15:26:16.732Z",
       "width": 1440,
       "height": 1480,
       "sha256": "60dcad1ef0f04c7d0703aad05b92099526036251b521233d61c1ffdce09a732a",
@@ -574,7 +582,7 @@
     {
       "path": "screens/desktop/03-lecon-mechanisms.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:30:01.642Z",
+      "capturedAt": "2026-11-11T15:26:22.892Z",
       "width": 1440,
       "height": 1507,
       "sha256": "9bdc0ff1738813d0c3e77103ae41c2e33284d9f585f5d8f70f761ed9176b0ab7",
@@ -583,7 +591,7 @@
     {
       "path": "screens/desktop/03-lecon-pitfall.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:30:01.908Z",
+      "capturedAt": "2026-11-11T15:26:23.524Z",
       "width": 1440,
       "height": 1264,
       "sha256": "35640189fec804a4ddfafa8149a23ee75d82c5feadd3bbb55e6e3aad272017a6",
@@ -592,7 +600,7 @@
     {
       "path": "screens/desktop/03-lecon-practice.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:30:02.433Z",
+      "capturedAt": "2026-11-11T15:26:24.363Z",
       "width": 1440,
       "height": 2234,
       "sha256": "ae5d9d4a5ac2e2ef5e38483c1ce96781626a9c89a77f3da6ba03f74be9ba7f32",
@@ -601,7 +609,7 @@
     {
       "path": "screens/desktop/03-lecon-summary.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:30:02.230Z",
+      "capturedAt": "2026-11-11T15:26:24.012Z",
       "width": 1440,
       "height": 1087,
       "sha256": "b5e0d726c924ffd224feac9f5c9d9d2b14e80091c1976244a6849ea280643d79",
@@ -610,7 +618,7 @@
     {
       "path": "screens/desktop/03-lecon-vocabulary.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:30:01.769Z",
+      "capturedAt": "2026-11-11T15:26:23.232Z",
       "width": 1440,
       "height": 1223,
       "sha256": "f660ea0773eaedc443d3117d439bfa1a2918e68e854b4299fa7e7e7811fecb9c",
@@ -619,16 +627,16 @@
     {
       "path": "screens/desktop/03-recherche.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:29:50.434Z",
+      "capturedAt": "2026-11-11T15:26:16.187Z",
       "width": 1440,
-      "height": 2033,
-      "sha256": "abcbd8690ad432d8ab12ec445eb3c094aea8876f74eb1f4e0ea491e8354fdaeb",
+      "height": 2199,
+      "sha256": "d211eacadf6b9aea8c147de1aa7e27ac242df51c017c0ec17f3b2619b80a9c19",
       "source": "test-results/design-surfaces-neutres-et-8fa7d-tion-sur-un-véritable-rendu-desktop-chromium/03-recherche.png"
     },
     {
       "path": "screens/desktop/03-teach-back.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:29:53.039Z",
+      "capturedAt": "2026-11-11T15:26:17.160Z",
       "width": 1440,
       "height": 1518,
       "sha256": "c8b1462c3ef22ce5c0cfef9b8c4814d3c1e26c13a5e1d1f389d8eaca1215ef90",
@@ -637,7 +645,7 @@
     {
       "path": "screens/desktop/04-quiz-feedback-focus-viewport.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:29:53.192Z",
+      "capturedAt": "2026-11-11T15:26:17.389Z",
       "width": 1440,
       "height": 1000,
       "sha256": "080392f86bf1044da81ee8f585e5cc1ffa4866f3afb2f7155d71217a0292bf41",
@@ -646,7 +654,7 @@
     {
       "path": "screens/desktop/04-quiz-feedback.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:29:53.281Z",
+      "capturedAt": "2026-11-11T15:26:17.490Z",
       "width": 1440,
       "height": 1146,
       "sha256": "c2898f050aaa5fa1efc30241ac65fab578877a9b63b3e46b7ea26a348fd69661",
@@ -655,7 +663,7 @@
     {
       "path": "screens/desktop/04-quiz-valide.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:29:53.575Z",
+      "capturedAt": "2026-11-11T15:26:17.749Z",
       "width": 1440,
       "height": 1351,
       "sha256": "d89a9fa0b8157e6bc28b903824e72539feb7adaa2e5ac56256a43016f8ee91c6",
@@ -664,232 +672,232 @@
     {
       "path": "screens/desktop/05-lab-below-threshold.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:30:00.988Z",
+      "capturedAt": "2026-11-11T15:26:21.923Z",
       "width": 1440,
       "height": 1925,
-      "sha256": "964e1fd8efa99bc5a96f2c0c06c608480cd78cb9d14b1cf90472b6be09822b57",
+      "sha256": "697e8ff7a0d1bbe213fc961698783c19aaec646ccf4f9e7a95a52bfab061f466",
       "source": "test-results/design-compositions-des-instruments-atlas-et-leçon-complète-desktop-chromium/05-lab-below-threshold.png"
     },
     {
       "path": "screens/desktop/05-lab-financier-viewport.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:29:54.072Z",
+      "capturedAt": "2026-11-11T15:26:18.810Z",
       "width": 1440,
       "height": 1000,
-      "sha256": "a17afe677a6a79c1d970789e70c50b8199f1eea375335854b0dcd25d224084a9",
+      "sha256": "4550e7a5506860f34fdfbe01985e54dbeec65682486bcddbac2a67b203a47e54",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-desktop-chromium/05-lab-financier-viewport.png"
     },
     {
       "path": "screens/desktop/05-lab-financier.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:29:54.031Z",
+      "capturedAt": "2026-11-11T15:26:18.750Z",
       "width": 1440,
       "height": 1925,
-      "sha256": "6f06778ed901c4a9bd19189678cec6ecc1b9d2646a13008ef47a084240f515f6",
+      "sha256": "1706f0da3f6bbd7ab5ee80929eb175ce054b4503655dd826cd6a45d26966ab60",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-desktop-chromium/05-lab-financier.png"
     },
     {
       "path": "screens/desktop/05-lab-invalid.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:30:01.148Z",
+      "capturedAt": "2026-11-11T15:26:22.191Z",
       "width": 1440,
       "height": 1485,
-      "sha256": "7e6ebcd547e98ad6c0a1088e0818c1915a6bce809bb62193e3b47cd9e902bc5f",
+      "sha256": "71cf8b15585cb8e565e6c547484449522619b38e4374ce1bc10cd9811f3e2654",
       "source": "test-results/design-compositions-des-instruments-atlas-et-leçon-complète-desktop-chromium/05-lab-invalid.png"
     },
     {
       "path": "screens/desktop/06-ai-comparison.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:30:00.440Z",
+      "capturedAt": "2026-11-11T15:26:21.169Z",
       "width": 1440,
       "height": 2050,
-      "sha256": "3ee2abbde96548653e5b56cce129a9265deff51553cff8f2aeab4ec761ab3572",
+      "sha256": "a30831ec1925e07d8ffb4f658f28016a15f0901612b5be22756ee9ccf5f248bb",
       "source": "test-results/design-compositions-des-instruments-atlas-et-leçon-complète-desktop-chromium/06-ai-comparison.png"
     },
     {
       "path": "screens/desktop/06-ai-empty-viewport.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:29:59.801Z",
+      "capturedAt": "2026-11-11T15:26:20.180Z",
       "width": 1440,
       "height": 1000,
-      "sha256": "27832118bc9157bc3a75720fdfce98cdcb3e414d0f2d8882eed599c3640cb92e",
+      "sha256": "6039b3a60830d3c6f81dd4b545a2d8a49a6b273ce9a6b418f43ebcbee998b38c",
       "source": "test-results/design-compositions-des-instruments-atlas-et-leçon-complète-desktop-chromium/06-ai-empty-viewport.png"
     },
     {
       "path": "screens/desktop/06-ai-empty.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:29:59.736Z",
+      "capturedAt": "2026-11-11T15:26:20.113Z",
       "width": 1440,
       "height": 1499,
-      "sha256": "9205b989b8865820560c5a674ed84220c262b6345132af8727ed0372e031e4d1",
+      "sha256": "eae622de1c80c6ae0b813fecae828d83a99e82d3d9696d4c62e1af7e1216d067",
       "source": "test-results/design-compositions-des-instruments-atlas-et-leçon-complète-desktop-chromium/06-ai-empty.png"
     },
     {
       "path": "screens/desktop/06-ai-lab.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:29:54.672Z",
+      "capturedAt": "2026-11-11T15:26:19.484Z",
       "width": 1440,
       "height": 2050,
-      "sha256": "5183e1323f05ead806287b70b89e5a4e34cb2d7f52947b810d81d35b0ee6a4ef",
+      "sha256": "0f93534853138babef0a347afbef1a42690973b205b99115cd9166f32b48da7d",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-desktop-chromium/06-ai-lab.png"
     },
     {
       "path": "screens/desktop/06-ai-structure-viewport.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:30:00.215Z",
+      "capturedAt": "2026-11-11T15:26:20.781Z",
       "width": 1440,
       "height": 1000,
-      "sha256": "d3cefc1f67c10f035967de51846a502ac6b46ce55f16483dca77b5f68fce2aca",
+      "sha256": "aaee96e09b6926af677114696e35b13f8bf5d72ed8ad702a2d250df116d280b4",
       "source": "test-results/design-compositions-des-instruments-atlas-et-leçon-complète-desktop-chromium/06-ai-structure-viewport.png"
     },
     {
       "path": "screens/desktop/06-ai-structure.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:30:00.161Z",
+      "capturedAt": "2026-11-11T15:26:20.675Z",
       "width": 1440,
       "height": 1434,
-      "sha256": "4f27fdd9ebea774cd8fd4e492e6c684701eb1d65e5cb1e0be5bd00a7d1c88b70",
+      "sha256": "d6cec4e60caa35b0fe0837b15aed3418f3e7dfde4e109c91048dd17c43a1fa15",
       "source": "test-results/design-compositions-des-instruments-atlas-et-leçon-complète-desktop-chromium/06-ai-structure.png"
     },
     {
       "path": "screens/desktop/06-ai-writing.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:29:59.975Z",
+      "capturedAt": "2026-11-11T15:26:20.358Z",
       "width": 1440,
       "height": 1434,
-      "sha256": "3ec43d8da2684276bc6ec9f75e1941bb242aec06d4cd5a5ffb92ee58a00bd078",
+      "sha256": "889a9e8192626edd23e2fc4e5fce2716bcf6c4d18af200820ca9addeb4c43d70",
       "source": "test-results/design-compositions-des-instruments-atlas-et-leçon-complète-desktop-chromium/06-ai-writing.png"
     },
     {
       "path": "screens/desktop/07-incubator.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:29:55.123Z",
+      "capturedAt": "2026-11-11T15:26:20.484Z",
       "width": 1440,
       "height": 1173,
-      "sha256": "d97e4141a46b16cb9afb5ce1be8f0fa0c7e2d1bafd1e81928efea7fd564150cc",
+      "sha256": "a230eaddea7dc5f4e4a0cceb85d9f066851e632db212123dbd4a01d3b8bc9ec6",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-desktop-chromium/07-incubator.png"
     },
     {
       "path": "screens/desktop/08-project-error.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:29:55.395Z",
+      "capturedAt": "2026-11-11T15:26:20.906Z",
       "width": 1440,
       "height": 2133,
-      "sha256": "182239c60aa66d63064b5c02b417d58de6f7d63b65d319f699b186b640b5c450",
+      "sha256": "6b3e3a88505af1646acfe9ae231961104c8e9af4987bd631ab7bd93f0e5aceff",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-desktop-chromium/08-project-error.png"
     },
     {
       "path": "screens/desktop/08-radar.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:29:55.507Z",
+      "capturedAt": "2026-11-11T15:26:21.141Z",
       "width": 1440,
       "height": 1000,
-      "sha256": "ee0cde3b73594fb2bf441e2b073696ea6f06b99563811c5f2110f7da87e72005",
+      "sha256": "0fd60f15c30031fd00a5baf9ba6dc491a155dcaf860a9ca2a5a945487a6c1fa8",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-desktop-chromium/08-radar.png"
     },
     {
       "path": "screens/desktop/09-competences-selection.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:29:56.182Z",
+      "capturedAt": "2026-11-11T15:26:21.993Z",
       "width": 1440,
       "height": 1953,
-      "sha256": "a3b621242023f11ef878e294cf4f07445be93f5b24680a9f26836fcdcc24ea2d",
+      "sha256": "79beda4b9f4856b1c42b6afd70dc5bbcbd4e62a3235fb1272c39ee23d3c5f9cf",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-desktop-chromium/09-competences-selection.png"
     },
     {
       "path": "screens/desktop/09-competences.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:29:55.986Z",
+      "capturedAt": "2026-11-11T15:26:21.678Z",
       "width": 1440,
       "height": 1953,
-      "sha256": "8b78d343c6bed0b37ea31528317c3fd750664f89e1d26afb6ad043281c7d7e63",
+      "sha256": "ba850780b4892f1a86be2a11f892ce75e85f4bf7deb6f2b8e00d020c3cdf823c",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-desktop-chromium/09-competences.png"
     },
     {
       "path": "screens/desktop/10-parametres.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:29:56.364Z",
+      "capturedAt": "2026-11-11T15:26:22.304Z",
       "width": 1440,
       "height": 2253,
-      "sha256": "530be72f23551b7bc44b161524f144fb7cb8f6ff164276fc1a5c2904e13ca972",
+      "sha256": "114caabcd50cb6e4fd600a581f931aade3b380a424e98720409d9d3252d51983",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-desktop-chromium/10-parametres.png"
     },
     {
       "path": "screens/desktop/11-revisions-complete.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:29:58.187Z",
+      "capturedAt": "2026-11-11T15:26:24.352Z",
       "width": 1440,
       "height": 1002,
-      "sha256": "abe2043ad0fcd4e8f66e8c4531f4433ce1c418c6c3ab91b7a96240bae63167dc",
+      "sha256": "f9b3da26c0f16b7954ba3da5661bb84641801db7e061cadf6b99fe29e6574965",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-desktop-chromium/11-revisions-complete.png"
     },
     {
       "path": "screens/desktop/11-revisions-due.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:29:57.626Z",
+      "capturedAt": "2026-11-11T15:26:23.509Z",
       "width": 1440,
       "height": 1318,
-      "sha256": "2dadeab9a6689ff2c726b2b24eb21eb0dd9612495c9297fe72de8ec691511b8f",
+      "sha256": "8dd550c6409d34c59c3294d08a59161a7d9c40e97d644d1a2abf5712f0ecf6c2",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-desktop-chromium/11-revisions-due.png"
     },
     {
       "path": "screens/desktop/11-revisions-empty.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:29:57.357Z",
+      "capturedAt": "2026-11-11T15:26:23.011Z",
       "width": 1440,
       "height": 1077,
-      "sha256": "bc262d021bba2c8bdd689558182acbdcdc58d3417506e5c61ffe613beb011dab",
+      "sha256": "c1da89244c0693eebdb7053425f57258b5aea6e59bab16841de103210ba83d5a",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-desktop-chromium/11-revisions-empty.png"
     },
     {
       "path": "screens/desktop/11-revisions-planned.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:29:58.349Z",
+      "capturedAt": "2026-11-11T15:26:24.518Z",
       "width": 1440,
       "height": 1318,
-      "sha256": "57d97c565a9026c5f436a793e2c06b5d13f0c199675b0da2854478db27c206dd",
+      "sha256": "75914145b1230b9c6f4ecea2491a55da1496091903dadde5d42fd3284aaefbd9",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-desktop-chromium/11-revisions-planned.png"
     },
     {
       "path": "screens/desktop/11-revisions-recall.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:29:57.825Z",
+      "capturedAt": "2026-11-11T15:26:23.755Z",
       "width": 1440,
       "height": 1000,
-      "sha256": "9c37ba9a744eb97422f6e62031b4397fc4179a9042550070749edc996867815e",
+      "sha256": "96a99c6bab16e2ee45f680bbb6f15c4748f9aa594acf0502578e63f86ca61122",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-desktop-chromium/11-revisions-recall.png"
     },
     {
       "path": "screens/desktop/11-revisions-revealed.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:29:57.967Z",
+      "capturedAt": "2026-11-11T15:26:24.002Z",
       "width": 1440,
       "height": 1397,
-      "sha256": "41f014e82830abb2d09f26c1f6f9c287f6caf0df8d65e026859b20633f4f7bf0",
+      "sha256": "090debacc216674a7cb6a2788193662f04f3cc1d9ff7fc3a9e8792bf461d4367",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-desktop-chromium/11-revisions-revealed.png"
     },
     {
       "path": "screens/desktop/11-revisions-viewport.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:29:57.692Z",
+      "capturedAt": "2026-11-11T15:26:23.588Z",
       "width": 1440,
       "height": 1000,
-      "sha256": "fe0ad9db92cf66033232f9f67b74dd832d9149828a6c7439d3488e30daed8ac3",
+      "sha256": "056f68416b5c5597e551746e1f290f6f9a6dfdad1f648f76a682718608b5176b",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-desktop-chromium/11-revisions-viewport.png"
     },
     {
       "path": "screens/desktop/12-project-decision.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:30:00.100Z",
+      "capturedAt": "2026-11-11T15:26:25.797Z",
       "width": 1440,
       "height": 1431,
-      "sha256": "e6dd557694f3e645394c8580602a57f1964ea5d62cac334ccfda3ac46ad1e3e8",
+      "sha256": "415b169a9eb3f2ee89c5f091cc936ebc5e101e27994f1791b1952e1c0d9c67aa",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-desktop-chromium/12-project-decision.png"
     },
     {
       "path": "screens/desktop/12-project-empty.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:29:59.252Z",
+      "capturedAt": "2026-11-11T15:26:24.950Z",
       "width": 1440,
       "height": 1266,
       "sha256": "fc1a21bb2b2790e4f4e3c19e96d4d9074d36e00aebab868ffea2b1300d866986",
@@ -898,79 +906,79 @@
     {
       "path": "screens/desktop/12-project-outcome.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:30:00.335Z",
+      "capturedAt": "2026-11-11T15:26:26.038Z",
       "width": 1440,
       "height": 1520,
-      "sha256": "9b0daa200b4c31e19949fc26702f414ccd3c3a40ac0ad18ad4c4582187c4e765",
+      "sha256": "cfd77ce362cf7d281b69b90e9b3d86e57308dcdab52a94ff8911faa8e78a58e4",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-desktop-chromium/12-project-outcome.png"
     },
     {
       "path": "screens/desktop/12-project-result.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:29:59.691Z",
+      "capturedAt": "2026-11-11T15:26:25.457Z",
       "width": 1440,
       "height": 1532,
-      "sha256": "142beb5a65b785782dcc6d6b180f1458b184350509661952a16484d558d0cad2",
+      "sha256": "01fbf6f26d6294abcc6f08095d36ddb1edbe8bebccbc78fe14c8d44d34c8278e",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-desktop-chromium/12-project-result.png"
     },
     {
       "path": "screens/desktop/12-project-test-plan.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:29:59.501Z",
+      "capturedAt": "2026-11-11T15:26:25.248Z",
       "width": 1440,
       "height": 1324,
-      "sha256": "48325a22f448ec897cf00df5ef4e423aa64dc760855b9e5f11628738c35141cb",
+      "sha256": "cb9dad0360f65e0a28b1d33d4bbde19507f4c36b95b9495d82132131b57e063c",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-desktop-chromium/12-project-test-plan.png"
     },
     {
       "path": "screens/desktop/12-project-viewport.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:30:00.384Z",
+      "capturedAt": "2026-11-11T15:26:26.095Z",
       "width": 1440,
       "height": 1000,
-      "sha256": "808f97a6c1609f339a32d16ed4a271bbfdec2b50b11e93054c8bf79caa14f37b",
+      "sha256": "cd0b4edaaef1a8d2a897f29648e0b484d5dcd4c25793ed719a636525ab598267",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-desktop-chromium/12-project-viewport.png"
     },
     {
       "path": "screens/desktop/13-simulation-default.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:30:01.354Z",
+      "capturedAt": "2026-11-11T15:26:26.631Z",
       "width": 1440,
       "height": 2627,
-      "sha256": "b98a48e806a346e42382b60a9308464a0252618ff7c4858ced8010c5625cdfe8",
+      "sha256": "4f560978e35d49f6892aaa0cfe5352a251b1f3a0830a1f905b0321ac29809ad4",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-desktop-chromium/13-simulation-default.png"
     },
     {
       "path": "screens/desktop/13-simulation-saved.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:30:01.976Z",
+      "capturedAt": "2026-11-11T15:26:27.343Z",
       "width": 1440,
       "height": 2706,
-      "sha256": "d1ccc1b798b911e71887ca3fda64b4846f224ea5024f245e3c01478174326ddf",
+      "sha256": "9cb4e4b77c1d48000ce91a1f1d0f7b619a44d162a4e77582b96b928ee2e1604e",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-desktop-chromium/13-simulation-saved.png"
     },
     {
       "path": "screens/desktop/13-simulation-scenario.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:30:01.665Z",
+      "capturedAt": "2026-11-11T15:26:26.998Z",
       "width": 1440,
       "height": 2604,
-      "sha256": "d4d08df76b78042f9ce52abf3777202f0eb913bdcaf8627622afd1edc24dddd7",
+      "sha256": "aed29867ea066cff875cde2037cb7e2caaf0ef9f74f612ed0a8496cfdf377b22",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-desktop-chromium/13-simulation-scenario.png"
     },
     {
       "path": "screens/desktop/13-simulation-viewport.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:30:01.413Z",
+      "capturedAt": "2026-11-11T15:26:26.691Z",
       "width": 1440,
       "height": 1000,
-      "sha256": "4e8a4568ab7b3859c14df2009537532be3b856c1c6eda05e9858b7dd40bb2e39",
+      "sha256": "2ed62d1c9d51f29983ed78fc1f875016d5721830ad127f50f79c761f91d843b9",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-desktop-chromium/13-simulation-viewport.png"
     },
     {
       "path": "screens/desktop/14-portfolio-empty.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:30:04.830Z",
+      "capturedAt": "2026-11-11T15:26:31.452Z",
       "width": 1440,
       "height": 5703,
       "sha256": "083cbee7906f2563a454912938af6ee63b92fbf7b296490713d912db950aa055",
@@ -979,43 +987,43 @@
     {
       "path": "screens/desktop/14-portfolio-notes.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:30:02.851Z",
+      "capturedAt": "2026-11-11T15:26:28.377Z",
       "width": 1440,
       "height": 1405,
-      "sha256": "e028997afac7972621cf79995fed4423a3637d8d4d623775f961b7b3817549f0",
+      "sha256": "c361c4fa2e80a95d288f340c3966cbc7ac240fbd506c446e0492414fb83d5c23",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-desktop-chromium/14-portfolio-notes.png"
     },
     {
       "path": "screens/desktop/14-portfolio-overview.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:30:02.456Z",
+      "capturedAt": "2026-11-11T15:26:27.921Z",
       "width": 1440,
       "height": 1718,
-      "sha256": "e3a47cdf630114aeb038dde88626c4e2f504e40ca8b528a497f694bb884f2e83",
+      "sha256": "9e572ab380fe1bf0a69bb39b3a48d059794f65933fa1dbc268790249ab1a3c9e",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-desktop-chromium/14-portfolio-overview.png"
     },
     {
       "path": "screens/desktop/14-portfolio-projects.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:30:02.655Z",
+      "capturedAt": "2026-11-11T15:26:28.192Z",
       "width": 1440,
       "height": 1789,
-      "sha256": "85d4a3beb23dd30b1c7a69af3058f351a3741c0e7c2516ef9b5729a6c8897ebe",
+      "sha256": "a3c7fbb2b013061452c68b1369ed67dfcdd95f81925dd50451b5c2a09d515ff9",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-desktop-chromium/14-portfolio-projects.png"
     },
     {
       "path": "screens/desktop/14-portfolio-viewport.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:30:02.515Z",
+      "capturedAt": "2026-11-11T15:26:27.997Z",
       "width": 1440,
       "height": 1000,
-      "sha256": "016845c0b7dd31f451ed7f07d699227c321f977dbb6824151b70378065f9de6a",
+      "sha256": "cf3be0614883d4c19c8efd4c10c0984c69579e52f267035a882abbe9c70dd0d1",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-desktop-chromium/14-portfolio-viewport.png"
     },
     {
       "path": "screens/desktop/15-project-learning-editor.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:30:03.336Z",
+      "capturedAt": "2026-11-11T15:26:29.016Z",
       "width": 1440,
       "height": 3258,
       "sha256": "0fd7a9501222fd5fc70b151010e444491ae25ed129702dd6b2cefd0b037487de",
@@ -1024,7 +1032,7 @@
     {
       "path": "screens/desktop/15-project-learning-empty.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:30:03.057Z",
+      "capturedAt": "2026-11-11T15:26:28.624Z",
       "width": 1440,
       "height": 1257,
       "sha256": "645e608649fec748ec051b47daaeb0dbd1bed6a047253f99f2971452e74dedcf",
@@ -1033,7 +1041,7 @@
     {
       "path": "screens/desktop/15-project-learning-lesson.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:30:03.819Z",
+      "capturedAt": "2026-11-11T15:26:29.678Z",
       "width": 1440,
       "height": 1466,
       "sha256": "4163258931644f21dd6499d096bebafb1abc931ccf1c22761425b50071479140",
@@ -1042,70 +1050,70 @@
     {
       "path": "screens/desktop/15-project-learning-map.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:30:04.478Z",
+      "capturedAt": "2026-11-11T15:26:30.681Z",
       "width": 1440,
       "height": 1904,
-      "sha256": "71e60954d967f089c5544a9b4f7aad529345aa1c295a53557d1853863c618cd9",
+      "sha256": "fd012048d75e0eac2976d79b2e058341ec1a3ced2e6b71a6016412bbc37a1ce2",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-desktop-chromium/15-project-learning-map.png"
     },
     {
       "path": "screens/desktop/15-project-learning-plan.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:30:03.542Z",
+      "capturedAt": "2026-11-11T15:26:29.258Z",
       "width": 1440,
       "height": 2129,
-      "sha256": "b6fc5634fa44804b209040249e5e2690c55b968d966c0b8108af436bedb6e355",
+      "sha256": "7ae899c1b6e710f46a3dcf2cf14663c4ca893193585f3dececd14e394c8c9a71",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-desktop-chromium/15-project-learning-plan.png"
     },
     {
       "path": "screens/desktop/15-project-learning-updated.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:30:04.270Z",
+      "capturedAt": "2026-11-11T15:26:30.246Z",
       "width": 1440,
       "height": 2091,
-      "sha256": "750817250a823ce4c3591cea8c995e250a9eedd5d6da13a585e7d921687a549f",
+      "sha256": "6921514e5a4ed75dbf2ff18701a0ac224bf46a8d9b7780e2177ddb9dcb17ac75",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-desktop-chromium/15-project-learning-updated.png"
     },
     {
       "path": "screens/desktop/15-project-learning-viewport.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:30:03.590Z",
+      "capturedAt": "2026-11-11T15:26:29.326Z",
       "width": 1440,
       "height": 1000,
-      "sha256": "250f4febc15cdafb2194528aa245d9a00f845c9eab746afd72a7179305ce610e",
+      "sha256": "0235accd1052103758b829a70bd3697ecdfe6bf9bb08ba3b396ab0ec88603ce8",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-desktop-chromium/15-project-learning-viewport.png"
     },
     {
       "path": "screens/desktop/16-search-empty.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:29:50.809Z",
+      "capturedAt": "2026-11-11T15:26:16.694Z",
       "width": 1440,
-      "height": 2033,
-      "sha256": "c20102a6df2239cca52ffc3015c55a0f18af4fa29058d191dc981bed218fde24",
+      "height": 2199,
+      "sha256": "936a159f3ef55f1606de5e555792c5e18e2d77906ec20d886667d1d3b34937f8",
       "source": "test-results/design-surfaces-neutres-et-8fa7d-tion-sur-un-véritable-rendu-desktop-chromium/16-search-empty.png"
     },
     {
       "path": "screens/desktop/16-search-keyboard-viewport.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:29:50.639Z",
+      "capturedAt": "2026-11-11T15:26:16.458Z",
       "width": 1440,
       "height": 1000,
-      "sha256": "b7c9834e5fa2289e4e1084aa40b72793af4356ff0f275372e494f0d53f6a0673",
+      "sha256": "428affa4cf0d44f3f14b23b670c900f9762d0961866139a03ec62eda0c1a076a",
       "source": "test-results/design-surfaces-neutres-et-8fa7d-tion-sur-un-véritable-rendu-desktop-chromium/16-search-keyboard-viewport.png"
     },
     {
       "path": "screens/desktop/16-search-keyboard.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:29:50.585Z",
+      "capturedAt": "2026-11-11T15:26:16.395Z",
       "width": 1440,
-      "height": 2033,
-      "sha256": "f34b253dc93f9f1985e5e71f636cc58761a416644d53d7b01e86d583686207b4",
+      "height": 2199,
+      "sha256": "3147215a64fec83eb65498226c15e937c51f63a36f4f47b634c95dcd7b3095d0",
       "source": "test-results/design-surfaces-neutres-et-8fa7d-tion-sur-un-véritable-rendu-desktop-chromium/16-search-keyboard.png"
     },
     {
       "path": "screens/desktop/17-lexique-recherche.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:30:04.097Z",
+      "capturedAt": "2026-11-11T15:26:26.355Z",
       "width": 1440,
       "height": 1214,
       "sha256": "b908fcaba956c8098c7d126dff316b691daf2613c5e2f3e202ae6a208fa84e05",
@@ -1114,7 +1122,7 @@
     {
       "path": "screens/desktop/17-lexique-viewport.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:30:03.957Z",
+      "capturedAt": "2026-11-11T15:26:26.207Z",
       "width": 1440,
       "height": 1000,
       "sha256": "7bf0f4754a5f22e4b037014454ab071757bfce3d1252f36e1c2277e0e338f654",
@@ -1123,7 +1131,7 @@
     {
       "path": "screens/desktop/17-lexique.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:30:03.900Z",
+      "capturedAt": "2026-11-11T15:26:26.138Z",
       "width": 1440,
       "height": 14671,
       "sha256": "fbfd46dd3236128629809405d5f9067626bdbfbae2682c02765c7b22cb65184c",
@@ -1132,7 +1140,7 @@
     {
       "path": "screens/desktop/18-investissement-lecon-viewport.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:30:04.728Z",
+      "capturedAt": "2026-11-11T15:26:27.007Z",
       "width": 1440,
       "height": 1000,
       "sha256": "c903dce9e3ca8ab77536afd89363ca502b0ba4e7adb7f07d165d0451564056f1",
@@ -1141,7 +1149,7 @@
     {
       "path": "screens/desktop/18-investissement-lecon.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:30:04.658Z",
+      "capturedAt": "2026-11-11T15:26:26.911Z",
       "width": 1440,
       "height": 1469,
       "sha256": "21fe864f657b8f0e3e8c3ce651b6bfd9937eb7342382a4695e8ea93e82bc964d",
@@ -1150,7 +1158,7 @@
     {
       "path": "screens/desktop/18-investissement-risque.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:30:04.886Z",
+      "capturedAt": "2026-11-11T15:26:27.198Z",
       "width": 1440,
       "height": 1393,
       "sha256": "830a71fbf6877558c1ba65aec7c8800ae4c9533403298ada8c5f8fcc2fddebdd",
@@ -1159,7 +1167,7 @@
     {
       "path": "screens/desktop/19-finance-perso-budget-viewport.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:30:05.140Z",
+      "capturedAt": "2026-11-11T15:26:27.499Z",
       "width": 1440,
       "height": 1000,
       "sha256": "c902ce4a19091870fffcd02b6f3b4295a0a55420e4057242d4b3894ac1f76d07",
@@ -1168,7 +1176,7 @@
     {
       "path": "screens/desktop/19-finance-perso-budget.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:30:05.051Z",
+      "capturedAt": "2026-11-11T15:26:27.401Z",
       "width": 1440,
       "height": 1443,
       "sha256": "a3bc04a0a2c86ba973f99bf17e3d16fb6cfcd1acc66446d6669dac68bfc6ca0b",
@@ -1177,7 +1185,7 @@
     {
       "path": "screens/desktop/19-finance-perso-credit.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:30:05.390Z",
+      "capturedAt": "2026-11-11T15:26:27.831Z",
       "width": 1440,
       "height": 1417,
       "sha256": "9ea243d1ce73df2f5d7715c3e17b8b707e591a38386d4122238b0323e84d304d",
@@ -1186,7 +1194,7 @@
     {
       "path": "screens/desktop/20-bulles-definition-viewport.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:30:05.605Z",
+      "capturedAt": "2026-11-11T15:26:28.103Z",
       "width": 1440,
       "height": 1000,
       "sha256": "4e7a0029c3653e88d08c4149f8a85fe7975fd71b2206528e5ee65c3325078137",
@@ -1195,16 +1203,16 @@
     {
       "path": "screens/desktop/21-guide-de-page-viewport.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:30:05.600Z",
+      "capturedAt": "2026-11-11T15:26:29.028Z",
       "width": 1440,
       "height": 1000,
-      "sha256": "f052057c79e60b3502b45a1e1feb03726164649dad4697482e2d9cde76861068",
+      "sha256": "0119d5fd9919c7f56ab4f364d15a454d60bd2725ec42ef5c562501389a23e437",
       "source": "test-results/design-confort-du-débutant-e6cbe-lecture-facile-et-ouverture-desktop-chromium/21-guide-de-page-viewport.png"
     },
     {
       "path": "screens/desktop/22-lecture-facile-lecon-viewport.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:30:06.524Z",
+      "capturedAt": "2026-11-11T15:26:30.248Z",
       "width": 1440,
       "height": 1000,
       "sha256": "3816204c15b50f3e0c72d079da456ebda280dce1d41b30a36c8d0ae25fd5e387",
@@ -1213,160 +1221,187 @@
     {
       "path": "screens/desktop/22-lecture-facile-reglage-viewport.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:30:05.890Z",
+      "capturedAt": "2026-11-11T15:26:29.403Z",
       "width": 1440,
       "height": 1000,
-      "sha256": "98ffa8ac6d216cb28dfcb36cb96d0f1b0c6897b50a8fc338c579c534ef90b270",
+      "sha256": "a43f92f3d3ecf535f95e298cd1981837d1cdba9423a3d912ce29e72b1f0ef404",
       "source": "test-results/design-confort-du-débutant-e6cbe-lecture-facile-et-ouverture-desktop-chromium/22-lecture-facile-reglage-viewport.png"
     },
     {
       "path": "screens/desktop/23-ouverture-envol-viewport.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:30:09.601Z",
+      "capturedAt": "2026-11-11T15:26:34.034Z",
       "width": 1440,
       "height": 1000,
-      "sha256": "f76ef7dd8c7ea7dbb67796bca41299f1f47cf0d9fe2dc883058bbaa4579efa98",
+      "sha256": "ba2790c5c1bf46afe8ac9c043e6d22f5b41fc7e347b12d5e286529d8f8cdc937",
       "source": "test-results/design-confort-du-débutant-e6cbe-lecture-facile-et-ouverture-desktop-chromium/23-ouverture-envol-viewport.png"
     },
     {
       "path": "screens/desktop/23-ouverture-viewport.png",
       "project": "desktop-chromium",
-      "capturedAt": "2026-11-09T17:30:08.982Z",
+      "capturedAt": "2026-11-11T15:26:33.320Z",
       "width": 1440,
       "height": 1000,
-      "sha256": "2052fce98b1487e4e4c5431f03ca7ed20eef1f09cecc6ca800a050e4783d8722",
+      "sha256": "f293cc71aeec077f819fdf622ba4ccc1d03271475ada4ac1c6923d737f87df51",
       "source": "test-results/design-confort-du-débutant-e6cbe-lecture-facile-et-ouverture-desktop-chromium/23-ouverture-viewport.png"
+    },
+    {
+      "path": "screens/desktop/24-premiers-pas-viewport.png",
+      "project": "desktop-chromium",
+      "capturedAt": "2026-11-11T15:26:32.481Z",
+      "width": 1440,
+      "height": 1000,
+      "sha256": "8834f6f366784cfed96a6bb525235bd0ce7bde4236303fd5582c52c2ea22b602",
+      "source": "test-results/design-didacticiel-visite--0bd2b-des-espaces-et-premiers-pas-desktop-chromium/24-premiers-pas-viewport.png"
+    },
+    {
+      "path": "screens/desktop/24-visite-accueil-viewport.png",
+      "project": "desktop-chromium",
+      "capturedAt": "2026-11-11T15:26:33.019Z",
+      "width": 1440,
+      "height": 1000,
+      "sha256": "365a73cf3d967fc9a7ad0ed14a2f6b2a69ff3b73e88b2d39f1e5e72523ec30fd",
+      "source": "test-results/design-didacticiel-visite--0bd2b-des-espaces-et-premiers-pas-desktop-chromium/24-visite-accueil-viewport.png"
+    },
+    {
+      "path": "screens/desktop/25-visite-espace-viewport.png",
+      "project": "desktop-chromium",
+      "capturedAt": "2026-11-11T15:26:34.694Z",
+      "width": 1440,
+      "height": 1000,
+      "sha256": "226d8832820b1877a23972d689e266adc124b56215b8d1f0e69dd8d93cfdaeff",
+      "source": "test-results/design-didacticiel-visite--0bd2b-des-espaces-et-premiers-pas-desktop-chromium/25-visite-espace-viewport.png"
     },
     {
       "path": "screens/mobile/00-home-viewport.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:30:49.037Z",
+      "capturedAt": "2026-11-11T15:26:39.548Z",
       "width": 1082,
       "height": 2202,
-      "sha256": "9445bdfd0d6a57264f4d619123accc22d0e5678c7a0bbbb3f73e659bfc1a6616",
+      "sha256": "aca40dab15405e3073b7ea612d388fec1b5a19589e9182cc8fbc517a2633b02a",
       "source": "test-results/design-surfaces-neutres-et-8fa7d-tion-sur-un-véritable-rendu-mobile-chromium/00-home-viewport.png"
     },
     {
       "path": "screens/mobile/01-home.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:30:48.920Z",
+      "capturedAt": "2026-11-11T15:26:39.311Z",
       "width": 1082,
-      "height": 7744,
-      "sha256": "4464b76fb02c0b6584b2d3df30738feca0c1bf871b03bbc8cb3bdb128e836abc",
+      "height": 8384,
+      "sha256": "874a089e47e2474462f6eccdee201ff2cfff8a068a70992cdf61f521cbb4c41c",
       "source": "test-results/design-surfaces-neutres-et-8fa7d-tion-sur-un-véritable-rendu-mobile-chromium/01-home.png"
     },
     {
       "path": "screens/mobile/01-onboarding.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:30:51.084Z",
+      "capturedAt": "2026-11-11T15:26:37.620Z",
       "width": 1082,
       "height": 3846,
-      "sha256": "1a4862c247dd1cddcbb6676c7ae84557acd478eb4cb5e238d70aa467e2caaa68",
+      "sha256": "fbbe297705d4f381f33a3f5c596eb0963a8ebc04e0cac78bb8297672d3885065",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-mobile-chromium/01-onboarding.png"
     },
     {
       "path": "screens/mobile/02-academy-catalogue.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:30:58.683Z",
+      "capturedAt": "2026-11-11T15:26:46.314Z",
       "width": 1082,
-      "height": 41580,
-      "sha256": "979f5c3758e8e974a181d5eff33ca5c87c2de2dd242970e0419570a4714eca41",
+      "height": 41701,
+      "sha256": "0cf747ebd3a573c1366656fbbaadc7028207486eed418496bfafe7f2828fcde5",
       "source": "test-results/design-compositions-des-instruments-atlas-et-leçon-complète-mobile-chromium/02-academy-catalogue.png"
     },
     {
       "path": "screens/mobile/02-academy-selection.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:30:57.078Z",
+      "capturedAt": "2026-11-11T15:26:43.647Z",
       "width": 1082,
-      "height": 6796,
-      "sha256": "28b890aea143264eac3346a790ce4d1caab9e4d7aaaf4f047a06d9445cd2ea6a",
+      "height": 6917,
+      "sha256": "c661bb8f7bde612d789d13e11fa5f79fe16bc911173002f41c510005df93b6f3",
       "source": "test-results/design-compositions-des-instruments-atlas-et-leçon-complète-mobile-chromium/02-academy-selection.png"
     },
     {
       "path": "screens/mobile/02-academy-viewport.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:30:52.079Z",
+      "capturedAt": "2026-11-11T15:26:39.062Z",
       "width": 1082,
       "height": 2202,
-      "sha256": "102bcb2987f4b1b4fc2412b5dbc73a93ba527af23ac57feee7eefc873ffd2a5e",
+      "sha256": "0623ed406002eb83b7ba2e94d67b7503f2321bb1d44f2c3e70f46e8222b0dd47",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-mobile-chromium/02-academy-viewport.png"
     },
     {
       "path": "screens/mobile/02-academy.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:30:51.968Z",
+      "capturedAt": "2026-11-11T15:26:38.884Z",
       "width": 1082,
-      "height": 7998,
-      "sha256": "c8004b514ec1eb1790700695ed6fc55ec3273e181260c72a27f8473e17c62ec5",
+      "height": 8119,
+      "sha256": "431f130e99462b7bbbba71b80bac0b241a689335ebf6cb15c913d8eb2a6264a4",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-mobile-chromium/02-academy.png"
     },
     {
       "path": "screens/mobile/02-navigation-mobile.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:30:48.535Z",
+      "capturedAt": "2026-11-11T15:26:38.453Z",
       "width": 1082,
-      "height": 7744,
-      "sha256": "3f3e00cd9a0e8c36e8e0ee6e62e0bc9d511615ab786b5a369c3af68f95c9a71c",
+      "height": 8384,
+      "sha256": "6fcb30c69704cce7dc52d82518adb5744e6702c1f43818346846e657dfc75b54",
       "source": "test-results/design-surfaces-neutres-et-8fa7d-tion-sur-un-véritable-rendu-mobile-chromium/02-navigation-mobile.png"
     },
     {
       "path": "screens/mobile/03-lecon-application.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:31:04.127Z",
+      "capturedAt": "2026-11-11T15:26:53.320Z",
       "width": 1082,
       "height": 4764,
-      "sha256": "f48192425ec590b4de1bea6cbf9775946c6784cf626df41e661955b4edd8b7ac",
+      "sha256": "1bc8d633df3a520cdd221ee2a3deecb572fa2f6f8e166291784d6e60796fb1ac",
       "source": "test-results/design-compositions-des-instruments-atlas-et-leçon-complète-mobile-chromium/03-lecon-application.png"
     },
     {
       "path": "screens/mobile/03-lecon-case.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:31:03.193Z",
+      "capturedAt": "2026-11-11T15:26:52.009Z",
       "width": 1082,
       "height": 4090,
-      "sha256": "78d2fe15a148458707269ca29aea26fd830ddeb57e2001073d74cce69862c3dd",
+      "sha256": "f96d77f04dc4c90109553657cfba2f64c1f7ec4ca8fa486445e9e68795e80543",
       "source": "test-results/design-compositions-des-instruments-atlas-et-leçon-complète-mobile-chromium/03-lecon-case.png"
     },
     {
       "path": "screens/mobile/03-lecon-learn-viewport.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:30:53.106Z",
+      "capturedAt": "2026-11-11T15:26:40.680Z",
       "width": 1082,
       "height": 2202,
-      "sha256": "47ece650c46416b5dd93c59fe7f20bdd98cba2a0f31778b6e0ccbaf37baafb10",
+      "sha256": "0497c93a0addc057f5ab047bba1730d727a090ed224df692b279c2058c65bfd3",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-mobile-chromium/03-lecon-learn-viewport.png"
     },
     {
       "path": "screens/mobile/03-lecon-learn.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:30:52.910Z",
+      "capturedAt": "2026-11-11T15:26:40.321Z",
       "width": 1082,
       "height": 5528,
-      "sha256": "7401ad6fbe8cc10c6a48d6d873789bfd42950f79ef5297f336022133888594a2",
+      "sha256": "978082c2e2f78f1d33528c8447248a59be4f45b959497f156b771224c87a3fc0",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-mobile-chromium/03-lecon-learn.png"
     },
     {
       "path": "screens/mobile/03-lecon-mechanisms.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:31:02.551Z",
+      "capturedAt": "2026-11-11T15:26:51.291Z",
       "width": 1082,
       "height": 5662,
-      "sha256": "284ae75b3c40a96b0b7e24b091598921d7550cb910cf39a5025b9c708983bcb7",
+      "sha256": "37bec44490ed4946a45d43ef1b0fcf1027571850881bce54dc2b1289f8340c85",
       "source": "test-results/design-compositions-des-instruments-atlas-et-leçon-complète-mobile-chromium/03-lecon-mechanisms.png"
     },
     {
       "path": "screens/mobile/03-lecon-pitfall.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:31:02.979Z",
+      "capturedAt": "2026-11-11T15:26:51.774Z",
       "width": 1082,
       "height": 4917,
-      "sha256": "b063897c853488dcfbb690a09e31b1fce48f6fcdb0228d89cbb30c50accdc16f",
+      "sha256": "8b9d29930b11a30b8a486e9055c2e9d337f918d7372f411096f82209be434b93",
       "source": "test-results/design-compositions-des-instruments-atlas-et-leçon-complète-mobile-chromium/03-lecon-pitfall.png"
     },
     {
       "path": "screens/mobile/03-lecon-practice.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:31:03.841Z",
+      "capturedAt": "2026-11-11T15:26:52.879Z",
       "width": 1082,
       "height": 7749,
       "sha256": "183ec288685b3dccc33416da1b75459f9ee190564e5a3676cde45ec48b1b8f8b",
@@ -1375,43 +1410,43 @@
     {
       "path": "screens/mobile/03-lecon-summary.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:31:03.393Z",
+      "capturedAt": "2026-11-11T15:26:52.303Z",
       "width": 1082,
       "height": 3730,
-      "sha256": "a3056ea48513f2df4d98643d03042e9f440e2c2e4212b745f08b6aad79b83b90",
+      "sha256": "9cfc1785c1b823fd98c20bef385c94329924fae57119a0e39940ab941ef9c8d9",
       "source": "test-results/design-compositions-des-instruments-atlas-et-leçon-complète-mobile-chromium/03-lecon-summary.png"
     },
     {
       "path": "screens/mobile/03-lecon-vocabulary.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:31:02.765Z",
+      "capturedAt": "2026-11-11T15:26:51.533Z",
       "width": 1082,
       "height": 4095,
-      "sha256": "b2cfc34a2f6531404367486ba77c774981dc632eb4aba124b327964eec9a2044",
+      "sha256": "649e32c41e8a2025a42328a11eeaf80d5125257714ddf6206e80fee170e0a8f0",
       "source": "test-results/design-compositions-des-instruments-atlas-et-leçon-complète-mobile-chromium/03-lecon-vocabulary.png"
     },
     {
       "path": "screens/mobile/03-recherche.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:30:49.608Z",
+      "capturedAt": "2026-11-11T15:26:40.643Z",
       "width": 1082,
-      "height": 7744,
-      "sha256": "99076e79a0f2bd71d51202de6093b4583c0b6271246049414e468e336cb5e75f",
+      "height": 8384,
+      "sha256": "585b5181cb7d985c13161db0e22c467594e4dbc3a1567957ea87bebd143bafc5",
       "source": "test-results/design-surfaces-neutres-et-8fa7d-tion-sur-un-véritable-rendu-mobile-chromium/03-recherche.png"
     },
     {
       "path": "screens/mobile/03-teach-back.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:30:53.451Z",
+      "capturedAt": "2026-11-11T15:26:41.214Z",
       "width": 1082,
       "height": 5331,
-      "sha256": "90079be7519f4a1441fbca54fb9a9e7cb510e87fe8818d7ca239e51ef42bdd62",
+      "sha256": "2cbf9c658b031db22d246fa75b4ec0a19d70a9c64bec26159950d758383c6496",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-mobile-chromium/03-teach-back.png"
     },
     {
       "path": "screens/mobile/04-quiz-feedback-focus-viewport.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:30:53.631Z",
+      "capturedAt": "2026-11-11T15:26:41.438Z",
       "width": 1082,
       "height": 2202,
       "sha256": "9e55628019b0a5aed3d0ef402d72bbc242a8c92764a30eefc915947d798be06f",
@@ -1420,7 +1455,7 @@
     {
       "path": "screens/mobile/04-quiz-feedback.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:30:53.786Z",
+      "capturedAt": "2026-11-11T15:26:41.674Z",
       "width": 1082,
       "height": 3812,
       "sha256": "3ceddcaf9ab34fe3b1e7b1ab0e20a84c2b4abe85b773b4df4de71c83cbe25390",
@@ -1429,7 +1464,7 @@
     {
       "path": "screens/mobile/04-quiz-valide.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:30:54.107Z",
+      "capturedAt": "2026-11-11T15:26:42.226Z",
       "width": 1082,
       "height": 5213,
       "sha256": "f3164e2924fbdbf6a38cb1346c42139db12a12e6ccfd4aa7a479873605fc564a",
@@ -1438,232 +1473,232 @@
     {
       "path": "screens/mobile/05-lab-below-threshold.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:31:01.673Z",
+      "capturedAt": "2026-11-11T15:26:50.089Z",
       "width": 1082,
-      "height": 6521,
-      "sha256": "d290fbb7a2a43f5c501d42e8ca9e6896ceeeacfe849f92245f88ff8876827a3c",
+      "height": 6641,
+      "sha256": "c810e06ee69b342887811dbbf33e1a8fa257504a3e0d317003f2d67de4451c3b",
       "source": "test-results/design-compositions-des-instruments-atlas-et-leçon-complète-mobile-chromium/05-lab-below-threshold.png"
     },
     {
       "path": "screens/mobile/05-lab-financier-viewport.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:30:54.742Z",
+      "capturedAt": "2026-11-11T15:26:43.059Z",
       "width": 1082,
       "height": 2202,
-      "sha256": "b4321f6b3f06b2c0be908949782b3b2f7a975b523029ea11d2dae971e0cd15a0",
+      "sha256": "c527436c1f24c42b1a2ebb839a0bb7a67d17a91634ffbf55bbdea2b864a0bea8",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-mobile-chromium/05-lab-financier-viewport.png"
     },
     {
       "path": "screens/mobile/05-lab-financier.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:30:54.642Z",
+      "capturedAt": "2026-11-11T15:26:42.935Z",
       "width": 1082,
-      "height": 6521,
-      "sha256": "559192de4cedaa20c49074176dc2ebb8ad458e4c0e5dad3c0a9229a3cbfb99bf",
+      "height": 6641,
+      "sha256": "eb270ec84d4c5f5f1f61cbf4ef16f59c8b45dafd641f452142de3968ab14c52e",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-mobile-chromium/05-lab-financier.png"
     },
     {
       "path": "screens/mobile/05-lab-invalid.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:31:01.907Z",
+      "capturedAt": "2026-11-11T15:26:50.447Z",
       "width": 1082,
-      "height": 5177,
-      "sha256": "f1ce551ffc581d80b764cc95d04a163f99841fbb2c5b4f688ecd8f7706671558",
+      "height": 5297,
+      "sha256": "dc3c216cb16ace554d4b9c73e89bdc3cb074e420d2bcbf9b815cc7507a1b8b1f",
       "source": "test-results/design-compositions-des-instruments-atlas-et-leçon-complète-mobile-chromium/05-lab-invalid.png"
     },
     {
       "path": "screens/mobile/06-ai-comparison.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:31:00.908Z",
+      "capturedAt": "2026-11-11T15:26:49.080Z",
       "width": 1082,
-      "height": 7405,
-      "sha256": "4ffc2da5f40c8141850ba21c26098820b5435aa5ca4e3f300a737911d9355ae4",
+      "height": 7526,
+      "sha256": "076ebd367eaf54cc9927f99bbc4b7df6b894484847b301e6b5c33e11a93f3c60",
       "source": "test-results/design-compositions-des-instruments-atlas-et-leçon-complète-mobile-chromium/06-ai-comparison.png"
     },
     {
       "path": "screens/mobile/06-ai-empty-viewport.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:30:59.569Z",
+      "capturedAt": "2026-11-11T15:26:47.464Z",
       "width": 1082,
       "height": 2202,
-      "sha256": "6f7503a5cc91d190583151a0ce785754742e6a98f791536e09ab899663e06f5c",
+      "sha256": "244a0a1e5ede3a32ba936582aeb765336d3157f553d9508f8a9f4741839d4cd9",
       "source": "test-results/design-compositions-des-instruments-atlas-et-leçon-complète-mobile-chromium/06-ai-empty-viewport.png"
     },
     {
       "path": "screens/mobile/06-ai-empty.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:30:59.457Z",
+      "capturedAt": "2026-11-11T15:26:47.307Z",
       "width": 1082,
-      "height": 4413,
-      "sha256": "b78a74725d992fb37afc5df991ab71f053c3ac95be546cf014ec6c66b9907e7c",
+      "height": 4533,
+      "sha256": "9f2101382d03a76fb24efa6b3f4695650f36b60b714c76e28330e1b67759fbf0",
       "source": "test-results/design-compositions-des-instruments-atlas-et-leçon-complète-mobile-chromium/06-ai-empty.png"
     },
     {
       "path": "screens/mobile/06-ai-lab.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:30:55.532Z",
+      "capturedAt": "2026-11-11T15:26:43.920Z",
       "width": 1082,
-      "height": 7347,
-      "sha256": "6eb4ea8cabcd09c3185180ef1055feeefd2c91a9166227610cf1e0f1661d07cd",
+      "height": 7468,
+      "sha256": "ecfeaa91ddd20baf964732f935a6f8ccc234221cae60f8055da2d119f90a3d51",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-mobile-chromium/06-ai-lab.png"
     },
     {
       "path": "screens/mobile/06-ai-structure-viewport.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:31:00.400Z",
+      "capturedAt": "2026-11-11T15:26:48.513Z",
       "width": 1082,
       "height": 2202,
-      "sha256": "576d54058a908a294e527434936b275746d12310c56206090861d9f4ca522f52",
+      "sha256": "5829c27c5172556e890939451597d98cf520b4c2adad7226e7bb2b4ddef54bce",
       "source": "test-results/design-compositions-des-instruments-atlas-et-leçon-complète-mobile-chromium/06-ai-structure-viewport.png"
     },
     {
       "path": "screens/mobile/06-ai-structure.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:31:00.245Z",
+      "capturedAt": "2026-11-11T15:26:48.351Z",
       "width": 1082,
-      "height": 4620,
-      "sha256": "e1386cf9b3c886a0b3c7833f1e91d68cf660e97c87ef5b01e0d6fc8209843f47",
+      "height": 4741,
+      "sha256": "ed15a1239c8da2e8c8c3a73ecd9cc02251f27e880b1f6723f68a9fa935f77c6d",
       "source": "test-results/design-compositions-des-instruments-atlas-et-leçon-complète-mobile-chromium/06-ai-structure.png"
     },
     {
       "path": "screens/mobile/06-ai-writing.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:30:59.850Z",
+      "capturedAt": "2026-11-11T15:26:47.840Z",
       "width": 1082,
-      "height": 4161,
-      "sha256": "3da9cbdf8f61cd0ed27474005e8a28b58f03d130ce0b42a3afead3ad36dafd6b",
+      "height": 4281,
+      "sha256": "2fcddd195ad2c3670b32906ae8a9c76330ad7f050a67da11dad982bda5164f3a",
       "source": "test-results/design-compositions-des-instruments-atlas-et-leçon-complète-mobile-chromium/06-ai-writing.png"
     },
     {
       "path": "screens/mobile/07-incubator.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:30:56.547Z",
+      "capturedAt": "2026-11-11T15:26:44.613Z",
       "width": 1082,
-      "height": 4176,
-      "sha256": "105c178f1b182a3fb9f6ae0a3257b8dc316b3b066a48eccdc9405fe8a0b4c4b2",
+      "height": 4297,
+      "sha256": "f437c7f4b1fbde31dea367498a2488a42143fdf6d85cccda7e24590469a79b66",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-mobile-chromium/07-incubator.png"
     },
     {
       "path": "screens/mobile/08-project-error.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:30:56.952Z",
+      "capturedAt": "2026-11-11T15:26:45.565Z",
       "width": 1082,
-      "height": 7237,
-      "sha256": "e34918926a23f69dd8812e427be7ce6f64f403f2fa727fdeebe3e428150d33ff",
+      "height": 7358,
+      "sha256": "46997c25f891b0fda55a32e295b72f81be3e1d659114a240aa536453391090d5",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-mobile-chromium/08-project-error.png"
     },
     {
       "path": "screens/mobile/08-radar.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:30:57.184Z",
+      "capturedAt": "2026-11-11T15:26:45.949Z",
       "width": 1082,
-      "height": 4442,
-      "sha256": "5f4b87becc37e4a798f80746ca1c3688624140c8ae2ede368f1fce615d108560",
+      "height": 4562,
+      "sha256": "0626ddab6b5151dad83086f3c93673f989c23db015451609847ba990d47bf3e8",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-mobile-chromium/08-radar.png"
     },
     {
       "path": "screens/mobile/09-competences-selection.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:30:58.808Z",
+      "capturedAt": "2026-11-11T15:26:47.445Z",
       "width": 1082,
-      "height": 8395,
-      "sha256": "da1f58707264feb8d4a6cba4b86f4850511cb47a851d872c2c6030a24f76376e",
+      "height": 8516,
+      "sha256": "f1e11ab793a5c01b00e39bc9555efe9bbf2cf3da697de2c8d56e85d44cf3286b",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-mobile-chromium/09-competences-selection.png"
     },
     {
       "path": "screens/mobile/09-competences.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:30:58.434Z",
+      "capturedAt": "2026-11-11T15:26:46.887Z",
       "width": 1082,
-      "height": 8943,
-      "sha256": "70c79a5047ed3080f62bd306cfea3fdd899875d4dbbe42a8e355bdd3af6039fc",
+      "height": 9064,
+      "sha256": "73f28b7ca49a3d13314ea346e7184921e56fa7c4cbea49f17b8deb2e9f3cca84",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-mobile-chromium/09-competences.png"
     },
     {
       "path": "screens/mobile/10-parametres.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:30:59.173Z",
+      "capturedAt": "2026-11-11T15:26:48.088Z",
       "width": 1082,
-      "height": 7704,
-      "sha256": "aaadd56cf37d089f369dc5c03af5bae228e8f007779f48c1bc5653f967230ed5",
+      "height": 8101,
+      "sha256": "78643febc3604cea26197cc262b262ca5354fe7e9ba5dea623937b7a8af4f22f",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-mobile-chromium/10-parametres.png"
     },
     {
       "path": "screens/mobile/11-revisions-complete.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:31:01.056Z",
+      "capturedAt": "2026-11-11T15:26:50.741Z",
       "width": 1082,
-      "height": 2885,
-      "sha256": "c7c9616e65a773c597a4468847f5c70b39629b44031cdd2063d0cbdab08d9969",
+      "height": 3006,
+      "sha256": "5ee2ac60164f0afd141a1dbb2e3dc480febb97c32408287d1e9c98ab3a0a7576",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-mobile-chromium/11-revisions-complete.png"
     },
     {
       "path": "screens/mobile/11-revisions-due.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:31:00.080Z",
+      "capturedAt": "2026-11-11T15:26:49.400Z",
       "width": 1082,
-      "height": 4295,
-      "sha256": "67b6c2c097e58afc72ce846a753cea52b7379692a0f32cf5a73e44c3b59de567",
+      "height": 4415,
+      "sha256": "feb55c96a6b56c4149af12e6d15f1109d5efa9cc23e002b91f80befe4c210d9e",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-mobile-chromium/11-revisions-due.png"
     },
     {
       "path": "screens/mobile/11-revisions-empty.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:30:59.736Z",
+      "capturedAt": "2026-11-11T15:26:48.835Z",
       "width": 1082,
-      "height": 3045,
-      "sha256": "1fc72944724e3361abbbe2e4e44e36e3a5ad4deeddd33a207913970355aff6f5",
+      "height": 3166,
+      "sha256": "f30f2a133d61ada21406539f74cc7ef3644219f8cdb07af23e02aa2ac8903d22",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-mobile-chromium/11-revisions-empty.png"
     },
     {
       "path": "screens/mobile/11-revisions-planned.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:31:01.264Z",
+      "capturedAt": "2026-11-11T15:26:51.098Z",
       "width": 1082,
-      "height": 4295,
-      "sha256": "22dfc7f5d5ff42f62928889bb1ffb4aea5582611eafae894a3c106924a862b85",
+      "height": 4415,
+      "sha256": "0af4cc5de455e89dba626b674294cd3cdd07e37e52b1ea5e4ec8a4d5f0db5d88",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-mobile-chromium/11-revisions-planned.png"
     },
     {
       "path": "screens/mobile/11-revisions-recall.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:31:00.430Z",
+      "capturedAt": "2026-11-11T15:26:49.841Z",
       "width": 1082,
-      "height": 2930,
-      "sha256": "69eccce3aa25b526181e0de205e505ce3a87e5eaba50c7b02856879baec074e9",
+      "height": 3050,
+      "sha256": "c094c17b2c8130209aba785f27b45bf729b9756e4edef72cf374854ba7028e6a",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-mobile-chromium/11-revisions-recall.png"
     },
     {
       "path": "screens/mobile/11-revisions-revealed.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:31:00.721Z",
+      "capturedAt": "2026-11-11T15:26:50.262Z",
       "width": 1082,
-      "height": 4428,
-      "sha256": "3ed102446d9aea69fa3d306a4e046f8343cf34e66dcedea572ea44bac7a5d749",
+      "height": 4549,
+      "sha256": "6eeb9882c5ed2c02ce7fb3804fa56aaa623a7393ac983edccf2857eeee399d16",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-mobile-chromium/11-revisions-revealed.png"
     },
     {
       "path": "screens/mobile/11-revisions-viewport.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:31:00.192Z",
+      "capturedAt": "2026-11-11T15:26:49.556Z",
       "width": 1082,
       "height": 2202,
-      "sha256": "12b89aaaeb0e30ab1551527f53e4393bc6dbf434030886677adb1e10578e3eb9",
+      "sha256": "0aad93d32c0c492ac33c4fe0fc6ea08b78fbdd380eb8d35e453d35489b640183",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-mobile-chromium/11-revisions-viewport.png"
     },
     {
       "path": "screens/mobile/12-project-decision.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:31:03.214Z",
+      "capturedAt": "2026-11-11T15:26:53.144Z",
       "width": 1082,
       "height": 4200,
-      "sha256": "4ab5721b28e552dcf5e18caa19c7dc1272a5b35467d8abaa45efc5429144b605",
+      "sha256": "56c4e6bf22e7d3bcd72164695606988e7fecd727f58491082941a726e7ce8c97",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-mobile-chromium/12-project-decision.png"
     },
     {
       "path": "screens/mobile/12-project-empty.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:31:02.198Z",
+      "capturedAt": "2026-11-11T15:26:51.674Z",
       "width": 1082,
       "height": 3704,
       "sha256": "6706e9223ce7fb0bdb1cdb5993793eb60acc7b734b7d9bba3b80e01b8e7d4107",
@@ -1672,79 +1707,79 @@
     {
       "path": "screens/mobile/12-project-outcome.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:31:03.603Z",
+      "capturedAt": "2026-11-11T15:26:53.860Z",
       "width": 1082,
       "height": 4620,
-      "sha256": "0c1d10cb4115d407bc70baca5e7f1df30c2eb9d6acf9241d30c57acfeb788bf8",
+      "sha256": "60fcd842e8ec3feb93a7adafc7f89672751aa4abc2b1dda2d7658c1e4a5e667f",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-mobile-chromium/12-project-outcome.png"
     },
     {
       "path": "screens/mobile/12-project-result.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:31:02.825Z",
+      "capturedAt": "2026-11-11T15:26:52.614Z",
       "width": 1082,
       "height": 4741,
-      "sha256": "74730022a54e88e6b7c108583919074cd2c5001e117e4535a0248f8fd0719742",
+      "sha256": "21269fc1a373904dedb1e7742f0c9b8e3828f6e04c714b9570b4beaab982c505",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-mobile-chromium/12-project-result.png"
     },
     {
       "path": "screens/mobile/12-project-test-plan.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:31:02.560Z",
+      "capturedAt": "2026-11-11T15:26:52.114Z",
       "width": 1082,
       "height": 4066,
-      "sha256": "51d45f625573b800cf389d1775c92fa1fbb6868a1f6c7399f7653fe26e3298a0",
+      "sha256": "c10474493d1a31041f1fec9edaaae357fe2fe55310f20691c51ccfcedf6606b8",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-mobile-chromium/12-project-test-plan.png"
     },
     {
       "path": "screens/mobile/12-project-viewport.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:31:03.708Z",
+      "capturedAt": "2026-11-11T15:26:54.110Z",
       "width": 1082,
       "height": 2202,
-      "sha256": "6d2acd0b62a4788de9127b56189a0db2bf48ad70320d8e0e40a568cc70c9eddd",
+      "sha256": "3336ecb4b18c628b4028a68375d030bf4245fb3f15e43d16cc80cb1597ddf0db",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-mobile-chromium/12-project-viewport.png"
     },
     {
       "path": "screens/mobile/13-simulation-default.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:31:04.860Z",
+      "capturedAt": "2026-11-11T15:26:55.030Z",
       "width": 1082,
-      "height": 9432,
-      "sha256": "99df3cdf9fbb2c1b96212369833ef948363e8688cfecc24ad0e7beab4fca1376",
+      "height": 9552,
+      "sha256": "726bec0138fe04ff470d9036466db570de00c5e9167903c0a1e3b00bbfd655a8",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-mobile-chromium/13-simulation-default.png"
     },
     {
       "path": "screens/mobile/13-simulation-saved.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:31:05.894Z",
+      "capturedAt": "2026-11-11T15:26:56.594Z",
       "width": 1082,
-      "height": 9639,
-      "sha256": "f4bd22157733c88fb89cfba410c4618d31f55013c7892f9a1b7f9df3ca64cc85",
+      "height": 9760,
+      "sha256": "eb8dc2717d1a15bc9503f9efb6e38e01296c390f5d060db82b208e01f98d1727",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-mobile-chromium/13-simulation-saved.png"
     },
     {
       "path": "screens/mobile/13-simulation-scenario.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:31:05.420Z",
+      "capturedAt": "2026-11-11T15:26:55.730Z",
       "width": 1082,
-      "height": 9377,
-      "sha256": "7ab305c60819bc2efcdfd2806673a7c8118ba223efe2d1fd21f1f27cbff98b3e",
+      "height": 9497,
+      "sha256": "4e380636e639f0ab6aa65b50851f1ee11bddf6b77358507ab7f191319b167454",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-mobile-chromium/13-simulation-scenario.png"
     },
     {
       "path": "screens/mobile/13-simulation-viewport.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:31:04.968Z",
+      "capturedAt": "2026-11-11T15:26:55.175Z",
       "width": 1082,
       "height": 2202,
-      "sha256": "4e8381fa3fcd358c6ce5619acbb9837d698595d7d4252dbb9a380951902de142",
+      "sha256": "d1bb481b3d8cde83374ef70ce1e16033ecc4340c6e94364d1318fb28a71a78af",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-mobile-chromium/13-simulation-viewport.png"
     },
     {
       "path": "screens/mobile/14-portfolio-empty.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:31:11.182Z",
+      "capturedAt": "2026-11-11T15:27:02.931Z",
       "width": 1082,
       "height": 18155,
       "sha256": "e190a4a61c241e9003e5d1fc78c918e8741650e4fa37464cc8e4715354e97806",
@@ -1753,34 +1788,34 @@
     {
       "path": "screens/mobile/14-portfolio-notes.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:31:07.704Z",
+      "capturedAt": "2026-11-11T15:26:58.178Z",
       "width": 1082,
       "height": 5093,
-      "sha256": "759145520044c0f61fff02a1f95fe251b9c52d78e73fcd14b3bf5ff408238f64",
+      "sha256": "4541d0940fe8d6e9b53a2c0a03ea8a8941dc090fca81bdcf00e4bb297ca0d2fd",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-mobile-chromium/14-portfolio-notes.png"
     },
     {
       "path": "screens/mobile/14-portfolio-overview.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:31:07.026Z",
+      "capturedAt": "2026-11-11T15:26:57.344Z",
       "width": 1082,
       "height": 6838,
-      "sha256": "19e8ef13be46787921f26177ffe382edae6cfe9a3338d7fc2d5fb9e163a21d75",
+      "sha256": "6b892539273f63e0a1dcb80608ad79540c60fc0b22c58bed699116ae2ce67cbc",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-mobile-chromium/14-portfolio-overview.png"
     },
     {
       "path": "screens/mobile/14-portfolio-projects.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:31:07.459Z",
+      "capturedAt": "2026-11-11T15:26:57.828Z",
       "width": 1082,
       "height": 6132,
-      "sha256": "fa6c19245d22378efc2c1d2d6fe6e04306c7fd8a7459d3a8574c54426d7dd05a",
+      "sha256": "e6e3c07832ab2e2390be6f665a8da20f62f16fff98f1fb639044ef03c13e3887",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-mobile-chromium/14-portfolio-projects.png"
     },
     {
       "path": "screens/mobile/14-portfolio-viewport.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:31:07.153Z",
+      "capturedAt": "2026-11-11T15:26:57.483Z",
       "width": 1082,
       "height": 2202,
       "sha256": "e4de5f1d648350917e81ae7b4a151e8e24e1bacfd255fa22be9060bdd9e5654e",
@@ -1789,7 +1824,7 @@
     {
       "path": "screens/mobile/15-project-learning-editor.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:31:08.539Z",
+      "capturedAt": "2026-11-11T15:26:59.430Z",
       "width": 1082,
       "height": 12679,
       "sha256": "01d552676ac0cd745979895493b47bb73440f1e5a0e817f9d43bc07749d4ef3d",
@@ -1798,7 +1833,7 @@
     {
       "path": "screens/mobile/15-project-learning-empty.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:31:07.972Z",
+      "capturedAt": "2026-11-11T15:26:58.609Z",
       "width": 1082,
       "height": 3730,
       "sha256": "3045e9a589935fe27fd9cb513cb0efca76abeca18131578d7b889b871453eb13",
@@ -1807,79 +1842,79 @@
     {
       "path": "screens/mobile/15-project-learning-lesson.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:31:09.468Z",
+      "capturedAt": "2026-11-11T15:27:00.676Z",
       "width": 1082,
       "height": 6093,
-      "sha256": "e684dadd5ce78d431512195639e703015921882f612b9008302a28bba340a117",
+      "sha256": "c0f42219ec31cfcc6013dac8d6d6140c0f27a753612eef9e733f1b641bd45089",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-mobile-chromium/15-project-learning-lesson.png"
     },
     {
       "path": "screens/mobile/15-project-learning-map.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:31:10.439Z",
+      "capturedAt": "2026-11-11T15:27:01.900Z",
       "width": 1082,
-      "height": 8642,
-      "sha256": "26db82f05dea88dc0ebe75160baee1a9fd38f20b65cd666074e2ee54712aab11",
+      "height": 8762,
+      "sha256": "a3f258365600da7ee623f21e40211e9d61710c50b75866eef864fc7f8bfb4752",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-mobile-chromium/15-project-learning-map.png"
     },
     {
       "path": "screens/mobile/15-project-learning-plan.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:31:08.859Z",
+      "capturedAt": "2026-11-11T15:26:59.854Z",
       "width": 1082,
       "height": 6213,
-      "sha256": "74806068165eefd062fa04d4ec8e533dfffd4899b7c017e403281c25bf83e00d",
+      "sha256": "37dcc878e9c311ec515f71b1413d2ec9d33199cd9aa9d9b7f50ccefe10230674",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-mobile-chromium/15-project-learning-plan.png"
     },
     {
       "path": "screens/mobile/15-project-learning-updated.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:31:10.056Z",
+      "capturedAt": "2026-11-11T15:27:01.403Z",
       "width": 1082,
       "height": 6195,
-      "sha256": "00c6622b2bcca6172e5fd71a9b9413a028d59fc9b7cb435f427ae98ef4befc73",
+      "sha256": "564a8eaa804c2da8471ec78183fb5bc19af44d858d3df14fe9005b24c0310158",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-mobile-chromium/15-project-learning-updated.png"
     },
     {
       "path": "screens/mobile/15-project-learning-viewport.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:31:08.967Z",
+      "capturedAt": "2026-11-11T15:27:00.011Z",
       "width": 1082,
       "height": 2202,
-      "sha256": "7e21274037e60c06f024e125e456e39b395215a74abb954c26639e85553abb0a",
+      "sha256": "0746ecbc20bc731ae3327830e7ebcf14b547e3e82084217cb89d9b66b55d765f",
       "source": "test-results/design-galerie-des-écrans-et-du-quiz-validé-sans-débordement-mobile-chromium/15-project-learning-viewport.png"
     },
     {
       "path": "screens/mobile/16-search-empty.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:30:50.373Z",
+      "capturedAt": "2026-11-11T15:26:42.031Z",
       "width": 1082,
-      "height": 7744,
-      "sha256": "9ad79fc7a0bcee56bd1d01b6fe7b56a527ae864bf1dafbc351d546984ee88674",
+      "height": 8384,
+      "sha256": "44cb7285ecb2c6e5862b8bc2aa76cb54c9dc6e552681abd7bd6e86e9a04857b7",
       "source": "test-results/design-surfaces-neutres-et-8fa7d-tion-sur-un-véritable-rendu-mobile-chromium/16-search-empty.png"
     },
     {
       "path": "screens/mobile/16-search-keyboard-viewport.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:30:50.019Z",
+      "capturedAt": "2026-11-11T15:26:41.400Z",
       "width": 1082,
       "height": 2202,
-      "sha256": "169d70a3cc0b6a43fad1fd9cc4d722cc32a22ae7c0a789b2c8169efd8603624e",
+      "sha256": "4ce262d4bf655156faac41c609dfd9ff1eac8c0b08d24b3e8357f64009efee07",
       "source": "test-results/design-surfaces-neutres-et-8fa7d-tion-sur-un-véritable-rendu-mobile-chromium/16-search-keyboard-viewport.png"
     },
     {
       "path": "screens/mobile/16-search-keyboard.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:30:49.931Z",
+      "capturedAt": "2026-11-11T15:26:41.250Z",
       "width": 1082,
-      "height": 7744,
-      "sha256": "66b9ae262c255eff39fc2b2260e0bc38dd7710250e3f14615ece25df775beeb5",
+      "height": 8384,
+      "sha256": "4f529a8d530e79bc24b948359810f6be0d02e6f52775b21f9a0cf618cc0ede54",
       "source": "test-results/design-surfaces-neutres-et-8fa7d-tion-sur-un-véritable-rendu-mobile-chromium/16-search-keyboard.png"
     },
     {
       "path": "screens/mobile/17-lexique-recherche.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:31:07.461Z",
+      "capturedAt": "2026-11-11T15:26:58.251Z",
       "width": 1082,
       "height": 4250,
       "sha256": "8cd2172a616771c5b524aa6c26a0c041a8a0e547e6fc8d6a88c6d8bb564c2e51",
@@ -1888,7 +1923,7 @@
     {
       "path": "screens/mobile/17-lexique-viewport.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:31:07.156Z",
+      "capturedAt": "2026-11-11T15:26:57.789Z",
       "width": 1082,
       "height": 2202,
       "sha256": "aed41d9bb88765c042b0d07400590542919e4a3f3d0cf918d181cfb25bac46ed",
@@ -1897,7 +1932,7 @@
     {
       "path": "screens/mobile/17-lexique.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:31:06.999Z",
+      "capturedAt": "2026-11-11T15:26:57.536Z",
       "width": 1082,
       "height": 61000,
       "sha256": "05223abe7c3b56e65b99c51df9ab39f9e5ea24a9143afae29d662895439d5268",
@@ -1906,61 +1941,61 @@
     {
       "path": "screens/mobile/18-investissement-lecon-viewport.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:31:08.591Z",
+      "capturedAt": "2026-11-11T15:26:59.951Z",
       "width": 1082,
       "height": 2202,
-      "sha256": "71a364f425452c373efaf32c8192f17d6a559b70a9c46d36bc0bef8f8297ec90",
+      "sha256": "4d0594fb265ff74e6a2033fb7131d39c933af769e7699cebaea158d906dd8ddc",
       "source": "test-results/design-module-investisseme-177e2-eçon-et-simulateur-de-frais-mobile-chromium/18-investissement-lecon-viewport.png"
     },
     {
       "path": "screens/mobile/18-investissement-lecon.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:31:08.321Z",
+      "capturedAt": "2026-11-11T15:26:59.520Z",
       "width": 1082,
       "height": 5927,
-      "sha256": "423dea612cfea3151538e143293abdd46f3e176af919032d74a9f37ab89641f8",
+      "sha256": "f0013f7f0e0b017bcccd7be2917c21a774cf59a7e6bd97bc1b4e2cf85ae93696",
       "source": "test-results/design-module-investisseme-177e2-eçon-et-simulateur-de-frais-mobile-chromium/18-investissement-lecon.png"
     },
     {
       "path": "screens/mobile/18-investissement-risque.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:31:09.134Z",
+      "capturedAt": "2026-11-11T15:27:00.734Z",
       "width": 1082,
       "height": 5536,
-      "sha256": "6a2052f2c420727edf9921a3d259603edc20176b6ea85e53cdf9dbbcf07b759e",
+      "sha256": "ab2a3feda247329bcd0756e6d3272c73858f5559cd6948bcd04ff967e69f4639",
       "source": "test-results/design-module-investisseme-177e2-eçon-et-simulateur-de-frais-mobile-chromium/18-investissement-risque.png"
     },
     {
       "path": "screens/mobile/19-finance-perso-budget-viewport.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:31:09.877Z",
+      "capturedAt": "2026-11-11T15:27:01.765Z",
       "width": 1082,
       "height": 2202,
-      "sha256": "8ef892f8845de187e54481f2da1a70638263465b7e0f19862c14bdef99dd6326",
+      "sha256": "721e1b7bd13b3570c7c539d588a0d7ffc2eb89917f5695c1a8454c9d5e61f868",
       "source": "test-results/design-module-investisseme-177e2-eçon-et-simulateur-de-frais-mobile-chromium/19-finance-perso-budget-viewport.png"
     },
     {
       "path": "screens/mobile/19-finance-perso-budget.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:31:09.601Z",
+      "capturedAt": "2026-11-11T15:27:01.369Z",
       "width": 1082,
       "height": 5439,
-      "sha256": "d703d43c42513b6a1623a23ac555ebf98cfb13939220be7fb01f97a93d31e6d1",
+      "sha256": "dce44e4b22e9519f02132891419e6e74ffeadd60fccff381ccd8b1499e8976e3",
       "source": "test-results/design-module-investisseme-177e2-eçon-et-simulateur-de-frais-mobile-chromium/19-finance-perso-budget.png"
     },
     {
       "path": "screens/mobile/19-finance-perso-credit.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:31:10.398Z",
+      "capturedAt": "2026-11-11T15:27:02.530Z",
       "width": 1082,
       "height": 5720,
-      "sha256": "aef8d929f2e614a9ecc9125b10ba45a0c8eb8757f2320df53ab1a7a4d411734d",
+      "sha256": "92a309ca5bdd92660eeaaedd97440f70e2e5d309e3a9c7ce237e5dba6f617124",
       "source": "test-results/design-module-investisseme-177e2-eçon-et-simulateur-de-frais-mobile-chromium/19-finance-perso-credit.png"
     },
     {
       "path": "screens/mobile/20-bulles-definition-viewport.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:31:10.832Z",
+      "capturedAt": "2026-11-11T15:27:03.103Z",
       "width": 1082,
       "height": 2202,
       "sha256": "16985b03ae99c905172b3941e923d5c6eb608bef902060dba3a104d582235d49",
@@ -1969,47 +2004,74 @@
     {
       "path": "screens/mobile/21-guide-de-page-viewport.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:31:11.817Z",
+      "capturedAt": "2026-11-11T15:27:04.142Z",
       "width": 1082,
       "height": 2202,
-      "sha256": "5d6b6dfccf3cea9b385cc07aaf2c4700470bdad3a567d7b84867140ee925caff",
+      "sha256": "2ba695d59972ef0eb403219f3c579ff058eba935440f7eb3d474678ee4ee147e",
       "source": "test-results/design-confort-du-débutant-e6cbe-lecture-facile-et-ouverture-mobile-chromium/21-guide-de-page-viewport.png"
     },
     {
       "path": "screens/mobile/22-lecture-facile-lecon-viewport.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:31:13.016Z",
+      "capturedAt": "2026-11-11T15:27:05.561Z",
       "width": 1082,
       "height": 2202,
-      "sha256": "85b9d00ddf71eec57113a858e8e066b682261729da00030ce79f545859b06a0e",
+      "sha256": "1e762ce6d4aab67903f2a6783d418c92df6dd4cc0129b3f83c9eecf2668418aa",
       "source": "test-results/design-confort-du-débutant-e6cbe-lecture-facile-et-ouverture-mobile-chromium/22-lecture-facile-lecon-viewport.png"
     },
     {
       "path": "screens/mobile/22-lecture-facile-reglage-viewport.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:31:12.186Z",
+      "capturedAt": "2026-11-11T15:27:04.662Z",
       "width": 1082,
       "height": 2202,
-      "sha256": "ef24ff72ce0e781057ed698f51005a22592e7239c302058ad6b3dfbd9d36e8fe",
+      "sha256": "f05b101a2a013d0d98d2eeb0f2f33d4a220af444be9524a3d984846efd92c424",
       "source": "test-results/design-confort-du-débutant-e6cbe-lecture-facile-et-ouverture-mobile-chromium/22-lecture-facile-reglage-viewport.png"
     },
     {
       "path": "screens/mobile/23-ouverture-envol-viewport.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:31:16.338Z",
+      "capturedAt": "2026-11-11T15:27:09.495Z",
       "width": 1082,
       "height": 2202,
-      "sha256": "76f4b61a9487e53bf0a40d7a5611743144834c1ea87de5ae1f8c580e0a6877bd",
+      "sha256": "fed711001ff21c193b5538f75ba671be87d0eccf7b30bc9b7b0d528b974eb320",
       "source": "test-results/design-confort-du-débutant-e6cbe-lecture-facile-et-ouverture-mobile-chromium/23-ouverture-envol-viewport.png"
     },
     {
       "path": "screens/mobile/23-ouverture-viewport.png",
       "project": "mobile-chromium",
-      "capturedAt": "2026-11-09T17:31:15.609Z",
+      "capturedAt": "2026-11-11T15:27:08.742Z",
       "width": 1082,
       "height": 2202,
-      "sha256": "ef971501f8d314d5e514af23d6e17e4d131cd51b13e4098317fdb8ed0d09c712",
+      "sha256": "9c0c5133081e6d342f1bf3fb7e1a7fc753e17cff38177856612434fab494c32a",
       "source": "test-results/design-confort-du-débutant-e6cbe-lecture-facile-et-ouverture-mobile-chromium/23-ouverture-viewport.png"
+    },
+    {
+      "path": "screens/mobile/24-premiers-pas-viewport.png",
+      "project": "mobile-chromium",
+      "capturedAt": "2026-11-11T15:27:04.197Z",
+      "width": 1082,
+      "height": 2202,
+      "sha256": "f97baafa998de2d4ed674d25a8733256c42fb5124c86faeb0bb0bae59c42f6e4",
+      "source": "test-results/design-didacticiel-visite--0bd2b-des-espaces-et-premiers-pas-mobile-chromium/24-premiers-pas-viewport.png"
+    },
+    {
+      "path": "screens/mobile/24-visite-accueil-viewport.png",
+      "project": "mobile-chromium",
+      "capturedAt": "2026-11-11T15:27:04.751Z",
+      "width": 1082,
+      "height": 2202,
+      "sha256": "0ca2cab69c3abfa5f708cb073d5ee17aa45bf0e295d0100bd6c16ded1652a117",
+      "source": "test-results/design-didacticiel-visite--0bd2b-des-espaces-et-premiers-pas-mobile-chromium/24-visite-accueil-viewport.png"
+    },
+    {
+      "path": "screens/mobile/25-visite-espace-viewport.png",
+      "project": "mobile-chromium",
+      "capturedAt": "2026-11-11T15:27:06.991Z",
+      "width": 1082,
+      "height": 2202,
+      "sha256": "165617db2db5f0d027550f84c8bc496cf8b14254eb73bf6ce77146e082a2cd4f",
+      "source": "test-results/design-didacticiel-visite--0bd2b-des-espaces-et-premiers-pas-mobile-chromium/25-visite-espace-viewport.png"
     }
   ]
 }

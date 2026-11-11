@@ -16,6 +16,7 @@ import { lessonShortLabel } from "../data/lessonLabels";
 import { buildReviewDeck, dueReviewCards } from "../lib/reviews";
 import { useClock } from "../lib/useClock";
 import { Terrain } from "./Terrain";
+import { FirstSteps } from "./Guide";
 
 type Props = { state: AppState; onNavigate: (route: string) => void };
 
@@ -235,6 +236,12 @@ export function Dashboard({ state, onNavigate }: Props) {
           )}
         </div>
       </header>
+
+      <FirstSteps
+        state={state}
+        lessonId={current?.id}
+        onNavigate={onNavigate}
+      />
 
       <div className="learning-stage">
         <div className="console-top">

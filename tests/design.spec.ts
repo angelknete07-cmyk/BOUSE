@@ -1114,6 +1114,43 @@ test("confort du débutant : guide de page, lecture facile et ouverture", async 
   await fresh.close();
 });
 
+test("didacticiel : visite guidée, visites des espaces et premiers pas", async ({
+  page,
+}, testInfo) => {
+  await seed(page);
+  await page.addInitScript(() =>
+    sessionStorage.setItem("bouse.splash.seen", "1"),
+  );
+  await page.goto("/#home");
+  const steps = page.getByRole("region", { name: "Tes premiers pas" });
+  await expect(steps).toBeVisible();
+  await noOverflow(page);
+  await page.screenshot({
+    path: testInfo.outputPath("24-premiers-pas-viewport.png"),
+  });
+  await steps.getByRole("button", { name: "Revoir la visite guidée" }).click();
+  await expect(page.locator(".tour-card[data-in]")).toBeVisible();
+  await page.screenshot({
+    path: testInfo.outputPath("24-visite-accueil-viewport.png"),
+  });
+  await page.keyboard.press("Escape");
+  await expect(page.getByRole("dialog")).toHaveCount(0);
+
+  await page.goto("/#lab");
+  await expect(page.locator(".page-loading")).toHaveCount(0);
+  await page.getByRole("button", { name: "Me montrer" }).click();
+  await expect(
+    page.getByRole("dialog", { name: "Une seule vente" }),
+  ).toBeVisible();
+  await page.getByRole("button", { name: "Suivant" }).click();
+  await expect(page.getByRole("dialog", { name: "Tes leviers" })).toBeVisible();
+  await expect(page.locator(".tour-card[data-in]")).toBeVisible();
+  await noOverflow(page);
+  await page.screenshot({
+    path: testInfo.outputPath("25-visite-espace-viewport.png"),
+  });
+});
+
 test("mouvement de page mesuré et préférence de réduction respectée", async ({
   page,
 }) => {

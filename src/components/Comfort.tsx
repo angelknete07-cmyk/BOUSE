@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { BrandLogo } from "./BrandLogo";
 import { Terrain } from "./Terrain";
 import { Icon } from "./Icon";
+import { hasTour, startTour, useTourIsNew } from "./Guide";
 
 /*
  * Trois conforts pour un vrai débutant (idées 8, 10 et 31 du 9 novembre 2026) :
@@ -85,20 +86,34 @@ export function PageGuide({ route }: { route: string }) {
   const [hidden, setHidden] = useState(
     () => read(GUIDES_HIDDEN, () => localStorage) === "1",
   );
+  const isNew = useTourIsNew(route);
   if (!guide) return null;
   const toggle = (value: boolean) => {
     setHidden(value);
     write(GUIDES_HIDDEN, value ? "1" : null, () => localStorage);
   };
+  const tour = hasTour(route) ? (
+    <button
+      type="button"
+      className="page-guide-tour"
+      data-new={isNew ? "" : undefined}
+      onClick={() => startTour(route)}
+    >
+      Me montrer
+    </button>
+  ) : null;
   if (hidden)
     return (
-      <button
-        type="button"
-        className="page-guide-show"
-        onClick={() => toggle(false)}
-      >
-        <Icon name="idea" size={15} /> À quoi sert cette page ?
-      </button>
+      <div className="page-guide-row">
+        <button
+          type="button"
+          className="page-guide-show"
+          onClick={() => toggle(false)}
+        >
+          <Icon name="idea" size={15} /> À quoi sert cette page ?
+        </button>
+        {tour}
+      </div>
     );
   return (
     <aside className="page-guide" aria-label="À quoi sert cette page">
@@ -107,6 +122,7 @@ export function PageGuide({ route }: { route: string }) {
         <strong>{guide.what}</strong>
         <span>{guide.how}</span>
       </p>
+      {tour}
       <button
         type="button"
         className="page-guide-hide"
