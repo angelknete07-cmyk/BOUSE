@@ -1,0 +1,817 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Maquette — arbre de compétences BOUSE</title>
+    <!--
+      MAQUETTE, pas le produit. Cette page affiche la vraie appli (serveur de
+      développement) sur « Mes compétences » et remplace la carte complète par
+      le nouvel arbre (idée 7 d'Angel). Rien ici n'est livré : `npm run build`
+      ne prend que index.html. Ouvrir : http://localhost:5173/maquette/arbre.html
+    -->
+    <style>
+      :root {
+        color-scheme: dark;
+      }
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        background: #050506;
+        color: #f3f2ee;
+        font: 14px/1.4 Inter, system-ui, sans-serif;
+      }
+      body {
+        display: grid;
+        grid-template-rows: auto 1fr;
+      }
+      .bar {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px 10px;
+        padding: 10px 14px;
+        border-bottom: 1px solid rgb(255 255 255 / 0.1);
+        background: #0d0d0f;
+      }
+      .bar strong {
+        font-weight: 550;
+        margin-right: 6px;
+      }
+      .bar small {
+        flex-basis: 100%;
+        color: #85858b;
+        font-size: 12px;
+      }
+      .bar button {
+        min-height: 32px;
+        padding: 0 12px;
+        border: 1px solid rgb(255 255 255 / 0.16);
+        border-radius: 8px;
+        background: #1a1a1e;
+        color: #f3f2ee;
+        font: inherit;
+        font-size: 13px;
+        cursor: pointer;
+        transition:
+          background-color 140ms cubic-bezier(0.22, 1, 0.36, 1),
+          transform 140ms cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .bar button:hover {
+        background: #252528;
+      }
+      .bar button:active {
+        transform: scale(0.97);
+      }
+      .bar button[aria-pressed="true"] {
+        background: #f3f2ee;
+        color: #171719;
+        border-color: transparent;
+      }
+      .bar .gap {
+        flex: 1;
+      }
+      .stage {
+        display: grid;
+        place-items: center;
+        min-height: 0;
+        overflow: hidden;
+      }
+      iframe {
+        border: 0;
+        width: 100%;
+        height: 100%;
+        background: #0a0a0b;
+      }
+      .stage[data-device="phone"] iframe {
+        width: 390px;
+        height: min(780px, calc(100% - 24px));
+        border: 1px solid rgb(255 255 255 / 0.16);
+        border-radius: 28px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bar">
+      <strong>Maquette · arbre de compétences</strong>
+      <button id="open">⤢ Agrandir l’arbre</button>
+      <button id="learn">Valider une leçon</button>
+      <button id="reset">Remettre à zéro</button>
+      <span class="gap"></span>
+      <button id="desktop" aria-pressed="true">Ordinateur</button>
+      <button id="phone" aria-pressed="false">Téléphone</button>
+      <small
+        >Maquette posée sur la vraie page « Mes compétences ». « Valider une
+        leçon » fait semblant de réussir la prochaine, pour voir l’arbre se
+        remplir.</small
+      >
+    </div>
+    <div class="stage" data-device="desktop">
+      <iframe id="app" title="BOUSE"></iframe>
+    </div>
+
+    <script type="module">
+      import { lessons } from "/src/data/lessons.ts";
+      import { lessonShortLabel } from "/src/data/lessonLabels.ts";
+
+      const frame = document.getElementById("app");
+      const stage = document.querySelector(".stage");
+      try {
+        sessionStorage.setItem("bouse.splash.seen", "1");
+        localStorage.setItem("bouse.tours.seen", "academy,reviews,skills,lab,simulation,ai,incubator,radar");
+      } catch {}
+      frame.src = "/#skills";
+
+      // ---------------------------------------------------------------- Mise en page
+      const LANES = [
+        "Finance personnelle",
+        "Investissement",
+        "Finance",
+        "Entrepreneuriat",
+        "Intelligence artificielle",
+      ];
+      const LANE_NAMES = {
+        "Finance personnelle": "Ton argent au quotidien",
+        Investissement: "Investir",
+        Finance: "Les chiffres d’une entreprise",
+        Entrepreneuriat: "Créer et faire tourner une activité",
+        "Intelligence artificielle": "Se servir de l’IA",
+      };
+      const PADL = 36, PADT = 64, COL = 250, W = 206, H = 44, ROW = 54, HEAD = 58, GAP = 34;
+      const byId = new Map(lessons.map((l) => [l.id, l]));
+      const pos = {};
+      const lanes = [];
+      let canvasW = 0, canvasH = 0, y0 = PADT;
+      for (const domain of LANES) {
+        const items = lessons.filter((l) => l.domain === domain);
+        const inside = (l) => l.prerequisites.filter((p) => byId.get(p)?.domain === domain);
+        const depth = {};
+        const depthOf = (l) =>
+          (depth[l.id] ??= inside(l).length ? 1 + Math.max(...inside(l).map((p) => depthOf(byId.get(p)))) : 0);
+        items.forEach(depthOf);
+        // Parent principal : le prérequis le plus profond de la même branche.
+        const kids = {};
+        for (const l of items) {
+          const ps = inside(l);
+          if (!ps.length) continue;
+          const main = ps.reduce((a, b) => (depth[b] > depth[a] ? b : a));
+          (kids[main] ||= []).push(l.id);
+        }
+        let row = 0;
+        const place = (id) => {
+          const children = kids[id] || [];
+          if (!children.length) {
+            pos[id] = { x: PADL + depth[id] * COL, y: y0 + HEAD + row * ROW };
+            row += 1;
+            return;
+          }
+          children.forEach(place);
+          const first = pos[children[0]].y, last = pos[children[children.length - 1]].y;
+          pos[id] = { x: PADL + depth[id] * COL, y: (first + last) / 2 };
+        };
+        items.filter((l) => !inside(l).length).forEach((l) => place(l.id));
+        const height = HEAD + row * ROW - (ROW - H) + 22;
+        lanes.push({ domain, top: y0, height, ids: items.map((l) => l.id) });
+        canvasW = Math.max(canvasW, ...items.map((l) => pos[l.id].x + W + PADL));
+        y0 += height + GAP;
+      }
+      canvasH = y0 - GAP + 28;
+
+      // ---------------------------------------------------------------- État
+      const KEY = "bouse.academy.v1:guest";
+      let done = new Set();
+      let selected = null;
+      const readDone = () => {
+        try {
+          const s = JSON.parse(frame.contentWindow.localStorage.getItem(KEY) || "{}");
+          return new Set((s.attempts || []).filter((a) => a.passed).map((a) => a.lessonId));
+        } catch {
+          return new Set();
+        }
+      };
+      const stateOf = (id) =>
+        done.has(id) ? "done" : byId.get(id).prerequisites.every((p) => done.has(p)) ? "open" : "wait";
+      const nextId = () => {
+        const lastDone = [...done].pop();
+        const home = lanes.find((l) => l.ids.includes(lastDone));
+        for (const lane of home ? [home, ...lanes] : lanes)
+          for (const id of [...lane.ids].sort((a, b) => pos[a].x - pos[b].x || pos[a].y - pos[b].y))
+            if (stateOf(id) === "open") return id;
+        return null;
+      };
+      const pathOf = (id) => {
+        const set = new Set([id]);
+        const up = (i) => byId.get(i).prerequisites.forEach((p) => !set.has(p) && (set.add(p), up(p)));
+        const down = (i) => lessons.forEach((l) => l.prerequisites.includes(i) && !set.has(l.id) && (set.add(l.id), down(l.id)));
+        up(id);
+        down(id);
+        return set;
+      };
+
+      // ---------------------------------------------------------------- Style (dans l'appli)
+      const CSS = `
+:root{--tr-io:cubic-bezier(.65,0,.35,1);--tr-out:cubic-bezier(.22,1,.36,1);--tr-settle:cubic-bezier(.34,1.4,.5,1)}
+.knowledge-atlas > *:not(.tr-inline){display:none!important}
+.knowledge-atlas{padding:0!important;border:0!important;background:none!important;box-shadow:none!important}
+.tr-inline{display:grid;gap:var(--space-4)}
+.tr-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:var(--space-3) var(--space-5)}
+.tr-head h3{margin:0;color:var(--text);font:550 var(--type-body-lg)/1.3 var(--font-display);letter-spacing:-.01em}
+.tr-head p{margin:4px 0 0;color:var(--text-tertiary);font-size:var(--type-body-sm);max-width:56ch}
+.tr-legend{display:flex;flex-wrap:wrap;gap:6px 14px;margin:0;padding:0;list-style:none;color:var(--text-tertiary);font-size:var(--type-caption)}
+.tr-legend li{display:inline-flex;align-items:center;gap:6px}
+.tr-legend i{display:inline-block;width:14px;height:10px;border-radius:5px;border:1px solid var(--line-strong);background:var(--surface)}
+.tr-legend i[data-s=done]{border-color:rgb(var(--accent-violet-rgb)/.7);background:rgb(var(--accent-violet-deep))}
+.tr-legend i[data-s=open]{border-color:var(--text)}
+.tr-legend i[data-s=wait]{opacity:.5}
+.tr-branches{display:grid;grid-template-columns:repeat(5,minmax(132px,1fr));gap:8px;margin:0;padding:0;list-style:none;overflow-x:auto;scrollbar-width:none}
+.tr-branches li{display:grid}
+.tr-branches button{display:grid;grid-template-rows:auto 1fr auto;align-content:start;gap:6px;padding:10px 12px;border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--surface-low);color:var(--text-secondary);font:inherit;font-size:var(--type-caption);text-align:left;cursor:pointer;
+  transition:border-color 160ms var(--tr-out),background-color 160ms var(--tr-out)}
+.tr-branches button:hover{border-color:var(--line-strong);background:var(--raised)}
+.tr-branches strong{color:var(--text);font-weight:500;font-size:var(--type-body-sm);line-height:1.3}
+.tr-branches span:not(.tr-bar):not(.tr-bar span){align-self:end;font-variant-numeric:tabular-nums}
+@media (max-width:700px){.tr-branches{grid-template-columns:repeat(5,150px)}}
+.tr-bar{height:3px;border-radius:2px;background:var(--line);overflow:hidden}
+.tr-bar span{display:block;height:100%;width:var(--p);background:var(--accent-violet);border-radius:2px;transition:width 600ms var(--tr-io)}
+.tr-frame{position:relative;height:var(--fh,560px);overflow:hidden;border:1px solid var(--line-strong);border-radius:var(--radius);cursor:zoom-in;
+  background:radial-gradient(120% 70% at 20% 0%,rgb(var(--accent-violet-rgb)/calc(.06*var(--wash-k))),transparent 60%),var(--surface-low);box-shadow:var(--highlight-edge)}
+.tr-frame::after{content:"";position:absolute;inset:auto 0 0;height:170px;pointer-events:none;background:linear-gradient(transparent,var(--surface-low) 82%)}
+.tr-frame .tr-canvas{transform-origin:0 0;transition:filter 240ms var(--tr-out)}
+.tr-frame:hover .tr-canvas{filter:brightness(1.12)}
+.tr-frame[data-hidden] .tr-canvas{visibility:hidden}
+.tr-cta{position:absolute;z-index:2;left:50%;bottom:22px;display:inline-flex;align-items:center;gap:8px;min-height:42px;padding:0 20px;border:0;border-radius:999px;transform:translateX(-50%);
+  background:var(--text);color:var(--text-inverse);font:550 var(--type-body-sm)/1 var(--font-sans);cursor:pointer;box-shadow:inset 0 1px 0 rgb(255 255 255/.7),0 10px 30px rgb(0 0 0/.5);
+  transition:transform 160ms var(--tr-out),background-color 160ms var(--tr-out)}
+.tr-cta:hover{background:#fff;transform:translateX(-50%) translateY(-1px)}
+.tr-cta:active{transform:translateX(-50%) scale(.97)}
+.tr-cta svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+/* --- Le dessin, commun à l'aperçu et au plein écran --- */
+.tr-canvas{position:absolute;left:0;top:0}
+.tr-canvas > svg{position:absolute;left:0;top:0;overflow:visible}
+.tr-lane{position:absolute;border:1px solid rgb(255 255 255/.045);border-radius:18px;background:linear-gradient(90deg,rgb(255 255 255/.022),transparent 70%)}
+.tr-lane-name{position:absolute;display:flex;align-items:baseline;gap:10px;white-space:nowrap}
+.tr-lane-name strong{color:var(--text);font:550 15px/1.2 var(--font-display);letter-spacing:-.01em}
+.tr-lane-name span{color:var(--text-tertiary);font-size:12px;font-variant-numeric:tabular-nums}
+.tr-lane-name em{color:var(--text-tertiary);font-style:normal;font-size:12px}
+.tr-link{fill:none;stroke:rgb(255 255 255/.16);stroke-width:1.25;transition:stroke 260ms var(--tr-out),stroke-width 260ms var(--tr-out),opacity 260ms var(--tr-out)}
+.tr-link[data-done]{stroke:rgb(var(--accent-violet-rgb)/.45)}
+.tr-link.tr-bridge{stroke-dasharray:3 5}
+.tr-arrow{fill:rgb(255 255 255/.3);transition:fill 260ms var(--tr-out),opacity 260ms var(--tr-out)}
+.tr-canvas[data-focus] .tr-link,.tr-canvas[data-focus] .tr-arrow{opacity:.18}
+.tr-canvas[data-focus] .tr-link[data-path]{opacity:1;stroke:rgb(var(--accent-violet-rgb)/.95);stroke-width:2}
+.tr-canvas[data-focus] .tr-arrow[data-path]{opacity:1;fill:rgb(var(--accent-violet-rgb))}
+.tr-bridge-tag{position:absolute;padding:2px 8px;border:1px dashed var(--line-strong);border-radius:999px;background:var(--surface-low);color:var(--text-tertiary);font-size:11px;white-space:nowrap;transform:translate(-50%,-50%)}
+.tr-node{position:absolute;display:flex;align-items:center;gap:9px;box-sizing:border-box;width:${W}px;height:${H}px;padding:0 12px 0 8px;border:1px solid var(--line-strong);border-radius:12px;
+  background:linear-gradient(180deg,rgb(255 255 255/.035),transparent),var(--raised);color:var(--text-secondary);font:500 13px/1.2 var(--font-sans);text-align:left;cursor:pointer;
+  box-shadow:var(--highlight-edge),0 6px 16px rgb(0 0 0/.25);
+  transition:border-color 220ms var(--tr-out),background-color 220ms var(--tr-out),color 220ms var(--tr-out),opacity 260ms var(--tr-out),transform 220ms var(--tr-out),box-shadow 220ms var(--tr-out)}
+.tr-node:hover{transform:translateY(-1px);border-color:var(--text-tertiary);color:var(--text)}
+.tr-node:active{transform:scale(.98)}
+.tr-node:focus-visible{outline:2px solid rgb(var(--accent-violet-rgb)/.8);outline-offset:3px}
+.tr-label{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;font-size:12.5px;line-height:1.18}
+.tr-dot{flex:none;display:grid;place-items:center;width:24px;height:24px;border-radius:50%;border:1px solid var(--line-strong);background:var(--surface);color:var(--text-tertiary)}
+.tr-dot svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.tr-node[data-s=open]{color:var(--text);border-color:rgb(255 255 255/.32)}
+.tr-node[data-s=open] .tr-dot{border-color:var(--text);color:var(--text)}
+.tr-node[data-s=done]{color:var(--text);border-color:rgb(var(--accent-violet-rgb)/.5);background:linear-gradient(180deg,rgb(var(--accent-violet-rgb)/.10),transparent),var(--raised)}
+.tr-node[data-s=done] .tr-dot{border-color:rgb(var(--accent-violet-rgb)/.75);background:rgb(var(--accent-violet-deep));color:rgb(var(--accent-violet-ink))}
+.tr-node[data-s=wait]{color:var(--text-tertiary);background:var(--surface);box-shadow:none}
+.tr-node[data-s=wait] .tr-dot{border-style:dashed}
+.tr-node[data-next]{border-color:var(--text)}
+.tr-node[data-next]::after{content:"";position:absolute;inset:-6px;border:1px solid rgb(255 255 255/.35);border-radius:16px;animation:tr-breathe 2.6s var(--tr-io) infinite;pointer-events:none}
+.tr-tag{position:absolute;left:10px;top:-19px;color:var(--text);font-size:11px;font-weight:500;letter-spacing:.02em;white-space:nowrap}
+.tr-tag::before{content:"";display:inline-block;width:6px;height:6px;margin-right:6px;border-radius:50%;background:var(--accent-violet);vertical-align:1px}
+.tr-canvas[data-focus] .tr-node{opacity:.32}
+.tr-canvas[data-focus] .tr-node[data-path]{opacity:1}
+.tr-node[aria-pressed=true]{opacity:1!important;border-color:rgb(var(--accent-violet-rgb));box-shadow:0 0 0 4px rgb(var(--accent-violet-rgb)/.14),0 10px 26px rgb(0 0 0/.4)}
+.tr-node[data-pop]{animation:tr-pop 520ms var(--tr-settle)}
+@keyframes tr-breathe{0%,100%{transform:scale(1);opacity:.9}50%{transform:scale(1.05);opacity:0}}
+@keyframes tr-pop{0%{transform:scale(.92)}55%{transform:scale(1.06)}100%{transform:scale(1)}}
+
+/* --- Plein écran --- */
+.tr-full{position:fixed;inset:0;z-index:95;overflow:hidden;background:var(--bg);opacity:0;transition:opacity 320ms var(--tr-out)}
+.tr-full[data-on]{opacity:1}
+.tr-full::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(90% 60% at 30% 0%,rgb(var(--accent-violet-rgb)/calc(.07*var(--wash-k))),transparent 60%)}
+.tr-view{position:absolute;inset:0;cursor:grab;touch-action:none}
+.tr-view[data-drag]{cursor:grabbing}
+.tr-view .tr-canvas{transform-origin:0 0;will-change:transform}
+.tr-view .tr-canvas[data-fly]{transition:transform 560ms var(--tr-io)}
+.tr-scrim{position:absolute;z-index:2;left:0;right:0;top:0;height:132px;pointer-events:none;background:linear-gradient(var(--bg) 45%,transparent)}
+.tr-top{position:absolute;z-index:3;left:16px;right:16px;top:14px;display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;pointer-events:none;
+  opacity:0;transform:translateY(-8px);transition:opacity 260ms var(--tr-out),transform 360ms var(--tr-out)}
+.tr-full[data-ready] .tr-top,.tr-full[data-ready] .tr-zoom{opacity:1;transform:none}
+.tr-top > *{pointer-events:auto}
+.tr-title{display:grid;gap:2px;margin-right:auto}
+.tr-title strong{color:var(--text);font:550 17px/1.2 var(--font-display);letter-spacing:-.012em}
+.tr-title span{color:var(--text-tertiary);font-size:12px}
+.tr-chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;max-width:100%}
+.tr-chips button,.tr-icon{min-height:34px;padding:0 12px;border:1px solid var(--line-strong);border-radius:999px;background:rgb(20 20 23/.86);backdrop-filter:blur(10px);color:var(--text-secondary);font:500 12.5px/1 var(--font-sans);white-space:nowrap;cursor:pointer;
+  transition:color 140ms var(--tr-out),border-color 140ms var(--tr-out),background-color 140ms var(--tr-out)}
+.tr-chips button:hover,.tr-icon:hover{color:var(--text);border-color:var(--text-tertiary)}
+.tr-icon{display:grid;place-items:center;width:38px;min-width:38px;padding:0;font-size:18px}
+.tr-close{order:0}
+.tr-zoom{position:absolute;z-index:3;right:16px;bottom:18px;display:flex;align-items:center;gap:4px;padding:4px;border:1px solid var(--line-strong);border-radius:999px;background:rgb(20 20 23/.86);backdrop-filter:blur(10px);
+  opacity:0;transform:translateY(8px);transition:opacity 260ms var(--tr-out),transform 360ms var(--tr-out)}
+.tr-zoom button{min-width:34px;height:34px;padding:0 10px;border:0;border-radius:999px;background:none;color:var(--text-secondary);font:500 13px/1 var(--font-sans);cursor:pointer}
+.tr-zoom button:hover{background:rgb(255 255 255/.07);color:var(--text)}
+.tr-zoom output{min-width:44px;color:var(--text-tertiary);font-size:12px;text-align:center;font-variant-numeric:tabular-nums}
+.tr-hint{position:absolute;z-index:2;left:16px;bottom:22px;margin:0;padding:8px 14px;border-radius:999px;background:rgb(20 20 23/.86);backdrop-filter:blur(10px);border:1px solid var(--line);
+  color:var(--text-secondary);font-size:12.5px;white-space:nowrap;opacity:0;transition:opacity 400ms var(--tr-out)}
+.tr-full[data-ready] .tr-hint{opacity:1}
+.tr-full[data-moved] .tr-hint{opacity:0}
+.tr-panel{position:absolute;z-index:4;right:16px;top:76px;width:330px;max-height:calc(100% - 160px);overflow:auto;box-sizing:border-box;padding:18px;border:1px solid var(--line-strong);border-radius:16px;
+  background:linear-gradient(180deg,rgb(255 255 255/.04),transparent 40%),var(--raised);box-shadow:var(--highlight-edge),0 28px 70px rgb(0 0 0/.6);color:var(--text-secondary);
+  opacity:0;transform:translateX(14px);pointer-events:none;transition:opacity 200ms var(--tr-out),transform 380ms var(--tr-settle)}
+.tr-panel[data-on]{opacity:1;transform:none;pointer-events:auto}
+.tr-panel-x{position:absolute;right:8px;top:8px}
+.tr-kicker{margin:0 0 6px;color:var(--text-tertiary);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase}
+.tr-panel h4{margin:0 34px 8px 0;color:var(--text);font:550 18px/1.3 var(--font-display);letter-spacing:-.012em}
+.tr-state{display:inline-flex;align-items:center;gap:7px;margin:0 0 12px;font-size:13px}
+.tr-state i{width:8px;height:8px;border-radius:50%;background:var(--text-tertiary)}
+.tr-state[data-s=done] i{background:var(--accent-violet)}
+.tr-state[data-s=open] i{background:var(--text)}
+.tr-panel p.tr-sum{margin:0 0 14px;font-size:13.5px;line-height:1.55}
+.tr-rel{margin:0 0 12px}
+.tr-rel span{display:block;margin-bottom:6px;color:var(--text-tertiary);font-size:12px}
+.tr-rel div{display:flex;flex-wrap:wrap;gap:6px}
+.tr-rel button{min-height:30px;padding:0 10px;border:1px solid var(--line-strong);border-radius:999px;background:var(--surface);color:var(--text-secondary);font:500 12px/1 var(--font-sans);cursor:pointer}
+.tr-rel button:hover{color:var(--text);border-color:var(--text-tertiary)}
+.tr-rel button[data-s=done]::before{content:"✓ ";color:var(--accent-violet)}
+.tr-go{display:inline-flex;align-items:center;gap:8px;min-height:42px;margin-top:6px;padding:0 18px;border:0;border-radius:999px;background:var(--text);color:var(--text-inverse);font:550 13.5px/1 var(--font-sans);cursor:pointer;
+  box-shadow:inset 0 1px 0 rgb(255 255 255/.7),0 6px 18px rgb(0 0 0/.35);transition:transform 160ms var(--tr-out),background-color 160ms var(--tr-out)}
+.tr-go:hover{background:#fff}
+.tr-go:active{transform:scale(.97)}
+@media (max-width:700px){
+  .tr-frame{--fh:440px}
+  .tr-top{left:12px;right:12px;top:10px;gap:8px}
+  .tr-chips{order:3;flex-basis:100%}
+  .tr-zoom{right:12px}
+  .tr-hint{left:12px;right:12px;bottom:72px;white-space:normal;text-align:center;font-size:12px;border-radius:14px}
+  .tr-zoom{bottom:16px}
+  .tr-zoom output{display:none}
+  .tr-scrim{height:150px}
+  .tr-full:has(.tr-panel[data-on]) .tr-zoom,.tr-full:has(.tr-panel[data-on]) .tr-hint{opacity:0;pointer-events:none}
+  .tr-panel{left:8px;right:8px;top:auto;bottom:8px;width:auto;max-height:58%;border-radius:20px;transform:translateY(24px)}
+  .tr-panel::before{content:"";display:block;width:36px;height:4px;margin:-6px auto 12px;border-radius:2px;background:var(--line-strong)}
+}
+@media (prefers-reduced-motion:reduce){
+  .tr-full,.tr-top,.tr-zoom,.tr-panel,.tr-view .tr-canvas[data-fly],.tr-node,.tr-link,.tr-bar span{transition-duration:1ms!important}
+  .tr-node[data-next]::after,.tr-node[data-pop]{animation:none}
+}`;
+
+      const CHECK = '<svg viewBox="0 0 16 16"><path d="M3 8.5l3.2 3.2L13 4.8"/></svg>';
+      const EXPAND = '<svg viewBox="0 0 16 16"><path d="M9.5 2.5h4v4M6.5 13.5h-4v-4M13.5 2.5 9 7M2.5 13.5 7 9"/></svg>';
+
+      // ---------------------------------------------------------------- Dessin
+      function linkPath(a, b) {
+        const x1 = a.x + W, y1 = a.y + H / 2, x2 = b.x - 6, y2 = b.y + H / 2;
+        const mid = Math.max(28, (x2 - x1) / 2);
+        return `M${x1} ${y1}C${x1 + mid} ${y1},${x2 - mid} ${y2},${x2} ${y2}`;
+      }
+      function drawCanvas(D, interactive) {
+        const c = D.createElement("div");
+        c.className = "tr-canvas";
+        c.style.width = `${canvasW}px`;
+        c.style.height = `${canvasH}px`;
+        const next = nextId();
+        let svg = `<svg width="${canvasW}" height="${canvasH}" viewBox="0 0 ${canvasW} ${canvasH}" aria-hidden="true">`;
+        let tags = "";
+        const reach = (from, to) => from === to || byId.get(from).prerequisites.some((q) => reach(q, to));
+        for (const l of lessons)
+          for (const p of l.prerequisites) {
+            if (l.prerequisites.some((q) => q !== p && reach(q, p))) continue;
+            const a = pos[p], b = pos[l.id];
+            if (!a || !b) continue;
+            const bridge = byId.get(p).domain !== l.domain;
+            const both = done.has(p) && done.has(l.id);
+            svg += `<path class="tr-link${bridge ? " tr-bridge" : ""}" data-from="${p}" data-to="${l.id}"${both ? " data-done" : ""} d="${linkPath(a, b)}"/>`;
+            svg += `<path class="tr-arrow" data-from="${p}" data-to="${l.id}" d="M${b.x - 7} ${b.y + H / 2 - 4}l6 4-6 4z"/>`;
+            if (bridge) {
+              const mx = (a.x + W + b.x) / 2, my = (a.y + b.y) / 2 + H / 2;
+              tags += `<span class="tr-bridge-tag" style="left:${mx}px;top:${my}px">passerelle</span>`;
+            }
+          }
+        svg += "</svg>";
+        let html = "";
+        for (const lane of lanes) {
+          const n = lane.ids.filter((id) => done.has(id)).length;
+          html += `<div class="tr-lane" style="left:${PADL - 18}px;top:${lane.top}px;width:${canvasW - 2 * PADL + 36}px;height:${lane.height}px"></div>`;
+          html += `<div class="tr-lane-name" style="left:${PADL}px;top:${lane.top + 18}px"><strong>${LANE_NAMES[lane.domain]}</strong><em>${lane.domain}</em><span>${n} / ${lane.ids.length} validées</span></div>`;
+        }
+        for (const l of lessons) {
+          const p = pos[l.id], s = stateOf(l.id);
+          const label = lessonShortLabel(l.id, l.title);
+          html += `<button type="button" class="tr-node" data-id="${l.id}" data-s="${s}"${l.id === next ? " data-next" : ""} ${interactive ? "" : 'tabindex="-1"'} aria-pressed="${selected === l.id}" title="${l.title.replace(/"/g, "&quot;")}" style="left:${p.x}px;top:${p.y}px">${l.id === next ? '<span class="tr-tag">À faire maintenant</span>' : ""}<span class="tr-dot">${s === "done" ? CHECK : ""}</span><span class="tr-label">${label}</span></button>`;
+        }
+        c.innerHTML = svg + html + tags;
+        return c;
+      }
+      function paintFocus(c) {
+        const path = selected ? pathOf(selected) : null;
+        c.toggleAttribute("data-focus", !!selected);
+        c.querySelectorAll(".tr-node").forEach((n) => {
+          n.toggleAttribute("data-path", !!path?.has(n.dataset.id));
+          n.setAttribute("aria-pressed", String(n.dataset.id === selected));
+        });
+        c.querySelectorAll("[data-from]").forEach((p) =>
+          p.toggleAttribute("data-path", !!path && path.has(p.dataset.from) && path.has(p.dataset.to)),
+        );
+      }
+
+      // ---------------------------------------------------------------- Aperçu dans la page
+      let W_, D, inline, frameEl, full;
+      function buildInline() {
+        const host = D.querySelector(".knowledge-atlas");
+        if (!host) return;
+        if (!D.getElementById("tr-style")) {
+          const st = D.createElement("style");
+          st.id = "tr-style";
+          st.textContent = CSS;
+          D.head.append(st);
+        }
+        host.querySelector(".tr-inline")?.remove();
+        inline = D.createElement("div");
+        inline.className = "tr-inline";
+        const total = done.size;
+        inline.innerHTML = `
+          <div class="tr-head">
+            <div><h3>L’arbre de tes compétences</h3><p>Chaque branche part des bases. Un trait relie une leçon à celle qu’il faut savoir avant. ${total} sur ${lessons.length} validées.</p></div>
+            <ul class="tr-legend"><li><i data-s="done"></i>Validée</li><li><i data-s="open"></i>Tu peux la faire</li><li><i data-s="wait"></i>Il faut d’abord la précédente</li></ul>
+          </div>
+          <ul class="tr-branches">${lanes
+            .map((lane) => {
+              const n = lane.ids.filter((id) => done.has(id)).length;
+              return `<li><button type="button" data-lane="${lane.domain}"><strong>${LANE_NAMES[lane.domain]}</strong><span>${n} / ${lane.ids.length}</span><span class="tr-bar" style="--p:${(n / lane.ids.length) * 100}%"><span></span></span></button></li>`;
+            })
+            .join("")}</ul>
+          <div class="tr-frame" role="button" tabindex="0" aria-label="Agrandir l’arbre des compétences"></div>`;
+        host.prepend(inline);
+        frameEl = inline.querySelector(".tr-frame");
+        const c = drawCanvas(D, false);
+        frameEl.append(c);
+        const cta = D.createElement("button");
+        cta.type = "button";
+        cta.className = "tr-cta";
+        cta.innerHTML = `${EXPAND} Agrandir l’arbre`;
+        frameEl.append(cta);
+        fitInline();
+        frameEl.addEventListener("click", (e) => {
+          const node = e.target.closest(".tr-node");
+          openFull(node ? node.dataset.id : null);
+        });
+        frameEl.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            openFull(null);
+          }
+        });
+        inline.querySelectorAll("[data-lane]").forEach((b) =>
+          b.addEventListener("click", () => openFull(null, b.dataset.lane)),
+        );
+      }
+      function fitInline() {
+        if (!frameEl) return;
+        const c = frameEl.querySelector(".tr-canvas");
+        const k = Math.min(1, (frameEl.clientWidth - 8) / canvasW);
+        c.style.transform = `translate(4px, 6px) scale(${k})`;
+        c.dataset.k = k;
+      }
+
+      // ---------------------------------------------------------------- Plein écran
+      let view, canvas, panel, tx = 0, ty = 0, k = 1, flying = 0;
+      const reduce = () => W_.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const apply = (fly) => {
+        if (fly && !reduce()) {
+          canvas.dataset.fly = "";
+          clearTimeout(flying);
+          flying = W_.setTimeout(() => delete canvas.dataset.fly, 600);
+        } else delete canvas.dataset.fly;
+        canvas.style.transform = `translate(${tx}px, ${ty}px) scale(${k})`;
+        full?.querySelector(".tr-zoom output") && (full.querySelector(".tr-zoom output").value = `${Math.round(k * 100)} %`);
+      };
+      const clampK = (v) => Math.min(1.8, Math.max(0.3, v));
+      const zoomAt = (factor, cx, cy, fly) => {
+        const nk = clampK(k * factor);
+        tx = cx - ((cx - tx) * nk) / k;
+        ty = cy - ((cy - ty) * nk) / k;
+        k = nk;
+        apply(fly);
+      };
+      const panelW = () => (W_.innerWidth > 700 && selected ? 346 : 0);
+      function centerOn(x, y, nk, fly) {
+        const vw = W_.innerWidth - panelW(), vh = W_.innerHeight;
+        k = nk ?? k;
+        const sheet = W_.innerWidth <= 700 && selected ? vh * 0.3 : 0;
+        tx = vw / 2 - x * k;
+        ty = (vh - sheet) / 2 - y * k;
+        apply(fly);
+      }
+      function fitAll(fly) {
+        const vw = W_.innerWidth, vh = W_.innerHeight;
+        k = clampK(Math.min((vw - 40) / canvasW, (vh - 150) / canvasH));
+        tx = (vw - canvasW * k) / 2;
+        ty = 96 + (vh - 120 - canvasH * k) / 2;
+        apply(fly);
+      }
+      function startView(laneName, nodeId) {
+        const phone = W_.innerWidth <= 700;
+        if (nodeId) return centerOn(pos[nodeId].x + W / 2, pos[nodeId].y + H / 2, phone ? 0.95 : 1, true);
+        if (laneName) {
+          const lane = lanes.find((l) => l.domain === laneName);
+          const kk = phone ? 0.62 : clampK(Math.min(1, (W_.innerWidth - 80) / canvasW));
+          k = kk;
+          tx = phone ? 12 : (W_.innerWidth - canvasW * k) / 2;
+          return placeLane(lane, phone);
+        }
+        const n = nextId();
+        if (n) {
+          // Commencer lisible, sur la prochaine leçon et sa branche.
+          const lane = lanes.find((l) => l.ids.includes(n));
+          k = phone ? 0.7 : clampK(Math.min(1, (W_.innerWidth - 80) / canvasW));
+          tx = phone ? 4 - Math.max(0, pos[n].x - COL - 8) * k : (W_.innerWidth - canvasW * k) / 2;
+          return placeLane(lane, phone);
+        }
+        fitAll(true);
+      }
+
+      // La branche au milieu de l'écran (sous la barre d'outils), ses voisines autour.
+      function placeLane(lane, phone) {
+        const top = phone ? 150 : 104, room = W_.innerHeight - top - (phone ? 120 : 70);
+        const h = lane.height * k;
+        ty = top - lane.top * k + Math.max(0, (room - h) / 2);
+        apply(true);
+      }
+      function openFull(nodeId, laneName) {
+        if (full) return;
+        selected = nodeId || null;
+        full = D.createElement("div");
+        full.className = "tr-full";
+        full.setAttribute("role", "dialog");
+        full.setAttribute("aria-modal", "true");
+        full.setAttribute("aria-label", "L’arbre de tes compétences");
+        full.innerHTML = `
+          <div class="tr-view"></div>
+          <div class="tr-scrim" aria-hidden="true"></div>
+          <div class="tr-top">
+            <div class="tr-title"><strong>L’arbre de tes compétences</strong><span>${done.size} sur ${lessons.length} validées · glisse pour te déplacer</span></div>
+            <div class="tr-chips">${lanes.map((l) => `<button type="button" data-lane="${l.domain}">${LANE_NAMES[l.domain]}</button>`).join("")}</div>
+            <button type="button" class="tr-icon tr-close" aria-label="Fermer l’arbre">×</button>
+          </div>
+          <div class="tr-zoom"><button type="button" data-z="-" aria-label="Dézoomer">−</button><output>100 %</output><button type="button" data-z="+" aria-label="Zoomer">+</button><button type="button" data-z="fit">Tout voir</button></div>
+          <p class="tr-hint">${W_.innerWidth <= 700 ? "Glisse pour te promener · pince pour zoomer" : "Glisse pour te promener · pince ou molette pour zoomer · touche une leçon"}</p>
+          <aside class="tr-panel" aria-live="polite"></aside>`;
+        D.body.append(full);
+        view = full.querySelector(".tr-view");
+        panel = full.querySelector(".tr-panel");
+        canvas = drawCanvas(D, true);
+        view.append(canvas);
+        paintFocus(canvas);
+
+        // FLIP : le dessin part exactement d'où il est dans la page.
+        const src = frameEl.querySelector(".tr-canvas").getBoundingClientRect();
+        const k0 = Number(frameEl.querySelector(".tr-canvas").dataset.k);
+        tx = src.left;
+        ty = src.top;
+        k = k0;
+        apply(false);
+        frameEl.dataset.hidden = "";
+        void full.offsetWidth;
+        full.dataset.on = "";
+        W_.requestAnimationFrame(() => {
+          startView(laneName, nodeId);
+          W_.setTimeout(() => {
+            full.dataset.ready = "";
+            if (selected) showPanel();
+          }, reduce() ? 0 : 380);
+        });
+        wire();
+        full.querySelector(".tr-close").focus({ preventScroll: true });
+      }
+
+      function closeFull() {
+        if (!full) return;
+        const f = full;
+        hidePanel();
+        delete f.dataset.ready;
+        const src = frameEl.getBoundingClientRect();
+        const k0 = Number(frameEl.querySelector(".tr-canvas").dataset.k);
+        tx = src.left + 4;
+        ty = src.top + 6;
+        k = k0;
+        apply(true);
+        W_.setTimeout(() => delete f.dataset.on, reduce() ? 0 : 260);
+        W_.setTimeout(() => {
+          f.remove();
+          delete frameEl.dataset.hidden;
+          full = null;
+          frameEl.focus({ preventScroll: true });
+        }, reduce() ? 10 : 600);
+      }
+
+      function select(id, fly = true) {
+        selected = id;
+        paintFocus(canvas);
+        if (!id) return hidePanel();
+        showPanel();
+        if (fly) {
+          const p = pos[id];
+          W_.requestAnimationFrame(() => centerOn(p.x + W / 2, p.y + H / 2, Math.max(k, W_.innerWidth <= 700 ? 0.9 : 0.85), true));
+        }
+      }
+      function showPanel() {
+        const l = byId.get(selected);
+        const s = stateOf(selected);
+        const before = l.prerequisites.map((p) => byId.get(p));
+        const after = lessons.filter((x) => x.prerequisites.includes(selected));
+        const chip = (x) => `<button type="button" data-go="${x.id}" data-s="${stateOf(x.id)}">${lessonShortLabel(x.id, x.title)}</button>`;
+        panel.innerHTML = `
+          <button type="button" class="tr-icon tr-panel-x" aria-label="Fermer la fiche">×</button>
+          <p class="tr-kicker">${LANE_NAMES[l.domain]} · ${l.minutes} min</p>
+          <h4>${l.title}</h4>
+          <p class="tr-state" data-s="${s}"><i></i>${s === "done" ? "Validée : quiz réussi" : s === "open" ? "Tu peux la faire maintenant" : "Il faut d’abord valider ce qui vient avant"}</p>
+          <p class="tr-sum">${l.summary || ""}</p>
+          ${before.length ? `<div class="tr-rel"><span>Il faut savoir avant</span><div>${before.map(chip).join("")}</div></div>` : `<div class="tr-rel"><span>C’est une base : rien à savoir avant.</span></div>`}
+          ${after.length ? `<div class="tr-rel"><span>Ça ouvre ensuite</span><div>${after.map(chip).join("")}</div></div>` : ""}
+          <button type="button" class="tr-go">${s === "done" ? "Revoir la leçon" : "Ouvrir la leçon"} →</button>`;
+        panel.dataset.on = "";
+        panel.querySelector(".tr-panel-x").onclick = () => select(null);
+        panel.querySelectorAll("[data-go]").forEach((b) => (b.onclick = () => select(b.dataset.go)));
+        panel.querySelector(".tr-go").onclick = () => {
+          const id = selected;
+          closeFull();
+          W_.setTimeout(() => (W_.location.hash = `#lesson/${id}`), 620);
+        };
+      }
+      function hidePanel() {
+        if (panel) delete panel.dataset.on;
+      }
+
+      function wire() {
+        full.querySelector(".tr-close").onclick = closeFull;
+        full.querySelectorAll(".tr-chips [data-lane]").forEach((b) => (b.onclick = () => startView(b.dataset.lane)));
+        full.querySelector('[data-z="+"]').onclick = () => zoomAt(1.25, W_.innerWidth / 2, W_.innerHeight / 2, true);
+        full.querySelector('[data-z="-"]').onclick = () => zoomAt(0.8, W_.innerWidth / 2, W_.innerHeight / 2, true);
+        full.querySelector('[data-z="fit"]').onclick = () => {
+          select(null, false);
+          fitAll(true);
+        };
+        // Glisser (souris, doigt) et pincer (deux doigts).
+        const pts = new Map();
+        let last = null, moved = 0, pinch = null;
+        view.addEventListener("pointerdown", (e) => {
+          pts.set(e.pointerId, { x: e.clientX, y: e.clientY });
+          view.setPointerCapture(e.pointerId);
+          last = { x: e.clientX, y: e.clientY };
+          moved = 0;
+          if (pts.size === 2) {
+            const [a, b] = [...pts.values()];
+            pinch = { d: Math.hypot(a.x - b.x, a.y - b.y), k };
+          }
+        });
+        view.addEventListener("pointermove", (e) => {
+          if (!pts.has(e.pointerId)) return;
+          pts.set(e.pointerId, { x: e.clientX, y: e.clientY });
+          if (pts.size === 2 && pinch) {
+            const [a, b] = [...pts.values()];
+            const d = Math.hypot(a.x - b.x, a.y - b.y);
+            zoomAt((pinch.k * d) / pinch.d / k, (a.x + b.x) / 2, (a.y + b.y) / 2, false);
+            moved = 99;
+            return;
+          }
+          const dx = e.clientX - last.x, dy = e.clientY - last.y;
+          moved += Math.abs(dx) + Math.abs(dy);
+          if (moved > 4) {
+            view.dataset.drag = "";
+            full.dataset.moved = "";
+          }
+          tx += dx;
+          ty += dy;
+          last = { x: e.clientX, y: e.clientY };
+          apply(false);
+        });
+        const up = (e) => {
+          pts.delete(e.pointerId);
+          if (pts.size < 2) pinch = null;
+          if (!pts.size) {
+            delete view.dataset.drag;
+            if (moved <= 4) {
+              const node = D.elementFromPoint(e.clientX, e.clientY)?.closest(".tr-node");
+              if (node) select(node.dataset.id);
+              else if (selected) select(null);
+            }
+          }
+          if (pts.size === 1) last = [...pts.values()][0];
+        };
+        view.addEventListener("pointerup", up);
+        view.addEventListener("pointercancel", up);
+        view.addEventListener(
+          "wheel",
+          (e) => {
+            e.preventDefault();
+            full.dataset.moved = "";
+            if (e.ctrlKey || e.metaKey) zoomAt(Math.exp(-e.deltaY * 0.01), e.clientX, e.clientY, false);
+            else {
+              tx -= e.deltaX;
+              ty -= e.deltaY;
+              apply(false);
+            }
+          },
+          { passive: false },
+        );
+        canvas.addEventListener("keydown", (e) => {
+          const node = e.target.closest(".tr-node");
+          if (node && (e.key === "Enter" || e.key === " ")) {
+            e.preventDefault();
+            select(node.dataset.id);
+          }
+        });
+        canvas.addEventListener("focusin", (e) => {
+          const node = e.target.closest(".tr-node");
+          if (!node) return;
+          const r = node.getBoundingClientRect();
+          if (r.left < 20 || r.right > W_.innerWidth - panelW() - 20 || r.top < 110 || r.bottom > W_.innerHeight - 80) {
+            const p = pos[node.dataset.id];
+            centerOn(p.x + W / 2, p.y + H / 2, null, true);
+          }
+        });
+        full.addEventListener("keydown", (e) => {
+          if (e.key === "Escape") {
+            e.stopPropagation();
+            if (selected) select(null);
+            else closeFull();
+          } else if (e.key === "+" || e.key === "=") zoomAt(1.2, W_.innerWidth / 2, W_.innerHeight / 2, true);
+          else if (e.key === "-") zoomAt(1 / 1.2, W_.innerWidth / 2, W_.innerHeight / 2, true);
+          else if (e.key.startsWith("Arrow") && !e.target.closest(".tr-node")) {
+            const s = 60;
+            tx += e.key === "ArrowLeft" ? s : e.key === "ArrowRight" ? -s : 0;
+            ty += e.key === "ArrowUp" ? s : e.key === "ArrowDown" ? -s : 0;
+            apply(true);
+          }
+        });
+      }
+
+      // ---------------------------------------------------------------- Branchements
+      function boot() {
+        W_ = frame.contentWindow;
+        D = frame.contentDocument;
+        done = readDone();
+        buildInline();
+        W_.addEventListener("resize", () => {
+          fitInline();
+        });
+      }
+      frame.addEventListener("load", async () => {
+        W_ = frame.contentWindow;
+        D = frame.contentDocument;
+        for (let i = 0; i < 80 && !D.querySelector(".knowledge-atlas"); i += 1) await new Promise((r) => setTimeout(r, 100));
+        boot();
+        // L'appli redessine la page quand on change d'espace : on repose l'arbre au retour.
+        setInterval(() => {
+          if (D.querySelector(".knowledge-atlas") && !D.querySelector(".tr-inline")) buildInline();
+        }, 500);
+      });
+
+      document.getElementById("open").onclick = () => {
+        if (!D.querySelector(".tr-inline")) {
+          W_.location.hash = "#skills";
+          setTimeout(() => openFull(null), 900);
+        } else openFull(null);
+      };
+      document.getElementById("learn").onclick = () => {
+        const n = nextId();
+        if (!n) return;
+        done.add(n);
+        if (full) {
+          const keep = selected;
+          const old = canvas;
+          canvas = drawCanvas(D, true);
+          canvas.style.transform = old.style.transform;
+          old.replaceWith(canvas);
+          selected = keep;
+          paintFocus(canvas);
+          canvas.querySelector(`[data-id="${n}"]`)?.setAttribute("data-pop", "");
+          full.querySelector(".tr-title span").textContent = `${done.size} sur ${lessons.length} validées · glisse pour te déplacer`;
+        }
+        buildInline();
+        if (!full) frameEl.querySelector(`[data-id="${n}"]`)?.setAttribute("data-pop", "");
+        else frameEl.dataset.hidden = "";
+      };
+      document.getElementById("reset").onclick = () => {
+        done = readDone();
+        selected = null;
+        if (full) closeFull();
+        setTimeout(buildInline, full ? 650 : 0);
+      };
+      for (const device of ["desktop", "phone"]) {
+        document.getElementById(device).onclick = () => {
+          stage.dataset.device = device;
+          document.getElementById("desktop").setAttribute("aria-pressed", String(device === "desktop"));
+          document.getElementById("phone").setAttribute("aria-pressed", String(device === "phone"));
+          setTimeout(fitInline, 300);
+        };
+      }
+    </script>
+  </body>
+</html>

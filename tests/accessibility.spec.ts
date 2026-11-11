@@ -247,6 +247,11 @@ test("le diagnostic et le quiz gardent un repère clavier à chaque étape", asy
     .getByRole("button", { name: "Entrer dans l’Académie" })
     .press("Enter");
   await expect(page.getByRole("main")).toBeFocused();
+  // La visite de bienvenue s'ouvre juste après le questionnaire : la passer.
+  const welcome = page.getByRole("dialog", { name: "Tes espaces" });
+  await expect(welcome).toBeVisible();
+  await welcome.getByRole("button", { name: "Passer" }).press("Enter");
+  await expect(welcome).toHaveCount(0);
   await page.goto(`/#lesson/${lesson.id}`);
   const previous = page.getByRole("button", {
     name: "Séquence précédente",

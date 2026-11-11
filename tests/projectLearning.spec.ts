@@ -1,4 +1,5 @@
 import { readFile } from "node:fs/promises";
+import { pickInTree } from "./treeHelpers";
 import { test, expect, type Page } from "@playwright/test";
 import { lessons, type Lesson } from "../src/data/lessons";
 import type { AppState, Attempt } from "../src/lib/types";
@@ -209,11 +210,7 @@ test("choisir des objectifs explicites dérive les prérequis sans transformer l
   expect((await stored(page)).projects[0]).toEqual(withGoals);
   await expect(steps(page).getByRole("listitem")).toHaveCount(5);
   await page.goto("/#skills");
-  await page
-    .getByRole("button", {
-      name: /Automatisation ou agent.*À explorer/,
-    })
-    .click();
+  await pickInTree(page, /Automatisation ou agent.*À explorer/);
   const goalLinks = page
     .getByRole("heading", {
       name: "Objectif dans vos projets",

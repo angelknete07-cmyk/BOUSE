@@ -1,4 +1,4 @@
-import { useId, useRef, useState, type CSSProperties } from "react";
+import { useRef, useState } from "react";
 import { lessonShortLabel } from "../data/lessonLabels";
 import { lessons, type Lesson } from "../data/lessons";
 import type { AppState, Attempt } from "../lib/types";
@@ -6,16 +6,12 @@ import { Icon } from "./Icon";
 import { currentQuizAttempts, latestCurrentAttempt } from "../lib/portfolio";
 import { useClock } from "../lib/useClock";
 import { recommendLesson } from "../lib/recommendation";
-import { columnLayout } from "../lib/mapLayout";
+import { SkillTree, type TreeStatus } from "./SkillTree";
 
 type Props = {
   state: AppState;
   onNavigate: (route: string) => void;
 };
-
-// One column per domain, laid out from the catalogue: new lessons find their place.
-const { positions, height: canvasHeight } = columnLayout(lessons);
-const columnStep = (88 / canvasHeight) * 100;
 
 function latestAttempt(state: AppState, id: string, now: Date) {
   const lesson = lessons.find((entry) => entry.id === id);
@@ -40,7 +36,6 @@ export function KnowledgeMap({ state, onNavigate }: Props) {
       : recommendLesson(state, now).current.id,
   );
   const detailRef = useRef<HTMLElement>(null);
-  const markerId = `knowledge-arrow-${useId().replace(/[^a-zA-Z0-9_-]/g, "")}`;
   const selected = lessons.find((lesson) => lesson.id === selectedId)!;
   const latest = latestAttempt(state, selected.id, now);
   const attempts = currentQuizAttempts(selected, state.attempts, now);
@@ -57,12 +52,21 @@ export function KnowledgeMap({ state, onNavigate }: Props) {
     const attempt = latestAttempt(state, lesson.id, now);
     return attempt && !attempt.passed;
   }).length;
-  const edges = lessons.flatMap((lesson) =>
-    lesson.prerequisites.map((prerequisite) => ({
-      from: prerequisite,
-      to: lesson.id,
-    })),
-  );
+  // L'état de chaque leçon dans l'arbre, d'après le dernier quiz courant.
+  const statuses: Record<string, TreeStatus> = {};
+  const passed = (id: string) => latestAttempt(state, id, now)?.passed;
+  for (const lesson of lessons) {
+    const attempt = latestAttempt(state, lesson.id, now);
+    statuses[lesson.id] = attempt
+      ? attempt.passed
+        ? "done"
+        : "retry"
+      : lesson.prerequisites.every(passed)
+        ? "open"
+        : "wait";
+  }
+  const recommended = recommendLesson(state, now).current.id;
+  const nextId = statuses[recommended] === "done" ? null : recommended;
   const linkedProjects = state.projects.filter((project) =>
     project.lessonIds.includes(selected.id),
   );
@@ -91,9 +95,9 @@ export function KnowledgeMap({ state, onNavigate }: Props) {
           <p className="eyebrow">VOTRE CARTE DE CONNAISSANCES</p>
           <h1>Relier les idées. Trouver la suite.</h1>
           <p>
-            D’abord où vous en êtes. Ensuite, la carte complète relie chaque
-            notion à ses prérequis : sélectionnez un point pour voir vos
-            preuves.
+            D’abord où vous en êtes. Ensuite, l’arbre range chaque notion dans
+            sa branche, des bases vers la suite : agrandissez-le et touchez une
+            leçon pour voir vos preuves.
           </p>
         </div>
         <button className="text-button" onClick={() => onNavigate("portfolio")}>
@@ -102,142 +106,23 @@ export function KnowledgeMap({ state, onNavigate }: Props) {
       </header>
       <SkillsSummary state={state} now={now} onNavigate={onNavigate} />
       <h2 className="knowledge-full-title">
-        La carte complète{" "}
+        L’arbre complet{" "}
         <small>
           {verified} validée{verified > 1 ? "s" : ""} · {toReview} à reprendre ·{" "}
           {lessons.length} notions reliées
         </small>
       </h2>
       <div className="knowledge-explorer">
-        <section className="knowledge-atlas" aria-label="Carte des prérequis">
-          <div className="knowledge-map-key" role="group" aria-label="Légende">
-            <span>
-              <i className="knowledge-key-point" /> À explorer
-            </span>
-            <span>
-              <Icon name="check" size={12} /> Quiz validé
-            </span>
-            <span>
-              <span aria-hidden="true">↺</span> À reprendre
-            </span>
-          </div>
-          <div className="knowledge-scroll">
-            <div
-              className="knowledge-canvas"
-              style={{ "--map-height": `${canvasHeight}px` } as CSSProperties}
-              role="group"
-              aria-label="Notions à explorer sur la carte"
-            >
-              <div className="knowledge-lanes" aria-hidden="true">
-                <span>Finance</span>
-                <span>Entrepreneuriat</span>
-                <span>Intelligence artificielle</span>
-                <span>Finance personnelle</span>
-                <span>Investissement</span>
-              </div>
-              <svg
-                className="knowledge-connections"
-                viewBox={`0 0 1000 ${canvasHeight}`}
-                preserveAspectRatio="none"
-                fill="none"
-                aria-hidden="true"
-              >
-                <defs>
-                  <marker
-                    id={markerId}
-                    viewBox="0 0 10 10"
-                    refX="8"
-                    refY="5"
-                    markerWidth="5"
-                    markerHeight="5"
-                    orient="auto-start-reverse"
-                  >
-                    <path
-                      d="M 1 1 L 8 5 L 1 9"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.4"
-                    />
-                  </marker>
-                </defs>
-                {edges.map((edge) => {
-                  const from = positions[edge.from];
-                  const to = positions[edge.to];
-                  if (!from || !to) return null;
-                  const scale = canvasHeight / 100;
-                  // A link that skips notions in its column bows around them.
-                  const bypass =
-                    from.x === to.x &&
-                    Math.abs(to.y - from.y) > columnStep * 1.5;
-                  const fromX = from.x * 10;
-                  const fromY = from.y * scale;
-                  const toX = to.x * 10;
-                  const toY = to.y * scale;
-                  const d = bypass
-                    ? `M ${fromX - 18} ${fromY} C ${fromX - 160} ${fromY + 40}, ${toX - 160} ${toY - 40}, ${toX - 20} ${toY}`
-                    : from.x === to.x
-                      ? `M ${fromX} ${fromY + 19} L ${toX} ${toY - 23}`
-                      : `M ${fromX + 20} ${fromY} C ${(fromX + toX) / 2} ${fromY}, ${(fromX + toX) / 2} ${toY}, ${toX - 22} ${toY}`;
-                  const active =
-                    edge.from === selectedId || edge.to === selectedId;
-                  return (
-                    <path
-                      key={`${edge.from}-${edge.to}`}
-                      d={d}
-                      className={active ? "is-related" : ""}
-                      markerEnd={`url(#${markerId})`}
-                      vectorEffect="non-scaling-stroke"
-                    />
-                  );
-                })}
-              </svg>
-              {lessons.map((lesson) => {
-                const position = positions[lesson.id];
-                if (!position) return null;
-                const attempt = latestAttempt(state, lesson.id, now);
-                return (
-                  <button
-                    key={lesson.id}
-                    type="button"
-                    className={`knowledge-node ${selectedId === lesson.id ? "is-selected" : ""} ${attempt?.passed ? "is-verified" : ""}`}
-                    style={
-                      {
-                        "--node-x": `${position.x}%`,
-                        "--node-y": `${position.y}%`,
-                      } as CSSProperties
-                    }
-                    aria-describedby={`knowledge-description-${lesson.id}`}
-                    aria-pressed={selectedId === lesson.id}
-                    aria-controls="knowledge-details"
-                    onClick={() => select(lesson.id)}
-                  >
-                    <span className="knowledge-node-point" aria-hidden="true">
-                      {attempt?.passed ? (
-                        <Icon name="check" size={14} />
-                      ) : attempt ? (
-                        <Icon name="clock" size={14} />
-                      ) : (
-                        <span className="knowledge-node-core" />
-                      )}
-                    </span>
-                    <span className="knowledge-node-label">
-                      {lessonShortLabel(lesson.id, lesson.title)}
-                    </span>
-                    <span hidden id={`knowledge-description-${lesson.id}`}>
-                      {lesson.title}
-                    </span>
-                    <span className="knowledge-node-status">
-                      {statusLabel(attempt)}
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-          <p className="knowledge-map-caption">
-            <Icon name="arrow" size={14} /> Une flèche relie un prérequis à la
-            notion suivante. Les liens ne bloquent pas votre exploration.
-          </p>
+        <section
+          className="knowledge-atlas"
+          aria-label="L’arbre des compétences"
+        >
+          <SkillTree
+            statuses={statuses}
+            nextId={nextId}
+            onSelect={setSelectedId}
+            onNavigate={onNavigate}
+          />
         </section>
         <article
           className="knowledge-details"

@@ -6,6 +6,7 @@ import {
   type TestInfo,
 } from "@playwright/test";
 import { lessons } from "../src/data/lessons";
+import { closeTree, openTree, pickInTree } from "./treeHelpers";
 import type { AppState } from "../src/lib/types";
 
 const lesson = lessons.find((item) => item.id === "ca-marge-tresorerie")!;
@@ -423,7 +424,12 @@ test("galerie des écrans et du quiz validé sans débordement", async ({
       const promptLesson = lessons.find(
         (item) => item.id === "prompt-structure",
       )!;
-      await page.getByRole("button", { name: /^Structurer un prompt/ }).click();
+      const tree = await openTree(page);
+      await capture(page, testInfo, "09-competences-arbre");
+      await tree.getByRole("button", { name: /^Structurer un prompt/ }).click();
+      await page.waitForTimeout(700);
+      await capture(page, testInfo, "09-competences-arbre-lecon");
+      await closeTree(page);
       await expect(
         page
           .locator(".knowledge-details")
@@ -798,11 +804,7 @@ test("galerie des écrans et du quiz validé sans débordement", async ({
   ).toContainText("Quiz validé");
   await capture(page, testInfo, "15-project-learning-updated");
   await page.goto("/#skills");
-  await page
-    .getByRole("button", {
-      name: /^Seuil de rentabilité.*Quiz validé/,
-    })
-    .click();
+  await pickInTree(page, /^Seuil de rentabilité.*Quiz validé/);
   await expect(
     page.getByRole("heading", {
       name: "Objectif dans vos projets",

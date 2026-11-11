@@ -1,4 +1,5 @@
 import { readFile } from "node:fs/promises";
+import { closeTree, openTree } from "./treeHelpers";
 import { test, expect, type Page } from "@playwright/test";
 import { lessons } from "../src/data/lessons";
 import type { AppState, Attempt } from "../src/lib/types";
@@ -189,11 +190,13 @@ test("le portfolio relie le dernier quiz courant aux notes et aux dossiers sans 
 }) => {
   const initial = stateFixture();
   await open(page, initial, "skills");
+  const tree = await openTree(page);
   await expect(
-    page.getByRole("button", {
+    tree.getByRole("button", {
       name: /Marge et trésorerie.*À reprendre/,
     }),
   ).toBeVisible();
+  await closeTree(page);
   await page
     .getByRole("button", { name: "Ouvrir mon portfolio", exact: true })
     .click();

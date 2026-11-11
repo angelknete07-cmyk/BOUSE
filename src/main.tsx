@@ -21,6 +21,7 @@ import "./fusion.css";
 import "./console.css";
 import "./comfort.css";
 import "./guide.css";
+import "./skill-tree.css";
 import { restoreEasyReading } from "./components/Comfort";
 
 restoreEasyReading();

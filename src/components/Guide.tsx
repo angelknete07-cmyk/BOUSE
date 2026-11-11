@@ -149,8 +149,8 @@ const tours: Record<string, Step[]> = {
     },
     {
       targets: [".knowledge-atlas"],
-      title: "La carte",
-      text: "Chaque rond est une notion. Les traits montrent ce qu’il faut savoir avant. Touche un rond.",
+      title: "L’arbre",
+      text: "Une branche par sujet, des bases vers la suite. Les traits montrent ce qu’il faut savoir avant. « Agrandir l’arbre » l’ouvre en grand : glisse, zoome, touche une leçon.",
     },
     {
       targets: [".knowledge-details"],
