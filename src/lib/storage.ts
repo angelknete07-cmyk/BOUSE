@@ -123,6 +123,16 @@ export function parseState(raw: string): AppState {
     (typeof s.activePathId !== "string" || s.activePathId.length > 80)
   )
     throw new Error("Parcours choisi invalide.");
+  if (
+    s.domains !== undefined &&
+    (!Array.isArray(s.domains) ||
+      s.domains.length > 40 ||
+      !s.domains.every(
+        (id: unknown) => typeof id === "string" && id.length <= 40,
+      ) ||
+      new Set(s.domains).size !== s.domains.length)
+  )
+    throw new Error("Domaines choisis invalides.");
   if (s.reviewEvents !== undefined) {
     if (!Array.isArray(s.reviewEvents) || !s.reviewEvents.every(isReviewEvent))
       throw new Error("Historique de révision invalide.");

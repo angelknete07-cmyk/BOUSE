@@ -1,3 +1,20 @@
+# Review design — Catalogue des compétences (idées 13 et 15)
+
+**11 novembre 2026.** **La direction artistique n’est pas déclarée validée.** Maquette `maquette/catalogue.html` montrée avant ; l’utilisateur a demandé « Fait le catalogue » puis « Fait tout dans l’ordre sens demander ». Paire principale : la page d’un domaine (`11-catalogue-domaine`), archive `2026-11-11_21-45-08-Europe-Paris`.
+
+- **21 domaines, 168 compétences** (`src/data/catalogue.ts`), rangés en quatre familles (Ton argent, Ton activité, Ton travail, Le numérique), chacun du débutant total à l’expert (Découvrir, Savoir faire, Maîtriser, Expert). Les 43 leçons existantes y sont toutes rangées (« Prête ») ; les 125 autres sont annoncées (« Bientôt ») avec ce qu’elles apprendront et le modèle qu’on gardera.
+- **Choisir ses domaines** : au début (questionnaire, « Ce qui t’intéresse », cinq domaines cochés d’office, deux colonnes sur téléphone) et à tout moment (page « Qu’est-ce qui t’intéresse ? », cartes à cocher, barre collante « N domaines choisis · C’est parti »). Il reste toujours au moins un domaine. Choix gardé dans la sauvegarde (champ `domains`, vérifié) ; les anciens profils gardent les cinq domaines des premières leçons.
+- **Académie** : bandeau « Tes domaines » (pastilles avec validées / total, « ＋ Ajouter un domaine »).
+- **Page d’un domaine** : pastilles pour passer d’un domaine à l’autre, carte « Ta prochaine étape » (bouton blanc), puis les quatre niveaux avec chaque compétence (Validée, À reprendre, Prête, Bientôt, modèle). Une compétence prête ouvre sa leçon, une « bientôt » ouvre sa fiche.
+- **Fiche d’une compétence** : niveau et durée, les trois temps (idée 2 min, geste 6 min, contrôle 2 min), son état, ce qu’il faut savoir avant et ce qu’elle ouvre ensuite.
+- **Arbre** : il montre maintenant les domaines choisis, avec toutes leurs compétences ; les « bientôt » sont en pointillés (légende « Bientôt »), et leur fiche mène à la fiche de la compétence. Les cartes de branches passent à la ligne sur ordinateur et défilent sur téléphone.
+- **Code** : `src/lib/catalogue.ts` (calculs testés), `src/components/Catalogue.tsx`, `src/components/DomainPicker.tsx`, `src/catalogue.css` ; branchements dans `App.tsx` (routes `domains`, `domain/…`, `skill/…`), `Academy.tsx`, `Onboarding.tsx`, `KnowledgeMap.tsx`, `SkillTree.tsx`. Vague et logo intouchés (`2c0c2a6c…`).
+- **Captures** : `11-catalogue-domaines`, `11-catalogue-domaine`, `11-catalogue-competence`, `01-onboarding`, `09-competences*` (ordinateur 1440×1000 et Pixel 7).
+- **Contrôles de l’agent** : `npm test` 274 (dont 9 nouveaux cas du catalogue) ; `npx playwright test` complet : 124 passés, 6 ignorés prévus ; nouveau `tests/domaines.spec.ts` (choix au début, Académie → domaine → fiche → ajout d’un domaine → arbre, aucune largeur en trop) ; l’audit d’accessibilité couvre les trois nouvelles pages ; `tsc`, build, Prettier. Corrigé pendant la revue : la liste du début était trop longue sur téléphone → deux colonnes.
+- **Limites** : les 125 compétences « bientôt » n’ont pas encore leur leçon (étape suivante) ; pas de vrai téléphone ; pas de validation externe.
+
+---
+
 # Review design — Arbre des compétences (idée 7)
 
 **11 novembre 2026.** **La direction artistique n’est pas déclarée validée.** Maquette (`maquette/arbre.html`, posée sur la vraie page « Mes compétences ») **validée par l’utilisateur** (« Oui, construis-le »). Demande d’origine : « on n’y comprend rien, les fils se croisent… le vouloir grand, zoomable, agrandi avec une animation ». Paire principale : le grand arbre ouvert (`09-competences-arbre-viewport`), archive `2026-11-11_17-31-23-Europe-Paris`.

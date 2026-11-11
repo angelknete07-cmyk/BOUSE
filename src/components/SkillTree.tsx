@@ -6,12 +6,11 @@ import {
   useState,
   type CSSProperties,
 } from "react";
+import { createContext, useContext, useMemo } from "react";
 import { createPortal } from "react-dom";
-import { lessonShortLabel } from "../data/lessonLabels";
-import { lessons } from "../data/lessons";
+import type { TreeNode } from "../lib/catalogue";
 import {
   TREE,
-  TREE_LANE_NAMES,
   skillTreeLayout,
   treeLinkPath,
   treePath,
@@ -23,11 +22,23 @@ import {
  * depuis l'aperçu, qu'on promène au doigt ou à la souris et qu'on zoome.
  */
 
-export type TreeStatus = "done" | "retry" | "open" | "wait";
+export type TreeStatus = "done" | "retry" | "open" | "wait" | "soon";
 
-const tree = skillTreeLayout(lessons);
-const byId = new Map(lessons.map((lesson) => [lesson.id, lesson]));
-const { width: W, height: H } = tree;
+/** Les nœuds, leur placement et le nom des branches, calculés une fois. */
+function makeModel(items: TreeNode[], laneNames: Record<string, string>) {
+  return {
+    items,
+    tree: skillTreeLayout(items),
+    byId: new Map(items.map((item) => [item.id, item])),
+    laneName: (domain: string) => laneNames[domain] ?? domain,
+  };
+}
+type Model = ReturnType<typeof makeModel>;
+const ModelContext = createContext<Model | null>(null);
+function useModel() {
+  const model = useContext(ModelContext)!;
+  return { ...model, W: model.tree.width, H: model.tree.height };
+}
 const NODE_W = TREE.nodeWidth;
 const NODE_H = TREE.nodeHeight;
 const PHONE = "(max-width: 700px)";
@@ -37,15 +48,20 @@ const STATUS_TEXT: Record<TreeStatus, string> = {
   retry: "À reprendre",
   open: "À explorer, tu peux la faire",
   wait: "À explorer après ses prérequis",
+  soon: "Bientôt, la leçon s’écrit",
 };
 const STATE_TEXT: Record<TreeStatus, string> = {
   done: "Validée : quiz réussi",
   retry: "À reprendre : le dernier quiz n’est pas passé",
   open: "Tu peux la faire maintenant",
   wait: "Il faut d’abord valider ce qui vient avant",
+  soon: "Bientôt : la leçon s’écrit en ce moment",
 };
 
 type Props = {
+  /** Les compétences des domaines choisis (catalogue). */
+  items: TreeNode[];
+  laneNames: Record<string, string>;
   statuses: Record<string, TreeStatus>;
   /** La leçon conseillée maintenant, si elle n'est pas déjà validée. */
   nextId: string | null;
@@ -85,7 +101,8 @@ function TreeCanvas({
   onPick?: (id: string) => void;
   canvasRef?: React.Ref<HTMLDivElement>;
 }) {
-  const path = selected ? treePath(lessons, selected) : null;
+  const { items, tree, W, H, laneName } = useModel();
+  const path = selected ? treePath(items, selected) : null;
   return (
     <div
       ref={canvasRef}
@@ -93,7 +110,7 @@ function TreeCanvas({
       data-focus={path ? "" : undefined}
       style={{ width: W, height: H }}
       role={interactive ? "group" : undefined}
-      aria-label={interactive ? "Les leçons de l’arbre" : undefined}
+      aria-label={interactive ? "Les compétences de l’arbre" : undefined}
       aria-hidden={interactive ? undefined : true}
     >
       <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} aria-hidden="true">
@@ -137,8 +154,7 @@ function TreeCanvas({
               className="tr-lane-name"
               style={{ left: TREE.padX, top: lane.top + 18 }}
             >
-              <strong>{TREE_LANE_NAMES[lane.domain] ?? lane.domain}</strong>
-              <em>{lane.domain}</em>
+              <strong>{laneName(lane.domain)}</strong>
               <span>
                 {count} / {lane.ids.length} validées
               </span>
@@ -164,11 +180,11 @@ function TreeCanvas({
             </span>
           );
         })}
-      {lessons.map((lesson) => {
+      {items.map((lesson) => {
         const point = tree.positions[lesson.id];
         if (!point) return null;
         const status = statuses[lesson.id] ?? "wait";
-        const label = lessonShortLabel(lesson.id, lesson.title);
+        const label = lesson.label;
         const next = lesson.id === nextId;
         return (
           <button
@@ -210,7 +226,23 @@ function TreeCanvas({
 
 type Opening = { nodeId: string | null; lane: string | null };
 
-export function SkillTree({ statuses, nextId, onSelect, onNavigate }: Props) {
+export function SkillTree({ items, laneNames, ...rest }: Props) {
+  const model = useMemo(() => makeModel(items, laneNames), [items, laneNames]);
+  return (
+    <ModelContext.Provider value={model}>
+      <InlineTree {...rest} />
+    </ModelContext.Provider>
+  );
+}
+
+function InlineTree({
+  statuses,
+  nextId,
+  onSelect,
+  onNavigate,
+}: Omit<Props, "items" | "laneNames">) {
+  const model = useModel();
+  const { tree, W, items, laneName } = model;
   const frameRef = useRef<HTMLDivElement>(null);
   const ctaRef = useRef<HTMLButtonElement>(null);
   const [scale, setScale] = useState(0.6);
@@ -226,7 +258,7 @@ export function SkillTree({ statuses, nextId, onSelect, onNavigate }: Props) {
     const observer = new ResizeObserver(fit);
     observer.observe(frame);
     return () => observer.disconnect();
-  }, []);
+  }, [W]);
 
   // À la fermeture, le clavier revient sur « Agrandir l'arbre » (une fois la
   // page redevenue active).
@@ -246,8 +278,8 @@ export function SkillTree({ statuses, nextId, onSelect, onNavigate }: Props) {
     <div className="tr-inline">
       <div className="tr-head">
         <p>
-          Chaque branche part des bases. Un trait relie une leçon à celle qu’il
-          faut savoir avant. {done} sur {lessons.length} validées.
+          Chaque branche part des bases. Un trait relie une compétence à celle
+          qu’il faut savoir avant. {done} sur {items.length} validées.
         </p>
         <ul className="tr-legend" aria-label="Légende">
           <li>
@@ -262,6 +294,9 @@ export function SkillTree({ statuses, nextId, onSelect, onNavigate }: Props) {
           <li>
             <i data-s="wait" /> Il faut d’abord la précédente
           </li>
+          <li>
+            <i data-s="soon" /> Bientôt
+          </li>
         </ul>
       </div>
       <ul className="tr-branches" aria-label="Les branches de l’arbre">
@@ -270,7 +305,7 @@ export function SkillTree({ statuses, nextId, onSelect, onNavigate }: Props) {
           return (
             <li key={lane.domain}>
               <button type="button" onClick={() => open(null, lane.domain)}>
-                <strong>{TREE_LANE_NAMES[lane.domain] ?? lane.domain}</strong>
+                <strong>{laneName(lane.domain)}</strong>
                 <span>
                   {count} / {lane.ids.length}
                   <span className="sr-only"> validées</span>
@@ -328,17 +363,19 @@ export function SkillTree({ statuses, nextId, onSelect, onNavigate }: Props) {
       </div>
       {opening &&
         createPortal(
-          <FullTree
-            opening={opening}
-            statuses={statuses}
-            nextId={nextId}
-            done={done}
-            frame={frameRef.current}
-            scale={scale}
-            onSelect={onSelect}
-            onNavigate={onNavigate}
-            onClosed={() => setOpening(null)}
-          />,
+          <ModelContext.Provider value={model}>
+            <FullTree
+              opening={opening}
+              statuses={statuses}
+              nextId={nextId}
+              done={done}
+              frame={frameRef.current}
+              scale={scale}
+              onSelect={onSelect}
+              onNavigate={onNavigate}
+              onClosed={() => setOpening(null)}
+            />
+          </ModelContext.Provider>,
           document.body,
         )}
     </div>
@@ -366,6 +403,7 @@ function FullTree({
   onNavigate: (route: string) => void;
   onClosed: () => void;
 }) {
+  const { items, tree, byId, W, H, laneName } = useModel();
   const rootRef = useRef<HTMLDivElement>(null);
   const viewRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLDivElement>(null);
@@ -691,16 +729,16 @@ function FullTree({
     ? lesson.prerequisites.flatMap((id) => byId.get(id) ?? [])
     : [];
   const after = lesson
-    ? lessons.filter((item) => item.prerequisites.includes(lesson.id))
+    ? items.filter((item) => item.prerequisites.includes(lesson.id))
     : [];
-  const chip = (item: (typeof lessons)[number]) => (
+  const chip = (item: TreeNode) => (
     <button
       type="button"
       key={item.id}
       data-s={statuses[item.id]}
       onClick={() => pick(item.id)}
     >
-      {lessonShortLabel(item.id, item.title)}
+      {item.label}
     </button>
   );
 
@@ -751,7 +789,7 @@ function FullTree({
         <div className="tr-title">
           <h2>L’arbre de tes compétences</h2>
           <span>
-            {done} sur {lessons.length} validées · glisse pour te déplacer
+            {done} sur {items.length} validées · glisse pour te déplacer
           </span>
         </div>
         <div className="tr-chips" role="group" aria-label="Aller à une branche">
@@ -764,7 +802,7 @@ function FullTree({
                 showLane(lane.domain);
               }}
             >
-              {TREE_LANE_NAMES[lane.domain] ?? lane.domain}
+              {laneName(lane.domain)}
             </button>
           ))}
         </div>
@@ -828,8 +866,7 @@ function FullTree({
               ×
             </button>
             <p className="tr-kicker">
-              {TREE_LANE_NAMES[lesson.domain] ?? lesson.domain} ·{" "}
-              {lesson.minutes} min
+              {laneName(lesson.domain)} · {lesson.minutes} min
             </p>
             <h3>{lesson.title}</h3>
             <p className="tr-state" data-s={status}>
@@ -837,6 +874,9 @@ function FullTree({
               {STATE_TEXT[status]}
             </p>
             <p className="tr-sum">{lesson.summary}</p>
+            {!lesson.lesson && lesson.gesture && (
+              <p className="tr-sum">Tu repars avec : {lesson.gesture}.</p>
+            )}
             {before.length ? (
               <div className="tr-rel">
                 <span>Il faut savoir avant</span>
@@ -857,15 +897,19 @@ function FullTree({
               type="button"
               className="tr-go"
               onClick={() => {
-                const id = lesson.id;
-                close(() => onNavigate(`lesson/${id}`));
+                const target = lesson.lesson
+                  ? `lesson/${lesson.lesson}`
+                  : `skill/${lesson.id}`;
+                close(() => onNavigate(target));
               }}
             >
-              {status === "done"
-                ? "Revoir la leçon"
-                : status === "retry"
-                  ? "Réviser la leçon"
-                  : "Ouvrir la leçon"}{" "}
+              {status === "soon"
+                ? "Voir la compétence"
+                : status === "done"
+                  ? "Revoir la leçon"
+                  : status === "retry"
+                    ? "Réviser la leçon"
+                    : "Ouvrir la leçon"}{" "}
               →
             </button>
           </div>

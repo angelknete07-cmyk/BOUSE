@@ -61,9 +61,14 @@
 .tr-legend i[data-s="wait"] {
   opacity: 0.5;
 }
+.tr-legend i[data-s="soon"] {
+  border-style: dashed;
+  background: transparent;
+  opacity: 0.6;
+}
 .tr-branches {
   display: grid;
-  grid-template-columns: repeat(5, minmax(132px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   gap: 8px;
   margin: 0;
   padding: 0;
@@ -393,6 +398,17 @@
 }
 .tr-node[data-s="wait"] .tr-dot {
   border-style: dashed;
+}
+/* Bientôt : la compétence est prévue, sa leçon s'écrit encore. */
+.tr-node[data-s="soon"] {
+  color: var(--text-tertiary);
+  background: transparent;
+  border-style: dashed;
+  box-shadow: none;
+}
+.tr-node[data-s="soon"] .tr-dot {
+  border-style: dashed;
+  opacity: 0.6;
 }
 .tr-node[data-next] {
   border-color: var(--text);
@@ -799,7 +815,9 @@
 
 @media (max-width: 700px) {
   .tr-branches {
-    grid-template-columns: repeat(5, 150px);
+    grid-auto-flow: column;
+    grid-template-columns: none;
+    grid-auto-columns: 150px;
   }
   .tr-frame {
     height: 440px;

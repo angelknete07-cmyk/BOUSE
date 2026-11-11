@@ -1,0 +1,684 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Maquette — catalogue des compétences BOUSE</title>
+    <!--
+      MAQUETTE, pas le produit (idées 13 et 15 d'Angel). Les données sont les
+      vraies (src/data/catalogue.ts) ; l'habillage reprend les jetons de
+      l'appli. Ouvrir : http://localhost:5173/maquette/catalogue.html
+    -->
+    <link rel="stylesheet" href="/src/tokens.css" />
+    <style>
+      :root {
+        color-scheme: dark;
+        --ease: cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text-secondary);
+        font: 15px/1.5 var(--font-sans);
+      }
+      .bar {
+        position: sticky;
+        top: 0;
+        z-index: 5;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px 10px;
+        padding: 10px 16px;
+        border-bottom: 1px solid var(--line-strong);
+        background: rgb(13 13 15 / 0.92);
+        backdrop-filter: blur(10px);
+      }
+      .bar strong {
+        color: var(--text);
+        font-weight: 550;
+        margin-right: 6px;
+      }
+      .bar button,
+      .pill {
+        min-height: 36px;
+        padding: 0 14px;
+        border: 1px solid var(--line-strong);
+        border-radius: 999px;
+        background: var(--surface);
+        color: var(--text-secondary);
+        font: 500 13px/1 var(--font-sans);
+        cursor: pointer;
+        transition:
+          color 140ms var(--ease),
+          border-color 140ms var(--ease),
+          background-color 140ms var(--ease),
+          transform 140ms var(--ease);
+      }
+      .bar button:hover,
+      .pill:hover {
+        color: var(--text);
+        border-color: var(--text-tertiary);
+      }
+      .bar button:active,
+      .pill:active {
+        transform: scale(0.97);
+      }
+      .bar button[aria-pressed="true"] {
+        background: var(--text);
+        color: var(--text-inverse);
+        border-color: transparent;
+      }
+      main {
+        max-width: 1080px;
+        margin: 0 auto;
+        padding: 36px 20px 80px;
+      }
+      [hidden] {
+        display: none !important;
+      }
+      .view {
+        animation: in 360ms var(--ease) both;
+      }
+      @keyframes in {
+        from {
+          opacity: 0;
+          transform: translateY(8px);
+        }
+      }
+      .eyebrow {
+        margin: 0 0 8px;
+        color: var(--text-tertiary);
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      h1 {
+        margin: 0 0 10px;
+        color: var(--text);
+        font: 600 clamp(26px, 4vw, 34px) / 1.15 var(--font-display);
+        letter-spacing: -0.02em;
+      }
+      h2 {
+        margin: 0;
+        color: var(--text);
+        font: 550 17px/1.3 var(--font-display);
+      }
+      .lead {
+        max-width: 60ch;
+        margin: 0 0 28px;
+      }
+      .primary {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        min-height: 46px;
+        padding: 0 22px;
+        border: 0;
+        border-radius: 999px;
+        background: var(--text);
+        color: var(--text-inverse);
+        font: 550 14.5px/1 var(--font-sans);
+        cursor: pointer;
+        box-shadow:
+          inset 0 1px 0 rgb(255 255 255 / 0.7),
+          0 8px 24px rgb(0 0 0 / 0.4);
+        transition:
+          transform 160ms var(--ease),
+          background-color 160ms var(--ease);
+      }
+      .primary:hover {
+        background: #fff;
+      }
+      .primary:active {
+        transform: scale(0.97);
+      }
+
+      /* ---------- 1. Choisir ses domaines ---------- */
+      .group {
+        margin: 0 0 26px;
+      }
+      .group > p {
+        margin: 0 0 10px;
+        color: var(--text);
+        font-weight: 550;
+      }
+      .domains {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+        gap: 10px;
+      }
+      .domain {
+        position: relative;
+        display: grid;
+        gap: 6px;
+        align-content: start;
+        min-height: 128px;
+        padding: 16px 16px 14px;
+        border: 1px solid var(--line-strong);
+        border-radius: 14px;
+        background:
+          linear-gradient(180deg, rgb(255 255 255 / 0.03), transparent),
+          var(--surface-low);
+        color: var(--text-secondary);
+        font: inherit;
+        text-align: left;
+        cursor: pointer;
+        transition:
+          border-color 200ms var(--ease),
+          background-color 200ms var(--ease),
+          transform 200ms var(--ease);
+      }
+      .domain:hover {
+        border-color: var(--text-tertiary);
+        transform: translateY(-1px);
+      }
+      .domain:active {
+        transform: scale(0.98);
+      }
+      .domain b {
+        padding-right: 30px;
+        color: var(--text);
+        font-weight: 550;
+        line-height: 1.3;
+      }
+      .domain span {
+        font-size: 13px;
+        line-height: 1.45;
+      }
+      .domain small {
+        margin-top: auto;
+        color: var(--text-tertiary);
+        font-size: 12px;
+      }
+      .tick {
+        position: absolute;
+        right: 14px;
+        top: 14px;
+        display: grid;
+        place-items: center;
+        width: 24px;
+        height: 24px;
+        border: 1px solid var(--line-strong);
+        border-radius: 50%;
+        color: transparent;
+        transition:
+          background-color 200ms var(--ease),
+          border-color 200ms var(--ease),
+          color 200ms var(--ease),
+          transform 320ms cubic-bezier(0.34, 1.5, 0.5, 1);
+      }
+      .domain[aria-pressed="true"] {
+        border-color: rgb(var(--accent-violet-rgb) / 0.55);
+        background:
+          linear-gradient(180deg, rgb(var(--accent-violet-rgb) / 0.08), transparent),
+          var(--surface-low);
+      }
+      .domain[aria-pressed="true"] .tick {
+        border-color: rgb(var(--accent-violet-rgb) / 0.8);
+        background: rgb(var(--accent-violet-deep));
+        color: rgb(var(--accent-violet-ink));
+        transform: scale(1.06);
+      }
+      .chooser-foot {
+        position: sticky;
+        bottom: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        margin-top: 10px;
+        padding: 12px 12px 12px 20px;
+        border: 1px solid var(--line-strong);
+        border-radius: 999px;
+        background: rgb(20 20 23 / 0.92);
+        backdrop-filter: blur(12px);
+        box-shadow: 0 18px 40px rgb(0 0 0 / 0.5);
+      }
+
+      /* ---------- 2. Un domaine ---------- */
+      .domain-head {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 22px;
+      }
+      .domain-pick {
+        display: flex;
+        gap: 6px;
+        overflow-x: auto;
+        margin: 0 0 26px;
+        padding-bottom: 4px;
+        scrollbar-width: none;
+      }
+      .domain-pick .pill[aria-pressed="true"] {
+        color: var(--text);
+        border-color: var(--text);
+      }
+      .next {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+        gap: 6px 20px;
+        margin: 0 0 30px;
+        padding: 22px 24px;
+        border: 1px solid var(--line-strong);
+        border-radius: 16px;
+        background:
+          radial-gradient(90% 120% at 0% 0%, rgb(var(--accent-violet-rgb) / 0.08), transparent 60%),
+          var(--raised);
+        box-shadow: var(--highlight-edge), 0 18px 40px rgb(0 0 0 / 0.35);
+      }
+      .next .eyebrow {
+        grid-column: 1 / -1;
+        margin: 0;
+        color: var(--text);
+      }
+      .next .eyebrow::before {
+        content: "";
+        display: inline-block;
+        width: 6px;
+        height: 6px;
+        margin-right: 8px;
+        border-radius: 50%;
+        background: var(--accent-violet);
+        vertical-align: 2px;
+      }
+      .next h2 {
+        font-size: 21px;
+      }
+      .next p {
+        margin: 0;
+      }
+      .levels {
+        display: grid;
+        gap: 26px;
+      }
+      .level-head {
+        display: flex;
+        align-items: baseline;
+        gap: 12px;
+        margin-bottom: 10px;
+      }
+      .level-head small {
+        color: var(--text-tertiary);
+        font-size: 12.5px;
+      }
+      .level-head i {
+        flex: 1;
+        height: 1px;
+        background: var(--line);
+      }
+      .skills {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 8px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      .skill {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 4px 12px;
+        width: 100%;
+        padding: 14px 16px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: var(--surface-low);
+        color: var(--text-secondary);
+        font: inherit;
+        font-size: 13.5px;
+        text-align: left;
+        cursor: pointer;
+        transition:
+          border-color 180ms var(--ease),
+          background-color 180ms var(--ease);
+      }
+      .skill:hover {
+        border-color: var(--line-strong);
+        background: var(--raised);
+      }
+      .skill .dot {
+        grid-row: span 3;
+        width: 22px;
+        height: 22px;
+        margin-top: 1px;
+        border: 1px solid var(--line-strong);
+        border-radius: 50%;
+      }
+      .skill[data-s="done"] .dot {
+        border-color: rgb(var(--accent-violet-rgb) / 0.75);
+        background: rgb(var(--accent-violet-deep));
+      }
+      .skill[data-s="soon"] .dot {
+        border-style: dashed;
+      }
+      .skill b {
+        color: var(--text);
+        font-weight: 550;
+      }
+      .skill[data-s="soon"] b {
+        color: var(--text-secondary);
+      }
+      .skill em {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: 4px;
+        font-style: normal;
+      }
+      .tag {
+        padding: 2px 9px;
+        border: 1px solid var(--line-strong);
+        border-radius: 999px;
+        color: var(--text-tertiary);
+        font-size: 11.5px;
+      }
+      .tag.ready {
+        color: var(--text);
+      }
+
+      /* ---------- 3. Une compétence de 10 minutes ---------- */
+      .steps {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+        margin: 0 0 24px;
+        padding: 0;
+        list-style: none;
+      }
+      .steps li {
+        padding: 12px 14px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: var(--surface-low);
+        font-size: 13px;
+      }
+      .steps li b {
+        display: block;
+        color: var(--text);
+        font-weight: 550;
+      }
+      .steps li[aria-current] {
+        border-color: var(--text);
+      }
+      .card {
+        padding: 24px;
+        border: 1px solid var(--line-strong);
+        border-radius: 16px;
+        background:
+          linear-gradient(180deg, rgb(255 255 255 / 0.03), transparent 40%),
+          var(--raised);
+        box-shadow: var(--highlight-edge);
+      }
+      .idea {
+        margin: 0 0 18px;
+        color: var(--text);
+        font-size: 17px;
+        line-height: 1.55;
+      }
+      .devis {
+        display: grid;
+        gap: 14px;
+        margin-top: 18px;
+        padding: 20px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: var(--surface-low);
+      }
+      .row2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+      label {
+        display: grid;
+        gap: 4px;
+        font-size: 12.5px;
+        color: var(--text-tertiary);
+      }
+      input {
+        min-height: 40px;
+        padding: 0 12px;
+        border: 1px solid var(--line-strong);
+        border-radius: 10px;
+        background: var(--surface);
+        color: var(--text);
+        font: 14px var(--font-sans);
+      }
+      input:focus-visible {
+        outline: 2px solid rgb(var(--accent-violet-rgb) / 0.7);
+        outline-offset: 1px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13.5px;
+      }
+      th,
+      td {
+        padding: 8px 6px;
+        border-bottom: 1px solid var(--line);
+        text-align: left;
+      }
+      th {
+        color: var(--text-tertiary);
+        font-weight: 500;
+        font-size: 12px;
+      }
+      td:last-child,
+      th:last-child {
+        text-align: right;
+        font-variant-numeric: tabular-nums;
+      }
+      .total td {
+        color: var(--text);
+        font-weight: 550;
+        border-bottom: 0;
+      }
+      .check {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px 16px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        font-size: 13px;
+      }
+      .check li::before {
+        content: "✓ ";
+        color: var(--accent-violet);
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 20px;
+      }
+      .note {
+        margin-top: 26px;
+        color: var(--text-tertiary);
+        font-size: 12.5px;
+      }
+      @media (max-width: 700px) {
+        main {
+          padding: 24px 16px 80px;
+        }
+        .steps {
+          grid-template-columns: 1fr;
+        }
+        .row2 {
+          grid-template-columns: 1fr;
+        }
+        .next {
+          grid-template-columns: 1fr;
+        }
+        .chooser-foot {
+          border-radius: 18px;
+          flex-wrap: wrap;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .view {
+          animation: none;
+        }
+        * {
+          transition-duration: 1ms !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bar">
+      <strong>Maquette · catalogue des compétences</strong>
+      <button data-view="choose" aria-pressed="true">1. Choisir ses domaines</button>
+      <button data-view="domain" aria-pressed="false">2. Un domaine</button>
+      <button data-view="skill" aria-pressed="false">3. Une compétence de 10 min</button>
+    </div>
+    <main>
+      <section class="view" id="choose"></section>
+      <section class="view" id="domain" hidden></section>
+      <section class="view" id="skill" hidden></section>
+    </main>
+
+    <script type="module">
+      import {
+        CATALOGUE_DOMAINS,
+        CATALOGUE_SKILLS,
+        LEVEL_NAMES,
+      } from "/src/data/catalogue.ts";
+
+      const $ = (id) => document.getElementById(id);
+      const chosen = new Set(
+        CATALOGUE_DOMAINS.filter((d) => d.core).map((d) => d.id),
+      );
+      // Pour la démonstration : deux compétences validées.
+      const done = new Set(["validation-client", "ent-idee"]);
+      let current = "ent";
+
+      // ---------------------------------------------------------- 1. Choisir
+      function drawChoose() {
+        const groups = [...new Set(CATALOGUE_DOMAINS.map((d) => d.group))];
+        $("choose").innerHTML = `
+          <p class="eyebrow">Ton parcours</p>
+          <h1>Qu’est-ce qui t’intéresse ?</h1>
+          <p class="lead">Coche les domaines que tu veux apprendre. Tu pourras en ajouter ou en retirer quand tu veux, dans l’Académie. Chaque domaine va du débutant total à l’expert.</p>
+          ${groups
+            .map(
+              (g) => `<div class="group"><p>${g}</p><div class="domains">${CATALOGUE_DOMAINS.filter((d) => d.group === g)
+                .map((d) => {
+                  const skills = CATALOGUE_SKILLS.filter((s) => s.domain === d.id);
+                  const ready = skills.filter((s) => s.lesson).length;
+                  return `<button class="domain" data-d="${d.id}" aria-pressed="${chosen.has(d.id)}"><i class="tick" aria-hidden="true">✓</i><b>${d.name}</b><span>${d.promise}</span><small>${skills.length} compétences${ready ? ` · ${ready} déjà prêtes` : ""}</small></button>`;
+                })
+                .join("")}</div></div>`,
+            )
+            .join("")}
+          <div class="chooser-foot"><span id="count"></span><button class="primary" data-go="domain">C’est parti →</button></div>`;
+        const count = () =>
+          ($("count").textContent = `${chosen.size} domaine${chosen.size > 1 ? "s" : ""} choisi${chosen.size > 1 ? "s" : ""}`);
+        count();
+        $("choose")
+          .querySelectorAll(".domain")
+          .forEach(
+            (b) =>
+              (b.onclick = () => {
+                const on = !chosen.has(b.dataset.d);
+                on ? chosen.add(b.dataset.d) : chosen.delete(b.dataset.d);
+                b.setAttribute("aria-pressed", String(on));
+                count();
+              }),
+          );
+      }
+
+      // ---------------------------------------------------------- 2. Un domaine
+      function statusOf(s) {
+        return done.has(s.id) ? "done" : s.lesson ? "ready" : "soon";
+      }
+      function drawDomain() {
+        const d = CATALOGUE_DOMAINS.find((x) => x.id === current);
+        const skills = CATALOGUE_SKILLS.filter((s) => s.domain === current);
+        const next =
+          skills.find(
+            (s) =>
+              !done.has(s.id) &&
+              s.prerequisites.every((p) => done.has(p) || !skills.some((x) => x.id === p)),
+          ) ?? skills[0];
+        const mine = CATALOGUE_DOMAINS.filter((x) => chosen.has(x.id));
+        $("domain").innerHTML = `
+          <div class="domain-pick">${mine.map((x) => `<button class="pill" data-d="${x.id}" aria-pressed="${x.id === current}">${x.name}</button>`).join("")}<button class="pill" data-go="choose">＋ Ajouter un domaine</button></div>
+          <div class="domain-head"><div><p class="eyebrow">Académie · ${d.group}</p><h1>${d.name}</h1><p class="lead" style="margin:0">${d.promise}</p></div>
+          <span class="tag">${skills.filter((s) => done.has(s.id)).length} / ${skills.length} validées</span></div>
+          <div class="next"><p class="eyebrow">Ta prochaine étape</p><div><h2>${next.title}</h2><p>${next.does}${next.gesture ? ` Tu repars avec : ${next.gesture.toLowerCase()}.` : ""}</p></div><button class="primary" data-go="skill">Commencer · 10 min →</button></div>
+          <div class="levels">${[0, 1, 2, 3]
+            .map((lv) => {
+              const list = skills.filter((s) => s.level === lv);
+              if (!list.length) return "";
+              return `<section><div class="level-head"><h2>${LEVEL_NAMES[lv]}</h2><small>${list.length} compétence${list.length > 1 ? "s" : ""}</small><i></i></div><ul class="skills">${list
+                .map((s) => {
+                  const st = statusOf(s);
+                  return `<li><button class="skill" data-s="${st}" data-go="skill"><span class="dot" aria-hidden="true"></span><b>${s.title}</b><span>${s.does}</span><em>${st === "done" ? '<span class="tag ready">Validée</span>' : st === "ready" ? '<span class="tag ready">Prête</span>' : '<span class="tag">Bientôt</span>'}${s.gesture ? `<span class="tag">Modèle : ${s.gesture}</span>` : ""}</em></button></li>`;
+                })
+                .join("")}</ul></section>`;
+            })
+            .join("")}</div>
+          <p class="note">« Prête » : la leçon existe déjà. « Bientôt » : elle s’écrit peu à peu ; on peut quand même la voir et savoir ce qu’elle apprendra. L’arbre des compétences montre tous les domaines choisis, avec leurs liens.</p>`;
+        $("domain")
+          .querySelectorAll(".domain-pick [data-d]")
+          .forEach(
+            (b) =>
+              (b.onclick = () => {
+                current = b.dataset.d;
+                drawDomain();
+              }),
+          );
+      }
+
+      // ---------------------------------------------------------- 3. Une compétence
+      function drawSkill() {
+        $("skill").innerHTML = `
+          <p class="eyebrow">Créer et faire tourner une activité · Savoir faire · 10 min</p>
+          <h1>Faire un devis</h1>
+          <p class="lead">Un devis clair, complet et légal, que ton client signe sans questions.</p>
+          <ol class="steps"><li><b>1. L’idée</b>2 min · ce qu’il faut comprendre</li><li aria-current="step"><b>2. Le geste</b>6 min · ton vrai devis à remplir</li><li><b>3. Le contrôle</b>2 min · deux questions pour vérifier</li></ol>
+          <div class="card">
+            <p class="idea">Un devis, c’est une promesse écrite : ce que tu feras, pour combien, et jusqu’à quand ton prix tient. Signé par le client, il vaut contrat.</p>
+            <ul class="check"><li>Tes coordonnées et ton SIRET</li><li>Celles du client</li><li>Le détail des travaux</li><li>Prix HT, TVA, TTC</li><li>Durée de validité</li><li>« Bon pour accord » et signature</li></ul>
+            <div class="devis">
+              <div class="row2"><label>Ton entreprise<input value="Atelier Martin · SIRET 123 456 789 00012" /></label><label>Client<input value="Mme Durand, 12 rue des Lilas, Lyon" /></label></div>
+              <table><thead><tr><th>Travaux</th><th>Quantité</th><th>Prix HT</th></tr></thead><tbody>
+                <tr><td>Pose de parquet chêne</td><td>24 m²</td><td>1 080 €</td></tr>
+                <tr><td>Plinthes assorties</td><td>18 m</td><td>216 €</td></tr>
+                <tr><td>Déplacement</td><td>1</td><td>40 €</td></tr>
+                <tr><td>TVA 10 %</td><td></td><td>133,60 €</td></tr>
+                <tr class="total"><td>Total TTC</td><td></td><td>1 469,60 €</td></tr></tbody></table>
+              <div class="row2"><label>Valable jusqu’au<input value="11 décembre 2026" /></label><label>Acompte à la signature<input value="30 % · 440,88 €" /></label></div>
+            </div>
+            <div class="actions"><button class="primary">Garder mon devis (PDF) →</button><button class="pill">Le faire relire par le mentor</button></div>
+          </div>
+          <p class="note">Chaque compétence suit ce même format court : une idée simple, un geste pratique avec un vrai modèle que tu gardes, un petit contrôle. Une fois réussie, elle se valide dans l’arbre.</p>`;
+      }
+
+      // ---------------------------------------------------------- Navigation
+      function show(view) {
+        for (const id of ["choose", "domain", "skill"]) $(id).hidden = id !== view;
+        document
+          .querySelectorAll(".bar [data-view]")
+          .forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.view === view)));
+        ({ choose: drawChoose, domain: drawDomain, skill: drawSkill })[view]();
+        scrollTo({ top: 0 });
+      }
+      document.addEventListener("click", (e) => {
+        const b = e.target.closest("[data-view], [data-go]");
+        if (b) show(b.dataset.view || b.dataset.go);
+      });
+      show("choose");
+    </script>
+  </body>
+</html>

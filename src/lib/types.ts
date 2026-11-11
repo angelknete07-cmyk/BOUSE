@@ -99,5 +99,7 @@ export interface AppState {
   lessonPositions?: Record<string, number>;
   /** Additive v1 field: the guided path the learner chose to follow. */
   activePathId?: string | null;
+  /** Additive v1 field: the catalogue domains the learner chose (ids). */
+  domains?: string[];
 }
 export type StateUpdater = (updater: (state: AppState) => AppState) => void;

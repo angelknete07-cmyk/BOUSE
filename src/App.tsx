@@ -51,10 +51,20 @@ import {
   useFirstStepsActive,
 } from "./components/Guide";
 import { latestCurrentAttempt } from "./lib/portfolio";
+import { catalogueDomain, catalogueSkill } from "./lib/catalogue";
 
 // Secondary screens load on demand; home and onboarding stay in the entry chunk.
 const Academy = lazy(() =>
   import("./components/Academy").then((m) => ({ default: m.Academy })),
+);
+const DomainChooser = lazy(() =>
+  import("./components/Catalogue").then((m) => ({ default: m.DomainChooser })),
+);
+const DomainPage = lazy(() =>
+  import("./components/Catalogue").then((m) => ({ default: m.DomainPage })),
+);
+const SkillSheet = lazy(() =>
+  import("./components/Catalogue").then((m) => ({ default: m.SkillSheet })),
 );
 const KnowledgeMap = lazy(() =>
   import("./components/KnowledgeMap").then((m) => ({
@@ -340,9 +350,15 @@ function App({
       ? lessons.find((item) => item.id === route.slice(7))?.title
       : route === "lexique" || route.startsWith("lexique/")
         ? "Lexique de l’Académie"
-        : projectId !== null
-          ? state.projects.find((item) => item.id === projectId)?.title
-          : navigation.find((item) => item.id === route)?.label;
+        : route === "domains"
+          ? "Tes domaines"
+          : route.startsWith("domain/")
+            ? catalogueDomain(route.slice(7))?.name
+            : route.startsWith("skill/")
+              ? catalogueSkill(route.slice(6))?.title
+              : projectId !== null
+                ? state.projects.find((item) => item.id === projectId)?.title
+                : navigation.find((item) => item.id === route)?.label;
     document.title = `${routeTitle || (route === "portfolio" ? "Portfolio" : route === "settings" ? "Profil et paramètres" : "Mon espace")} — BOUSE`;
     return () => cancelAnimationFrame(frame);
   }, [route, !!state.profile]);
@@ -409,14 +425,19 @@ function App({
           <CloudPanel cloud={cloud} state={state} />
         </div>
         <Onboarding
-          onComplete={(profile) => {
+          onComplete={(profile, domains) => {
             queueWelcomeTour();
-            update((s) => ({ ...s, profile }));
+            update((s) => ({ ...s, profile, domains }));
           }}
         />
       </>
     );
   const inGlossary = route === "lexique" || route.startsWith("lexique/");
+  // Le catalogue des compétences fait partie de l'Académie.
+  const inCatalogue =
+    route === "domains" ||
+    route.startsWith("domain/") ||
+    route.startsWith("skill/");
   const lesson = route.startsWith("lesson/")
     ? lessons.find((l) => l.id === route.slice(7))
     : undefined;
@@ -495,7 +516,8 @@ function App({
                 onClick={() => setMobileOpen(false)}
                 aria-current={
                   route === n.id ||
-                  (n.id === "academy" && (lesson || inGlossary)) ||
+                  (n.id === "academy" &&
+                    (lesson || inGlossary || inCatalogue)) ||
                   (n.id === "skills" && route === "portfolio") ||
                   (n.id === "incubator" && projectId !== null)
                     ? "page"
@@ -503,7 +525,8 @@ function App({
                 }
                 className={
                   route === n.id ||
-                  (n.id === "academy" && (lesson || inGlossary)) ||
+                  (n.id === "academy" &&
+                    (lesson || inGlossary || inCatalogue)) ||
                   (n.id === "skills" && route === "portfolio") ||
                   (n.id === "incubator" && projectId !== null)
                     ? "nav-link active"
@@ -572,7 +595,7 @@ function App({
             <span className="topbar-parent">Mon espace</span>
             <span className="breadcrumb-separator">/</span>
             <span>
-              {lesson || inGlossary
+              {lesson || inGlossary || inCatalogue
                 ? "Académie"
                 : route === "portfolio"
                   ? "Portfolio"
@@ -687,6 +710,23 @@ function App({
                   update={update}
                   onNavigate={go}
                 />
+              ) : route === "domains" ? (
+                <DomainChooser state={state} update={update} onNavigate={go} />
+              ) : route.startsWith("domain/") ? (
+                <DomainPage
+                  key={route}
+                  id={route.slice(7)}
+                  state={state}
+                  update={update}
+                  onNavigate={go}
+                />
+              ) : route.startsWith("skill/") ? (
+                <SkillSheet
+                  key={route}
+                  id={route.slice(6)}
+                  state={state}
+                  onNavigate={go}
+                />
               ) : route === "skills" ? (
                 <KnowledgeMap state={state} onNavigate={go} />
               ) : route === "portfolio" ? (
@@ -795,7 +835,8 @@ function App({
             href={`#${item.id}`}
             aria-current={
               route === item.id ||
-              (item.id === "academy" && (lesson || inGlossary)) ||
+              (item.id === "academy" &&
+                (lesson || inGlossary || inCatalogue)) ||
               (item.id === "incubator" && projectId !== null)
                 ? "page"
                 : undefined

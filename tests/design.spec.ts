@@ -438,6 +438,27 @@ test("galerie des écrans et du quiz validé sans débordement", async ({
       await capture(page, testInfo, "09-competences-selection");
     }
   }
+  // Le catalogue des compétences : choisir ses domaines, un domaine, une fiche.
+  for (const [route, heading, name] of [
+    ["domains", "Qu’est-ce qui t’intéresse ?", "11-catalogue-domaines"],
+    [
+      "domain/ent",
+      "Créer et faire tourner une activité",
+      "11-catalogue-domaine",
+    ],
+    [
+      "skill/ent-idee",
+      "Trouver une idée d’activité",
+      "11-catalogue-competence",
+    ],
+  ]) {
+    await page.goto(`/#${route}`);
+    await expect(
+      page.getByRole("heading", { level: 1, name: heading }),
+    ).toBeVisible();
+    await page.waitForTimeout(400);
+    await capture(page, testInfo, name);
+  }
 
   // Use the application's validated import flow. The gallery init script would
   // replace direct localStorage mutations after a document reload.

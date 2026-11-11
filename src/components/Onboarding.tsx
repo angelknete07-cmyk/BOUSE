@@ -10,6 +10,8 @@ import {
 } from "../data/profileOptions";
 import type { Profile } from "../lib/types";
 import { Icon } from "./Icon";
+import { DomainPicker } from "./DomainPicker";
+import { CORE_DOMAIN_IDS, toggleDomain } from "../lib/catalogue";
 
 /** Not knowing is a valid answer: it never blocks and never counts as an error. */
 const UNKNOWN = 3;
@@ -73,9 +75,11 @@ const diagnostic = [
 export function Onboarding({
   onComplete,
 }: {
-  onComplete: (profile: Profile) => void;
+  onComplete: (profile: Profile, domains: string[]) => void;
 }) {
   const [step, setStep] = useState(0);
+  // Les domaines du catalogue : ceux des premières leçons, cochés d'office.
+  const [domains, setDomains] = useState<string[]>(() => [...CORE_DOMAIN_IDS]);
   const [profile, setProfile] = useState<Profile>({
     name: "",
     level: "Débutant++",
@@ -186,6 +190,17 @@ export function Onboarding({
                   </select>
                 </label>
               </div>
+              <fieldset className="onboarding-domains">
+                <legend>
+                  Ce qui t’intéresse{" "}
+                  <small>(tu pourras changer dans l’Académie)</small>
+                </legend>
+                <DomainPicker
+                  compact
+                  chosen={domains}
+                  onToggle={(id) => setDomains((d) => toggleDomain(d, id))}
+                />
+              </fieldset>
               <details className="onboarding-more">
                 <summary>Préciser mon profil (facultatif)</summary>
                 <label className="field">
@@ -251,10 +266,10 @@ export function Onboarding({
                   patch({ diagnostic: filled });
                 }
                 if (showResult)
-                  onComplete({
-                    ...profile,
-                    name: profile.name.trim() || "Vous",
-                  });
+                  onComplete(
+                    { ...profile, name: profile.name.trim() || "Vous" },
+                    domains,
+                  );
                 else setShowResult(true);
               }}
             >

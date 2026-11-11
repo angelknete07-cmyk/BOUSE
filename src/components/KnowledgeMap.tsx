@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { lessonShortLabel } from "../data/lessonLabels";
 import { lessons, type Lesson } from "../data/lessons";
 import type { AppState, Attempt } from "../lib/types";
@@ -6,7 +6,14 @@ import { Icon } from "./Icon";
 import { currentQuizAttempts, latestCurrentAttempt } from "../lib/portfolio";
 import { useClock } from "../lib/useClock";
 import { recommendLesson } from "../lib/recommendation";
-import { SkillTree, type TreeStatus } from "./SkillTree";
+import { SkillTree } from "./SkillTree";
+import { CATALOGUE_SKILLS } from "../data/catalogue";
+import {
+  DOMAIN_NAMES,
+  chosenDomainIds,
+  skillStatuses,
+  treeNodes,
+} from "../lib/catalogue";
 
 type Props = {
   state: AppState;
@@ -52,21 +59,22 @@ export function KnowledgeMap({ state, onNavigate }: Props) {
     const attempt = latestAttempt(state, lesson.id, now);
     return attempt && !attempt.passed;
   }).length;
-  // L'état de chaque leçon dans l'arbre, d'après le dernier quiz courant.
-  const statuses: Record<string, TreeStatus> = {};
-  const passed = (id: string) => latestAttempt(state, id, now)?.passed;
-  for (const lesson of lessons) {
-    const attempt = latestAttempt(state, lesson.id, now);
-    statuses[lesson.id] = attempt
-      ? attempt.passed
-        ? "done"
-        : "retry"
-      : lesson.prerequisites.every(passed)
-        ? "open"
-        : "wait";
-  }
+  // L'arbre montre les compétences des domaines choisis ; l'état de chacune
+  // vient du dernier quiz courant de sa leçon (« bientôt » sans leçon).
+  const domainKey = chosenDomainIds(state).join(",");
+  const items = useMemo(() => treeNodes(domainKey.split(",")), [domainKey]);
+  const statuses = skillStatuses(
+    CATALOGUE_SKILLS.filter((skill) => items.some((i) => i.id === skill.id)),
+    (id) => {
+      const attempt = latestAttempt(state, id, now);
+      return attempt ? (attempt.passed ? "passed" : "failed") : undefined;
+    },
+  );
   const recommended = recommendLesson(state, now).current.id;
-  const nextId = statuses[recommended] === "done" ? null : recommended;
+  const nextId =
+    !statuses[recommended] || statuses[recommended] === "done"
+      ? null
+      : recommended;
   const linkedProjects = state.projects.filter((project) =>
     project.lessonIds.includes(selected.id),
   );
@@ -109,7 +117,7 @@ export function KnowledgeMap({ state, onNavigate }: Props) {
         L’arbre complet{" "}
         <small>
           {verified} validée{verified > 1 ? "s" : ""} · {toReview} à reprendre ·{" "}
-          {lessons.length} notions reliées
+          {items.length} compétences reliées
         </small>
       </h2>
       <div className="knowledge-explorer">
@@ -118,9 +126,14 @@ export function KnowledgeMap({ state, onNavigate }: Props) {
           aria-label="L’arbre des compétences"
         >
           <SkillTree
+            items={items}
+            laneNames={DOMAIN_NAMES}
             statuses={statuses}
             nextId={nextId}
-            onSelect={setSelectedId}
+            onSelect={(id) => {
+              // La fiche de la page suit les compétences qui ont leur leçon.
+              if (lessons.some((lesson) => lesson.id === id)) setSelectedId(id);
+            }}
             onNavigate={onNavigate}
           />
         </section>

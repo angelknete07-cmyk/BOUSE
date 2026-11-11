@@ -65,7 +65,7 @@ test("l'aperçu montre les branches et ouvre le grand arbre", async ({
   });
   await expect(branches.getByRole("listitem")).toHaveCount(5);
   await expect(branches).toContainText("Ton argent au quotidien");
-  await expect(branches).toContainText("1 / 9");
+  await expect(branches).toContainText("1 / 14");
   // La page ne déborde jamais en largeur, même sur téléphone.
   expect(
     await page.evaluate(

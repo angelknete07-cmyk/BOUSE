@@ -8,6 +8,7 @@ import { recommendLesson } from "../lib/recommendation";
 import type { AppState, StateUpdater } from "../lib/types";
 import { goalPathById, goalPaths } from "../data/goalPaths";
 import { KnowledgeAtlas } from "./KnowledgeAtlas";
+import { DomainStrip } from "./Catalogue";
 import { Icon } from "./Icon";
 import { ProgressBar } from "./ProgressRing";
 import { Terrain } from "./Terrain";
@@ -69,6 +70,7 @@ export function Academy({
           </button>
         </div>
       </header>
+      <DomainStrip state={state} onNavigate={onNavigate} />
       <div className="atlas-toolbar">
         <div
           className="atlas-views"
