@@ -342,6 +342,9 @@ test("une erreur alimente la révision ; export et import nécessitent un rempla
     page.getByRole("status").filter({ hasText: "0/2 · 0 %" }),
   ).toBeVisible();
   await navigate(page, "Vue d’ensemble");
+  // Sur téléphone, le suivi détaillé est replié sous « Voir tout mon suivi ».
+  const more = page.getByRole("button", { name: /Voir tout mon suivi/ });
+  if (test.info().project.name.startsWith("mobile")) await more.click();
   await expect(
     page.getByRole("button", { name: /Consolider 1 notion/i }),
   ).toBeVisible();

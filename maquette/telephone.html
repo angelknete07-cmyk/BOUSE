@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Maquette — BOUSE plus simple sur téléphone</title>
+    <!--
+      MAQUETTE, pas le produit (idée 9 d'Angel : « sur téléphone, c'est trop
+      compliqué »). Deux téléphones affichent la vraie appli (serveur de
+      développement) : à gauche telle qu'elle est, à droite avec les
+      changements proposés, posés par-dessus. Rien n'est retiré : ce qui est
+      replié reste à un toucher. Ouvrir : http://localhost:5173/maquette/telephone.html
+    -->
+    <style>
+      :root {
+        color-scheme: dark;
+      }
+      html,
+      body {
+        margin: 0;
+        min-height: 100%;
+        background: #050506;
+        color: #f3f2ee;
+        font: 14px/1.45 Inter, system-ui, sans-serif;
+      }
+      .bar {
+        position: sticky;
+        top: 0;
+        z-index: 2;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px 10px;
+        padding: 10px 16px;
+        border-bottom: 1px solid rgb(255 255 255 / 0.1);
+        background: #0d0d0f;
+      }
+      .bar strong {
+        font-weight: 550;
+        margin-right: 6px;
+      }
+      .bar button {
+        min-height: 34px;
+        padding: 0 12px;
+        border: 1px solid rgb(255 255 255 / 0.16);
+        border-radius: 8px;
+        background: #1a1a1e;
+        color: #f3f2ee;
+        font: inherit;
+        font-size: 13px;
+        cursor: pointer;
+        transition:
+          background-color 140ms cubic-bezier(0.22, 1, 0.36, 1),
+          transform 140ms cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .bar button:hover {
+        background: #252528;
+      }
+      .bar button:active {
+        transform: scale(0.97);
+      }
+      .bar button[aria-pressed="true"] {
+        background: #f3f2ee;
+        color: #171719;
+        border-color: transparent;
+      }
+      .stage {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 28px;
+        padding: 20px 16px 8px;
+      }
+      figure {
+        margin: 0;
+        display: grid;
+        gap: 10px;
+        justify-items: center;
+      }
+      figcaption {
+        display: grid;
+        gap: 2px;
+        text-align: center;
+      }
+      figcaption b {
+        font-weight: 550;
+      }
+      figcaption span {
+        color: #85858b;
+        font-size: 12.5px;
+      }
+      iframe {
+        width: 390px;
+        height: 844px;
+        border: 1px solid rgb(255 255 255 / 0.16);
+        border-radius: 34px;
+        background: #0a0a0b;
+      }
+      .notes {
+        max-width: 860px;
+        margin: 8px auto 40px;
+        padding: 0 16px;
+      }
+      .notes h2 {
+        margin: 18px 0 8px;
+        font-size: 15px;
+        font-weight: 550;
+      }
+      .notes ol {
+        margin: 0;
+        padding-left: 20px;
+        color: #c9c8c3;
+      }
+      .notes li {
+        margin: 6px 0;
+      }
+      .notes li b {
+        color: #f3f2ee;
+        font-weight: 550;
+      }
+      .notes p {
+        color: #85858b;
+        font-size: 12.5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bar">
+      <strong>Maquette · BOUSE plus simple sur téléphone</strong>
+      <button data-route="home" aria-pressed="true">Accueil</button>
+      <button data-route="academy" aria-pressed="false">Académie</button>
+      <button data-route="lesson/ca-marge-tresorerie" aria-pressed="false">
+        Une leçon
+      </button>
+      <button data-route="lab" aria-pressed="false">Lab financier</button>
+      <button data-route="skills" aria-pressed="false">Compétences</button>
+    </div>
+    <div class="stage">
+      <figure>
+        <iframe id="before" title="BOUSE aujourd’hui"></iframe>
+        <figcaption>
+          <b>Aujourd’hui</b><span>la vraie appli, telle qu’elle est en ligne</span>
+        </figcaption>
+      </figure>
+      <figure>
+        <iframe id="after" title="BOUSE proposé"></iframe>
+        <figcaption>
+          <b>Proposé</b><span>les mêmes écrans, plus simples</span>
+        </figcaption>
+      </figure>
+    </div>
+    <div class="notes">
+      <h2>Ce qui change (rien n’est retiré : ce qui est replié reste à un toucher)</h2>
+      <ol>
+        <li>
+          <b>L’accueil commence par l’essentiel.</b> Le premier écran montre ta
+          leçon du jour et son bouton blanc, sans avoir à descendre. « Tes
+          premiers pas » passe juste en dessous, en plus compact.
+        </li>
+        <li>
+          <b>Moins de blocs à faire défiler.</b> Le suivi détaillé (parcours,
+          activité, objectifs, trajectoire) se replie dans « Voir tout mon
+          suivi » : l’accueil passe d’environ 3,5 écrans à 2.
+        </li>
+        <li>
+          <b>L’aide de chaque page tient sur une ligne.</b> On la touche pour
+          lire la suite ; « Me montrer » reste à côté.
+        </li>
+        <li>
+          <b>Une barre du haut plus calme.</b> Le nom de la page en plus gros ;
+          « Données locales » quitte le téléphone (il reste dans les
+          préférences).
+        </li>
+        <li>
+          <b>Des textes lisibles.</b> Plus aucun texte sous 12 px, les petits
+          titres gris un peu plus clairs.
+        </li>
+        <li>
+          <b>Des boutons faciles à toucher.</b> Au moins 44 px de haut
+          (onglets d’une leçon, liens, pastilles) ; les quatre étapes d’une
+          leçon restent collées en haut quand on lit.
+        </li>
+        <li>
+          <b>Une barre du bas plus nette.</b> L’onglet actif dans une pastille,
+          les noms un peu plus grands.
+        </li>
+      </ol>
+      <p>
+        Maquette posée sur la vraie appli : c’est un aperçu, pas la version
+        finale. Rien n’est en ligne.
+      </p>
+    </div>
+
+    <script>
+      const PROFILE = {
+        schemaVersion: 1,
+        profile: {
+          name: "Camille",
+          level: "Débutant",
+          goal: "Comprendre les bases",
+          interests: ["Finance"],
+          minutes: 20,
+          preference: "Exemples puis pratique",
+          diagnostic: { finance: 0, business: 0, ai: 0 },
+        },
+        attempts: [
+          {
+            lessonId: "fp-budget",
+            answers: {},
+            correct: 3,
+            total: 3,
+            percent: 100,
+            passed: true,
+            at: "2026-11-01T10:00:00.000Z",
+          },
+        ],
+        projects: [],
+        notes: {},
+        lastLessonId: "ca-marge-tresorerie",
+      };
+      try {
+        sessionStorage.setItem("bouse.splash.seen", "1");
+        localStorage.setItem("bouse.tour.seen", "1");
+        if (!localStorage.getItem("bouse.academy.v1:guest"))
+          localStorage.setItem("bouse.academy.v1:guest", JSON.stringify(PROFILE));
+      } catch {}
+
+      // ------------------------------------------------ Les changements proposés
+      const CSS = `
+@media (max-width: 700px) {
+  /* 4. Barre du haut plus calme */
+  .local-status { display: none !important; }
+  .topbar > div:first-child > span:last-child { font-size: 15px !important; font-weight: 550 !important; color: var(--text) !important; }
+
+  /* 1. L'accueil commence par l'essentiel */
+  .learning-home { display: flex !important; flex-direction: column; gap: var(--space-5); }
+  .learning-home > .learning-stage { display: contents !important; }
+  .learning-home > .console-greeting { order: 0; }
+  .learning-home .console-top { order: 1; }
+  .learning-home > .first-steps { order: 2; }
+  .learning-home .console-tiles { order: 3; }
+  .learning-home .home-domains { order: 4; }
+  .learning-home .mk-more { order: 5; }
+  .learning-home .console-row { order: 6; }
+  .learning-home .home-objectives { order: 7; }
+  .learning-home .learning-trajectory { order: 8; }
+
+  /* Premiers pas compacts : la ligne d'étapes sans légendes */
+  .first-steps { padding: 14px 16px !important; }
+  .first-steps .fs-path span:not(:first-child), .first-steps .fs-path small { display: none !important; }
+  .first-steps .fs-now { padding-top: 6px !important; margin-top: 4px !important; }
+  .first-steps .fs-tour { display: none !important; }
+
+  /* 2. Le suivi détaillé se replie */
+  html:not(.mk-open) .learning-home .console-row,
+  html:not(.mk-open) .learning-home .home-objectives,
+  html:not(.mk-open) .learning-home .learning-trajectory { display: none !important; }
+  .mk-more { display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%; min-height: 52px; padding: 0 18px;
+    border: 1px solid var(--line-strong); border-radius: var(--radius); background: var(--surface-low); color: var(--text); font: 500 14px/1.3 var(--font-sans); text-align: left; cursor: pointer;
+    transition: background-color 160ms cubic-bezier(.22,1,.36,1), transform 160ms cubic-bezier(.22,1,.36,1); }
+  .mk-more:active { transform: scale(.98); }
+  .mk-more small { color: var(--text-tertiary); font-size: 12.5px; }
+  .mk-more i { font-style: normal; transition: transform 300ms cubic-bezier(.22,1,.36,1); }
+  html.mk-open .mk-more i { transform: rotate(180deg); }
+  html.mk-open .learning-home .console-row,
+  html.mk-open .learning-home .home-objectives,
+  html.mk-open .learning-home .learning-trajectory { animation: mk-in 360ms cubic-bezier(.22,1,.36,1) both; }
+  @keyframes mk-in { from { opacity: 0; transform: translateY(8px); } }
+
+  /* 3. L'aide de la page sur une ligne */
+  .page-guide { display: flex !important; flex-wrap: nowrap !important; align-items: center !important; padding: 8px 10px 8px 12px !important; gap: 10px !important; cursor: pointer; }
+  .page-guide p { flex: 1; min-width: 0; margin: 0 !important; }
+  html.mk-guide .page-guide { flex-wrap: wrap !important; }
+  html:not(.mk-guide) .page-guide p strong { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; font-size: 13.5px; line-height: 1.3; }
+  .page-guide-tour { order: 2; padding: 0 12px !important; }
+  .page-guide-hide { order: 3; }
+  html:not(.mk-guide) .page-guide p span { display: none !important; }
+  .page-guide-tour { flex: none; }
+
+  /* 5. Des textes lisibles */
+  .eyebrow, [class*="eyebrow"], .console-tile-text small, .fs-path, .learning-stage-tab small, .home-section-heading small { font-size: 12px !important; }
+  .eyebrow, [class*="kicker"], .home-section-heading small { color: var(--text-secondary) !important; letter-spacing: .04em !important; }
+
+  /* 6. Des boutons faciles à toucher */
+  .text-button, .learning-stage-tab, .page-guide-tour, .page-guide-hide, .chip, [role="tab"] { min-height: 44px !important; }
+  .learning-journey { position: sticky; top: 56px; z-index: 5; background: var(--bg); padding: 6px 0 !important; box-shadow: 0 10px 18px -12px rgb(0 0 0 / .8); }
+
+  /* 7. Barre du bas plus nette */
+  .mobile-bottom-nav a[aria-current], .mobile-bottom-nav button[aria-current], .mobile-bottom-nav .is-active, .mobile-bottom-nav [aria-current="page"] {
+    background: rgb(255 255 255 / .07); border-radius: 14px; color: var(--text) !important; }
+  .mobile-bottom-nav span, .mobile-bottom-nav small { font-size: 11.5px !important; }
+}`;
+
+      function enhance(frame) {
+        const D = frame.contentDocument;
+        if (!D || !D.head) return;
+        if (!D.getElementById("mk-style")) {
+          const st = D.createElement("style");
+          st.id = "mk-style";
+          st.textContent = CSS;
+          D.head.append(st);
+          // L'aide de la page se déplie au toucher.
+          D.addEventListener("click", (event) => {
+            const guide = event.target.closest(".page-guide");
+            if (guide && !event.target.closest("button"))
+              D.documentElement.classList.toggle("mk-guide");
+          });
+        }
+        // Le bouton « Voir tout mon suivi » sur l'accueil.
+        const home = D.querySelector(".learning-home");
+        if (home && !home.querySelector(".mk-more")) {
+          const more = D.createElement("button");
+          more.type = "button";
+          more.className = "mk-more";
+          more.innerHTML =
+            "<span>Voir tout mon suivi<br><small>parcours, activité, objectifs, trajectoire</small></span><i aria-hidden='true'>⌄</i>";
+          more.onclick = () => {
+            const open = D.documentElement.classList.toggle("mk-open");
+            more.firstChild.firstChild.textContent = open
+              ? "Replier mon suivi"
+              : "Voir tout mon suivi";
+          };
+          home.append(more);
+        }
+      }
+
+      const before = document.getElementById("before");
+      const after = document.getElementById("after");
+      function go(route) {
+        before.src = `/#${route}`;
+        after.src = `/#${route}`;
+        document
+          .querySelectorAll("[data-route]")
+          .forEach((b) =>
+            b.setAttribute("aria-pressed", String(b.dataset.route === route)),
+          );
+      }
+      after.addEventListener("load", () => {
+        // L'appli redessine ses pages : on repose les changements à chaque fois.
+        setInterval(() => enhance(after), 300);
+      });
+      document
+        .querySelectorAll("[data-route]")
+        .forEach((b) => (b.onclick = () => go(b.dataset.route)));
+      go("home");
+    </script>
+  </body>

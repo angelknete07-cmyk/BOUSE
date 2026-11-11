@@ -1,0 +1,232 @@
+/* ==========================================================================
+   Téléphone simplifié (maquette maquette/telephone.html). Rien n'est retiré :
+   le suivi détaillé de l'accueil se replie, l'aide de page tient sur une
+   ligne, les petits textes et les cibles grandissent.
+   ========================================================================== */
+
+/* Le bouton qui replie le suivi n'existe que sur téléphone. */
+.home-more,
+.page-guide-more {
+  display: none;
+}
+
+@media (max-width: 700px) {
+  /* 1. Barre du haut plus calme : l'état de la sauvegarde reste dans
+     Préférences. */
+  .topbar .local-status {
+    display: none;
+  }
+
+  /* 2. L'accueil commence par l'essentiel. */
+  .learning-home {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+  .learning-home > .learning-stage {
+    display: contents;
+  }
+  .learning-home > .console-greeting {
+    order: 0;
+  }
+  .learning-home .console-top {
+    order: 1;
+  }
+  .learning-home > .first-steps {
+    order: 2;
+  }
+  .learning-home .console-tiles {
+    order: 3;
+  }
+  .learning-home .home-domains {
+    order: 4;
+  }
+  .learning-home .home-more {
+    order: 5;
+  }
+  .learning-home .console-row {
+    order: 6;
+  }
+  .learning-home .home-objectives {
+    order: 7;
+  }
+  .learning-home .learning-trajectory {
+    order: 8;
+  }
+  .learning-home:not(.is-open) .console-row,
+  .learning-home:not(.is-open) .home-objectives,
+  .learning-home:not(.is-open) .learning-trajectory {
+    display: none;
+  }
+  .learning-home.is-open .console-row,
+  .learning-home.is-open .home-objectives,
+  .learning-home.is-open .learning-trajectory {
+    animation: phone-in 360ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  @keyframes phone-in {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+  }
+  .home-more {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+    min-height: 56px;
+    padding: 8px 18px;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius);
+    background: var(--surface-low);
+    color: var(--text);
+    font: 500 14px/1.3 var(--font-sans);
+    text-align: left;
+    cursor: pointer;
+    transition:
+      background-color 160ms cubic-bezier(0.22, 1, 0.36, 1),
+      transform 160ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .home-more:active {
+    transform: scale(0.98);
+    background: var(--raised);
+  }
+  .home-more span {
+    display: grid;
+    gap: 2px;
+  }
+  .home-more small {
+    color: var(--text-tertiary);
+    font-size: 12.5px;
+  }
+  .home-more svg {
+    flex: none;
+    transform: rotate(90deg);
+    transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .home-more[aria-expanded="true"] svg {
+    transform: rotate(-90deg);
+  }
+
+  /* Premiers pas compacts : la ligne d'étapes, sans les légendes. */
+  .first-steps {
+    padding: 14px 16px;
+  }
+  .first-steps .fs-path span:not(:first-child),
+  .first-steps .fs-path small {
+    display: none;
+  }
+
+  /* 3. L'aide de la page : la première phrase, « La suite » pour le reste. */
+  .page-guide {
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 10px;
+    padding: 8px 8px 8px 12px;
+  }
+  .page-guide > svg {
+    margin-top: 0;
+  }
+  /* Le texte prend toute la ligne ; les boutons passent dessous. */
+  .page-guide p {
+    flex: 1 1 calc(100% - 40px);
+    min-width: 0;
+  }
+  .page-guide:not([data-open]) p {
+    cursor: pointer;
+  }
+  .page-guide:not([data-open]) p strong {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    font-size: 13.5px;
+    line-height: 1.3;
+  }
+  .page-guide:not([data-open]) p span {
+    display: none;
+  }
+  .page-guide-more {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 10px;
+    border: 0;
+    border-radius: var(--radius-sm);
+    background: transparent;
+    color: var(--text-secondary);
+    font: 500 13px/1 var(--font-sans);
+    text-decoration: underline;
+    text-decoration-color: var(--line-strong);
+    text-underline-offset: 3px;
+    cursor: pointer;
+  }
+  .page-guide-more {
+    margin-left: 18px;
+  }
+  .page-guide .page-guide-tour {
+    margin-left: auto;
+  }
+  .page-guide .page-guide-hide {
+    margin: 0;
+  }
+
+  /* 4. Des textes lisibles : jamais moins de 12 px. */
+  .eyebrow,
+  .console-tile-text small,
+  .fs-path,
+  .home-section-heading small {
+    font-size: 12px;
+  }
+  .eyebrow,
+  .home-section-heading small {
+    color: var(--text-secondary);
+    letter-spacing: 0.04em;
+  }
+
+  /* 5. Des boutons faciles à toucher. */
+  .text-button:not(.inline),
+  .page-guide-tour,
+  .page-guide-hide,
+  .page-guide-show,
+  [role="tab"] {
+    min-height: 44px;
+  }
+  .page-guide-hide {
+    width: 44px;
+    height: 44px;
+  }
+  /* Dans une leçon, les étapes restent sous le doigt. */
+  .learning-journey {
+    position: sticky;
+    top: 56px;
+    z-index: 5;
+    padding: 6px 0;
+    background: var(--bg);
+    box-shadow: 0 10px 18px -12px rgb(0 0 0 / 0.8);
+  }
+
+  /* 6. Barre du bas plus nette : l'onglet ouvert en pastille. */
+  .mobile-bottom-nav [aria-current="page"] {
+    background: rgb(255 255 255 / 0.07);
+    border-radius: 14px;
+  }
+  .mobile-bottom-nav a,
+  .mobile-bottom-nav button {
+    font-size: 11.5px;
+  }
+}
+
+@media (max-width: 700px) and (prefers-reduced-motion: reduce) {
+  .learning-home.is-open .console-row,
+  .learning-home.is-open .home-objectives,
+  .learning-home.is-open .learning-trajectory {
+    animation: none;
+  }
+  .home-more,
+  .home-more svg {
+    transition-duration: 1ms;
+  }
+}

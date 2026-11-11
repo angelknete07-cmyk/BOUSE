@@ -87,6 +87,7 @@ export function PageGuide({ route }: { route: string }) {
     () => read(GUIDES_HIDDEN, () => localStorage) === "1",
   );
   const isNew = useTourIsNew(route);
+  const [more, setMore] = useState(false);
   if (!guide) return null;
   const toggle = (value: boolean) => {
     setHidden(value);
@@ -116,12 +117,26 @@ export function PageGuide({ route }: { route: string }) {
       </div>
     );
   return (
-    <aside className="page-guide" aria-label="À quoi sert cette page">
+    <aside
+      className="page-guide"
+      aria-label="À quoi sert cette page"
+      data-open={more ? "" : undefined}
+    >
       <Icon name="idea" size={18} />
-      <p>
+      {/* Sur téléphone, seule la première phrase s'affiche ; « La suite »
+          déplie l'explication. */}
+      <p onClick={() => setMore(true)}>
         <strong>{guide.what}</strong>
         <span>{guide.how}</span>
       </p>
+      <button
+        type="button"
+        className="page-guide-more"
+        aria-expanded={more}
+        onClick={() => setMore((open) => !open)}
+      >
+        {more ? "Moins" : "La suite"}
+      </button>
       {tour}
       <button
         type="button"

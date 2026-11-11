@@ -23,6 +23,7 @@ import "./comfort.css";
 import "./guide.css";
 import "./skill-tree.css";
 import "./catalogue.css";
+import "./phone.css";
 import { restoreEasyReading } from "./components/Comfort";
 
 restoreEasyReading();

@@ -81,6 +81,7 @@ export function Dashboard({ state, onNavigate }: Props) {
     current;
   const [selectedId, setSelectedId] = useState(following.id);
   const [trackId, setTrackId] = useState(trackOf(current.id).id);
+  const [showAll, setShowAll] = useState(false);
   const track = tracks.find((item) => item.id === trackId) || tracks[0]!;
   // A long track shows a readable window of seven notions around the next one.
   const windowFocus =
@@ -199,7 +200,7 @@ export function Dashboard({ state, onNavigate }: Props) {
       });
 
   return (
-    <div className="learning-home art-home">
+    <div className={`learning-home art-home${showAll ? " is-open" : ""}`}>
       <header className="console-greeting">
         <div>
           <h1>
@@ -749,6 +750,19 @@ export function Dashboard({ state, onNavigate }: Props) {
             <Icon name="arrow" size={15} />
           </button>
         </section>
+        {/* Sur téléphone, le suivi détaillé se replie sous ce bouton. */}
+        <button
+          type="button"
+          className="home-more"
+          aria-expanded={showAll}
+          onClick={() => setShowAll((open) => !open)}
+        >
+          <span>
+            {showAll ? "Replier mon suivi" : "Voir tout mon suivi"}
+            <small>parcours, activité, objectifs, trajectoire</small>
+          </span>
+          <Icon name="chevron" size={18} />
+        </button>
       </div>
     </div>
   );

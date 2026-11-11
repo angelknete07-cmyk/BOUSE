@@ -194,6 +194,9 @@ test("surfaces neutres et états de navigation sur un véritable rendu", async (
     [".console-hero-art path", "stroke", "Tracé topographique"],
     [".eyebrow", "color", "Texte secondaire"],
   ];
+  // Sur téléphone, le suivi détaillé est replié sous « Voir tout mon suivi ».
+  const more = page.getByRole("button", { name: /Voir tout mon suivi/ });
+  if (testInfo.project.name.startsWith("mobile")) await more.click();
   for (const [selector, property, description] of colors) {
     await neutral(page.locator(selector).first(), property, description);
   }

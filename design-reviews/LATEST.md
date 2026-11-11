@@ -1,3 +1,18 @@
+# Review design — Téléphone simplifié
+
+**11 novembre 2026.** **La direction artistique n’est pas déclarée validée.** Construit d’après `maquette/telephone.html` (avant / après sur la vraie appli), dans l’ordre demandé par l’utilisateur (« Fait tout dans l’ordre sens demander »). Rien n’est retiré : tout reste à un toucher. Ordinateur inchangé. Paire principale : l’accueil (`00-home-viewport`), archive `2026-11-11_21-56-43-Europe-Paris`.
+
+- **Accueil** : il commence par l’essentiel (bonjour, la leçon à faire et la séance, premiers pas, chiffres, domaines). Le suivi détaillé (parcours, activité, objectifs, trajectoire) se replie sous un bouton « Voir tout mon suivi » (flèche qui tourne, ouverture en douceur, `aria-expanded`).
+- **Aide de la page** : seule la première phrase s’affiche, sur toute la largeur ; « La suite » déplie l’explication, « Moins » la replie ; « Me montrer » et la croix passent dessous.
+- **Barre du haut** plus calme (l’état de la sauvegarde reste dans Préférences) ; **barre du bas** : l’onglet ouvert en pastille.
+- **Lisibilité** : petits textes à 12 px minimum ; boutons de texte, onglets et boutons de l’aide à 44 px de haut au moins. Dans une leçon, les étapes restent collées en haut.
+- **Code** : `src/phone.css` (tout sous `max-width: 700px`, avec réduction des animations), bouton dans `Dashboard.tsx`, « La suite » dans `Comfort.tsx`. Vague et logo intouchés.
+- **Captures** : `00-home-viewport`, `01-home` (suivi déplié), `02-academy-viewport` (aide sur téléphone) et toutes les autres paires mobiles régénérées.
+- **Contrôles de l’agent** : nouveau `tests/telephone.spec.ts` (accueil replié puis déplié, ordre des blocs, aucune largeur en trop, aide dépliable, cibles de 44 px) ; deux anciens tests ouvrent d’abord « Voir tout mon suivi » sur téléphone ; suite complète passée avant la dernière retouche de l’aide, puis `design`, `telephone`, `guide` relancés : tous passés ; `npm test`, `tsc`, Prettier. Corrigé pendant la revue : le texte de l’aide était écrasé par les boutons → texte sur sa ligne, boutons dessous.
+- **Limites** : pas de vrai téléphone ; pas de validation externe.
+
+---
+
 # Review design — Catalogue des compétences (idées 13 et 15)
 
 **11 novembre 2026.** **La direction artistique n’est pas déclarée validée.** Maquette `maquette/catalogue.html` montrée avant ; l’utilisateur a demandé « Fait le catalogue » puis « Fait tout dans l’ordre sens demander ». Paire principale : la page d’un domaine (`11-catalogue-domaine`), archive `2026-11-11_21-45-08-Europe-Paris`.
