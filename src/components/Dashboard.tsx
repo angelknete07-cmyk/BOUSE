@@ -17,6 +17,8 @@ import { buildReviewDeck, dueReviewCards } from "../lib/reviews";
 import { useClock } from "../lib/useClock";
 import { Terrain } from "./Terrain";
 import { FirstSteps } from "./Guide";
+import { useTraps } from "./useTraps";
+import { trapsToFoil } from "../lib/traps";
 
 type Props = { state: AppState; onNavigate: (route: string) => void };
 
@@ -64,6 +66,7 @@ export function Dashboard({ state, onNavigate }: Props) {
   const now = useClock();
   const reviewDeck = buildReviewDeck(lessons, state, now);
   const due = dueReviewCards(reviewDeck, now);
+  const toFoil = trapsToFoil(useTraps(state)).length;
   const { latest, done, current, resumed, reason, lastValidated } =
     recommendLesson(state, now);
   // « Vous » is the stand-in for an empty name: never greet « À vous de jouer, Vous ».
@@ -297,6 +300,14 @@ export function Dashboard({ state, onNavigate }: Props) {
                   >
                     {due.length} rappel{due.length > 1 ? "s" : ""} prêt
                     {due.length > 1 ? "s" : ""} avant de continuer
+                  </button>
+                )}
+                {toFoil > 0 && (
+                  <button
+                    className="button secondary console-traps"
+                    onClick={() => onNavigate("reviews")}
+                  >
+                    {toFoil} piège{toFoil > 1 ? "s" : ""} à déjouer →
                   </button>
                 )}
               </div>

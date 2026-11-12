@@ -363,7 +363,9 @@ function App({
       titleRef.current?.focus({ preventScroll: true }),
     );
     const routeTitle = route.startsWith("lesson/")
-      ? lessons.find((item) => item.id === route.slice(7))?.title
+      ? lessons.find(
+          (item) => item.id === route.slice(7).replace(/\/quiz$/, ""),
+        )?.title
       : route === "lexique" || route.startsWith("lexique/")
         ? "Lexique de l’Académie"
         : route === "domains"
@@ -371,7 +373,7 @@ function App({
           : route.startsWith("domain/")
             ? catalogueDomain(route.slice(7))?.name
             : route.startsWith("skill/")
-              ? catalogueSkill(route.slice(6))?.title
+              ? catalogueSkill(route.slice(6).replace(/\/check$/, ""))?.title
               : route === "missions"
                 ? "Missions réelles"
                 : route.startsWith("mission/")
@@ -462,7 +464,7 @@ function App({
   // Les missions réelles font partie de Projets.
   const inMissions = route === "missions" || route.startsWith("mission/");
   const lesson = route.startsWith("lesson/")
-    ? lessons.find((l) => l.id === route.slice(7))
+    ? lessons.find((l) => l.id === route.slice(7).replace(/\/quiz$/, ""))
     : undefined;
   const navActive = (id: string) =>
     route === id ||
@@ -733,8 +735,9 @@ function App({
                   <Academy state={state} update={update} onNavigate={go} />
                 ) : lesson ? (
                   <LessonView
-                    key={lesson.id}
+                    key={route}
                     lesson={lesson}
+                    startOnQuiz={route.endsWith("/quiz")}
                     state={state}
                     update={update}
                     onNavigate={go}
@@ -756,7 +759,8 @@ function App({
                 ) : route.startsWith("skill/") ? (
                   <SkillSheet
                     key={route}
-                    id={route.slice(6)}
+                    id={route.slice(6).replace(/\/check$/, "")}
+                    startOnCheck={route.endsWith("/check")}
                     state={state}
                     update={update}
                     onNavigate={go}

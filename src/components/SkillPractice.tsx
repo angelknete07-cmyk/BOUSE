@@ -22,18 +22,27 @@ export function SkillPractice({
   skill,
   status,
   update,
+  startOnCheck = false,
 }: {
   skill: CatalogueSkill;
   status: SkillStatus;
   update: StateUpdater;
+  /** Ouvrir directement le contrôle (depuis « Mes pièges »). */
+  startOnCheck?: boolean;
 }) {
   const [content, setContent] = useState<SkillContent | null | undefined>();
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(startOnCheck ? 2 : 0);
   const [values, setValues] = useState<Record<number, string>>({});
   const [answers, setAnswers] = useState<Record<number, number>>({});
   const [checked, setChecked] = useState(false);
   const panelRef = useRef<HTMLDivElement>(null);
   const moved = useRef(false);
+
+  useEffect(() => {
+    if (startOnCheck && content)
+      panelRef.current?.scrollIntoView({ block: "start" });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [!!content]);
 
   useEffect(() => {
     let live = true;

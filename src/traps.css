@@ -1,0 +1,207 @@
+/* ==========================================================================
+   « Mes pièges » (idée 19, maquette maquette/pieges.html) : en haut des
+   Révisions, les questions ratées avec la bonne réponse et le pourquoi.
+   Neutre ; la lavande seulement sur le filtre choisi, le pourquoi et un
+   piège raté plusieurs fois.
+   ========================================================================== */
+
+.trap-notebook {
+  --trap-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  display: grid;
+  gap: 16px;
+  margin: 0 0 28px;
+}
+.trap-head {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: 12px 20px;
+}
+.trap-head h2 {
+  margin: 4px 0 6px;
+  color: var(--text);
+  font-size: 22px;
+  font-weight: 560;
+  letter-spacing: -0.01em;
+}
+.trap-head p:not(.eyebrow) {
+  max-width: 62ch;
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 14.5px;
+}
+.trap-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.trap-filter button {
+  min-height: 44px;
+  padding: 0 16px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text-secondary);
+  font: 500 13.5px/1 var(--font-sans);
+  cursor: pointer;
+  transition:
+    color 140ms var(--trap-ease),
+    border-color 160ms var(--trap-ease),
+    transform 140ms var(--trap-ease);
+}
+.trap-filter button:hover {
+  color: var(--text);
+}
+.trap-filter button:active {
+  transform: scale(0.97);
+}
+.trap-filter button[aria-pressed="true"] {
+  border-color: rgb(var(--accent-violet-rgb) / 0.55);
+  color: var(--text);
+}
+.trap-filter button:focus-visible {
+  outline: 2px solid rgb(var(--accent-violet-rgb) / 0.75);
+  outline-offset: 2px;
+}
+.trap-list {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.trap-card {
+  display: grid;
+  gap: 10px;
+  padding: 18px 20px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: linear-gradient(180deg, var(--raised), var(--surface));
+  box-shadow: var(--shadow-surface);
+}
+.trap-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  color: var(--text-tertiary);
+  font-size: 12.5px;
+}
+.trap-chip {
+  padding: 2px 9px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  color: var(--text-secondary);
+}
+.trap-chip.is-hot {
+  border-color: rgb(var(--accent-violet-rgb) / 0.5);
+  color: var(--text);
+}
+.trap-q {
+  margin: 0;
+  color: var(--text);
+  font-size: 15.5px;
+  line-height: 1.45;
+}
+.trap-answers {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  font-size: 14px;
+}
+.trap-answers div {
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  gap: 10px;
+}
+.trap-answers dt {
+  color: var(--text-tertiary);
+}
+.trap-answers dd {
+  margin: 0;
+}
+.trap-wrong del {
+  color: var(--text-secondary);
+  text-decoration-color: var(--text-tertiary);
+}
+.trap-right {
+  color: var(--text);
+}
+.trap-why {
+  margin: 0;
+  padding: 10px 12px;
+  border-left: 2px solid rgb(var(--accent-violet-rgb) / 0.7);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  background: var(--surface-low);
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+.trap-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.trap-card.is-done .trap-q {
+  color: var(--text-secondary);
+}
+.trap-ok {
+  margin: 0;
+  color: var(--text);
+  font-size: 13.5px;
+}
+.trap-empty {
+  margin: 0;
+  padding: 16px 18px;
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius);
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+.trap-more {
+  justify-self: start;
+  min-height: 44px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .trap-card {
+    animation: trap-in 380ms var(--trap-ease) backwards;
+  }
+  .trap-card:nth-child(2) {
+    animation-delay: 50ms;
+  }
+  .trap-card:nth-child(3) {
+    animation-delay: 100ms;
+  }
+  .trap-card:nth-child(4) {
+    animation-delay: 150ms;
+  }
+  .trap-card:nth-child(5) {
+    animation-delay: 200ms;
+  }
+  @keyframes trap-in {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+  }
+}
+
+@media (max-width: 700px) {
+  .trap-head {
+    grid-template-columns: 1fr;
+  }
+  .trap-head h2 {
+    font-size: 20px;
+  }
+  .trap-card {
+    padding: 16px;
+  }
+  .trap-answers div {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .trap-actions .button {
+    flex: 1 1 100%;
+  }
+}

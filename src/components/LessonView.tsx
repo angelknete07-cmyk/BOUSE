@@ -27,6 +27,8 @@ type Props = {
   state: AppState;
   update: StateUpdater;
   onNavigate: (route: string) => void;
+  /** Ouvrir directement l'étape « Démontrer » (depuis « Mes pièges »). */
+  startOnQuiz?: boolean;
 };
 const stages = [
   { label: "Comprendre", subtitle: "Les notions" },
@@ -35,9 +37,15 @@ const stages = [
   { label: "Appliquer", subtitle: "Mon projet" },
 ];
 
-export function LessonView({ lesson, state, update, onNavigate }: Props) {
+export function LessonView({
+  lesson,
+  state,
+  update,
+  onNavigate,
+  startOnQuiz = false,
+}: Props) {
   const now = useClock();
-  const [tab, setTab] = useState(0);
+  const [tab, setTab] = useState(startOnQuiz ? 2 : 0);
   const savedPosition = (id: string) =>
     Math.min(
       Math.max(state.lessonPositions?.[id] ?? 0, 0),
@@ -105,7 +113,7 @@ export function LessonView({ lesson, state, update, onNavigate }: Props) {
   const selectionIsCorrect = selected === question.answer;
 
   useEffect(() => {
-    setTab(0);
+    setTab(startOnQuiz ? 2 : 0);
     setSequence(savedPosition(lesson.id));
     setResumedAt(savedPosition(lesson.id));
     setExerciseText("");

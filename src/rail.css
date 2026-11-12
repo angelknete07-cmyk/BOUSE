@@ -306,6 +306,12 @@
   }
 }
 
+/* La vague de tête de page (page-aura) déborde à droite par dessin : on la
+   coupe au bord de l'espace de travail, sans barre de défilement horizontale. */
+.app-shell .workspace {
+  overflow-x: clip;
+}
+
 /* Changer d'espace : la page apparaît en douceur, morceau par morceau. */
 @media (prefers-reduced-motion: no-preference) {
   .route-stage {

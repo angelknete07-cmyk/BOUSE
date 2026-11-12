@@ -9,6 +9,8 @@ import {
   type ReviewCard,
 } from "../lib/reviews";
 import { Icon } from "./Icon";
+import { TrapNotebook } from "./Traps";
+import { useTraps } from "./useTraps";
 
 type Props = {
   state: AppState;
@@ -62,6 +64,7 @@ const spacingSteps = [
 ].map((step) => ({ ...step, x: 20 + Math.sqrt(step.days / 30) * 300 }));
 
 export function Reviews({ state, update, onNavigate }: Props) {
+  const traps = useTraps(state);
   const [now, setNow] = useState(() => new Date());
   const [session, setSession] = useState<Session | null>(null);
   const [revealedFor, setRevealedFor] = useState<string | null>(null);
@@ -206,6 +209,8 @@ export function Reviews({ state, update, onNavigate }: Props) {
         <h1>Faire revenir les idées.</h1>
         <p>Ce que vous retrouvez sans relire commence à vous appartenir.</p>
       </header>
+
+      {!session && <TrapNotebook traps={traps} onNavigate={onNavigate} />}
 
       {session ? (
         finished ? (

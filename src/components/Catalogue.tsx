@@ -305,7 +305,8 @@ export function SkillSheet({
   state,
   update,
   onNavigate,
-}: Props & { id: string }) {
+  startOnCheck = false,
+}: Props & { id: string; startOnCheck?: boolean }) {
   const statuses = useStatuses(state);
   const skill = catalogueSkill(id);
   const headingRef = useRef<HTMLHeadingElement>(null);
@@ -345,7 +346,12 @@ export function SkillSheet({
       </h1>
       <p className="cat-lead">{skill.does}</p>
       {!skill.lesson && isReady(skill) ? (
-        <SkillPractice skill={skill} status={status} update={update} />
+        <SkillPractice
+          skill={skill}
+          status={status}
+          update={update}
+          startOnCheck={startOnCheck}
+        />
       ) : (
         <>
           <ol className="cat-steps" aria-label="Comment elle se déroule">
