@@ -464,6 +464,37 @@ test("galerie des écrans et du quiz validé sans débordement", async ({
     await capture(page, testInfo, name);
   }
 
+  // Les missions réelles : la liste, puis une mission avec son dossier rempli.
+  await page.goto("/#missions");
+  await expect(
+    page.getByRole("heading", {
+      level: 1,
+      name: "Apprends en faisant ton vrai dossier",
+    }),
+  ).toBeVisible();
+  await page.waitForTimeout(400);
+  await capture(page, testInfo, "12-missions");
+  await page.goto("/#mission/micro-entreprise");
+  await page
+    .getByLabel("Ce que tu proposes")
+    .fill("Des photos pour les commerces du quartier");
+  await page
+    .getByLabel("Pour qui")
+    .fill("Cafés, boutiques et artisans de ma ville");
+  await page
+    .getByLabel("Le problème que ça règle")
+    .fill("Leurs photos en ligne sont sombres");
+  await page.getByRole("button", { name: /Valider la mission/ }).click();
+  await page.getByLabel(/Ce que tu veux gagner/).fill("1 500");
+  await page.getByLabel(/Tes frais par mois/).fill("150");
+  await page.getByLabel(/Tes cotisations/).fill("25");
+  await page.getByLabel(/Heures facturées/).fill("60");
+  await expect(
+    page.getByRole("complementary", { name: "Ton dossier, en direct" }),
+  ).toContainText("Ton prix de l’heure");
+  await page.waitForTimeout(1000);
+  await capture(page, testInfo, "12-mission");
+
   // Use the application's validated import flow. The gallery init script would
   // replace direct localStorage mutations after a document reload.
   const currentState: AppState = await page.evaluate(() =>

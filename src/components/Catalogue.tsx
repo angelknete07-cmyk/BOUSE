@@ -16,6 +16,7 @@ import {
   toggleDomain,
   type SkillStatus,
 } from "../lib/catalogue";
+import { missionsUsing, practicedSkills } from "../lib/missions";
 import { latestCurrentAttempt } from "../lib/portfolio";
 import type { AppState, StateUpdater } from "../lib/types";
 import { useClock } from "../lib/useClock";
@@ -164,6 +165,7 @@ export function DomainPage({
   const skills = CATALOGUE_SKILLS.filter((s) => s.domain === id);
   const done = skills.filter((s) => statuses[s.id] === "done").length;
   const next = nextSkill(id, statuses);
+  const practiced = practicedSkills(state);
   return (
     <div className="cat-page">
       <div
@@ -268,6 +270,11 @@ export function DomainPage({
                           >
                             {TAG[status]}
                           </span>
+                          {practiced.has(skill.id) && (
+                            <span className="cat-tag is-ready">
+                              Mise en pratique
+                            </span>
+                          )}
                           {skill.gesture && (
                             <span className="cat-tag">
                               Modèle : {skill.gesture}
@@ -415,6 +422,27 @@ export function SkillSheet({
         <div className="cat-rel">
           <p>Ça ouvre ensuite</p>
           <div className="cat-pills">{after.map(chip)}</div>
+        </div>
+      )}
+      {missionsUsing(skill.id).length > 0 && (
+        <div className="cat-rel">
+          <p>
+            {practicedSkills(state).has(skill.id)
+              ? "Mise en pratique dans une mission réelle"
+              : "À mettre en pratique dans une mission réelle"}
+          </p>
+          <div className="cat-pills">
+            {missionsUsing(skill.id).map((mission) => (
+              <button
+                type="button"
+                key={mission.id}
+                className="cat-pill"
+                onClick={() => onNavigate(`mission/${mission.id}`)}
+              >
+                {mission.title}
+              </button>
+            ))}
+          </div>
         </div>
       )}
       <p className="cat-note">

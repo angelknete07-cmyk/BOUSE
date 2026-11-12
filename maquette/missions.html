@@ -1,0 +1,669 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Maquette — missions réelles BOUSE</title>
+    <!--
+      MAQUETTE, pas le produit (idée 14 : « les missions réelles »). Un vrai
+      projet devient une suite de missions ; chaque mission remplit une partie
+      d'un vrai dossier, visible en direct, téléchargeable à la fin.
+      Ouvrir : http://localhost:5173/maquette/missions.html
+    -->
+    <link rel="stylesheet" href="/src/tokens.css" />
+    <style>
+      :root {
+        color-scheme: dark;
+        --ease: cubic-bezier(0.22, 1, 0.36, 1);
+        --v: var(--accent-violet-rgb);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text-secondary);
+        font: 15px/1.5 var(--font-sans);
+      }
+      h1,
+      h2,
+      h3 {
+        color: var(--text);
+        font-weight: 560;
+        letter-spacing: -0.01em;
+        margin: 0;
+      }
+      .bar {
+        position: sticky;
+        top: 0;
+        z-index: 5;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px 10px;
+        padding: 10px 16px;
+        border-bottom: 1px solid var(--line-strong);
+        background: rgb(13 13 15 / 0.92);
+        backdrop-filter: blur(10px);
+      }
+      .bar strong {
+        color: var(--text);
+        font-weight: 550;
+        margin-right: 6px;
+      }
+      .tab {
+        min-height: 36px;
+        padding: 0 14px;
+        border: 1px solid var(--line-strong);
+        border-radius: 999px;
+        background: var(--surface);
+        color: var(--text-secondary);
+        font: 500 13px/1 var(--font-sans);
+        cursor: pointer;
+        transition:
+          color 140ms var(--ease),
+          border-color 140ms var(--ease),
+          transform 140ms var(--ease);
+      }
+      .tab:active {
+        transform: scale(0.97);
+      }
+      .tab[aria-pressed="true"] {
+        color: var(--text);
+        border-color: rgb(var(--v) / 0.55);
+      }
+      main {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 28px 16px 80px;
+      }
+      .screen {
+        display: none;
+        animation: in 360ms var(--ease) both;
+      }
+      .screen.on {
+        display: block;
+      }
+      @keyframes in {
+        from {
+          opacity: 0;
+          transform: translateY(8px);
+        }
+      }
+      .eyebrow {
+        color: var(--text-tertiary);
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .lead {
+        max-width: 62ch;
+        margin: 8px 0 24px;
+      }
+      .card {
+        border: 1px solid var(--line-strong);
+        border-radius: var(--radius);
+        background: linear-gradient(180deg, var(--raised), var(--surface));
+        box-shadow: var(--shadow-surface);
+        padding: 20px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+        max-width: 860px;
+        gap: 14px;
+      }
+      .mission {
+        display: grid;
+        gap: 10px;
+        text-align: left;
+        cursor: pointer;
+        color: inherit;
+        font: inherit;
+        transition:
+          border-color 180ms var(--ease),
+          transform 180ms var(--ease);
+      }
+      .mission:hover {
+        border-color: var(--line-silver);
+        transform: translateY(-2px);
+      }
+      .mission:active {
+        transform: scale(0.985);
+      }
+      .mission h3 {
+        font-size: 17px;
+      }
+      .meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+      .chip {
+        padding: 3px 9px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        color: var(--text-tertiary);
+        font-size: 12px;
+      }
+      .doc-out {
+        color: var(--text);
+        font-size: 13.5px;
+      }
+      .doc-out b {
+        color: rgb(var(--v));
+        font-weight: 550;
+      }
+      .note {
+        margin-top: 22px;
+        color: var(--text-tertiary);
+        font-size: 13px;
+        max-width: 70ch;
+      }
+      /* Écran 2 : la mission en cours */
+      .work {
+        display: grid;
+        grid-template-columns: 230px minmax(0, 1fr) minmax(0, 0.9fr);
+        gap: 16px;
+        align-items: start;
+      }
+      .steps {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: 6px;
+      }
+      .steps li {
+        display: grid;
+        grid-template-columns: 22px 1fr;
+        gap: 10px;
+        padding: 10px 12px;
+        border: 1px solid transparent;
+        border-radius: var(--radius-sm);
+        font-size: 13.5px;
+      }
+      .steps li small {
+        display: block;
+        color: var(--text-tertiary);
+        font-size: 12px;
+      }
+      .steps .dot {
+        width: 22px;
+        height: 22px;
+        border: 1px solid var(--line-strong);
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        font-size: 11px;
+      }
+      .steps .done .dot {
+        background: var(--text);
+        color: var(--bg);
+        border-color: var(--text);
+      }
+      .steps .now {
+        border-color: rgb(var(--v) / 0.4);
+        background: rgb(var(--v) / calc(0.08 * var(--wash-k)));
+        color: var(--text);
+      }
+      .steps .now .dot {
+        border-color: rgb(var(--v));
+        color: rgb(var(--v));
+      }
+      .form {
+        display: grid;
+        gap: 12px;
+      }
+      .row {
+        display: grid;
+        grid-template-columns: 1fr 120px;
+        gap: 8px;
+      }
+      label {
+        display: grid;
+        gap: 5px;
+        font-size: 13px;
+      }
+      input {
+        width: 100%;
+        min-width: 0;
+        min-height: 42px;
+        padding: 0 12px;
+        border: 1px solid var(--line-strong);
+        border-radius: var(--radius-sm);
+        background: var(--bg);
+        color: var(--text);
+        font: 14px var(--font-sans);
+      }
+      input:focus {
+        outline: none;
+        border-color: var(--line-focus);
+      }
+      .uses {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        align-items: center;
+        font-size: 12.5px;
+      }
+      .uses a {
+        color: var(--text-secondary);
+        padding: 3px 9px;
+        border: 1px dashed var(--line-strong);
+        border-radius: 999px;
+        text-decoration: none;
+      }
+      .uses a.ok {
+        border-style: solid;
+        color: var(--text);
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 6px;
+      }
+      .btn {
+        min-height: 44px;
+        padding: 0 18px;
+        border-radius: 999px;
+        border: 1px solid var(--line-strong);
+        background: var(--surface);
+        color: var(--text);
+        font: 500 14px/1 var(--font-sans);
+        cursor: pointer;
+        transition: transform 140ms var(--ease);
+      }
+      .btn:active {
+        transform: scale(0.97);
+      }
+      .btn.primary {
+        background: linear-gradient(180deg, #f4f4f6, #c9c9cf);
+        color: #111;
+        border-color: transparent;
+      }
+      .hint {
+        padding: 12px 14px;
+        border-left: 2px solid rgb(var(--v) / 0.7);
+        background: var(--surface-low);
+        border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+        font-size: 13.5px;
+      }
+      /* Le dossier, comme une feuille */
+      .paper {
+        position: sticky;
+        top: 70px;
+        padding: 22px;
+        border-radius: var(--radius);
+        background: #ececef;
+        color: #26262a;
+        box-shadow: 0 22px 50px -24px rgb(0 0 0 / 0.9);
+        font-size: 13px;
+      }
+      .paper h3 {
+        color: #111;
+        font-size: 15px;
+      }
+      .paper .sec {
+        margin-top: 14px;
+        padding-top: 10px;
+        border-top: 1px solid #cfcfd4;
+      }
+      .paper .sec.todo {
+        color: #9a9aa2;
+      }
+      .paper table {
+        width: 100%;
+        border-collapse: collapse;
+        font-variant-numeric: tabular-nums;
+      }
+      .paper td {
+        padding: 3px 0;
+      }
+      .paper td:last-child {
+        text-align: right;
+      }
+      .paper .total td {
+        border-top: 1px solid #b9b9c0;
+        font-weight: 600;
+        color: #111;
+      }
+      .paper .flash {
+        animation: flash 900ms var(--ease);
+      }
+      @keyframes flash {
+        from {
+          background: rgb(var(--v) / 0.22);
+        }
+      }
+      .label {
+        display: inline-block;
+        margin-top: 12px;
+        color: #6b6b73;
+        font-size: 11.5px;
+      }
+      /* Écran 3 : dossier prêt */
+      .final {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 18px;
+        align-items: start;
+      }
+      .check {
+        list-style: none;
+        padding: 0;
+        margin: 12px 0 0;
+        display: grid;
+        gap: 8px;
+      }
+      .check li::before {
+        content: "✓ ";
+        color: var(--text);
+      }
+      @media (max-width: 900px) {
+        .work,
+        .final {
+          grid-template-columns: 1fr;
+        }
+        .steps {
+          display: flex;
+          overflow-x: auto;
+        }
+        .steps li {
+          flex: none;
+        }
+        .steps li small {
+          display: none;
+        }
+        .paper {
+          position: static;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation: none !important;
+          transition-duration: 1ms !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bar">
+      <strong>Maquette · Missions réelles</strong>
+      <button class="tab" aria-pressed="true" data-go="0">1. Choisir</button>
+      <button class="tab" aria-pressed="false" data-go="1">
+        2. Une mission
+      </button>
+      <button class="tab" aria-pressed="false" data-go="2">
+        3. Le dossier prêt
+      </button>
+    </div>
+    <main>
+      <!-- 1. Choisir -->
+      <section class="screen on">
+        <p class="eyebrow">Projets · Missions réelles</p>
+        <h1>Apprends en faisant ton vrai dossier</h1>
+        <p class="lead">
+          Choisis un projet de ta vie. Chaque mission te fait remplir une partie
+          d’un vrai document. À la fin, tu as appris <em>et</em> tu repars avec
+          ton dossier prêt.
+        </p>
+        <div class="grid">
+          <button class="card mission" data-go="1">
+            <h3>Mon budget de l’année</h3>
+            <div class="meta">
+              <span class="chip">5 missions</span
+              ><span class="chip">≈ 45 min</span
+              ><span class="chip">Ton argent au quotidien</span>
+            </div>
+            <p class="doc-out">
+              Tu repars avec : <b>ton budget sur 12 mois</b> + ton épargne de
+              précaution.
+            </p>
+          </button>
+          <button class="card mission" data-go="1">
+            <h3>Lancer ma micro-entreprise</h3>
+            <div class="meta">
+              <span class="chip">6 missions</span
+              ><span class="chip">≈ 1 h 15</span
+              ><span class="chip">Entreprendre · Papiers · Vente</span>
+            </div>
+            <p class="doc-out">
+              Tu repars avec : <b>ton premier devis</b>, ton prix, ton plan des
+              démarches.
+            </p>
+          </button>
+          <button class="card mission" data-go="1">
+            <h3>Préparer mon premier placement</h3>
+            <div class="meta">
+              <span class="chip">5 missions</span
+              ><span class="chip">≈ 50 min</span
+              ><span class="chip">Investir</span>
+            </div>
+            <p class="doc-out">
+              Tu repars avec : <b>ta fiche de réflexion</b> (horizon, risque,
+              frais). Pas un conseil.
+            </p>
+          </button>
+          <button class="card mission" data-go="1">
+            <h3>Trouver mes 10 premiers clients</h3>
+            <div class="meta">
+              <span class="chip">5 missions</span><span class="chip">≈ 1 h</span
+              ><span class="chip">Vente · Marketing</span>
+            </div>
+            <p class="doc-out">
+              Tu repars avec : <b>ta liste de prospects</b> et ton message
+              d’approche.
+            </p>
+          </button>
+        </div>
+        <p class="note">
+          Les missions se rangent dans Projets, à côté de tes fiches. Tu peux en
+          suivre plusieurs ; ta progression reste enregistrée comme le reste.
+        </p>
+      </section>
+
+      <!-- 2. Une mission -->
+      <section class="screen">
+        <p class="eyebrow">Lancer ma micro-entreprise · mission 3 sur 6</p>
+        <h1 style="margin-bottom: 20px">Faire ton premier devis</h1>
+        <div class="work">
+          <ol class="steps">
+            <li class="done">
+              <span class="dot">✓</span
+              ><span>Ton idée en une phrase<small>Fait</small></span>
+            </li>
+            <li class="done">
+              <span class="dot">✓</span
+              ><span>Ton prix<small>Fait · 45 € de l’heure</small></span>
+            </li>
+            <li class="now">
+              <span class="dot">3</span
+              ><span>Ton premier devis<small>En cours · 10 min</small></span>
+            </li>
+            <li>
+              <span class="dot">4</span
+              ><span>Ton statut et tes démarches<small>10 min</small></span>
+            </li>
+            <li>
+              <span class="dot">5</span
+              ><span>Ta facture<small>10 min</small></span>
+            </li>
+            <li>
+              <span class="dot">6</span
+              ><span>Ton plan des 3 premiers mois<small>15 min</small></span>
+            </li>
+          </ol>
+          <div class="card form">
+            <p class="hint">
+              Un devis dit <b>quoi</b>, <b>combien</b> et <b>jusqu’à quand</b>.
+              Remplis avec un vrai client (ou un client imaginé) : le dossier se
+              construit à droite.
+            </p>
+            <label>Ton client<input id="cl" value="Café Lumière" /></label>
+            <div class="row">
+              <label
+                >Prestation 1<input id="p1" value="Séance photo (2 h)"
+              /></label>
+              <label
+                >Prix (€)<input id="m1" value="90" inputmode="decimal"
+              /></label>
+            </div>
+            <div class="row">
+              <label
+                >Prestation 2<input id="p2" value="Retouche de 20 photos"
+              /></label>
+              <label
+                >Prix (€)<input id="m2" value="120" inputmode="decimal"
+              /></label>
+            </div>
+            <label
+              >Valable jusqu’au<input id="va" value="30 novembre 2026"
+            /></label>
+            <div class="uses">
+              <span>Compétences utilisées :</span>
+              <a class="ok" href="#">Faire un devis ✓</a>
+              <a href="#">Fixer son prix</a>
+            </div>
+            <div class="actions">
+              <button class="btn primary" data-go="2">
+                Valider la mission →
+              </button>
+              <button class="btn">Revoir la compétence</button>
+            </div>
+          </div>
+          <aside class="paper" aria-label="Ton dossier, en direct">
+            <h3>Dossier · Lancer ma micro-entreprise</h3>
+            <div class="sec">
+              <b>1. L’idée</b><br />Photos pour les commerces du quartier.
+            </div>
+            <div class="sec">
+              <b>2. Le prix</b><br />45 € de l’heure (calculé à la mission 2).
+            </div>
+            <div class="sec" id="devis">
+              <b>3. Devis n° 1 — <span id="dcl"></span></b>
+              <table>
+                <tr>
+                  <td id="dp1"></td>
+                  <td id="dm1"></td>
+                </tr>
+                <tr>
+                  <td id="dp2"></td>
+                  <td id="dm2"></td>
+                </tr>
+                <tr class="total">
+                  <td>Total</td>
+                  <td id="dt"></td>
+                </tr>
+              </table>
+              <small
+                >Valable jusqu’au <span id="dva"></span>. Mention TVA à vérifier
+                à la mission 4.</small
+              >
+            </div>
+            <div class="sec todo">4. Statut et démarches — à venir</div>
+            <div class="sec todo">5. Facture — à venir</div>
+            <div class="sec todo">6. Plan des 3 premiers mois — à venir</div>
+            <span class="label"
+              >Document d’apprentissage, à vérifier avant tout usage
+              officiel.</span
+            >
+          </aside>
+        </div>
+      </section>
+
+      <!-- 3. Dossier prêt -->
+      <section class="screen">
+        <p class="eyebrow">Lancer ma micro-entreprise · terminé</p>
+        <h1>Ton dossier est prêt</h1>
+        <p class="lead">
+          Six missions faites. Voilà ce que tu as construit et ce que tu sais
+          faire maintenant.
+        </p>
+        <div class="final">
+          <div class="card">
+            <h3>Ce que tu repars avec</h3>
+            <ul class="check">
+              <li>Ton idée et ton client type</li>
+              <li>Ton prix, avec le calcul</li>
+              <li>Ton premier devis</li>
+              <li>Ta liste de démarches</li>
+              <li>Ta première facture</li>
+              <li>Ton plan des 3 premiers mois</li>
+            </ul>
+            <div class="actions" style="margin-top: 18px">
+              <button class="btn primary">Télécharger mon dossier</button>
+              <button class="btn">Le faire relire par le mentor</button>
+            </div>
+            <p class="note" style="margin-top: 12px">
+              Le mentor relit et propose des améliorations, marquées « brouillon
+              non vérifié ». Le dossier reste à toi : rien n’est envoyé sans ton
+              clic.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Dans ton arbre</h3>
+            <p>
+              Les 7 compétences utilisées sont marquées
+              <b style="color: var(--text)">« mise en pratique »</b> :
+            </p>
+            <div class="uses" style="margin-top: 10px">
+              <a class="ok" href="#">Trouver son idée</a
+              ><a class="ok" href="#">Fixer son prix</a
+              ><a class="ok" href="#">Faire un devis</a
+              ><a class="ok" href="#">Choisir son statut</a
+              ><a class="ok" href="#">Faire une facture</a
+              ><a class="ok" href="#">Ses premières démarches</a
+              ><a class="ok" href="#">Se fixer un plan</a>
+            </div>
+            <p class="note">
+              Une compétence validée par son contrôle reste la preuve ; la
+              mission ajoute « je l’ai fait pour de vrai ». Les deux se voient
+              dans l’arbre.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script>
+      const screens = [...document.querySelectorAll(".screen")];
+      const tabs = [...document.querySelectorAll(".tab")];
+      const go = (i) => {
+        screens.forEach((s, k) => s.classList.toggle("on", k === i));
+        tabs.forEach((t, k) => t.setAttribute("aria-pressed", String(k === i)));
+        scrollTo({ top: 0 });
+      };
+      document
+        .querySelectorAll("[data-go]")
+        .forEach((el) =>
+          el.addEventListener("click", () => go(Number(el.dataset.go))),
+        );
+      const $ = (id) => document.getElementById(id);
+      const euro = (n) =>
+        isFinite(n) ? n.toLocaleString("fr-FR") + " €" : "—";
+      function render(flash) {
+        $("dcl").textContent = $("cl").value || "…";
+        $("dp1").textContent = $("p1").value || "…";
+        $("dp2").textContent = $("p2").value || "…";
+        const a = parseFloat($("m1").value.replace(",", ".")) || 0;
+        const b = parseFloat($("m2").value.replace(",", ".")) || 0;
+        $("dm1").textContent = euro(a);
+        $("dm2").textContent = euro(b);
+        $("dt").textContent = euro(a + b);
+        $("dva").textContent = $("va").value || "…";
+        if (flash) {
+          const d = $("devis");
+          d.classList.remove("flash");
+          void d.offsetWidth;
+          d.classList.add("flash");
+        }
+      }
+      document
+        .querySelectorAll(".form input")
+        .forEach((i) => i.addEventListener("input", () => render(true)));
+      render(false);
+    </script>
+  </body>
+</html>

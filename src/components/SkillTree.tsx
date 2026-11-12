@@ -25,9 +25,14 @@ import {
 export type TreeStatus = "done" | "retry" | "open" | "wait" | "soon";
 
 /** Les nœuds, leur placement et le nom des branches, calculés une fois. */
-function makeModel(items: TreeNode[], laneNames: Record<string, string>) {
+function makeModel(
+  items: TreeNode[],
+  laneNames: Record<string, string>,
+  practiced: ReadonlySet<string>,
+) {
   return {
     items,
+    practiced,
     tree: skillTreeLayout(items),
     byId: new Map(items.map((item) => [item.id, item])),
     laneName: (domain: string) => laneNames[domain] ?? domain,
@@ -68,7 +73,10 @@ type Props = {
   /** Ce qu'on choisit dans l'arbre s'affiche aussi dans la fiche de la page. */
   onSelect: (id: string) => void;
   onNavigate: (route: string) => void;
+  /** Les compétences déjà utilisées dans une mission réelle. */
+  practiced?: ReadonlySet<string>;
 };
+const NONE: ReadonlySet<string> = new Set();
 
 function Check() {
   return (
@@ -226,8 +234,16 @@ function TreeCanvas({
 
 type Opening = { nodeId: string | null; lane: string | null };
 
-export function SkillTree({ items, laneNames, ...rest }: Props) {
-  const model = useMemo(() => makeModel(items, laneNames), [items, laneNames]);
+export function SkillTree({
+  items,
+  laneNames,
+  practiced = NONE,
+  ...rest
+}: Props) {
+  const model = useMemo(
+    () => makeModel(items, laneNames, practiced),
+    [items, laneNames, practiced],
+  );
   return (
     <ModelContext.Provider value={model}>
       <InlineTree {...rest} />
@@ -403,7 +419,7 @@ function FullTree({
   onNavigate: (route: string) => void;
   onClosed: () => void;
 }) {
-  const { items, tree, byId, W, H, laneName } = useModel();
+  const { items, tree, byId, W, H, laneName, practiced } = useModel();
   const rootRef = useRef<HTMLDivElement>(null);
   const viewRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLDivElement>(null);
@@ -873,6 +889,11 @@ function FullTree({
               <i aria-hidden="true" />
               {STATE_TEXT[status]}
             </p>
+            {practiced.has(lesson.id) && (
+              <p className="tr-sum">
+                Mise en pratique dans une mission réelle.
+              </p>
+            )}
             <p className="tr-sum">{lesson.summary}</p>
             {!lesson.lesson && lesson.gesture && (
               <p className="tr-sum">Tu repars avec : {lesson.gesture}.</p>

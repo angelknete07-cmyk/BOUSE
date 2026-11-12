@@ -1,5 +1,6 @@
 import { useMemo, useRef, useState } from "react";
 import { lessonShortLabel } from "../data/lessonLabels";
+import { practicedSkills } from "../lib/missions";
 import { lessons, type Lesson } from "../data/lessons";
 import type { AppState, Attempt } from "../lib/types";
 import { Icon } from "./Icon";
@@ -64,6 +65,7 @@ export function KnowledgeMap({ state, onNavigate }: Props) {
   // vient du dernier quiz courant de sa leçon (« bientôt » sans leçon).
   const domainKey = chosenDomainIds(state).join(",");
   const items = useMemo(() => treeNodes(domainKey.split(",")), [domainKey]);
+  const practiced = useMemo(() => practicedSkills(state), [state.missions]);
   const statuses = skillStatuses(
     CATALOGUE_SKILLS.filter((skill) => items.some((i) => i.id === skill.id)),
     (id) => {
@@ -130,6 +132,7 @@ export function KnowledgeMap({ state, onNavigate }: Props) {
             items={items}
             laneNames={DOMAIN_NAMES}
             statuses={statuses}
+            practiced={practiced}
             nextId={nextId}
             onSelect={(id) => {
               // La fiche de la page suit les compétences qui ont leur leçon.

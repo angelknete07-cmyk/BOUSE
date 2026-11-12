@@ -133,6 +133,8 @@ export function parseState(raw: string): AppState {
       new Set(s.domains).size !== s.domains.length)
   )
     throw new Error("Domaines choisis invalides.");
+  if (s.missions !== undefined && !isMissions(s.missions))
+    throw new Error("Missions invalides.");
   if (s.reviewEvents !== undefined) {
     if (!Array.isArray(s.reviewEvents) || !s.reviewEvents.every(isReviewEvent))
       throw new Error("Historique de révision invalide.");
@@ -210,4 +212,36 @@ export function downloadFile(
   a.download = name;
   a.click();
   setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+const isShortText = (value: unknown, max: number) =>
+  typeof value === "string" && value.length <= max;
+
+/** Les missions réelles : brouillons et étapes validées, bornés. */
+function isMissions(value: unknown): boolean {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return false;
+  const entries = Object.entries(value as Record<string, unknown>);
+  return (
+    entries.length <= 40 &&
+    entries.every(([id, record]) => {
+      if (id.length > 60 || !record || typeof record !== "object") return false;
+      const r = record as Record<string, unknown>;
+      const answers = r.answers;
+      return (
+        !!answers &&
+        typeof answers === "object" &&
+        !Array.isArray(answers) &&
+        Object.keys(answers).length <= 120 &&
+        Object.entries(answers).every(
+          ([key, text]) => key.length <= 60 && isShortText(text, 4000),
+        ) &&
+        Array.isArray(r.done) &&
+        r.done.length <= 40 &&
+        r.done.every((step) => isShortText(step, 60)) &&
+        new Set(r.done).size === r.done.length &&
+        isShortText(r.startedAt, 40) &&
+        (r.finishedAt === undefined || isShortText(r.finishedAt, 40))
+      );
+    })
+  );
 }

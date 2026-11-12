@@ -1,0 +1,386 @@
+/* Les missions réelles (maquette maquette/missions.html). */
+.ms-page {
+  max-width: 1180px;
+}
+.ms-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+  gap: 14px;
+  max-width: 880px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.ms-card {
+  display: grid;
+  gap: 10px;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: linear-gradient(180deg, var(--raised), var(--surface));
+  box-shadow: var(--shadow-surface);
+  color: var(--text-secondary);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    border-color 180ms var(--cat-ease),
+    transform 180ms var(--cat-ease);
+}
+.ms-card:hover {
+  border-color: var(--line-silver);
+  transform: translateY(-2px);
+}
+.ms-card:active {
+  transform: scale(0.985);
+}
+.ms-card > b {
+  color: var(--text);
+  font-size: 17px;
+  font-weight: 560;
+}
+.ms-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.ms-out {
+  color: var(--text);
+  font-size: 13.5px;
+}
+.ms-out strong {
+  color: rgb(var(--accent-violet-rgb));
+  font-weight: 550;
+}
+.ms-state {
+  justify-self: start;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--surface-low);
+  color: var(--text-secondary);
+  font-size: 12px;
+}
+.ms-state[data-done] {
+  color: var(--text);
+}
+
+/* Une mission : étapes, formulaire, dossier. */
+.ms-work {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr) minmax(0, 0.9fr);
+  gap: 16px;
+  align-items: start;
+}
+.ms-steps {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.ms-steps button {
+  display: grid;
+  grid-template-columns: 22px 1fr;
+  gap: 10px;
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-secondary);
+  font: 13.5px/1.35 var(--font-sans);
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background-color 160ms var(--cat-ease),
+    border-color 160ms var(--cat-ease);
+}
+.ms-steps button:hover:not(:disabled) {
+  background: var(--surface-low);
+}
+.ms-steps button:disabled {
+  cursor: default;
+  opacity: 0.7;
+}
+.ms-steps small {
+  display: block;
+  color: var(--text-tertiary);
+  font-size: 12px;
+}
+.ms-dot {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  font-size: 11px;
+}
+.ms-steps [data-done] .ms-dot {
+  border-color: var(--text);
+  background: var(--text);
+  color: var(--bg);
+}
+.ms-steps [aria-current="step"] button {
+  border-color: rgb(var(--accent-violet-rgb) / 0.4);
+  background: rgb(var(--accent-violet-rgb) / calc(0.08 * var(--wash-k)));
+  color: var(--text);
+}
+.ms-steps [aria-current="step"] .ms-dot {
+  border-color: rgb(var(--accent-violet-rgb));
+  color: rgb(var(--accent-violet-rgb));
+}
+.ms-steps [aria-current="step"] [data-done] .ms-dot {
+  background: rgb(var(--accent-violet-rgb));
+  color: var(--bg);
+}
+.ms-form {
+  display: grid;
+  gap: 14px;
+}
+.ms-hint {
+  margin: 0;
+  padding: 12px 14px;
+  border-left: 2px solid rgb(var(--accent-violet-rgb) / 0.7);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  background: var(--surface-low);
+  color: var(--text-secondary);
+  font-size: 13.5px;
+}
+.ms-fields {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 130px;
+  gap: 12px 10px;
+}
+.ms-fields label {
+  display: grid;
+  grid-column: 1 / -1;
+  gap: 5px;
+  color: var(--text-tertiary);
+  font-size: 12.5px;
+}
+.ms-fields label[data-inline] {
+  grid-column: auto;
+}
+.ms-fields input,
+.ms-fields textarea {
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 1px solid var(--line-strong);
+  border-radius: 10px;
+  background: var(--bg);
+  color: var(--text);
+  font: 14px/1.4 var(--font-sans);
+  resize: vertical;
+}
+.ms-fields input::placeholder,
+.ms-fields textarea::placeholder {
+  color: var(--text-tertiary);
+}
+.ms-fields input:focus-visible,
+.ms-fields textarea:focus-visible {
+  outline: 2px solid rgb(var(--accent-violet-rgb) / 0.7);
+  outline-offset: 1px;
+}
+.ms-uses {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-tertiary);
+  font-size: 12.5px;
+}
+.ms-use {
+  min-height: 32px;
+  padding: 3px 11px;
+  border: 1px dashed var(--line-strong);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text-secondary);
+  font: 12.5px var(--font-sans);
+  cursor: pointer;
+}
+.ms-use[data-ok] {
+  border-style: solid;
+  color: var(--text);
+}
+.ms-problems {
+  margin: 0;
+  padding: 10px 14px 10px 30px;
+  border: 1px solid var(--warning-line);
+  border-radius: var(--radius-sm);
+  background: var(--warning-surface);
+  color: var(--warning-text);
+  font-size: 13px;
+}
+
+/* Le dossier, comme une feuille claire. */
+.ms-paper {
+  position: sticky;
+  top: 76px;
+  padding: 22px;
+  border-radius: var(--radius);
+  background: #ececef;
+  color: #2a2a2e;
+  box-shadow: 0 22px 50px -24px rgb(0 0 0 / 0.9);
+  font-size: 13px;
+}
+.ms-paper h2 {
+  margin: 0;
+  color: #111;
+  font-size: 15px;
+  font-weight: 600;
+}
+.ms-sec {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid #cfcfd4;
+}
+.ms-sec b {
+  color: #111;
+  font-weight: 600;
+}
+.ms-sec[data-todo] {
+  color: #63636b;
+}
+.ms-sec[data-live] {
+  animation: ms-flash 900ms var(--cat-ease);
+}
+@keyframes ms-flash {
+  from {
+    background: rgb(var(--accent-violet-rgb) / 0.2);
+  }
+}
+.ms-paper table {
+  width: 100%;
+  margin-top: 4px;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+.ms-paper td {
+  padding: 3px 0;
+  vertical-align: top;
+}
+.ms-paper td:first-child {
+  padding-right: 12px;
+  color: #5c5c64;
+}
+.ms-paper td:last-child {
+  text-align: right;
+}
+.ms-paper .ms-total td {
+  border-top: 1px solid #b9b9c0;
+  color: #111;
+  font-weight: 600;
+}
+.ms-paper > small {
+  display: block;
+  margin-top: 14px;
+  color: #57575f;
+  font-size: 11.5px;
+}
+
+/* Le dossier prêt. */
+.ms-final {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  align-items: start;
+}
+.ms-final .ms-paper {
+  position: static;
+  grid-column: 1 / -1;
+}
+.ms-check {
+  display: grid;
+  gap: 4px;
+  margin: 10px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.ms-check li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  color: var(--text);
+}
+.ms-check li > span::before {
+  content: "✓ ";
+  color: var(--text-secondary);
+}
+.ms-confirm {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+
+/* Projets : l'entrée vers les missions. */
+.ms-entry {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 6px 20px;
+  padding: 18px 22px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: linear-gradient(180deg, var(--raised), var(--surface));
+}
+.ms-entry h2 {
+  margin: 0;
+  color: var(--text);
+  font-size: 17px;
+  font-weight: 560;
+}
+.ms-entry p {
+  margin: 4px 0 0;
+  color: var(--text-secondary);
+  font-size: 13.5px;
+}
+
+@media (max-width: 960px) {
+  .ms-work,
+  .ms-final {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .ms-steps {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .ms-steps li {
+    flex: none;
+  }
+  .ms-steps small {
+    display: none;
+  }
+  .ms-paper {
+    position: static;
+  }
+}
+@media (max-width: 700px) {
+  .ms-fields {
+    grid-template-columns: minmax(0, 1fr) 110px;
+  }
+  .ms-entry {
+    grid-template-columns: 1fr;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ms-sec[data-live] {
+    animation: none;
+  }
+  .ms-card,
+  .ms-steps button {
+    transition-duration: 1ms;
+  }
+}

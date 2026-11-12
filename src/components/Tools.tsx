@@ -110,6 +110,21 @@ export function Incubator({
           concrète.
         </p>
       </header>
+      <section className="ms-entry" aria-labelledby="ms-entry-title">
+        <div>
+          <h2 id="ms-entry-title">Missions réelles</h2>
+          <p>
+            Un vrai projet de ta vie, des missions courtes, et à la fin un vrai
+            dossier : budget, devis, facture, plan.
+          </p>
+        </div>
+        <button
+          className="button secondary"
+          onClick={() => onNavigate("missions")}
+        >
+          Choisir une mission →
+        </button>
+      </section>
       <div>
         <button
           className="button primary"

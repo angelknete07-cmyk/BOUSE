@@ -52,6 +52,7 @@ import {
 } from "./components/Guide";
 import { latestCurrentAttempt } from "./lib/portfolio";
 import { catalogueDomain, catalogueSkill } from "./lib/catalogue";
+import { findMission } from "./lib/missions";
 
 // Secondary screens load on demand; home and onboarding stay in the entry chunk.
 const Academy = lazy(() =>
@@ -65,6 +66,12 @@ const DomainPage = lazy(() =>
 );
 const SkillSheet = lazy(() =>
   import("./components/Catalogue").then((m) => ({ default: m.SkillSheet })),
+);
+const MissionList = lazy(() =>
+  import("./components/Missions").then((m) => ({ default: m.MissionList })),
+);
+const MissionPage = lazy(() =>
+  import("./components/Missions").then((m) => ({ default: m.MissionPage })),
 );
 const KnowledgeMap = lazy(() =>
   import("./components/KnowledgeMap").then((m) => ({
@@ -356,9 +363,14 @@ function App({
             ? catalogueDomain(route.slice(7))?.name
             : route.startsWith("skill/")
               ? catalogueSkill(route.slice(6))?.title
-              : projectId !== null
-                ? state.projects.find((item) => item.id === projectId)?.title
-                : navigation.find((item) => item.id === route)?.label;
+              : route === "missions"
+                ? "Missions réelles"
+                : route.startsWith("mission/")
+                  ? findMission(route.slice(8))?.title
+                  : projectId !== null
+                    ? state.projects.find((item) => item.id === projectId)
+                        ?.title
+                    : navigation.find((item) => item.id === route)?.label;
     document.title = `${routeTitle || (route === "portfolio" ? "Portfolio" : route === "settings" ? "Profil et paramètres" : "Mon espace")} — BOUSE`;
     return () => cancelAnimationFrame(frame);
   }, [route, !!state.profile]);
@@ -438,6 +450,8 @@ function App({
     route === "domains" ||
     route.startsWith("domain/") ||
     route.startsWith("skill/");
+  // Les missions réelles font partie de Projets.
+  const inMissions = route === "missions" || route.startsWith("mission/");
   const lesson = route.startsWith("lesson/")
     ? lessons.find((l) => l.id === route.slice(7))
     : undefined;
@@ -519,7 +533,7 @@ function App({
                   (n.id === "academy" &&
                     (lesson || inGlossary || inCatalogue)) ||
                   (n.id === "skills" && route === "portfolio") ||
-                  (n.id === "incubator" && projectId !== null)
+                  (n.id === "incubator" && (projectId !== null || inMissions))
                     ? "page"
                     : undefined
                 }
@@ -528,7 +542,7 @@ function App({
                   (n.id === "academy" &&
                     (lesson || inGlossary || inCatalogue)) ||
                   (n.id === "skills" && route === "portfolio") ||
-                  (n.id === "incubator" && projectId !== null)
+                  (n.id === "incubator" && (projectId !== null || inMissions))
                     ? "nav-link active"
                     : "nav-link"
                 }
@@ -599,7 +613,7 @@ function App({
                 ? "Académie"
                 : route === "portfolio"
                   ? "Portfolio"
-                  : projectId !== null
+                  : projectId !== null || inMissions
                     ? "Projets"
                     : navigation.find((n) => n.id === route)?.label ||
                       (route === "settings"
@@ -740,6 +754,16 @@ function App({
                 <SimulationLab state={state} update={update} onNavigate={go} />
               ) : route === "ai" ? (
                 <AILab />
+              ) : route === "missions" ? (
+                <MissionList state={state} onNavigate={go} />
+              ) : route.startsWith("mission/") ? (
+                <MissionPage
+                  key={route}
+                  id={route.slice(8)}
+                  state={state}
+                  update={update}
+                  onNavigate={go}
+                />
               ) : route === "incubator" ? (
                 <Incubator state={state} update={update} onNavigate={go} />
               ) : project ? (
@@ -838,7 +862,7 @@ function App({
               route === item.id ||
               (item.id === "academy" &&
                 (lesson || inGlossary || inCatalogue)) ||
-              (item.id === "incubator" && projectId !== null)
+              (item.id === "incubator" && (projectId !== null || inMissions))
                 ? "page"
                 : undefined
             }

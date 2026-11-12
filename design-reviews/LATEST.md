@@ -1,3 +1,18 @@
+# Review design — Missions réelles
+
+**12 novembre 2026.** **La direction artistique n’est pas déclarée validée.** Maquette `maquette/missions.html` montrée à l’utilisateur, puis « Go » : construit tel que la maquette. Paire principale : une mission en cours (`12-mission`), archive `2026-11-12_11-59-33-Europe-Paris` ; aussi `12-missions` (le choix).
+
+- **Quatre missions** (Projets → « Choisir une mission ») : Mon budget de l’année (5), Lancer ma micro-entreprise (6), Préparer mon premier placement (5, fiche de réflexion, jamais un conseil), Trouver mes premiers clients (5).
+- **Une mission** : les étapes à gauche (les suivantes s’ouvrent à leur tour, les faites se rouvrent), le formulaire au centre avec l’idée en deux phrases, les compétences utilisées (pleines si validées) et « Revoir la compétence » ; à droite **le dossier, comme une feuille claire, qui se remplit en direct** (totaux et calculs : reste du mois, épargne de précaution, prix de l’heure, frais sur l’horizon…). Les champs manquants ou non chiffrés sont dits avant de valider. Le brouillon s’enregistre pendant la frappe.
+- **Le dossier prêt** : téléchargement en Markdown, « Le faire relire par mon Claude » (copie du dossier avec une consigne de relecture, ouverture de claude.ai, rien n’est envoyé par BOUSE), « Modifier » chaque étape, « Recommencer » avec confirmation.
+- **Mise en pratique** : les compétences des étapes faites portent l’étiquette « Mise en pratique » dans leur domaine, une ligne dans leur fiche (avec les missions qui les utilisent) et dans le panneau de l’arbre. Le contrôle de la compétence reste la preuve.
+- **Aucun barème légal en dur** : le taux de cotisations, la mention TVA, l’enveloppe se saisissent, avec renvoi à urssaf.fr, service-public.fr, impots.gouv.fr.
+- **Code** : `src/data/missions.ts`, `src/lib/missions.ts` (calcul pur), `src/components/Missions.tsx`, `src/missions.css` ; sauvegarde : champ additif `missions` validé dans `storage.ts`.
+- **Contrôles de l’agent** : `npm test` 281 (dont 6 nouveaux : forme des missions, compétences réelles, nombres à la française, calculs, progression, sauvegarde) ; `npx playwright test` complet : 134 passés, 8 ignorés prévus (nouveaux : une mission budget de bout en bout avec rechargement, erreurs, téléchargement, étiquette dans le domaine ; reprise d’une mission ; accessibilité des deux écrans). Corrigé pendant la revue : contraste des textes gris sur la feuille.
+- **Limites** : contenus à relire par l’utilisateur ; sur téléphone le dossier est sous le formulaire (pas visible pendant la frappe) ; pas de vrai téléphone ; pas de validation externe.
+
+---
+
 # Review design — Les 125 compétences « bientôt » sont écrites
 
 **12 novembre 2026.** **La direction artistique n’est pas déclarée validée.** Suite de l’ordre de l’utilisateur (« Fait tout dans l’ordre sens demander »). Paire principale : une compétence courte (`11-catalogue-competence-ecrite`), archive `2026-11-12_11-25-53-Europe-Paris`.

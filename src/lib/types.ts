@@ -101,5 +101,15 @@ export interface AppState {
   activePathId?: string | null;
   /** Additive v1 field: the catalogue domains the learner chose (ids). */
   domains?: string[];
+  /** Additive v1 field: the real missions in progress (src/data/missions). */
+  missions?: Record<string, MissionRecord>;
+}
+export interface MissionRecord {
+  /** Ce qui a été tapé, par champ (brouillon compris). */
+  answers: Record<string, string>;
+  /** Les étapes validées, dans l'ordre de la mission. */
+  done: string[];
+  startedAt: string;
+  finishedAt?: string;
 }
 export type StateUpdater = (updater: (state: AppState) => AppState) => void;
