@@ -2,42 +2,41 @@ export function Icon({ name, size = 20 }: { name: string; size?: number }) {
   const paths: Record<string, React.ReactNode> = {
     home: (
       <>
-        <rect x="3" y="3" width="7" height="7" rx="1.5" />
-        <rect x="14" y="3" width="7" height="7" rx="1.5" />
-        <rect x="3" y="14" width="7" height="7" rx="1.5" />
-        <rect x="14" y="14" width="7" height="7" rx="1.5" />
+        <rect x="3.5" y="3.5" width="7" height="7" rx="2.2" />
+        <rect x="13.5" y="3.5" width="7" height="7" rx="2.2" />
+        <rect x="3.5" y="13.5" width="7" height="7" rx="2.2" />
+        <rect x="13.5" y="13.5" width="7" height="7" rx="3.5" />
       </>
     ),
     book: (
       <>
-        <path d="M3 4h6l3 2 3-2h6v15h-6l-3 2-3-2H3zM12 6v15" />
+        <path d="M12 6.5C10 5 7.2 4.6 4 5v13c3.2-.4 6 0 8 1.5 2-1.5 4.8-1.9 8-1.5V5c-3.2-.4-6 0-8 1.5ZM12 6.5v13" />
       </>
     ),
     lab: (
       <>
-        <path d="M9 3h6M10 3v7L4 20h16l-6-10V3M7 15h10" />
+        <path d="M9.5 3.5h5M10 3.5v5.2L5.2 17a2.3 2.3 0 0 0 2 3.5h9.6a2.3 2.3 0 0 0 2-3.5L14 8.7V3.5M7.4 14h9.2" />
       </>
     ),
     chart: (
       <>
-        <path d="M4 3v17h17M8 15l4-5 4 2 5-7" />
+        <path d="M4 19.5h16M5 15.5c2.5 0 3-5 6-5s3 3 5.5 3S19 7 20 5.5" />
       </>
     ),
     idea: (
       <>
-        <path d="M9 18h6M10 21h4M8 14a7 7 0 1 1 8 0l-1 2H9z" />
+        <path d="M9 17.5h6M10 20.5h4M8.5 14.5a6 6 0 1 1 7 0c-.6.5-1 1.2-1 2v1h-5v-1c0-.8-.4-1.5-1-2Z" />
       </>
     ),
     ai: (
       <>
-        <path d="m12 2 2.8 7.2L22 12l-7.2 2.8L12 22l-2.8-7.2L2 12l7.2-2.8z" />
+        <path d="M12 3.5c.6 3.9 2.6 5.9 6.5 6.5-3.9.6-5.9 2.6-6.5 6.5-.6-3.9-2.6-5.9-6.5-6.5 3.9-.6 5.9-2.6 6.5-6.5ZM18.5 15.5c.3 1.6 1 2.3 2.5 2.5-1.5.3-2.2 1-2.5 2.5-.3-1.5-1-2.2-2.5-2.5 1.5-.2 2.2-.9 2.5-2.5Z" />
       </>
     ),
     radar: (
       <>
-        <circle cx="12" cy="12" r="9" />
-        <path d="M12 3v9l7 5M7 8a6 6 0 0 0 7 10" />
-        <circle cx="7" cy="8" r="1" />
+        <circle cx="12" cy="12" r="8.5" />
+        <path d="m15.5 8.5-2 5-5 2 2-5 5-2Z" />
       </>
     ),
     search: (
@@ -57,8 +56,7 @@ export function Icon({ name, size = 20 }: { name: string; size?: number }) {
     check: <path d="m5 12 4 4L19 6" />,
     clock: (
       <>
-        <circle cx="12" cy="12" r="9" />
-        <path d="M12 7v5l3 2" />
+        <path d="M4.5 12a7.5 7.5 0 1 0 2.2-5.3M4 4.5v3.2h3.2M12 8v4.2l2.8 1.8" />
       </>
     ),
     settings: (
@@ -78,10 +76,10 @@ export function Icon({ name, size = 20 }: { name: string; size?: number }) {
     menu: <path d="M4 6h16M4 12h16M4 18h16" />,
     node: (
       <>
-        <circle cx="6" cy="5" r="3" />
-        <circle cx="18" cy="12" r="3" />
-        <circle cx="6" cy="20" r="3" />
-        <path d="m9 6 6 4M9 18l6-4M6 8v9" />
+        <circle cx="6" cy="6" r="2.3" />
+        <circle cx="6" cy="18" r="2.3" />
+        <circle cx="18" cy="12" r="2.3" />
+        <path d="M6 8.3v7.4M8 7.2l7.9 3.7M8 16.8l7.9-3.7" />
       </>
     ),
     lock: (

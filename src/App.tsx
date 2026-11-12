@@ -1,11 +1,11 @@
 import {
-  Fragment,
   lazy,
   Suspense,
   useCallback,
   useEffect,
   useRef,
   useState,
+  type CSSProperties,
   type RefObject,
 } from "react";
 import { lessons, type Lesson } from "./data/lessons";
@@ -183,6 +183,15 @@ const navigation = [
     group: "Construire",
     hint: "Sites de référence à consulter",
   },
+];
+/** Les groupes de la barre, dans l'ordre : une gélule chacun sur ordinateur. */
+const navGroups = [...new Set(navigation.map((n) => n.group))];
+/** La barre du bas sur téléphone (plus « Explorer », qui ouvre tout). */
+const DOCK = [
+  { id: "home", label: "Accueil", icon: "home" },
+  { id: "academy", label: "Apprendre", icon: "book" },
+  { id: "reviews", label: "Réviser", icon: "clock" },
+  { id: "incubator", label: "Projets", icon: "idea" },
 ];
 const getRoute = () => {
   try {
@@ -455,6 +464,17 @@ function App({
   const lesson = route.startsWith("lesson/")
     ? lessons.find((l) => l.id === route.slice(7))
     : undefined;
+  const navActive = (id: string) =>
+    route === id ||
+    (id === "academy" && !!(lesson || inGlossary || inCatalogue)) ||
+    (id === "skills" && route === "portfolio") ||
+    (id === "incubator" && (projectId !== null || inMissions));
+  // Changer d'espace rejoue l'apparition de la page (pas d'une leçon à l'autre).
+  const stageKey = navigation.find((n) => navActive(n.id))?.id ?? route;
+  // La pastille de la barre du bas : l'espace ouvert, ou « Explorer ».
+  const dockIndex = mobileOpen
+    ? DOCK.length
+    : DOCK.findIndex((item) => navActive(item.id));
   const project =
     projectId !== null
       ? state.projects.find((item) => item.id === projectId)
@@ -516,51 +536,45 @@ function App({
           <kbd>⌘ K</kbd>
         </button>
         <nav aria-label="Navigation principale">
-          {navigation.map((n, index) => (
-            <Fragment key={n.id}>
-              {navigation[index - 1]?.group !== n.group && (
-                <p className="nav-group" aria-hidden="true">
-                  {n.group}
-                </p>
-              )}
-              <a
-                aria-describedby={`nav-hint-${n.id}`}
-                title={`${n.label} : ${n.hint}`}
-                href={`#${n.id}`}
-                onClick={() => setMobileOpen(false)}
-                aria-current={
-                  route === n.id ||
-                  (n.id === "academy" &&
-                    (lesson || inGlossary || inCatalogue)) ||
-                  (n.id === "skills" && route === "portfolio") ||
-                  (n.id === "incubator" && (projectId !== null || inMissions))
-                    ? "page"
-                    : undefined
-                }
-                className={
-                  route === n.id ||
-                  (n.id === "academy" &&
-                    (lesson || inGlossary || inCatalogue)) ||
-                  (n.id === "skills" && route === "portfolio") ||
-                  (n.id === "incubator" && (projectId !== null || inMissions))
-                    ? "nav-link active"
-                    : "nav-link"
-                }
+          {navGroups.map((group) => {
+            const items = navigation.filter((n) => n.group === group);
+            const activeIndex = items.findIndex((n) => navActive(n.id));
+            return (
+              <div
+                key={group}
+                className="nav-cluster"
+                data-active={activeIndex >= 0 ? "" : undefined}
+                style={{ "--nav-i": Math.max(activeIndex, 0) } as CSSProperties}
               >
-                <Icon name={n.icon} size={19} />
-                <span className="nav-label">
-                  {n.label}
-                  <small
-                    className="nav-hint"
-                    id={`nav-hint-${n.id}`}
-                    aria-hidden="true"
+                <p className="nav-group" aria-hidden="true">
+                  {group}
+                </p>
+                <span className="nav-pill" aria-hidden="true" />
+                {items.map((n) => (
+                  <a
+                    key={n.id}
+                    aria-describedby={`nav-hint-${n.id}`}
+                    href={`#${n.id}`}
+                    onClick={() => setMobileOpen(false)}
+                    aria-current={navActive(n.id) ? "page" : undefined}
+                    className={navActive(n.id) ? "nav-link active" : "nav-link"}
                   >
-                    {n.hint}
-                  </small>
-                </span>
-              </a>
-            </Fragment>
-          ))}
+                    <Icon name={n.icon} size={19} />
+                    <span className="nav-label">
+                      {n.label}
+                      <small
+                        className="nav-hint"
+                        id={`nav-hint-${n.id}`}
+                        aria-hidden="true"
+                      >
+                        {n.hint}
+                      </small>
+                    </span>
+                  </a>
+                ))}
+              </div>
+            );
+          })}
         </nav>
         <div className="sidebar-bottom">
           <div className="sidebar-progress">
@@ -705,138 +719,150 @@ function App({
                   }
                 />
               )}
-            <Suspense
-              fallback={
-                <p className="page-loading" role="status">
-                  Chargement…
-                </p>
-              }
-            >
-              {route === "home" ? (
-                <Dashboard state={state} onNavigate={go} />
-              ) : route === "academy" ? (
-                <Academy state={state} update={update} onNavigate={go} />
-              ) : lesson ? (
-                <LessonView
-                  key={lesson.id}
-                  lesson={lesson}
-                  state={state}
-                  update={update}
-                  onNavigate={go}
-                />
-              ) : route === "domains" ? (
-                <DomainChooser state={state} update={update} onNavigate={go} />
-              ) : route.startsWith("domain/") ? (
-                <DomainPage
-                  key={route}
-                  id={route.slice(7)}
-                  state={state}
-                  update={update}
-                  onNavigate={go}
-                />
-              ) : route.startsWith("skill/") ? (
-                <SkillSheet
-                  key={route}
-                  id={route.slice(6)}
-                  state={state}
-                  update={update}
-                  onNavigate={go}
-                />
-              ) : route === "skills" ? (
-                <KnowledgeMap state={state} onNavigate={go} />
-              ) : route === "portfolio" ? (
-                <LearningPortfolio state={state} onNavigate={go} />
-              ) : route === "reviews" ? (
-                <Reviews state={state} update={update} onNavigate={go} />
-              ) : route === "lab" ? (
-                <Lab onNavigate={go} />
-              ) : route === "simulation" ? (
-                <SimulationLab state={state} update={update} onNavigate={go} />
-              ) : route === "ai" ? (
-                <AILab />
-              ) : route === "missions" ? (
-                <MissionList state={state} onNavigate={go} />
-              ) : route.startsWith("mission/") ? (
-                <MissionPage
-                  key={route}
-                  id={route.slice(8)}
-                  state={state}
-                  update={update}
-                  onNavigate={go}
-                />
-              ) : route === "incubator" ? (
-                <Incubator state={state} update={update} onNavigate={go} />
-              ) : project ? (
-                <ProjectWorkbench
-                  key={project.id}
-                  project={project}
-                  state={state}
-                  update={update}
-                  onNavigate={go}
-                  initialTab={
-                    route.startsWith("project-plan/") ? "reperes" : "terrain"
-                  }
-                />
-              ) : projectId !== null ? (
-                <div className="empty-state">
-                  <h1>Projet introuvable.</h1>
-                  <p>
-                    Ce projet n’est pas présent dans cette sauvegarde. Retrouvez
-                    vos fiches dans Projets.
+            <div className="route-stage" key={stageKey}>
+              <Suspense
+                fallback={
+                  <p className="page-loading" role="status">
+                    Chargement…
                   </p>
-                  <button
-                    className="button primary"
-                    onClick={() => go("incubator")}
-                  >
-                    Retrouver mes projets
-                  </button>
-                </div>
-              ) : inGlossary ? (
-                <Glossary
-                  focusId={route.startsWith("lexique/") ? route.slice(8) : null}
-                  onNavigate={go}
-                />
-              ) : route === "radar" ? (
-                <Radar />
-              ) : route === "settings" ? (
-                <Settings
-                  state={state}
-                  update={update}
-                  cloud={cloud}
-                  disk={disk}
-                />
-              ) : StyleLab && route === "labo-design" ? (
-                <StyleLab />
-              ) : (
-                <div className="empty-state not-found">
-                  <h1>Cette page n’existe pas.</h1>
-                  <p>
-                    Le lien est peut-être ancien ou incomplet. Votre progression
-                    n’est pas touchée.
-                  </p>
-                  <div className="not-found-actions">
+                }
+              >
+                {route === "home" ? (
+                  <Dashboard state={state} onNavigate={go} />
+                ) : route === "academy" ? (
+                  <Academy state={state} update={update} onNavigate={go} />
+                ) : lesson ? (
+                  <LessonView
+                    key={lesson.id}
+                    lesson={lesson}
+                    state={state}
+                    update={update}
+                    onNavigate={go}
+                  />
+                ) : route === "domains" ? (
+                  <DomainChooser
+                    state={state}
+                    update={update}
+                    onNavigate={go}
+                  />
+                ) : route.startsWith("domain/") ? (
+                  <DomainPage
+                    key={route}
+                    id={route.slice(7)}
+                    state={state}
+                    update={update}
+                    onNavigate={go}
+                  />
+                ) : route.startsWith("skill/") ? (
+                  <SkillSheet
+                    key={route}
+                    id={route.slice(6)}
+                    state={state}
+                    update={update}
+                    onNavigate={go}
+                  />
+                ) : route === "skills" ? (
+                  <KnowledgeMap state={state} onNavigate={go} />
+                ) : route === "portfolio" ? (
+                  <LearningPortfolio state={state} onNavigate={go} />
+                ) : route === "reviews" ? (
+                  <Reviews state={state} update={update} onNavigate={go} />
+                ) : route === "lab" ? (
+                  <Lab onNavigate={go} />
+                ) : route === "simulation" ? (
+                  <SimulationLab
+                    state={state}
+                    update={update}
+                    onNavigate={go}
+                  />
+                ) : route === "ai" ? (
+                  <AILab />
+                ) : route === "missions" ? (
+                  <MissionList state={state} onNavigate={go} />
+                ) : route.startsWith("mission/") ? (
+                  <MissionPage
+                    key={route}
+                    id={route.slice(8)}
+                    state={state}
+                    update={update}
+                    onNavigate={go}
+                  />
+                ) : route === "incubator" ? (
+                  <Incubator state={state} update={update} onNavigate={go} />
+                ) : project ? (
+                  <ProjectWorkbench
+                    key={project.id}
+                    project={project}
+                    state={state}
+                    update={update}
+                    onNavigate={go}
+                    initialTab={
+                      route.startsWith("project-plan/") ? "reperes" : "terrain"
+                    }
+                  />
+                ) : projectId !== null ? (
+                  <div className="empty-state">
+                    <h1>Projet introuvable.</h1>
+                    <p>
+                      Ce projet n’est pas présent dans cette sauvegarde.
+                      Retrouvez vos fiches dans Projets.
+                    </p>
                     <button
                       className="button primary"
-                      onClick={() => go("home")}
+                      onClick={() => go("incubator")}
                     >
-                      Revenir à mon espace
-                    </button>
-                    <button
-                      className="button secondary"
-                      onClick={() => go("academy")}
-                    >
-                      Voir toutes les leçons
-                    </button>
-                    <button
-                      className="button secondary"
-                      onClick={() => setSearchOpen(true)}
-                    >
-                      Rechercher
+                      Retrouver mes projets
                     </button>
                   </div>
-                </div>
-              )}
-            </Suspense>
+                ) : inGlossary ? (
+                  <Glossary
+                    focusId={
+                      route.startsWith("lexique/") ? route.slice(8) : null
+                    }
+                    onNavigate={go}
+                  />
+                ) : route === "radar" ? (
+                  <Radar />
+                ) : route === "settings" ? (
+                  <Settings
+                    state={state}
+                    update={update}
+                    cloud={cloud}
+                    disk={disk}
+                  />
+                ) : StyleLab && route === "labo-design" ? (
+                  <StyleLab />
+                ) : (
+                  <div className="empty-state not-found">
+                    <h1>Cette page n’existe pas.</h1>
+                    <p>
+                      Le lien est peut-être ancien ou incomplet. Votre
+                      progression n’est pas touchée.
+                    </p>
+                    <div className="not-found-actions">
+                      <button
+                        className="button primary"
+                        onClick={() => go("home")}
+                      >
+                        Revenir à mon espace
+                      </button>
+                      <button
+                        className="button secondary"
+                        onClick={() => go("academy")}
+                      >
+                        Voir toutes les leçons
+                      </button>
+                      <button
+                        className="button secondary"
+                        onClick={() => setSearchOpen(true)}
+                      >
+                        Rechercher
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </Suspense>
+            </div>
           </div>
         </main>
         <footer className="page-footer">
@@ -849,23 +875,17 @@ function App({
         aria-label="Navigation mobile"
         inert={mobileOpen ? true : undefined}
       >
-        {[
-          { id: "home", label: "Accueil", icon: "home" },
-          { id: "academy", label: "Apprendre", icon: "book" },
-          { id: "reviews", label: "Réviser", icon: "clock" },
-          { id: "incubator", label: "Projets", icon: "idea" },
-        ].map((item) => (
+        <span
+          className="dock-pill"
+          aria-hidden="true"
+          data-on={dockIndex >= 0 ? "" : undefined}
+          style={{ "--dock-i": Math.max(dockIndex, 0) } as CSSProperties}
+        />
+        {DOCK.map((item) => (
           <a
             key={item.id}
             href={`#${item.id}`}
-            aria-current={
-              route === item.id ||
-              (item.id === "academy" &&
-                (lesson || inGlossary || inCatalogue)) ||
-              (item.id === "incubator" && (projectId !== null || inMissions))
-                ? "page"
-                : undefined
-            }
+            aria-current={navActive(item.id) ? "page" : undefined}
           >
             <Icon name={item.icon} size={20} />
             <span>{item.label}</span>

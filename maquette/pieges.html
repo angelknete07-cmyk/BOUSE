@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Maquette — Mes pièges BOUSE</title>
+    <!--
+      MAQUETTE, pas le produit (idée 19 : carnet « Mes pièges »). Chaque
+      question ratée d'un quiz ou d'un contrôle est gardée, expliquée, et
+      revue en priorité. Ouvrir : http://localhost:5173/maquette/pieges.html
+    -->
+    <link rel="stylesheet" href="/src/tokens.css" />
+    <style>
+      :root {
+        color-scheme: dark;
+        --ease: cubic-bezier(0.22, 1, 0.36, 1);
+        --v: var(--accent-violet-rgb);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text-secondary);
+        font: 15px/1.5 var(--font-sans);
+      }
+      h1,
+      h2,
+      h3 {
+        margin: 0;
+        color: var(--text);
+        font-weight: 560;
+        letter-spacing: -0.01em;
+      }
+      main {
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 28px 16px 80px;
+      }
+      .eyebrow {
+        color: var(--text-tertiary);
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .lead {
+        max-width: 62ch;
+        margin: 8px 0 22px;
+      }
+      .ctx {
+        margin: 0 0 18px;
+        padding: 10px 14px;
+        border: 1px dashed var(--line-strong);
+        border-radius: var(--radius-sm);
+        color: var(--text-tertiary);
+        font-size: 13px;
+      }
+      .head {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: end;
+        gap: 12px;
+        margin-bottom: 16px;
+      }
+      .count {
+        display: flex;
+        gap: 8px;
+      }
+      .tab {
+        min-height: 40px;
+        padding: 0 14px;
+        border: 1px solid var(--line-strong);
+        border-radius: 999px;
+        background: var(--surface);
+        color: var(--text-secondary);
+        font: 500 13px/1 var(--font-sans);
+        cursor: pointer;
+        transition:
+          color 140ms var(--ease),
+          border-color 140ms var(--ease),
+          transform 140ms var(--ease);
+      }
+      .tab:active {
+        transform: scale(0.97);
+      }
+      .tab[aria-pressed="true"] {
+        border-color: rgb(var(--v) / 0.55);
+        color: var(--text);
+      }
+      .list {
+        display: grid;
+        gap: 12px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      .trap {
+        display: grid;
+        gap: 10px;
+        padding: 18px 20px;
+        border: 1px solid var(--line-strong);
+        border-radius: var(--radius);
+        background: linear-gradient(180deg, var(--raised), var(--surface));
+        box-shadow: var(--shadow-surface);
+        animation: in 360ms var(--ease) both;
+      }
+      .trap:nth-child(2) {
+        animation-delay: 50ms;
+      }
+      .trap:nth-child(3) {
+        animation-delay: 100ms;
+      }
+      @keyframes in {
+        from {
+          opacity: 0;
+          transform: translateY(8px);
+        }
+      }
+      .meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        align-items: center;
+        color: var(--text-tertiary);
+        font-size: 12.5px;
+      }
+      .chip {
+        padding: 2px 9px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+      }
+      .chip.hot {
+        border-color: rgb(var(--v) / 0.5);
+        color: var(--text);
+      }
+      .q {
+        color: var(--text);
+        font-size: 15.5px;
+      }
+      .answers {
+        display: grid;
+        gap: 6px;
+        font-size: 13.5px;
+      }
+      .answers div {
+        display: grid;
+        grid-template-columns: 92px 1fr;
+        gap: 10px;
+      }
+      .answers span:first-child {
+        color: var(--text-tertiary);
+      }
+      .wrong {
+        color: var(--text-secondary);
+        text-decoration: line-through;
+        text-decoration-color: var(--text-tertiary);
+      }
+      .right {
+        color: var(--text);
+      }
+      .why {
+        padding: 10px 12px;
+        border-left: 2px solid rgb(var(--v) / 0.7);
+        border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+        background: var(--surface-low);
+        font-size: 13.5px;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .btn {
+        min-height: 44px;
+        padding: 0 18px;
+        border: 1px solid var(--line-strong);
+        border-radius: 999px;
+        background: var(--surface);
+        color: var(--text);
+        font: 500 14px/1 var(--font-sans);
+        cursor: pointer;
+        transition: transform 140ms var(--ease);
+      }
+      .btn:active {
+        transform: scale(0.97);
+      }
+      .btn.primary {
+        border-color: transparent;
+        background: linear-gradient(180deg, #f4f4f6, #c9c9cf);
+        color: #111;
+      }
+      .done .q {
+        color: var(--text-secondary);
+      }
+      .ok {
+        color: var(--text);
+        font-size: 13px;
+      }
+      .home {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+        gap: 6px 18px;
+        margin-top: 34px;
+        padding: 16px 20px;
+        border: 1px solid var(--line-strong);
+        border-radius: var(--radius);
+        background: var(--surface-low);
+      }
+      .home b {
+        color: var(--text);
+      }
+      .note {
+        margin-top: 22px;
+        color: var(--text-tertiary);
+        font-size: 13px;
+      }
+      [hidden] {
+        display: none !important;
+      }
+      @media (max-width: 640px) {
+        .head,
+        .home {
+          grid-template-columns: 1fr;
+        }
+        .answers div {
+          grid-template-columns: 1fr;
+          gap: 0;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation: none !important;
+          transition-duration: 1ms !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p class="ctx">
+        Maquette · l’écran Révisions, avec un nouveau bloc en haut. Les
+        questions sont de vraies questions de l’appli.
+      </p>
+      <p class="eyebrow">Révisions · Mes pièges</p>
+      <div class="head">
+        <div>
+          <h1>Tes pièges</h1>
+          <p class="lead" style="margin-bottom: 0">
+            Chaque question ratée est gardée ici, avec la bonne réponse et
+            pourquoi. Un piège est déjoué quand tu réussis la question au
+            quiz suivant.
+          </p>
+        </div>
+        <div class="count" role="group" aria-label="Filtrer">
+          <button class="tab" aria-pressed="true" data-f="todo">À déjouer · 3</button>
+          <button class="tab" aria-pressed="false" data-f="done">Déjoués · 1</button>
+        </div>
+      </div>
+
+      <ul class="list">
+        <li class="trap" data-k="todo">
+          <div class="meta">
+            <span class="chip hot">Raté 2 fois</span><span>Leçon · Chiffre d’affaires, marge et trésorerie</span><span>· il y a 2 jours</span>
+          </div>
+          <p class="q">Tu reçois un emprunt bancaire de 10 000 €. Quel effet immédiat est certain ?</p>
+          <div class="answers">
+            <div><span>Ta réponse</span><span class="wrong">Le résultat augmente de 10 000 €</span></div>
+            <div><span>La bonne</span><span class="right">La trésorerie et la dette augmentent</span></div>
+          </div>
+          <p class="why">Le prêt finance l’entreprise : il augmente son cash et sa dette. Ce n’est ni une vente ni un profit.</p>
+          <div class="actions">
+            <button class="btn primary">Refaire le quiz →</button>
+            <button class="btn">Revoir la leçon</button>
+          </div>
+        </li>
+        <li class="trap" data-k="todo">
+          <div class="meta">
+            <span class="chip">Raté 1 fois</span><span>Compétence · Sortir d’une dette</span><span>· hier</span>
+          </div>
+          <p class="q">Avec la méthode « avalanche », on rembourse d’abord :</p>
+          <div class="answers">
+            <div><span>Ta réponse</span><span class="wrong">la plus petite dette</span></div>
+            <div><span>La bonne</span><span class="right">la dette au taux le plus élevé</span></div>
+          </div>
+          <p class="why">Le taux le plus élevé coûte le plus cher chaque mois : le solder d’abord économise des intérêts.</p>
+          <div class="actions">
+            <button class="btn primary">Refaire le contrôle →</button>
+            <button class="btn">Revoir l’idée</button>
+          </div>
+        </li>
+        <li class="trap" data-k="todo">
+          <div class="meta">
+            <span class="chip">Raté 1 fois</span><span>Leçon · Trouver son seuil de rentabilité</span><span>· il y a 5 jours</span>
+          </div>
+          <p class="q">Tu vends 20 € un produit qui entraîne 22 € de coûts variables. Les charges fixes sont positives. Que conclure ?</p>
+          <div class="answers">
+            <div><span>Ta réponse</span><span class="wrong">Vendre davantage suffit forcément</span></div>
+            <div><span>La bonne</span><span class="right">Il n’existe pas de seuil rentable avec ces hypothèses</span></div>
+          </div>
+          <p class="why">Chaque vente ajoute une perte de contribution de 2 €. Augmenter le volume aggrave le résultat dans ce modèle.</p>
+          <div class="actions">
+            <button class="btn primary">Refaire le quiz →</button>
+            <button class="btn">Revoir la leçon</button>
+          </div>
+        </li>
+        <li class="trap done" data-k="done" hidden>
+          <div class="meta">
+            <span class="chip">Déjoué</span><span>Leçon · Faire son budget</span><span>· réussi aujourd’hui</span>
+          </div>
+          <p class="q">Que veut dire « se payer en premier » ?</p>
+          <p class="ok">✓ Réussie au dernier quiz : « Mettre de côté dès la paie reçue, avant les dépenses ».</p>
+        </li>
+      </ul>
+
+      <div class="home">
+        <div>
+          <b>Et sur l’accueil :</b> une ligne « 3 pièges à déjouer », qui
+          mène ici. Rien de plus, pour garder l’accueil simple.
+        </div>
+        <button class="btn">3 pièges à déjouer →</button>
+      </div>
+      <p class="note">
+        Aucun piège n’est inventé : ils viennent de tes vraies réponses aux
+        quiz et aux contrôles. Le carnet se vide tout seul quand tu réussis.
+      </p>
+    </main>
+    <script>
+      const tabs = [...document.querySelectorAll(".tab")];
+      tabs.forEach((tab) =>
+        tab.addEventListener("click", () => {
+          tabs.forEach((t) => t.setAttribute("aria-pressed", String(t === tab)));
+          document.querySelectorAll(".trap").forEach((li) => (li.hidden = li.dataset.k !== tab.dataset.f));
+        }),
+      );
+    </script>
+  </body>
+</html>

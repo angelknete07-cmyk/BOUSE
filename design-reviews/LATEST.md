@@ -1,3 +1,18 @@
+# Review design — Nouvelle barre : le rail d’icônes (variante B)
+
+**12 novembre 2026.** **La direction artistique n’est pas déclarée validée.** Référence : la vidéo de l’utilisateur (tableau de bord « Vertix »). Maquette `maquette/barre.html` avec trois variantes ; **l’utilisateur a choisi B, le rail d’icônes**. Paire principale : le Lab financier (`05-lab-financier-viewport`), archive `2026-11-12_16-29-24-Europe-Paris` ; toutes les captures montrent la nouvelle barre.
+
+- **Ordinateur** : la barre se détache du bord. Trois gélules flottantes (Apprendre, S’exercer, Construire) plus la recherche et le profil, chacune en carte sombre arrondie. **Une pastille ronde argentée glisse** sur l’espace ouvert (léger rebond), l’icône passe en noir dessus. **Le nom et l’aide de chaque espace** s’affichent dans une bulle au survol et au clavier (pas seulement une info-bulle du navigateur) ; les lecteurs d’écran lisent toujours le nom.
+- **Icônes redessinées** dans un même trait (1,6, bouts ronds) : accueil, Académie, Révisions, compétences, Lab, Scénarios, Atelier IA, Projets, Sources.
+- **Changer d’espace** : la page apparaît en douceur (flou qui se dissipe, puis les blocs qui montent un à un). Désactivé avec « réduire les animations ». Passer d’une leçon à l’autre ne rejoue pas l’animation.
+- **Téléphone** : la barre du bas flotte, détachée, avec la même pastille qui glisse ; le menu « Explorer » garde la liste avec les noms.
+- **Mises à jour de l’appli installée** (signalé par l’utilisateur : il ne voyait pas les nouveautés) : l’appli cherche la nouvelle version quand on revient dessus, et le bandeau propose « Mettre à jour maintenant » (recharge seulement sur ce clic ; sauvegardes conservées).
+- **Rien de retiré** : mêmes espaces, aides, raccourcis, recherche, profil ; la vague et le logo ne sont pas touchés.
+- **Contrôles de l’agent** : `npm test` 281 ; `npx playwright test` complet : 134 passés, 8 ignorés prévus ; `tsc`, Prettier. Corrigé pendant la revue : l’icône active invisible sur la pastille ; le logo sans nom pour les lecteurs d’écran.
+- **Limites** : sur ordinateur, il faut survoler une icône pour lire son nom (choix B) ; pas de vrai iPhone ; pas de validation externe.
+
+---
+
 # Review design — Missions réelles
 
 **12 novembre 2026.** **La direction artistique n’est pas déclarée validée.** Maquette `maquette/missions.html` montrée à l’utilisateur, puis « Go » : construit tel que la maquette. Paire principale : une mission en cours (`12-mission`), archive `2026-11-12_11-59-33-Europe-Paris` ; aussi `12-missions` (le choix).

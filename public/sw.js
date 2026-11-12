@@ -23,6 +23,11 @@ self.addEventListener("install", (event) => {
   );
 });
 
+// The person asked for the update (button in the app): activate now.
+self.addEventListener("message", (event) => {
+  if (event.data && event.data.type === "SKIP_WAITING") self.skipWaiting();
+});
+
 self.addEventListener("activate", (event) => {
   event.waitUntil(
     caches

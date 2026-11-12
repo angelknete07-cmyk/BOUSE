@@ -1,0 +1,754 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Maquette — nouvelle barre BOUSE</title>
+    <!--
+      MAQUETTE, pas le produit (idée 12 : nouvelle barre latérale). Référence :
+      la vidéo d'Angel (tableau de bord « Vertix ») : barre détachée du bord,
+      pastille qui glisse sur l'onglet choisi, page qui s'efface puis
+      réapparaît morceau par morceau. Trois variantes à comparer.
+      Ouvrir : http://localhost:5173/maquette/barre.html
+    -->
+    <link rel="stylesheet" href="/src/tokens.css" />
+    <style>
+      :root {
+        color-scheme: dark;
+        --out: cubic-bezier(0.22, 1, 0.36, 1);
+        --in: cubic-bezier(0.55, 0, 1, 0.45);
+        --spring: cubic-bezier(0.34, 1.32, 0.64, 1);
+        --v: var(--accent-violet-rgb);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        margin: 0;
+        background:
+          radial-gradient(
+            1200px 600px at 70% -10%,
+            rgb(var(--v) / 0.07),
+            transparent 60%
+          ),
+          var(--bg);
+        color: var(--text-secondary);
+        font: 15px/1.5 var(--font-sans);
+        overflow-x: hidden;
+      }
+      button {
+        font: inherit;
+      }
+      /* Choix de la variante */
+      .switch {
+        position: fixed;
+        z-index: 30;
+        left: 50%;
+        bottom: 16px;
+        display: flex;
+        gap: 4px;
+        padding: 5px;
+        border: 1px solid var(--line-strong);
+        border-radius: 999px;
+        background: rgb(20 20 23 / 0.85);
+        backdrop-filter: blur(14px);
+        transform: translateX(-50%);
+        box-shadow: 0 18px 40px -18px rgb(0 0 0 / 0.9);
+      }
+      .switch button {
+        min-height: 38px;
+        padding: 0 14px;
+        border: 0;
+        border-radius: 999px;
+        background: transparent;
+        color: var(--text-secondary);
+        font-size: 13px;
+        cursor: pointer;
+        white-space: nowrap;
+      }
+      .switch button[aria-pressed="true"] {
+        background: linear-gradient(180deg, #f4f4f6, #c9c9cf);
+        color: #111;
+      }
+      .switch span {
+        align-self: center;
+        padding: 0 8px 0 10px;
+        color: var(--text-tertiary);
+        font-size: 12px;
+      }
+
+      /* Les icônes redessinées : trait 1,6, bouts ronds. */
+      .ico {
+        width: 20px;
+        height: 20px;
+        flex: none;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 1.6;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      /* ===== La barre (commune) ===== */
+      .app {
+        display: grid;
+        grid-template-columns: var(--bar-w) 1fr;
+        min-height: 100vh;
+        transition: grid-template-columns 420ms var(--out);
+      }
+      .side {
+        position: sticky;
+        z-index: 10;
+        top: 0;
+        height: 100vh;
+        padding: 14px 0 14px 14px;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        height: 44px;
+        padding: 0 12px;
+        color: var(--text);
+        font: 600 15px/1 var(--font-sans);
+        letter-spacing: 0.28em;
+      }
+      .brand b {
+        flex: none;
+        display: grid;
+        place-items: center;
+        width: 34px;
+        height: 34px;
+        border-radius: 11px;
+        background: linear-gradient(160deg, #f6f6f8, #a9a9b2);
+        color: #111;
+        font-size: 17px;
+        letter-spacing: 0;
+      }
+      .group {
+        position: relative;
+        display: grid;
+        gap: 2px;
+        margin: 0;
+        padding: 6px;
+        list-style: none;
+      }
+      .item {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        width: 100%;
+        min-height: 42px;
+        padding: 0 12px;
+        border: 0;
+        border-radius: 14px;
+        background: transparent;
+        color: var(--text-secondary);
+        text-align: left;
+        cursor: pointer;
+        transition:
+          color 220ms var(--out),
+          transform 160ms var(--out);
+      }
+      .item:hover {
+        color: var(--text);
+      }
+      .item:active {
+        transform: scale(0.97);
+      }
+      .item[aria-current="page"] {
+        color: #111;
+      }
+      .item .label {
+        font-size: 14px;
+        white-space: nowrap;
+      }
+      /* La pastille qui glisse sous l'onglet choisi. */
+      .pill {
+        position: absolute;
+        z-index: 0;
+        left: 6px;
+        right: 6px;
+        top: 0;
+        height: 42px;
+        border-radius: 14px;
+        background: linear-gradient(180deg, #f4f4f6, #c4c4cb);
+        box-shadow:
+          0 8px 20px -10px rgb(0 0 0 / 0.9),
+          inset 0 1px 0 rgb(255 255 255 / 0.9);
+        opacity: 0;
+        transition:
+          transform 460ms var(--spring),
+          opacity 200ms var(--out);
+      }
+      .pill.on {
+        opacity: 1;
+      }
+      .tip {
+        position: absolute;
+        left: calc(100% + 14px);
+        top: 50%;
+        padding: 6px 10px;
+        border: 1px solid var(--line-strong);
+        border-radius: 10px;
+        background: #19191c;
+        color: var(--text);
+        font-size: 13px;
+        white-space: nowrap;
+        pointer-events: none;
+        opacity: 0;
+        transform: translate(-4px, -50%);
+        transition:
+          opacity 160ms var(--out),
+          transform 160ms var(--out);
+      }
+      .tip small {
+        display: block;
+        color: var(--text-tertiary);
+        font-size: 12px;
+      }
+
+      /* A — Panneau flottant, avec les noms */
+      [data-v="a"] {
+        --bar-w: 262px;
+      }
+      [data-v="a"] .panel {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        padding: 10px 6px;
+        border: 1px solid var(--line-strong);
+        border-radius: 24px;
+        background: linear-gradient(180deg, rgb(28 28 32 / 0.9), rgb(18 18 21 / 0.9));
+        box-shadow:
+          0 30px 60px -30px rgb(0 0 0 / 0.95),
+          inset 0 1px 0 rgb(255 255 255 / 0.05);
+      }
+      [data-v="a"] .group + .group {
+        margin-top: 6px;
+        padding-top: 10px;
+        border-top: 1px solid var(--line);
+      }
+      [data-v="a"] .grow {
+        flex: 1;
+      }
+      [data-v="a"] .tip {
+        display: none;
+      }
+
+      /* B — Rail d'icônes, comme la vidéo */
+      [data-v="b"] {
+        --bar-w: 92px;
+      }
+      [data-v="b"] .panel {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        height: 100%;
+      }
+      [data-v="b"] .brand {
+        justify-content: center;
+        padding: 0;
+      }
+      [data-v="b"] .brand span,
+      [data-v="b"] .label {
+        display: none;
+      }
+      [data-v="b"] .group {
+        width: 60px;
+        border: 1px solid var(--line-strong);
+        border-radius: 22px;
+        background: rgb(24 24 28 / 0.88);
+        box-shadow: 0 20px 40px -24px rgb(0 0 0 / 0.95);
+      }
+      [data-v="b"] .item {
+        justify-content: center;
+        width: 46px;
+        height: 46px;
+        padding: 0;
+        border-radius: 50%;
+      }
+      [data-v="b"] .pill {
+        left: 6px;
+        width: 46px;
+        height: 46px;
+        border-radius: 50%;
+      }
+      [data-v="b"] .grow {
+        flex: 1;
+      }
+      [data-v="b"] .item:hover .tip,
+      [data-v="b"] .item:focus-visible .tip {
+        opacity: 1;
+        transform: translate(0, -50%);
+      }
+
+      /* C — Rail qui s'ouvre (icônes, puis les noms au survol) */
+      [data-v="c"] {
+        --bar-w: 92px;
+      }
+      [data-v="c"] .side {
+        z-index: 10;
+      }
+      [data-v="c"] .panel {
+        display: flex;
+        flex-direction: column;
+        width: 66px;
+        height: 100%;
+        padding: 10px 0;
+        overflow: hidden;
+        border: 1px solid var(--line-strong);
+        border-radius: 24px;
+        background: linear-gradient(180deg, rgb(28 28 32 / 0.94), rgb(18 18 21 / 0.94));
+        backdrop-filter: blur(14px);
+        box-shadow: 0 30px 60px -30px rgb(0 0 0 / 0.95);
+        transition:
+          width 420ms var(--out),
+          box-shadow 420ms var(--out);
+      }
+      [data-v="c"] .panel:hover,
+      [data-v="c"] .panel:focus-within {
+        width: 246px;
+        box-shadow: 0 30px 80px -20px rgb(0 0 0 / 1);
+      }
+      [data-v="c"] .brand {
+        padding: 0 16px;
+      }
+      [data-v="c"] .brand span,
+      [data-v="c"] .label {
+        opacity: 0;
+        transform: translateX(-6px);
+        transition:
+          opacity 200ms var(--out),
+          transform 300ms var(--out);
+      }
+      [data-v="c"] .panel:hover .brand span,
+      [data-v="c"] .panel:hover .label,
+      [data-v="c"] .panel:focus-within .label {
+        opacity: 1;
+        transform: none;
+        transition-delay: 80ms;
+      }
+      [data-v="c"] .group {
+        padding: 6px 10px;
+      }
+      [data-v="c"] .item {
+        padding: 0 11px;
+      }
+      [data-v="c"] .pill {
+        left: 10px;
+        right: 10px;
+      }
+      [data-v="c"] .group + .group {
+        margin-top: 6px;
+        padding-top: 10px;
+        border-top: 1px solid var(--line);
+      }
+      [data-v="c"] .grow {
+        flex: 1;
+      }
+      [data-v="c"] .tip {
+        display: none;
+      }
+
+      /* ===== La page, qui change avec une transition ===== */
+      main {
+        min-width: 0;
+        padding: 28px 32px 120px;
+      }
+      .top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 26px;
+        color: var(--text-tertiary);
+        font-size: 13px;
+      }
+      .search {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        width: min(380px, 50%);
+        height: 42px;
+        padding: 0 14px;
+        border: 1px solid var(--line-strong);
+        border-radius: 999px;
+        background: var(--surface-low);
+      }
+      .stage > * {
+        animation: enter 520ms var(--out) both;
+        animation-delay: calc(var(--i, 0) * 55ms);
+      }
+      .stage.leaving > * {
+        animation: leave 150ms var(--in) both;
+      }
+      @keyframes enter {
+        from {
+          opacity: 0;
+          filter: blur(8px);
+          transform: translateY(12px);
+        }
+      }
+      @keyframes leave {
+        to {
+          opacity: 0;
+          filter: blur(6px);
+          transform: translateY(-4px);
+        }
+      }
+      .eyebrow {
+        color: var(--text-tertiary);
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      h1 {
+        margin: 6px 0 6px;
+        color: var(--text);
+        font: 600 clamp(28px, 4vw, 38px) / 1.1 var(--font-display);
+        letter-spacing: -0.02em;
+      }
+      .lead {
+        max-width: 60ch;
+        margin: 0 0 24px;
+      }
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 14px;
+      }
+      .card {
+        min-height: 150px;
+        padding: 18px;
+        border: 1px solid var(--line-strong);
+        border-radius: 20px;
+        background: linear-gradient(180deg, var(--raised), var(--surface));
+        box-shadow: var(--shadow-surface);
+      }
+      .card.wide {
+        grid-column: span 2;
+      }
+      .card b {
+        color: var(--text);
+        font-weight: 550;
+      }
+      .card p {
+        margin: 6px 0 14px;
+        font-size: 13.5px;
+      }
+      .bar {
+        height: 8px;
+        margin-top: 10px;
+        border-radius: 99px;
+        background: var(--surface-low);
+        overflow: hidden;
+      }
+      .bar i {
+        display: block;
+        height: 100%;
+        border-radius: inherit;
+        background: rgb(var(--v));
+      }
+      .line {
+        height: 10px;
+        margin-top: 10px;
+        border-radius: 99px;
+        background: var(--surface-low);
+      }
+      .note {
+        margin-top: 26px;
+        padding: 14px 16px;
+        border: 1px dashed var(--line-strong);
+        border-radius: 14px;
+        color: var(--text-tertiary);
+        font-size: 13px;
+        max-width: 72ch;
+      }
+      .note b {
+        color: var(--text);
+      }
+
+      /* ===== Téléphone : la barre du bas, détachée ===== */
+      .phone-wrap {
+        margin-top: 34px;
+      }
+      .phone {
+        position: relative;
+        width: 340px;
+        height: 200px;
+        border: 1px solid var(--line-strong);
+        border-radius: 30px;
+        background: var(--bg);
+        overflow: hidden;
+      }
+      .phone .mini {
+        padding: 22px;
+        color: var(--text);
+        font-weight: 550;
+      }
+      .dock {
+        position: absolute;
+        left: 12px;
+        right: 12px;
+        bottom: 12px;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        padding: 6px;
+        border: 1px solid var(--line-strong);
+        border-radius: 24px;
+        background: rgb(24 24 28 / 0.9);
+        backdrop-filter: blur(14px);
+        box-shadow: 0 20px 40px -20px rgb(0 0 0 / 1);
+      }
+      .dock button {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        justify-items: center;
+        gap: 2px;
+        min-height: 52px;
+        padding: 6px 0;
+        border: 0;
+        background: transparent;
+        color: var(--text-secondary);
+        font-size: 11.5px;
+        cursor: pointer;
+        transition: color 220ms var(--out);
+      }
+      .dock button[aria-current="page"] {
+        color: #111;
+      }
+      .dock .pill {
+        left: 6px;
+        right: auto;
+        top: 6px;
+        width: calc((100% - 12px) / 5);
+        height: 52px;
+        border-radius: 18px;
+        opacity: 1;
+      }
+      @media (max-width: 760px) {
+        [data-v] {
+          --bar-w: 0px;
+        }
+        .side {
+          display: none;
+        }
+        main {
+          padding: 20px 16px 120px;
+        }
+        .card.wide {
+          grid-column: auto;
+        }
+        .search {
+          display: none;
+        }
+        .switch span {
+          display: none;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .stage > *,
+        .stage.leaving > * {
+          animation-name: fade;
+          animation-duration: 120ms;
+          animation-delay: 0ms;
+          filter: none;
+        }
+        @keyframes fade {
+          from {
+            opacity: 0;
+          }
+        }
+        .pill,
+        [data-v="c"] .panel,
+        .item {
+          transition-duration: 1ms !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+      <symbol id="i-home" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="7" height="7" rx="2.2" /><rect x="13.5" y="3.5" width="7" height="7" rx="2.2" /><rect x="3.5" y="13.5" width="7" height="7" rx="2.2" /><rect x="13.5" y="13.5" width="7" height="7" rx="3.5" /></symbol>
+      <symbol id="i-book" viewBox="0 0 24 24"><path d="M12 6.5C10 5 7.2 4.6 4 5v13c3.2-.4 6 0 8 1.5 2-1.5 4.8-1.9 8-1.5V5c-3.2-.4-6 0-8 1.5Z" /><path d="M12 6.5v13" /></symbol>
+      <symbol id="i-clock" viewBox="0 0 24 24"><path d="M4.5 12a7.5 7.5 0 1 0 2.2-5.3" /><path d="M4 4.5v3.2h3.2" /><path d="M12 8v4.2l2.8 1.8" /></symbol>
+      <symbol id="i-node" viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.3" /><circle cx="6" cy="18" r="2.3" /><circle cx="18" cy="12" r="2.3" /><path d="M6 8.3v7.4M8 7.2l7.9 3.7M8 16.8l7.9-3.7" /></symbol>
+      <symbol id="i-lab" viewBox="0 0 24 24"><path d="M9.5 3.5h5M10 3.5v5.2L5.2 17a2.3 2.3 0 0 0 2 3.5h9.6a2.3 2.3 0 0 0 2-3.5L14 8.7V3.5" /><path d="M7.4 14h9.2" /></symbol>
+      <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 19.5h16" /><path d="M5 15.5c2.5 0 3-5 6-5s3 3 5.5 3S19 7 20 5.5" /></symbol>
+      <symbol id="i-ai" viewBox="0 0 24 24"><path d="M12 3.5c.6 3.9 2.6 5.9 6.5 6.5-3.9.6-5.9 2.6-6.5 6.5-.6-3.9-2.6-5.9-6.5-6.5 3.9-.6 5.9-2.6 6.5-6.5Z" /><path d="M18.5 15.5c.3 1.6 1 2.3 2.5 2.5-1.5.3-2.2 1-2.5 2.5-.3-1.5-1-2.2-2.5-2.5 1.5-.2 2.2-.9 2.5-2.5Z" /></symbol>
+      <symbol id="i-idea" viewBox="0 0 24 24"><path d="M9 17.5h6M10 20.5h4" /><path d="M8.5 14.5a6 6 0 1 1 7 0c-.6.5-1 1.2-1 2v1h-5v-1c0-.8-.4-1.5-1-2Z" /></symbol>
+      <symbol id="i-radar" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" /><path d="m15.5 8.5-2 5-5 2 2-5 5-2Z" /></symbol>
+      <symbol id="i-gear" viewBox="0 0 24 24"><path d="M4 7h10M18 7h2M4 17h4M12 17h8" /><circle cx="16" cy="7" r="2" /><circle cx="10" cy="17" r="2" /></symbol>
+      <symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" /><path d="M9.7 9.6a2.4 2.4 0 0 1 4.6.9c0 1.6-2.3 2-2.3 3.5M12 16.8v.2" /></symbol>
+      <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5" /><path d="m16 16 4 4" /></symbol>
+      <symbol id="i-more" viewBox="0 0 24 24"><path d="M5 8h14M5 12h14M5 16h14" /></symbol>
+    </svg>
+
+    <div class="app" data-v="a" id="app">
+      <aside class="side" aria-label="Navigation">
+        <nav class="panel" id="panel"></nav>
+      </aside>
+      <main>
+        <div class="top">
+          <span>Mon espace / <b id="crumb" style="color: var(--text); font-weight: 500"></b></span>
+          <span class="search"><svg class="ico"><use href="#i-search" /></svg>Rechercher une leçon, un outil…</span>
+        </div>
+        <div class="stage" id="stage"></div>
+        <div class="phone-wrap">
+          <p class="eyebrow">Sur téléphone · la barre du bas, détachée, même pastille</p>
+          <div class="phone">
+            <div class="mini" id="mini">Accueil</div>
+            <div class="dock" id="dock"><span class="pill" id="dpill"></span></div>
+          </div>
+        </div>
+        <p class="note" id="note"></p>
+      </main>
+    </div>
+
+    <div class="switch" role="group" aria-label="Variante">
+      <span>Variante</span>
+      <button aria-pressed="true" data-set="a">A · Panneau flottant</button>
+      <button aria-pressed="false" data-set="b">B · Rail d’icônes</button>
+      <button aria-pressed="false" data-set="c">C · Rail qui s’ouvre</button>
+    </div>
+
+    <script>
+      const GROUPS = [
+        [
+          ["home", "Vue d’ensemble", "home", "Ta prochaine action"],
+          ["academy", "Académie", "book", "Toutes les leçons et le lexique"],
+          ["reviews", "Révisions", "clock", "Rappels pour retenir"],
+          ["skills", "Mes compétences", "node", "Ton arbre et tes preuves"],
+        ],
+        [
+          ["lab", "Lab financier", "lab", "Prix, coûts et seuil de rentabilité"],
+          ["simulation", "Scénarios", "chart", "« Et si ? » sur six mois"],
+          ["ai", "Atelier IA", "ai", "Bien demander à une IA"],
+        ],
+        [
+          ["incubator", "Projets", "idea", "Du savoir au terrain"],
+          ["radar", "Sources", "radar", "Les références à lire"],
+        ],
+      ];
+      const FOOT = [
+        ["settings", "Préférences", "gear", "Profil, lecture facile, sauvegarde"],
+        ["help", "Aide", "help", "Revoir la visite guidée"],
+      ];
+      const NOTES = {
+        a: "<b>A · Panneau flottant.</b> La barre se détache du bord, en carte arrondie qui flotte. On garde les noms des onglets (un vrai débutant comprend tout de suite). La pastille argentée glisse d’un onglet à l’autre avec un léger rebond.",
+        b: "<b>B · Rail d’icônes, le plus proche de ta vidéo.</b> Trois petits groupes d’icônes qui flottent, la pastille ronde glisse. Le nom de l’onglet apparaît au survol. Plus de place pour la page, mais il faut connaître les icônes.",
+        c: "<b>C · Rail qui s’ouvre.</b> Fin comme la vidéo au repos ; passe la souris (ou le clavier) dessus et il s’ouvre avec les noms, par-dessus la page. Le meilleur des deux, un geste de plus.",
+      };
+      const PAGES = {
+        home: ["Vue d’ensemble", "Bonjour Camille", "Ta prochaine action, ton avancée et tes rappels, d’un coup d’œil.", ["Reprendre : Faire son budget", "3 révisions aujourd’hui", "Ta semaine"]],
+        academy: ["Académie", "Toutes les leçons", "Tes domaines, du débutant total à l’expert.", ["Ton argent au quotidien", "Entreprendre", "Investir"]],
+        reviews: ["Révisions", "Ce que tu dois revoir", "Cinq cartes au plus, au bon moment, pour retenir.", ["À revoir aujourd’hui", "Planifiées", "Tes pièges"]],
+        skills: ["Mes compétences", "Ton arbre", "Ce que tu sais faire, et ce que ça ouvre ensuite.", ["L’arbre des compétences", "Validées", "Mises en pratique"]],
+        lab: ["Lab financier", "Ton prix, tes coûts", "Calcule ton seuil de rentabilité en changeant les chiffres.", ["Prix de vente", "Coûts", "Seuil"]],
+        simulation: ["Scénarios", "Et si ?", "Ta trésorerie sur six mois, selon tes choix.", ["Scénario prudent", "Scénario visé", "Comparaison"]],
+        ai: ["Atelier IA", "Bien demander à une IA", "Une demande claire donne une réponse utile.", ["Ta demande", "La grille", "Trame à garder"]],
+        incubator: ["Projets", "Donne une suite à tes idées", "Tes projets et tes missions réelles.", ["Missions réelles", "Mes projets", "Décisions"]],
+        radar: ["Sources", "Les références à lire", "Des sources choisies, datées et vérifiées.", ["Argent", "Entreprise", "IA"]],
+        settings: ["Préférences", "Profil et réglages", "Lecture facile, sauvegarde, compte.", ["Profil", "Confort", "Données"]],
+        help: ["Aide", "Revoir la visite", "La visite guidée, quand tu veux.", ["Visite de l’accueil", "Visite de l’Académie", "Questions"]],
+      };
+      const DOCK = [
+        ["home", "Accueil", "home"],
+        ["academy", "Apprendre", "book"],
+        ["reviews", "Réviser", "clock"],
+        ["incubator", "Projets", "idea"],
+        ["more", "Explorer", "more"],
+      ];
+      const icon = (id) => `<svg class="ico" aria-hidden="true"><use href="#i-${id}"/></svg>`;
+      const item = ([id, label, ic, hint]) =>
+        `<li><button class="item" data-id="${id}" aria-label="${label}">${icon(ic)}<span class="label">${label}</span><span class="tip">${label}<small>${hint}</small></span></button></li>`;
+      const panel = document.getElementById("panel");
+      panel.innerHTML =
+        `<div class="brand"><b>B</b><span>BOUSE</span></div>` +
+        GROUPS.map((g) => `<ul class="group"><span class="pill"></span>${g.map(item).join("")}</ul>`).join("") +
+        `<div class="grow"></div><ul class="group"><span class="pill"></span>${FOOT.map(item).join("")}</ul>`;
+      const dock = document.getElementById("dock");
+      dock.insertAdjacentHTML(
+        "beforeend",
+        DOCK.map(([id, label, ic]) => `<button data-d="${id}">${icon(ic)}${label}</button>`).join(""),
+      );
+
+      let current = "home";
+      function placePills() {
+        document.querySelectorAll(".group").forEach((group) => {
+          const pill = group.querySelector(".pill");
+          const active = group.querySelector(`[data-id="${current}"]`);
+          pill.classList.toggle("on", !!active);
+          if (active) pill.style.transform = `translateY(${active.offsetTop}px)`;
+        });
+      }
+      function render() {
+        const [crumb, title, lead, cards] = PAGES[current];
+        document.getElementById("crumb").textContent = crumb;
+        const stage = document.getElementById("stage");
+        stage.innerHTML =
+          `<p class="eyebrow" style="--i:0">${crumb}</p><h1 style="--i:1">${title}</h1><p class="lead" style="--i:2">${lead}</p>` +
+          `<div class="cards" style="--i:3">${cards
+            .map(
+              (c, k) =>
+                `<div class="card${k === 0 ? " wide" : ""}" style="animation: enter 520ms var(--out) both; animation-delay: ${200 + k * 70}ms"><b>${c}</b><p>Exemple de contenu de la page.</p><div class="bar"><i style="width:${[64, 38, 52][k]}%"></i></div><div class="line" style="width:80%"></div><div class="line" style="width:55%"></div></div>`,
+            )
+            .join("")}</div>`;
+      }
+      function go(id) {
+        if (id === current || !PAGES[id]) return;
+        current = id;
+        document.querySelectorAll(".item").forEach((b) => (b.dataset.id === id ? b.setAttribute("aria-current", "page") : b.removeAttribute("aria-current")));
+        placePills();
+        placeDock(id);
+        const stage = document.getElementById("stage");
+        const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+        stage.classList.add("leaving");
+        setTimeout(() => {
+          stage.classList.remove("leaving");
+          render();
+        }, reduce ? 0 : 150);
+      }
+      function placeDock(id) {
+        const index = Math.max(0, DOCK.findIndex((d) => d[0] === id));
+        const pill = document.getElementById("dpill");
+        pill.style.transform = `translateX(${index * 100}%)`;
+        dock.querySelectorAll("button").forEach((b, k) => (k === index ? b.setAttribute("aria-current", "page") : b.removeAttribute("aria-current")));
+        document.getElementById("mini").textContent = DOCK[index][1];
+      }
+      panel.addEventListener("click", (e) => {
+        const b = e.target.closest(".item");
+        if (b) go(b.dataset.id);
+      });
+      dock.addEventListener("click", (e) => {
+        const b = e.target.closest("button");
+        if (!b) return;
+        if (b.dataset.d === "more") return placeDock("more");
+        go(b.dataset.d);
+      });
+      document.querySelectorAll("[data-set]").forEach((b) =>
+        b.addEventListener("click", () => {
+          document.getElementById("app").dataset.v = b.dataset.set;
+          document.querySelectorAll("[data-set]").forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+          document.getElementById("note").innerHTML = NOTES[b.dataset.set];
+          requestAnimationFrame(placePills);
+        }),
+      );
+      document.querySelector(`[data-id="home"]`).setAttribute("aria-current", "page");
+      document.getElementById("note").innerHTML = NOTES.a;
+      render();
+      placeDock("home");
+      requestAnimationFrame(placePills);
+      addEventListener("resize", placePills);
+    </script>
+  </body>
+</html>
