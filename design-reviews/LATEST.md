@@ -1,3 +1,16 @@
+# Review design — Les 125 compétences « bientôt » sont écrites
+
+**12 novembre 2026.** **La direction artistique n’est pas déclarée validée.** Suite de l’ordre de l’utilisateur (« Fait tout dans l’ordre sens demander »). Paire principale : une compétence courte (`11-catalogue-competence-ecrite`), archive `2026-11-12_11-25-53-Europe-Paris`.
+
+- **Toutes les compétences du catalogue sont prêtes** : les 43 leçons longues, plus 125 compétences courtes (21 domaines), au format de la maquette : **l’idée** (2 ou 3 paragraphes, « À retenir »), **le geste** (un vrai modèle à remplir, exemples en gris, conseil, bouton « Garder mon modèle (texte) »), **le contrôle** (trois questions ; explication après vérification ; trois bonnes réponses valident la compétence dans le domaine et dans l’arbre).
+- **Écran** : les trois temps en onglets (sur une ligne compacte sur téléphone), passage de l’un à l’autre avec le clavier et la vue qui suivent, résultat annoncé (`role="status"`). Le résultat est un quiz comme les autres (version `competence-1`), gardé et synchronisé avec le reste.
+- **Rédaction** : un domaine écrit comme modèle (Ton argent au quotidien), les 20 autres par des agents Sonnet en parallèle, puis relus : ton en « tu », exemples chiffrés simples, aucun barème annuel en dur (renvoi à service-public.fr, impots.gouv.fr, urssaf). Un test vérifie chaque fichier (domaine, longueurs, 3 questions, réponses valides, liste à jour).
+- **Code** : `src/data/skills/*.ts` (un fichier par domaine, chargé à la demande), `written.ts` (liste légère), `src/components/SkillPractice.tsx`, styles dans `src/catalogue.css` ; `src/lib/catalogue.ts` traite une compétence écrite comme une leçon. Plus aucun « Bientôt » à l’écran (le cas reste prévu pour de futures compétences).
+- **Contrôles de l’agent** : `npm test` 275 (dont le contrôle des 125 contenus) ; `npx playwright test` complet : 130 passés, 8 ignorés prévus (nouveau cas : une compétence en trois temps, une erreur puis 3/3, modèle téléchargé, « Validée » dans le domaine) ; puis `design` et `domaines` relancés après la retouche téléphone : passés ; `tsc`, Prettier. Corrigé pendant la revue : sur téléphone, les trois temps prenaient un écran entier → une ligne.
+- **Limites** : contenus à relire par l’utilisateur (ils restent pédagogiques, pas des conseils) ; pas de vrai téléphone ; pas de validation externe.
+
+---
+
 # Review design — Téléphone simplifié
 
 **11 novembre 2026.** **La direction artistique n’est pas déclarée validée.** Construit d’après `maquette/telephone.html` (avant / après sur la vraie appli), dans l’ordre demandé par l’utilisateur (« Fait tout dans l’ordre sens demander »). Rien n’est retiré : tout reste à un toucher. Ordinateur inchangé. Paire principale : l’accueil (`00-home-viewport`), archive `2026-11-11_21-56-43-Europe-Paris`.

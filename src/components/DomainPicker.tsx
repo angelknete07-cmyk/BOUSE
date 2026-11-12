@@ -1,4 +1,5 @@
 import { CATALOGUE_DOMAINS, CATALOGUE_SKILLS } from "../data/catalogue";
+import { isReady } from "../lib/catalogue";
 
 const GROUPS = [...new Set(CATALOGUE_DOMAINS.map((d) => d.group))];
 const countLabel = (n: number, word: string) =>
@@ -22,7 +23,7 @@ export function DomainPicker({
           <div className="cat-domains">
             {CATALOGUE_DOMAINS.filter((d) => d.group === group).map((d) => {
               const skills = CATALOGUE_SKILLS.filter((s) => s.domain === d.id);
-              const ready = skills.filter((s) => s.lesson).length;
+              const ready = skills.filter(isReady).length;
               const on = chosen.includes(d.id);
               return (
                 <button
@@ -40,7 +41,7 @@ export function DomainPicker({
                   {!compact && (
                     <small>
                       {countLabel(skills.length, "compétence")}
-                      {ready ? ` · ${ready} déjà prêtes` : ""}
+                      {ready < skills.length ? ` · ${ready} déjà prêtes` : ""}
                     </small>
                   )}
                 </button>

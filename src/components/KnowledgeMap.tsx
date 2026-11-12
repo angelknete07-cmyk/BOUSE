@@ -11,6 +11,7 @@ import { CATALOGUE_SKILLS } from "../data/catalogue";
 import {
   DOMAIN_NAMES,
   chosenDomainIds,
+  quizTarget,
   skillStatuses,
   treeNodes,
 } from "../lib/catalogue";
@@ -66,7 +67,7 @@ export function KnowledgeMap({ state, onNavigate }: Props) {
   const statuses = skillStatuses(
     CATALOGUE_SKILLS.filter((skill) => items.some((i) => i.id === skill.id)),
     (id) => {
-      const attempt = latestAttempt(state, id, now);
+      const attempt = latestCurrentAttempt(quizTarget(id), state.attempts, now);
       return attempt ? (attempt.passed ? "passed" : "failed") : undefined;
     },
   );

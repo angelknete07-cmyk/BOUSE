@@ -11,6 +11,24 @@ import {
 } from "../data/catalogue.ts";
 import { lessonShortLabels } from "../data/lessonLabels.ts";
 import { lessons } from "../data/lessons.ts";
+import { WRITTEN_SKILLS } from "../data/skills/written.ts";
+
+/** Version des résultats d'une compétence courte (voir src/data/skills). */
+export const SKILL_VERSION = "competence-1";
+
+/** Ce dont dépend un résultat : la leçon longue, sinon la compétence courte. */
+export function quizTarget(id: string): { id: string; version: string } {
+  return lessons.find((l) => l.id === id) ?? { id, version: SKILL_VERSION };
+}
+
+/** Prête : sa leçon longue existe, ou son contenu court est écrit. */
+export function isReady(skill: CatalogueSkill) {
+  return !!skill.lesson || WRITTEN_SKILLS.has(skill.id);
+}
+/** L'identifiant du quiz qui valide la compétence. */
+const quizId = (skill: CatalogueSkill | undefined) =>
+  skill?.lesson ??
+  (skill && WRITTEN_SKILLS.has(skill.id) ? skill.id : undefined);
 
 /** Les cinq domaines des premières leçons : proposés à tous au départ. */
 export const CORE_DOMAIN_IDS = CATALOGUE_DOMAINS.filter((d) => d.core).map(
@@ -60,19 +78,20 @@ export function skillStatuses(
   const out: Record<string, SkillStatus> = {};
   const byId = new Map(CATALOGUE_SKILLS.map((s) => [s.id, s]));
   for (const skill of skills) {
-    if (!skill.lesson) {
+    const id = quizId(skill);
+    if (!id) {
       out[skill.id] = "soon";
       continue;
     }
-    const own = result(skill.lesson);
+    const own = result(id);
     if (own) {
       out[skill.id] = own === "passed" ? "done" : "retry";
       continue;
     }
-    // Seuls les prérequis qui ont déjà leur leçon peuvent bloquer.
+    // Seuls les prérequis déjà écrits peuvent bloquer.
     const blocking = skill.prerequisites
-      .map((id) => byId.get(id)?.lesson)
-      .filter((id): id is string => !!id);
+      .map((p) => quizId(byId.get(p)))
+      .filter((p): p is string => !!p);
     out[skill.id] = blocking.every((id) => result(id) === "passed")
       ? "open"
       : "wait";

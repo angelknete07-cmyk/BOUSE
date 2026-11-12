@@ -454,6 +454,7 @@ test("galerie des écrans et du quiz validé sans débordement", async ({
       "Trouver une idée d’activité",
       "11-catalogue-competence",
     ],
+    ["skill/fp-dettes", "Sortir d’une dette", "11-catalogue-competence-ecrite"],
   ]) {
     await page.goto(`/#${route}`);
     await expect(

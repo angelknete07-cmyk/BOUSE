@@ -725,6 +725,7 @@ function App({
                   key={route}
                   id={route.slice(6)}
                   state={state}
+                  update={update}
                   onNavigate={go}
                 />
               ) : route === "skills" ? (

@@ -5,12 +5,13 @@ import {
   type CatalogueLevel,
   type CatalogueSkill,
 } from "../data/catalogue";
-import { lessons } from "../data/lessons";
 import {
   catalogueDomain,
   catalogueSkill,
   chosenDomainIds,
+  isReady,
   nextSkill,
+  quizTarget,
   skillStatuses,
   toggleDomain,
   type SkillStatus,
@@ -19,6 +20,7 @@ import { latestCurrentAttempt } from "../lib/portfolio";
 import type { AppState, StateUpdater } from "../lib/types";
 import { useClock } from "../lib/useClock";
 import { DomainPicker } from "./DomainPicker";
+import { SkillPractice } from "./SkillPractice";
 
 /**
  * Le catalogue des compétences dans l'appli (idées 13 et 15 d'Angel, maquette
@@ -37,10 +39,7 @@ const LEVELS: CatalogueLevel[] = [0, 1, 2, 3];
 function useStatuses(state: AppState) {
   const now = useClock();
   return skillStatuses(CATALOGUE_SKILLS, (id) => {
-    const lesson = lessons.find((item) => item.id === id);
-    const attempt = lesson
-      ? latestCurrentAttempt(lesson, state.attempts, now)
-      : undefined;
+    const attempt = latestCurrentAttempt(quizTarget(id), state.attempts, now);
     return attempt ? (attempt.passed ? "passed" : "failed") : undefined;
   });
 }
@@ -234,7 +233,7 @@ export function DomainPage({
             className="button primary"
             onClick={() => onNavigate(skillRoute(next))}
           >
-            {next.lesson ? "Commencer" : "Voir la compétence"} →
+            {isReady(next) ? "Commencer" : "Voir la compétence"} →
           </button>
         </section>
       )}
@@ -285,9 +284,9 @@ export function DomainPage({
         })}
       </div>
       <p className="cat-note">
-        « Prête » : la leçon existe déjà. « Bientôt » : elle s’écrit peu à peu ;
-        tu peux déjà voir ce qu’elle t’apprendra. L’arbre des compétences montre
-        tous tes domaines, avec leurs liens.
+        Chaque compétence se fait en une leçon complète ou en dix minutes : une
+        idée simple, un vrai modèle à remplir, un petit contrôle. L’arbre des
+        compétences montre tous tes domaines, avec leurs liens.
       </p>
     </div>
   );
@@ -297,8 +296,9 @@ export function DomainPage({
 export function SkillSheet({
   id,
   state,
+  update,
   onNavigate,
-}: Omit<Props, "update"> & { id: string }) {
+}: Props & { id: string }) {
   const statuses = useStatuses(state);
   const skill = catalogueSkill(id);
   const headingRef = useRef<HTMLHeadingElement>(null);
@@ -337,62 +337,70 @@ export function SkillSheet({
         {skill.title}
       </h1>
       <p className="cat-lead">{skill.does}</p>
-      <ol className="cat-steps" aria-label="Comment elle se déroule">
-        <li>
-          <b>1. L’idée</b>2 min · ce qu’il faut comprendre
-        </li>
-        <li>
-          <b>2. Le geste</b>6 min ·{" "}
-          {skill.gesture
-            ? `${lower(skill.gesture)} à remplir`
-            : "un exercice pratique"}
-        </li>
-        <li>
-          <b>3. Le contrôle</b>2 min · deux questions pour vérifier
-        </li>
-      </ol>
-      <section className="cat-card" aria-label="Où en est cette compétence">
-        {status === "soon" ? (
-          <>
-            <p className="cat-state" data-s="soon">
-              <i aria-hidden="true" /> Bientôt : sa leçon s’écrit en ce moment.
-            </p>
-            <p>
-              Tu vois déjà ce qu’elle t’apprendra. En attendant, avance sur ce
-              qui vient avant, ou sur une compétence déjà prête de ce domaine.
-            </p>
-            <div className="cat-actions">
-              <button
-                type="button"
-                className="button primary"
-                onClick={() => onNavigate(`domain/${domain.id}`)}
-              >
-                Voir les compétences prêtes →
-              </button>
-            </div>
-          </>
-        ) : (
-          <>
-            <p className="cat-state" data-s={status}>
-              <i aria-hidden="true" /> {TAG[status]}
-            </p>
-            <div className="cat-actions">
-              <button
-                type="button"
-                className="button primary"
-                onClick={() => onNavigate(skillRoute(skill))}
-              >
-                {status === "done"
-                  ? "Revoir la leçon"
-                  : status === "retry"
-                    ? "Réviser la leçon"
-                    : "Ouvrir la leçon"}{" "}
-                →
-              </button>
-            </div>
-          </>
-        )}
-      </section>
+      {!skill.lesson && isReady(skill) ? (
+        <SkillPractice skill={skill} status={status} update={update} />
+      ) : (
+        <>
+          <ol className="cat-steps" aria-label="Comment elle se déroule">
+            <li>
+              <b>1. L’idée</b>2 min · ce qu’il faut comprendre
+            </li>
+            <li>
+              <b>2. Le geste</b>6 min ·{" "}
+              {skill.gesture
+                ? `${lower(skill.gesture)} à remplir`
+                : "un exercice pratique"}
+            </li>
+            <li>
+              <b>3. Le contrôle</b>2 min · trois questions pour vérifier
+            </li>
+          </ol>
+          <section className="cat-card" aria-label="Où en est cette compétence">
+            {status === "soon" ? (
+              <>
+                <p className="cat-state" data-s="soon">
+                  <i aria-hidden="true" /> Bientôt : sa leçon s’écrit en ce
+                  moment.
+                </p>
+                <p>
+                  Tu vois déjà ce qu’elle t’apprendra. En attendant, avance sur
+                  ce qui vient avant, ou sur une compétence déjà prête de ce
+                  domaine.
+                </p>
+                <div className="cat-actions">
+                  <button
+                    type="button"
+                    className="button primary"
+                    onClick={() => onNavigate(`domain/${domain.id}`)}
+                  >
+                    Voir les compétences prêtes →
+                  </button>
+                </div>
+              </>
+            ) : (
+              <>
+                <p className="cat-state" data-s={status}>
+                  <i aria-hidden="true" /> {TAG[status]}
+                </p>
+                <div className="cat-actions">
+                  <button
+                    type="button"
+                    className="button primary"
+                    onClick={() => onNavigate(skillRoute(skill))}
+                  >
+                    {status === "done"
+                      ? "Revoir la leçon"
+                      : status === "retry"
+                        ? "Réviser la leçon"
+                        : "Ouvrir la leçon"}{" "}
+                    →
+                  </button>
+                </div>
+              </>
+            )}
+          </section>
+        </>
+      )}
       <div className="cat-rel">
         <p>
           {before.length

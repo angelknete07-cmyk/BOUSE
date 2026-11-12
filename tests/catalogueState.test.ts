@@ -10,6 +10,7 @@ import {
   treeNodes,
 } from "../src/lib/catalogue.ts";
 import { emptyState, parseState } from "../src/lib/storage.ts";
+import { WRITTEN_SKILLS } from "../src/data/skills/written.ts";
 
 test("sans choix, on part des domaines des premières leçons", () => {
   assert.deepEqual(chosenDomainIds({}), CORE_DOMAIN_IDS);
@@ -38,13 +39,23 @@ test("l'état d'une compétence suit le quiz de sa leçon", () => {
   assert.equal(statuses["fp-budget"], "done");
   assert.equal(statuses["fp-epargne-precaution"], "retry");
   // Sans leçon écrite : « bientôt », jamais bloquant pour la suite.
-  const soon = CATALOGUE_SKILLS.find((s) => !s.lesson)!;
-  assert.equal(statuses[soon.id], "soon");
-  for (const skill of CATALOGUE_SKILLS.filter((s) => s.lesson))
+  const draft = { ...CATALOGUE_SKILLS[0]!, id: "brouillon", lesson: undefined };
+  assert.equal(skillStatuses([draft], () => undefined).brouillon, "soon");
+  for (const skill of CATALOGUE_SKILLS.filter(
+    (s) => s.lesson || WRITTEN_SKILLS.has(s.id),
+  ))
     assert.ok(["done", "retry", "open", "wait"].includes(statuses[skill.id]!));
   // Une base avec sa leçon est ouverte d'emblée.
   const fresh = skillStatuses(CATALOGUE_SKILLS, () => undefined);
   assert.equal(fresh["fp-budget"], "open");
+  // Une compétence courte écrite se fait comme une leçon : son propre quiz.
+  assert.equal(fresh["fp-fiche-paie"], "open");
+  assert.equal(
+    skillStatuses(CATALOGUE_SKILLS, (id) =>
+      id === "fp-fiche-paie" ? "passed" : undefined,
+    )["fp-fiche-paie"],
+    "done",
+  );
   assert.equal(nextSkill("fp", fresh)?.id, "fp-budget");
   assert.equal(nextSkill("fp", statuses)?.id, "fp-epargne-precaution");
 });
