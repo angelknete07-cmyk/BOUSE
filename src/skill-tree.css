@@ -892,3 +892,13 @@
     animation: none;
   }
 }
+
+/* Déjà sue d'après le test de niveau (idée 16) : pointillés argent, pas validée. */
+.tr-node[data-known] {
+  border-style: dashed;
+  border-color: rgb(201 201 207 / 0.75);
+}
+.tr-legend i[data-known] {
+  border: 1px dashed rgb(201 201 207 / 0.85);
+  background: transparent;
+}

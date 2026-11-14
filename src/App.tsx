@@ -67,6 +67,9 @@ const DomainPage = lazy(() =>
 const SkillSheet = lazy(() =>
   import("./components/Catalogue").then((m) => ({ default: m.SkillSheet })),
 );
+const Placement = lazy(() =>
+  import("./components/Placement").then((m) => ({ default: m.Placement })),
+);
 const MissionList = lazy(() =>
   import("./components/Missions").then((m) => ({ default: m.MissionList })),
 );
@@ -374,14 +377,16 @@ function App({
             ? catalogueDomain(route.slice(7))?.name
             : route.startsWith("skill/")
               ? catalogueSkill(route.slice(6).replace(/\/check$/, ""))?.title
-              : route === "missions"
-                ? "Missions réelles"
-                : route.startsWith("mission/")
-                  ? findMission(route.slice(8))?.title
-                  : projectId !== null
-                    ? state.projects.find((item) => item.id === projectId)
-                        ?.title
-                    : navigation.find((item) => item.id === route)?.label;
+              : route.startsWith("placement/")
+                ? "Test de niveau"
+                : route === "missions"
+                  ? "Missions réelles"
+                  : route.startsWith("mission/")
+                    ? findMission(route.slice(8))?.title
+                    : projectId !== null
+                      ? state.projects.find((item) => item.id === projectId)
+                          ?.title
+                      : navigation.find((item) => item.id === route)?.label;
     document.title = `${routeTitle || (route === "portfolio" ? "Portfolio" : route === "settings" ? "Profil et paramètres" : "Mon espace")} — BOUSE`;
     return () => cancelAnimationFrame(frame);
   }, [route, !!state.profile]);
@@ -460,7 +465,8 @@ function App({
   const inCatalogue =
     route === "domains" ||
     route.startsWith("domain/") ||
-    route.startsWith("skill/");
+    route.startsWith("skill/") ||
+    route.startsWith("placement/");
   // Les missions réelles font partie de Projets.
   const inMissions = route === "missions" || route.startsWith("mission/");
   const lesson = route.startsWith("lesson/")
@@ -761,6 +767,14 @@ function App({
                     key={route}
                     id={route.slice(6).replace(/\/check$/, "")}
                     startOnCheck={route.endsWith("/check")}
+                    state={state}
+                    update={update}
+                    onNavigate={go}
+                  />
+                ) : route.startsWith("placement/") ? (
+                  <Placement
+                    key={route}
+                    id={route.slice(10)}
                     state={state}
                     update={update}
                     onNavigate={go}

@@ -1,0 +1,547 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Maquette — Test de niveau BOUSE</title>
+    <!--
+      MAQUETTE, pas le produit (idée 16 : test de niveau par domaine pour
+      sauter ce qu'on sait). Trois moments : l'entrée dans un domaine, une
+      question, le résultat. Les questions sont de vraies questions de
+      l'appli. Ouvrir : http://localhost:5173/maquette/niveau.html
+    -->
+    <link rel="stylesheet" href="/src/tokens.css" />
+    <style>
+      :root {
+        color-scheme: dark;
+        --ease: cubic-bezier(0.22, 1, 0.36, 1);
+        --spring: cubic-bezier(0.34, 1.32, 0.64, 1);
+        --v: var(--accent-violet-rgb);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text-secondary);
+        font: 15px/1.5 var(--font-sans);
+      }
+      h1,
+      h2,
+      h3 {
+        margin: 0;
+        color: var(--text);
+        font-weight: 560;
+        letter-spacing: -0.01em;
+      }
+      main {
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 28px 16px 80px;
+      }
+      .ctx {
+        margin: 0 0 18px;
+        padding: 10px 14px;
+        border: 1px dashed var(--line-strong);
+        border-radius: var(--radius-sm);
+        color: var(--text-tertiary);
+        font-size: 13px;
+      }
+      .steps {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 22px;
+      }
+      .steps button {
+        min-height: 40px;
+        padding: 0 14px;
+        border: 1px solid var(--line-strong);
+        border-radius: 999px;
+        background: var(--surface);
+        color: var(--text-secondary);
+        font: 500 13px/1 var(--font-sans);
+        cursor: pointer;
+      }
+      .steps button[aria-pressed="true"] {
+        border-color: rgb(var(--v) / 0.55);
+        color: var(--text);
+      }
+      .eyebrow {
+        margin: 0;
+        color: var(--text-tertiary);
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .card {
+        padding: 22px 24px;
+        border: 1px solid var(--line-strong);
+        border-radius: var(--radius);
+        background: linear-gradient(180deg, var(--raised), var(--surface));
+        box-shadow: var(--shadow-surface);
+      }
+      .panel {
+        display: grid;
+        gap: 16px;
+        animation: in 380ms var(--ease) both;
+      }
+      @keyframes in {
+        from {
+          opacity: 0;
+          transform: translateY(8px);
+        }
+      }
+      .btn {
+        min-height: 44px;
+        padding: 0 18px;
+        border: 1px solid var(--line-strong);
+        border-radius: 999px;
+        background: var(--surface);
+        color: var(--text);
+        font: 500 14px/1 var(--font-sans);
+        cursor: pointer;
+        transition: transform 140ms var(--ease);
+      }
+      .btn:active {
+        transform: scale(0.97);
+      }
+      .btn.primary {
+        border-color: transparent;
+        background: linear-gradient(180deg, #f4f4f6, #c9c9cf);
+        color: #111;
+      }
+      .row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        align-items: center;
+      }
+      .muted {
+        color: var(--text-tertiary);
+        font-size: 13px;
+      }
+
+      /* 1. Entrée */
+      .domain-head h1 {
+        font-size: 28px;
+      }
+      .entry {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        gap: 16px;
+        align-items: center;
+      }
+      .entry .mark {
+        display: grid;
+        place-items: center;
+        width: 44px;
+        height: 44px;
+        border: 1px solid rgb(var(--v) / 0.45);
+        border-radius: 14px;
+        color: var(--text);
+        font-size: 18px;
+      }
+      .entry h3 {
+        font-size: 16px;
+      }
+      .entry p {
+        margin: 2px 0 0;
+      }
+      .levels {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+      }
+      .levels div {
+        padding: 12px 14px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--surface-low);
+        font-size: 13px;
+      }
+      .levels b {
+        display: block;
+        color: var(--text);
+        font-weight: 520;
+      }
+
+      /* 2. Question */
+      .q-top {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 10px;
+        align-items: center;
+      }
+      .ladder {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 6px;
+      }
+      .ladder span {
+        height: 4px;
+        border-radius: 2px;
+        background: var(--line-strong);
+        transition: background 300ms var(--ease);
+      }
+      .ladder span.on {
+        background: rgb(var(--v) / 0.85);
+      }
+      .ladder span.past {
+        background: #d8d8dd;
+      }
+      .q {
+        margin: 6px 0 2px;
+        color: var(--text);
+        font-size: 19px;
+        line-height: 1.4;
+      }
+      .opts {
+        display: grid;
+        gap: 8px;
+      }
+      .opt {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        min-height: 52px;
+        padding: 10px 16px;
+        border: 1px solid var(--line-strong);
+        border-radius: 14px;
+        background: var(--surface);
+        color: var(--text);
+        font: 15px/1.4 var(--font-sans);
+        text-align: left;
+        cursor: pointer;
+        transition:
+          border-color 160ms var(--ease),
+          transform 140ms var(--ease);
+      }
+      .opt:hover {
+        border-color: rgb(255 255 255 / 0.3);
+      }
+      .opt:active {
+        transform: scale(0.99);
+      }
+      .opt .k {
+        display: grid;
+        place-items: center;
+        flex: none;
+        width: 26px;
+        height: 26px;
+        border: 1px solid var(--line-strong);
+        border-radius: 50%;
+        color: var(--text-tertiary);
+        font-size: 12px;
+      }
+      .opt.idk {
+        border-style: dashed;
+        color: var(--text-secondary);
+      }
+      .count {
+        color: var(--text-tertiary);
+        font-size: 13px;
+      }
+
+      /* 3. Résultat */
+      .result-head {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 16px;
+        align-items: end;
+      }
+      .start-at {
+        margin: 6px 0 4px;
+        font-size: 26px;
+      }
+      .scale {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 6px;
+        margin-top: 4px;
+      }
+      .scale div {
+        padding: 10px 12px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        font-size: 12.5px;
+      }
+      .scale div.got {
+        border-color: var(--line-strong);
+        background: var(--surface-low);
+        color: var(--text);
+      }
+      .scale div.here {
+        border-color: rgb(var(--v) / 0.6);
+        color: var(--text);
+      }
+      .cols {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+      .list {
+        display: grid;
+        gap: 8px;
+        margin: 10px 0 0;
+        padding: 0;
+        list-style: none;
+      }
+      .list li {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        gap: 10px;
+        align-items: center;
+        padding: 10px 12px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        font-size: 14px;
+      }
+      .list li b {
+        color: var(--text);
+        font-weight: 500;
+      }
+      .dot {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        border: 1.5px dashed #c9c9cf;
+      }
+      .dot.todo {
+        border: 1.5px solid var(--line-strong);
+      }
+      .dot.next {
+        border: 0;
+        background: rgb(var(--v) / 0.9);
+      }
+      .link {
+        border: 0;
+        background: none;
+        color: var(--text-secondary);
+        font: 500 13px var(--font-sans);
+        text-decoration: underline;
+        text-underline-offset: 3px;
+        cursor: pointer;
+      }
+      .note {
+        margin-top: 22px;
+        color: var(--text-tertiary);
+        font-size: 13px;
+      }
+      [hidden] {
+        display: none !important;
+      }
+      @media (max-width: 680px) {
+        .entry,
+        .result-head,
+        .cols {
+          grid-template-columns: 1fr;
+        }
+        .levels,
+        .scale {
+          grid-template-columns: 1fr 1fr;
+        }
+        .entry .btn {
+          width: 100%;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation: none !important;
+          transition-duration: 1ms !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p class="ctx">
+        Maquette · idée 16. Un domaine (ici « Ton argent au quotidien »),
+        un test court qui monte de niveau en niveau, et le résultat : ce que
+        tu sais déjà est sauté. Les questions sont de vraies questions de
+        l’appli. Clique sur les étapes ou réponds aux questions.
+      </p>
+      <div class="steps" role="group" aria-label="Moments de la maquette">
+        <button aria-pressed="true" data-s="entry">1. L’entrée du domaine</button>
+        <button aria-pressed="false" data-s="quiz">2. Une question</button>
+        <button aria-pressed="false" data-s="result">3. Le résultat</button>
+      </div>
+
+      <!-- 1. Entrée -->
+      <section class="panel" data-p="entry">
+        <div class="domain-head">
+          <p class="eyebrow">Académie · Tes domaines</p>
+          <h1>Ton argent au quotidien</h1>
+          <p class="muted">14 compétences · 4 niveaux</p>
+        </div>
+        <div class="card entry">
+          <span class="mark" aria-hidden="true">↗</span>
+          <div>
+            <h3>Tu en connais déjà une partie ?</h3>
+            <p>
+              Un test de niveau : une question par compétence, de la plus
+              simple à la plus avancée. Il s’arrête tout seul quand ça devient
+              nouveau pour toi. <span class="muted">3 à 5 min.</span>
+            </p>
+          </div>
+          <button class="btn primary" data-go="quiz">Tester mon niveau →</button>
+        </div>
+        <div class="levels" aria-label="Les niveaux du domaine">
+          <div><b>Découvrir</b>4 compétences</div>
+          <div><b>Savoir faire</b>6 compétences</div>
+          <div><b>Maîtriser</b>3 compétences</div>
+          <div><b>Expert</b>1 compétence</div>
+        </div>
+        <p class="muted">
+          Le test est aussi proposé juste après avoir choisi un domaine. On
+          peut le refaire quand on veut.
+        </p>
+      </section>
+
+      <!-- 2. Question -->
+      <section class="panel" data-p="quiz" hidden>
+        <div class="card" style="display: grid; gap: 16px">
+          <div class="q-top">
+            <p class="eyebrow" id="q-level">Niveau 1 · Découvrir</p>
+            <span class="count" id="q-count">Question 1</span>
+          </div>
+          <div class="ladder" aria-hidden="true">
+            <span class="on"></span><span></span><span></span><span></span>
+          </div>
+          <p class="muted" id="q-skill" style="margin: 0">
+            Compétence · Faire son budget
+          </p>
+          <p class="q" id="q-text"></p>
+          <div class="opts" id="q-opts"></div>
+          <p class="muted" style="margin: 0">
+            Pas de piège : si tu ne sais pas, dis-le. Ça évite de sauter une
+            compétence que tu n’as pas.
+          </p>
+        </div>
+        <div class="row">
+          <button class="btn" data-go="entry">Arrêter</button>
+          <span class="muted">Rien n’est enregistré avant la fin.</span>
+        </div>
+      </section>
+
+      <!-- 3. Résultat -->
+      <section class="panel" data-p="result" hidden>
+        <div class="card" style="display: grid; gap: 14px">
+          <div class="result-head">
+            <div>
+              <p class="eyebrow">Ton point de départ</p>
+              <h2 class="start-at">Savoir faire</h2>
+              <p style="margin: 0">
+                Tu as répondu juste à <b style="color: var(--text)">5</b>
+                questions sur 7. Le test s’est arrêté au niveau 2, quand deux
+                réponses ont manqué.
+              </p>
+            </div>
+            <button class="btn primary">Commencer par « Comparer deux crédits » →</button>
+          </div>
+          <div class="scale" aria-label="Ton niveau">
+            <div class="got">Découvrir · su</div>
+            <div class="here">Savoir faire · en cours</div>
+            <div>Maîtriser</div>
+            <div>Expert</div>
+          </div>
+        </div>
+        <div class="cols">
+          <div class="card">
+            <h3 style="font-size: 16px">Déjà su · sauté</h3>
+            <p class="muted" style="margin: 2px 0 0">
+              On ne te les propose plus. Pour les valider dans l’arbre, fais
+              leur contrôle complet (1 min).
+            </p>
+            <ul class="list">
+              <li><span class="dot"></span><b>Faire son budget</b><button class="link">Valider</button></li>
+              <li><span class="dot"></span><b>Sa banque au quotidien</b><button class="link">Valider</button></li>
+              <li><span class="dot"></span><b>Lire sa fiche de paie</b><button class="link">Valider</button></li>
+              <li><span class="dot"></span><b>Mettre ses comptes en pilote automatique</b><button class="link">Valider</button></li>
+              <li><span class="dot"></span><b>Se faire une épargne de précaution</b><button class="link">Valider</button></li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3 style="font-size: 16px">À apprendre</h3>
+            <p class="muted" style="margin: 2px 0 0">
+              Ta suite dans ce domaine, dans l’ordre.
+            </p>
+            <ul class="list">
+              <li><span class="dot next"></span><b>Comparer deux crédits</b><span class="muted">raté</span></li>
+              <li><span class="dot todo"></span><b>Garder son pouvoir d’achat</b><span class="muted">raté</span></li>
+              <li><span class="dot todo"></span><b>Comprendre son impôt</b><span class="muted">pas testé</span></li>
+              <li><span class="dot todo"></span><b>S’assurer sans se ruiner</b><span class="muted">pas testé</span></li>
+              <li><span class="dot todo"></span><b>… et 5 autres</b><span></span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="row">
+          <button class="btn" data-go="quiz">Refaire le test</button>
+          <span class="muted">Dans l’arbre, les compétences « déjà su » ont un contour en pointillés argent, différent de « validée ».</span>
+        </div>
+      </section>
+
+      <p class="note">
+        Honnête : une bonne réponse au test ne valide pas une compétence. Elle
+        la saute seulement dans ta suite. Seul le contrôle complet la valide.
+        Les ratés du test ne vont pas dans « Mes pièges » (ce n’est qu’un
+        sondage). Le résultat est gardé et synchronisé avec le reste.
+      </p>
+    </main>
+    <script>
+      const panels = document.querySelectorAll("[data-p]");
+      const steps = [...document.querySelectorAll(".steps button")];
+      function show(id) {
+        panels.forEach((p) => (p.hidden = p.dataset.p !== id));
+        steps.forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.s === id)));
+        if (id === "quiz") start();
+      }
+      steps.forEach((b) => b.addEventListener("click", () => show(b.dataset.s)));
+      document.querySelectorAll("[data-go]").forEach((b) =>
+        b.addEventListener("click", () => show(b.dataset.go)),
+      );
+
+      const LEVELS = ["Découvrir", "Savoir faire", "Maîtriser", "Expert"];
+      const QS = [
+        { l: 0, s: "Faire son budget", q: "Que signifie « se payer en premier » ?", o: ["Programmer l’épargne en début de mois, puis vivre avec le reste", "Épargner ce qui reste éventuellement en fin de mois", "Payer ses envies avant ses factures"] },
+        { l: 0, s: "Lire sa fiche de paie", q: "Ton brut est de 2 000 € et tes cotisations de 440 €. Ton net avant impôt est de :", o: ["2 440 €", "1 560 €", "2 000 €"] },
+        { l: 1, s: "Se faire une épargne de précaution", q: "Quelle qualité est indispensable pour une épargne de précaution ?", o: ["Être disponible rapidement sans risque de perte", "Offrir le rendement le plus élevé possible", "Être bloquée plusieurs années pour éviter la tentation"] },
+        { l: 1, s: "Comparer deux crédits", q: "Allonger la durée d’un crédit, à taux identique, a quel effet ?", o: ["Mensualité plus basse, coût total plus élevé", "Mensualité plus basse, coût total plus bas", "Aucun effet sur le coût total"] },
+      ];
+      let i = 0;
+      function start() {
+        i = 0;
+        render();
+      }
+      function render() {
+        if (i >= QS.length) return show("result");
+        const item = QS[i];
+        document.getElementById("q-level").textContent = `Niveau ${item.l + 1} · ${LEVELS[item.l]}`;
+        document.getElementById("q-count").textContent = `Question ${i + 1}`;
+        document.getElementById("q-skill").textContent = `Compétence · ${item.s}`;
+        document.getElementById("q-text").textContent = item.q;
+        document.querySelectorAll(".ladder span").forEach((s, n) => {
+          s.className = n < item.l ? "past" : n === item.l ? "on" : "";
+        });
+        const box = document.getElementById("q-opts");
+        box.innerHTML = "";
+        [...item.o, "Je ne sais pas"].forEach((text, n) => {
+          const b = document.createElement("button");
+          b.className = "opt" + (n === item.o.length ? " idk" : "");
+          b.innerHTML = `<span class="k">${n === item.o.length ? "?" : "ABC"[n]}</span><span></span>`;
+          b.lastChild.textContent = text;
+          b.addEventListener("click", () => {
+            i += 1;
+            const panel = document.querySelector('[data-p="quiz"] .card');
+            panel.style.animation = "none";
+            panel.offsetHeight;
+            panel.style.animation = "in 320ms var(--ease) both";
+            render();
+          });
+          box.appendChild(b);
+        });
+      }
+    </script>
+  </body>
+</html>

@@ -99,16 +99,22 @@ export function skillStatuses(
   return out;
 }
 
-/** La prochaine compétence d'un domaine : la première non validée et ouverte. */
+/**
+ * La prochaine compétence d'un domaine : la première non validée et ouverte.
+ * Celles que le test de niveau dit déjà sues sont sautées (pas validées).
+ */
 export function nextSkill(
   domainId: string,
   statuses: Record<string, SkillStatus>,
+  known: ReadonlySet<string> = new Set(),
 ): CatalogueSkill | undefined {
   const skills = CATALOGUE_SKILLS.filter((s) => s.domain === domainId);
+  const fresh = skills.filter((s) => !known.has(s.id));
   return (
     skills.find((s) => statuses[s.id] === "retry") ??
-    skills.find((s) => statuses[s.id] === "open") ??
-    skills.find((s) => statuses[s.id] === "soon") ??
+    fresh.find((s) => statuses[s.id] === "open") ??
+    fresh.find((s) => statuses[s.id] === "soon") ??
+    fresh.find((s) => statuses[s.id] !== "done") ??
     skills.find((s) => statuses[s.id] !== "done")
   );
 }

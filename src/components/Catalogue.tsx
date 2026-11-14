@@ -17,10 +17,12 @@ import {
   type SkillStatus,
 } from "../lib/catalogue";
 import { missionsUsing, practicedSkills } from "../lib/missions";
+import { knownSkills } from "../lib/placement";
 import { latestCurrentAttempt } from "../lib/portfolio";
 import type { AppState, StateUpdater } from "../lib/types";
 import { useClock } from "../lib/useClock";
 import { DomainPicker } from "./DomainPicker";
+import { Icon } from "./Icon";
 import { SkillPractice } from "./SkillPractice";
 
 /**
@@ -36,8 +38,12 @@ type Props = {
 };
 
 const LEVELS: CatalogueLevel[] = [0, 1, 2, 3];
+const dayFormatter = new Intl.DateTimeFormat("fr-FR", {
+  day: "numeric",
+  month: "long",
+});
 
-function useStatuses(state: AppState) {
+export function useStatuses(state: AppState) {
   const now = useClock();
   return skillStatuses(CATALOGUE_SKILLS, (id) => {
     const attempt = latestCurrentAttempt(quizTarget(id), state.attempts, now);
@@ -164,8 +170,11 @@ export function DomainPage({
   const mine = chosen.includes(id);
   const skills = CATALOGUE_SKILLS.filter((s) => s.domain === id);
   const done = skills.filter((s) => statuses[s.id] === "done").length;
-  const next = nextSkill(id, statuses);
+  const known = knownSkills(state);
+  const next = nextSkill(id, statuses, known);
   const practiced = practicedSkills(state);
+  const placement = state.placements?.[id];
+  const testable = skills.some(isReady);
   return (
     <div className="cat-page">
       <div
@@ -220,6 +229,46 @@ export function DomainPage({
           )}
         </div>
       </div>
+      {testable &&
+        (placement ? (
+          <section className="pl-entry is-done" aria-label="Test de niveau">
+            <p>
+              Test de niveau fait le{" "}
+              {dayFormatter.format(new Date(placement.at))} ·{" "}
+              {countLabel(placement.known.length, "compétence")} déjà sue
+              {placement.known.length > 1 ? "s" : ""}, sautée
+              {placement.known.length > 1 ? "s" : ""} dans ta suite.
+            </p>
+            <button
+              type="button"
+              className="button secondary"
+              onClick={() => onNavigate(`placement/${id}`)}
+            >
+              Refaire le test
+            </button>
+          </section>
+        ) : (
+          <section className="pl-entry" aria-labelledby="pl-entry-title">
+            <span className="pl-entry-mark" aria-hidden="true">
+              <Icon name="chart" size={18} />
+            </span>
+            <div>
+              <h2 id="pl-entry-title">Tu en connais déjà une partie&nbsp;?</h2>
+              <p>
+                Un test de niveau : une question par compétence, de la plus
+                simple à la plus avancée. Il s’arrête tout seul quand ça devient
+                nouveau pour toi. 3 à 5&nbsp;min.
+              </p>
+            </div>
+            <button
+              type="button"
+              className="button primary"
+              onClick={() => onNavigate(`placement/${id}`)}
+            >
+              Tester mon niveau →
+            </button>
+          </section>
+        ))}
       {next && (
         <section className="cat-next" aria-labelledby="cat-next-title">
           <p className="eyebrow">Ta prochaine étape</p>
@@ -270,6 +319,9 @@ export function DomainPage({
                           >
                             {TAG[status]}
                           </span>
+                          {known.has(skill.id) && status !== "done" && (
+                            <span className="cat-tag is-known">Déjà sue</span>
+                          )}
                           {practiced.has(skill.id) && (
                             <span className="cat-tag is-ready">
                               Mise en pratique
@@ -460,7 +512,11 @@ export function SkillSheet({
   );
 }
 
-function Missing({ onNavigate }: { onNavigate: (route: string) => void }) {
+export function Missing({
+  onNavigate,
+}: {
+  onNavigate: (route: string) => void;
+}) {
   return (
     <div className="empty-state not-found">
       <h1>Ce domaine ou cette compétence n’existe pas.</h1>

@@ -103,6 +103,15 @@ export interface AppState {
   domains?: string[];
   /** Additive v1 field: the real missions in progress (src/data/missions). */
   missions?: Record<string, MissionRecord>;
+  /** Tests de niveau, par domaine (le dernier fait). */
+  placements?: Record<string, PlacementRecord>;
+}
+export interface PlacementRecord {
+  at: string;
+  /** Réussies au test : sautées dans la suite, mais pas validées. */
+  known: string[];
+  /** Ratées ou « Je ne sais pas ». */
+  missed: string[];
 }
 export interface MissionRecord {
   /** Ce qui a été tapé, par champ (brouillon compris). */

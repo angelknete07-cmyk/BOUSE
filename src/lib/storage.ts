@@ -135,6 +135,8 @@ export function parseState(raw: string): AppState {
     throw new Error("Domaines choisis invalides.");
   if (s.missions !== undefined && !isMissions(s.missions))
     throw new Error("Missions invalides.");
+  if (s.placements !== undefined && !isPlacements(s.placements))
+    throw new Error("Tests de niveau invalides.");
   if (s.reviewEvents !== undefined) {
     if (!Array.isArray(s.reviewEvents) || !s.reviewEvents.every(isReviewEvent))
       throw new Error("Historique de révision invalide.");
@@ -218,6 +220,29 @@ const isShortText = (value: unknown, max: number) =>
   typeof value === "string" && value.length <= max;
 
 /** Les missions réelles : brouillons et étapes validées, bornés. */
+function isPlacements(value: unknown): boolean {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return false;
+  const ids = (list: unknown) =>
+    Array.isArray(list) &&
+    list.length <= 60 &&
+    list.every((id) => typeof id === "string" && id.length <= 60);
+  const entries = Object.entries(value as Record<string, unknown>);
+  return (
+    entries.length <= 40 &&
+    entries.every(([domain, record]) => {
+      if (domain.length > 40 || !record || typeof record !== "object")
+        return false;
+      const r = record as Record<string, unknown>;
+      return (
+        typeof r.at === "string" &&
+        Number.isFinite(Date.parse(r.at)) &&
+        ids(r.known) &&
+        ids(r.missed)
+      );
+    })
+  );
+}
+
 function isMissions(value: unknown): boolean {
   if (!value || typeof value !== "object" || Array.isArray(value)) return false;
   const entries = Object.entries(value as Record<string, unknown>);

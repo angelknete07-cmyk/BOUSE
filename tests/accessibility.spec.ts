@@ -106,6 +106,7 @@ test("les écrans principaux conservent leurs noms accessibles et leurs contrast
     "skill/ent-idee",
     "missions",
     "mission/budget-annee",
+    "placement/fp",
   ]) {
     await page.goto(`/#${route}`);
     await expect(page.locator("main h1")).toBeVisible();

@@ -115,6 +115,7 @@ async function capture(page: Page, testInfo: TestInfo, name: string) {
       "17-lexique",
       "18-investissement-lecon",
       "19-finance-perso-budget",
+      "20-niveau-resultat",
     ].includes(name)
   )
     await page.screenshot({
@@ -494,6 +495,21 @@ test("galerie des écrans et du quiz validé sans débordement", async ({
   ).toContainText("Ton prix de l’heure");
   await page.waitForTimeout(1000);
   await capture(page, testInfo, "12-mission");
+
+  // Le test de niveau (idée 16) : une question, puis le point de départ.
+  await page.goto("/#placement/fp");
+  await expect(page.locator("#pl-question")).toBeVisible();
+  await page.waitForTimeout(400);
+  await capture(page, testInfo, "20-niveau-question");
+  for (const pick of [0, 1, 1, 1, 0, -1, 2]) {
+    const options = page.locator(".pl-opt");
+    await (pick < 0 ? options.last() : options.nth(pick)).click();
+  }
+  await expect(
+    page.getByRole("heading", { level: 1, name: "Savoir faire" }),
+  ).toBeVisible();
+  await page.waitForTimeout(500);
+  await capture(page, testInfo, "20-niveau-resultat");
 
   // Use the application's validated import flow. The gallery init script would
   // replace direct localStorage mutations after a document reload.

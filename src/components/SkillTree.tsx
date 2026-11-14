@@ -29,10 +29,12 @@ function makeModel(
   items: TreeNode[],
   laneNames: Record<string, string>,
   practiced: ReadonlySet<string>,
+  known: ReadonlySet<string>,
 ) {
   return {
     items,
     practiced,
+    known,
     tree: skillTreeLayout(items),
     byId: new Map(items.map((item) => [item.id, item])),
     laneName: (domain: string) => laneNames[domain] ?? domain,
@@ -75,6 +77,8 @@ type Props = {
   onNavigate: (route: string) => void;
   /** Les compétences déjà utilisées dans une mission réelle. */
   practiced?: ReadonlySet<string>;
+  /** Les compétences déjà sues d'après un test de niveau (pas validées). */
+  known?: ReadonlySet<string>;
 };
 const NONE: ReadonlySet<string> = new Set();
 
@@ -109,7 +113,7 @@ function TreeCanvas({
   onPick?: (id: string) => void;
   canvasRef?: React.Ref<HTMLDivElement>;
 }) {
-  const { items, tree, W, H, laneName } = useModel();
+  const { items, tree, W, H, laneName, known } = useModel();
   const path = selected ? treePath(items, selected) : null;
   return (
     <div
@@ -201,11 +205,14 @@ function TreeCanvas({
             className="tr-node"
             data-id={lesson.id}
             data-s={status}
+            data-known={
+              known.has(lesson.id) && status !== "done" ? "" : undefined
+            }
             data-next={next ? "" : undefined}
             data-path={path?.has(lesson.id) ? "" : undefined}
             tabIndex={interactive ? undefined : -1}
             aria-pressed={interactive ? selected === lesson.id : undefined}
-            aria-label={`${label} · ${STATUS_TEXT[status]}${next ? " · à faire maintenant" : ""}`}
+            aria-label={`${label} · ${STATUS_TEXT[status]}${known.has(lesson.id) && status !== "done" ? " · déjà sue (test de niveau)" : ""}${next ? " · à faire maintenant" : ""}`}
             title={lesson.title}
             style={{ left: point.x, top: point.y }}
             onClick={onPick ? () => onPick(lesson.id) : undefined}
@@ -238,11 +245,12 @@ export function SkillTree({
   items,
   laneNames,
   practiced = NONE,
+  known = NONE,
   ...rest
 }: Props) {
   const model = useMemo(
-    () => makeModel(items, laneNames, practiced),
-    [items, laneNames, practiced],
+    () => makeModel(items, laneNames, practiced, known),
+    [items, laneNames, practiced, known],
   );
   return (
     <ModelContext.Provider value={model}>
@@ -256,9 +264,9 @@ function InlineTree({
   nextId,
   onSelect,
   onNavigate,
-}: Omit<Props, "items" | "laneNames">) {
+}: Omit<Props, "items" | "laneNames" | "practiced" | "known">) {
   const model = useModel();
-  const { tree, W, items, laneName } = model;
+  const { tree, W, items, laneName, known, byId } = model;
   const frameRef = useRef<HTMLDivElement>(null);
   const ctaRef = useRef<HTMLButtonElement>(null);
   const [scale, setScale] = useState(0.6);
@@ -313,6 +321,11 @@ function InlineTree({
           <li>
             <i data-s="soon" /> Bientôt
           </li>
+          {[...known].some((id) => byId.has(id) && statuses[id] !== "done") && (
+            <li>
+              <i data-known="" /> Déjà sue (test de niveau)
+            </li>
+          )}
         </ul>
       </div>
       <ul className="tr-branches" aria-label="Les branches de l’arbre">
@@ -419,7 +432,7 @@ function FullTree({
   onNavigate: (route: string) => void;
   onClosed: () => void;
 }) {
-  const { items, tree, byId, W, H, laneName, practiced } = useModel();
+  const { items, tree, byId, W, H, laneName, practiced, known } = useModel();
   const rootRef = useRef<HTMLDivElement>(null);
   const viewRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLDivElement>(null);
@@ -889,6 +902,12 @@ function FullTree({
               <i aria-hidden="true" />
               {STATE_TEXT[status]}
             </p>
+            {known.has(lesson.id) && status !== "done" && (
+              <p className="tr-sum">
+                Déjà sue d’après ton test de niveau : sautée dans ta suite. Fais
+                son contrôle pour la valider.
+              </p>
+            )}
             {practiced.has(lesson.id) && (
               <p className="tr-sum">
                 Mise en pratique dans une mission réelle.
