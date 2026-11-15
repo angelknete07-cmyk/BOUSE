@@ -135,7 +135,7 @@ export function LessonMedia({ lesson, mode, onMode, onExercise }: Props) {
     if ("mediaSession" in navigator && typeof MediaMetadata !== "undefined") {
       navigator.mediaSession.metadata = new MediaMetadata({
         title: lesson.title,
-        artist: "BOUSE",
+        artist: "BOOST",
         album: lesson.domain,
       });
     }
@@ -263,7 +263,7 @@ export function LessonMedia({ lesson, mode, onMode, onExercise }: Props) {
             </div>
           )}
           <div className="lm-brand" aria-hidden="true">
-            BOUSE · {podcast ? "Podcast" : "Leçon en vidéo"}
+            BOOST · {podcast ? "Podcast" : "Leçon en vidéo"}
           </div>
           <div
             className="lm-scene"

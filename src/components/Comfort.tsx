@@ -225,14 +225,14 @@ const flip = (from: DOMRect, to: DOMRect, keepRatio = true) => {
   return `translate(${to.left - from.left}px, ${to.top - from.top}px) scale(${sx}, ${sy})`;
 };
 
-const WORD = "BOUSE";
+const WORD = "BOOST";
 const EASE_OUT = "cubic-bezier(0.22, 1, 0.36, 1)";
 const EASE_IN_OUT = "cubic-bezier(0.65, 0, 0.35, 1)";
 
 /**
  * Ouverture animée (≈ 3 s). Sur fond noir, une lumière balaie la vague et
  * l'allume de violet puis de cyan ; le B se dessine ruban par ruban ;
- * « BOUSE » apparaît lettre à lettre. Puis le B et le nom s'envolent se poser
+ * « BOOST » apparaît lettre à lettre. Puis le B et le nom s'envolent se poser
  * à leur vraie place dans la barre de gauche, la vague glisse jusqu'au décor
  * de la page, et l'appli sort du noir. Une fois par visite ; un clic ou une
  * touche la passe ; rien si l'on a demandé moins d'animations.
@@ -325,7 +325,7 @@ export function SplashIntro() {
       { duration: 1500, delay: 250, easing: EASE_OUT },
     );
 
-    // 3. « BOUSE » lettre à lettre, qui sort du flou.
+    // 3. « BOOST » lettre à lettre, qui sort du flou.
     letters.forEach((letter, index) =>
       run(
         letter,

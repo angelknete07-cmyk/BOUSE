@@ -257,7 +257,7 @@ export function Dashboard({ state, onNavigate }: Props) {
               <Terrain />
             </div>
             <span className="learning-coordinate console-coordinate">
-              BOUSE / {current.domain.toUpperCase()}
+              BOOST / {current.domain.toUpperCase()}
             </span>
             <div className="console-hero-content">
               <span className="console-badge">

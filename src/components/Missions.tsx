@@ -482,7 +482,7 @@ function MissionFinal({
           <p className="cat-note">
             « Le faire relire » copie ton dossier avec une consigne de relecture
             et ouvre claude.ai : tu colles et tu envoies avec ton abonnement.
-            BOUSE n’envoie rien lui-même.
+            BOOST n’envoie rien lui-même.
           </p>
           {copied === "copied" && (
             <p className="cat-note" role="status">

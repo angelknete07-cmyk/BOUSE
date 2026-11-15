@@ -117,7 +117,7 @@ export function SkillPractice({
         (field, i) => `${field.label} : ${values[i]?.trim() || "…"}`,
       ),
       "",
-      "Fait avec BOUSE — Académie business & IA.",
+      "Fait avec BOOST — Académie business & IA.",
     ];
     downloadFile(`${skill.id}.txt`, lines.join("\n"), "text/plain");
   }

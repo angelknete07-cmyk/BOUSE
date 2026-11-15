@@ -112,7 +112,7 @@ export function Onboarding({
       <div className="onboarding-brand">
         <BrandLogo size={40} />
         <span>
-          BOUSE <small>ACADÉMIE BUSINESS & IA</small>
+          BOOST <small>ACADÉMIE BUSINESS & IA</small>
         </span>
       </div>
       <div className="onboarding-layout">

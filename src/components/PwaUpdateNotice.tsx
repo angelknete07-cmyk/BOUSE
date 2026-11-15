@@ -45,7 +45,7 @@ export function PwaUpdateNotice() {
   }
   return waiting ? (
     <p className="storage-banner" role="status">
-      Une nouvelle version de BOUSE est prête. Tes sauvegardes sont conservées.{" "}
+      Une nouvelle version de BOOST est prête. Tes sauvegardes sont conservées.{" "}
       <button
         type="button"
         className="text-button"

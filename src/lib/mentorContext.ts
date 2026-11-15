@@ -41,7 +41,7 @@ export function claudeHandoffPrompt(lesson: Lesson, question: string): string {
     .map((item) => `### ${item.title}\n${item.excerpt}`)
     .join("\n\n");
   return [
-    "Tu es mon mentor pour un cours de l’académie BOUSE (business, finance, IA).",
+    "Tu es mon mentor pour un cours de l’académie BOOST (business, finance, IA).",
     "Explique en français, simplement, en partant de l’intuition puis du vocabulaire. Appuie-toi d’abord sur les extraits de la leçon ci-dessous et cite-les. N’invente aucun chiffre ni règle fiscale. Pour l’investissement : pédagogie uniquement, aucun conseil ni recommandation de titre.",
     `## Leçon : ${lesson.title}`,
     excerpts,

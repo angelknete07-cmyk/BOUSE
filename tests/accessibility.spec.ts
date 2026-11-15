@@ -158,7 +158,7 @@ test("la recherche se parcourt au clavier et restitue le focus après fermeture 
   await expect(page).toHaveURL(new RegExp(`#lesson/${lesson.id}$`));
   await expect(main).toBeFocused();
   await expect(search).toHaveCount(0);
-  await expect(page).toHaveTitle(`${lesson.title} — BOUSE`);
+  await expect(page).toHaveTitle(`${lesson.title} — BOOST`);
   await page.goBack();
   await expect(page).toHaveURL(/#home$/);
   await expect(main).toBeFocused();

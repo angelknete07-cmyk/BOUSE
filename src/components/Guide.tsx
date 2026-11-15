@@ -82,7 +82,7 @@ const tours: Record<string, Step[]> = {
     {
       targets: [".console-hero"],
       title: "Commence ici",
-      text: "BOUSE te propose toujours ta prochaine leçon. Un seul geste : le bouton blanc.",
+      text: "BOOST te propose toujours ta prochaine leçon. Un seul geste : le bouton blanc.",
     },
     {
       demo: true,
@@ -95,19 +95,19 @@ const tours: Record<string, Step[]> = {
         '.mobile-bottom-nav a[href="#reviews"]',
       ],
       title: "Pour ne rien oublier",
-      text: "Après une leçon, BOUSE te repose quelques questions, au bon moment. Ça se passe ici.",
+      text: "Après une leçon, BOOST te repose quelques questions, au bon moment. Ça se passe ici.",
     },
     {
       targets: [".search-trigger", ".topbar-search"],
       title: "Tu cherches quelque chose ?",
-      text: "Tape un mot : une leçon, une définition, un outil. BOUSE te l’ouvre.",
+      text: "Tape un mot : une leçon, une définition, un outil. BOOST te l’ouvre.",
     },
   ],
   academy: [
     {
       targets: [".academy-start-card"],
       title: "Ta prochaine leçon",
-      text: "BOUSE a choisi pour toi la leçon à faire maintenant. Le bouton blanc l’ouvre.",
+      text: "BOOST a choisi pour toi la leçon à faire maintenant. Le bouton blanc l’ouvre.",
     },
     {
       targets: [".academy-path"],
@@ -117,7 +117,7 @@ const tours: Record<string, Step[]> = {
     {
       targets: [".academy-goals"],
       title: "Tu as un but précis ?",
-      text: "Choisis un objectif : BOUSE te prépare la suite de leçons qui y mène.",
+      text: "Choisis un objectif : BOOST te prépare la suite de leçons qui y mène.",
     },
     {
       targets: [".atlas-toolbar"],
@@ -133,7 +133,7 @@ const tours: Record<string, Step[]> = {
     },
     {
       title: "Dis si c’était facile",
-      text: "Après chaque réponse, tu dis si tu t’en souvenais. BOUSE te reposera la question plus tôt ou plus tard, selon ce que tu as dit.",
+      text: "Après chaque réponse, tu dis si tu t’en souvenais. BOOST te reposera la question plus tôt ou plus tard, selon ce que tu as dit.",
     },
     {
       targets: [".review-method"],
@@ -145,7 +145,7 @@ const tours: Record<string, Step[]> = {
     {
       targets: [".skills-summary"],
       title: "Où tu en es",
-      text: "Acquis : ce que tu sais. En cours : ce que tu apprends. Ensuite : ce que BOUSE te conseille.",
+      text: "Acquis : ce que tu sais. En cours : ce que tu apprends. Ensuite : ce que BOOST te conseille.",
     },
     {
       targets: [".knowledge-atlas"],
@@ -211,9 +211,9 @@ const tours: Record<string, Step[]> = {
     {
       targets: [".prompt-observatory", ".prompt-mobile-views"],
       title: "Ce qu’il manque",
-      text: "BOUSE te montre ce qui manque à ta demande pour obtenir une bonne réponse d’une IA.",
+      text: "BOOST te montre ce qui manque à ta demande pour obtenir une bonne réponse d’une IA.",
       phoneText:
-        "Touche « Structure » : BOUSE te montre ce qui manque à ta demande pour obtenir une bonne réponse d’une IA.",
+        "Touche « Structure » : BOOST te montre ce qui manque à ta demande pour obtenir une bonne réponse d’une IA.",
     },
   ],
   incubator: [
@@ -225,7 +225,7 @@ const tours: Record<string, Step[]> = {
     {
       targets: [".project-empty-steps", ".page-view .stack .panel"],
       title: "Étape par étape",
-      text: "BOUSE te guide : une hypothèse, un test sur le terrain, puis ce que tu as observé.",
+      text: "BOOST te guide : une hypothèse, un test sur le terrain, puis ce que tu as observé.",
     },
     {
       title: "Relie tes leçons",
@@ -236,7 +236,7 @@ const tours: Record<string, Step[]> = {
     {
       targets: [".page-view .notice"],
       title: "Avant de décider",
-      text: "BOUSE t’apprend les bases. Pour une vraie décision, vérifie toujours à la source.",
+      text: "BOOST t’apprend les bases. Pour une vraie décision, vérifie toujours à la source.",
     },
     {
       targets: [".catalog-card"],
@@ -863,7 +863,7 @@ export function FirstSteps({
         ) : (
           <>
             <span>Bravo</span>
-            Tu connais les bases de BOUSE. La suite, c’est toi qui choisis.
+            Tu connais les bases de BOOST. La suite, c’est toi qui choisis.
           </>
         )}
       </p>

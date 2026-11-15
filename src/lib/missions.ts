@@ -146,7 +146,7 @@ export function missionDocument(mission: Mission, record?: MissionRecord) {
   const out = [
     `# ${mission.title}`,
     "",
-    `Dossier fait avec BOUSE — Académie business & IA.`,
+    `Dossier fait avec BOOST — Académie business & IA.`,
   ];
   mission.steps.forEach((step, i) => {
     out.push("", `## ${i + 1}. ${step.title}`);
@@ -177,7 +177,7 @@ export function missionDocument(mission: Mission, record?: MissionRecord) {
 /** Le texte à coller dans Claude pour faire relire le dossier. */
 export function reviewPrompt(mission: Mission, record?: MissionRecord) {
   return [
-    "Tu es mon mentor de l’académie BOUSE (business, finance, IA).",
+    "Tu es mon mentor de l’académie BOOST (business, finance, IA).",
     "Relis mon dossier ci-dessous, en français et simplement : ce qui est clair, ce qui manque, trois améliorations concrètes. N’invente aucun chiffre ni règle fiscale ; dis-moi quoi vérifier et où (service-public.fr, urssaf.fr, impots.gouv.fr). Pour l’investissement : pédagogie uniquement, aucun conseil ni recommandation de produit.",
     missionDocument(mission, record),
   ].join("\n\n");

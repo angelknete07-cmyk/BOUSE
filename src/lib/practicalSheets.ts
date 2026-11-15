@@ -11,7 +11,7 @@ export interface PracticalSheet {
 
 const checklist = `# Créer son entreprise : liste de contrôle
 
-Fiche BOUSE · repères vérifiés en novembre 2026, à revérifier sur entreprendre.service-public.gouv.fr.
+Fiche BOOST · repères vérifiés en novembre 2026, à revérifier sur entreprendre.service-public.gouv.fr.
 
 ## Avant l'immatriculation
 - [ ] Problème vérifié auprès d'au moins cinq clients potentiels

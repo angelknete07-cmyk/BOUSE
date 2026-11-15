@@ -96,7 +96,7 @@ export function StyleLab() {
         <p className="eyebrow">Interne · développement seulement</p>
         <h1>Labo de style V4</h1>
         <p>
-          Les vrais composants de BOUSE avec les jetons actuels. Rien ici n’est
+          Les vrais composants de BOOST avec les jetons actuels. Rien ici n’est
           visible dans le site publié.
         </p>
       </header>

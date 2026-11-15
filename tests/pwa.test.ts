@@ -13,8 +13,8 @@ const manifest = JSON.parse(
   icons: { src: string; sizes: string; purpose: string }[];
 };
 
-test("the manifest makes BOUSE installable in French with existing icons", () => {
-  assert.equal(manifest.short_name, "BOUSE");
+test("the manifest makes BOOST installable in French with existing icons", () => {
+  assert.equal(manifest.short_name, "BOOST");
   assert.equal(manifest.lang, "fr");
   assert.equal(manifest.display, "standalone");
   assert.ok(manifest.start_url.startsWith("/"));

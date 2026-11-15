@@ -387,7 +387,7 @@ function App({
                       ? state.projects.find((item) => item.id === projectId)
                           ?.title
                       : navigation.find((item) => item.id === route)?.label;
-    document.title = `${routeTitle || (route === "portfolio" ? "Portfolio" : route === "settings" ? "Profil et paramètres" : "Mon espace")} — BOUSE`;
+    document.title = `${routeTitle || (route === "portfolio" ? "Portfolio" : route === "settings" ? "Profil et paramètres" : "Mon espace")} — BOOST`;
     return () => cancelAnimationFrame(frame);
   }, [route, !!state.profile]);
   const done = passedIds(state);
@@ -530,7 +530,7 @@ function App({
         <a className="brand" href="#home" onClick={() => setMobileOpen(false)}>
           <BrandLogo />
           <span>
-            BOUSE<small>Apprendre · Comprendre · Agir</small>
+            BOOST<small>Apprendre · Comprendre · Agir</small>
           </span>
         </a>
         <button
@@ -698,7 +698,7 @@ function App({
             </div>
           )}
           <div className="page-view" key={route}>
-            {/* V4 : la vague de BOUSE, en lumière discrète, en tête des pages
+            {/* V4 : la vague de BOOST, en lumière discrète, en tête des pages
                 d'outils. Ni sur l'accueil ni dans l'Académie (qui l'ont déjà),
                 ni dans les leçons (lecture). */}
             {!lesson && route !== "home" && route !== "academy" && (
@@ -884,7 +884,7 @@ function App({
           </div>
         </main>
         <footer className="page-footer">
-          <span>BOUSE / Apprendre pour agir.</span>
+          <span>BOOST / Apprendre pour agir.</span>
           <span>Version fondations · 0.1</span>
         </footer>
       </div>

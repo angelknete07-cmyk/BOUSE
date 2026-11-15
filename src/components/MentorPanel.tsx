@@ -125,7 +125,7 @@ function IntegratedMentor({
     <div className="mentor-panel">
       <p className="learning-footnote">
         Votre question et le texte de cette leçon sont envoyés au fournisseur
-        d’IA (Anthropic) par le serveur de BOUSE. N’y mettez pas de données
+        d’IA (Anthropic) par le serveur de BOOST. N’y mettez pas de données
         personnelles. Les échanges ne sont pas conservés.
       </p>
       {exchanges.map((item, index) => (
@@ -227,7 +227,7 @@ function AskMyClaude({ lesson }: { lesson: Lesson }) {
       </button>
       <p className="learning-footnote">
         Copie votre question avec le texte de la leçon, puis ouvre claude.ai :
-        collez et envoyez avec votre propre abonnement. BOUSE n’envoie rien
+        collez et envoyez avec votre propre abonnement. BOOST n’envoie rien
         lui-même.
       </p>
       {copied === "copied" && (

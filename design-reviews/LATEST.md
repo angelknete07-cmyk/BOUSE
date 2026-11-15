@@ -1,3 +1,14 @@
+# Review — Nouveau nom : BOOST
+
+**15 novembre 2026.** **La direction artistique n’est pas déclarée validée.** À la demande de l’utilisateur (« sinon ça fait Booze »), le nom affiché passe de « BOUSE » à **« BOOST »** (choisi dans le widget parmi BOUSSE, BOOSSE, BOOST). Paire principale : l’ouverture animée (`23-ouverture-viewport`), archive `2026-11-15_17-46-27-Europe-Paris-previous`.
+
+- **Changé (42 endroits)** : ouverture animée, barre, en-tête de l’accueil (« BOOST / FINANCE »), titre de l’onglet, nom de l’appli installée (manifeste, écran d’accueil iPhone), guide, dossiers et fiches téléchargés, consignes copiées pour le mentor, avis de mise à jour, lecteur vidéo et écran verrouillé.
+- **Pas changé, exprès** : l’adresse `bouse.vercel.app`, le dépôt GitHub, les clés de sauvegarde (`bouse.…`, sinon les données seraient perdues), les variables `BOUSE_…` des scripts, les commentaires du code, le logo B (`BrandLogo.tsx`, intouchable) ; les consignes internes du mentor côté serveur Supabase disent encore « BOUSE » (il faudrait redéployer la fonction).
+- **Contrôles de l’agent** : `npm test` 300 ; `npx playwright test` complet : 152 passés, 8 ignorés prévus ; `tsc`.
+- **Limites** : pas de nouvelle adresse ni de nouveau logo ; pas de validation externe.
+
+---
+
 # Review design — La leçon en vidéo et en podcast
 
 **15 novembre 2026.** **La direction artistique n’est pas déclarée validée.** Maquette `maquette/video.html` (avec la vraie voix) montrée à l’utilisateur, puis « Oui, fais-les » : construit tel que la maquette pour les 43 leçons. Paire principale : `21-lecon-video-viewport`, archive `2026-11-15_17-31-59-Europe-Paris`.
