@@ -80,6 +80,10 @@ test("du domaine au résultat : les compétences sues sont sautées, pas validé
     page.getByRole("button", { name: "Valider Faire son budget" }),
   ).toBeVisible();
 
+  // L'enregistrement suit l'affichage de très près : on l'attend.
+  await expect
+    .poll(async () => (await saved(page)).placements?.fp)
+    .toBeTruthy();
   const placements = (await saved(page)).placements;
   expect(placements.fp.known).toEqual([
     "fp-budget",

@@ -105,6 +105,8 @@ export interface AppState {
   missions?: Record<string, MissionRecord>;
   /** Tests de niveau, par domaine (le dernier fait). */
   placements?: Record<string, PlacementRecord>;
+  /** Façon d'apprendre choisie dans les leçons (lire, regarder, écouter). */
+  learningMode?: "lire" | "regarder" | "ecouter";
 }
 export interface PlacementRecord {
   at: string;

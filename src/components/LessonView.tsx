@@ -6,6 +6,7 @@ import type { AppState, Attempt, StateUpdater } from "../lib/types";
 import { Icon } from "./Icon";
 import { GlossaryText } from "./GlossaryText";
 import { LessonScene } from "./LessonScene";
+import { LessonMedia } from "./LessonMedia";
 import {
   PracticalSheetButton,
   PracticeDrill,
@@ -366,6 +367,18 @@ export function LessonView({
         >
           {tab === 0 && (
             <>
+              <LessonMedia
+                lesson={lesson}
+                mode={state.learningMode ?? "regarder"}
+                onMode={(mode) =>
+                  update((previous) =>
+                    previous.learningMode === mode
+                      ? previous
+                      : { ...previous, learningMode: mode },
+                  )
+                }
+                onExercise={() => advanceTo(1)}
+              />
               <div className="learning-sequence-top">
                 <span className="eyebrow">
                   SÉQUENCE {String(sequence + 1).padStart(2, "0")}{" "}

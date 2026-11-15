@@ -1,0 +1,638 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Maquette — Leçon en vidéo BOUSE</title>
+    <!--
+      MAQUETTE, pas le produit (idées 1, 37, 38 : la leçon en vidéo, avec
+      une voix ; mode podcast). La voix est une vraie voix du Mac (provisoire,
+      à remplacer par la voix choisie). L'image est animée en direct à partir
+      du texte de la leçon et suit la voix phrase par phrase : pas de gros
+      fichier vidéo. Ouvrir : http://localhost:5173/maquette/video.html
+    -->
+    <link rel="stylesheet" href="/src/tokens.css" />
+    <style>
+      :root {
+        color-scheme: dark;
+        --ease: cubic-bezier(0.22, 1, 0.36, 1);
+        --spring: cubic-bezier(0.34, 1.32, 0.64, 1);
+        --v: var(--accent-violet-rgb);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text-secondary);
+        font: 15px/1.5 var(--font-sans);
+      }
+      main {
+        max-width: 1080px;
+        margin: 0 auto;
+        padding: 28px 16px 80px;
+      }
+      .ctx {
+        margin: 0 0 18px;
+        padding: 10px 14px;
+        border: 1px dashed var(--line-strong);
+        border-radius: var(--radius-sm);
+        color: var(--text-tertiary);
+        font-size: 13px;
+      }
+      .eyebrow {
+        margin: 0;
+        color: var(--text-tertiary);
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      h1 {
+        margin: 4px 0 6px;
+        color: var(--text);
+        font-size: 28px;
+        font-weight: 560;
+        letter-spacing: -0.01em;
+      }
+      /* Le choix de la façon d'apprendre (idée 36). */
+      .modes {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 14px 0 18px;
+      }
+      .modes button {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        min-height: 44px;
+        padding: 0 16px;
+        border: 1px solid var(--line-strong);
+        border-radius: 999px;
+        background: var(--surface);
+        color: var(--text-secondary);
+        font: 500 14px/1 var(--font-sans);
+        cursor: pointer;
+        transition:
+          color 160ms var(--ease),
+          border-color 160ms var(--ease),
+          transform 140ms var(--ease);
+      }
+      .modes button:active {
+        transform: scale(0.97);
+      }
+      .modes button[aria-pressed="true"] {
+        border-color: rgb(var(--v) / 0.6);
+        color: var(--text);
+      }
+      .modes small {
+        color: var(--text-tertiary);
+        font-size: 12px;
+      }
+
+      /* La scène 16:9. */
+      .player {
+        overflow: hidden;
+        border: 1px solid var(--line-strong);
+        border-radius: 18px;
+        background: #060607;
+        box-shadow: 0 30px 60px -30px rgb(0 0 0 / 0.95);
+      }
+      .stage {
+        position: relative;
+        aspect-ratio: 16 / 9;
+        overflow: hidden;
+        background:
+          radial-gradient(70% 60% at 78% 18%, rgb(var(--v) / 0.1), transparent 60%),
+          radial-gradient(60% 50% at 10% 100%, rgb(255 255 255 / 0.04), transparent 60%),
+          #08080a;
+        cursor: pointer;
+      }
+      .waves {
+        position: absolute;
+        inset: auto -5% -8% 30%;
+        height: 70%;
+        opacity: 0.35;
+        pointer-events: none;
+        transition: transform 1.2s var(--ease);
+      }
+      .chapters {
+        position: absolute;
+        top: 4%;
+        left: 5%;
+        right: 5%;
+        display: grid;
+        grid-auto-columns: 1fr;
+        grid-auto-flow: column;
+        gap: 6px;
+      }
+      .chapters i {
+        position: relative;
+        height: 3px;
+        overflow: hidden;
+        border-radius: 2px;
+        background: rgb(255 255 255 / 0.12);
+      }
+      .chapters i b {
+        position: absolute;
+        inset: 0;
+        background: #e9e9ee;
+        transform: scaleX(var(--p, 0));
+        transform-origin: left;
+      }
+      .brand {
+        position: absolute;
+        top: 8%;
+        left: 5%;
+        color: var(--text-tertiary);
+        font-size: clamp(9px, 1.25vw, 13px);
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+      .scene {
+        position: absolute;
+        inset: 16% 7% 18% 7%;
+        display: grid;
+        align-content: center;
+        gap: 2.4%;
+      }
+      .kicker {
+        color: rgb(var(--v) / 0.95);
+        font-size: clamp(10px, 1.4vw, 15px);
+        font-weight: 500;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+      .big {
+        margin: 0;
+        color: #f4f4f6;
+        font-size: clamp(22px, 4.4vw, 50px);
+        font-weight: 560;
+        line-height: 1.08;
+        letter-spacing: -0.02em;
+        text-wrap: balance;
+      }
+      .prev {
+        margin: 0;
+        color: rgb(255 255 255 / 0.32);
+        font-size: clamp(12px, 1.7vw, 19px);
+        line-height: 1.4;
+      }
+      .line {
+        margin: 0;
+        max-width: 30ch;
+        color: rgb(255 255 255 / 0.4);
+        font-size: clamp(16px, 2.9vw, 33px);
+        font-weight: 500;
+        line-height: 1.25;
+        letter-spacing: -0.012em;
+        text-wrap: pretty;
+      }
+      .line .w {
+        transition: color 220ms var(--ease);
+      }
+      .line .w.on {
+        color: #f4f4f6;
+      }
+      /* Une formule devient une carte. */
+      .formula {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.5em 0.7em;
+        padding: 0.8em 1em;
+        border: 1px solid rgb(255 255 255 / 0.14);
+        border-radius: 0.7em;
+        background: rgb(255 255 255 / 0.04);
+        color: #f4f4f6;
+        font-size: clamp(13px, 2.1vw, 24px);
+        font-weight: 500;
+        width: fit-content;
+      }
+      .formula .eq {
+        color: rgb(var(--v) / 1);
+        font-size: 1.2em;
+      }
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6em;
+        font-size: clamp(11px, 1.7vw, 19px);
+      }
+      .chips span {
+        padding: 0.35em 0.8em;
+        border: 1px solid rgb(255 255 255 / 0.16);
+        border-radius: 999px;
+        color: #f4f4f6;
+        font-variant-numeric: tabular-nums;
+      }
+      .enter {
+        animation: enter 620ms var(--ease) both;
+      }
+      .enter-2 {
+        animation: enter 620ms var(--ease) 90ms both;
+      }
+      .pop {
+        animation: pop 520ms var(--spring) both;
+      }
+      @keyframes enter {
+        from {
+          opacity: 0;
+          transform: translateY(14px);
+          filter: blur(6px);
+        }
+      }
+      @keyframes pop {
+        from {
+          opacity: 0;
+          transform: scale(0.86);
+        }
+      }
+      .caption {
+        position: absolute;
+        left: 50%;
+        bottom: 5%;
+        max-width: 86%;
+        padding: 0.35em 0.8em;
+        border-radius: 8px;
+        background: rgb(0 0 0 / 0.6);
+        color: #ececf0;
+        font-size: clamp(10px, 1.45vw, 16px);
+        text-align: center;
+        transform: translateX(-50%);
+      }
+      .bigplay {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        background: rgb(0 0 0 / 0.35);
+        transition: opacity 260ms var(--ease);
+      }
+      .bigplay span {
+        display: grid;
+        place-items: center;
+        width: 76px;
+        height: 76px;
+        border-radius: 50%;
+        background: linear-gradient(180deg, #f4f4f6, #c4c4cb);
+        color: #111;
+        font-size: 26px;
+        box-shadow: 0 16px 40px -14px rgb(0 0 0 / 0.95);
+      }
+      .playing .bigplay {
+        opacity: 0;
+        pointer-events: none;
+      }
+      /* La question qui s'ouvre dans la vidéo (idée 38). */
+      .ask {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        padding: 4%;
+        background: rgb(4 4 6 / 0.82);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        animation: enter 420ms var(--ease) both;
+      }
+      .ask-card {
+        display: grid;
+        gap: 10px;
+        width: min(560px, 100%);
+        padding: 20px 22px;
+        border: 1px solid var(--line-strong);
+        border-radius: 16px;
+        background: linear-gradient(180deg, var(--raised), var(--surface));
+      }
+      .ask-card p {
+        margin: 0;
+      }
+      .ask-q {
+        color: var(--text);
+        font-size: 17px;
+        line-height: 1.35;
+      }
+      .ask-card button.opt {
+        min-height: 46px;
+        padding: 8px 14px;
+        border: 1px solid var(--line-strong);
+        border-radius: 12px;
+        background: var(--surface);
+        color: var(--text);
+        font: 14.5px/1.35 var(--font-sans);
+        text-align: left;
+        cursor: pointer;
+      }
+      .ask-card button.opt[data-r="ok"] {
+        border-color: rgb(127 166 156 / 0.8);
+      }
+      .ask-card button.opt[data-r="ko"] {
+        border-style: dashed;
+        color: var(--text-secondary);
+      }
+      .why {
+        padding: 8px 12px;
+        border-left: 2px solid rgb(var(--v) / 0.7);
+        background: var(--surface-low);
+        font-size: 14px;
+      }
+      /* Commandes. */
+      .bar {
+        display: grid;
+        grid-template-columns: auto auto 1fr auto auto auto;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 14px;
+        border-top: 1px solid var(--line);
+      }
+      .ctl {
+        display: grid;
+        place-items: center;
+        min-width: 44px;
+        height: 44px;
+        padding: 0 10px;
+        border: 1px solid var(--line-strong);
+        border-radius: 999px;
+        background: var(--surface);
+        color: var(--text);
+        font: 500 13px/1 var(--font-sans);
+        cursor: pointer;
+        transition: transform 140ms var(--ease);
+      }
+      .ctl:active {
+        transform: scale(0.95);
+      }
+      .ctl.main {
+        border-color: transparent;
+        background: linear-gradient(180deg, #f4f4f6, #c9c9cf);
+        color: #111;
+      }
+      .seek {
+        position: relative;
+        height: 28px;
+        cursor: pointer;
+      }
+      .seek::before {
+        content: "";
+        position: absolute;
+        top: 12px;
+        left: 0;
+        right: 0;
+        height: 4px;
+        border-radius: 2px;
+        background: rgb(255 255 255 / 0.12);
+      }
+      .seek b {
+        position: absolute;
+        top: 12px;
+        left: 0;
+        height: 4px;
+        border-radius: 2px;
+        background: #e9e9ee;
+        width: var(--t, 0%);
+      }
+      .time {
+        color: var(--text-tertiary);
+        font-size: 12.5px;
+        font-variant-numeric: tabular-nums;
+      }
+      /* Podcast : écran simple, on peut éteindre l'écran. */
+      .podcast .stage {
+        aspect-ratio: auto;
+        min-height: 220px;
+      }
+      .podcast .scene .line,
+      .podcast .scene .formula,
+      .podcast .scene .chips,
+      .podcast .waves {
+        display: none;
+      }
+      .notes {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        margin-top: 22px;
+      }
+      .notes div {
+        padding: 14px 16px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--surface-low);
+        font-size: 13.5px;
+      }
+      .notes b {
+        display: block;
+        margin-bottom: 2px;
+        color: var(--text);
+        font-weight: 520;
+      }
+      @media (max-width: 700px) {
+        .bar {
+          grid-template-columns: auto 1fr auto auto;
+        }
+        .bar .hide-s {
+          display: none;
+        }
+        .notes {
+          grid-template-columns: 1fr;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation: none !important;
+          transition-duration: 1ms !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p class="ctx">
+        Maquette · la leçon « Chiffre d’affaires, marge et trésorerie » en
+        vidéo, avec une vraie voix gratuite du Mac (provisoire, tu choisiras
+        la belle voix plus tard). L’image est animée à partir du texte de la
+        leçon et suit la voix. Appuie sur lecture.
+      </p>
+      <p class="eyebrow">Leçon · Finance d’entreprise</p>
+      <h1>Chiffre d’affaires, marge et trésorerie</h1>
+      <div class="modes" role="group" aria-label="Ta façon d’apprendre">
+        <button aria-pressed="false" data-m="lire">Lire <small>comme aujourd’hui</small></button>
+        <button aria-pressed="true" data-m="video">Regarder <small>3 min 32</small></button>
+        <button aria-pressed="false" data-m="podcast">Écouter <small>podcast</small></button>
+      </div>
+
+      <div class="player" id="player">
+        <div class="stage" id="stage" aria-label="Vidéo de la leçon">
+          <svg class="waves" viewBox="0 0 600 300" preserveAspectRatio="none" aria-hidden="true" id="waves"></svg>
+          <div class="chapters" id="chapters"></div>
+          <div class="brand">BOUSE · Leçon en vidéo</div>
+          <div class="scene" id="scene"></div>
+          <p class="caption" id="caption" hidden></p>
+          <div class="bigplay" id="bigplay"><span>▶</span></div>
+        </div>
+        <div class="bar">
+          <button class="ctl main" id="play" aria-label="Lecture">▶</button>
+          <button class="ctl hide-s" id="back" aria-label="Reculer de 10 secondes">−10</button>
+          <div class="seek" id="seek" role="slider" aria-label="Position" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0"><b></b></div>
+          <span class="time" id="time">0:00 / 3:32</span>
+          <button class="ctl" id="speed" aria-label="Vitesse">1×</button>
+          <button class="ctl hide-s" id="cc" aria-pressed="false" aria-label="Sous-titres">CC</button>
+        </div>
+      </div>
+
+      <div class="notes">
+        <div><b>Regarder</b>Chaque partie a son écran ; la phrase dite s’allume mot à mot ; les formules deviennent des cartes, les chiffres des pastilles. Sous-titres, vitesse, −10 s, reprise là où tu t’es arrêté.</div>
+        <div><b>La question dans la vidéo</b>Après « Les trois mécanismes », la vidéo s’arrête et une vraie question du quiz s’ouvre par-dessus. Tu réponds, l’explication s’affiche, la vidéo repart seule.</div>
+        <div><b>Écouter (podcast)</b>La même voix, sans l’image : pour le trajet ou le sport, écran éteint possible. Ensuite, l’exercice et le quiz comme aujourd’hui. Les 43 leçons auront leur voix.</div>
+      </div>
+    </main>
+    <audio id="audio" src="/lecons-voix/ca-marge-tresorerie.m4a" preload="auto"></audio>
+    <script type="module">
+      const data = await fetch("/lecons-voix/ca-marge-tresorerie.json").then((r) => r.json());
+      const audio = document.getElementById("audio");
+      const stage = document.getElementById("stage");
+      const scene = document.getElementById("scene");
+      const caption = document.getElementById("caption");
+      const player = document.getElementById("player");
+      const parts = [...new Set(data.lines.map((l) => l.part))];
+      const ASK_AFTER = 1; // après « Les trois mécanismes »
+      const QUESTION = {
+        q: "Tu reçois un emprunt bancaire de 10 000 €. Quel effet immédiat est certain ?",
+        o: ["Le CA augmente de 10 000 €", "La trésorerie et la dette augmentent", "Le résultat augmente de 10 000 €"],
+        a: 1,
+        why: "Le prêt finance l’entreprise : il augmente son cash et sa dette. Ce n’est ni une vente ni un profit.",
+      };
+      let asked = false;
+
+      // Vague filaire d'ambiance (dans l'appli : la vraie vague de BOUSE).
+      const waves = document.getElementById("waves");
+      waves.innerHTML = Array.from({ length: 22 }, (_, i) => {
+        const y = 120 + i * 6;
+        return `<path d="M0 ${y} C 150 ${y - 70 - i * 2}, 300 ${y + 40}, 600 ${y - 90 + i}" fill="none" stroke="rgba(220,220,230,${0.05 + i * 0.012})" stroke-width="1"/>`;
+      }).join("");
+
+      const chapters = document.getElementById("chapters");
+      chapters.innerHTML = parts.map(() => "<i><b></b></i>").join("");
+
+      const fmt = (s) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, "0")}`;
+      const esc = (t) => t.replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" })[c]);
+      let shown = null;
+
+      function render(t) {
+        const idx = data.lines.findLastIndex((l) => l.start <= t + 0.05);
+        const line = data.lines[Math.max(0, idx)];
+        const part = line.part;
+        // Chapitres.
+        [...chapters.children].forEach((c, i) => {
+          const p = parts[i];
+          const ls = data.lines.filter((l) => l.part === p);
+          const s = ls[0].start, e = ls.at(-1).end;
+          c.firstChild.style.setProperty("--p", Math.max(0, Math.min(1, (t - s) / (e - s))));
+        });
+        document.querySelector(".seek b").style.setProperty("--t", `${(t / data.duration) * 100}%`);
+        document.getElementById("time").textContent = `${fmt(t)} / ${fmt(data.duration)}`;
+        caption.textContent = line.text;
+        waves.style.transform = `translateX(${-(t / data.duration) * 8}%)`;
+
+        const key = idx < 0 ? "start" : `${idx}`;
+        if (key !== shown) {
+          shown = key;
+          const title = data.lines.find((l) => l.part === part && l.kind === "title");
+          const n = parts.indexOf(part);
+          const kicker = part === -1 ? "Leçon" : n === parts.length - 1 ? "Exemple" : `Partie ${n} / ${parts.length - 2}`;
+          if (line.kind === "title" || idx < 0) {
+            scene.innerHTML = `<div class="kicker enter">${kicker}</div><h2 class="big enter-2">${esc(title.text)}</h2>`;
+          } else {
+            const before = data.lines[idx - 1];
+            const prev = before && before.kind === "line" && before.part === part ? `<p class="prev">${esc(before.text)}</p>` : "";
+            const words = line.text.split(/\s+/).map((w) => `<span class="w">${esc(w)}</span>`).join(" ");
+            let extra = "";
+            const f = line.text.match(/([^.:;]{2,60}?)\s=\s([^.;]{2,80})/);
+            const nums = [...line.text.matchAll(/\d[\d\s ]*(?:,\d+)?\s?(?:€|%|jours)/g)].map((m) => m[0].trim());
+            if (f) extra = `<div class="formula pop"><span>${esc(f[1].replace(/^.*:\s*/, ""))}</span><span class="eq">=</span><span>${esc(f[2])}</span></div>`;
+            else if (nums.length >= 2) extra = `<div class="chips">${nums.slice(0, 5).map((n, i) => `<span class="pop" style="animation-delay:${i * 90}ms">${esc(n)}</span>`).join("")}</div>`;
+            scene.innerHTML = `<div class="kicker">${kicker} · ${esc(title.text)}</div>${prev}<p class="line enter">${words}</p>${extra}`;
+          }
+        }
+        // Mot à mot (approché d'après la durée de la phrase).
+        if (line.kind === "line") {
+          const ws = scene.querySelectorAll(".line .w");
+          const k = Math.floor(((t - line.start) / (line.end - line.start)) * ws.length + 0.5);
+          ws.forEach((w, i) => w.classList.toggle("on", i < k));
+        }
+        // La question dans la vidéo.
+        const lastOfPart = data.lines.filter((l) => l.part === ASK_AFTER).at(-1);
+        if (!asked && t >= lastOfPart.end + 0.2) {
+          asked = true;
+          audio.pause();
+          openAsk();
+        }
+      }
+
+      function openAsk() {
+        const box = document.createElement("div");
+        box.className = "ask";
+        box.innerHTML = `<div class="ask-card" role="dialog" aria-label="Question rapide"><p class="kicker">Question rapide</p><p class="ask-q">${esc(QUESTION.q)}</p>${QUESTION.o.map((o, i) => `<button class="opt" data-i="${i}">${esc(o)}</button>`).join("")}</div>`;
+        stage.appendChild(box);
+        box.addEventListener("click", (e) => e.stopPropagation());
+        box.querySelectorAll(".opt").forEach((b) =>
+          b.addEventListener("click", () => {
+            const i = +b.dataset.i;
+            box.querySelectorAll(".opt").forEach((x) => (x.disabled = true));
+            box.querySelector(`[data-i="${QUESTION.a}"]`).dataset.r = "ok";
+            if (i !== QUESTION.a) b.dataset.r = "ko";
+            const why = document.createElement("p");
+            why.className = "why";
+            why.textContent = (i === QUESTION.a ? "Juste. " : "Pas tout à fait. ") + QUESTION.why;
+            box.firstChild.appendChild(why);
+            const go = document.createElement("button");
+            go.className = "ctl main";
+            go.style.justifySelf = "start";
+            go.style.padding = "0 18px";
+            go.textContent = "Reprendre la vidéo →";
+            go.addEventListener("click", () => { box.remove(); audio.play(); });
+            box.firstChild.appendChild(go);
+            setTimeout(() => { if (box.isConnected) { box.remove(); audio.play(); } }, 6000);
+          }),
+        );
+      }
+
+      const playBtn = document.getElementById("play");
+      const toggle = () => (audio.paused ? audio.play() : audio.pause());
+      stage.addEventListener("click", toggle);
+      playBtn.addEventListener("click", toggle);
+      audio.addEventListener("play", () => { player.classList.add("playing"); playBtn.textContent = "❚❚"; playBtn.setAttribute("aria-label", "Pause"); });
+      audio.addEventListener("pause", () => { player.classList.remove("playing"); playBtn.textContent = "▶"; playBtn.setAttribute("aria-label", "Lecture"); });
+      document.getElementById("back").addEventListener("click", () => (audio.currentTime = Math.max(0, audio.currentTime - 10)));
+      const speeds = [1, 1.25, 1.5, 0.85];
+      document.getElementById("speed").addEventListener("click", (e) => {
+        const next = speeds[(speeds.indexOf(audio.playbackRate) + 1) % speeds.length];
+        audio.playbackRate = next;
+        e.currentTarget.textContent = `${String(next).replace(".", ",")}×`;
+      });
+      document.getElementById("cc").addEventListener("click", (e) => {
+        const on = e.currentTarget.getAttribute("aria-pressed") !== "true";
+        e.currentTarget.setAttribute("aria-pressed", String(on));
+        caption.hidden = !on;
+      });
+      caption.hidden = true;
+      document.getElementById("seek").addEventListener("click", (e) => {
+        const r = e.currentTarget.getBoundingClientRect();
+        audio.currentTime = ((e.clientX - r.left) / r.width) * data.duration;
+        render(audio.currentTime);
+      });
+      document.querySelectorAll(".modes button").forEach((b) =>
+        b.addEventListener("click", () => {
+          document.querySelectorAll(".modes button").forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+          player.classList.toggle("podcast", b.dataset.m === "podcast");
+          player.hidden = b.dataset.m === "lire";
+        }),
+      );
+      (function loop() { render(audio.currentTime); requestAnimationFrame(loop); })();
+      window.__seek = (s) => { audio.currentTime = s; render(s); };
+      window.__data = data;
+    </script>
+  </body>
+</html>

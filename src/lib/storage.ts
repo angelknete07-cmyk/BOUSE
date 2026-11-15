@@ -118,6 +118,11 @@ export function parseState(raw: string): AppState {
   )
     throw new Error("Positions de lecture invalides.");
   if (
+    s.learningMode !== undefined &&
+    !["lire", "regarder", "ecouter"].includes(s.learningMode as string)
+  )
+    throw new Error("Façon d’apprendre invalide.");
+  if (
     s.activePathId !== undefined &&
     s.activePathId !== null &&
     (typeof s.activePathId !== "string" || s.activePathId.length > 80)

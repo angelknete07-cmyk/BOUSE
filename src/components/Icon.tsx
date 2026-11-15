@@ -125,6 +125,13 @@ export function Icon({ name, size = 20 }: { name: string; size?: number }) {
     ),
     chevron: <path d="m9 5 7 7-7 7" />,
     play: <path d="M8 5.5v13l10-6.5z" />,
+    headphones: (
+      <>
+        <path d="M4 15v-3a8 8 0 0 1 16 0v3" />
+        <rect x="3.5" y="14" width="4.5" height="6.5" rx="1.6" />
+        <rect x="16" y="14" width="4.5" height="6.5" rx="1.6" />
+      </>
+    ),
   };
   return (
     <svg

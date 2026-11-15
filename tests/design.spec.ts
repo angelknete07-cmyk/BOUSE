@@ -116,6 +116,7 @@ async function capture(page: Page, testInfo: TestInfo, name: string) {
       "18-investissement-lecon",
       "19-finance-perso-budget",
       "20-niveau-resultat",
+      "21-lecon-video",
     ].includes(name)
   )
     await page.screenshot({
@@ -510,6 +511,14 @@ test("galerie des écrans et du quiz validé sans débordement", async ({
   ).toBeVisible();
   await page.waitForTimeout(500);
   await capture(page, testInfo, "20-niveau-resultat");
+
+  // La leçon en vidéo, avec sa voix (idées 1, 37, 38).
+  await page.goto(`/#lesson/${lesson.id}`);
+  await expect(
+    page.getByRole("region", { name: "Vidéo de la leçon" }),
+  ).toContainText(lesson.title);
+  await page.waitForTimeout(800);
+  await capture(page, testInfo, "21-lecon-video");
 
   // Use the application's validated import flow. The gallery init script would
   // replace direct localStorage mutations after a document reload.
