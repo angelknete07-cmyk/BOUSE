@@ -1,3 +1,15 @@
+# Review — La vraie voix des 43 leçons (ElevenLabs)
+
+**17 novembre 2026.** **La direction artistique n’est pas déclarée validée.** Aucun changement d’écran : seul le son change. Les 43 vidéos et podcasts passent de la voix gratuite du Mac à la voix « BOUSE » choisie par l’utilisateur sur ElevenLabs (formule Creator), fabriquée et contrôlée dans `~/claude/bouse-voix` (conversation « Voix off des 43 leçons »).
+
+- **Fichiers** : `public/lecons-voix/<id>.m4a` (AAC 64 kbit/s mono, ~2 Mo par leçon, 95 Mo en tout, toujours exclus du pré-téléchargement hors ligne) et `<id>.json` (même minutage phrase par phrase, issu de l’alignement ElevenLabs, donc plus précis). 3 h 21 d’écoute, de 2 à 6 minutes par leçon.
+- **Contrôle** : chaque fichier retranscrit par Whisper et comparé au texte dans `bouse-voix` ; un seul doute à écouter à l’oreille (« validation-client » : « je le paierai » entendu « perdrai »). Ici : les 43 minutages valides et à la bonne version, essai réel de lecture dans l’appli (« Faire son budget », 4 min 39, phrase et mots synchronisés).
+- **Protection** : `scripts/voix-lecons.ts` (voix du Mac, secours) ne réécrit plus jamais une leçon déjà faite avec ElevenLabs.
+- **Contrôles de l’agent** : `npm test` 300 ; `npx playwright test` complet : 152 passés, 8 ignorés prévus ; `npm run build`.
+- **Limites** : le doute de « validation-client » n’est pas encore écouté ; pas de vrai iPhone ; pas de validation externe.
+
+---
+
 # Review — Nouveau nom : BOOST
 
 **15 novembre 2026.** **La direction artistique n’est pas déclarée validée.** À la demande de l’utilisateur (« sinon ça fait Booze »), le nom affiché passe de « BOUSE » à **« BOOST »** (choisi dans le widget parmi BOUSSE, BOOSSE, BOOST). Paire principale : l’ouverture animée (`23-ouverture-viewport`), archive `2026-11-15_17-46-27-Europe-Paris-previous`.

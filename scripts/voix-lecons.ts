@@ -1,6 +1,11 @@
 /**
  * Fabrique la voix des leçons (idée 1/38 : vidéo de chaque leçon).
  *
+ * Depuis le 17 nov. 2026, les fichiers en ligne sont les vraies voix
+ * ElevenLabs (voix « BOUSE »), fabriquées par ~/claude/bouse-voix et
+ * copiées dans public/lecons-voix. Ce script ne sert plus qu'en secours
+ * (voix du Mac), pour une leçon nouvelle ou modifiée.
+ *
  *   node --experimental-strip-types scripts/voix-lecons.ts [id…]
  *   (les leçons déjà faites sont gardées ; BOUSE_VOICE_FORCE=1 refait tout)
  *
@@ -228,7 +233,13 @@ if (import.meta.main) {
       const done = JSON.parse(
         readFileSync(join(OUT, `${lesson.id}.json`), "utf8"),
       );
-      if (!force && done.version === lesson.version && done.voice === VOICE)
+      // Les vraies voix (ElevenLabs, voix « BOUSE », fabriquées dans
+      // ~/claude/bouse-voix) ne sont jamais écrasées par la voix du Mac.
+      if (
+        !force &&
+        done.version === lesson.version &&
+        (done.voice === VOICE || String(done.voice).includes("ElevenLabs"))
+      )
         continue;
     } catch {
       /* pas encore faite */
