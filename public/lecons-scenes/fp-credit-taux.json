@@ -1,0 +1,886 @@
+{
+  "lesson": "fp-credit-taux",
+  "version": "1.0.0",
+  "scenes": [
+    {
+      "from": 0,
+      "to": 5.7,
+      "items": [
+        {
+          "type": "text",
+          "size": "title",
+          "text": "Crédit : taux, TAEG et coût total",
+          "at": 0.2
+        },
+        {
+          "type": "text",
+          "size": "small",
+          "text": "Bienvenue",
+          "at": 4.2
+        }
+      ]
+    },
+    {
+      "from": 5.7,
+      "to": 16.6,
+      "items": [
+        {
+          "type": "row",
+          "at": 5.8,
+          "items": [
+            {
+              "type": "icon",
+              "icon": "phone",
+              "size": "l",
+              "label": "la publicité",
+              "at": 5.8
+            },
+            {
+              "type": "counter",
+              "label": "Par mois",
+              "to": 30,
+              "at": 7.4,
+              "until": 9.4
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "size": "big",
+          "text": "Au total ? [[?]]",
+          "at": 11.4
+        },
+        {
+          "type": "row",
+          "at": 13.9,
+          "items": [
+            {
+              "type": "icon",
+              "icon": "calendar",
+              "label": "engagé combien de temps ?",
+              "at": 13.9
+            }
+          ]
+        },
+        {
+          "type": "actor",
+          "character": "toi",
+          "name": "toi",
+          "at": 5.9,
+          "think": {
+            "text": "?",
+            "at": 12.0
+          }
+        }
+      ]
+    },
+    {
+      "from": 16.6,
+      "to": 32.5,
+      "items": [
+        {
+          "type": "text",
+          "size": "mid",
+          "text": "Lire une offre de crédit",
+          "at": 16.7
+        },
+        {
+          "type": "cards",
+          "at": 19.6,
+          "items": [
+            {
+              "icon": "calendar",
+              "title": "Mensualité",
+              "sub": "",
+              "at": 21.2
+            },
+            {
+              "icon": "hour",
+              "title": "Durée",
+              "sub": "",
+              "at": 22.8
+            },
+            {
+              "icon": "percent",
+              "title": "Taux nominal",
+              "sub": "",
+              "at": 24.2
+            },
+            {
+              "icon": "target",
+              "title": "TAEG",
+              "sub": "",
+              "at": 26.2,
+              "accent": true
+            }
+          ]
+        },
+        {
+          "type": "icon",
+          "icon": "calculator",
+          "label": "le coût réel",
+          "at": 28.2
+        }
+      ]
+    },
+    {
+      "from": 32.5,
+      "to": 53.8,
+      "items": [
+        {
+          "type": "text",
+          "size": "big",
+          "text": "Pourquoi apprendre ça ?",
+          "at": 32.6,
+          "out": 34.5,
+          "hide": true
+        },
+        {
+          "type": "counter",
+          "label": "Par mois",
+          "to": 150,
+          "at": 37.2,
+          "until": 39.4
+        },
+        {
+          "type": "text",
+          "size": "mid",
+          "text": "Coût [[total]] ? Durée ?",
+          "at": 41.4
+        },
+        {
+          "type": "row",
+          "at": 46.9,
+          "items": [
+            {
+              "type": "icon",
+              "icon": "shield",
+              "label": "tu te protèges",
+              "at": 46.9
+            },
+            {
+              "type": "icon",
+              "icon": "scale",
+              "label": "tu compares",
+              "at": 49.9
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "from": 53.8,
+      "to": 66.8,
+      "items": [
+        {
+          "type": "text",
+          "size": "mid",
+          "text": "Crédit [[amortissable]]",
+          "at": 55.7
+        },
+        {
+          "type": "icons",
+          "icon": "calendar",
+          "count": 3,
+          "step": 1.2,
+          "label": "même mensualité",
+          "at": 62.0
+        },
+        {
+          "type": "text",
+          "size": "small",
+          "text": "Toujours le même montant",
+          "at": 65.0
+        }
+      ]
+    },
+    {
+      "from": 66.8,
+      "to": 84.2,
+      "items": [
+        {
+          "type": "text",
+          "size": "mid",
+          "text": "Deux parts par mensualité",
+          "at": 66.9,
+          "out": 69.5,
+          "hide": true
+        },
+        {
+          "type": "cards",
+          "at": 69.6,
+          "items": [
+            {
+              "icon": "percent",
+              "title": "Intérêts",
+              "sub": "le prix de l’argent prêté",
+              "at": 69.7,
+              "tone": "loss"
+            },
+            {
+              "icon": "coins",
+              "title": "Capital",
+              "sub": "la somme empruntée",
+              "at": 74.2,
+              "accent": true
+            }
+          ]
+        },
+        {
+          "type": "chart",
+          "at": 79.7,
+          "lines": [
+            {
+              "label": "intérêts",
+              "values": [
+                60,
+                50,
+                40,
+                30,
+                20,
+                10
+              ],
+              "at": 79.8,
+              "until": 83.0,
+              "tone": "loss"
+            },
+            {
+              "label": "capital",
+              "values": [
+                10,
+                20,
+                30,
+                40,
+                50,
+                60
+              ],
+              "at": 80.4,
+              "until": 83.8
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "from": 84.2,
+      "to": 104.5,
+      "items": [
+        {
+          "type": "chips",
+          "at": 87.1,
+          "items": [
+            {
+              "text": "capital",
+              "at": 87.3
+            },
+            {
+              "text": "+",
+              "at": 88.2
+            },
+            {
+              "text": "taux par mois",
+              "at": 88.5
+            },
+            {
+              "text": "+",
+              "at": 89.4
+            },
+            {
+              "text": "nombre de mois",
+              "at": 89.7
+            },
+            {
+              "text": "→",
+              "at": 90.6
+            },
+            {
+              "text": "mensualité",
+              "at": 90.9,
+              "tone": "accent"
+            }
+          ]
+        },
+        {
+          "type": "icon",
+          "icon": "calculator",
+          "size": "l",
+          "label": "un simulateur la calcule",
+          "at": 91.9
+        },
+        {
+          "type": "chips",
+          "at": 98.0,
+          "items": [
+            {
+              "text": "Plus tu empruntes",
+              "at": 98.0
+            },
+            {
+              "text": "taux élevé",
+              "at": 99.4
+            },
+            {
+              "text": "durée longue",
+              "at": 100.6
+            },
+            {
+              "text": "→",
+              "at": 101.6
+            },
+            {
+              "text": "plus cher",
+              "at": 102.0,
+              "tone": "loss"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "from": 104.5,
+      "to": 113.7,
+      "items": [
+        {
+          "type": "text",
+          "size": "mid",
+          "text": "Coût total du crédit",
+          "at": 104.6
+        },
+        {
+          "type": "chips",
+          "at": 105.5,
+          "items": [
+            {
+              "text": "toutes les mensualités",
+              "at": 105.8
+            },
+            {
+              "text": "−",
+              "at": 107.2
+            },
+            {
+              "text": "somme empruntée",
+              "at": 107.6
+            },
+            {
+              "text": "=",
+              "at": 108.8
+            },
+            {
+              "text": "coût",
+              "at": 109.2,
+              "tone": "accent"
+            }
+          ]
+        },
+        {
+          "type": "row",
+          "at": 110.4,
+          "items": [
+            {
+              "type": "icon",
+              "icon": "invoice",
+              "size": "s",
+              "label": "frais",
+              "at": 110.4
+            },
+            {
+              "type": "icon",
+              "icon": "shield",
+              "size": "s",
+              "label": "assurance",
+              "at": 111.2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "from": 113.7,
+      "to": 140.4,
+      "items": [
+        {
+          "type": "text",
+          "size": "mid",
+          "text": "Plus long : mensualité [[basse]], coût [[haut]]",
+          "at": 113.8
+        },
+        {
+          "type": "compare",
+          "at": 125.1,
+          "left": {
+            "title": "24 mois",
+            "icon": "phone",
+            "items": [
+              {
+                "text": "25 € par mois",
+                "at": 125.2
+              },
+              {
+                "text": "= 600 €",
+                "at": 128.8
+              }
+            ]
+          },
+          "right": {
+            "title": "48 mois",
+            "icon": "phone",
+            "items": [
+              {
+                "text": "15 € par mois",
+                "at": 131.3
+              },
+              {
+                "text": "= 720 €",
+                "at": 133.6
+              }
+            ]
+          }
+        },
+        {
+          "type": "counter",
+          "label": "Surcoût",
+          "to": 120,
+          "at": 136.0,
+          "until": 138.6,
+          "tone": "loss"
+        }
+      ]
+    },
+    {
+      "from": 140.4,
+      "to": 163.6,
+      "items": [
+        {
+          "type": "cards",
+          "at": 142.4,
+          "items": [
+            {
+              "icon": "percent",
+              "title": "Taux nominal",
+              "sub": "sert à calculer les intérêts",
+              "at": 142.5,
+              "subAt": 142.9
+            },
+            {
+              "icon": "target",
+              "title": "TAEG",
+              "sub": "avec frais et assurance exigée",
+              "at": 146.7,
+              "subAt": 148.8,
+              "accent": true
+            }
+          ]
+        },
+        {
+          "type": "row",
+          "at": 153.8,
+          "items": [
+            {
+              "type": "icon",
+              "icon": "scale",
+              "label": "indicateur légal",
+              "at": 153.8
+            },
+            {
+              "type": "icon",
+              "icon": "document",
+              "label": "dans l’offre",
+              "at": 156.5
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "size": "mid",
+          "text": "Compare le [[TAEG]]",
+          "at": 158.4
+        }
+      ]
+    },
+    {
+      "from": 163.6,
+      "to": 174.2,
+      "items": [
+        {
+          "type": "text",
+          "size": "mid",
+          "text": "Tableau d’amortissement",
+          "at": 165.9
+        },
+        {
+          "type": "row",
+          "at": 167.8,
+          "items": [
+            {
+              "type": "icon",
+              "icon": "document",
+              "size": "l",
+              "label": "chaque échéance",
+              "at": 167.8
+            },
+            {
+              "type": "chips",
+              "at": 170.0,
+              "items": [
+                {
+                  "text": "intérêts",
+                  "at": 170.0,
+                  "tone": "loss"
+                },
+                {
+                  "text": "capital",
+                  "at": 172.0,
+                  "tone": "accent"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "from": 174.2,
+      "to": 193.7,
+      "items": [
+        {
+          "type": "chips",
+          "at": 174.3,
+          "items": [
+            {
+              "text": "remboursements",
+              "at": 174.5
+            },
+            {
+              "text": "÷",
+              "at": 176.0
+            },
+            {
+              "text": "revenus",
+              "at": 176.4
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "size": "small",
+          "text": "Taux d’endettement : seuils à vérifier",
+          "at": 178.2
+        },
+        {
+          "type": "row",
+          "at": 182.5,
+          "items": [
+            {
+              "type": "icon",
+              "icon": "card",
+              "size": "l",
+              "label": "crédit renouvelable",
+              "at": 182.5
+            },
+            {
+              "type": "icon",
+              "icon": "percent",
+              "tone": "loss",
+              "label": "taux plus élevé",
+              "at": 186.6
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "size": "mid",
+          "text": "[[Prudence]]",
+          "at": 191.1
+        }
+      ]
+    },
+    {
+      "from": 193.7,
+      "to": 205.8,
+      "items": [
+        {
+          "type": "text",
+          "size": "mid",
+          "text": "Délai de rétractation",
+          "at": 193.8
+        },
+        {
+          "type": "row",
+          "at": 196.0,
+          "items": [
+            {
+              "type": "icon",
+              "icon": "hour",
+              "size": "l",
+              "label": "tu peux changer d’avis",
+              "at": 198.3
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "size": "small",
+          "text": "Durée : service-public.fr",
+          "at": 201.0
+        }
+      ]
+    },
+    {
+      "from": 205.8,
+      "to": 221.4,
+      "items": [
+        {
+          "type": "text",
+          "size": "big",
+          "text": "Le piège : la mensualité [[basse]]",
+          "at": 205.9
+        },
+        {
+          "type": "compare",
+          "at": 211.2,
+          "left": {
+            "title": "Mensualité basse",
+            "icon": "coin",
+            "items": [
+              {
+                "text": "Dure plus longtemps",
+                "at": 215.4
+              }
+            ]
+          },
+          "right": {
+            "title": "Coût total",
+            "icon": "coins",
+            "items": [
+              {
+                "text": "Le plus élevé",
+                "at": 218.0,
+                "tone": "loss"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "from": 221.4,
+      "to": 229.1,
+      "items": [
+        {
+          "type": "row",
+          "at": 221.5,
+          "items": [
+            {
+              "type": "icon",
+              "icon": "layers",
+              "size": "l",
+              "label": "regrouper, allonger",
+              "at": 221.5
+            },
+            {
+              "type": "icon",
+              "icon": "sun",
+              "label": "soulage ce mois-ci",
+              "at": 224.6
+            },
+            {
+              "type": "icon",
+              "icon": "link",
+              "label": "engagement prolongé",
+              "tone": "loss",
+              "at": 226.6
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "from": 229.1,
+      "to": 240.7,
+      "items": [
+        {
+          "type": "text",
+          "size": "mid",
+          "text": "Le simulateur ne compte pas",
+          "at": 230.8
+        },
+        {
+          "type": "list",
+          "style": "cross",
+          "at": 232.0,
+          "items": [
+            {
+              "text": "l’assurance",
+              "at": 233.2
+            },
+            {
+              "text": "les frais",
+              "at": 234.4
+            },
+            {
+              "text": "le TAEG",
+              "at": 235.6
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "size": "small",
+          "text": "Échéances arrondies, aucune banque",
+          "at": 236.4
+        }
+      ]
+    },
+    {
+      "from": 240.7,
+      "to": 253.2,
+      "items": [
+        {
+          "type": "text",
+          "size": "mid",
+          "text": "Inès et son ordinateur",
+          "at": 240.8,
+          "out": 245.6,
+          "hide": true
+        },
+        {
+          "type": "icon",
+          "icon": "laptop",
+          "size": "l",
+          "label": "à financer",
+          "at": 245.8
+        },
+        {
+          "type": "counter",
+          "label": "Emprunt",
+          "to": 3000,
+          "at": 248.0,
+          "until": 250.0
+        },
+        {
+          "type": "chips",
+          "at": 250.2,
+          "items": [
+            {
+              "text": "12 mois",
+              "at": 250.2
+            },
+            {
+              "text": "taux 6 %",
+              "at": 251.6
+            }
+          ]
+        },
+        {
+          "type": "actor",
+          "character": "toi",
+          "name": "Inès",
+          "at": 245.8
+        }
+      ]
+    },
+    {
+      "from": 253.2,
+      "to": 262.8,
+      "items": [
+        {
+          "type": "stats",
+          "at": 253.3,
+          "items": [
+            {
+              "label": "Mensualité",
+              "value": 258,
+              "unit": " €",
+              "at": 253.4
+            },
+            {
+              "label": "Intérêts",
+              "value": 98,
+              "unit": " €",
+              "at": 257.4,
+              "tone": "loss",
+              "accent": true
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "size": "small",
+          "text": "Hors assurance et frais",
+          "at": 260.0
+        }
+      ]
+    },
+    {
+      "from": 262.8,
+      "to": 273.2,
+      "items": [
+        {
+          "type": "compare",
+          "at": 262.9,
+          "left": {
+            "title": "12 mois",
+            "icon": "calendar",
+            "items": [
+              {
+                "text": "258 € par mois",
+                "at": 263.0
+              },
+              {
+                "text": "Intérêts : 98 €",
+                "at": 265.0
+              }
+            ]
+          },
+          "right": {
+            "title": "24 mois",
+            "icon": "calendar",
+            "items": [
+              {
+                "text": "133 € par mois",
+                "at": 265.9
+              },
+              {
+                "text": "Intérêts presque doublés",
+                "at": 269.9,
+                "tone": "loss"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "from": 273.2,
+      "to": 287,
+      "items": [
+        {
+          "type": "list",
+          "style": "check",
+          "at": 273.3,
+          "items": [
+            {
+              "text": "Mensualité basse ≠ crédit pas cher",
+              "at": 273.4
+            },
+            {
+              "text": "Coût total = remboursé − emprunté",
+              "at": 276.9
+            },
+            {
+              "text": "Pour comparer : le TAEG",
+              "at": 281.0
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "size": "small",
+          "text": "À bientôt",
+          "at": 284.4
+        }
+      ]
+    }
+  ]
+}

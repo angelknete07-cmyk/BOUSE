@@ -1,0 +1,308 @@
+{
+  "lesson": "inv-risque-diversification",
+  "version": "1.0.0",
+  "scenes": [
+    {
+      "from": 0,
+      "to": 4.1,
+      "items": [
+        { "type": "text", "size": "title", "text": "Risque, rendement et diversification", "at": 0.2 },
+        { "type": "text", "size": "small", "text": "Bienvenue", "at": 3.0 }
+      ]
+    },
+    {
+      "from": 4.1,
+      "to": 14.6,
+      "items": [
+        { "type": "row", "at": 4.2, "items": [
+          { "type": "icon", "icon": "chart-up", "size": "l", "label": "combien ça rapporte ?", "at": 4.2 },
+          { "type": "icon", "icon": "alert", "size": "l", "label": "combien puis-je perdre ?", "tone": "loss", "at": 9.2 }
+        ] },
+        { "type": "text", "size": "mid", "text": "Le supporterais-tu ? [[?]]", "at": 11.6 },
+        { "type": "actor", "character": "toi", "name": "toi", "at": 9.2, "think": { "text": "?", "at": 12.4 } }
+      ]
+    },
+    {
+      "from": 14.6,
+      "to": 28.1,
+      "items": [
+        { "type": "list", "style": "num", "at": 15.8, "items": [
+          { "text": "Mesurer une perte", "at": 16.0 },
+          { "text": "Répartir ses placements", "at": 18.2 },
+          { "text": "Reconnaître une promesse trop belle", "at": 20.4 }
+        ] },
+        { "type": "text", "size": "big", "text": "Pas de gros rendement sans [[risque]]", "at": 23.3 }
+      ]
+    },
+    {
+      "from": 28.1,
+      "to": 34.8,
+      "items": [
+        { "type": "compare", "at": 29.4, "left": { "title": "Le rendement", "icon": "chart-up", "items": [
+          { "text": "Attire l’attention", "at": 29.5 }
+        ] }, "right": { "title": "Le risque", "icon": "scale", "items": [
+          { "text": "Décide si tu tiens", "at": 31.6 }
+        ] } }
+      ]
+    },
+    {
+      "from": 34.8,
+      "to": 49.8,
+      "items": [
+        { "type": "chart", "at": 34.9, "lines": [
+          { "label": "ta pire année", "values": [60, 70, 30, 35, 55], "at": 35.0, "until": 38.4, "tone": "loss" }
+        ] },
+        { "type": "text", "size": "small", "text": "Tenir sans être obligé de vendre", "at": 38.0 },
+        { "type": "cards", "at": 41.0, "items": [
+          { "icon": "chart-down", "title": "Mesurer", "sub": "une perte", "at": 41.4 },
+          { "icon": "pie", "title": "Diversifier", "sub": "ce que ça protège", "at": 44.0 },
+          { "icon": "alert", "title": "Repérer", "sub": "les offres frauduleuses", "at": 46.4, "tone": "loss" }
+        ] }
+      ]
+    },
+    {
+      "from": 49.8,
+      "to": 66.6,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Rendement espéré et risque : [[ensemble]]", "at": 51.3 },
+        { "type": "chips", "at": 55.9, "items": [
+          { "text": "promet beaucoup", "at": 55.9 },
+          { "text": "→", "at": 58.4 },
+          { "text": "variations fortes", "at": 58.8 },
+          { "text": "+", "at": 60.4 },
+          { "text": "perte possible", "at": 60.8, "tone": "loss" }
+        ] },
+        { "type": "row", "at": 62.6, "items": [
+          { "type": "icon", "icon": "alert", "tone": "loss", "label": "« garanti » : signal d’alerte", "at": 62.6 }
+        ] }
+      ]
+    },
+    {
+      "from": 66.6,
+      "to": 78.8,
+      "items": [
+        { "type": "text", "size": "mid", "text": "[[Perte maximale]]", "at": 67.0 },
+        { "type": "chart", "at": 70.6, "lines": [
+          { "label": "point haut → point bas", "values": [20, 50, 80, 60, 30, 25], "at": 70.7, "until": 74.0, "tone": "loss" }
+        ] }
+      ]
+    },
+    {
+      "from": 78.8,
+      "to": 91.8,
+      "items": [
+        { "type": "gauge", "label": "Baisse", "value": 50, "at": 79.0, "until": 81.0, "tone": "loss" },
+        { "type": "gauge", "label": "Hausse pour revenir au départ", "value": 100, "at": 82.0, "until": 85.4, "tone": "accent" },
+        { "type": "text", "size": "mid", "text": "Perdre la moitié : [[doubler]]", "at": 87.6 }
+      ]
+    },
+    {
+      "from": 91.8,
+      "to": 102.3,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Diversifier", "at": 91.9 },
+        { "type": "cards", "at": 94.9, "items": [
+          { "icon": "building", "title": "Entreprises", "sub": "", "at": 95.0 },
+          { "icon": "factory", "title": "Secteurs", "sub": "", "at": 96.7 },
+          { "icon": "globe", "title": "Pays", "sub": "", "at": 98.4 },
+          { "icon": "layers", "title": "Types d’actifs", "sub": "", "at": 100.3 }
+        ] }
+      ]
+    },
+    {
+      "from": 102.3,
+      "to": 113.0,
+      "items": [
+        { "type": "compare", "at": 102.4, "left": { "title": "Risque d’une entreprise", "icon": "shield", "items": [
+          { "text": "Faillite : réduit", "at": 103.0, "tone": "gain" }
+        ] }, "right": { "title": "Risque de marché", "icon": "alert", "items": [
+          { "text": "Pas supprimé", "at": 106.2 },
+          { "text": "Crise : tout baisse ensemble", "at": 109.0, "tone": "loss" }
+        ] } }
+      ]
+    },
+    {
+      "from": 113.0,
+      "to": 125.3,
+      "items": [
+        { "type": "text", "size": "mid", "text": "L’horizon de placement", "at": 113.1, "out": 116.0, "hide": true },
+        { "type": "icon", "icon": "hour", "size": "l", "label": "la durée investie", "at": 116.1 },
+        { "type": "chart", "at": 119.2, "lines": [
+          { "label": "après la baisse, attendre", "values": [50, 30, 38, 48, 60], "at": 119.3, "until": 122.0 }
+        ] },
+        { "type": "text", "size": "small", "text": "Sans garantie de récupérer ta mise", "at": 122.2 }
+      ]
+    },
+    {
+      "from": 125.3,
+      "to": 133.1,
+      "items": [
+        { "type": "row", "at": 125.4, "items": [
+          { "type": "icon", "icon": "clock", "size": "l", "label": "besoin à court terme", "at": 126.2 },
+          { "type": "icon", "icon": "umbrella", "size": "l", "label": "épargne de précaution", "at": 128.0 }
+        ] },
+        { "type": "text", "size": "mid", "text": "Pas sur les [[marchés d’actions|loss]]", "at": 130.0 }
+      ]
+    },
+    {
+      "from": 133.1,
+      "to": 143.6,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Volatilité", "at": 135.4 },
+        { "type": "chart", "at": 137.1, "lines": [
+          { "label": "ampleur des variations", "values": [40, 80, 20, 90, 15, 85], "at": 137.2, "until": 141.0 }
+        ] }
+      ]
+    },
+    {
+      "from": 143.6,
+      "to": 148.1,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Corrélation", "at": 143.7 },
+        { "type": "chart", "at": 144.4, "lines": [
+          { "label": "actif A", "values": [20, 40, 30, 60, 50], "at": 144.5, "until": 147.0 },
+          { "label": "actif B", "values": [25, 45, 35, 65, 55], "at": 144.8, "until": 147.3, "tone": "muted" }
+        ] }
+      ]
+    },
+    {
+      "from": 148.1,
+      "to": 156.5,
+      "items": [
+        { "type": "text", "size": "small", "text": "Document d’informations clés : indicateur de risque", "at": 148.2 },
+        { "type": "timeline", "at": 150.0, "points": [
+          { "label": "1", "sub": "le plus faible", "pos": 8, "at": 150.2 },
+          { "label": "7", "sub": "le plus élevé", "pos": 92, "at": 153.0 }
+        ], "span": { "label": "risque", "from": 8, "to": 92, "at": 153.2 } }
+      ]
+    },
+    {
+      "from": 156.5,
+      "to": 166.6,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Ton profil de risque", "at": 156.6 },
+        { "type": "list", "style": "dot", "at": 157.6, "items": [
+          { "text": "Tes objectifs", "at": 157.8 },
+          { "text": "Ton horizon", "at": 159.4 },
+          { "text": "Ta situation financière", "at": 160.8 },
+          { "text": "Ta capacité à supporter des pertes", "at": 163.0 }
+        ] }
+      ]
+    },
+    {
+      "from": 166.6,
+      "to": 178.2,
+      "items": [
+        { "type": "text", "size": "big", "text": "Tout sur un seul [[panier]]", "at": 169.5 },
+        { "type": "row", "at": 171.9, "items": [
+          { "type": "icon", "icon": "building", "size": "l", "label": "une action", "at": 172.0 },
+          { "type": "icon", "icon": "factory", "size": "l", "label": "un secteur", "at": 173.8 },
+          { "type": "icon", "icon": "briefcase", "size": "l", "label": "ton employeur", "at": 175.8 }
+        ] }
+      ]
+    },
+    {
+      "from": 178.2,
+      "to": 183.1,
+      "items": [
+        { "type": "row", "at": 178.3, "items": [
+          { "type": "icon", "icon": "chart-down", "size": "l", "tone": "loss", "label": "ton placement", "at": 179.8 },
+          { "type": "icon", "icon": "wallet", "size": "l", "tone": "loss", "label": "ton salaire", "at": 181.2 }
+        ] }
+      ]
+    },
+    {
+      "from": 183.1,
+      "to": 191.0,
+      "items": [
+        { "type": "chart", "at": 183.2, "lines": [
+          { "label": "la baisse", "values": [60, 50, 30, 20, 45, 60], "at": 183.3, "until": 187.0, "tone": "loss" }
+        ] },
+        { "type": "chips", "at": 186.9, "items": [
+          { "text": "vendre au plus bas", "at": 186.9 },
+          { "text": "→", "at": 188.4 },
+          { "text": "perte définitive", "at": 188.8, "tone": "loss" }
+        ] }
+      ]
+    },
+    {
+      "from": 191.0,
+      "to": 195.9,
+      "items": [
+        { "type": "icon", "icon": "document", "size": "l", "label": "un plan écrit à l’avance", "at": 191.1 }
+      ]
+    },
+    {
+      "from": 195.9,
+      "to": 204.8,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Les signes d’arnaque", "at": 196.0 },
+        { "type": "list", "style": "cross", "at": 196.6, "items": [
+          { "text": "Rendement élevé sans risque", "at": 196.8 },
+          { "text": "Pression pour décider vite", "at": 199.4 },
+          { "text": "Interlocuteur introuvable ou non autorisé", "at": 201.6 }
+        ] }
+      ]
+    },
+    {
+      "from": 204.8,
+      "to": 214.1,
+      "items": [
+        { "type": "row", "at": 204.9, "items": [
+          { "type": "icon", "icon": "shield", "size": "l", "label": "l’AMF", "at": 204.9 },
+          { "type": "icon", "icon": "alert", "tone": "loss", "label": "listes noires", "at": 206.6 }
+        ] },
+        { "type": "text", "size": "mid", "text": "Intermédiaire autorisé ? [[Avant]] de verser", "at": 209.1 }
+      ]
+    },
+    {
+      "from": 214.1,
+      "to": 229.9,
+      "items": [
+        { "type": "compare", "at": 218.7, "left": { "title": "Portefeuille A", "icon": "building", "items": [
+          { "text": "Une seule action", "at": 220.1 }
+        ] }, "right": { "title": "Portefeuille B", "icon": "layers", "items": [
+          { "text": "20 sociétés", "at": 223.6 },
+          { "text": "Secteurs et pays différents", "at": 225.6 }
+        ] } }
+      ]
+    },
+    {
+      "from": 229.9,
+      "to": 237.0,
+      "items": [
+        { "type": "text", "size": "small", "text": "Une entreprise fait faillite", "at": 230.0 },
+        { "type": "bars", "at": 230.4, "unit": " %", "items": [
+          { "label": "A perd", "value": 100, "at": 231.2, "tone": "loss" },
+          { "label": "B perd environ", "value": 5, "at": 233.5 }
+        ] }
+      ]
+    },
+    {
+      "from": 237.0,
+      "to": 249.1,
+      "items": [
+        { "type": "gauge", "label": "Le marché baisse", "value": 30, "at": 237.1, "until": 239.8, "tone": "loss" },
+        { "type": "counter", "label": "10 000 € deviennent", "from": 10000, "to": 7000, "at": 241.5, "until": 243.5, "tone": "loss" },
+        { "type": "chips", "at": 243.9, "items": [
+          { "text": "7 000 €", "at": 243.9 },
+          { "text": "+ 43 %", "at": 245.4, "tone": "accent" },
+          { "text": "=", "at": 246.4 },
+          { "text": "10 000 €", "at": 246.8 }
+        ] }
+      ]
+    },
+    {
+      "from": 249.1,
+      "to": 265,
+      "items": [
+        { "type": "list", "style": "check", "at": 249.2, "items": [
+          { "text": "Pas de gros rendement sans risque", "at": 250.4 },
+          { "text": "− 50 % demande + 100 % pour revenir", "at": 252.7 },
+          { "text": "Diversifier : pas de protection contre une crise", "at": 257.3 }
+        ] },
+        { "type": "text", "size": "small", "text": "À bientôt", "at": 262.9 }
+      ]
+    }
+  ]
+}

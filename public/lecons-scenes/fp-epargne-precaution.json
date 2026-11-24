@@ -1,0 +1,306 @@
+{
+  "lesson": "fp-epargne-precaution",
+  "version": "1.0.0",
+  "scenes": [
+    {
+      "from": 0,
+      "to": 11.4,
+      "items": [
+        { "type": "text", "size": "title", "text": "L’épargne de précaution", "at": 0.2 },
+        { "type": "text", "size": "small", "text": "Bienvenue", "at": 2.2 },
+        { "type": "row", "at": 3.2, "items": [
+          { "type": "icon", "icon": "car", "size": "l", "label": "en panne", "tone": "loss", "at": 3.2 },
+          { "type": "icon", "icon": "hour", "size": "l", "label": "sans revenus", "at": 4.8 },
+          { "type": "icon", "icon": "invoice", "size": "l", "label": "grosse facture", "at": 7.4 }
+        ] },
+        { "type": "actor", "character": "toi", "name": "toi", "at": 3.3, "think": { "text": "?", "at": 10.4 } }
+      ]
+    },
+    {
+      "from": 11.4,
+      "to": 24.9,
+      "items": [
+        { "type": "icon", "icon": "wallet", "size": "l", "label": "aucune réserve", "tone": "loss", "at": 11.5 },
+        { "type": "text", "size": "mid", "text": "[[Épargne de précaution]]", "at": 15.0 },
+        { "type": "row", "at": 18.4, "items": [
+          { "type": "icon", "icon": "umbrella", "size": "l", "label": "matelas", "at": 18.4 },
+          { "type": "icon", "icon": "clock", "size": "l", "label": "tout de suite", "at": 20.4 },
+          { "type": "icon", "icon": "shield", "size": "l", "label": "sans risque", "at": 22.4 }
+        ] },
+        { "type": "actor", "character": "toi", "name": "toi", "at": 11.5, "think": { "text": "!", "at": 22.0 } }
+      ]
+    },
+    {
+      "from": 24.9,
+      "to": 29.6,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Il passe [[avant tout]]", "at": 25.0 },
+        { "type": "chips", "at": 26.2, "items": [
+          { "text": "Réserve", "at": 26.2, "tone": "accent" },
+          { "text": "→", "at": 26.8 },
+          { "text": "investir", "at": 27.0, "tone": "muted" },
+          { "text": "emprunter", "at": 27.9, "tone": "muted" }
+        ] }
+      ]
+    },
+    {
+      "from": 29.6,
+      "to": 44.2,
+      "items": [
+        { "type": "text", "size": "big", "text": "Sans réserve", "at": 29.7, "out": 32.4, "hide": true },
+        { "type": "cards", "at": 32.6, "items": [
+          { "icon": "card", "title": "Découvert", "sub": "à la banque", "at": 32.8, "tone": "loss" },
+          { "icon": "percent", "title": "Crédit cher", "sub": "des intérêts en plus", "at": 35.8 },
+          { "icon": "chart-down", "title": "Placement vendu", "sub": "au plus bas", "at": 38.9, "tone": "loss" }
+        ] }
+      ]
+    },
+    {
+      "from": 44.2,
+      "to": 54.8,
+      "items": [
+        { "type": "text", "size": "big", "text": "La [[base]] de toute stratégie", "at": 44.3 },
+        { "type": "compare", "at": 48.2, "left": { "title": "Sans réserve", "icon": "alert", "items": [
+          { "text": "Forcé de décider", "at": 49.0 },
+          { "text": "Dans l’urgence", "at": 51.0 }
+        ] }, "right": { "title": "Avec une réserve", "icon": "shield", "items": [
+          { "text": "Le reste devient possible", "at": 50.0 },
+          { "text": "Choix calmes", "at": 52.0 }
+        ] } }
+      ]
+    },
+    {
+      "from": 54.8,
+      "to": 71.4,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Réserve = [[mois de dépenses essentielles]]", "at": 57.7 },
+        { "type": "chips", "at": 61.3, "items": [
+          { "text": "3 mois", "at": 61.3 },
+          { "text": "→", "at": 62.3 },
+          { "text": "6 mois", "at": 62.8, "tone": "accent" }
+        ] },
+        { "type": "text", "size": "small", "text": "Un repère, pas une règle exacte", "at": 63.9 },
+        { "type": "list", "style": "dot", "at": 65.8, "items": [
+          { "text": "Stabilité de tes revenus", "at": 66.2 },
+          { "text": "Situation familiale", "at": 67.8 },
+          { "text": "Risques personnels", "at": 69.6 }
+        ] }
+      ]
+    },
+    {
+      "from": 71.4,
+      "to": 89.9,
+      "items": [
+        { "type": "row", "at": 71.6, "items": [
+          { "type": "icon", "icon": "briefcase", "size": "l", "label": "indépendant", "at": 72.2 },
+          { "type": "icon", "icon": "car", "size": "l", "label": "voiture indispensable", "at": 74.8 },
+          { "type": "icon", "icon": "house", "size": "l", "label": "logement ancien", "at": 77.0 }
+        ] },
+        { "type": "text", "size": "small", "text": "Réserve plus grande", "at": 78.4 },
+        { "type": "chips", "at": 79.8, "items": [
+          { "text": "1 200 € par mois", "at": 79.8 },
+          { "text": "×", "at": 82.4 },
+          { "text": "3 mois", "at": 82.8 },
+          { "text": "=", "at": 83.4 },
+          { "text": "3 600 €", "at": 83.8, "tone": "accent" }
+        ] },
+        { "type": "chips", "at": 85.2, "items": [
+          { "text": "1 200 €", "at": 85.2 },
+          { "text": "×", "at": 85.8 },
+          { "text": "6 mois", "at": 86.2 },
+          { "text": "=", "at": 87.0 },
+          { "text": "7 200 €", "at": 87.4, "tone": "accent" }
+        ] }
+      ]
+    },
+    {
+      "from": 89.9,
+      "to": 97.0,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Ça paraît énorme ? [[Commence petit]]", "at": 90.0 },
+        { "type": "steps", "at": 92.6, "items": [
+          { "text": "1 mois de dépenses", "icon": "calendar", "at": 92.8 },
+          { "text": "Tu continues", "icon": "ladder", "at": 95.0 }
+        ] }
+      ]
+    },
+    {
+      "from": 97.0,
+      "to": 107.4,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Deux conditions", "at": 97.1 },
+        { "type": "cards", "at": 99.5, "items": [
+          { "icon": "clock", "title": "Disponible vite", "sub": "récupérable sans attendre", "at": 99.6 },
+          { "icon": "shield", "title": "Sans perte de valeur", "sub": "aucun risque", "at": 102.1, "accent": true }
+        ] },
+        { "type": "text", "size": "small", "text": "Les livrets réglementés", "at": 104.9 }
+      ]
+    },
+    {
+      "from": 107.4,
+      "to": 118.7,
+      "items": [
+        { "type": "row", "at": 107.5, "items": [
+          { "type": "icon", "icon": "piggy", "size": "l", "label": "Livret A", "at": 107.6 },
+          { "type": "icon", "icon": "piggy", "size": "l", "label": "LDDS", "at": 109.2 }
+        ] },
+        { "type": "row", "at": 110.9, "items": [
+          { "type": "icon", "icon": "bank", "size": "m", "at": 110.9 },
+          { "type": "text", "size": "small", "text": "Taux et plafonds fixés par les pouvoirs publics", "at": 111.2 }
+        ] },
+        { "type": "text", "size": "small", "text": "Ces règles changent : vérifie à la date de ta décision", "at": 115.0 }
+      ]
+    },
+    {
+      "from": 118.7,
+      "to": 132.2,
+      "items": [
+        { "type": "text", "size": "big", "text": "Rôle : la [[sécurité]]", "at": 118.8, "out": 125.1 },
+        { "type": "chart", "at": 125.3, "lines": [
+          { "label": "en bourse", "values": [50, 60, 70, 45, 25, 20], "at": 125.5, "until": 129.5, "tone": "loss" }
+        ] },
+        { "type": "text", "size": "mid", "text": "Vendre juste après la [[baisse|loss]]", "at": 129.0 }
+      ]
+    },
+    {
+      "from": 132.2,
+      "to": 148.8,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Deux mots à connaître", "at": 132.3, "out": 135.8, "hide": true },
+        { "type": "cards", "at": 135.9, "items": [
+          { "icon": "clock", "title": "Liquidité", "sub": "récupérer son argent sans perdre", "at": 136.0 }
+        ] },
+        { "type": "chips", "at": 141.9, "items": [
+          { "text": "Plus c’est rapide", "at": 141.9 },
+          { "text": "→", "at": 143.0 },
+          { "text": "plus c’est liquide", "at": 143.3, "tone": "accent" }
+        ] },
+        { "type": "text", "size": "mid", "text": "Rendement réel", "at": 144.4 }
+      ]
+    },
+    {
+      "from": 148.8,
+      "to": 160.1,
+      "items": [
+        { "type": "chips", "at": 148.9, "items": [
+          { "text": "Rendement", "at": 149.0 },
+          { "text": "−", "at": 149.6 },
+          { "text": "inflation", "at": 150.0, "tone": "loss" },
+          { "text": "=", "at": 151.0 },
+          { "text": "réel", "at": 151.4, "tone": "accent" }
+        ] },
+        { "type": "chart", "at": 151.8, "baseline": { "value": 0, "label": "0" }, "lines": [
+          { "label": "taux du livret", "values": [10, 10, 10, 10, 10], "at": 152.0, "until": 154.5, "tone": "muted" },
+          { "label": "prix", "values": [5, 12, 20, 28, 36], "at": 153.0, "until": 155.8, "tone": "loss" }
+        ] },
+        { "type": "text", "size": "mid", "text": "Réel parfois [[négatif|loss]]", "at": 156.7 },
+        { "type": "text", "size": "small", "text": "Le prix de la sécurité", "at": 158.0 }
+      ]
+    },
+    {
+      "from": 160.1,
+      "to": 173.3,
+      "items": [
+        { "type": "text", "size": "mid", "text": "L’ordre conseillé", "at": 160.2 },
+        { "type": "steps", "at": 163.1, "items": [
+          { "text": "Réserve", "icon": "umbrella", "at": 163.2 },
+          { "text": "Dettes coûteuses", "icon": "card", "at": 166.3 },
+          { "text": "Projets, placements", "icon": "rocket", "at": 168.9 }
+        ] }
+      ]
+    },
+    {
+      "from": 173.3,
+      "to": 192.2,
+      "items": [
+        { "type": "text", "size": "mid", "text": "La réserve qui sert à [[tout]]", "at": 173.4, "out": 180.0, "hide": true },
+        { "type": "compare", "at": 180.1, "left": { "title": "Plaisir", "icon": "cross", "items": [
+          { "text": "Vacances", "at": 181.0 },
+          { "text": "Achat plaisir", "at": 183.0 }
+        ] }, "right": { "title": "Urgence", "icon": "check", "items": [
+          { "text": "Voiture en panne", "at": 186.0 },
+          { "text": "C’est son rôle", "at": 188.0 }
+        ] } },
+        { "type": "text", "size": "small", "text": "Pas un échec", "at": 190.6 }
+      ]
+    },
+    {
+      "from": 192.2,
+      "to": 205.4,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Astuce : [[sépare tes comptes]]", "at": 192.3 },
+        { "type": "row", "at": 194.8, "items": [
+          { "type": "icon", "icon": "umbrella", "size": "l", "label": "la réserve", "at": 194.9 },
+          { "type": "icon", "icon": "rocket", "size": "l", "label": "les projets", "at": 196.4 }
+        ] },
+        { "type": "icon", "icon": "lock", "at": 197.8 },
+        { "type": "text", "size": "mid", "text": "Après un imprévu : [[reconstituer]]", "at": 199.9 }
+      ]
+    },
+    {
+      "from": 205.4,
+      "to": 218.6,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Montants et durées : des [[repères]]", "at": 205.5 },
+        { "type": "row", "at": 210.2, "items": [
+          { "type": "icon", "icon": "percent", "label": "taux", "at": 210.2 },
+          { "type": "icon", "icon": "scale", "label": "plafonds", "at": 211.2 }
+        ] },
+        { "type": "text", "size": "small", "text": "Change : vérifie sur service-public.fr", "at": 212.6 }
+      ]
+    },
+    {
+      "from": 218.6,
+      "to": 233.8,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Karim", "at": 218.7, "out": 223.4, "hide": true },
+        { "type": "counter", "label": "Dépenses essentielles par mois", "from": 0, "to": 1500, "at": 223.6, "until": 226.0 },
+        { "type": "icons", "icon": "house", "count": 1, "at": 226.4, "label": "logement" },
+        { "type": "row", "at": 227.0, "items": [
+          { "type": "icon", "icon": "basket", "size": "s", "label": "nourriture", "at": 227.0 },
+          { "type": "icon", "icon": "car", "size": "s", "label": "transport", "at": 228.2 },
+          { "type": "icon", "icon": "shield", "size": "s", "label": "assurances", "at": 229.4 }
+        ] },
+        { "type": "text", "size": "small", "text": "CDI : contrat stable", "at": 231.0 },
+        { "type": "actor", "character": "client", "name": "Karim", "at": 223.6 }
+      ]
+    },
+    {
+      "from": 233.8,
+      "to": 249.5,
+      "items": [
+        { "type": "chips", "at": 233.9, "items": [
+          { "text": "1 500 €", "at": 233.9 },
+          { "text": "×", "at": 234.9 },
+          { "text": "3 mois", "at": 235.3 },
+          { "text": "=", "at": 236.2 },
+          { "text": "4 500 €", "at": 236.8, "tone": "accent" }
+        ] },
+        { "type": "compare", "at": 238.0, "left": { "title": "Sa sœur", "icon": "briefcase", "items": [
+          { "text": "Indépendante", "at": 238.5 },
+          { "text": "Revenus irréguliers", "at": 240.0 }
+        ] }, "right": { "title": "Elle vise", "icon": "umbrella", "items": [
+          { "text": "6 mois de dépenses", "at": 241.4 }
+        ] } },
+        { "type": "row", "at": 244.2, "items": [
+          { "type": "icon", "icon": "piggy", "label": "livret disponible", "at": 244.2 },
+          { "type": "icon", "icon": "bank", "tone": "muted", "label": "compte courant séparé", "at": 246.5 }
+        ] }
+      ]
+    },
+    {
+      "from": 249.5,
+      "to": 266,
+      "items": [
+        { "type": "text", "size": "big", "text": "Pour résumer", "at": 249.6, "out": 250.9, "hide": true },
+        { "type": "list", "style": "check", "at": 251.0, "items": [
+          { "text": "Un matelas pour les imprévus", "at": 251.1 },
+          { "text": "3 à 6 mois de dépenses essentielles", "at": 254.3 },
+          { "text": "Disponible et sans risque", "at": 258.9 },
+          { "text": "Avant les placements", "at": 261.4 }
+        ] },
+        { "type": "text", "size": "small", "text": "À bientôt", "at": 264.0 }
+      ]
+    }
+  ]
+}

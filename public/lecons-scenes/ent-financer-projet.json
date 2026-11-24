@@ -1,0 +1,823 @@
+{
+ "lesson": "ent-financer-projet",
+ "version": "1.0.0",
+ "scenes": [
+  {
+   "from": 0,
+   "to": 22.4,
+   "items": [
+    {
+     "type": "text",
+     "size": "title",
+     "text": "Financer son projet",
+     "at": 0.2
+    },
+    {
+     "type": "row",
+     "at": 7.7,
+     "items": [
+      {
+       "type": "icon",
+       "icon": "house",
+       "label": "chez soi",
+       "at": 7.7
+      },
+      {
+       "type": "icon",
+       "icon": "bank",
+       "label": "banque",
+       "at": 8.6
+      },
+      {
+       "type": "icon",
+       "icon": "users",
+       "label": "investisseurs",
+       "at": 9.4
+      },
+      {
+       "type": "icon",
+       "icon": "gift",
+       "label": "aides",
+       "at": 10.4
+      }
+     ]
+    },
+    {
+     "type": "chips",
+     "at": 11.8,
+     "items": [
+      {
+       "text": "Un coût",
+       "at": 12.0
+      },
+      {
+       "text": "Des conditions",
+       "at": 13.4
+      },
+      {
+       "text": "Un bon moment",
+       "at": 14.8
+      }
+     ]
+    },
+    {
+     "type": "steps",
+     "at": 17.0,
+     "items": [
+      {
+       "text": "Mesurer ton besoin",
+       "icon": "calculator",
+       "at": 17.2
+      },
+      {
+       "text": "Choisir la source",
+       "icon": "target",
+       "at": 19.6
+      }
+     ]
+    },
+    {
+     "type": "actor",
+     "character": "entrepreneuse",
+     "name": "toi",
+     "at": 3.0,
+     "think": {
+      "text": "?",
+      "at": 6.2
+     }
+    }
+   ]
+  },
+  {
+   "from": 22.4,
+   "to": 44.6,
+   "items": [
+    {
+     "type": "compare",
+     "at": 24.1,
+     "left": {
+      "title": "Pas assez d’argent",
+      "icon": "alert",
+      "items": [
+       {
+        "text": "Un projet viable échoue",
+        "at": 24.3
+       }
+      ]
+     },
+     "right": {
+      "title": "Trop, ou mauvais partenaires",
+      "icon": "lock",
+      "items": [
+       {
+        "text": "Perdre le contrôle",
+        "at": 29.0
+       },
+       {
+        "text": "Croissance imposée",
+        "at": 32.8
+       }
+      ]
+     }
+    },
+    {
+     "type": "chips",
+     "at": 36.9,
+     "items": [
+      {
+       "text": "Combien",
+       "at": 37.2
+      },
+      {
+       "text": "Pour quoi",
+       "at": 38.5
+      },
+      {
+       "text": "Pour quand",
+       "at": 39.8
+      }
+     ]
+    },
+    {
+     "type": "icon",
+     "icon": "calculator",
+     "label": "le prévisionnel financier",
+     "at": 41.2
+    }
+   ]
+  },
+  {
+   "from": 44.6,
+   "to": 68.8,
+   "items": [
+    {
+     "type": "text",
+     "size": "mid",
+     "text": "Besoin de démarrage : [[3 choses]]",
+     "at": 46.7
+    },
+    {
+     "type": "cards",
+     "at": 52.0,
+     "items": [
+      {
+       "icon": "truck",
+       "title": "Investissements",
+       "sub": "matériel, travaux, logiciel, dépôt de garantie",
+       "at": 52.0
+      },
+      {
+       "icon": "box",
+       "title": "BFR",
+       "sub": "stock et délais de paiement des clients",
+       "at": 57.9
+      },
+      {
+       "icon": "shield",
+       "title": "Trésorerie de sécurité",
+       "sub": "premiers mois déficitaires",
+       "at": 63.7
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "from": 68.8,
+   "to": 78.8,
+   "items": [
+    {
+     "type": "text",
+     "size": "mid",
+     "text": "Le plan de financement",
+     "at": 68.9
+    },
+    {
+     "type": "compare",
+     "at": 71.2,
+     "left": {
+      "title": "Besoin",
+      "icon": "target",
+      "items": [
+       {
+        "text": "Combien il faut",
+        "at": 71.3
+       }
+      ]
+     },
+     "right": {
+      "title": "Ressources",
+      "icon": "coins",
+      "items": [
+       {
+        "text": "Apport personnel",
+        "at": 71.8
+       },
+       {
+        "text": "Prêts",
+        "at": 73.4
+       },
+       {
+        "text": "Subventions",
+        "at": 74.6
+       },
+       {
+        "text": "Levée de fonds",
+        "at": 75.8
+       }
+      ]
+     }
+    },
+    {
+     "type": "icon",
+     "icon": "scale",
+     "tone": "accent",
+     "label": "équilibré",
+     "at": 77.1
+    }
+   ]
+  },
+  {
+   "from": 78.8,
+   "to": 84.9,
+   "items": [
+    {
+     "type": "chart",
+     "at": 78.8,
+     "baseline": {
+      "value": 0,
+      "label": "0 €"
+     },
+     "lines": [
+      {
+       "label": "ton compte",
+       "values": [
+        20,
+        14,
+        9,
+        12,
+        18,
+        24
+       ],
+       "at": 79.0,
+       "until": 84.0,
+       "tone": "gain"
+      }
+     ]
+    },
+    {
+     "type": "text",
+     "size": "small",
+     "text": "Jamais sous zéro",
+     "at": 82.5
+    }
+   ]
+  },
+  {
+   "from": 84.9,
+   "to": 104.1,
+   "items": [
+    {
+     "type": "text",
+     "size": "mid",
+     "text": "Deux grandes familles",
+     "at": 85.0
+    },
+    {
+     "type": "compare",
+     "at": 87.3,
+     "left": {
+      "title": "La dette",
+      "icon": "bank",
+      "items": [
+       {
+        "text": "Tu rembourses",
+        "at": 87.5
+       },
+       {
+        "text": "Avec des intérêts",
+        "at": 89.0
+       },
+       {
+        "text": "Tu gardes le contrôle",
+        "at": 90.6
+       }
+      ]
+     },
+     "right": {
+      "title": "Fonds propres",
+      "icon": "users",
+      "items": [
+       {
+        "text": "Entrent au capital",
+        "at": 93.2
+       },
+       {
+        "text": "Pas de remboursement",
+        "at": 99.5
+       },
+       {
+        "text": "Décisions et gains partagés",
+        "at": 100.9
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "from": 104.1,
+   "to": 115.6,
+   "items": [
+    {
+     "type": "text",
+     "size": "mid",
+     "text": "Les principales sources",
+     "at": 106.3
+    },
+    {
+     "type": "row",
+     "at": 108.3,
+     "items": [
+      {
+       "type": "icon",
+       "icon": "wallet",
+       "size": "l",
+       "label": "apport personnel",
+       "at": 108.4
+      },
+      {
+       "type": "icon",
+       "icon": "heart",
+       "size": "l",
+       "label": "entourage : love money",
+       "at": 110.2
+      }
+     ]
+    },
+    {
+     "type": "text",
+     "size": "small",
+     "text": "Ils rassurent les autres financeurs",
+     "at": 113.3
+    }
+   ]
+  },
+  {
+   "from": 115.6,
+   "to": 130.1,
+   "items": [
+    {
+     "type": "text",
+     "size": "mid",
+     "text": "[[Prêt d’honneur]]",
+     "at": 115.7
+    },
+    {
+     "type": "chips",
+     "at": 117.8,
+     "items": [
+      {
+       "text": "Sans intérêt",
+       "at": 118.0
+      },
+      {
+       "text": "Sans garantie",
+       "at": 119.4
+      },
+      {
+       "text": "À toi, personnellement",
+       "at": 121.0
+      }
+     ]
+    },
+    {
+     "type": "cards",
+     "at": 122.4,
+     "items": [
+      {
+       "icon": "handshake",
+       "title": "Initiative France",
+       "sub": "",
+       "at": 122.6
+      },
+      {
+       "icon": "users",
+       "title": "Réseau Entreprendre",
+       "sub": "",
+       "at": 124.2
+      }
+     ]
+    },
+    {
+     "type": "text",
+     "size": "small",
+     "text": "Renforce l’apport, ouvre la porte de la banque",
+     "at": 125.8
+    }
+   ]
+  },
+  {
+   "from": 130.1,
+   "to": 142.3,
+   "items": [
+    {
+     "type": "row",
+     "at": 130.2,
+     "items": [
+      {
+       "type": "icon",
+       "icon": "bank",
+       "at": 130.2
+      },
+      {
+       "type": "text",
+       "size": "mid",
+       "text": "[[Prêt bancaire]] : les investissements",
+       "at": 130.3
+      }
+     ]
+    },
+    {
+     "type": "list",
+     "style": "check",
+     "at": 133.9,
+     "items": [
+      {
+       "text": "Ton apport",
+       "at": 134.0
+      },
+      {
+       "text": "Ton prévisionnel",
+       "at": 135.3
+      },
+      {
+       "text": "Ton expérience",
+       "at": 136.6
+      }
+     ]
+    },
+    {
+     "type": "row",
+     "at": 138.0,
+     "items": [
+      {
+       "type": "icon",
+       "icon": "shield",
+       "tone": "accent",
+       "at": 138.0
+      },
+      {
+       "type": "text",
+       "size": "small",
+       "text": "Bpifrance garantit une partie",
+       "at": 138.1
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "from": 142.3,
+   "to": 150.4,
+   "items": [
+    {
+     "type": "text",
+     "size": "mid",
+     "text": "Aides et subventions",
+     "at": 142.4
+    },
+    {
+     "type": "cards",
+     "at": 144.0,
+     "items": [
+      {
+       "icon": "flag",
+       "title": "Régions",
+       "sub": "",
+       "at": 144.1
+      },
+      {
+       "icon": "person",
+       "title": "France Travail",
+       "sub": "demandeurs d’emploi",
+       "at": 145.6
+      }
+     ]
+    },
+    {
+     "type": "text",
+     "size": "small",
+     "text": "Conditions et délais précis",
+     "at": 148.1
+    }
+   ]
+  },
+  {
+   "from": 150.4,
+   "to": 161.5,
+   "items": [
+    {
+     "type": "text",
+     "size": "mid",
+     "text": "Financement participatif",
+     "at": 150.5
+    },
+    {
+     "type": "chips",
+     "at": 152.8,
+     "items": [
+      {
+       "text": "Dons et contreparties",
+       "at": 153.0
+      },
+      {
+       "text": "Prêts",
+       "at": 154.6
+      },
+      {
+       "text": "Participations",
+       "at": 155.8
+      }
+     ]
+    },
+    {
+     "type": "icon",
+     "icon": "users",
+     "label": "test de l’intérêt du public",
+     "at": 158.6
+    }
+   ]
+  },
+  {
+   "from": 161.5,
+   "to": 174.6,
+   "items": [
+    {
+     "type": "text",
+     "size": "mid",
+     "text": "Business angels et capital-risque",
+     "at": 161.6
+    },
+    {
+     "type": "icon",
+     "icon": "rocket",
+     "size": "l",
+     "label": "très fort potentiel de croissance",
+     "at": 165.1
+    },
+    {
+     "type": "icon",
+     "icon": "pie",
+     "label": "en échange d’une part du capital",
+     "at": 168.4
+    },
+    {
+     "type": "text",
+     "size": "small",
+     "text": "Très peu de projets",
+     "at": 171.8
+    }
+   ]
+  },
+  {
+   "from": 174.6,
+   "to": 191.8,
+   "items": [
+    {
+     "type": "text",
+     "size": "mid",
+     "text": "Investisseurs = [[dilution|loss]]",
+     "at": 178.9
+    },
+    {
+     "type": "chart",
+     "at": 181.8,
+     "lines": [
+      {
+       "label": "ta part",
+       "values": [
+        100,
+        78,
+        60,
+        46
+       ],
+       "at": 181.9,
+       "until": 185.0,
+       "tone": "loss"
+      }
+     ]
+    },
+    {
+     "type": "icon",
+     "icon": "handshake",
+     "label": "pacte d’associés : décisions, sorties, droits",
+     "at": 185.2
+    }
+   ]
+  },
+  {
+   "from": 191.8,
+   "to": 206.6,
+   "items": [
+    {
+     "type": "icon",
+     "icon": "lock",
+     "size": "l",
+     "tone": "loss",
+     "label": "caution personnelle",
+     "at": 191.9
+    },
+    {
+     "type": "text",
+     "size": "small",
+     "text": "Tes biens personnels sont engagés",
+     "at": 194.2
+    },
+    {
+     "type": "text",
+     "size": "mid",
+     "text": "Lis chaque engagement",
+     "at": 199.3
+    },
+    {
+     "type": "list",
+     "style": "cross",
+     "at": 200.9,
+     "items": [
+      {
+       "text": "Crédit à la consommation",
+       "at": 201.0
+      },
+      {
+       "text": "Découvert durable",
+       "at": 203.4
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "from": 206.6,
+   "to": 226.0,
+   "items": [
+    {
+     "type": "text",
+     "size": "mid",
+     "text": "Yanis · un food truck",
+     "at": 206.7
+    },
+    {
+     "type": "waterfall",
+     "at": 215.4,
+     "rows": [
+      {
+       "label": "Camion aménagé",
+       "value": 38000,
+       "kind": "start",
+       "at": 215.6
+      },
+      {
+       "label": "Stock, démarrage",
+       "value": 4000,
+       "kind": "plus",
+       "at": 218.8
+      },
+      {
+       "label": "Trésorerie de sécurité",
+       "value": 6000,
+       "kind": "plus",
+       "at": 221.0
+      },
+      {
+       "label": "Besoin total",
+       "value": 48000,
+       "kind": "total",
+       "at": 223.9,
+       "tone": "accent"
+      }
+     ]
+    },
+    {
+     "type": "actor",
+     "character": "artisan",
+     "name": "Yanis",
+     "at": 211.6
+    }
+   ]
+  },
+  {
+   "from": 226.0,
+   "to": 234.4,
+   "items": [
+    {
+     "type": "split",
+     "label": "Ses ressources",
+     "total": 48000,
+     "at": 226.2,
+     "parts": [
+      {
+       "label": "apport",
+       "value": 8000,
+       "at": 227.4
+      },
+      {
+       "label": "prêt d’honneur",
+       "value": 10000,
+       "at": 229.4,
+       "tone": "muted"
+      },
+      {
+       "label": "prêt bancaire",
+       "value": 30000,
+       "at": 231.0,
+       "tone": "accent"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "from": 234.4,
+   "to": 243.0,
+   "items": [
+    {
+     "type": "chart",
+     "at": 234.5,
+     "baseline": {
+      "value": 0,
+      "label": "0 €"
+     },
+     "lines": [
+      {
+       "label": "trésorerie",
+       "values": [
+        24,
+        18,
+        10,
+        2,
+        10,
+        20
+       ],
+       "at": 234.6,
+       "until": 237.8,
+       "tone": "loss"
+      }
+     ]
+    },
+    {
+     "type": "text",
+     "size": "small",
+     "text": "Creux en janvier",
+     "at": 236.0
+    },
+    {
+     "type": "icon",
+     "icon": "calendar",
+     "tone": "accent",
+     "label": "différé de 3 mois",
+     "at": 238.5
+    }
+   ]
+  },
+  {
+   "from": 243.0,
+   "to": 260,
+   "items": [
+    {
+     "type": "text",
+     "size": "big",
+     "text": "Pour résumer",
+     "at": 243.1,
+     "out": 244.3,
+     "hide": true
+    },
+    {
+     "type": "list",
+     "style": "check",
+     "at": 244.5,
+     "items": [
+      {
+       "text": "Mesure ton besoin",
+       "at": 244.6
+      },
+      {
+       "text": "Combine plusieurs sources",
+       "at": 247.2
+      },
+      {
+       "text": "Dette ≠ fonds propres",
+       "at": 252.4
+      }
+     ]
+    },
+    {
+     "type": "text",
+     "size": "small",
+     "text": "À bientôt",
+     "at": 257.8
+    }
+   ]
+  }
+ ]
+}

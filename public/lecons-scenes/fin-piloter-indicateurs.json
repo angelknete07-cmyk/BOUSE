@@ -1,0 +1,277 @@
+{
+  "lesson": "fin-piloter-indicateurs",
+  "version": "1.0.0",
+  "scenes": [
+    {
+      "from": 0,
+      "to": 10.6,
+      "items": [
+        { "type": "text", "size": "title", "text": "Piloter avec des indicateurs", "at": 0.2 },
+        { "type": "compare", "at": 3.8, "left": {
+          "title": "Cent graphiques", "icon": "chart-bar", "items": [
+            { "text": "On se perd", "at": 5.0 }
+          ] }, "right": {
+          "title": "Quelques chiffres", "icon": "target", "items": [
+            { "text": "Bien choisis", "at": 6.0 }
+          ] } },
+        { "type": "text", "size": "mid", "text": "Mais [[lesquels]] ?", "at": 8.5 }
+      ]
+    },
+    {
+      "from": 10.6,
+      "to": 18.6,
+      "items": [
+        { "type": "steps", "at": 11.8, "items": [
+          { "text": "Choisir", "icon": "target", "at": 12.2 },
+          { "text": "Calculer", "icon": "calculator", "at": 14.4 },
+          { "text": "Lire", "icon": "eye", "at": 16.0 }
+        ] },
+        { "type": "text", "size": "small", "text": "Pour piloter une petite entreprise", "at": 16.8 }
+      ]
+    },
+    {
+      "from": 18.6,
+      "to": 40.2,
+      "items": [
+        { "type": "text", "size": "big", "text": "Pourquoi apprendre ça ?", "at": 18.7, "out": 20.0, "hide": true },
+        { "type": "timeline", "at": 20.2, "points": [
+          { "label": "Les faits", "pos": 8, "at": 20.4 },
+          { "label": "Comptes annuels", "pos": 92, "at": 21.4 }
+        ], "span": { "label": "des mois plus tard", "from": 8, "to": 92, "at": 21.6 } },
+        { "type": "chips", "at": 23.4, "items": [
+          { "text": "prix", "at": 24.4 },
+          { "text": "commandes", "at": 25.6 },
+          { "text": "encaissements", "at": 27.0 },
+          { "text": "stocks", "at": 29.0 }
+        ] },
+        { "type": "chips", "at": 31.0, "items": [
+          { "text": "indicateur qui dérive", "at": 31.2 },
+          { "text": "→", "at": 33.0 },
+          { "text": "action", "at": 33.4, "tone": "accent" }
+        ] },
+        { "type": "row", "at": 34.5, "items": [
+          { "type": "icon", "icon": "eye", "tone": "muted", "at": 34.5 },
+          { "type": "text", "size": "small", "text": "Personne ne le regarde : il peut disparaître", "at": 35.8, "tone": "muted" }
+        ] }
+      ]
+    },
+    {
+      "from": 40.2,
+      "to": 59.8,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Trois familles d’indicateurs", "at": 40.3, "out": 46.0, "hide": true },
+        { "type": "text", "size": "mid", "text": "[[1 ·]] L’activité", "at": 46.4 },
+        { "type": "chips", "at": 48.9, "items": [
+          { "text": "CA du mois", "at": 49.0 },
+          { "text": "CA cumulé", "at": 50.2 },
+          { "text": "vs prévisionnel", "at": 51.4, "tone": "muted" },
+          { "text": "vs année d’avant", "at": 52.6, "tone": "muted" }
+        ] },
+        { "type": "row", "at": 54.4, "items": [
+          { "type": "icon", "icon": "users", "size": "l", "label": "nombre de clients", "at": 54.4 },
+          { "type": "icon", "icon": "basket", "size": "l", "label": "panier moyen", "at": 56.4 }
+        ] }
+      ]
+    },
+    {
+      "from": 59.8,
+      "to": 81.5,
+      "items": [
+        { "type": "text", "size": "mid", "text": "[[2 ·]] La marge", "at": 59.9 },
+        { "type": "chips", "at": 62.2, "items": [
+          { "text": "marge", "at": 62.4 },
+          { "text": "÷", "at": 64.0 },
+          { "text": "CA hors taxes", "at": 64.4 },
+          { "text": "=", "at": 65.6 },
+          { "text": "taux de marge", "at": 65.9, "tone": "accent" }
+        ] },
+        { "type": "compare", "at": 66.9, "left": {
+          "title": "Commerce", "icon": "shop", "items": [
+            { "text": "Ventes − coût d’achat", "at": 67.2 }
+          ] }, "right": {
+          "title": "Service", "icon": "laptop", "items": [
+            { "text": "Marge sur coûts variables", "at": 73.4 }
+          ] } },
+        { "type": "row", "at": 76.5, "items": [
+          { "type": "icon", "icon": "chart-down", "tone": "loss", "at": 76.5 },
+          { "type": "text", "size": "small", "text": "Marge qui s’érode : coûts en hausse, remises", "at": 77.0 }
+        ] }
+      ]
+    },
+    {
+      "from": 81.5,
+      "to": 97.8,
+      "items": [
+        { "type": "text", "size": "mid", "text": "[[3 ·]] La trésorerie et le cycle", "at": 81.6 },
+        { "type": "list", "style": "dot", "at": 85.1, "items": [
+          { "text": "Solde et prévision à 3 mois", "at": 85.2 },
+          { "text": "Délai client moyen", "at": 88.7 },
+          { "text": "Impayés", "at": 90.6 },
+          { "text": "Rotation des stocks : fois par an", "at": 92.4 }
+        ] }
+      ]
+    },
+    {
+      "from": 97.8,
+      "to": 114.8,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Rentabilité", "at": 97.9 },
+        { "type": "chips", "at": 103.6, "items": [
+          { "text": "EBE", "at": 103.8 },
+          { "text": "÷", "at": 107.4 },
+          { "text": "CA", "at": 107.8 },
+          { "text": "=", "at": 109.0 },
+          { "text": "taux d’EBE", "at": 109.3, "tone": "accent" }
+        ] },
+        { "type": "chips", "at": 111.1, "items": [
+          { "text": "résultat net", "at": 111.2 },
+          { "text": "÷", "at": 112.4 },
+          { "text": "CA", "at": 112.8 }
+        ] }
+      ]
+    },
+    {
+      "from": 114.8,
+      "to": 130.5,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Solidité", "at": 114.9 },
+        { "type": "chips", "at": 115.2, "items": [
+          { "text": "dettes financières", "at": 115.6 },
+          { "text": "÷", "at": 118.2 },
+          { "text": "capitaux propres", "at": 118.6 }
+        ] },
+        { "type": "chips", "at": 121.3, "items": [
+          { "text": "dettes financières", "at": 121.6 },
+          { "text": "÷", "at": 124.4 },
+          { "text": "CAF", "at": 124.8 },
+          { "text": "=", "at": 126.8 },
+          { "text": "années", "at": 127.4, "tone": "accent" }
+        ] }
+      ]
+    },
+    {
+      "from": 130.5,
+      "to": 144.2,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Un tableau de bord : [[une page]]", "at": 130.6 },
+        { "type": "icons", "icon": "target", "count": 5, "step": 0.4, "at": 132.8, "label": "indicateur" },
+        { "type": "chips", "at": 135.2, "items": [
+          { "text": "un objectif", "at": 135.6 },
+          { "text": "un seuil d’alerte", "at": 137.2, "tone": "loss" }
+        ] },
+        { "type": "row", "at": 139.9, "items": [
+          { "type": "icon", "icon": "calendar", "at": 139.9 },
+          { "type": "text", "size": "small", "text": "À date fixe : chaque semaine ou chaque mois", "at": 140.4 }
+        ] }
+      ]
+    },
+    {
+      "from": 144.2,
+      "to": 166.9,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Un ratio seul ne dit [[rien]]", "at": 148.4 },
+        { "type": "cards", "at": 150.5, "items": [
+          { "icon": "calendar", "title": "Dans le temps", "at": 150.6 },
+          { "icon": "target", "title": "À un objectif", "at": 152.0 },
+          { "icon": "users", "title": "Au secteur", "at": 153.4 }
+        ] },
+        { "type": "list", "style": "cross", "at": 158.3, "items": [
+          { "text": "Abonnés", "at": 158.4 },
+          { "text": "Visites", "at": 160.0 },
+          { "text": "Devis envoyés", "at": 161.4 }
+        ] },
+        { "type": "chips", "at": 163.5, "items": [
+          { "text": "chaque indicateur", "at": 163.5 },
+          { "text": "→", "at": 164.8 },
+          { "text": "cash ou marge", "at": 165.0, "tone": "accent" }
+        ] }
+      ]
+    },
+    {
+      "from": 166.9,
+      "to": 185.0,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Exemple fictif · une épicerie fine", "at": 167.0 },
+        { "type": "row", "at": 171.4, "items": [
+          { "type": "icon", "icon": "calendar", "label": "chaque lundi", "at": 171.4 },
+          { "type": "icon", "icon": "shop", "label": "six chiffres", "at": 173.0 }
+        ] },
+        { "type": "chips", "at": 175.0, "items": [
+          { "text": "ventes de la semaine", "at": 175.2 },
+          { "text": "panier moyen", "at": 177.0 },
+          { "text": "taux de marge", "at": 178.6, "tone": "accent" },
+          { "text": "stock en jours de ventes", "at": 179.8 },
+          { "text": "trésorerie à 90 jours", "at": 181.6 },
+          { "text": "périmés jetés", "at": 183.4 }
+        ] },
+        { "type": "actor", "character": "artisan", "name": "le gérant", "at": 169.8 }
+      ]
+    },
+    {
+      "from": 185.0,
+      "to": 199.0,
+      "items": [
+        { "type": "counter", "label": "Taux de marge", "from": 38, "to": 33, "unit": " %", "tone": "loss", "bar": true, "max": 100, "at": 185.4, "until": 189.4 },
+        { "type": "chips", "at": 188.6, "items": [
+          { "text": "les ventes", "at": 188.8 },
+          { "text": "progressent", "at": 189.6, "tone": "gain" }
+        ] },
+        { "type": "row", "at": 191.1, "items": [
+          { "type": "icon", "icon": "percent", "tone": "loss", "label": "promotions répétées", "at": 191.1 },
+          { "type": "icon", "icon": "gift", "tone": "gain", "label": "offre groupée", "at": 195.2 }
+        ] }
+      ]
+    },
+    {
+      "from": 199.0,
+      "to": 213.4,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Pourquoi peu d’indicateurs suffisent", "at": 199.1 },
+        { "type": "icon", "icon": "car", "size": "l", "label": "le tableau de bord d’une voiture", "at": 203.2 },
+        { "type": "chips", "at": 205.2, "items": [
+          { "text": "vitesse", "at": 205.6 },
+          { "text": "carburant", "at": 207.4 },
+          { "text": "température", "at": 209.0 }
+        ] }
+      ]
+    },
+    {
+      "from": 213.4,
+      "to": 228.5,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Le bon sens, ou l’alerte", "at": 213.5, "out": 218.6, "hide": true },
+        { "type": "text", "size": "big", "text": "Si ce chiffre bouge, que [[faire]] ?", "at": 218.9 },
+        { "type": "row", "at": 224.7, "items": [
+          { "type": "icon", "icon": "cross", "tone": "loss", "at": 224.7 },
+          { "type": "text", "size": "small", "text": "Réponse « rien » : pas un bon indicateur", "at": 225.0 }
+        ] }
+      ]
+    },
+    {
+      "from": 228.5,
+      "to": 243.0,
+      "items": [
+        { "type": "counter", "label": "Délai client moyen", "from": 30, "to": 45, "unit": " jours", "tone": "loss", "at": 230.5, "until": 234.0 },
+        { "type": "row", "at": 235.1, "items": [
+          { "type": "icon", "icon": "mail", "label": "relancer plus tôt", "at": 235.1 },
+          { "type": "icon", "icon": "coin", "label": "demander des acomptes", "at": 236.6 }
+        ] },
+        { "type": "text", "size": "mid", "text": "L’indicateur [[déclenche une action]]", "at": 238.3 }
+      ]
+    },
+    {
+      "from": 243.0,
+      "to": 257,
+      "items": [
+        { "type": "text", "size": "big", "text": "Pour résumer", "at": 243.1, "out": 244.2, "hide": true },
+        { "type": "steps", "at": 244.3, "items": [
+          { "text": "5 à 10 indicateurs", "icon": "target", "at": 244.4 },
+          { "text": "Comparer", "icon": "scale", "at": 247.9 },
+          { "text": "Relier au cash", "icon": "link", "at": 250.5 },
+          { "text": "Agir", "icon": "rocket", "at": 252.9 }
+        ] },
+        { "type": "text", "size": "small", "text": "À bientôt", "at": 255.0 }
+      ]
+    }
+  ]
+}

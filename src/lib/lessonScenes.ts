@@ -231,7 +231,8 @@ export function progress(t: number, a: number, b: number): number {
 export function money(value: number, unit = " €"): string {
   const sign = value < 0 ? "−" : "";
   const abs = Math.abs(value);
-  const digits = Number.isInteger(abs) ? 0 : 1;
+  // Des centimes s'écrivent 20,10 € ; un taux non entier garde une décimale.
+  const digits = Number.isInteger(abs) ? 0 : unit.includes("€") ? 2 : 1;
   return `${sign}${abs.toLocaleString("fr-FR", { maximumFractionDigits: digits, minimumFractionDigits: digits })}${unit}`;
 }
 

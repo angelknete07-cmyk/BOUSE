@@ -1,0 +1,245 @@
+{
+  "lesson": "fp-banque-arnaques",
+  "version": "1.0.0",
+  "scenes": [
+    {
+      "from": 0,
+      "to": 13.4,
+      "items": [
+        { "type": "text", "size": "title", "text": "Banque au quotidien et arnaques", "at": 0.2 },
+        { "type": "icon", "icon": "bank", "size": "l", "label": "ton compte, tous les jours", "at": 3.8 },
+        { "type": "row", "at": 6.6, "items": [
+          { "type": "icon", "icon": "invoice", "tone": "loss", "label": "frais pas vus", "at": 7.8 },
+          { "type": "icon", "icon": "alert", "tone": "loss", "label": "arnaques pas vues", "at": 10.6 }
+        ] }
+      ]
+    },
+    {
+      "from": 13.4,
+      "to": 26.1,
+      "items": [
+        { "type": "chips", "at": 13.6, "items": [
+          { "text": "les frais", "at": 14.6 },
+          { "text": "le découvert", "at": 16.4 },
+          { "text": "les moyens de paiement", "at": 18.0 }
+        ] },
+        { "type": "steps", "at": 20.2, "items": [
+          { "text": "Faux conseiller", "icon": "phone", "at": 22.4 },
+          { "text": "Faux site", "icon": "globe", "at": 24.4 }
+        ] },
+        { "type": "text", "size": "small", "text": "Reconnaître les fraudes les plus courantes", "at": 20.4 }
+      ]
+    },
+    {
+      "from": 26.1,
+      "to": 49.5,
+      "items": [
+        { "type": "text", "size": "big", "text": "Pourquoi apprendre ça ?", "at": 26.2, "out": 27.6, "hide": true },
+        { "type": "row", "at": 27.9, "items": [
+          { "type": "icon", "icon": "invoice", "label": "frais", "at": 28.2 },
+          { "type": "icon", "icon": "card", "label": "incidents", "at": 30.2 },
+          { "type": "icon", "icon": "alert", "label": "fraudes", "at": 32.2 }
+        ] },
+        { "type": "text", "size": "mid", "text": "Quelques [[réflexes]] suffisent", "at": 35.5 },
+        { "type": "chips", "at": 43.9, "items": [
+          { "text": "relevés", "at": 45.0 },
+          { "text": "alertes", "at": 46.2 },
+          { "text": "virements programmés", "at": 47.0 }
+        ] },
+        { "type": "icon", "icon": "wallet", "label": "ton premier outil de budget", "at": 40.0, "size": "s" }
+      ]
+    },
+    {
+      "from": 49.5,
+      "to": 75.3,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Les frais", "at": 51.7 },
+        { "type": "row", "at": 53.4, "items": [
+          { "type": "icon", "icon": "document", "label": "plaquette tarifaire", "at": 53.4 },
+          { "type": "icon", "icon": "mail", "label": "récapitulatif annuel", "at": 58.3 }
+        ] },
+        { "type": "text", "size": "small", "text": "Compare les deux", "at": 62.6 },
+        { "type": "list", "style": "dot", "at": 63.6, "items": [
+          { "text": "Tenue de compte", "at": 64.2 },
+          { "text": "Carte bancaire", "at": 66.2 },
+          { "text": "Commission d’intervention (incident)", "at": 67.4 },
+          { "text": "Frais de rejet (paiement refusé)", "at": 71.4 }
+        ] }
+      ]
+    },
+    {
+      "from": 75.3,
+      "to": 103.0,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Le découvert", "at": 75.4 },
+        { "type": "compare", "at": 77.1, "left": {
+          "title": "Autorisé", "icon": "bank", "items": [
+            { "text": "Un crédit, accord de la banque", "at": 77.2 },
+            { "text": "Intérêts : les agios", "at": 83.2 }
+          ] }, "right": {
+          "title": "Dépassé", "icon": "alert", "items": [
+            { "text": "Coûte plus cher", "at": 88.8 },
+            { "text": "Paiements rejetés", "at": 91.4 }
+          ] } },
+        { "type": "row", "at": 95.2, "items": [
+          { "type": "icon", "icon": "alert", "tone": "loss", "at": 95.2 },
+          { "type": "text", "size": "small", "text": "Permanent : budget à revoir, pas un financement", "at": 95.6 }
+        ] }
+      ]
+    },
+    {
+      "from": 103.0,
+      "to": 123.2,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Les moyens de paiement", "at": 103.1 },
+        { "type": "cards", "at": 104.9, "items": [
+          { "icon": "card", "title": "Carte", "sub": "débit immédiat ou différé", "at": 104.9 },
+          { "icon": "phone", "title": "Virement", "sub": "instantané : quelques secondes", "at": 109.5 },
+          { "icon": "invoice", "title": "Prélèvement", "sub": "contestable dans des délais", "at": 114.3 },
+          { "icon": "pencil", "title": "Chèque", "sub": "compte provisionné", "at": 117.7 }
+        ] }
+      ]
+    },
+    {
+      "from": 123.2,
+      "to": 134.6,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Le [[droit au compte]]", "at": 123.3 },
+        { "type": "steps", "at": 126.7, "items": [
+          { "text": "Une banque refuse", "icon": "cross", "at": 126.8 },
+          { "text": "Banque de France", "icon": "building", "at": 129.2 },
+          { "text": "Une banque désignée", "icon": "bank", "at": 131.0 },
+          { "text": "Services de base", "icon": "check", "at": 133.0 }
+        ] }
+      ]
+    },
+    {
+      "from": 134.6,
+      "to": 165.5,
+      "items": [
+        { "type": "text", "size": "mid", "text": "[[1 ·]] Le faux conseiller", "at": 140.2, "out": 148.0, "hide": true },
+        { "type": "row", "at": 142.7, "out": 148.0, "hide": true, "items": [
+          { "type": "icon", "icon": "phone", "label": "le vrai numéro de ta banque", "at": 142.8 },
+          { "type": "icon", "icon": "alert", "tone": "loss", "label": "usurpation", "at": 146.7 }
+        ] },
+        { "type": "dialog", "at": 148.2, "items": [
+          { "character": "conseiller", "name": "faux conseiller", "text": "Opération suspecte ! Valide.", "at": 148.2, "side": "left" },
+          { "character": "toi", "text": "Mon code ?", "at": 151.4, "side": "right" }
+        ] },
+        { "type": "list", "style": "cross", "at": 154.9, "items": [
+          { "text": "Jamais un code reçu par SMS", "at": 155.0 },
+          { "text": "Jamais valider pour « annuler »", "at": 160.9 }
+        ] }
+      ]
+    },
+    {
+      "from": 165.5,
+      "to": 187.9,
+      "items": [
+        { "type": "text", "size": "mid", "text": "[[2 ·]] L’hameçonnage", "at": 165.6 },
+        { "type": "chips", "at": 169.8, "items": [
+          { "text": "colis", "at": 170.0 },
+          { "text": "amende", "at": 171.2 },
+          { "text": "impôts", "at": 172.4 },
+          { "text": "compte bloqué", "at": 173.4 }
+        ] },
+        { "type": "steps", "at": 175.1, "items": [
+          { "text": "Lien", "icon": "link", "at": 175.2 },
+          { "text": "Faux site", "icon": "globe", "at": 176.4 },
+          { "text": "Identifiants volés", "icon": "key", "at": 178.0 }
+        ] },
+        { "type": "row", "at": 180.2, "items": [
+          { "type": "icon", "icon": "globe", "tone": "gain", "at": 180.2 },
+          { "type": "text", "size": "small", "text": "Tape toi-même l’adresse officielle", "at": 181.0 }
+        ] }
+      ]
+    },
+    {
+      "from": 187.9,
+      "to": 205.0,
+      "items": [
+        { "type": "text", "size": "mid", "text": "[[3 ·]] Les faux placements", "at": 188.0 },
+        { "type": "row", "at": 188.4, "items": [
+          { "type": "icon", "icon": "chart-up", "label": "rendement « garanti »", "at": 188.6 },
+          { "type": "icon", "icon": "clock", "tone": "loss", "label": "décide vite", "at": 191.4 }
+        ] },
+        { "type": "list", "style": "check", "at": 195.5, "items": [
+          { "text": "Liste noire de l’AMF", "at": 198.0 },
+          { "text": "Registre ORIAS", "at": 201.4 }
+        ] },
+        { "type": "text", "size": "small", "text": "Intermédiaire non autorisé ?", "at": 193.4 }
+      ]
+    },
+    {
+      "from": 205.0,
+      "to": 222.2,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Victime ? [[Agis vite]]", "at": 205.1 },
+        { "type": "steps", "at": 211.8, "items": [
+          { "text": "Opposition", "icon": "lock", "at": 211.8 },
+          { "text": "Signaler à la banque", "icon": "bank", "at": 216.6 },
+          { "text": "Porter plainte", "icon": "document", "at": 218.5 },
+          { "text": "Signaler en ligne", "icon": "megaphone", "at": 219.5 }
+        ] }
+      ]
+    },
+    {
+      "from": 222.2,
+      "to": 244.4,
+      "items": [
+        { "type": "compare", "at": 222.4, "left": {
+          "title": "Non autorisée", "icon": "shield", "items": [
+            { "text": "Banque : en principe remboursée", "at": 222.6 },
+            { "text": "Sauf négligence grave", "at": 226.0 }
+          ] }, "right": {
+          "title": "Validée par toi", "icon": "alert", "items": [
+            { "text": "Beaucoup plus difficile", "at": 231.8 },
+            { "text": "Même sous pression", "at": 234.4 }
+          ] } },
+        { "type": "text", "size": "mid", "text": "Ne valide jamais ce que tu n’as pas [[lancé]]", "at": 239.6 }
+      ]
+    },
+    {
+      "from": 244.4,
+      "to": 262.5,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Exemple fictif · le « service fraude »", "at": 244.5 },
+        { "type": "counter", "label": "Paiement « suspect »", "to": 980, "tone": "loss", "at": 252.6, "until": 255.0 },
+        { "type": "dialog", "at": 252.8, "items": [
+          { "character": "conseiller", "name": "faux conseiller", "text": "Valide la notification", "at": 256.4, "side": "left" },
+          { "character": "toi", "name": "Clara", "text": "Je raccroche.", "at": 261.0, "side": "right" }
+        ] }
+      ]
+    },
+    {
+      "from": 262.5,
+      "to": 275.4,
+      "items": [
+        { "type": "steps", "at": 262.6, "items": [
+          { "text": "Ouvre son appli", "icon": "phone", "at": 262.7 },
+          { "text": "Appelle le n° au dos", "icon": "card", "at": 264.2 }
+        ] },
+        { "type": "row", "at": 267.1, "items": [
+          { "type": "icon", "icon": "check", "tone": "gain", "label": "aucune opération suspecte", "at": 267.1 },
+          { "type": "icon", "icon": "alert", "tone": "loss", "label": "la notification : un virement au fraudeur", "at": 270.5 }
+        ] }
+      ]
+    },
+    {
+      "from": 275.4,
+      "to": 291,
+      "items": [
+        { "type": "text", "size": "big", "text": "Pour résumer", "at": 275.5, "out": 276.5, "hide": true },
+        { "type": "list", "style": "check", "at": 276.7, "items": [
+          { "text": "Compare les frais de ta banque", "at": 277.0 },
+          { "text": "Évite le découvert permanent", "at": 279.8 },
+          { "text": "Jamais de code, jamais valider pour annuler", "at": 281.8 }
+        ] },
+        { "type": "row", "at": 285.5, "items": [
+          { "type": "icon", "icon": "phone", "at": 285.5 },
+          { "type": "text", "size": "mid", "text": "Un doute : [[raccroche et rappelle]]", "at": 285.8 }
+        ] }
+      ]
+    }
+  ]
+}

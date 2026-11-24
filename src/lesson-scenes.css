@@ -77,8 +77,11 @@
 .ls-a.is-in.is-gone {
   opacity: 0.25;
 }
+/* Effacé pour de bon : il libère sa place (la suite de la scène remonte). */
 .ls-a.is-in.is-hidden {
+  position: absolute;
   opacity: 0;
+  visibility: hidden;
 }
 .ls-a.is-left {
   justify-self: start;

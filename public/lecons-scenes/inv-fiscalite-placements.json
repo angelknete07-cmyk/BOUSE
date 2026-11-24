@@ -1,0 +1,195 @@
+{
+  "lesson": "inv-fiscalite-placements",
+  "version": "1.0.0",
+  "scenes": [
+    {
+      "from": 0,
+      "to": 21.8,
+      "items": [
+        { "type": "text", "size": "title", "text": "La fiscalité des placements", "at": 0.2 },
+        { "type": "row", "at": 3.5, "items": [
+          { "type": "icon", "icon": "coins", "size": "l", "label": "même rendement", "at": 3.6 },
+          { "type": "text", "size": "big", "text": "[[≠]]", "at": 6.6 },
+          { "type": "icon", "icon": "wallet", "size": "l", "label": "somme gardée", "at": 7.0 }
+        ] },
+        { "type": "chips", "at": 12.0, "items": [
+          { "text": "PFU", "at": 14.4 },
+          { "text": "prélèvements sociaux", "at": 15.8 },
+          { "text": "PEA", "at": 18.0, "tone": "accent" },
+          { "text": "assurance-vie", "at": 19.2 }
+        ] }
+      ]
+    },
+    {
+      "from": 21.8,
+      "to": 36.0,
+      "items": [
+        { "type": "chips", "at": 23.7, "items": [
+          { "text": "enveloppe", "at": 24.0, "tone": "accent" },
+          { "text": "=", "at": 26.0 },
+          { "text": "le support du placement", "at": 26.4 }
+        ] },
+        { "type": "row", "at": 29.8, "items": [
+          { "type": "icon", "icon": "calendar", "at": 29.9 },
+          { "type": "text", "size": "mid", "text": "La fiscalité change souvent", "at": 30.0 }
+        ] },
+        { "type": "text", "size": "mid", "text": "Comprendre les [[mécanismes]]", "at": 31.8 }
+      ]
+    },
+    {
+      "from": 36.0,
+      "to": 52.7,
+      "items": [
+        { "type": "row", "at": 38.7, "items": [
+          { "type": "icon", "icon": "document", "size": "l", "at": 38.8 },
+          { "type": "text", "size": "mid", "text": "Compte-titres", "at": 39.0 }
+        ] },
+        { "type": "chips", "at": 41.0, "items": [
+          { "text": "intérêts", "at": 41.6 },
+          { "text": "dividendes", "at": 43.4 },
+          { "text": "plus-values", "at": 45.4 }
+        ] },
+        { "type": "text", "size": "big", "text": "[[PFU]] · « flat tax »", "at": 48.0 }
+      ]
+    },
+    {
+      "from": 52.7,
+      "to": 73.6,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Le PFU : deux parts", "at": 52.8 },
+        { "type": "split", "label": "PFU", "total": 31.4, "unit": " %", "at": 54.0, "parts": [
+          { "label": "impôt sur le revenu", "value": 12.8, "at": 54.5 },
+          { "label": "prélèvements sociaux", "value": 18.6, "at": 67.0, "tone": "accent" }
+        ] },
+        { "type": "text", "size": "small", "text": "CSG relevée en 2026, selon les sources", "at": 59.6 }
+      ]
+    },
+    {
+      "from": 73.6,
+      "to": 93.2,
+      "items": [
+        { "type": "compare", "at": 73.6,
+          "left": { "title": "PFU", "icon": "percent", "items": [
+            { "text": "12,8 % d’impôt", "at": 73.8 }
+          ] },
+          "right": { "title": "Barème progressif", "icon": "chart-up", "items": [
+            { "text": "Sur option globale", "at": 75.0 },
+            { "text": "Bon pour les faibles revenus", "at": 80.8 }
+          ] } },
+        { "type": "chips", "at": 84.1, "items": [
+          { "text": "Livret A", "at": 86.4 },
+          { "text": "LDDS", "at": 87.6 },
+          { "text": "LEP", "at": 88.6 }
+        ] },
+        { "type": "text", "size": "small", "text": "[[Exonérés|gain]] dans la limite des plafonds", "at": 89.4 }
+      ]
+    },
+    {
+      "from": 93.2,
+      "to": 114.5,
+      "items": [
+        { "type": "row", "at": 95.4, "items": [
+          { "type": "icon", "icon": "globe", "size": "l", "at": 95.5 },
+          { "type": "text", "size": "mid", "text": "PEA · actions européennes", "at": 97.0 }
+        ] },
+        { "type": "timeline", "at": 101.6, "points": [
+          { "label": "Ouverture", "pos": 6, "at": 101.6 },
+          { "label": "5 ans", "sub": "gains sans impôt sur le revenu", "pos": 94, "at": 103.0 }
+        ], "span": { "label": "détention", "from": 6, "to": 94, "at": 101.8 } },
+        { "type": "text", "size": "small", "text": "Seuls les prélèvements sociaux s’appliquent", "at": 106.4 },
+        { "type": "row", "at": 108.6, "items": [
+          { "type": "icon", "icon": "alert", "tone": "loss", "at": 108.7 },
+          { "type": "text", "size": "small", "text": "Retrait avant 5 ans : clôture + PFU", "at": 109.0 }
+        ] }
+      ]
+    },
+    {
+      "from": 114.5,
+      "to": 135.1,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Assurance-vie", "at": 114.6 },
+        { "type": "counter", "label": "Prélèvements sociaux", "from": 0, "to": 17.2, "unit": " %", "at": 118.4, "until": 121.0, "tone": "accent" },
+        { "type": "text", "size": "mid", "text": "Après [[8 ans]] : abattement annuel", "at": 126.4 },
+        { "type": "stats", "at": 128.0, "items": [
+          { "label": "Personne seule", "value": 4600, "at": 128.4, "tone": "gain" },
+          { "label": "Couple", "value": 9200, "at": 131.5, "tone": "gain" }
+        ] }
+      ]
+    },
+    {
+      "from": 135.1,
+      "to": 148.6,
+      "items": [
+        { "type": "text", "size": "big", "text": "La fiscalité ne guide pas [[seule]]", "at": 139.0 },
+        { "type": "row", "at": 141.8, "items": [
+          { "type": "icon", "icon": "alert", "tone": "loss", "label": "PEA sur un seul titre", "at": 141.9 },
+          { "type": "icon", "icon": "coins", "tone": "loss", "label": "assurance-vie aux frais élevés", "at": 144.8 }
+        ] }
+      ]
+    },
+    {
+      "from": 148.6,
+      "to": 184.1,
+      "items": [
+        { "type": "counter", "label": "Plus-value de Camille", "from": 0, "to": 1000, "at": 153.8, "until": 156.4, "tone": "accent" },
+        { "type": "bars", "at": 157.2, "unit": " €", "items": [
+          { "label": "Compte-titres · 31,4 %", "value": 686, "at": 157.4 },
+          { "label": "PEA > 5 ans · 18,6 %", "value": 814, "at": 163.4, "tone": "gain" },
+          { "label": "Assurance-vie > 8 ans · 17,2 %", "value": 828, "at": 171.2, "tone": "gain" }
+        ] },
+        { "type": "text", "size": "small", "text": "Puis comparer les frais", "at": 181.0 },
+        { "type": "actor", "character": "client", "name": "Camille", "at": 153.8 }
+      ]
+    },
+    {
+      "from": 184.1,
+      "to": 198.1,
+      "items": [
+        { "type": "counter", "label": "Gain sur un placement", "from": 0, "to": 1000, "at": 188.4, "until": 190.8 },
+        { "type": "stats", "at": 191.2, "items": [
+          { "label": "Cas 1", "value": 686, "at": 191.4, "tone": "loss" },
+          { "label": "Cas 2", "value": 814, "at": 193.8 },
+          { "label": "Cas 3", "value": 828, "at": 196.0, "tone": "gain" }
+        ] }
+      ]
+    },
+    {
+      "from": 198.1,
+      "to": 212.7,
+      "items": [
+        { "type": "counter", "label": "Écart entre le premier et le dernier", "from": 0, "to": 142, "at": 198.1, "until": 201.0, "tone": "loss" },
+        { "type": "chart", "at": 204.2, "lines": [
+          { "label": "écart, année après année", "values": [5, 10, 17, 25, 36, 50], "at": 204.4, "until": 208.4, "tone": "loss" }
+        ] },
+        { "type": "text", "size": "small", "text": "Différence [[considérable]]", "at": 208.0 }
+      ]
+    },
+    {
+      "from": 212.7,
+      "to": 230.5,
+      "items": [
+        { "type": "timeline", "at": 212.7, "points": [
+          { "label": "PEA", "sub": "5 ans", "pos": 16, "at": 213.2 },
+          { "label": "Assurance-vie", "sub": "8 ans", "pos": 84, "at": 216.0 }
+        ], "span": { "label": "plus tu gardes, plus l’avantage grandit", "from": 6, "to": 94, "at": 218.0 } },
+        { "type": "row", "at": 222.0, "items": [
+          { "type": "icon", "icon": "alert", "tone": "loss", "at": 222.1 },
+          { "type": "text", "size": "small", "text": "Retirer trop tôt : avantage perdu", "at": 222.4 }
+        ] },
+        { "type": "text", "size": "mid", "text": "Connaître les durées [[avant]] de choisir", "at": 225.9 }
+      ]
+    },
+    {
+      "from": 230.5,
+      "to": 245,
+      "items": [
+        { "type": "cards", "at": 231.5, "items": [
+          { "icon": "document", "title": "Compte-titres", "sub": "on paie le PFU", "at": 231.5 },
+          { "icon": "globe", "title": "PEA · 5 ans", "sub": "impôt allégé", "at": 234.0, "accent": true },
+          { "icon": "umbrella", "title": "Assurance-vie · 8 ans", "sub": "impôt allégé", "at": 236.0 }
+        ] },
+        { "type": "text", "size": "mid", "text": "Compare les [[frais]], vérifie les règles", "at": 238.7 }
+      ]
+    }
+  ]
+}

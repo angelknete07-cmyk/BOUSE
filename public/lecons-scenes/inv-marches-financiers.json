@@ -1,0 +1,286 @@
+{
+  "lesson": "inv-marches-financiers",
+  "version": "1.0.0",
+  "scenes": [
+    {
+      "from": 0,
+      "to": 4.9,
+      "items": [
+        { "type": "text", "size": "title", "text": "La bourse : actions, obligations et indices", "at": 0.2 },
+        { "type": "text", "size": "small", "text": "Bienvenue", "at": 3.8 }
+      ]
+    },
+    {
+      "from": 4.9,
+      "to": 15.8,
+      "items": [
+        { "type": "row", "at": 7.6, "items": [
+          { "type": "icon", "icon": "ticket", "size": "l", "label": "un casino ?", "tone": "loss", "at": 7.6 },
+          { "type": "icon", "icon": "rocket", "size": "l", "label": "une machine à devenir riche ?", "tone": "loss", "at": 9.4 }
+        ] },
+        { "type": "text", "size": "mid", "text": "Deux images [[fausses]]", "at": 12.0 },
+        { "type": "actor", "character": "toi", "name": "toi", "at": 5.0, "think": { "text": "?", "at": 6.0 } }
+      ]
+    },
+    {
+      "from": 15.8,
+      "to": 25.7,
+      "items": [
+        { "type": "cards", "at": 17.2, "items": [
+          { "icon": "cart", "title": "Ce qu’on achète", "sub": "", "at": 17.3 },
+          { "icon": "coin", "title": "Qui reçoit l’argent", "sub": "", "at": 19.4 },
+          { "icon": "chart-bar", "title": "CAC 40", "sub": "ce que mesure un indice", "at": 21.2, "accent": true }
+        ] },
+        { "type": "text", "size": "small", "text": "La base de tout placement", "at": 23.5 }
+      ]
+    },
+    {
+      "from": 25.7,
+      "to": 37.4,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Avant le rendement, trois choses", "at": 25.8 },
+        { "type": "list", "style": "num", "at": 30.6, "items": [
+          { "text": "Ce que tu détiens", "at": 30.7 },
+          { "text": "Ce que tu peux perdre", "at": 32.8 },
+          { "text": "Qui est de l’autre côté", "at": 34.3 }
+        ] }
+      ]
+    },
+    {
+      "from": 37.4,
+      "to": 49.6,
+      "items": [
+        { "type": "row", "at": 37.5, "items": [
+          { "type": "icon", "icon": "eye", "label": "aucun titre recommandé", "at": 37.5 }
+        ] },
+        { "type": "cards", "at": 41.9, "items": [
+          { "icon": "document", "title": "Le vocabulaire", "sub": "", "at": 42.0 },
+          { "icon": "gear", "title": "Les mécanismes", "sub": "", "at": 43.8 },
+          { "icon": "alert", "title": "Promesse irréaliste", "sub": "la reconnaître", "at": 46.4, "tone": "loss" }
+        ] }
+      ]
+    },
+    {
+      "from": 49.6,
+      "to": 62.7,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Une action = [[une part]] de société", "at": 52.7 },
+        { "type": "row", "at": 55.9, "items": [
+          { "type": "icon", "icon": "building", "size": "l", "label": "l’entreprise", "at": 55.9 },
+          { "type": "icon", "icon": "pie", "size": "l", "label": "1 000 000 de parts", "at": 57.6 }
+        ] },
+        { "type": "text", "size": "small", "text": "Tu en achètes une : un millionième", "at": 59.4 }
+      ]
+    },
+    {
+      "from": 62.7,
+      "to": 71.6,
+      "items": [
+        { "type": "stats", "at": 62.8, "items": [
+          { "label": "Aujourd’hui", "value": 25, "unit": " €", "at": 62.8 },
+          { "label": "Demain ?", "value": 30, "unit": " €", "at": 64.4, "tone": "gain" },
+          { "label": "Ou", "value": 20, "unit": " €", "at": 65.8, "tone": "loss" }
+        ] },
+        { "type": "text", "size": "mid", "text": "Aucune [[garantie]]", "at": 68.0 }
+      ]
+    },
+    {
+      "from": 71.6,
+      "to": 83.7,
+      "items": [
+        { "type": "cards", "at": 71.8, "items": [
+          { "icon": "users", "title": "Voter", "sub": "à l’assemblée générale", "at": 71.9 },
+          { "icon": "coins", "title": "Dividende", "sub": "une part des bénéfices, si versé", "at": 75.5, "accent": true }
+        ] },
+        { "type": "text", "size": "mid", "text": "Une action n’est [[jamais remboursée]]", "at": 81.2 }
+      ]
+    },
+    {
+      "from": 83.7,
+      "to": 92.1,
+      "items": [
+        { "type": "chart", "at": 83.9, "lines": [
+          { "label": "prix de l’action", "values": [30, 36, 28, 40, 34], "at": 84.0, "until": 87.4 }
+        ] },
+        { "type": "row", "at": 88.0, "items": [
+          { "type": "icon", "icon": "alert", "tone": "loss", "label": "faillite : tout perdre", "at": 88.0 }
+        ] }
+      ]
+    },
+    {
+      "from": 92.1,
+      "to": 110.0,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Une obligation = un [[prêt]]", "at": 93.8 },
+        { "type": "steps", "at": 95.8, "items": [
+          { "text": "Tu prêtes", "icon": "handshake", "at": 95.9 },
+          { "text": "Coupons : intérêts", "icon": "percent", "at": 98.9 },
+          { "text": "Échéance : somme rendue", "icon": "calendar", "at": 105.4 }
+        ] },
+        { "type": "text", "size": "small", "text": "À un État ou une entreprise", "at": 96.5 }
+      ]
+    },
+    {
+      "from": 110.0,
+      "to": 116.0,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Entre-temps, le prix [[varie]]", "at": 110.1 },
+        { "type": "chips", "at": 112.6, "items": [
+          { "text": "taux du marché ↑", "at": 112.7 },
+          { "text": "→", "at": 114.0 },
+          { "text": "prix ↓", "at": 114.4, "tone": "loss" }
+        ] }
+      ]
+    },
+    {
+      "from": 116.0,
+      "to": 139.1,
+      "items": [
+        { "type": "compare", "at": 116.1, "left": { "title": "Marché primaire", "icon": "building", "items": [
+          { "text": "Nouveaux titres", "at": 120.1 },
+          { "text": "Introduction en bourse", "at": 123.5 },
+          { "text": "Ton argent va à l’émetteur", "at": 127.1 }
+        ] }, "right": { "title": "Marché secondaire", "icon": "users", "items": [
+          { "text": "Échange entre investisseurs", "at": 130.1 },
+          { "text": "Ton argent va au vendeur", "at": 135.0 }
+        ] } }
+      ]
+    },
+    {
+      "from": 139.1,
+      "to": 156.5,
+      "items": [
+        { "type": "icon", "icon": "basket", "size": "l", "label": "un indice = un panier de valeurs", "at": 140.9 },
+        { "type": "counter", "label": "CAC 40 : sociétés cotées à Paris", "from": 0, "to": 40, "unit": "", "at": 145.3, "until": 147.8 },
+        { "type": "row", "at": 148.8, "items": [
+          { "type": "icon", "icon": "cross", "tone": "loss", "label": "on ne l’achète pas directement", "at": 148.8 },
+          { "type": "icon", "icon": "layers", "label": "des fonds le reproduisent", "at": 153.1 }
+        ] }
+      ]
+    },
+    {
+      "from": 156.5,
+      "to": 173.6,
+      "items": [
+        { "type": "row", "at": 160.2, "items": [
+          { "type": "icon", "icon": "ticket", "label": "le cours : dernier échange", "at": 160.2 }
+        ] },
+        { "type": "chips", "at": 163.2, "items": [
+          { "text": "cours", "at": 163.2 },
+          { "text": "×", "at": 164.6 },
+          { "text": "nombre d’actions", "at": 165.0 },
+          { "text": "=", "at": 166.4 },
+          { "text": "capitalisation", "at": 166.8, "tone": "accent" }
+        ] },
+        { "type": "text", "size": "small", "text": "Valeur donnée par le marché, pas garantie", "at": 171.7 }
+      ]
+    },
+    {
+      "from": 173.6,
+      "to": 184.9,
+      "items": [
+        { "type": "row", "at": 173.7, "items": [
+          { "type": "icon", "icon": "clock", "size": "l", "label": "liquidité : acheter, vendre sans bouger le prix", "at": 173.7 }
+        ] },
+        { "type": "chart", "at": 178.7, "lines": [
+          { "label": "volatilité", "values": [40, 70, 30, 80, 20, 75], "at": 178.8, "until": 182.0 }
+        ] }
+      ]
+    },
+    {
+      "from": 184.9,
+      "to": 193.5,
+      "items": [
+        { "type": "cards", "at": 185.0, "items": [
+          { "icon": "building", "title": "Dividende", "sub": "rémunère l’actionnaire", "at": 185.2 },
+          { "icon": "handshake", "title": "Coupon", "sub": "rémunère celui qui prête", "at": 189.2, "accent": true }
+        ] }
+      ]
+    },
+    {
+      "from": 193.5,
+      "to": 209.8,
+      "items": [
+        { "type": "text", "size": "big", "text": "Le piège de la [[bonne entreprise]]", "at": 193.6, "out": 195.7, "hide": true },
+        { "type": "chips", "at": 200.9, "items": [
+          { "text": "excellente société", "at": 201.0 },
+          { "text": "+", "at": 203.0 },
+          { "text": "trop chère", "at": 203.4, "tone": "loss" },
+          { "text": "=", "at": 205.0 },
+          { "text": "déception", "at": 205.6, "tone": "loss" }
+        ] },
+        { "type": "icon", "icon": "hour", "label": "pendant des années", "at": 207.0 }
+      ]
+    },
+    {
+      "from": 209.8,
+      "to": 226.4,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Passé [[≠]] promesse", "at": 209.9 },
+        { "type": "text", "size": "small", "text": "Les obligations : pas sans risque", "at": 213.3 },
+        { "type": "row", "at": 215.8, "items": [
+          { "type": "icon", "icon": "alert", "tone": "loss", "label": "l’émetteur ne rembourse pas", "at": 215.9 },
+          { "type": "icon", "icon": "chart-down", "tone": "loss", "label": "inflation, hausse des taux", "at": 217.9 }
+        ] },
+        { "type": "text", "size": "small", "text": "Leçon simplifiée, exemples fictifs", "at": 222.1 }
+      ]
+    },
+    {
+      "from": 226.4,
+      "to": 240.3,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Atelier Nord", "at": 226.5, "out": 231.4, "hide": true },
+        { "type": "stats", "at": 231.7, "items": [
+          { "label": "Actions", "value": 1000000, "at": 231.8 },
+          { "label": "Cours", "value": 25, "unit": " €", "at": 233.2 }
+        ] },
+        { "type": "chips", "at": 236.7, "items": [
+          { "text": "1 000 000", "at": 236.7 },
+          { "text": "×", "at": 237.4 },
+          { "text": "25 €", "at": 237.8 },
+          { "text": "=", "at": 238.4 },
+          { "text": "25 000 000 €", "at": 238.8, "tone": "accent" }
+        ] }
+      ]
+    },
+    {
+      "from": 240.3,
+      "to": 248.4,
+      "items": [
+        { "type": "chips", "at": 240.4, "items": [
+          { "text": "dividende : 0,50 € par action", "at": 240.5 }
+        ] },
+        { "type": "gauge", "label": "du cours actuel", "value": 2, "at": 243.3, "until": 244.9, "tone": "gain" },
+        { "type": "text", "size": "small", "text": "Pas garanti l’an prochain", "at": 245.4 }
+      ]
+    },
+    {
+      "from": 248.4,
+      "to": 259.9,
+      "items": [
+        { "type": "stats", "at": 248.5, "items": [
+          { "label": "Obligation", "value": 1000, "unit": " €", "at": 248.6 },
+          { "label": "Taux", "value": 3, "unit": " %", "at": 250.2 },
+          { "label": "Durée", "value": 5, "unit": " ans", "at": 251.4 }
+        ] },
+        { "type": "timeline", "at": 253.8, "points": [
+          { "label": "Chaque année", "sub": "30 €", "pos": 12, "at": 253.9 },
+          { "label": "À la fin", "sub": "1 000 €", "pos": 88, "at": 256.0 }
+        ] },
+        { "type": "text", "size": "small", "text": "Si Atelier Nord peut rembourser", "at": 257.6 }
+      ]
+    },
+    {
+      "from": 259.9,
+      "to": 274,
+      "items": [
+        { "type": "list", "style": "check", "at": 260.0, "items": [
+          { "text": "Action = part, obligation = prêt", "at": 261.1 },
+          { "text": "Cours = prix, indice = panier", "at": 265.5 },
+          { "text": "Aucune n’est sans risque", "at": 268.9 }
+        ] },
+        { "type": "text", "size": "small", "text": "À bientôt", "at": 271.5 }
+      ]
+    }
+  ]
+}

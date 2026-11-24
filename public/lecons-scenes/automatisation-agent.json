@@ -1,0 +1,170 @@
+{
+  "lesson": "automatisation-agent",
+  "version": "1.0.0",
+  "scenes": [
+    { "from": 0, "to": 14.6, "items": [
+      { "type": "text", "size": "title", "text": "Automatisation ou agent : le bon outil", "at": 0.2, "out": 5.2, "hide": true },
+      { "type": "text", "size": "small", "text": "Bienvenue", "at": 4.5, "out": 5.2, "hide": true },
+      { "type": "icon", "icon": "robot", "size": "l", "label": "toujours un agent IA ?", "at": 5.4 },
+      { "type": "text", "size": "big", "text": "Réponse courte : [[non]]", "at": 12.6 }
+    ] },
+    { "from": 14.6, "to": 28.6, "items": [
+      { "type": "icon", "icon": "gear", "size": "l", "label": "souvent, un simple automatisme fait mieux", "at": 14.7 },
+      { "type": "compare", "at": 17.4,
+        "left": { "title": "Règles précises", "icon": "lock", "items": [ { "text": "workflow qui suit des règles", "at": 17.8 } ] },
+        "right": { "title": "Choix adaptatif", "icon": "brain", "items": [ { "text": "l’IA choisit selon la situation", "at": 20.8 } ] } },
+      { "type": "row", "at": 24.1, "items": [
+        { "type": "icon", "icon": "shield", "label": "encadrer les actions", "at": 24.3 }
+      ] }
+    ] },
+    { "from": 28.6, "to": 51.1, "items": [
+      { "type": "text", "size": "big", "text": "Pourquoi apprendre ça ?", "at": 28.7, "out": 30.0, "hide": true },
+      { "type": "chart", "at": 32.0, "lines": [
+        { "label": "ce que le système peut faire", "values": [10, 25, 45, 70], "at": 32.2, "until": 35.6 },
+        { "label": "façons de se tromper", "values": [5, 15, 40, 75], "at": 36.0, "until": 39.0, "tone": "loss" }
+      ] },
+      { "type": "chips", "at": 39.2, "items": [
+        { "text": "mêmes données", "at": 43.3 },
+        { "text": "→", "at": 45.0 },
+        { "text": "même résultat", "at": 45.4, "tone": "gain" }
+      ] },
+      { "type": "icon", "icon": "invoice", "label": "un calcul de facture", "at": 48.5 }
+    ] },
+    { "from": 51.1, "to": 67.2, "items": [
+      { "type": "text", "size": "big", "text": "La tâche d’abord, [[pas la mode]]", "at": 51.2 },
+      { "type": "text", "size": "small", "text": "Fiable, avec le moins de complexité possible", "at": 55.8 },
+      { "type": "row", "at": 60.8, "items": [
+        { "type": "icon", "icon": "pencil", "label": "une étape de rédaction avec IA", "at": 60.9 },
+        { "type": "text", "size": "big", "text": "[[≠]]", "at": 63.6 },
+        { "type": "icon", "icon": "robot", "label": "un agent autonome", "at": 64.0 }
+      ] }
+    ] },
+    { "from": 67.2, "to": 83.8, "items": [
+      { "type": "text", "size": "mid", "text": "Une [[automatisation]] suit des règles fixées d’avance", "at": 71.4 },
+      { "type": "steps", "at": 74.6, "items": [
+        { "text": "Déclencheur", "icon": "rocket", "at": 74.7 },
+        { "text": "Conditions", "icon": "check", "at": 77.8 },
+        { "text": "Actions", "icon": "gear", "at": 80.7 }
+      ] }
+    ] },
+    { "from": 83.8, "to": 96.9, "items": [
+      { "type": "text", "size": "mid", "text": "Un [[workflow]] : des étapes, des embranchements", "at": 83.9 },
+      { "type": "steps", "at": 89.0, "items": [
+        { "text": "Facture reçue", "icon": "invoice", "at": 89.1 },
+        { "text": "Extraction", "icon": "search", "at": 91.0 },
+        { "text": "Vérification", "icon": "check", "at": 92.6 },
+        { "text": "Validation", "icon": "person", "at": 94.2 }
+      ] }
+    ] },
+    { "from": 96.9, "to": 117.0, "items": [
+      { "type": "text", "size": "mid", "text": "Un [[agent]]", "at": 97.0 },
+      { "type": "chips", "at": 99.0, "items": [
+        { "text": "un modèle d’IA", "at": 99.2 },
+        { "text": "choisit", "at": 102.0 },
+        { "text": "les prochaines actions", "at": 103.4, "tone": "accent" }
+      ] },
+      { "type": "text", "size": "small", "text": "Le mot varie selon les fournisseurs", "at": 107.9 },
+      { "type": "text", "size": "mid", "text": "Quelle part de décision laisse-t-on à la machine ?", "at": 110.1 }
+    ] },
+    { "from": 117.0, "to": 141.3, "items": [
+      { "type": "row", "at": 117.2, "items": [
+        { "type": "icon", "icon": "document", "label": "lire un document", "at": 118.0 },
+        { "type": "icon", "icon": "link", "label": "interroger une API", "at": 120.0 },
+        { "type": "icon", "icon": "mail", "label": "préparer un courriel", "at": 122.0 }
+      ] },
+      { "type": "cards", "at": 124.4, "items": [
+        { "icon": "link", "title": "API", "sub": "une porte d’échange entre deux logiciels", "at": 124.5 },
+        { "icon": "megaphone", "title": "Webhook", "sub": "un signal quand un événement se produit", "at": 128.7 }
+      ] },
+      { "type": "text", "size": "mid", "text": "Aucun n’exige forcément [[une IA]]", "at": 133.7 }
+    ] },
+    { "from": 141.3, "to": 173.2, "items": [
+      { "type": "text", "size": "big", "text": "Le test de décision", "at": 141.4, "out": 143.3, "hide": true },
+      { "type": "cards", "at": 146.2, "items": [
+        { "icon": "gear", "title": "Étapes et critères connus", "sub": "workflow déterministe, pas d’IA", "at": 146.3, "subAt": 149.6 },
+        { "icon": "document", "title": "Texte ambigu", "sub": "une étape d’IA, puis validation", "at": 153.4, "subAt": 157.6 },
+        { "icon": "robot", "title": "Chemin imprévisible", "sub": "un agent, mais borné", "at": 162.2, "subAt": 167.5, "accent": true }
+      ] }
+    ] },
+    { "from": 173.2, "to": 185.6, "items": [
+      { "type": "text", "size": "mid", "text": "Avant l’autonomie : [[cinq choses]]", "at": 173.3 },
+      { "type": "list", "style": "check", "at": 176.5, "items": [
+        { "text": "Les données autorisées", "at": 176.6 },
+        { "text": "Les outils permis", "at": 178.0 },
+        { "text": "Limites de coût et de durée", "at": 179.4 },
+        { "text": "La condition d’arrêt", "at": 181.4 },
+        { "text": "Validation humaine pour certaines actions", "at": 182.9 }
+      ] }
+    ] },
+    { "from": 185.6, "to": 202.8, "items": [
+      { "type": "text", "size": "big", "text": "Le [[moindre privilège]]", "at": 185.7 },
+      { "type": "text", "size": "small", "text": "Seulement les capacités nécessaires", "at": 188.9 },
+      { "type": "compare", "at": 192.8,
+        "left": { "title": "Lire", "icon": "eye", "items": [ { "text": "préparer un remboursement", "at": 193.0 } ] },
+        "right": { "title": "Publier, exécuter", "icon": "megaphone", "items": [ { "text": "des conséquences réelles", "at": 199.0 } ] } }
+    ] },
+    { "from": 202.8, "to": 225.2, "items": [
+      { "type": "text", "size": "big", "text": "Concevoir les échecs d’abord", "at": 202.9, "out": 205.2, "hide": true },
+      { "type": "chips", "at": 209.4, "items": [
+        { "text": "doublons", "at": 209.9, "tone": "loss" },
+        { "text": "retards", "at": 211.1, "tone": "loss" },
+        { "text": "erreurs réseau", "at": 212.3, "tone": "loss" }
+      ] },
+      { "type": "text", "size": "mid", "text": "[[Idempotence]]", "at": 213.9 },
+      { "type": "icons", "icon": "mail", "count": 2, "step": 0.8, "label": "même événement", "at": 221.0 }
+    ] },
+    { "from": 225.2, "to": 237.8, "items": [
+      { "type": "steps", "at": 225.3, "items": [
+        { "text": "Essais limités", "icon": "clock", "at": 225.4 },
+        { "text": "Signalement", "icon": "alert", "at": 226.8 },
+        { "text": "Reprise à la main", "icon": "person", "at": 228.2 }
+      ] },
+      { "type": "row", "at": 229.2, "items": [
+        { "type": "icon", "icon": "eye", "label": "une trace des actions utiles", "at": 229.4 },
+        { "type": "icon", "icon": "lock", "tone": "loss", "label": "une action externe n’est pas toujours annulable", "at": 233.9 }
+      ] }
+    ] },
+    { "from": 237.8, "to": 250.3, "items": [
+      { "type": "list", "style": "check", "at": 237.9, "items": [
+        { "text": "Informations manquantes", "at": 238.0 },
+        { "text": "Outil indisponible", "at": 239.8 },
+        { "text": "Document piégé", "at": 241.4 }
+      ] },
+      { "type": "chips", "at": 243.0, "items": [
+        { "text": "plusieurs agents", "at": 243.1 },
+        { "text": "≠", "at": 245.4 },
+        { "text": "meilleure vérification", "at": 246.0, "tone": "loss" }
+      ] }
+    ] },
+    { "from": 250.3, "to": 273.2, "items": [
+      { "type": "text", "size": "big", "text": "Le suivi des factures fournisseurs", "at": 250.4, "out": 253.4, "hide": true },
+      { "type": "steps", "at": 257.0, "items": [
+        { "text": "Importer la facture", "icon": "invoice", "at": 257.1 },
+        { "text": "Extraire les champs", "icon": "search", "at": 258.6 },
+        { "text": "Total : calcul exact", "icon": "calculator", "at": 260.4 },
+        { "text": "Doublons : identifiant", "icon": "key", "at": 262.8 },
+        { "text": "Approbation humaine", "icon": "person", "at": 265.5 }
+      ] },
+      { "type": "compare", "at": 267.9,
+        "left": { "title": "Le modèle d’IA", "icon": "brain", "items": [ { "text": "aide pour les mises en page inhabituelles", "at": 268.0 } ] },
+        "right": { "title": "Pouvoir de payer", "icon": "cross", "items": [ { "text": "il n’en a pas", "at": 271.6 } ] } }
+    ] },
+    { "from": 273.2, "to": 299, "items": [
+      { "type": "row", "at": 273.2, "items": [
+        { "type": "icon", "icon": "search", "label": "agent : chercher une pièce manquante", "at": 273.4 }
+      ] },
+      { "type": "chips", "at": 275.4, "items": [
+        { "text": "sources autorisées", "at": 275.5 },
+        { "text": "étapes limitées", "at": 277.6 },
+        { "text": "durée limitée", "at": 279.3 }
+      ] },
+      { "type": "list", "style": "check", "at": 282.6, "items": [
+        { "text": "Commence par la tâche, pas par la mode", "at": 282.7 },
+        { "text": "Étapes connues : un workflow suffit", "at": 285.3 },
+        { "text": "De l’IA seulement si le texte est ambigu", "at": 288.1 },
+        { "text": "Pouvoirs limités, échecs prévus", "at": 291.6 },
+        { "text": "Un humain pour les décisions importantes", "at": 294.0 }
+      ] }
+    ] }
+  ]
+}

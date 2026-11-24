@@ -1,0 +1,277 @@
+{
+  "lesson": "fin-previsionnel",
+  "version": "1.0.0",
+  "scenes": [
+    {
+      "from": 0,
+      "to": 10.9,
+      "items": [
+        { "type": "text", "size": "title", "text": "Construire un prévisionnel crédible", "at": 0.2 },
+        { "type": "text", "size": "big", "text": "prévisionnel [[≠]] promesse", "at": 4.3 },
+        { "type": "row", "at": 6.9, "items": [
+          { "type": "icon", "icon": "pencil", "label": "hypothèses", "at": 6.9 },
+          { "type": "icon", "icon": "target", "label": "à tester", "at": 8.8 }
+        ] }
+      ]
+    },
+    {
+      "from": 10.9,
+      "to": 21.4,
+      "items": [
+        { "type": "steps", "at": 11.8, "items": [
+          { "text": "Construire", "icon": "pencil", "at": 12.0 },
+          { "text": "Relier", "icon": "link", "at": 14.8 },
+          { "text": "Tester", "icon": "gear", "at": 16.4 },
+          { "text": "Décider", "icon": "target", "at": 18.2 },
+          { "text": "Convaincre", "icon": "handshake", "at": 19.4 }
+        ] }
+      ]
+    },
+    {
+      "from": 21.4,
+      "to": 43.7,
+      "items": [
+        { "type": "text", "size": "big", "text": "Pourquoi apprendre ça ?", "at": 21.5, "out": 23.2, "hide": true },
+        { "type": "cards", "at": 23.4, "items": [
+          { "icon": "bank", "title": "Banque", "sub": "demande un prévisionnel", "at": 23.4 },
+          { "icon": "person", "title": "Toi", "sub": "premier utilisateur", "at": 26.7, "accent": true }
+        ] },
+        { "type": "list", "style": "check", "at": 29.6, "items": [
+          { "text": "Le projet peut-il vivre ?", "at": 29.6 },
+          { "text": "Combien de temps tenir ?", "at": 31.6 },
+          { "text": "Quel chiffre surveiller ?", "at": 33.4 }
+        ] },
+        { "type": "row", "at": 35.3, "items": [
+          { "type": "icon", "icon": "alert", "tone": "loss", "at": 35.3 },
+          { "type": "text", "size": "small", "text": "Trop optimiste = mauvaises décisions", "at": 35.5 }
+        ] },
+        { "type": "text", "size": "small", "text": "Sans hypothèses explicites, personne n’est convaincu", "at": 39.3 }
+      ]
+    },
+    {
+      "from": 43.7,
+      "to": 66.7,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Quatre tableaux · [[1 ·]] Les hypothèses", "at": 43.8 },
+        { "type": "chips", "at": 48.8, "items": [
+          { "text": "prix", "at": 49.4 },
+          { "text": "volumes", "at": 50.8 },
+          { "text": "coûts variables", "at": 52.4 },
+          { "text": "charges fixes", "at": 54.0 },
+          { "text": "salaires", "at": 55.4 },
+          { "text": "délais de paiement", "at": 56.6 }
+        ] },
+        { "type": "icon", "icon": "building", "label": "investissements", "at": 58.4, "size": "s" },
+        { "type": "list", "style": "check", "at": 60.2, "items": [
+          { "text": "Entretiens", "at": 60.4 },
+          { "text": "Devis", "at": 61.8 },
+          { "text": "Données de marché", "at": 62.8 },
+          { "text": "Précommandes", "at": 64.6 }
+        ] }
+      ]
+    },
+    {
+      "from": 66.7,
+      "to": 76.6,
+      "items": [
+        { "type": "text", "size": "mid", "text": "[[2 ·]] Le compte de résultat", "at": 66.8 },
+        { "type": "icon", "icon": "calendar", "label": "souvent sur 3 ans", "at": 68.4 },
+        { "type": "steps", "at": 71.4, "items": [
+          { "text": "Chiffre d’affaires", "icon": "ticket", "at": 71.6 },
+          { "text": "Marges", "icon": "pie", "at": 72.8 },
+          { "text": "Charges", "icon": "invoice", "at": 74.0 },
+          { "text": "Résultat", "icon": "chart-up", "at": 75.0 }
+        ] }
+      ]
+    },
+    {
+      "from": 76.6,
+      "to": 88.1,
+      "items": [
+        { "type": "text", "size": "mid", "text": "[[3 ·]] Le plan de financement", "at": 76.7 },
+        { "type": "compare", "at": 79.6, "left": {
+          "title": "Besoins", "icon": "building", "items": [
+            { "text": "Investissements", "at": 82.0 },
+            { "text": "BFR", "at": 83.6 }
+          ] }, "right": {
+          "title": "Ressources", "icon": "piggy", "items": [
+            { "text": "Apports", "at": 85.0 },
+            { "text": "Prêts", "at": 86.0 },
+            { "text": "Aides", "at": 87.0 }
+          ] } }
+      ]
+    },
+    {
+      "from": 88.1,
+      "to": 101.8,
+      "items": [
+        { "type": "text", "size": "mid", "text": "[[4 ·]] Le plan de trésorerie mensuel", "at": 88.2 },
+        { "type": "chart", "at": 90.4, "baseline": { "value": 0, "label": "0 €" }, "lines": [
+          { "label": "ton compte", "values": [14, 10, 12, 8, 14, 18], "at": 92.5, "until": 96.0 }
+        ] },
+        { "type": "chips", "at": 96.2, "items": [
+          { "text": "hypothèse", "at": 98.2 },
+          { "text": "→", "at": 98.9 },
+          { "text": "tout se met à jour", "at": 99.6, "tone": "gain" }
+        ] },
+        { "type": "icon", "icon": "link", "label": "quatre tableaux reliés", "at": 96.2, "size": "s" }
+      ]
+    },
+    {
+      "from": 101.8,
+      "to": 118.5,
+      "items": [
+        { "type": "text", "size": "big", "text": "Tester la solidité", "at": 101.9, "out": 104.2, "hide": true },
+        { "type": "cards", "at": 106.3, "items": [
+          { "icon": "umbrella", "title": "Prudent", "sub": "doit éviter la cessation de paiement", "at": 107.2, "subAt": 111.9, "accent": true },
+          { "icon": "target", "title": "Central", "sub": "le plus probable", "at": 108.6 },
+          { "icon": "rocket", "title": "Favorable", "sub": "tout va bien", "at": 110.0 }
+        ] },
+        { "type": "text", "size": "small", "text": "Sinon : prévoir comment réagir", "at": 115.9 }
+      ]
+    },
+    {
+      "from": 118.5,
+      "to": 136.2,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Sensibilité : une hypothèse à la fois", "at": 118.6 },
+        { "type": "stats", "at": 121.3, "items": [
+          { "label": "Prix", "value": -10, "unit": " %", "at": 122.4, "tone": "loss" },
+          { "label": "Volume", "value": -20, "unit": " %", "at": 125.0, "tone": "loss" },
+          { "label": "Délai client", "value": 30, "unit": " jours", "at": 127.4, "tone": "loss" }
+        ] },
+        { "type": "row", "at": 129.7, "items": [
+          { "type": "icon", "icon": "search", "at": 129.7 },
+          { "type": "text", "size": "mid", "text": "Laquelle menace le [[plus]] ?", "at": 129.7 }
+        ] },
+        { "type": "text", "size": "small", "text": "À tester en priorité sur le terrain", "at": 132.8 }
+      ]
+    },
+    {
+      "from": 136.2,
+      "to": 147.0,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Erreur fréquente : la montée en charge", "at": 136.3 },
+        { "type": "chart", "at": 139.2, "lines": [
+          { "label": "rythme de croisière : des mois", "values": [4, 8, 14, 22, 32, 44], "at": 139.2, "until": 142.0 },
+          { "label": "plein dès le mois 1", "values": [44, 44, 44, 44, 44, 44], "at": 142.1, "until": 144.0, "tone": "loss" }
+        ] },
+        { "type": "row", "at": 144.4, "items": [
+          { "type": "icon", "icon": "alert", "tone": "loss", "at": 144.4 },
+          { "type": "text", "size": "small", "text": "Signal d’alerte pour le banquier", "at": 144.5 }
+        ] },
+        { "type": "actor", "character": "conseiller", "name": "le banquier", "at": 142.0, "think": { "text": "?", "at": 143.8 } }
+      ]
+    },
+    {
+      "from": 147.0,
+      "to": 164.9,
+      "items": [
+        { "type": "text", "size": "big", "text": "Le point de vigilance", "at": 147.1, "out": 150.8, "hide": true },
+        { "type": "list", "style": "cross", "at": 151.4, "items": [
+          { "text": "Ta propre rémunération", "at": 151.5 },
+          { "text": "Cotisations du dirigeant", "at": 154.2 },
+          { "text": "TVA", "at": 157.0 },
+          { "text": "Impôts", "at": 158.2 }
+        ] },
+        { "type": "text", "size": "mid", "text": "Rentable seulement si tu ne te paies pas : [[fragile|loss]]", "at": 159.9 }
+      ]
+    },
+    {
+      "from": 164.9,
+      "to": 172.1,
+      "items": [
+        { "type": "chips", "at": 165.0, "items": [
+          { "text": "réel", "at": 165.2 },
+          { "text": "−", "at": 166.0 },
+          { "text": "prévisionnel", "at": 166.4 },
+          { "text": "=", "at": 167.2 },
+          { "text": "écart", "at": 167.6, "tone": "accent" }
+        ] },
+        { "type": "text", "size": "mid", "text": "Un écart : une [[information]], pas un échec", "at": 168.4 }
+      ]
+    },
+    {
+      "from": 172.1,
+      "to": 190.9,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Exemple fictif · un studio de pilates", "at": 172.2 },
+        { "type": "stats", "at": 178.5, "items": [
+          { "label": "Cours par jour", "value": 6, "unit": "", "at": 178.5 },
+          { "label": "Places", "value": 12, "unit": "", "at": 181.0 },
+          { "label": "La séance", "value": 18, "at": 188.0 },
+          { "label": "Charges fixes / mois", "value": 4500, "at": 189.3 }
+        ] },
+        { "type": "counter", "label": "Remplissage en 10 mois", "from": 30, "to": 70, "unit": " %", "bar": true, "max": 100, "at": 183.2, "until": 187.2, "tone": "accent" },
+        { "type": "actor", "character": "entrepreneuse", "name": "la fondatrice", "at": 176.7 }
+      ]
+    },
+    {
+      "from": 190.9,
+      "to": 210.5,
+      "items": [
+        { "type": "timeline", "at": 191.0, "points": [
+          { "label": "Central", "sub": "mois 7", "pos": 30, "at": 191.2 },
+          { "label": "Prudent", "sub": "mois 11", "pos": 88, "at": 194.5 }
+        ] },
+        { "type": "cards", "at": 199.9, "items": [
+          { "icon": "users", "title": "Remplissage", "sub": "pèse beaucoup", "at": 200.0, "accent": true },
+          { "icon": "euro", "title": "Prix", "sub": "pèse bien moins", "at": 201.8 }
+        ] },
+        { "type": "steps", "at": 204.9, "items": [
+          { "text": "Cours d’essai", "icon": "ticket", "at": 205.0 },
+          { "text": "Avant l’ouverture", "icon": "calendar", "at": 206.6 },
+          { "text": "Liste d’abonnés", "icon": "users", "at": 208.4 }
+        ] }
+      ]
+    },
+    {
+      "from": 210.5,
+      "to": 228.5,
+      "items": [
+        { "type": "row", "at": 210.6, "items": [
+          { "type": "icon", "icon": "sun", "size": "l", "label": "prévision météo", "at": 210.6 },
+          { "type": "icon", "icon": "umbrella", "size": "l", "label": "parapluie ?", "at": 216.0 }
+        ] },
+        { "type": "text", "size": "mid", "text": "Pas une certitude : une [[aide à décider]]", "at": 217.8 },
+        { "type": "text", "size": "big", "text": "Il ne prédit pas, il [[prépare]]", "at": 222.4 }
+      ]
+    },
+    {
+      "from": 228.5,
+      "to": 253.6,
+      "items": [
+        { "type": "list", "style": "num", "at": 228.6, "items": [
+          { "text": "Si tout va bien ?", "at": 228.6 },
+          { "text": "Ventes plus lentes : je tiens ?", "at": 230.8 },
+          { "text": "Client en retard : ça résiste ?", "at": 233.7 }
+        ] },
+        { "type": "text", "size": "small", "text": "Aucun test réussi : [[à revoir|loss]] avant de lancer", "at": 237.5 },
+        { "type": "chips", "at": 243.2, "items": [
+          { "text": "pourquoi ce prix ?", "at": 243.8 },
+          { "text": "ce volume ?", "at": 245.6 },
+          { "text": "ce délai ?", "at": 247.4 }
+        ] },
+        { "type": "row", "at": 249.9, "items": [
+          { "type": "icon", "icon": "search", "at": 249.9 },
+          { "type": "text", "size": "small", "text": "Pas d’explication : va étudier le terrain", "at": 250.0 }
+        ] }
+      ]
+    },
+    {
+      "from": 253.6,
+      "to": 270,
+      "items": [
+        { "type": "text", "size": "big", "text": "Pour résumer", "at": 253.7, "out": 254.7, "hide": true },
+        { "type": "steps", "at": 254.8, "items": [
+          { "text": "Hypothèses justifiées", "icon": "pencil", "at": 254.9 },
+          { "text": "Quatre tableaux reliés", "icon": "link", "at": 257.6 },
+          { "text": "Scénarios", "icon": "umbrella", "at": 260.6 },
+          { "text": "Hypothèse sensible", "icon": "target", "at": 262.6 },
+          { "text": "Réel chaque mois", "icon": "calendar", "at": 265.2 }
+        ] },
+        { "type": "text", "size": "small", "text": "À bientôt", "at": 267.6 }
+      ]
+    }
+  ]
+}

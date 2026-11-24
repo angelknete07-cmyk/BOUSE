@@ -1,0 +1,237 @@
+{
+  "lesson": "fin-etats-financiers",
+  "version": "1.0.0",
+  "scenes": [
+    {
+      "from": 0, "to": 11.8,
+      "items": [
+        { "type": "text", "size": "title", "text": "Lire un compte de résultat et un bilan", "at": 0.2 },
+        { "type": "row", "at": 4.6, "items": [
+          { "type": "icon", "icon": "bank", "label": "banquiers", "at": 4.6 },
+          { "type": "icon", "icon": "users", "label": "investisseurs", "at": 6.0 },
+          { "type": "icon", "icon": "handshake", "label": "repreneurs", "at": 7.4 },
+          { "type": "icon", "icon": "building", "label": "administrations", "at": 8.8 }
+        ] },
+        { "type": "text", "size": "small", "text": "Tous lisent les comptes annuels", "at": 10.0 }
+      ]
+    },
+    {
+      "from": 11.8, "to": 33.0,
+      "items": [
+        { "type": "cards", "at": 12.6, "items": [
+          { "icon": "chart-bar", "title": "Compte de résultat", "sub": "raconte une année", "at": 12.8, "subAt": 21.4 },
+          { "icon": "scale", "title": "Bilan", "sub": "photographie une date", "at": 15.0, "subAt": 24.1 }
+        ] },
+        { "type": "chips", "at": 26.8, "items": [
+          { "text": "D’où vient le résultat", "at": 26.9 },
+          { "text": "Possède", "at": 29.6 },
+          { "text": "Doit", "at": 31.2 }
+        ] }
+      ]
+    },
+    {
+      "from": 33.0, "to": 61.2,
+      "items": [
+        { "type": "text", "size": "big", "text": "Pourquoi les lire ?", "at": 33.1, "out": 36.0, "hide": true },
+        { "type": "row", "at": 36.6, "items": [
+          { "type": "icon", "icon": "bank", "label": "un prêt", "at": 36.8 },
+          { "type": "icon", "icon": "building", "label": "un rachat", "at": 38.4 },
+          { "type": "icon", "icon": "handshake", "label": "une association", "at": 40.0 }
+        ] },
+        { "type": "text", "size": "small", "text": "Sans comprendre, on signe à l’aveugle", "at": 41.4 },
+        { "type": "compare", "at": 53.7,
+          "left": { "title": "Compte de résultat", "icon": "chart-bar", "items": [
+            { "text": "Le film d’une année", "at": 54.2 }
+          ] },
+          "right": { "title": "Bilan", "icon": "eye", "items": [
+            { "text": "La photo d’un jour", "at": 57.6 }
+          ] } }
+      ]
+    },
+    {
+      "from": 61.2, "to": 80.1,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Le compte de résultat", "at": 63.4 },
+        { "type": "compare", "at": 65.8,
+          "left": { "title": "Produits", "icon": "ticket", "items": [
+            { "text": "Les ventes", "at": 66.6 }
+          ] },
+          "right": { "title": "Charges", "icon": "invoice", "items": [
+            { "text": "Achats", "at": 69.0 },
+            { "text": "Salaires, loyers", "at": 70.6 },
+            { "text": "Amortissements", "at": 72.2 },
+            { "text": "Intérêts", "at": 73.8 }
+          ] } },
+        { "type": "icon", "icon": "calendar", "label": "un exercice : souvent une année", "at": 76.1 }
+      ]
+    },
+    {
+      "from": 80.1, "to": 87.6,
+      "items": [
+        { "type": "chips", "at": 80.3, "items": [
+          { "text": "Produits", "at": 80.4 },
+          { "text": "−", "at": 81.1 },
+          { "text": "charges", "at": 81.4 },
+          { "text": "=", "at": 82.0 },
+          { "text": "résultat", "at": 82.5, "tone": "accent" }
+        ] },
+        { "type": "row", "at": 83.4, "items": [
+          { "type": "icon", "icon": "chart-up", "tone": "gain", "label": "bénéfice", "at": 83.5 },
+          { "type": "icon", "icon": "chart-down", "tone": "loss", "label": "perte", "at": 85.7 }
+        ] }
+      ]
+    },
+    {
+      "from": 87.6, "to": 109.0,
+      "items": [
+        { "type": "text", "size": "small", "text": "Lecture en cascade", "at": 87.7 },
+        { "type": "steps", "at": 90.6, "items": [
+          { "text": "Résultat d’exploitation", "icon": "factory", "at": 90.7 },
+          { "text": "Résultat financier", "icon": "bank", "at": 95.0 },
+          { "text": "Résultat exceptionnel", "icon": "alert", "at": 99.1 },
+          { "text": "Résultat net", "icon": "check", "at": 104.8 }
+        ] },
+        { "type": "text", "size": "small", "text": "Exemple d’inhabituel : vendre une machine", "at": 101.2 }
+      ]
+    },
+    {
+      "from": 109.0, "to": 125.6,
+      "items": [
+        { "type": "text", "size": "mid", "text": "[[EBE]] : excédent brut d’exploitation", "at": 109.1 },
+        { "type": "text", "size": "small", "text": "L’activité, avant :", "at": 114.5 },
+        { "type": "list", "style": "cross", "at": 114.6, "items": [
+          { "text": "Amortissements", "at": 115.0 },
+          { "text": "Intérêts", "at": 116.4 },
+          { "text": "Impôt", "at": 117.6 }
+        ] },
+        { "type": "icon", "icon": "coins", "label": "capacité à produire de la trésorerie", "at": 119.4 }
+      ]
+    },
+    {
+      "from": 125.6, "to": 162.2,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Le bilan : deux colonnes", "at": 127.0 },
+        { "type": "compare", "at": 130.0,
+          "left": { "title": "Actif : ce qu’elle possède", "icon": "building", "items": [
+            { "text": "Immobilisations : machines, locaux", "at": 134.7 },
+            { "text": "Stocks", "at": 141.2 },
+            { "text": "Créances clients", "at": 142.8 },
+            { "text": "Trésorerie", "at": 144.5 }
+          ] },
+          "right": { "title": "Passif : comment c’est financé", "icon": "pie", "items": [
+            { "text": "Capitaux propres : aux associés", "at": 151.0 },
+            { "text": "Dettes : banques, fournisseurs, État", "at": 158.2 }
+          ] } }
+      ]
+    },
+    {
+      "from": 162.2, "to": 180.6,
+      "items": [
+        { "type": "chips", "at": 166.2, "items": [
+          { "text": "Actif", "at": 166.4 },
+          { "text": "=", "at": 167.4 },
+          { "text": "Passif", "at": 167.8 }
+        ] },
+        { "type": "text", "size": "small", "text": "Quelques signaux", "at": 168.9 },
+        { "type": "list", "style": "cross", "at": 170.1, "items": [
+          { "text": "Capitaux propres négatifs : pertes > apports", "at": 170.2 },
+          { "text": "Dettes à court terme élevées, peu de trésorerie", "at": 174.8 }
+        ] }
+      ]
+    },
+    {
+      "from": 180.6, "to": 195.8,
+      "items": [
+        { "type": "text", "size": "big", "text": "Bénéfice [[≠]] argent sur le compte", "at": 184.2 },
+        { "type": "row", "at": 187.0, "items": [
+          { "type": "icon", "icon": "invoice", "label": "vente facturée", "at": 187.1 },
+          { "type": "icon", "icon": "hour", "tone": "loss", "label": "pas encaissée", "at": 188.8 }
+        ] },
+        { "type": "text", "size": "small", "text": "Remboursement d’emprunt : sort du compte, pas du résultat", "at": 190.9 }
+      ]
+    },
+    {
+      "from": 195.8, "to": 203.0,
+      "items": [
+        { "type": "icon", "icon": "eye", "size": "l", "label": "une photo à une date choisie", "at": 195.9 },
+        { "type": "text", "size": "small", "text": "Une semaine plus tard : tout peut changer", "at": 198.6 }
+      ]
+    },
+    {
+      "from": 203.0, "to": 228.2,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Une boulangerie", "at": 205.6 },
+        { "type": "waterfall", "at": 207.1, "rows": [
+          { "label": "Ventes", "value": 300000, "kind": "start", "at": 207.2 },
+          { "label": "Achats", "value": 90000, "kind": "minus", "at": 210.8 },
+          { "label": "Charges externes", "value": 50000, "kind": "minus", "at": 214.1 },
+          { "label": "Salaires et cotisations", "value": 120000, "kind": "minus", "at": 219.7 },
+          { "label": "Impôts et taxes", "value": 5000, "kind": "minus", "at": 222.7 },
+          { "label": "EBE", "value": 35000, "kind": "total", "at": 225.3, "tone": "accent" }
+        ] }
+      ]
+    },
+    {
+      "from": 228.2, "to": 244.1,
+      "items": [
+        { "type": "waterfall", "at": 228.3, "rows": [
+          { "label": "EBE", "value": 35000, "kind": "start", "at": 228.4 },
+          { "label": "Amortissement du four", "value": 15000, "kind": "minus", "at": 229.0 },
+          { "label": "Intérêts", "value": 3000, "kind": "minus", "at": 231.2 },
+          { "label": "Résultat avant impôt", "value": 17000, "kind": "total", "at": 233.2, "tone": "gain" }
+        ] },
+        { "type": "compare", "at": 236.2,
+          "left": { "title": "Actif", "icon": "factory", "items": [
+            { "text": "Le four, valeur restante", "at": 236.4 }
+          ] },
+          "right": { "title": "Passif", "icon": "bank", "items": [
+            { "text": "L’emprunt du four", "at": 240.8 }
+          ] } }
+      ]
+    },
+    {
+      "from": 244.1, "to": 262.2,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Lire un compte de résultat", "at": 246.4 },
+        { "type": "row", "at": 247.0, "items": [
+          { "type": "icon", "icon": "ticket", "label": "1re ligne : le chiffre d’affaires", "at": 247.2 }
+        ] },
+        { "type": "chips", "at": 250.0, "items": [
+          { "text": "Combien reste-t-il ?", "at": 252.0, "tone": "accent" }
+        ] },
+        { "type": "icon", "icon": "layers", "label": "couche après couche, jusqu’au net", "at": 257.8 }
+      ]
+    },
+    {
+      "from": 262.2, "to": 283.5,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Lire un bilan : deux questions", "at": 262.3 },
+        { "type": "list", "style": "num", "at": 264.7, "items": [
+          { "text": "Que possède l’entreprise ? (à gauche)", "at": 264.8 },
+          { "text": "Qui a financé ? (à droite)", "at": 268.8 }
+        ] },
+        { "type": "row", "at": 273.5, "items": [
+          { "type": "icon", "icon": "alert", "tone": "loss", "at": 273.5 },
+          { "type": "text", "size": "small", "text": "Dettes courtes élevées, trésorerie faible", "at": 273.6 }
+        ] },
+        { "type": "row", "at": 278.6, "items": [
+          { "type": "icon", "icon": "shield", "tone": "gain", "at": 278.6 },
+          { "type": "text", "size": "small", "text": "Capitaux propres solides : mauvais exercice encaissé", "at": 278.7 }
+        ] }
+      ]
+    },
+    {
+      "from": 283.5, "to": 303,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Déjà beaucoup d’informations", "at": 283.6, "out": 287.5, "hide": true },
+        { "type": "text", "size": "big", "text": "Pour résumer", "at": 287.9, "out": 288.9, "hide": true },
+        { "type": "cards", "at": 289.0, "items": [
+          { "icon": "chart-bar", "title": "Compte de résultat", "sub": "produits − charges", "at": 289.1 },
+          { "icon": "scale", "title": "Bilan", "sub": "ce qu’on possède et doit", "at": 293.2 }
+        ] },
+        { "type": "text", "size": "big", "text": "Bénéfice [[≠]] argent en poche", "at": 297.5 },
+        { "type": "text", "size": "small", "text": "À bientôt", "at": 301.0 }
+      ]
+    }
+  ]
+}

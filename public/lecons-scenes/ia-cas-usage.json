@@ -1,0 +1,243 @@
+{
+  "lesson": "ia-cas-usage",
+  "version": "1.0.0",
+  "scenes": [
+    {
+      "from": 0,
+      "to": 24.0,
+      "items": [
+        { "type": "text", "size": "title", "text": "Choisir un bon cas d’usage de l’IA", "at": 0.2 },
+        { "type": "text", "size": "big", "text": "L’IA pour tout ? [[Non.]]", "at": 6.9, "mark": { "text": "Non.", "at": 9.3 } },
+        { "type": "cards", "at": 13.1, "items": [
+          { "icon": "hour", "title": "Temps gagné", "sub": "sans risque excessif", "at": 13.3 },
+          { "icon": "calculator", "title": "Gain net", "sub": "vérification comprise", "at": 18.8, "accent": true }
+        ] },
+        { "type": "actor", "character": "robot", "name": "l’IA", "at": 4.2 }
+      ]
+    },
+    {
+      "from": 24.0,
+      "to": 43.5,
+      "items": [
+        { "type": "chips", "at": 25.8, "items": [
+          { "text": "tester partout", "at": 25.9 },
+          { "text": "→", "at": 28.0 },
+          { "text": "abandon", "at": 28.4, "tone": "loss" }
+        ] },
+        { "type": "chips", "at": 31.4, "items": [
+          { "text": "erreur coûteuse", "at": 31.5, "tone": "loss" },
+          { "text": "+", "at": 33.2 },
+          { "text": "aucun contrôle", "at": 33.5, "tone": "loss" }
+        ] },
+        { "type": "list", "style": "check", "at": 35.9, "items": [
+          { "text": "Un résultat visible", "at": 36.0 },
+          { "text": "Des équipes rassurées", "at": 38.2 },
+          { "text": "On apprend à travailler avec l’outil", "at": 40.2 }
+        ] }
+      ]
+    },
+    {
+      "from": 43.5,
+      "to": 66.0,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Une bonne tâche pour l’IA ?", "at": 44.9 },
+        { "type": "list", "style": "num", "at": 48.7, "items": [
+          { "text": "Fréquente ou volumineuse : le gain se répète", "at": 48.7 },
+          { "text": "Texte ou données disponibles", "at": 53.2 },
+          { "text": "Résultat vérifiable vite par un compétent", "at": 57.1 },
+          { "text": "Tolère l’erreur, corrigeable", "at": 61.6 }
+        ] }
+      ]
+    },
+    {
+      "from": 66.0,
+      "to": 82.5,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Souvent pertinent", "at": 66.1 },
+        { "type": "list", "style": "check", "at": 68.6, "items": [
+          { "text": "Premiers jets : courriers, fiches produit", "at": 68.6 },
+          { "text": "Résumés de longs documents", "at": 71.5 },
+          { "text": "Classement des demandes entrantes", "at": 73.6 },
+          { "text": "Extraction de factures, avec contrôle", "at": 75.8 },
+          { "text": "Aide au code, testé ensuite", "at": 79.2 }
+        ] }
+      ]
+    },
+    {
+      "from": 82.5,
+      "to": 98.8,
+      "items": [
+        { "type": "text", "size": "mid", "text": "À éviter ou à encadrer", "at": 82.6 },
+        { "type": "list", "style": "cross", "at": 84.0, "items": [
+          { "text": "Décisions sur des personnes : recrutement, crédit, santé", "at": 84.0 },
+          { "text": "Chiffres non vérifiés présentés comme exacts", "at": 91.0 },
+          { "text": "Réponses juridiques ou médicales sans relecture", "at": 94.0 }
+        ] }
+      ]
+    },
+    {
+      "from": 98.8,
+      "to": 121.2,
+      "items": [
+        { "type": "chips", "at": 103.3, "items": [
+          { "text": "temps gagné", "at": 103.4 },
+          { "text": "×", "at": 105.0 },
+          { "text": "nombre de tâches", "at": 105.4 },
+          { "text": "×", "at": 107.4 },
+          { "text": "coût d’une heure", "at": 107.8 }
+        ] },
+        { "type": "chips", "at": 110.4, "items": [
+          { "text": "−", "at": 110.5 },
+          { "text": "vérification × coût horaire", "at": 111.0, "tone": "loss" },
+          { "text": "−", "at": 116.1 },
+          { "text": "prix de l’outil", "at": 116.5 },
+          { "text": "=", "at": 118.1 },
+          { "text": "gain net", "at": 118.5, "tone": "gain" }
+        ] }
+      ]
+    },
+    {
+      "from": 121.2,
+      "to": 138.7,
+      "items": [
+        { "type": "row", "at": 121.2, "items": [
+          { "type": "icon", "icon": "hour", "size": "l", "tone": "accent", "at": 121.3 },
+          { "type": "text", "size": "mid", "text": "La vérification : souvent [[oubliée]]", "at": 121.5 }
+        ] },
+        { "type": "text", "size": "mid", "text": "Pourtant, elle [[décide]]", "at": 123.8 },
+        { "type": "chips", "at": 127.9, "items": [
+          { "text": "qualité régulière", "at": 128.0 },
+          { "text": "délai plus court", "at": 130.2 },
+          { "text": "plus disponible", "at": 132.2 }
+        ] },
+        { "type": "row", "at": 134.2, "items": [
+          { "type": "icon", "icon": "search", "at": 134.3 },
+          { "type": "text", "size": "small", "text": "Mesuré sur un échantillon réel", "at": 134.6 }
+        ] }
+      ]
+    },
+    {
+      "from": 138.7,
+      "to": 155.3,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Le projet pilote", "at": 138.8 },
+        { "type": "steps", "at": 141.2, "items": [
+          { "text": "Tâche", "icon": "target", "at": 141.3 },
+          { "text": "Outil", "icon": "gear", "at": 142.4 },
+          { "text": "Mesure de départ", "icon": "scale", "at": 143.0 },
+          { "text": "Durée", "icon": "calendar", "at": 147.4 },
+          { "text": "Succès", "icon": "flag", "at": 148.6 }
+        ] },
+        { "type": "chips", "at": 150.1, "items": [
+          { "text": "généraliser", "at": 150.8, "tone": "gain" },
+          { "text": "ajuster", "at": 152.0 },
+          { "text": "arrêter", "at": 153.0, "tone": "loss" }
+        ] }
+      ]
+    },
+    {
+      "from": 155.3,
+      "to": 176.2,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Moins de rédaction, plus de [[relecture]]", "at": 159.0 },
+        { "type": "chips", "at": 163.8, "items": [
+          { "text": "relecture bâclée", "at": 163.9, "tone": "loss" },
+          { "text": "→", "at": 165.6 },
+          { "text": "erreurs en production", "at": 166.0, "tone": "loss" },
+          { "text": "→", "at": 167.6 },
+          { "text": "clients", "at": 168.0 }
+        ] },
+        { "type": "row", "at": 169.2, "items": [
+          { "type": "icon", "icon": "graduate", "label": "former", "at": 169.3 },
+          { "type": "icon", "icon": "person", "label": "un responsable", "at": 172.0 }
+        ] }
+      ]
+    },
+    {
+      "from": 176.2,
+      "to": 186.4,
+      "items": [
+        { "type": "stats", "at": 180.4, "items": [
+          { "label": "Courriels par mois", "value": 600, "at": 180.5 },
+          { "label": "Minutes par réponse", "value": 6, "at": 183.8, "accent": true }
+        ] },
+        { "type": "actor", "character": "entrepreneuse", "name": "la boutique", "at": 178.8 }
+      ]
+    },
+    {
+      "from": 186.4,
+      "to": 198.4,
+      "items": [
+        { "type": "chips", "at": 186.4, "items": [
+          { "text": "relire : 2 min", "at": 187.0 },
+          { "text": "+", "at": 190.0 },
+          { "text": "cas difficiles : 1 min", "at": 190.6 }
+        ] },
+        { "type": "waterfall", "at": 194.3, "rows": [
+          { "label": "Sans l’IA (min)", "value": 6, "kind": "start", "at": 194.3 },
+          { "label": "gagné", "value": 3, "kind": "minus", "at": 195.2, "tone": "gain" },
+          { "label": "Avec l’IA", "value": 3, "kind": "total", "at": 196.6 }
+        ] }
+      ]
+    },
+    {
+      "from": 198.4,
+      "to": 210.2,
+      "items": [
+        { "type": "stats", "at": 198.4, "items": [
+          { "label": "Gagné par mois (heures)", "value": 30, "at": 198.6, "tone": "gain", "accent": true },
+          { "label": "Abonnement", "value": 60, "unit": " €", "at": 200.4 }
+        ] },
+        { "type": "row", "at": 202.2, "items": [
+          { "type": "icon", "icon": "check", "tone": "gain", "at": 202.3 },
+          { "type": "text", "size": "small", "text": "Satisfaction client : stable", "at": 202.6 }
+        ] },
+        { "type": "text", "size": "small", "text": "Généralisé, avec [[relecture obligatoire]]", "at": 206.7 }
+      ]
+    },
+    {
+      "from": 210.2,
+      "to": 233.0,
+      "items": [
+        { "type": "dialog", "at": 212.9, "items": [
+          { "character": "robot", "name": "le stagiaire", "text": "« Voici tous tes brouillons ! »", "at": 214.0, "side": "left" },
+          { "character": "toi", "name": "toi", "text": "« Je dois tout relire… »", "at": 221.6, "side": "right" }
+        ] },
+        { "type": "chips", "at": 224.9, "items": [
+          { "text": "relire", "at": 225.0 },
+          { "text": "≈", "at": 226.4 },
+          { "text": "écrire", "at": 226.8 },
+          { "text": "=", "at": 227.6 },
+          { "text": "presque rien gagné", "at": 228.0, "tone": "loss" }
+        ] },
+        { "type": "text", "size": "small", "text": "C’est ce que mesure le [[gain net]]", "at": 229.9 }
+      ]
+    },
+    {
+      "from": 233.0,
+      "to": 254.2,
+      "items": [
+        { "type": "steps", "at": 233.0, "items": [
+          { "text": "Un petit cas", "icon": "target", "at": 233.2 },
+          { "text": "Tâche répétitive", "icon": "calendar", "at": 237.3 },
+          { "text": "Tu mesures", "icon": "calculator", "at": 241.0 },
+          { "text": "Avant / après", "icon": "scale", "at": 242.1 },
+          { "text": "Gain réel : on étend", "icon": "rocket", "at": 245.1 }
+        ] },
+        { "type": "text", "size": "small", "text": "Pas de déception : [[prudence]]", "at": 249.1 }
+      ]
+    },
+    {
+      "from": 254.2,
+      "to": 267.5,
+      "items": [
+        { "type": "text", "size": "big", "text": "Pour résumer", "at": 254.3, "out": 255.4, "hide": true },
+        { "type": "list", "style": "check", "at": 255.5, "items": [
+          { "text": "Fréquentes, vérifiables, tolérantes", "at": 255.5 },
+          { "text": "Compter la vérification", "at": 259.6 },
+          { "text": "Petit pilote avant de généraliser", "at": 261.7 }
+        ] }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,894 @@
+{
+  "lesson": "fp-inflation-quotidien",
+  "version": "1.0.0",
+  "scenes": [
+    {
+      "from": 0,
+      "to": 4.5,
+      "items": [
+        {
+          "type": "text",
+          "size": "title",
+          "text": "Inflation, pouvoir d’achat et salaire réel",
+          "at": 0.2
+        },
+        {
+          "type": "text",
+          "size": "small",
+          "text": "Bienvenue",
+          "at": 3.5
+        }
+      ]
+    },
+    {
+      "from": 4.5,
+      "to": 10.5,
+      "items": [
+        {
+          "type": "icon",
+          "icon": "cart",
+          "size": "l",
+          "label": "le panier de courses",
+          "at": 4.6
+        },
+        {
+          "type": "icon",
+          "icon": "chart-up",
+          "tone": "loss",
+          "label": "plus cher qu’avant",
+          "at": 7.0
+        },
+        {
+          "type": "text",
+          "size": "big",
+          "text": "[[Inflation]]",
+          "at": 9.0
+        }
+      ]
+    },
+    {
+      "from": 10.5,
+      "to": 20.2,
+      "items": [
+        {
+          "type": "cards",
+          "at": 11.6,
+          "items": [
+            {
+              "icon": "wallet",
+              "title": "Même salaire",
+              "sub": "achète moins",
+              "at": 11.8
+            },
+            {
+              "icon": "percent",
+              "title": "Un taux",
+              "sub": "savoir le lire",
+              "at": 14.4
+            },
+            {
+              "icon": "calculator",
+              "title": "Ton budget",
+              "sub": "ce qui change",
+              "at": 17.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "from": 20.2,
+      "to": 39.4,
+      "items": [
+        {
+          "type": "text",
+          "size": "mid",
+          "text": "Une idée qui surprend",
+          "at": 20.3,
+          "out": 24.0,
+          "hide": true
+        },
+        {
+          "type": "stats",
+          "at": 24.3,
+          "items": [
+            {
+              "label": "Ton salaire",
+              "value": 2,
+              "unit": " %",
+              "at": 24.5,
+              "tone": "gain"
+            },
+            {
+              "label": "Les prix",
+              "value": 3,
+              "unit": " %",
+              "at": 29.9,
+              "tone": "loss",
+              "accent": true
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "size": "mid",
+          "text": "Plus d’euros, [[moins de choses]]",
+          "at": 35.7
+        },
+        {
+          "type": "actor",
+          "character": "toi",
+          "name": "toi",
+          "at": 24.4,
+          "think": {
+            "text": "?",
+            "at": 28.7
+          }
+        }
+      ]
+    },
+    {
+      "from": 39.4,
+      "to": 49.8,
+      "items": [
+        {
+          "type": "text",
+          "size": "small",
+          "text": "Comprendre l’inflation, c’est…",
+          "at": 39.5
+        },
+        {
+          "type": "cards",
+          "at": 42.4,
+          "items": [
+            {
+              "icon": "handshake",
+              "title": "Négocier",
+              "sub": "ton salaire",
+              "at": 42.5
+            },
+            {
+              "icon": "calculator",
+              "title": "Ajuster",
+              "sub": "ton budget",
+              "at": 44.2
+            },
+            {
+              "icon": "piggy",
+              "title": "Juger",
+              "sub": "ton épargne",
+              "at": 45.8
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "from": 49.8,
+      "to": 67.0,
+      "items": [
+        {
+          "type": "text",
+          "size": "mid",
+          "text": "Hausse [[générale]] des prix",
+          "at": 52.7
+        },
+        {
+          "type": "row",
+          "at": 56.6,
+          "items": [
+            {
+              "type": "icon",
+              "icon": "bank",
+              "size": "l",
+              "label": "l’Insee la mesure",
+              "at": 56.7
+            },
+            {
+              "type": "icon",
+              "icon": "cart",
+              "size": "l",
+              "label": "un panier représentatif",
+              "at": 61.2
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "size": "small",
+          "text": "Indice des prix à la consommation",
+          "at": 63.0
+        }
+      ]
+    },
+    {
+      "from": 67.0,
+      "to": 79.5,
+      "items": [
+        {
+          "type": "icon",
+          "icon": "cart",
+          "size": "l",
+          "label": "d’une année sur l’autre",
+          "at": 67.1
+        },
+        {
+          "type": "counter",
+          "label": "Le panier",
+          "from": 0,
+          "to": 100,
+          "at": 71.4,
+          "until": 73.8
+        },
+        {
+          "type": "chips",
+          "at": 74.4,
+          "items": [
+            {
+              "text": "100 €",
+              "at": 74.4
+            },
+            {
+              "text": "+ 3 %",
+              "at": 75.6,
+              "tone": "loss"
+            },
+            {
+              "text": "=",
+              "at": 76.8
+            },
+            {
+              "text": "103 €",
+              "at": 77.4,
+              "tone": "accent"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "from": 79.5,
+      "to": 88.2,
+      "items": [
+        {
+          "type": "text",
+          "size": "mid",
+          "text": "Pouvoir d’achat",
+          "at": 79.6
+        },
+        {
+          "type": "chart",
+          "at": 83.8,
+          "lines": [
+            {
+              "label": "prix",
+              "values": [
+                10,
+                22,
+                36,
+                52,
+                70
+              ],
+              "at": 83.9,
+              "until": 86.8,
+              "tone": "loss"
+            },
+            {
+              "label": "revenu",
+              "values": [
+                10,
+                16,
+                22,
+                28,
+                34
+              ],
+              "at": 84.4,
+              "until": 87.4,
+              "tone": "muted"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "from": 88.2,
+      "to": 103.8,
+      "items": [
+        {
+          "type": "text",
+          "size": "mid",
+          "text": "Salaire réel",
+          "at": 88.3
+        },
+        {
+          "type": "chips",
+          "at": 91.0,
+          "items": [
+            {
+              "text": "hausse du salaire",
+              "at": 92.0
+            },
+            {
+              "text": "−",
+              "at": 93.8
+            },
+            {
+              "text": "inflation",
+              "at": 94.2,
+              "tone": "loss"
+            },
+            {
+              "text": "≈",
+              "at": 95.2
+            },
+            {
+              "text": "salaire réel",
+              "at": 95.6,
+              "tone": "accent"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "size": "small",
+          "text": "Une approximation, mais elle suffit",
+          "at": 96.7
+        }
+      ]
+    },
+    {
+      "from": 103.8,
+      "to": 118.6,
+      "items": [
+        {
+          "type": "compare",
+          "at": 103.9,
+          "left": {
+            "title": "Argent qui dort",
+            "icon": "coins",
+            "items": [
+              {
+                "text": "Aucun intérêt",
+                "at": 108.2
+              },
+              {
+                "text": "Perd de la valeur",
+                "at": 105.5,
+                "tone": "loss"
+              }
+            ]
+          },
+          "right": {
+            "title": "Dette à taux fixe",
+            "icon": "card",
+            "items": [
+              {
+                "text": "Prix et revenus montent",
+                "at": 114.0
+              },
+              {
+                "text": "Pèse un peu moins",
+                "at": 116.0,
+                "tone": "gain"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "from": 118.6,
+      "to": 134.5,
+      "items": [
+        {
+          "type": "text",
+          "size": "mid",
+          "text": "Quelques mots utiles",
+          "at": 118.7,
+          "out": 122.4,
+          "hide": true
+        },
+        {
+          "type": "cards",
+          "at": 122.5,
+          "items": [
+            {
+              "icon": "calendar",
+              "title": "Glissement annuel",
+              "sub": "sur un an",
+              "at": 122.6
+            },
+            {
+              "icon": "chart-bar",
+              "title": "Moyenne de l’année",
+              "sub": "",
+              "at": 125.0
+            },
+            {
+              "icon": "thermometer",
+              "title": "Sous-jacente",
+              "sub": "sans les prix qui bougent le plus",
+              "at": 128.1,
+              "subAt": 130.0,
+              "accent": true
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "size": "small",
+          "text": "Une vision plus stable",
+          "at": 132.6
+        }
+      ]
+    },
+    {
+      "from": 134.5,
+      "to": 144.6,
+      "items": [
+        {
+          "type": "text",
+          "size": "mid",
+          "text": "Inflation [[personnelle]]",
+          "at": 134.6
+        },
+        {
+          "type": "row",
+          "at": 138.4,
+          "items": [
+            {
+              "type": "icon",
+              "icon": "car",
+              "size": "l",
+              "label": "carburant",
+              "at": 138.5
+            },
+            {
+              "type": "icon",
+              "icon": "house",
+              "size": "l",
+              "label": "loyer",
+              "at": 140.6
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "size": "small",
+          "text": "Pas la même pour tout le monde",
+          "at": 142.0
+        }
+      ]
+    },
+    {
+      "from": 144.6,
+      "to": 156.4,
+      "items": [
+        {
+          "type": "text",
+          "size": "big",
+          "text": "L’illusion [[monétaire]]",
+          "at": 147.4
+        },
+        {
+          "type": "compare",
+          "at": 150.3,
+          "left": {
+            "title": "Euros affichés",
+            "icon": "euro",
+            "items": [
+              {
+                "text": "On croit gagner",
+                "at": 154.2
+              }
+            ]
+          },
+          "right": {
+            "title": "Pouvoir d’achat",
+            "icon": "cart",
+            "items": [
+              {
+                "text": "On perd",
+                "at": 155.0,
+                "tone": "loss"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "from": 156.4,
+      "to": 169.4,
+      "items": [
+        {
+          "type": "chips",
+          "at": 156.5,
+          "items": [
+            {
+              "text": "épargne 1 %",
+              "at": 157.0
+            },
+            {
+              "text": "−",
+              "at": 158.8
+            },
+            {
+              "text": "inflation 3 %",
+              "at": 159.2,
+              "tone": "loss"
+            },
+            {
+              "text": "=",
+              "at": 160.6
+            },
+            {
+              "text": "− 2 %",
+              "at": 161.0,
+              "tone": "loss"
+            }
+          ]
+        },
+        {
+          "type": "gauge",
+          "label": "Pouvoir d’achat perdu",
+          "value": 2,
+          "at": 161.4,
+          "until": 164.0,
+          "tone": "loss"
+        },
+        {
+          "type": "text",
+          "size": "small",
+          "text": "Une augmentation ? Compare à l’inflation",
+          "at": 165.5
+        }
+      ]
+    },
+    {
+      "from": 169.4,
+      "to": 184.9,
+      "items": [
+        {
+          "type": "text",
+          "size": "mid",
+          "text": "Hausse de revenu ou rendement [[vs]] inflation",
+          "at": 169.5
+        },
+        {
+          "type": "compare",
+          "at": 175.8,
+          "left": {
+            "title": "Acheter par peur",
+            "icon": "cross",
+            "items": [
+              {
+                "text": "Vite, avant la hausse",
+                "at": 176.5
+              }
+            ]
+          },
+          "right": {
+            "title": "Garder la main",
+            "icon": "check",
+            "items": [
+              {
+                "text": "Revoir les dépenses",
+                "at": 180.2
+              },
+              {
+                "text": "De la marge au budget",
+                "at": 182.0
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "from": 184.9,
+      "to": 193.0,
+      "items": [
+        {
+          "type": "icon",
+          "icon": "bank",
+          "size": "l",
+          "label": "chiffres officiels : l’Insee",
+          "at": 185.0
+        },
+        {
+          "type": "text",
+          "size": "small",
+          "text": "Les taux de cette leçon sont inventés",
+          "at": 189.9
+        }
+      ]
+    },
+    {
+      "from": 193.0,
+      "to": 205.1,
+      "items": [
+        {
+          "type": "text",
+          "size": "mid",
+          "text": "Tom",
+          "at": 193.1,
+          "out": 197.8,
+          "hide": true
+        },
+        {
+          "type": "counter",
+          "label": "Salaire",
+          "to": 2000,
+          "at": 198.3,
+          "until": 200.3
+        },
+        {
+          "type": "chips",
+          "at": 200.8,
+          "items": [
+            {
+              "text": "+ 2 %",
+              "at": 200.8,
+              "tone": "gain"
+            },
+            {
+              "text": "=",
+              "at": 202.0
+            },
+            {
+              "text": "2 040 €",
+              "at": 202.5,
+              "tone": "accent"
+            }
+          ]
+        },
+        {
+          "type": "actor",
+          "character": "client",
+          "name": "Tom",
+          "at": 197.6
+        }
+      ]
+    },
+    {
+      "from": 205.1,
+      "to": 213.9,
+      "items": [
+        {
+          "type": "gauge",
+          "label": "Les prix",
+          "value": 3,
+          "at": 205.2,
+          "until": 207.8,
+          "tone": "loss"
+        },
+        {
+          "type": "bars",
+          "at": 209.5,
+          "unit": " €",
+          "items": [
+            {
+              "label": "Son salaire",
+              "value": 2040,
+              "at": 209.6
+            },
+            {
+              "label": "Pour garder le même pouvoir",
+              "value": 2060,
+              "at": 211.4,
+              "tone": "accent"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "from": 213.9,
+      "to": 222.7,
+      "items": [
+        {
+          "type": "stats",
+          "at": 214.0,
+          "items": [
+            {
+              "label": "Salaire réel",
+              "value": -1,
+              "unit": " %",
+              "at": 214.1,
+              "tone": "loss"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "size": "small",
+          "text": "2 040 € achètent moins que 2 000 € avant",
+          "at": 218.1
+        }
+      ]
+    },
+    {
+      "from": 222.7,
+      "to": 239.8,
+      "items": [
+        {
+          "type": "text",
+          "size": "mid",
+          "text": "En trois temps",
+          "at": 222.8
+        },
+        {
+          "type": "steps",
+          "at": 226.5,
+          "items": [
+            {
+              "text": "Les prix montent",
+              "icon": "chart-up",
+              "at": 226.6
+            },
+            {
+              "text": "Ton revenu à la traîne",
+              "icon": "wallet",
+              "at": 230.3
+            },
+            {
+              "text": "Ton épargne aussi",
+              "icon": "piggy",
+              "at": 235.1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "from": 239.8,
+      "to": 247.5,
+      "items": [
+        {
+          "type": "text",
+          "size": "mid",
+          "text": "Que faire ?",
+          "at": 239.9
+        },
+        {
+          "type": "row",
+          "at": 241.5,
+          "items": [
+            {
+              "type": "icon",
+              "icon": "fire",
+              "size": "l",
+              "label": "énergie",
+              "at": 242.4
+            },
+            {
+              "type": "icon",
+              "icon": "cart",
+              "size": "l",
+              "label": "courses",
+              "at": 243.8
+            },
+            {
+              "type": "icon",
+              "icon": "house",
+              "size": "l",
+              "label": "loyer",
+              "at": 245.4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "from": 247.5,
+      "to": 253.6,
+      "items": [
+        {
+          "type": "chips",
+          "at": 247.6,
+          "items": [
+            {
+              "text": "ton revenu",
+              "at": 247.7
+            },
+            {
+              "text": "≠",
+              "at": 249.0
+            },
+            {
+              "text": "évolution des prix",
+              "at": 249.4,
+              "tone": "accent"
+            }
+          ]
+        },
+        {
+          "type": "icon",
+          "icon": "invoice",
+          "label": "pas seulement ta fiche de paie",
+          "at": 251.0
+        }
+      ]
+    },
+    {
+      "from": 253.6,
+      "to": 265.8,
+      "items": [
+        {
+          "type": "chart",
+          "at": 253.7,
+          "lines": [
+            {
+              "label": "taux du livret",
+              "values": [
+                20,
+                20,
+                20,
+                20
+              ],
+              "at": 254.0,
+              "until": 257.4,
+              "tone": "muted"
+            },
+            {
+              "label": "prix",
+              "values": [
+                10,
+                22,
+                34,
+                46
+              ],
+              "at": 256.5,
+              "until": 260.0,
+              "tone": "loss"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "size": "mid",
+          "text": "Taux < inflation : valeur [[perdue|loss]]",
+          "at": 258.5
+        },
+        {
+          "type": "text",
+          "size": "small",
+          "text": "Le coût de la sécurité",
+          "at": 262.3
+        }
+      ]
+    },
+    {
+      "from": 265.8,
+      "to": 278,
+      "items": [
+        {
+          "type": "list",
+          "style": "check",
+          "at": 265.9,
+          "items": [
+            {
+              "text": "Salaire plus lent que les prix = perte",
+              "at": 266.9
+            },
+            {
+              "text": "Compare toujours à l’inflation",
+              "at": 271.1
+            },
+            {
+              "text": "Évite l’illusion monétaire",
+              "at": 273.1
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "size": "small",
+          "text": "À bientôt",
+          "at": 276.0
+        }
+      ]
+    }
+  ]
+}

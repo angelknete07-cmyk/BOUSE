@@ -1,0 +1,278 @@
+{
+  "lesson": "inv-fonds-enveloppes",
+  "version": "1.0.0",
+  "scenes": [
+    {
+      "from": 0,
+      "to": 8.0,
+      "items": [
+        { "type": "text", "size": "title", "text": "Fonds, ETF et enveloppes", "at": 0.2 },
+        { "type": "text", "size": "small", "text": "PEA · assurance-vie · compte-titres", "at": 3.0 },
+        { "type": "text", "size": "small", "text": "Bienvenue", "at": 7.0 }
+      ]
+    },
+    {
+      "from": 8.0,
+      "to": 19.1,
+      "items": [
+        { "type": "chips", "at": 8.9, "items": [
+          { "text": "PEA", "at": 10.8 },
+          { "text": "ETF", "at": 11.8 },
+          { "text": "assurance-vie", "at": 12.8 },
+          { "text": "SICAV", "at": 14.2 },
+          { "text": "compte-titres", "at": 15.2 }
+        ] },
+        { "type": "icon", "icon": "question", "size": "l", "at": 17.3, "tone": "accent" },
+        { "type": "actor", "character": "toi", "name": "toi", "at": 8.2, "think": { "text": "?", "at": 17.4 } }
+      ]
+    },
+    {
+      "from": 19.1,
+      "to": 32.8,
+      "items": [
+        { "type": "cards", "at": 19.6, "items": [
+          { "icon": "chart-bar", "title": "Support", "sub": "ce que tu détiens", "at": 21.5, "subAt": 23.0 },
+          { "icon": "briefcase", "title": "Enveloppe", "sub": "le cadre qui le contient", "at": 24.0, "subAt": 25.0, "accent": true }
+        ] },
+        { "type": "row", "at": 28.1, "items": [
+          { "type": "icon", "icon": "document", "label": "DIC", "at": 28.5 },
+          { "type": "icon", "icon": "percent", "label": "frais", "at": 30.5 }
+        ] }
+      ]
+    },
+    {
+      "from": 32.8,
+      "to": 56.0,
+      "items": [
+        { "type": "text", "size": "big", "text": "support [[≠]] enveloppe", "at": 36.0 },
+        { "type": "row", "at": 44.0, "items": [
+          { "type": "icon", "icon": "chart-up", "label": "action", "at": 44.5, "id": "act" },
+          { "type": "icon", "icon": "pie", "label": "fonds", "at": 47.0, "id": "fon" },
+          { "type": "icon", "icon": "box", "size": "l", "label": "enveloppe", "at": 49.5, "id": "boite", "tone": "accent" }
+        ] },
+        { "type": "fly", "from": "act", "to": "boite", "at": 50.0, "until": 52.0, "count": 3 },
+        { "type": "fly", "from": "fon", "to": "boite", "at": 51.0, "until": 53.0, "count": 3 },
+        { "type": "text", "size": "small", "text": "gains imposés selon le cadre", "at": 54.0 }
+      ]
+    },
+    {
+      "from": 56.0,
+      "to": 65.6,
+      "items": [
+        { "type": "icon", "icon": "globe", "size": "l", "label": "la carte", "at": 56.1 },
+        { "type": "list", "style": "check", "at": 57.8, "items": [
+          { "text": "Comprendre les cases", "at": 57.9, "style": "check" },
+          { "text": "Choisir ton enveloppe", "at": 59.8, "style": "cross" },
+          { "text": "Vérifier les règles fiscales à la date de ta décision", "at": 61.8, "style": "check" }
+        ] }
+      ]
+    },
+    {
+      "from": 65.6,
+      "to": 76.9,
+      "items": [
+        { "type": "text", "size": "big", "text": "Les supports", "at": 65.7, "out": 68.8, "hide": true },
+        { "type": "icons", "icon": "person", "count": 6, "step": 0.35, "at": 69.1, "id": "epa" },
+        { "type": "icon", "icon": "basket", "size": "l", "label": "un fonds", "at": 72.0, "id": "fonds", "tone": "accent" },
+        { "type": "fly", "from": "epa-0", "to": "fonds", "at": 72.6, "until": 74.4, "count": 3 },
+        { "type": "fly", "from": "epa-4", "to": "fonds", "at": 73.4, "until": 75.4, "count": 3 }
+      ]
+    },
+    {
+      "from": 76.9,
+      "to": 89.5,
+      "items": [
+        { "type": "compare", "at": 77.0,
+          "left": { "title": "Gestion active", "icon": "target", "items": [
+            { "text": "Le gérant veut battre le marché", "at": 79.4 }
+          ] },
+          "right": { "title": "Gestion indicielle", "icon": "chart-bar", "items": [
+            { "text": "Elle reproduit un indice", "at": 83.5 },
+            { "text": "Exemple : le CAC 40", "at": 86.8 }
+          ] } }
+      ]
+    },
+    {
+      "from": 89.5,
+      "to": 106.7,
+      "items": [
+        { "type": "text", "size": "big", "text": "ETF = [[tracker]]", "at": 89.6 },
+        { "type": "chips", "at": 91.0, "items": [
+          { "text": "fonds indiciel", "at": 91.0 },
+          { "text": "+", "at": 92.4 },
+          { "text": "coté en bourse", "at": 92.8 },
+          { "text": "= comme une action", "at": 94.8, "tone": "muted" }
+        ] },
+        { "type": "row", "at": 98.5, "items": [
+          { "type": "icon", "icon": "percent", "tone": "gain", "at": 98.5 },
+          { "type": "text", "size": "small", "text": "frais souvent plus bas, [[pas toujours|muted]]", "at": 98.8 }
+        ] },
+        { "type": "chart", "at": 103.2, "lines": [
+          { "label": "indice", "values": [50, 42, 30, 22, 12, 6], "at": 103.3, "until": 106.2, "tone": "loss" }
+        ] }
+      ]
+    },
+    {
+      "from": 106.7,
+      "to": 126.0,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Les enveloppes", "at": 106.8, "out": 108.4 },
+        { "type": "cards", "at": 108.5, "items": [
+          { "icon": "briefcase", "title": "Compte-titres", "sub": "titres variés, aucun avantage fiscal", "at": 108.6, "subAt": 112.0 },
+          { "icon": "flag", "title": "PEA", "sub": "actions européennes et fonds éligibles", "at": 114.8, "subAt": 116.5, "accent": true }
+        ] },
+        { "type": "chips", "at": 120.9, "items": [
+          { "text": "plafond de versements", "at": 120.9 },
+          { "text": "+", "at": 122.6 },
+          { "text": "durée de détention", "at": 123.0 }
+        ] }
+      ]
+    },
+    {
+      "from": 126.0,
+      "to": 151.0,
+      "items": [
+        { "type": "row", "at": 126.0, "items": [
+          { "type": "icon", "icon": "umbrella", "at": 126.0 },
+          { "type": "text", "size": "mid", "text": "Assurance-vie : un contrat", "at": 126.2 }
+        ] },
+        { "type": "compare", "at": 130.0,
+          "left": { "title": "Fonds en euros", "icon": "shield", "items": [
+            { "text": "Capital en principe garanti", "at": 130.8 }
+          ] },
+          "right": { "title": "Unités de compte", "icon": "alert", "items": [
+            { "text": "Risque de perte", "at": 135.1 }
+          ] } },
+        { "type": "text", "size": "small", "text": "plafonds · durées · retraits · fiscalité : [[la loi change]]", "at": 139.2 },
+        { "type": "row", "at": 144.6, "items": [
+          { "type": "icon", "icon": "search", "at": 144.6 },
+          { "type": "text", "size": "small", "text": "service-public.fr · AMF", "at": 146.0 }
+        ] }
+      ]
+    },
+    {
+      "from": 151.0,
+      "to": 170.0,
+      "items": [
+        { "type": "text", "size": "big", "text": "Le DIC", "at": 151.2, "out": 154.4, "hide": true },
+        { "type": "icon", "icon": "document", "size": "l", "label": "document d’informations clés", "at": 154.6 },
+        { "type": "list", "style": "check", "at": 157.0, "items": [
+          { "text": "Objectif du produit", "at": 157.5 },
+          { "text": "Risque de 1 à 7", "at": 160.0 },
+          { "text": "Scénarios de performance", "at": 162.2 },
+          { "text": "Coûts", "at": 165.2 }
+        ] },
+        { "type": "row", "at": 166.9, "items": [
+          { "type": "icon", "icon": "eye", "at": 166.9 },
+          { "type": "text", "size": "mid", "text": "[[Lire avant d’acheter]]", "at": 167.4 }
+        ] }
+      ]
+    },
+    {
+      "from": 170.0,
+      "to": 186.0,
+      "items": [
+        { "type": "chips", "at": 170.2, "items": [
+          { "text": "OPC", "at": 171.0 },
+          { "text": "OPCVM", "at": 172.2 },
+          { "text": "SICAV", "at": 173.6 },
+          { "text": "FCP", "at": 174.8 }
+        ] },
+        { "type": "text", "size": "small", "text": "des familles de fonds", "at": 176.5 },
+        { "type": "row", "at": 179.3, "items": [
+          { "type": "icon", "icon": "percent", "at": 179.3 },
+          { "type": "text", "size": "mid", "text": "frais courants · par an", "at": 179.6 }
+        ] },
+        { "type": "chips", "at": 182.4, "items": [
+          { "text": "frais courants", "at": 182.4 },
+          { "text": "+", "at": 183.6 },
+          { "text": "frais du contrat", "at": 184.0, "tone": "loss" }
+        ] }
+      ]
+    },
+    {
+      "from": 186.0,
+      "to": 201.3,
+      "items": [
+        { "type": "row", "at": 188.6, "items": [
+          { "type": "icon", "icon": "gift", "size": "l", "label": "avantage fiscal", "at": 188.6 },
+          { "type": "text", "size": "big", "text": "[[seul]]", "at": 192.0, "tone": "loss" }
+        ] },
+        { "type": "cards", "at": 195.5, "items": [
+          { "icon": "alert", "title": "Risque", "sub": "", "at": 196.0 },
+          { "icon": "percent", "title": "Frais", "sub": "", "at": 197.2 },
+          { "icon": "calendar", "title": "Horizon", "sub": "", "at": 198.6, "accent": true }
+        ] }
+      ]
+    },
+    {
+      "from": 201.3,
+      "to": 223.4,
+      "items": [
+        { "type": "list", "style": "dot", "at": 201.5, "items": [
+          { "text": "Frais du contrat", "at": 202.0 },
+          { "text": "Frais du support", "at": 203.6 },
+          { "text": "Frais d’arbitrage (quand tu changes de support)", "at": 205.0 }
+        ] },
+        { "type": "chart", "at": 208.4, "lines": [
+          { "label": "avantage fiscal", "values": [30, 30, 30, 30, 30, 30], "at": 208.5, "until": 212.0, "tone": "gain" },
+          { "label": "frais", "values": [5, 12, 20, 30, 42, 55], "at": 208.8, "until": 212.0, "tone": "loss" }
+        ] },
+        { "type": "text", "size": "small", "text": "pas de transmission, ni de cas particuliers", "at": 212.8 },
+        { "type": "actor", "character": "conseiller", "name": "conseiller autorisé", "at": 218.5, "think": { "text": "!", "at": 219.5 } }
+      ]
+    },
+    {
+      "from": 223.4,
+      "to": 247.2,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Exemple fictif · Camille", "at": 223.5 },
+        { "type": "chips", "at": 229.3, "items": [
+          { "text": "ETF « Monde »", "at": 229.3 },
+          { "text": "0,2 % par an", "at": 232.6 }
+        ] },
+        { "type": "compare", "at": 235.4,
+          "left": { "title": "Compte-titres", "icon": "briefcase", "items": [
+            { "text": "ETF détenu directement", "at": 235.6 }
+          ] },
+          "right": { "title": "Assurance-vie", "icon": "umbrella", "items": [
+            { "text": "ETF en unité de compte", "at": 239.1 },
+            { "text": "+ frais de gestion du contrat", "at": 243.9 }
+          ] } },
+        { "type": "actor", "character": "toi", "name": "Camille", "at": 223.8 }
+      ]
+    },
+    {
+      "from": 247.2,
+      "to": 259.0,
+      "items": [
+        { "type": "chips", "at": 247.2, "items": [
+          { "text": "support", "at": 247.4 },
+          { "text": "=", "at": 248.0 },
+          { "text": "comparable ✓", "at": 248.3, "tone": "gain" }
+        ] },
+        { "type": "cards", "at": 249.3, "items": [
+          { "icon": "percent", "title": "Frais", "sub": "", "at": 250.0 },
+          { "icon": "calculator", "title": "Fiscalité", "sub": "", "at": 251.4 },
+          { "icon": "key", "title": "Retrait", "sub": "", "at": 252.6, "accent": true }
+        ] },
+        { "type": "text", "size": "small", "text": "règles à vérifier avant toute décision", "at": 254.2 }
+      ]
+    },
+    {
+      "from": 259.0,
+      "to": 272.0,
+      "items": [
+        { "type": "row", "at": 259.1, "items": [
+          { "type": "icon", "icon": "chart-bar", "label": "support = ce que tu détiens", "at": 259.2 },
+          { "type": "icon", "icon": "briefcase", "label": "enveloppe = le cadre", "at": 261.6, "tone": "accent" }
+        ] },
+        { "type": "list", "style": "check", "at": 264.2, "items": [
+          { "text": "Compare les frais des deux", "at": 264.3 },
+          { "text": "Lis le DIC avant d’acheter", "at": 265.8 }
+        ] },
+        { "type": "text", "size": "small", "text": "À bientôt", "at": 269.6 }
+      ]
+    }
+  ]
+}

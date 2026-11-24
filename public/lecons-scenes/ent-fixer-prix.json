@@ -1,0 +1,330 @@
+{
+  "lesson": "ent-fixer-prix",
+  "version": "1.0.0",
+  "scenes": [
+    {
+      "from": 0,
+      "to": 3.8,
+      "items": [
+        { "type": "text", "size": "title", "text": "Fixer son prix sans se tromper", "at": 0.2 },
+        { "type": "text", "size": "small", "text": "Bienvenue", "at": 2.8 }
+      ]
+    },
+    {
+      "from": 3.8,
+      "to": 14.2,
+      "items": [
+        { "type": "text", "size": "big", "text": "Quel [[prix]] demander ?", "at": 3.9 },
+        { "type": "compare", "at": 8.9,
+          "left": { "title": "Trop cher", "icon": "cross", "items": [
+            { "text": "les clients fuient", "at": 9.2 }
+          ] },
+          "right": { "title": "Trop bas", "icon": "alert", "items": [
+            { "text": "tu t’épuises sans gagner", "at": 11.3 }
+          ] } }
+      ]
+    },
+    {
+      "from": 14.2,
+      "to": 23.9,
+      "items": [
+        { "type": "cards", "at": 15.5, "items": [
+          { "icon": "coins", "title": "Ton coût", "sub": "", "at": 16.2 },
+          { "icon": "scale", "title": "Alternatives", "sub": "", "at": 18.6 },
+          { "icon": "gift", "title": "Valeur perçue", "sub": "", "at": 20.8, "accent": true }
+        ] }
+      ]
+    },
+    {
+      "from": 23.9,
+      "to": 34.4,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Le prix : le levier le [[plus puissant]]", "at": 25.8 },
+        { "type": "chips", "at": 29.1, "items": [
+          { "text": "quelques % de prix", "at": 29.3 },
+          { "text": ">", "at": 31.4 },
+          { "text": "le nombre de ventes", "at": 31.8 }
+        ] },
+        { "type": "icon", "icon": "scale", "label": "sur ta marge", "at": 32.4 }
+      ]
+    },
+    {
+      "from": 34.4,
+      "to": 48.1,
+      "items": [
+        { "type": "list", "style": "cross", "at": 34.4, "items": [
+          { "text": "Tu te sous-évalues", "at": 34.5 },
+          { "text": "Peur de perdre le client", "at": 37.3 },
+          { "text": "Un prix trop bas épuise", "at": 39.4 },
+          { "text": "Il faut vendre bien plus", "at": 41.5 },
+          { "text": "Très dur de le remonter ensuite", "at": 44.9 }
+        ] },
+        { "type": "actor", "character": "toi", "name": "toi", "at": 34.6, "think": { "text": "?", "at": 37.4 } }
+      ]
+    },
+    {
+      "from": 48.1,
+      "to": 64.5,
+      "items": [
+        { "type": "text", "size": "mid", "text": "[[1 ·]] Le plancher : le coût", "at": 52.3 },
+        { "type": "chips", "at": 55.3, "items": [
+          { "text": "coûts variables", "at": 57.0 },
+          { "text": "+", "at": 61.4 },
+          { "text": "part des charges fixes", "at": 62.0 }
+        ] },
+        { "type": "row", "at": 58.6, "items": [
+          { "type": "icon", "icon": "flour", "label": "matière", "at": 58.6 },
+          { "type": "icon", "icon": "handshake", "label": "sous-traitance", "at": 59.8 },
+          { "type": "icon", "icon": "percent", "label": "commission", "at": 60.8 }
+        ] }
+      ]
+    },
+    {
+      "from": 64.5,
+      "to": 80.7,
+      "items": [
+        { "type": "chips", "at": 64.6, "items": [
+          { "text": "prix", "at": 64.8 },
+          { "text": "<", "at": 66.0 },
+          { "text": "plancher", "at": 66.4 },
+          { "text": "= perte à chaque vente", "at": 67.2, "tone": "loss" }
+        ] },
+        { "type": "row", "at": 69.0, "items": [
+          { "type": "icon", "icon": "clock", "at": 69.0 },
+          { "type": "text", "size": "mid", "text": "service : le temps est ton coût", "at": 69.4 }
+        ] },
+        { "type": "list", "style": "cross", "at": 72.1, "items": [
+          { "text": "Recherche de clients", "at": 74.2 },
+          { "text": "Administratif", "at": 75.8 },
+          { "text": "Congés et formation", "at": 77.4 }
+        ] }
+      ]
+    },
+    {
+      "from": 80.7,
+      "to": 91.6,
+      "items": [
+        { "type": "text", "size": "mid", "text": "[[2 ·]] Le marché", "at": 80.8 },
+        { "type": "list", "style": "dot", "at": 84.7, "items": [
+          { "text": "Les concurrents", "at": 84.8 },
+          { "text": "Faire soi-même", "at": 86.2 },
+          { "text": "Ne rien faire", "at": 87.8 }
+        ] },
+        { "type": "text", "size": "small", "text": "ce sont aussi des concurrents", "at": 89.6 }
+      ]
+    },
+    {
+      "from": 91.6,
+      "to": 105.4,
+      "items": [
+        { "type": "text", "size": "mid", "text": "[[3 ·]] Le plafond : la valeur perçue", "at": 91.7 },
+        { "type": "chips", "at": 95.5, "items": [
+          { "text": "du temps", "at": 97.4 },
+          { "text": "de l’argent", "at": 98.4 },
+          { "text": "moins de risques", "at": 99.6 }
+        ] },
+        { "type": "text", "size": "mid", "text": "Il paie ce qu’il [[perçoit]], pas ce que ça te coûte", "at": 101.1 }
+      ]
+    },
+    {
+      "from": 105.4,
+      "to": 119.0,
+      "items": [
+        { "type": "compare", "at": 106.6,
+          "left": { "title": "Hors taxes", "icon": "invoice", "items": [
+            { "text": "sans la TVA", "at": 107.2 }
+          ] },
+          "right": { "title": "Toutes taxes", "icon": "invoice", "items": [
+            { "text": "avec la TVA", "at": 110.4 }
+          ] } },
+        { "type": "chips", "at": 112.8, "items": [
+          { "text": "TTC", "at": 113.0 },
+          { "text": "=", "at": 114.0 },
+          { "text": "HT", "at": 114.4 },
+          { "text": "×", "at": 115.4 },
+          { "text": "1 + taux de TVA", "at": 116.0, "tone": "accent" }
+        ] }
+      ]
+    },
+    {
+      "from": 119.0,
+      "to": 133.9,
+      "items": [
+        { "type": "cards", "at": 119.0, "items": [
+          { "icon": "briefcase", "title": "Entre pros", "sub": "hors taxes : TVA récupérable", "at": 119.0 },
+          { "icon": "person", "title": "Particulier", "sub": "compare du toutes taxes", "at": 124.1 },
+          { "icon": "document", "title": "Franchise", "sub": "dispensé de TVA : facture sans", "at": 127.8 }
+        ] }
+      ]
+    },
+    {
+      "from": 133.9,
+      "to": 150.4,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Calculer un tarif de service", "at": 136.6, "out": 139.3, "hide": true },
+        { "type": "chips", "at": 139.4, "items": [
+          { "text": "revenu souhaité", "at": 139.5 },
+          { "text": "+", "at": 141.4 },
+          { "text": "charges", "at": 141.8 },
+          { "text": "+", "at": 143.2 },
+          { "text": "cotisations, impôts", "at": 143.6 }
+        ] },
+        { "type": "chips", "at": 146.1, "items": [
+          { "text": "le tout", "at": 146.2 },
+          { "text": "÷", "at": 147.6 },
+          { "text": "heures réellement facturables", "at": 148.0, "tone": "accent" }
+        ] }
+      ]
+    },
+    {
+      "from": 150.4,
+      "to": 163.2,
+      "items": [
+        { "type": "bars", "at": 152.2, "unit": " h", "items": [
+          { "label": "heures travaillées", "value": 1600, "at": 152.4 },
+          { "label": "tu crois en facturer", "value": 1500, "at": 154.6, "tone": "loss" }
+        ] },
+        { "type": "row", "at": 157.4, "items": [
+          { "type": "icon", "icon": "search", "label": "clients", "at": 157.6 },
+          { "type": "icon", "icon": "document", "label": "administratif", "at": 159.8 },
+          { "type": "text", "size": "small", "text": "du temps non facturé", "at": 161.0 }
+        ] }
+      ]
+    },
+    {
+      "from": 163.2,
+      "to": 174.9,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Une remise se paie sur la [[marge]]", "at": 163.3 },
+        { "type": "waterfall", "at": 169.2, "rows": [
+          { "label": "prix", "value": 100, "kind": "start", "at": 169.2 },
+          { "label": "coût", "value": 60, "kind": "minus", "at": 171.2 },
+          { "label": "marge", "value": 40, "kind": "total", "at": 172.8, "tone": "gain" }
+        ] }
+      ]
+    },
+    {
+      "from": 174.9,
+      "to": 184.7,
+      "items": [
+        { "type": "waterfall", "at": 174.9, "rows": [
+          { "label": "prix − 10 %", "value": 90, "kind": "start", "at": 175.0 },
+          { "label": "coût", "value": 60, "kind": "minus", "at": 177.0 },
+          { "label": "marge", "value": 30, "kind": "total", "at": 178.6, "tone": "loss" }
+        ] },
+        { "type": "gauge", "label": "marge perdue", "value": 25, "at": 181.0, "until": 183.8, "tone": "loss" }
+      ]
+    },
+    {
+      "from": 184.7,
+      "to": 191.4,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Même marge : vendre [[un tiers de plus]]", "at": 184.8 },
+        { "type": "text", "size": "small", "text": "Réfléchis avant de faire une remise", "at": 189.0 }
+      ]
+    },
+    {
+      "from": 191.4,
+      "to": 203.0,
+      "items": [
+        { "type": "steps", "at": 193.8, "items": [
+          { "text": "Deux formules", "icon": "layers", "at": 193.8 },
+          { "text": "Annonce ton prix tôt", "icon": "megaphone", "at": 195.4 },
+          { "text": "Écoute les objections", "icon": "chat", "at": 197.2 },
+          { "text": "Monte peu à peu", "icon": "chart-up", "at": 199.5 }
+        ] }
+      ]
+    },
+    {
+      "from": 203.0,
+      "to": 218.2,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Des règles [[encadrent]] les prix", "at": 207.4 },
+        { "type": "list", "style": "check", "at": 209.4, "items": [
+          { "text": "Un affichage clair pour les consommateurs", "at": 209.5 },
+          { "text": "Pas de revente à perte (sous le prix d’achat)", "at": 212.7 }
+        ] }
+      ]
+    },
+    {
+      "from": 218.2,
+      "to": 235.9,
+      "items": [
+        { "type": "row", "at": 218.3, "items": [
+          { "type": "icon", "icon": "percent", "at": 218.3 },
+          { "type": "text", "size": "small", "text": "une réduction : prix de référence réel", "at": 218.7 }
+        ] },
+        { "type": "row", "at": 222.6, "items": [
+          { "type": "icon", "icon": "search", "at": 222.6 },
+          { "type": "text", "size": "small", "text": "règles propres à ton secteur", "at": 223.0 }
+        ] },
+        { "type": "chips", "at": 225.2, "items": [
+          { "text": "son prix", "at": 225.4 },
+          { "text": "sans ses coûts", "at": 226.6 },
+          { "text": "= ses erreurs", "at": 228.6, "tone": "loss" }
+        ] },
+        { "type": "list", "style": "dot", "at": 230.4, "items": [
+          { "text": "D’autres coûts", "at": 231.0 },
+          { "text": "Un autre volume de ventes", "at": 232.4 },
+          { "text": "Il perd peut-être de l’argent", "at": 233.8 }
+        ] }
+      ]
+    },
+    {
+      "from": 235.9,
+      "to": 257.8,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Exemple fictif · une graphiste", "at": 236.0, "out": 240.8 },
+        { "type": "waterfall", "at": 241.5, "rows": [
+          { "label": "revenu visé", "value": 30000, "kind": "start", "at": 241.5 },
+          { "label": "frais", "value": 8000, "kind": "plus", "at": 245.1 },
+          { "label": "cotisations", "value": 9000, "kind": "plus", "at": 250.6 },
+          { "label": "chiffre d’affaires", "value": 47000, "kind": "total", "at": 254.6, "tone": "accent" }
+        ] },
+        { "type": "actor", "character": "entrepreneuse", "name": "la graphiste", "at": 236.2 }
+      ]
+    },
+    {
+      "from": 257.8,
+      "to": 269.4,
+      "items": [
+        { "type": "stats", "at": 257.9, "items": [
+          { "label": "heures de travail", "value": 1600, "unit": " h", "at": 258.0 },
+          { "label": "facturables", "value": 1000, "unit": " h", "at": 259.8, "accent": true }
+        ] },
+        { "type": "chips", "at": 262.0, "items": [
+          { "text": "47 000 €", "at": 262.1 },
+          { "text": "÷", "at": 263.0 },
+          { "text": "1 000 h", "at": 263.3 },
+          { "text": "=", "at": 264.0 },
+          { "text": "47 € / h", "at": 264.3, "tone": "accent" }
+        ] },
+        { "type": "text", "size": "small", "text": "agences de sa ville : 65 à 90 € / h", "at": 265.4 }
+      ]
+    },
+    {
+      "from": 269.4,
+      "to": 277.9,
+      "items": [
+        { "type": "timeline", "at": 270.0, "points": [
+          { "label": "60 € / h", "sub": "au départ", "pos": 10, "at": 270.2 },
+          { "label": "70 € / h", "sub": "nouveaux clients", "pos": 90, "at": 273.6 }
+        ], "span": { "label": "après six mois", "from": 10, "to": 90, "at": 274.0 } }
+      ]
+    },
+    {
+      "from": 277.9,
+      "to": 293.0,
+      "items": [
+        { "type": "cards", "at": 278.3, "items": [
+          { "icon": "box", "title": "Plancher", "sub": "le coût", "at": 279.0 },
+          { "icon": "scale", "title": "Marché", "sub": "les alternatives", "at": 281.0 },
+          { "icon": "gift", "title": "Plafond", "sub": "la valeur perçue", "at": 283.0, "accent": true }
+        ] },
+        { "type": "text", "size": "small", "text": "une remise se paie sur la marge", "at": 285.3 },
+        { "type": "text", "size": "mid", "text": "un prix trop bas [[épuise]]", "at": 287.7 },
+        { "type": "text", "size": "small", "text": "À bientôt", "at": 290.2 }
+      ]
+    }
+  ]
+}

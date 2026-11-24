@@ -1,0 +1,266 @@
+{
+  "lesson": "ia-donnees-confidentialite",
+  "version": "1.0.0",
+  "scenes": [
+    {
+      "from": 0,
+      "to": 12.8,
+      "items": [
+        { "type": "text", "size": "title", "text": "Données personnelles et confidentialité avec l’IA", "at": 0.2 },
+        { "type": "row", "at": 4.6, "items": [
+          { "type": "icon", "icon": "contract", "size": "l", "label": "contrat client", "at": 4.8 },
+          { "type": "icon", "icon": "robot", "size": "l", "label": "assistant IA", "at": 6.6 }
+        ] },
+        { "type": "chips", "at": 9.3, "items": [
+          { "text": "copier", "at": 9.4 },
+          { "text": "→", "at": 10.2 },
+          { "text": "coller", "at": 10.5 },
+          { "text": "10 secondes", "at": 11.4, "tone": "accent" }
+        ] }
+      ]
+    },
+    {
+      "from": 12.8,
+      "to": 24.9,
+      "items": [
+        { "type": "row", "at": 12.8, "items": [
+          { "type": "icon", "icon": "contract", "size": "l", "at": 12.8, "id": "contrat" },
+          { "type": "icon", "icon": "question", "size": "l", "label": "où est-il parti ?", "at": 13.6, "id": "ailleurs" }
+        ] },
+        { "type": "fly", "from": "contrat", "to": "ailleurs", "at": 13.8, "until": 14.8, "count": 3 },
+        { "type": "cards", "at": 16.5, "items": [
+          { "icon": "person", "title": "Données personnelles", "at": 16.8 },
+          { "icon": "lock", "title": "Secrets de l’entreprise", "at": 18.8 },
+          { "icon": "shield", "title": "RGPD", "sub": "règlement européen", "at": 21.4, "accent": true }
+        ] }
+      ]
+    },
+    {
+      "from": 24.9,
+      "to": 44.9,
+      "items": [
+        { "type": "chips", "at": 26.5, "items": [
+          { "text": "conservé", "at": 27.0 },
+          { "text": "lu", "at": 28.0 },
+          { "text": "réutilisé", "at": 29.0 }
+        ] },
+        { "type": "row", "at": 31.2, "items": [
+          { "type": "icon", "icon": "contract", "label": "contrat client", "at": 31.6 },
+          { "type": "icon", "icon": "wallet", "label": "salaires", "at": 33.4 },
+          { "type": "icon", "icon": "heart", "label": "dossier médical", "at": 35.2 }
+        ] },
+        { "type": "text", "size": "mid", "text": "[[Fuite de données|loss]]", "at": 36.6 },
+        { "type": "text", "size": "small", "text": "même sans mauvaise intention", "at": 38.6 }
+      ]
+    },
+    {
+      "from": 44.9,
+      "to": 52.6,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Trois choses à savoir", "at": 44.9 },
+        { "type": "steps", "at": 46.0, "items": [
+          { "text": "Ce que tu transmets", "icon": "document", "at": 46.2 },
+          { "text": "À qui", "icon": "person", "at": 48.4 },
+          { "text": "Pour quoi", "icon": "target", "at": 49.8 }
+        ] }
+      ]
+    },
+    {
+      "from": 52.6,
+      "to": 71.8,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Personne identifiable : le [[RGPD]] s’applique", "at": 56.2 },
+        { "type": "chips", "at": 61.3, "items": [
+          { "text": "nom", "at": 61.5 },
+          { "text": "e-mail", "at": 62.4 },
+          { "text": "identifiant", "at": 63.3 },
+          { "text": "voix", "at": 64.4 },
+          { "text": "image", "at": 65.2 }
+        ] },
+        { "type": "row", "at": 66.2, "items": [
+          { "type": "icon", "icon": "search", "at": 66.3 },
+          { "type": "text", "size": "small", "text": "Des indices croisés suffisent", "at": 66.6 }
+        ] }
+      ]
+    },
+    {
+      "from": 71.8,
+      "to": 89.1,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Les principes du RGPD", "at": 71.9 },
+        { "type": "chips", "at": 72.3, "items": [
+          { "text": "finalité précise", "at": 72.5 },
+          { "text": "base légale", "at": 76.6 },
+          { "text": "minimisation", "at": 79.5, "tone": "accent" },
+          { "text": "information", "at": 83.3 },
+          { "text": "durée limitée", "at": 85.5 },
+          { "text": "sécurité", "at": 87.8 }
+        ] }
+      ]
+    },
+    {
+      "from": 89.1,
+      "to": 112.7,
+      "items": [
+        { "type": "chips", "at": 89.1, "items": [
+          { "text": "santé", "at": 89.3 },
+          { "text": "opinions", "at": 90.6 },
+          { "text": "origine", "at": 92.0 },
+          { "text": "orientation sexuelle", "at": 93.0 },
+          { "text": "biométrie", "at": 95.2 }
+        ] },
+        { "type": "row", "at": 97.0, "items": [
+          { "type": "icon", "icon": "lock", "tone": "accent", "at": 97.1 },
+          { "type": "text", "size": "mid", "text": "Protection [[renforcée]]", "at": 97.3 }
+        ] },
+        { "type": "chips", "at": 99.6, "items": [
+          { "text": "prix", "at": 101.2 },
+          { "text": "stratégie", "at": 102.2 },
+          { "text": "code source", "at": 103.4 },
+          { "text": "infos clients", "at": 105.2 }
+        ] },
+        { "type": "text", "size": "small", "text": "Le contrat de confidentialité vaut aussi pour l’IA", "at": 107.7 }
+      ]
+    },
+    {
+      "from": 112.7,
+      "to": 133.3,
+      "items": [
+        { "type": "row", "at": 115.5, "items": [
+          { "type": "icon", "icon": "document", "at": 115.6 },
+          { "type": "text", "size": "mid", "text": "Les conditions d’utilisation", "at": 118.4 }
+        ] },
+        { "type": "list", "style": "num", "at": 121.7, "items": [
+          { "text": "Entraînement des modèles : peux-tu t’y opposer ?", "at": 121.7 },
+          { "text": "Combien de temps conservé ?", "at": 127.3 },
+          { "text": "Où sont-elles traitées ?", "at": 130.6 }
+        ] }
+      ]
+    },
+    {
+      "from": 133.3,
+      "to": 145.2,
+      "items": [
+        { "type": "cards", "at": 133.3, "items": [
+          { "icon": "contract", "title": "Contrat de sous-traitance", "at": 133.6 },
+          { "icon": "shield", "title": "Pas d’entraînement", "at": 135.8 },
+          { "icon": "key", "title": "Contrôles d’accès", "at": 137.8 }
+        ] },
+        { "type": "row", "at": 140.4, "items": [
+          { "type": "icon", "icon": "check", "tone": "gain", "at": 140.5 },
+          { "type": "text", "size": "small", "text": "Outils autorisés, selon les données", "at": 141.0 }
+        ] }
+      ]
+    },
+    {
+      "from": 145.2,
+      "to": 162.0,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Des gestes simples", "at": 145.3 },
+        { "type": "steps", "at": 147.8, "items": [
+          { "text": "Anonymiser", "icon": "eye", "at": 147.9 },
+          { "text": "Résumer", "icon": "document", "at": 154.0 },
+          { "text": "Pas de mot de passe", "icon": "lock", "at": 157.3 }
+        ] },
+        { "type": "chips", "at": 150.0, "items": [
+          { "text": "Marie Durand", "at": 150.0, "tone": "muted" },
+          { "text": "→", "at": 151.2 },
+          { "text": "Client A", "at": 151.6, "tone": "accent" }
+        ] }
+      ]
+    },
+    {
+      "from": 162.0,
+      "to": 173.5,
+      "items": [
+        { "type": "text", "size": "big", "text": "Pseudonymiser [[≠]] anonymiser", "at": 165.8 },
+        { "type": "row", "at": 168.4, "items": [
+          { "type": "icon", "icon": "search", "at": 168.5 },
+          { "type": "text", "size": "small", "text": "En croisant les infos : toujours personnelles", "at": 169.0 }
+        ] }
+      ]
+    },
+    {
+      "from": 173.5,
+      "to": 188.3,
+      "items": [
+        { "type": "cards", "at": 173.5, "items": [
+          { "icon": "document", "title": "Injection de prompt", "sub": "instructions cachées dans un document", "at": 173.6, "subAt": 178.7 },
+          { "icon": "gear", "title": "Extension mal sécurisée", "sub": "le document peut être exposé", "at": 180.5, "accent": true }
+        ] },
+        { "type": "text", "size": "small", "text": "Intégrations [[nécessaires]] seulement, permissions vérifiées", "at": 183.9 }
+      ]
+    },
+    {
+      "from": 188.3,
+      "to": 220.6,
+      "items": [
+        { "type": "compare", "at": 198.4,
+          "left": { "title": "Avant", "icon": "document", "items": [
+            { "text": "Noms des participants", "at": 198.6 },
+            { "text": "Tarifs négociés", "at": 200.4 },
+            { "text": "Un problème de santé", "at": 202.4 }
+          ] },
+          "right": { "title": "Après", "icon": "shield", "items": [
+            { "text": "« Client A », « Contact 1 »", "at": 205.4 },
+            { "text": "Santé et tarifs retirés", "at": 210.2 },
+            { "text": "Résumé demandé", "at": 212.9 }
+          ] } },
+        { "type": "text", "size": "small", "text": "Plus tard : offre pro, [[sans entraînement]]", "at": 214.9 },
+        { "type": "actor", "character": "entrepreneuse", "name": "Julie", "at": 193.8 }
+      ]
+    },
+    {
+      "from": 220.6,
+      "to": 237.2,
+      "items": [
+        { "type": "row", "at": 222.7, "items": [
+          { "type": "icon", "icon": "megaphone", "size": "l", "label": "à voix haute", "at": 222.7 },
+          { "type": "icon", "icon": "question", "size": "l", "label": "murs inconnus", "at": 225.2 }
+        ] },
+        { "type": "chips", "at": 228.7, "items": [
+          { "text": "qui entend ?", "at": 229.0 },
+          { "text": "gardé combien de temps ?", "at": 231.0 }
+        ] },
+        { "type": "row", "at": 232.9, "items": [
+          { "type": "icon", "icon": "key", "tone": "loss", "label": "mot de passe", "at": 233.4 },
+          { "type": "icon", "icon": "wallet", "tone": "loss", "label": "salaires", "at": 235.0 }
+        ] }
+      ]
+    },
+    {
+      "from": 237.2,
+      "to": 263.5,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Avant de coller : trois questions", "at": 237.3 },
+        { "type": "list", "style": "num", "at": 241.8, "items": [
+          { "text": "Une personne identifiable ?", "at": 241.8 },
+          { "text": "Un secret de mon entreprise ?", "at": 245.6 },
+          { "text": "Vraiment nécessaire ?", "at": 248.0 }
+        ] },
+        { "type": "text", "size": "small", "text": "Oui aux deux premières : [[retire ou remplace]]", "at": 251.0 },
+        { "type": "chips", "at": 257.0, "items": [
+          { "text": "le résumé", "at": 257.1, "tone": "accent" },
+          { "text": ">", "at": 259.6 },
+          { "text": "le document complet", "at": 260.0, "tone": "muted" }
+        ] }
+      ]
+    },
+    {
+      "from": 263.5,
+      "to": 280,
+      "items": [
+        { "type": "list", "style": "check", "at": 264.6, "items": [
+          { "text": "Est-ce nécessaire ?", "at": 264.6 },
+          { "text": "Est-ce sensible ?", "at": 269.4 },
+          { "text": "Que fait le service de mes données ?", "at": 270.8 }
+        ] },
+        { "type": "steps", "at": 272.9, "items": [
+          { "text": "Anonymise", "icon": "eye", "at": 273.0 },
+          { "text": "Résume", "icon": "document", "at": 274.6 },
+          { "text": "Jamais de mot de passe", "icon": "lock", "at": 276.0 }
+        ] }
+      ]
+    }
+  ]
+}

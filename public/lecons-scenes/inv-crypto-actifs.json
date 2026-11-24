@@ -1,0 +1,225 @@
+{
+  "lesson": "inv-crypto-actifs",
+  "version": "1.0.0",
+  "scenes": [
+    {
+      "from": 0,
+      "to": 24.8,
+      "items": [
+        { "type": "text", "size": "title", "text": "Crypto-actifs : comprendre avant d’acheter", "at": 0.2 },
+        { "type": "chips", "at": 4.6, "items": [
+          { "text": "Bitcoin", "at": 4.8 },
+          { "text": "blockchain", "at": 6.6 },
+          { "text": "stablecoins", "at": 8.4 }
+        ] },
+        { "type": "text", "size": "mid", "text": "S’enrichir [[vite]] ?", "at": 11.0 },
+        { "type": "chips", "at": 15.8, "items": [
+          { "text": "Ce que c’est", "at": 16.2 },
+          { "text": "Volatilité", "at": 18.2 },
+          { "text": "Plateforme autorisée", "at": 20.2 },
+          { "text": "Impôts", "at": 22.6 }
+        ] },
+        { "type": "actor", "character": "toi", "name": "toi", "at": 4.7, "think": { "text": "?", "at": 13.3 } }
+      ]
+    },
+    {
+      "from": 24.8,
+      "to": 39.7,
+      "items": [
+        { "type": "text", "size": "big", "text": "Pourquoi apprendre ça ?", "at": 24.9, "out": 26.3, "hide": true },
+        { "type": "chart", "at": 26.6, "lines": [
+          { "label": "valeur", "values": [80, 85, 70, 50, 30, 20], "at": 26.6, "until": 30.0, "tone": "loss" }
+        ] },
+        { "type": "icon", "icon": "alert", "size": "m", "label": "des escroqueries", "at": 30.9, "tone": "loss" },
+        { "type": "text", "size": "mid", "text": "Comprendre ce que tu [[achètes]]", "at": 33.3 }
+      ]
+    },
+    {
+      "from": 39.7,
+      "to": 55.7,
+      "items": [
+        { "type": "text", "size": "big", "text": "La blockchain", "at": 39.8, "out": 42.0, "hide": true },
+        { "type": "icons", "icon": "laptop", "count": 5, "step": 0.35, "label": "réseau", "at": 42.9 },
+        { "type": "row", "at": 46.4, "items": [
+          { "type": "icon", "icon": "lock", "size": "m", "label": "très difficile à falsifier", "at": 46.4 },
+          { "type": "icon", "icon": "document", "size": "m", "label": "un grand cahier de comptes", "at": 50.3 }
+        ] }
+      ]
+    },
+    {
+      "from": 55.7,
+      "to": 73.8,
+      "items": [
+        { "type": "row", "at": 55.8, "items": [
+          { "type": "icon", "icon": "coin", "size": "m", "label": "Bitcoin · 2009", "at": 55.8 },
+          { "type": "icon", "icon": "layers", "size": "m", "label": "Ethereum : des programmes", "at": 59.9 }
+        ] },
+        { "type": "compare", "at": 64.3,
+          "left": { "title": "Action, obligation", "icon": "chart-bar", "items": [{ "text": "bénéfices ou revenus", "at": 64.4 }] },
+          "right": { "title": "Crypto-actif", "icon": "coin", "items": [{ "text": "aucun revenu derrière", "at": 66.6 }] } },
+        { "type": "text", "size": "mid", "text": "Prix = [[offre et demande]]", "at": 70.5 }
+      ]
+    },
+    {
+      "from": 73.8,
+      "to": 85.5,
+      "items": [
+        { "type": "chart", "at": 73.9, "lines": [
+          { "label": "prix", "values": [30, 75, 15, 85, 10, 65], "at": 73.9, "until": 76.8, "tone": "accent" }
+        ] },
+        { "type": "row", "at": 77.0, "items": [
+          { "type": "icon", "icon": "euro", "size": "m", "label": "suit l’euro", "at": 77.0 },
+          { "type": "icon", "icon": "coin", "size": "m", "label": "stablecoin : valeur stable", "at": 79.0 },
+          { "type": "icon", "icon": "scale", "size": "m", "label": "réserves variables", "at": 82.5, "tone": "muted" }
+        ] }
+      ]
+    },
+    {
+      "from": 85.5,
+      "to": 98.9,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Conserver, c’est [[un risque]]", "at": 85.6 },
+        { "type": "compare", "at": 88.6,
+          "left": { "title": "Plateforme", "icon": "building", "items": [{ "text": "tu dépends de sa solidité", "at": 88.7 }] },
+          "right": { "title": "Portefeuille personnel", "icon": "key", "items": [
+            { "text": "clé privée perdue", "at": 91.2 },
+            { "text": "fonds perdus pour toujours", "at": 94.8 } ] } }
+      ]
+    },
+    {
+      "from": 98.9,
+      "to": 121.5,
+      "items": [
+        { "type": "text", "size": "big", "text": "Cadre légal et fiscalité", "at": 99.0, "out": 101.4, "hide": true },
+        { "type": "cards", "at": 103.8, "items": [
+          { "icon": "shield", "title": "MiCA", "sub": "encadre les prestataires", "at": 103.9 },
+          { "icon": "calendar", "title": "Depuis juillet 2026", "sub": "agrément européen exigé", "at": 109.6, "accent": true }
+        ] },
+        { "type": "icon", "icon": "search", "size": "m", "label": "listes de l’AMF", "at": 118.3 }
+      ]
+    },
+    {
+      "from": 121.5,
+      "to": 139.7,
+      "items": [
+        { "type": "compare", "at": 121.6,
+          "left": { "title": "Vente contre euros", "icon": "euro", "items": [
+            { "text": "plus-value imposée", "at": 121.7 },
+            { "text": "prélèvement forfaitaire unique", "at": 126.0 } ] },
+          "right": { "title": "Crypto contre crypto", "icon": "link", "items": [{ "text": "pas imposé à l’échange", "at": 131.3 }] } },
+        { "type": "icon", "icon": "globe", "size": "m", "label": "comptes étrangers : à déclarer", "at": 135.7 }
+      ]
+    },
+    {
+      "from": 139.7,
+      "to": 153.8,
+      "items": [
+        { "type": "text", "size": "big", "text": "Le point de vigilance", "at": 139.8, "out": 141.7, "hide": true },
+        { "type": "icon", "icon": "wallet", "size": "m", "label": "ce que tu peux perdre en entier", "at": 143.3 },
+        { "type": "steps", "at": 147.9, "items": [
+          { "text": "Épargne de précaution", "icon": "umbrella", "at": 147.9 },
+          { "text": "Une part limitée", "icon": "pie", "at": 150.6 }
+        ] }
+      ]
+    },
+    {
+      "from": 153.8,
+      "to": 165.3,
+      "items": [
+        { "type": "list", "style": "cross", "at": 154.0, "items": [
+          { "text": "rendement garanti", "at": 154.2 },
+          { "text": "staking à taux extravagant", "at": 156.0 },
+          { "text": "« robots de trading »", "at": 158.2 },
+          { "text": "influenceurs rémunérés", "at": 159.8 }
+        ] },
+        { "type": "text", "size": "mid", "text": "Terrains d’[[escroqueries|loss]]", "at": 161.9 }
+      ]
+    },
+    {
+      "from": 165.3,
+      "to": 176.6,
+      "items": [
+        { "type": "counter", "label": "Théo investit", "from": 0, "to": 2000, "at": 171.0, "until": 173.6 },
+        { "type": "icon", "icon": "megaphone", "size": "m", "label": "au plus haut de l’emballement", "at": 173.8, "tone": "muted" },
+        { "type": "actor", "character": "toi", "name": "Théo", "at": 171.1 }
+      ]
+    },
+    {
+      "from": 176.6,
+      "to": 187.2,
+      "items": [
+        { "type": "gauge", "label": "Baisse du cours", "value": 60, "at": 176.7, "until": 179.6, "tone": "loss" },
+        { "type": "counter", "label": "Son placement", "from": 2000, "to": 800, "at": 180.3, "until": 182.7, "tone": "loss", "bar": true, "max": 2000 },
+        { "type": "text", "size": "mid", "text": "Pour revenir à 2 000 € : [[+150 %]]", "at": 183.0 }
+      ]
+    },
+    {
+      "from": 187.2,
+      "to": 196.8,
+      "items": [
+        { "type": "row", "at": 187.3, "items": [
+          { "type": "icon", "icon": "umbrella", "size": "m", "label": "épargne de précaution intacte", "at": 187.3, "tone": "gain" },
+          { "type": "icon", "icon": "pie", "size": "m", "label": "petite part du patrimoine", "at": 190.6 }
+        ] },
+        { "type": "text", "size": "mid", "text": "Douloureuse, mais [[supportable]]", "at": 193.9 }
+      ]
+    },
+    {
+      "from": 196.8,
+      "to": 214.2,
+      "items": [
+        { "type": "cards", "at": 202.3, "items": [
+          { "icon": "chart-bar", "title": "Action", "sub": "une part des bénéfices", "at": 202.3 },
+          { "icon": "document", "title": "Obligation", "sub": "des intérêts", "at": 205.9 },
+          { "icon": "house", "title": "Immeuble", "sub": "des loyers", "at": 208.4 },
+          { "icon": "coin", "title": "Crypto-actif", "sub": "rien par lui-même", "at": 210.7, "accent": true }
+        ] }
+      ]
+    },
+    {
+      "from": 214.2,
+      "to": 230.1,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Son seul intérêt : qu’un autre te le rachète [[plus cher]]", "at": 214.3 },
+        { "type": "text", "size": "small", "text": "Des variations violentes", "at": 219.4 },
+        { "type": "chart", "at": 222.5, "lines": [
+          { "label": "prix", "values": [20, 30, 50, 80, 95, 40, 15, 10], "at": 222.5, "until": 229.2, "tone": "accent" }
+        ] }
+      ]
+    },
+    {
+      "from": 230.1,
+      "to": 239.0,
+      "items": [
+        { "type": "text", "size": "mid", "text": "La règle de [[prudence]]", "at": 230.2 },
+        { "type": "row", "at": 233.0, "items": [
+          { "type": "icon", "icon": "coins", "size": "m", "label": "une perte totale acceptable", "at": 233.0 },
+          { "type": "icon", "icon": "umbrella", "size": "m", "label": "jamais l’épargne de précaution", "at": 236.0, "tone": "loss" }
+        ] }
+      ]
+    },
+    {
+      "from": 239.0,
+      "to": 249.9,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Ta responsabilité est [[plus grande]]", "at": 239.1 },
+        { "type": "row", "at": 243.1, "items": [
+          { "type": "icon", "icon": "key", "size": "m", "label": "clé perdue : personne ne la rend", "at": 243.1, "tone": "loss" },
+          { "type": "icon", "icon": "building", "size": "m", "label": "plateforme disparue", "at": 245.9, "tone": "loss" }
+        ] }
+      ]
+    },
+    {
+      "from": 249.9,
+      "to": 267,
+      "items": [
+        { "type": "cards", "at": 251.3, "items": [
+          { "icon": "coin", "title": "Pas de revenu", "sub": "prix = offre et demande", "at": 251.3 },
+          { "icon": "chart-bar", "title": "Très volatil", "sub": "conservation = un risque", "at": 256.5, "accent": true },
+          { "icon": "shield", "title": "Plateforme autorisée", "sub": "seulement ce que tu peux perdre", "at": 260.1 }
+        ] },
+        { "type": "text", "size": "small", "text": "À bientôt", "at": 264.9 }
+      ]
+    }
+  ]
+}

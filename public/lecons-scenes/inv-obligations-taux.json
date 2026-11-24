@@ -1,0 +1,201 @@
+{
+  "lesson": "inv-obligations-taux",
+  "version": "1.0.0",
+  "scenes": [
+    {
+      "from": 0,
+      "to": 21.7,
+      "items": [
+        { "type": "text", "size": "title", "text": "Obligations et taux d’intérêt", "at": 0.2 },
+        { "type": "row", "at": 3.6, "items": [
+          { "type": "icon", "icon": "wallet", "size": "m", "label": "toi", "at": 3.6 },
+          { "type": "text", "size": "big", "text": "[[→]]", "at": 5.0 },
+          { "type": "icon", "icon": "building", "size": "m", "label": "emprunteur", "at": 5.4 }
+        ] },
+        { "type": "text", "size": "mid", "text": "Taux [[↑]] · prix [[↓]] ?", "at": 7.1 },
+        { "type": "chips", "at": 16.4, "items": [
+          { "text": "Coupon", "at": 16.4 },
+          { "text": "Taux et prix", "at": 18.0, "tone": "accent" },
+          { "text": "Risque de crédit", "at": 19.6 }
+        ] },
+        { "type": "actor", "character": "toi", "name": "toi", "at": 3.7, "think": { "text": "?", "at": 10.6 } }
+      ]
+    },
+    {
+      "from": 21.7,
+      "to": 46.4,
+      "items": [
+        { "type": "text", "size": "big", "text": "Pourquoi apprendre ça ?", "at": 21.8, "out": 23.3, "hide": true },
+        { "type": "cards", "at": 23.5, "items": [
+          { "icon": "shield", "title": "Fonds en euros", "sub": "", "at": 23.5 },
+          { "icon": "chart-bar", "title": "Fonds obligataires", "sub": "", "at": 26.0 },
+          { "icon": "umbrella", "title": "Épargne retraite", "sub": "", "at": 28.4 }
+        ] },
+        { "type": "row", "at": 31.1, "items": [
+          { "type": "icon", "icon": "shield", "size": "m", "label": "« sûres »", "at": 31.1 },
+          { "type": "icon", "icon": "chart-down", "size": "m", "label": "pourtant, ça baisse", "at": 33.2, "tone": "loss" }
+        ] },
+        { "type": "text", "size": "mid", "text": "2022 · les taux [[remontent]]", "at": 35.3 },
+        { "type": "text", "size": "small", "text": "Lire la performance d’un contrat", "at": 42.0 }
+      ]
+    },
+    {
+      "from": 46.4,
+      "to": 70.4,
+      "items": [
+        { "type": "icon", "icon": "document", "size": "m", "label": "titre de dette", "at": 47.9 },
+        { "type": "chips", "at": 50.5, "items": [
+          { "text": "l’État", "at": 52.0 },
+          { "text": "une collectivité", "at": 53.0 },
+          { "text": "une entreprise", "at": 54.4 }
+        ] },
+        { "type": "steps", "at": 56.4, "items": [
+          { "text": "Coupon : intérêt régulier", "icon": "coins", "at": 56.5 },
+          { "text": "Nominal : somme prêtée", "icon": "wallet", "at": 60.0 },
+          { "text": "Échéance : date de fin", "icon": "flag", "at": 63.0 }
+        ] },
+        { "type": "text", "size": "small", "text": "Coupon fixé à l’émission", "at": 66.7 }
+      ]
+    },
+    {
+      "from": 70.4,
+      "to": 90.3,
+      "items": [
+        { "type": "text", "size": "small", "text": "Revendable avant l’échéance : prix variable", "at": 70.5 },
+        { "type": "compare", "at": 77.7,
+          "left": { "title": "Taux du marché ↑", "icon": "chart-up", "items": [{ "text": "anciennes : valeur ↓", "at": 80.0 }] },
+          "right": { "title": "Taux du marché ↓", "icon": "chart-down", "items": [{ "text": "anciennes : valeur ↑", "at": 84.6 }] } },
+        { "type": "text", "size": "mid", "text": "Prix et taux : [[sens inverse]]", "at": 87.1 }
+      ]
+    },
+    {
+      "from": 90.3,
+      "to": 108.1,
+      "items": [
+        { "type": "compare", "at": 90.4,
+          "left": { "title": "Échéance proche", "icon": "clock", "items": [{ "text": "prix peu sensible", "at": 90.5 }] },
+          "right": { "title": "Échéance lointaine", "icon": "hour", "items": [{ "text": "prix très sensible", "at": 92.2 }] } },
+        { "type": "chips", "at": 94.8, "items": [{ "text": "sensibilité = duration", "at": 94.8, "tone": "accent" }] },
+        { "type": "row", "at": 98.7, "items": [
+          { "type": "icon", "icon": "flag", "size": "m", "label": "gardée jusqu’au bout", "at": 98.7 },
+          { "type": "icon", "icon": "wallet", "size": "m", "label": "nominal récupéré", "at": 102.8, "tone": "gain" }
+        ] },
+        { "type": "text", "size": "small", "text": "si l’émetteur ne fait pas défaut", "at": 105.0 }
+      ]
+    },
+    {
+      "from": 108.1,
+      "to": 132.5,
+      "items": [
+        { "type": "row", "at": 111.8, "items": [
+          { "type": "icon", "icon": "building", "size": "m", "label": "émetteur", "at": 111.8 },
+          { "type": "icon", "icon": "cross", "size": "m", "label": "ne paie pas : défaut", "at": 113.2, "tone": "loss" }
+        ] },
+        { "type": "text", "size": "mid", "text": "Rendement [[↑]] = risque [[↑]]", "at": 115.1 },
+        { "type": "chips", "at": 119.0, "items": [
+          { "text": "fonds", "at": 119.4 },
+          { "text": "OPCVM", "at": 121.2 },
+          { "text": "ETF obligataires", "at": 123.0 },
+          { "text": "fonds en euros", "at": 126.2 }
+        ] },
+        { "type": "icon", "icon": "layers", "size": "m", "label": "nombreux émetteurs", "at": 129.0, "tone": "gain" }
+      ]
+    },
+    {
+      "from": 132.5,
+      "to": 160.2,
+      "items": [
+        { "type": "compare", "at": 135.9,
+          "left": { "title": "Fonds obligataire", "icon": "chart-bar", "items": [
+            { "text": "pas d’échéance", "at": 135.9 },
+            { "text": "valeur qui fluctue sans cesse", "at": 138.7 } ] },
+          "right": { "title": "Gardée jusqu’au terme", "icon": "flag", "items": [{ "text": "récupère le nominal", "at": 142.0 }] } },
+        { "type": "row", "at": 144.3, "items": [
+          { "type": "icon", "icon": "shield", "size": "m", "label": "fonds en euros : capital garanti", "at": 144.3 },
+          { "type": "icon", "icon": "building", "size": "m", "label": "risque porté par l’assureur", "at": 148.1 }
+        ] },
+        { "type": "text", "size": "mid", "text": "« Minibons » à rendement très élevé : [[risque de perte|loss]]", "at": 150.3 }
+      ]
+    },
+    {
+      "from": 160.2,
+      "to": 177.1,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Marc et son obligation", "at": 160.3 },
+        { "type": "chips", "at": 167.4, "items": [
+          { "text": "1 000 €", "at": 167.5 },
+          { "text": "2 % par an", "at": 169.2 },
+          { "text": "10 ans", "at": 171.0 }
+        ] },
+        { "type": "stats", "at": 172.4, "items": [
+          { "label": "La sienne", "value": "2 %", "at": 172.4 },
+          { "label": "Les nouvelles", "value": "4 %", "at": 174.0, "accent": true }
+        ] },
+        { "type": "actor", "character": "toi", "name": "Marc", "at": 167.5 }
+      ]
+    },
+    {
+      "from": 177.1,
+      "to": 193.6,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Personne ne l’achète [[1 000 €]]", "at": 177.2 },
+        { "type": "counter", "label": "Son prix", "from": 1000, "to": 850, "at": 179.3, "until": 183.4, "tone": "loss", "bar": true, "max": 1000 },
+        { "type": "compare", "at": 185.0,
+          "left": { "title": "Il la garde", "icon": "check", "items": [{ "text": "1 000 € + ses coupons", "at": 185.1 }] },
+          "right": { "title": "Il la vend", "icon": "cross", "items": [{ "text": "une perte", "at": 190.8 }] } },
+        { "type": "actor", "character": "toi", "name": "Marc", "at": 177.3 }
+      ]
+    },
+    {
+      "from": 193.6,
+      "to": 210.6,
+      "items": [
+        { "type": "text", "size": "small", "text": "Une image pour retenir", "at": 193.7, "out": 196.5, "hide": true },
+        { "type": "row", "at": 197.7, "items": [
+          { "type": "icon", "icon": "ticket", "size": "l", "label": "−2 € par mois", "at": 197.7 },
+          { "type": "icon", "icon": "ticket", "size": "l", "label": "−4 € par mois", "at": 201.8, "tone": "accent" }
+        ] },
+        { "type": "text", "size": "mid", "text": "Ton abonnement : prix [[↓]]", "at": 208.1 }
+      ]
+    },
+    {
+      "from": 210.6,
+      "to": 231.8,
+      "items": [
+        { "type": "stats", "at": 213.3, "items": [
+          { "label": "Ancienne", "value": "2 %", "at": 213.3, "tone": "muted" },
+          { "label": "Nouvelles", "value": "4 %", "at": 215.2, "accent": true }
+        ] },
+        { "type": "icon", "icon": "chart-down", "size": "m", "label": "le prix baisse pour compenser", "at": 218.7, "tone": "loss" },
+        { "type": "timeline", "at": 221.0, "points": [
+          { "label": "Aujourd’hui", "sub": "", "pos": 6, "at": 221.0 },
+          { "label": "Échéance", "sub": "lointaine", "pos": 94, "at": 223.0 }
+        ], "span": { "label": "moins avantageuse", "from": 6, "to": 94, "at": 224.0 } },
+        { "type": "text", "size": "small", "text": "Sensibilité = durée restante", "at": 227.9 }
+      ]
+    },
+    {
+      "from": 231.8,
+      "to": 241.7,
+      "items": [
+        { "type": "row", "at": 231.9, "items": [
+          { "type": "icon", "icon": "flag", "size": "m", "label": "jusqu’au bout", "at": 231.9 },
+          { "type": "icon", "icon": "wallet", "size": "m", "label": "ta mise récupérée", "at": 235.0, "tone": "gain" }
+        ] },
+        { "type": "text", "size": "mid", "text": "La vente anticipée [[matérialise|loss]] la perte", "at": 237.7 }
+      ]
+    },
+    {
+      "from": 241.7,
+      "to": 256,
+      "items": [
+        { "type": "cards", "at": 241.8, "items": [
+          { "icon": "chart-up", "title": "Taux en hausse", "sub": "prix des anciennes en baisse", "at": 241.8 },
+          { "icon": "flag", "title": "Gardée jusqu’au bout", "sub": "nominal remboursé", "at": 245.5, "accent": true },
+          { "icon": "alert", "title": "Rendement très élevé", "sub": "risque très élevé", "at": 249.3 }
+        ] },
+        { "type": "text", "size": "small", "text": "À bientôt", "at": 253.2 }
+      ]
+    }
+  ]
+}

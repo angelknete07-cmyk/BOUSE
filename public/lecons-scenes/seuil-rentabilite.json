@@ -1,0 +1,931 @@
+{
+ "lesson": "seuil-rentabilite",
+ "version": "1.0.0",
+ "scenes": [
+  {
+   "from": 0,
+   "to": 4.0,
+   "items": [
+    {
+     "type": "text",
+     "size": "title",
+     "text": "Trouver son seuil de rentabilité",
+     "at": 0.2
+    },
+    {
+     "type": "text",
+     "size": "small",
+     "text": "Bienvenue",
+     "at": 2.8
+    }
+   ]
+  },
+  {
+   "from": 4.0,
+   "to": 10.7,
+   "items": [
+    {
+     "type": "icon",
+     "icon": "shop",
+     "size": "l",
+     "label": "boutique de bijoux",
+     "at": 4.4
+    },
+    {
+     "type": "icons",
+     "icon": "heart",
+     "count": 3,
+     "step": 0.5,
+     "at": 7.2
+    },
+    {
+     "type": "actor",
+     "character": "entrepreneuse",
+     "name": "toi",
+     "at": 4.4
+    }
+   ]
+  },
+  {
+   "from": 10.7,
+   "to": 15.5,
+   "items": [
+    {
+     "type": "cards",
+     "at": 10.8,
+     "items": [
+      {
+       "icon": "house",
+       "title": "Loyer",
+       "at": 11.0
+      },
+      {
+       "icon": "laptop",
+       "title": "Matériel",
+       "at": 12.2
+      },
+      {
+       "icon": "coins",
+       "title": "Tout le reste",
+       "at": 13.4
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "from": 15.5,
+   "to": 29.8,
+   "items": [
+    {
+     "type": "text",
+     "size": "big",
+     "text": "Le [[seuil de rentabilité]]",
+     "at": 15.9
+    },
+    {
+     "type": "chips",
+     "at": 19.8,
+     "items": [
+      {
+       "text": "1 · soustraire",
+       "at": 20.0
+      },
+      {
+       "text": "2 · diviser",
+       "at": 21.6
+      }
+     ]
+    },
+    {
+     "type": "text",
+     "size": "mid",
+     "text": "un calcul [[≠]] le bon sens",
+     "at": 24.4
+    }
+   ]
+  },
+  {
+   "from": 29.8,
+   "to": 45.5,
+   "items": [
+    {
+     "type": "text",
+     "size": "big",
+     "text": "Pourquoi apprendre ça ?",
+     "at": 29.9
+    },
+    {
+     "type": "chips",
+     "at": 33.6,
+     "items": [
+      {
+       "text": "Prix séduisant",
+       "at": 33.6
+      },
+      {
+       "text": "→",
+       "at": 35.0
+      },
+      {
+       "text": "modèle impossible",
+       "at": 35.6,
+       "tone": "loss"
+      },
+      {
+       "text": "Vendre plus que ce que tu fabriques",
+       "at": 37.4,
+       "tone": "loss"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "from": 45.5,
+   "to": 54.2,
+   "items": [
+    {
+     "type": "row",
+     "at": 45.9,
+     "items": [
+      {
+       "type": "icon",
+       "icon": "scale",
+       "size": "l",
+       "label": "ni gain ni perte",
+       "at": 45.9
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "from": 54.2,
+   "to": 73.7,
+   "items": [
+    {
+     "type": "text",
+     "size": "big",
+     "text": "Résultat [[= 0]]",
+     "at": 54.6
+    },
+    {
+     "type": "icon",
+     "icon": "calendar",
+     "label": "sur un mois",
+     "at": 56.0
+    },
+    {
+     "type": "list",
+     "style": "cross",
+     "at": 61.3,
+     "items": [
+      {
+       "text": "Le marché achètera ?",
+       "at": 64.0
+      },
+      {
+       "text": "La trésorerie suffira ?",
+       "at": 66.5
+      }
+     ]
+    },
+    {
+     "type": "text",
+     "size": "mid",
+     "text": "Juste un [[repère]]",
+     "at": 71.4
+    }
+   ]
+  },
+  {
+   "from": 73.7,
+   "to": 101.6,
+   "items": [
+    {
+     "type": "text",
+     "size": "big",
+     "text": "L’économie d’une vente",
+     "at": 73.8,
+     "out": 75.9,
+     "hide": true
+    },
+    {
+     "type": "chips",
+     "at": 79.9,
+     "items": [
+      {
+       "text": "Prix hors taxes",
+       "at": 80.0
+      },
+      {
+       "text": "−",
+       "at": 83.9
+      },
+      {
+       "text": "coût variable",
+       "at": 84.4,
+       "tone": "loss"
+      },
+      {
+       "text": "=",
+       "at": 93.7
+      },
+      {
+       "text": "contribution",
+       "at": 94.0,
+       "tone": "gain"
+      }
+     ]
+    },
+    {
+     "type": "row",
+     "at": 87.0,
+     "items": [
+      {
+       "type": "icon",
+       "icon": "flour",
+       "label": "matière première",
+       "at": 87.0
+      },
+      {
+       "type": "icon",
+       "icon": "truck",
+       "label": "livraison",
+       "at": 89.4
+      },
+      {
+       "type": "icon",
+       "icon": "percent",
+       "label": "commission",
+       "at": 91.4
+      }
+     ]
+    },
+    {
+     "type": "text",
+     "size": "small",
+     "text": "La contribution de chaque vente",
+     "at": 97.4
+    }
+   ]
+  },
+  {
+   "from": 101.6,
+   "to": 126.9,
+   "items": [
+    {
+     "type": "waterfall",
+     "at": 101.6,
+     "rows": [
+      {
+       "label": "prix de vente",
+       "value": 40,
+       "kind": "start",
+       "at": 101.8
+      },
+      {
+       "label": "coût",
+       "value": 16,
+       "kind": "minus",
+       "at": 103.8
+      },
+      {
+       "label": "contribution",
+       "value": 24,
+       "kind": "total",
+       "at": 106.0,
+       "tone": "gain"
+      }
+     ]
+    },
+    {
+     "type": "row",
+     "at": 110.9,
+     "items": [
+      {
+       "type": "icon",
+       "icon": "bank",
+       "label": "charges fixes",
+       "at": 111.0
+      },
+      {
+       "type": "icon",
+       "icon": "house",
+       "label": "loyer",
+       "at": 118.6
+      },
+      {
+       "type": "icon",
+       "icon": "laptop",
+       "label": "abonnement",
+       "at": 120.0
+      },
+      {
+       "type": "icon",
+       "icon": "person",
+       "label": "salarié",
+       "at": 121.4
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "from": 126.9,
+   "to": 141.8,
+   "items": [
+    {
+     "type": "chart",
+     "at": 127.1,
+     "lines": [
+      {
+       "label": "charges fixes",
+       "values": [
+        20,
+        20,
+        20,
+        60,
+        60,
+        60
+       ],
+       "at": 127.4,
+       "until": 133.5,
+       "tone": "accent"
+      }
+     ]
+    },
+    {
+     "type": "text",
+     "size": "mid",
+     "text": "Un [[palier]]",
+     "at": 132.4
+    },
+    {
+     "type": "text",
+     "size": "small",
+     "text": "Classe tes coûts selon la décision et la période",
+     "at": 134.6
+    }
+   ]
+  },
+  {
+   "from": 141.8,
+   "to": 160.5,
+   "items": [
+    {
+     "type": "text",
+     "size": "big",
+     "text": "Les deux formules",
+     "at": 141.9
+    },
+    {
+     "type": "chips",
+     "at": 146.3,
+     "items": [
+      {
+       "text": "seuil en ventes",
+       "at": 146.4
+      },
+      {
+       "text": "=",
+       "at": 148.0
+      },
+      {
+       "text": "charges fixes",
+       "at": 149.2
+      },
+      {
+       "text": "÷",
+       "at": 150.4
+      },
+      {
+       "text": "contribution d’une vente",
+       "at": 151.0,
+       "tone": "accent"
+      }
+     ]
+    },
+    {
+     "type": "text",
+     "size": "small",
+     "text": "Toujours arrondir [[vers le haut]]",
+     "at": 153.4
+    }
+   ]
+  },
+  {
+   "from": 160.5,
+   "to": 175.0,
+   "items": [
+    {
+     "type": "chips",
+     "at": 160.8,
+     "items": [
+      {
+       "text": "taux de marge",
+       "at": 166.3
+      },
+      {
+       "text": "=",
+       "at": 167.5
+      },
+      {
+       "text": "marge",
+       "at": 168.2
+      },
+      {
+       "text": "÷",
+       "at": 169.2
+      },
+      {
+       "text": "CA",
+       "at": 169.8
+      }
+     ]
+    },
+    {
+     "type": "chips",
+     "at": 171.7,
+     "items": [
+      {
+       "text": "charges fixes",
+       "at": 171.8
+      },
+      {
+       "text": "÷",
+       "at": 172.8
+      },
+      {
+       "text": "taux de marge",
+       "at": 173.2,
+       "tone": "accent"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "from": 175.0,
+   "to": 186.8,
+   "items": [
+    {
+     "type": "gauge",
+     "label": "Taux de marge",
+     "value": 60,
+     "at": 176.0,
+     "until": 178.2
+    },
+    {
+     "type": "chips",
+     "at": 178.5,
+     "items": [
+      {
+       "text": "3 000 €",
+       "at": 178.8
+      },
+      {
+       "text": "÷",
+       "at": 180.9
+      },
+      {
+       "text": "0,6",
+       "at": 181.4
+      },
+      {
+       "text": "=",
+       "at": 184.2
+      },
+      {
+       "text": "5 000 € de CA",
+       "at": 184.8,
+       "tone": "accent"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "from": 186.8,
+   "to": 202.2,
+   "items": [
+    {
+     "type": "row",
+     "at": 188.5,
+     "items": [
+      {
+       "type": "icon",
+       "icon": "alert",
+       "tone": "loss",
+       "at": 188.5
+      },
+      {
+       "type": "text",
+       "size": "mid",
+       "text": "Contribution nulle ou [[négative|loss]]",
+       "at": 188.8
+      }
+     ]
+    },
+    {
+     "type": "text",
+     "size": "small",
+     "text": "Aucune hausse des ventes ne paiera les charges fixes",
+     "at": 192.0
+    },
+    {
+     "type": "list",
+     "style": "dot",
+     "at": 197.9,
+     "items": [
+      {
+       "text": "Revoir le prix",
+       "at": 198.2
+      },
+      {
+       "text": "Revoir les coûts",
+       "at": 199.2
+      },
+      {
+       "text": "Revoir l’offre",
+       "at": 200.2
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "from": 202.2,
+   "to": 221.8,
+   "items": [
+    {
+     "type": "text",
+     "size": "big",
+     "text": "Du calcul à la décision",
+     "at": 202.3,
+     "out": 204.6,
+     "hide": true
+    },
+    {
+     "type": "icon",
+     "icon": "scale",
+     "size": "l",
+     "label": "un outil pour décider",
+     "at": 206.9
+    },
+    {
+     "type": "bars",
+     "at": 212.9,
+     "items": [
+      {
+       "label": "Seuil (rendez-vous)",
+       "value": 200,
+       "at": 213.0
+      },
+      {
+       "label": "Capacité",
+       "value": 120,
+       "at": 214.6,
+       "tone": "loss"
+      }
+     ]
+    },
+    {
+     "type": "text",
+     "size": "mid",
+     "text": "Mieux vendre ne suffit pas : [[changer le modèle]]",
+     "at": 217.7
+    }
+   ]
+  },
+  {
+   "from": 221.8,
+   "to": 237.7,
+   "items": [
+    {
+     "type": "cards",
+     "at": 223.8,
+     "items": [
+      {
+       "icon": "coins",
+       "title": "Coûts plus élevés",
+       "at": 223.9
+      },
+      {
+       "icon": "users",
+       "title": "Volume plus faible",
+       "at": 225.4
+      },
+      {
+       "icon": "percent",
+       "title": "Remise",
+       "at": 227.1,
+       "accent": true
+      }
+     ]
+    },
+    {
+     "type": "chart",
+     "at": 228.9,
+     "lines": [
+      {
+       "label": "prix",
+       "values": [
+        60,
+        56,
+        52,
+        50
+       ],
+       "at": 229.0,
+       "until": 232.5,
+       "tone": "muted"
+      },
+      {
+       "label": "contribution",
+       "values": [
+        60,
+        48,
+        34,
+        20
+       ],
+       "at": 229.5,
+       "until": 233.5,
+       "tone": "loss"
+      }
+     ]
+    },
+    {
+     "type": "text",
+     "size": "mid",
+     "text": "Les coûts, eux, [[ne baissent pas]]",
+     "at": 234.9
+    }
+   ]
+  },
+  {
+   "from": 237.7,
+   "to": 256.3,
+   "items": [
+    {
+     "type": "text",
+     "size": "mid",
+     "text": "Les limites honnêtes",
+     "at": 237.8
+    },
+    {
+     "type": "list",
+     "style": "dot",
+     "at": 239.5,
+     "items": [
+      {
+       "text": "Plusieurs produits : un mélange de ventes plausible",
+       "at": 239.6
+      },
+      {
+       "text": "Les coûts changent avec le volume",
+       "at": 244.0
+      },
+      {
+       "text": "Un seuil en temps suppose une activité régulière",
+       "at": 246.6
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "from": 256.3,
+   "to": 266.6,
+   "items": [
+    {
+     "type": "compare",
+     "at": 256.6,
+     "left": {
+      "title": "Seuil de résultat",
+      "icon": "chart-bar",
+      "items": [
+       {
+        "text": "équilibre sur le papier",
+        "at": 258.4
+       }
+      ]
+     },
+     "right": {
+      "title": "Besoin de cash",
+      "icon": "wallet",
+      "items": [
+       {
+        "text": "argent réel en banque",
+        "at": 262.0
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "from": 266.6,
+   "to": 291.9,
+   "items": [
+    {
+     "type": "text",
+     "size": "mid",
+     "text": "Cours de poterie · [[atelier collectif]]",
+     "at": 266.8
+    },
+    {
+     "type": "split",
+     "label": "Une place",
+     "total": 60,
+     "at": 275.3,
+     "parts": [
+      {
+       "label": "matériel + commission",
+       "value": 20,
+       "at": 278.0,
+       "tone": "muted"
+      },
+      {
+       "label": "contribution",
+       "value": 40,
+       "at": 281.7,
+       "tone": "accent"
+      }
+     ]
+    },
+    {
+     "type": "chips",
+     "at": 284.9,
+     "items": [
+      {
+       "text": "2 000 €",
+       "at": 285.0
+      },
+      {
+       "text": "÷",
+       "at": 287.6
+      },
+      {
+       "text": "40 €",
+       "at": 288.0
+      },
+      {
+       "text": "=",
+       "at": 289.6
+      },
+      {
+       "text": "50 places",
+       "at": 290.0,
+       "tone": "accent"
+      }
+     ]
+    },
+    {
+     "type": "actor",
+     "character": "artisan",
+     "name": "l’artisan",
+     "at": 267.0
+    }
+   ]
+  },
+  {
+   "from": 291.9,
+   "to": 298.0,
+   "items": [
+    {
+     "type": "stats",
+     "at": 292.2,
+     "items": [
+      {
+       "label": "45 places",
+       "value": -200,
+       "at": 292.4,
+       "tone": "loss"
+      },
+      {
+       "label": "60 places",
+       "value": 400,
+       "at": 295.0,
+       "tone": "gain"
+      }
+     ]
+    },
+    {
+     "type": "actor",
+     "character": "artisan",
+     "name": "l’artisan",
+     "at": 291.9
+    }
+   ]
+  },
+  {
+   "from": 298.0,
+   "to": 306.6,
+   "items": [
+    {
+     "type": "chips",
+     "at": 298.1,
+     "items": [
+      {
+       "text": "remise de −10 %",
+       "at": 298.2,
+       "tone": "loss"
+      }
+     ]
+    },
+    {
+     "type": "waterfall",
+     "at": 300.2,
+     "rows": [
+      {
+       "label": "prix remisé",
+       "value": 54,
+       "kind": "start",
+       "at": 300.4
+      },
+      {
+       "label": "coût",
+       "value": 20,
+       "kind": "minus",
+       "at": 302.7
+      },
+      {
+       "label": "contribution",
+       "value": 34,
+       "kind": "total",
+       "at": 304.3
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "from": 306.6,
+   "to": 314.8,
+   "items": [
+    {
+     "type": "counter",
+     "label": "Places pour l’équilibre",
+     "from": 50,
+     "to": 59,
+     "unit": "",
+     "at": 306.9,
+     "until": 309.8,
+     "tone": "loss"
+    },
+    {
+     "type": "text",
+     "size": "big",
+     "text": "[[+ 9 places]] pour une petite remise",
+     "at": 310.9
+    }
+   ]
+  },
+  {
+   "from": 314.8,
+   "to": 333,
+   "items": [
+    {
+     "type": "text",
+     "size": "big",
+     "text": "Pour résumer",
+     "at": 314.9,
+     "out": 315.9,
+     "hide": true
+    },
+    {
+     "type": "cards",
+     "at": 316.0,
+     "items": [
+      {
+       "icon": "target",
+       "title": "Le seuil",
+       "sub": "là où tu ne perds plus d’argent",
+       "at": 316.1,
+       "accent": true
+      },
+      {
+       "icon": "calculator",
+       "title": "Charges ÷ contribution",
+       "sub": "ce que rapporte une vente",
+       "at": 322.3
+      },
+      {
+       "icon": "eye",
+       "title": "Comparer au réel",
+       "sub": "demande et capacité",
+       "at": 326.5
+      }
+     ]
+    },
+    {
+     "type": "text",
+     "size": "small",
+     "text": "À bientôt",
+     "at": 331.0
+    }
+   ]
+  }
+ ]
+}

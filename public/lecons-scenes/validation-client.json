@@ -1,0 +1,209 @@
+{
+  "lesson": "validation-client",
+  "version": "1.0.0",
+  "scenes": [
+    { "from": 0, "to": 11.9, "items": [
+      { "type": "text", "size": "title", "text": "Valider un problème avant de construire", "at": 0.2, "out": 4.6, "hide": true },
+      { "type": "text", "size": "small", "text": "Bienvenue dans cette leçon", "at": 3.2, "out": 4.6, "hide": true },
+      { "type": "icon", "icon": "bulb", "size": "l", "label": "ton idée", "at": 4.8 },
+      { "type": "dialog", "at": 7.2, "items": [
+        { "character": "client", "name": "tes amis", "text": "« Super idée ! »", "at": 7.3, "side": "left" }
+      ] },
+      { "type": "actor", "character": "toi", "name": "toi", "at": 4.9, "think": { "text": "!", "at": 10.0 } }
+    ] },
+    { "from": 11.9, "to": 22.2, "items": [
+      { "type": "chips", "at": 11.9, "items": [
+        { "text": "un compliment", "at": 12.0 },
+        { "text": "≠", "at": 13.0 },
+        { "text": "un client", "at": 13.6, "tone": "accent" }
+      ] },
+      { "type": "row", "at": 16.0, "items": [
+        { "type": "icon", "icon": "search", "size": "l", "label": "un vrai problème ?", "at": 16.0 },
+        { "type": "icon", "icon": "calendar", "size": "l", "label": "des semaines de travail", "at": 19.2 }
+      ] }
+    ] },
+    { "from": 22.2, "to": 29.0, "items": [
+      { "type": "steps", "at": 22.4, "items": [
+        { "text": "Décrire le problème", "icon": "pencil", "at": 22.6 },
+        { "text": "Mener un entretien", "icon": "chat", "at": 24.4 },
+        { "text": "Test qui peut échouer", "icon": "target", "at": 26.4 }
+      ] }
+    ] },
+    { "from": 29.0, "to": 48.5, "items": [
+      { "type": "text", "size": "big", "text": "Pourquoi apprendre ça ?", "at": 29.1, "out": 30.5, "hide": true },
+      { "type": "chips", "at": 32.8, "items": [
+        { "text": "« Bonne idée »", "at": 32.8 },
+        { "text": "≠", "at": 34.8 },
+        { "text": "« je l’utiliserai »", "at": 35.0 },
+        { "text": "≠", "at": 36.3 },
+        { "text": "« je le paierai »", "at": 36.5, "tone": "loss" }
+      ] },
+      { "type": "list", "style": "num", "at": 38.5, "items": [
+        { "text": "Quel problème existe vraiment ?", "at": 42.6 },
+        { "text": "Pour qui ?", "at": 45.2 },
+        { "text": "Avec quelles conséquences ?", "at": 46.1 }
+      ] }
+    ] },
+    { "from": 48.5, "to": 67.4, "items": [
+      { "type": "text", "size": "small", "text": "Valider ≠ prouver pour toujours", "at": 48.6 },
+      { "type": "text", "size": "mid", "text": "Valider = réduire [[une incertitude]]", "at": 54.7 },
+      { "type": "icon", "icon": "eye", "size": "l", "label": "une observation", "at": 56.5 },
+      { "type": "text", "size": "big", "text": "Un vrai test peut te donner [[tort]]", "at": 59.4 }
+    ] },
+    { "from": 67.4, "to": 90.8, "items": [
+      { "type": "text", "size": "big", "text": "Séparer problème, solution, client", "at": 67.5, "out": 70.7, "hide": true },
+      { "type": "chips", "at": 75.5, "items": [
+        { "text": "Hypothèse", "at": 75.6, "tone": "accent" },
+        { "text": "=", "at": 76.6 },
+        { "text": "supposé vrai, pas vérifié", "at": 77.2 }
+      ] },
+      { "type": "row", "at": 80.6, "items": [
+        { "type": "icon", "icon": "shop", "size": "l", "label": "boulangeries de quartier", "at": 80.6 },
+        { "type": "icon", "icon": "hour", "size": "l", "label": "estimer la production du soir", "at": 85.0 }
+      ] },
+      { "type": "text", "size": "small", "text": "Un problème, pas encore une solution", "at": 88.0 }
+    ] },
+    { "from": 90.8, "to": 101.0, "items": [
+      { "type": "cards", "at": 91.0, "items": [
+        { "icon": "alert", "title": "Problème", "sub": "d’abord", "at": 91.1, "accent": true },
+        { "icon": "robot", "title": "Solution", "sub": "ensuite : une façon parmi d’autres", "at": 92.8, "subAt": 96.0 }
+      ] }
+    ] },
+    { "from": 101.0, "to": 113.6, "items": [
+      { "type": "cards", "at": 101.5, "items": [
+        { "icon": "wallet", "title": "Client", "sub": "celui qui paie", "at": 101.6, "accent": true },
+        { "icon": "person", "title": "Utilisateur", "sub": "celui qui s’en sert", "at": 103.7 }
+      ] },
+      { "type": "row", "at": 109.2, "items": [
+        { "type": "icon", "icon": "building", "label": "l’école paie", "at": 109.4 },
+        { "type": "icon", "icon": "users", "label": "les professeurs s’en servent", "at": 111.0 }
+      ] }
+    ] },
+    { "from": 113.6, "to": 128.5, "items": [
+      { "type": "text", "size": "mid", "text": "Tes concurrents", "at": 113.7 },
+      { "type": "cards", "at": 115.4, "items": [
+        { "icon": "laptop", "title": "Autre appli", "at": 115.5 },
+        { "icon": "chart-bar", "title": "Tableur", "at": 117.8 },
+        { "icon": "pencil", "title": "Carnet", "at": 119.0 },
+        { "icon": "person", "title": "Collègue", "sub": "ou ne rien faire", "at": 120.2, "subAt": 121.6 }
+      ] },
+      { "type": "text", "size": "mid", "text": "Ton produit doit faire [[nettement mieux]]", "at": 123.4 }
+    ] },
+    { "from": 128.5, "to": 146.3, "items": [
+      { "type": "chips", "at": 128.6, "items": [
+        { "text": "un groupe précis", "at": 129.0 },
+        { "text": "+", "at": 131.0 },
+        { "text": "un problème important", "at": 131.4 },
+        { "text": "+", "at": 133.6 },
+        { "text": "un résultat recherché", "at": 134.2, "tone": "accent" }
+      ] },
+      { "type": "compare", "at": 137.8,
+        "left": { "title": "Précis · testable", "icon": "check", "items": [ { "text": "Réduire le temps de clôture des salons", "at": 138.0 } ] },
+        "right": { "title": "Vague", "icon": "cross", "items": [ { "text": "Révolutionner les commerces", "at": 143.3 } ] } }
+    ] },
+    { "from": 146.3, "to": 160.2, "items": [
+      { "type": "icon", "icon": "users", "size": "l", "label": "de vrais clients", "at": 150.4 },
+      { "type": "dialog", "at": 155.1, "items": [
+        { "character": "toi", "name": "toi", "text": "« Raconte-moi la dernière fois. »", "at": 155.1, "side": "left" },
+        { "character": "client", "text": "« Hier soir, justement… »", "at": 157.6, "side": "right" }
+      ] }
+    ] },
+    { "from": 160.2, "to": 168.2, "items": [
+      { "type": "list", "style": "num", "at": 160.2, "items": [
+        { "text": "À quelle fréquence ?", "at": 160.3 },
+        { "text": "Quelles conséquences ?", "at": 162.0 },
+        { "text": "Comment s’en sort-il aujourd’hui ?", "at": 163.2 },
+        { "text": "Combien ça coûte ?", "at": 165.2 },
+        { "text": "Qui décide d’acheter ?", "at": 166.3 }
+      ] }
+    ] },
+    { "from": 168.2, "to": 187.1, "items": [
+      { "type": "text", "size": "mid", "text": "Laisse parler : écoute [[avant]] de présenter", "at": 168.3 },
+      { "type": "compare", "at": 172.4,
+        "left": { "title": "À éviter", "icon": "cross", "items": [ { "text": "Vous aimeriez gagner du temps avec l’IA ?", "at": 174.9 } ] },
+        "right": { "title": "À préférer", "icon": "check", "items": [ { "text": "Qu’avez-vous déjà essayé ?", "at": 182.2 } ] } },
+      { "type": "text", "size": "small", "text": "Tout le monde répond oui, sans vouloir acheter", "at": 178.0 }
+    ] },
+    { "from": 187.1, "to": 201.8, "items": [
+      { "type": "cards", "at": 190.3, "items": [
+        { "icon": "chat", "title": "Ce qu’il a dit", "at": 190.5 },
+        { "icon": "eye", "title": "Ce que tu as observé", "at": 192.2 },
+        { "icon": "brain", "title": "Ce que tu en déduis", "at": 194.2, "accent": true }
+      ] },
+      { "type": "row", "at": 196.6, "items": [
+        { "type": "icon", "icon": "lock", "label": "pas de données sensibles inutiles", "at": 196.8 }
+      ] }
+    ] },
+    { "from": 201.8, "to": 219.0, "items": [
+      { "type": "text", "size": "big", "text": "Un test qui peut échouer", "at": 201.9, "out": 204.4, "hide": true },
+      { "type": "list", "style": "check", "at": 208.0, "items": [
+        { "text": "Hypothèse", "at": 208.1 },
+        { "text": "Personnes interrogées", "at": 210.0 },
+        { "text": "Méthode et mesure", "at": 212.3 },
+        { "text": "Durée", "at": 214.8 },
+        { "text": "Décision selon le résultat", "at": 216.0 }
+      ] }
+    ] },
+    { "from": 219.0, "to": 231.4, "items": [
+      { "type": "icons", "icon": "person", "count": 5, "step": 0.4, "label": "gérants", "at": 220.3 },
+      { "type": "counter", "label": "Rendez-vous acceptés : au moins", "from": 0, "to": 3, "unit": "", "at": 223.6, "until": 226.6, "tone": "gain", "bar": true, "max": 5 },
+      { "type": "text", "size": "small", "text": "Un service fait à la main, sur leurs données", "at": 228.0 }
+    ] },
+    { "from": 231.4, "to": 243.0, "items": [
+      { "type": "text", "size": "mid", "text": "Une [[action concrète]]", "at": 233.1 },
+      { "type": "list", "style": "check", "at": 235.2, "items": [
+        { "text": "Un rendez-vous tenu", "at": 235.3 },
+        { "text": "Un accès à des données autorisées", "at": 236.8 },
+        { "text": "Une utilisation répétée", "at": 238.6 },
+        { "text": "Un vrai paiement", "at": 240.2 }
+      ] }
+    ] },
+    { "from": 243.0, "to": 263.4, "items": [
+      { "type": "list", "style": "cross", "at": 244.2, "items": [
+        { "text": "Vendre une fonction qui n’existe pas", "at": 244.3 }
+      ] },
+      { "type": "chips", "at": 247.5, "items": [
+        { "text": "5 entretiens", "at": 247.6 },
+        { "text": "≠", "at": 249.6 },
+        { "text": "taille du marché", "at": 250.0, "tone": "loss" }
+      ] },
+      { "type": "cards", "at": 253.6, "items": [
+        { "icon": "users", "title": "Groupe cible", "at": 254.0 },
+        { "icon": "megaphone", "title": "Canal", "at": 255.4 },
+        { "icon": "target", "title": "Proposition", "at": 256.8 }
+      ] },
+      { "type": "text", "size": "mid", "text": "Ne change pas tout [[d’un coup]]", "at": 259.2 }
+    ] },
+    { "from": 263.4, "to": 282.6, "items": [
+      { "type": "text", "size": "big", "text": "Les invendus d’une boulangerie", "at": 263.5, "out": 266.4, "hide": true },
+      { "type": "row", "at": 268.3, "items": [
+        { "type": "icon", "icon": "robot", "size": "l", "label": "prévision par IA", "at": 268.5 },
+        { "type": "icon", "icon": "shop", "size": "l", "label": "boulangeries", "at": 270.6 }
+      ] },
+      { "type": "cards", "at": 272.4, "items": [
+        { "icon": "users", "title": "Deux gérants", "sub": "suivent déjà très bien leurs ventes", "at": 272.5 },
+        { "icon": "person", "title": "Un troisième", "sub": "aucune donnée exploitable", "at": 277.1, "tone": "loss" }
+      ] },
+      { "type": "actor", "character": "entrepreneuse", "name": "Lina", "at": 268.4, "think": { "text": "?", "at": 278.5 } }
+    ] },
+    { "from": 282.6, "to": 294.5, "items": [
+      { "type": "steps", "at": 282.8, "items": [
+        { "text": "Données jour par jour", "icon": "database", "at": 283.0 },
+        { "text": "Rapport fait à la main", "icon": "pencil", "at": 285.6 }
+      ] },
+      { "type": "compare", "at": 287.8,
+        "left": { "title": "Compter", "icon": "cross", "items": [ { "text": "les gens qui trouvent ça intéressant", "at": 288.0 } ] },
+        "right": { "title": "Observer", "icon": "check", "items": [ { "text": "s’ils utilisent vraiment les conseils", "at": 291.3 } ] } }
+    ] },
+    { "from": 294.5, "to": 309, "items": [
+      { "type": "text", "size": "big", "text": "Pour résumer", "at": 294.6, "out": 295.2, "hide": true },
+      { "type": "list", "style": "check", "at": 295.2, "items": [
+        { "text": "Un compliment n’est pas une preuve", "at": 295.3 },
+        { "text": "Sépare problème, solution et client", "at": 298.2 },
+        { "text": "Interroge sur des faits passés", "at": 301.6 },
+        { "text": "Crée un test qui peut te donner tort", "at": 303.8 }
+      ] },
+      { "type": "text", "size": "small", "text": "À bientôt", "at": 306.4 }
+    ] }
+  ]
+}

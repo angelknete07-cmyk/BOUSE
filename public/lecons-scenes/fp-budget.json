@@ -1,0 +1,168 @@
+{
+  "lesson": "fp-budget",
+  "version": "1.0.0",
+  "scenes": [
+    { "from": 0, "to": 13.8, "items": [
+      { "type": "text", "size": "title", "text": "Construire son budget", "at": 0.2, "out": 5.4, "hide": true },
+      { "type": "text", "size": "small", "text": "Bienvenue", "at": 4.6, "out": 5.4, "hide": true },
+      { "type": "chips", "at": 5.6, "items": [
+        { "text": "budget", "at": 5.7 },
+        { "text": "=", "at": 6.8 },
+        { "text": "punition ?", "at": 7.4, "tone": "loss" }
+      ] },
+      { "type": "text", "size": "big", "text": "Un outil [[libérateur]]", "at": 10.3 }
+    ] },
+    { "from": 13.8, "to": 27.4, "items": [
+      { "type": "steps", "at": 14.0, "items": [
+        { "text": "Ce qui entre", "icon": "coins", "at": 14.6 },
+        { "text": "Ce qui sort", "icon": "wallet", "at": 16.0 },
+        { "text": "Ce qui reste", "icon": "piggy", "at": 17.3 }
+      ] },
+      { "type": "icon", "icon": "piggy", "size": "l", "label": "se payer en premier", "at": 19.1 },
+      { "type": "text", "size": "small", "text": "Épargner sans y penser, avant que l’argent disparaisse", "at": 22.8 }
+    ] },
+    { "from": 27.4, "to": 51.1, "items": [
+      { "type": "text", "size": "mid", "text": "Pas une punition : [[une carte]]", "at": 30.8 },
+      { "type": "compare", "at": 34.4,
+        "left": { "title": "Sans carte", "icon": "question", "items": [ { "text": "tu découvres où l’argent est parti", "at": 34.5 } ] },
+        "right": { "title": "Avec une carte", "icon": "target", "items": [ { "text": "tu décides avant de partir", "at": 37.9 } ] } },
+      { "type": "cards", "at": 43.4, "items": [
+        { "icon": "coins", "title": "Entre", "at": 43.6 },
+        { "icon": "lock", "title": "Sort à coup sûr", "at": 45.0 },
+        { "icon": "chart-up", "title": "Varie", "at": 46.9 },
+        { "icon": "wallet", "title": "Disponible", "at": 48.6 }
+      ] }
+    ] },
+    { "from": 51.1, "to": 66.9, "items": [
+      { "type": "text", "size": "big", "text": "Les revenus nets", "at": 51.2 },
+      { "type": "row", "at": 56.4, "items": [
+        { "type": "icon", "icon": "briefcase", "label": "salaire net", "at": 57.0 },
+        { "type": "icon", "icon": "gift", "label": "aides", "at": 59.0 },
+        { "type": "icon", "icon": "laptop", "label": "revenus d’activité", "at": 60.6 }
+      ] }
+    ] },
+    { "from": 66.9, "to": 74.6, "items": [
+      { "type": "bars", "at": 66.9, "items": [
+        { "label": "Mois prudent", "value": 1500, "at": 67.0 },
+        { "label": "Bon mois", "value": 2500, "at": 70.0, "tone": "muted" }
+      ] },
+      { "type": "text", "size": "mid", "text": "Construis sur [[1 500 €]]", "at": 72.4 }
+    ] },
+    { "from": 74.6, "to": 92.3, "items": [
+      { "type": "text", "size": "big", "text": "Les charges fixes", "at": 74.7 },
+      { "type": "row", "at": 76.6, "items": [
+        { "type": "icon", "icon": "house", "label": "loyer", "at": 77.0 },
+        { "type": "icon", "icon": "laptop", "label": "abonnements", "at": 78.6 },
+        { "type": "icon", "icon": "umbrella", "label": "assurances", "at": 80.6 },
+        { "type": "icon", "icon": "bank", "label": "crédit", "at": 82.4 }
+      ] },
+      { "type": "chips", "at": 84.8, "items": [
+        { "text": "3 derniers mois de relevés", "at": 85.0 },
+        { "text": "→", "at": 88.0 },
+        { "text": "même montant : charge fixe", "at": 88.6, "tone": "accent" }
+      ] }
+    ] },
+    { "from": 92.3, "to": 101.6, "items": [
+      { "type": "text", "size": "mid", "text": "Les dépenses [[variables]]", "at": 92.4 },
+      { "type": "row", "at": 94.4, "items": [
+        { "type": "icon", "icon": "cart", "label": "courses", "at": 94.6 },
+        { "type": "icon", "icon": "ticket", "label": "sorties", "at": 96.0 },
+        { "type": "icon", "icon": "car", "label": "carburant", "at": 97.2 }
+      ] },
+      { "type": "text", "size": "small", "text": "Les plus faciles à ajuster", "at": 98.8 }
+    ] },
+    { "from": 101.6, "to": 124.3, "items": [
+      { "type": "text", "size": "mid", "text": "Les dépenses [[ponctuelles]]", "at": 101.7 },
+      { "type": "row", "at": 103.8, "items": [
+        { "type": "icon", "icon": "gear", "label": "réparation", "at": 104.0 },
+        { "type": "icon", "icon": "gift", "label": "cadeaux", "at": 105.0 },
+        { "type": "icon", "icon": "document", "label": "impôts", "at": 106.0 }
+      ] },
+      { "type": "chips", "at": 112.8, "items": [
+        { "text": "assurance : 240 € par an", "at": 114.7 },
+        { "text": "→", "at": 117.0 },
+        { "text": "20 € par mois", "at": 117.6, "tone": "gain" }
+      ] },
+      { "type": "icon", "icon": "piggy", "label": "la somme est prête le jour venu", "at": 120.2 }
+    ] },
+    { "from": 124.3, "to": 142.6, "items": [
+      { "type": "chips", "at": 124.4, "items": [
+        { "text": "revenus", "at": 124.5 },
+        { "text": "−", "at": 125.6 },
+        { "text": "charges fixes", "at": 126.0 },
+        { "text": "=", "at": 126.8 },
+        { "text": "reste à vivre", "at": 127.2, "tone": "accent" }
+      ] },
+      { "type": "steps", "at": 129.6, "items": [
+        { "text": "Début du mois", "icon": "calendar", "at": 129.7 },
+        { "text": "Épargne programmée", "icon": "piggy", "at": 131.4 },
+        { "text": "Tu vis avec le reste", "icon": "wallet", "at": 134.3 }
+      ] },
+      { "type": "text", "size": "mid", "text": "Épargner « ce qui reste » : [[souvent rien|loss]]", "at": 136.5 }
+    ] },
+    { "from": 142.6, "to": 176.8, "items": [
+      { "type": "text", "size": "big", "text": "Le vocabulaire des banques", "at": 142.7, "out": 144.5, "hide": true },
+      { "type": "cards", "at": 146.7, "items": [
+        { "icon": "wallet", "title": "Reste à vivre", "at": 146.8 },
+        { "icon": "percent", "title": "Taux d’endettement", "sub": "la part des revenus qui rembourse des crédits", "at": 149.9, "subAt": 151.8 },
+        { "icon": "pie", "title": "Besoins · envies · épargne", "sub": "un point de départ, pas une obligation", "at": 163.0, "subAt": 168.8 }
+      ] },
+      { "type": "text", "size": "small", "text": "Seuils variables : à vérifier quand tu empruntes", "at": 158.0 }
+    ] },
+    { "from": 176.8, "to": 205.8, "items": [
+      { "type": "text", "size": "big", "text": "Les petites dépenses invisibles", "at": 176.9, "out": 180.0, "hide": true },
+      { "type": "row", "at": 184.0, "items": [
+        { "type": "icon", "icon": "card", "label": "abonnement oublié", "at": 184.2 },
+        { "type": "icon", "icon": "coin", "label": "petit achat répété", "at": 187.0 }
+      ] },
+      { "type": "chips", "at": 190.8, "items": [
+        { "text": "4 € par jour", "at": 190.9 },
+        { "text": "≈", "at": 192.4 },
+        { "text": "120 € par mois", "at": 192.8, "tone": "loss" }
+      ] },
+      { "type": "chips", "at": 194.8, "items": [
+        { "text": "10 € par mois", "at": 194.9 },
+        { "text": "=", "at": 196.6 },
+        { "text": "120 € par an", "at": 197.0, "tone": "loss" }
+      ] },
+      { "type": "counter", "label": "Cinq abonnements, par an", "from": 0, "to": 600, "at": 200.3, "until": 204.0, "tone": "loss" }
+    ] },
+    { "from": 205.8, "to": 230.2, "items": [
+      { "type": "compare", "at": 205.8,
+        "left": { "title": "Budget trop serré", "icon": "cross", "items": [ { "text": "abandonné en trois semaines", "at": 209.4 } ] },
+        "right": { "title": "Ligne réaliste", "icon": "check", "items": [ { "text": "« imprévus et plaisirs »", "at": 211.2 } ] } },
+      { "type": "row", "at": 216.4, "items": [
+        { "type": "icon", "icon": "shield", "label": "ni impôts du foyer, ni surendettement", "at": 218.6 }
+      ] },
+      { "type": "row", "at": 223.0, "items": [
+        { "type": "icon", "icon": "bank", "label": "difficultés : ta banque ou la Banque de France", "at": 226.5 }
+      ] }
+    ] },
+    { "from": 230.2, "to": 252.4, "items": [
+      { "type": "text", "size": "mid", "text": "Le budget de Léa", "at": 230.3 },
+      { "type": "waterfall", "at": 235.2, "rows": [
+        { "label": "revenus nets", "value": 1800, "kind": "start", "at": 235.4 },
+        { "label": "charges fixes", "value": 1100, "kind": "minus", "at": 238.2 },
+        { "label": "épargne", "value": 150, "kind": "minus", "at": 245.3, "tone": "gain" },
+        { "label": "dépenses variables", "value": 550, "kind": "total", "at": 248.8, "tone": "accent" }
+      ] },
+      { "type": "actor", "character": "toi", "name": "Léa", "at": 235.3 }
+    ] },
+    { "from": 252.4, "to": 264.5, "items": [
+      { "type": "waterfall", "at": 252.4, "rows": [
+        { "label": "prévu pour le variable", "value": 550, "kind": "start", "at": 252.5 },
+        { "label": "courses et sorties", "value": 450, "kind": "minus", "at": 253.8 },
+        { "label": "marge", "value": 100, "kind": "total", "at": 255.4, "tone": "gain" }
+      ] },
+      { "type": "gauge", "label": "Taux d’épargne", "value": 8, "at": 257.7, "until": 260.5, "tone": "gain" }
+    ] },
+    { "from": 264.5, "to": 280, "items": [
+      { "type": "cards", "at": 264.6, "items": [
+        { "icon": "target", "title": "Une carte", "sub": "pas une punition", "at": 264.7 },
+        { "icon": "layers", "title": "Quatre blocs", "sub": "entre · sort · varie · reste", "at": 267.5 },
+        { "icon": "piggy", "title": "Payer en premier", "sub": "épargne programmée au début du mois", "at": 272.9, "accent": true }
+      ] },
+      { "type": "text", "size": "small", "text": "À bientôt", "at": 278.2 }
+    ] }
+  ]
+}

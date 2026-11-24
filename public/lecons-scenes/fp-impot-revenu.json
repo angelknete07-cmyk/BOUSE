@@ -1,0 +1,277 @@
+{
+  "lesson": "fp-impot-revenu",
+  "version": "1.0.0",
+  "scenes": [
+    {
+      "from": 0,
+      "to": 10.1,
+      "items": [
+        { "type": "text", "size": "title", "text": "Comprendre l’impôt sur le revenu", "at": 0.2 },
+        { "type": "dialog", "at": 3.7, "items": [
+          { "character": "toi", "text": "« Je gagne plus, donc je gagne moins ? »", "at": 3.9, "side": "left" }
+        ] },
+        { "type": "icon", "icon": "question", "label": "une phrase déjà entendue ?", "at": 7.4 }
+      ]
+    },
+    {
+      "from": 10.1,
+      "to": 30.8,
+      "items": [
+        { "type": "text", "size": "big", "text": "[[Faux]]", "at": 10.2 },
+        { "type": "row", "at": 11.4, "items": [
+          { "type": "icon", "icon": "cross", "tone": "loss", "label": "des augmentations refusées", "at": 11.8 }
+        ] },
+        { "type": "list", "style": "dot", "at": 18.9, "items": [
+          { "text": "Le barème progressif", "at": 19.4 },
+          { "text": "Taux marginal et taux moyen", "at": 21.0 },
+          { "text": "Le quotient familial", "at": 23.6 },
+          { "text": "Le prélèvement à la source", "at": 25.2 }
+        ] },
+        { "type": "row", "at": 27.0, "items": [
+          { "type": "icon", "icon": "document", "at": 27.0 },
+          { "type": "text", "size": "small", "text": "Lire ton avis d’impôt", "at": 27.4 }
+        ] }
+      ]
+    },
+    {
+      "from": 30.8,
+      "to": 51.4,
+      "items": [
+        { "type": "text", "size": "big", "text": "Pourquoi apprendre ça ?", "at": 30.9, "out": 32.4, "hide": true },
+        { "type": "text", "size": "big", "text": "Un impôt calculé [[par tranches]]", "at": 35.0 },
+        { "type": "compare", "at": 37.6, "left": {
+          "title": "Ce qu’on croit", "icon": "cross", "items": [
+            { "text": "Tout le salaire change de tranche", "at": 37.8 }
+          ] }, "right": {
+          "title": "Ce qui se passe", "icon": "check", "items": [
+            { "text": "Jamais, avec une augmentation", "at": 39.8 }
+          ] } },
+        { "type": "row", "at": 44.4, "items": [
+          { "type": "icon", "icon": "chart-up", "label": "un placement", "at": 45.0 },
+          { "type": "icon", "icon": "briefcase", "label": "un statut d’entrepreneur", "at": 47.0 },
+          { "type": "icon", "icon": "percent", "label": "une réduction", "at": 49.0 }
+        ] }
+      ]
+    },
+    {
+      "from": 51.4,
+      "to": 74.6,
+      "items": [
+        { "type": "text", "size": "mid", "text": "[[1 ·]] Par foyer fiscal", "at": 55.6 },
+        { "type": "row", "at": 59.4, "items": [
+          { "type": "icon", "icon": "person", "label": "une personne seule", "at": 59.6 },
+          { "type": "icon", "icon": "users", "label": "ou un couple, avec ses enfants", "at": 61.6 }
+        ] },
+        { "type": "text", "size": "mid", "text": "Revenu net imposable", "at": 64.7 },
+        { "type": "chips", "at": 65.2, "items": [
+          { "text": "salaires après abattement", "at": 66.0 },
+          { "text": "revenus d’activité", "at": 68.0 },
+          { "text": "pensions", "at": 69.8 },
+          { "text": "revenus du patrimoine", "at": 71.0 }
+        ] }
+      ]
+    },
+    {
+      "from": 74.6,
+      "to": 85.2,
+      "items": [
+        { "type": "chips", "at": 74.8, "items": [
+          { "text": "revenu imposable", "at": 74.8 },
+          { "text": "÷", "at": 76.6 },
+          { "text": "nombre de parts", "at": 77.0 },
+          { "text": "=", "at": 77.6 },
+          { "text": "quotient familial", "at": 77.9, "tone": "accent" }
+        ] },
+        { "type": "row", "at": 80.6, "items": [
+          { "type": "icon", "icon": "person", "label": "seul", "at": 80.6 },
+          { "type": "icon", "icon": "users", "label": "couple : plus de parts", "at": 81.8 },
+          { "type": "icon", "icon": "heart", "label": "enfants : en ajoutent", "at": 83.2 }
+        ] }
+      ]
+    },
+    {
+      "from": 85.2,
+      "to": 103.9,
+      "items": [
+        { "type": "text", "size": "mid", "text": "[[2 ·]] Le barème : des tranches", "at": 85.3 },
+        { "type": "bars", "at": 90.4, "unit": " %", "items": [
+          { "label": "Tranche 1", "value": 0, "at": 91.0 },
+          { "label": "Tranche 2", "value": 11, "at": 92.6 },
+          { "label": "Tranche 3", "value": 30, "at": 94.4 },
+          { "label": "Tranche 4", "value": 41, "at": 96.2 },
+          { "label": "Tranche 5", "value": 45, "at": 97.8, "tone": "accent" }
+        ] },
+        { "type": "row", "at": 99.7, "items": [
+          { "type": "icon", "icon": "calendar", "at": 99.7 },
+          { "type": "text", "size": "small", "text": "Seuils changés chaque année : site des impôts", "at": 100.0 }
+        ] }
+      ]
+    },
+    {
+      "from": 103.9,
+      "to": 117.2,
+      "items": [
+        { "type": "text", "size": "mid", "text": "L’idée essentielle", "at": 104.0, "out": 106.0 },
+        { "type": "text", "size": "big", "text": "Chaque tranche : [[son propre taux]]", "at": 106.1 },
+        { "type": "row", "at": 109.1, "items": [
+          { "type": "icon", "icon": "ladder", "label": "seuls les euros au-dessus du seuil", "at": 109.4 },
+          { "type": "icon", "icon": "lock", "label": "le reste ne change pas", "at": 115.4 }
+        ] }
+      ]
+    },
+    {
+      "from": 117.2,
+      "to": 129.4,
+      "items": [
+        { "type": "cards", "at": 119.2, "items": [
+          { "icon": "target", "title": "Taux marginal", "sub": "dernière tranche atteinte", "at": 119.3, "accent": true },
+          { "icon": "scale", "title": "Taux moyen", "sub": "impôt total ÷ revenu imposable", "at": 123.2 }
+        ] },
+        { "type": "text", "size": "mid", "text": "Le moyen est toujours [[plus faible]]", "at": 127.4 }
+      ]
+    },
+    {
+      "from": 129.4,
+      "to": 139.7,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Puis trois ajustements", "at": 129.5 },
+        { "type": "list", "style": "num", "at": 131.0, "items": [
+          { "text": "Plafonnement du quotient familial", "at": 131.4 },
+          { "text": "Décote (revenus modestes)", "at": 134.2 },
+          { "text": "Réductions et crédits d’impôt", "at": 136.2 }
+        ] }
+      ]
+    },
+    {
+      "from": 139.7,
+      "to": 161.8,
+      "items": [
+        { "type": "text", "size": "mid", "text": "[[3 ·]] Prélevé à la source", "at": 141.8 },
+        { "type": "row", "at": 143.8, "items": [
+          { "type": "icon", "icon": "calendar", "label": "depuis 2019", "at": 143.8 },
+          { "type": "icon", "icon": "wallet", "label": "un taux sur ton salaire ou ta pension", "at": 147.6 }
+        ] },
+        { "type": "chips", "at": 151.1, "items": [
+          { "text": "indépendants, revenus fonciers", "at": 151.2 },
+          { "text": "→", "at": 153.2 },
+          { "text": "acomptes", "at": 153.6 }
+        ] },
+        { "type": "row", "at": 155.5, "items": [
+          { "type": "icon", "icon": "document", "label": "déclaration annuelle : impôt définitif", "at": 155.5 }
+        ] }
+      ]
+    },
+    {
+      "from": 161.8,
+      "to": 176.1,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Le taux de prélèvement", "at": 161.9 },
+        { "type": "cards", "at": 164.6, "items": [
+          { "icon": "gear", "title": "Personnalisé", "at": 162.5 },
+          { "icon": "users", "title": "Individualisé", "sub": "dans un couple", "at": 164.7 },
+          { "icon": "eye", "title": "Neutre", "sub": "vis-à-vis de l’employeur", "at": 167.5 }
+        ] },
+        { "type": "text", "size": "small", "text": "Ajustable en ligne si ta situation change", "at": 170.5 }
+      ]
+    },
+    {
+      "from": 176.1,
+      "to": 190.0,
+      "items": [
+        { "type": "compare", "at": 176.2, "left": {
+          "title": "Réduction d’impôt", "icon": "percent", "items": [
+            { "text": "Diminue l’impôt dû", "at": 176.4 },
+            { "text": "Jamais négatif", "at": 179.6 }
+          ] }, "right": {
+          "title": "Crédit d’impôt", "icon": "coins", "items": [
+            { "text": "Remboursé s’il dépasse l’impôt", "at": 182.4 }
+          ] } },
+        { "type": "row", "at": 186.3, "items": [
+          { "type": "icon", "icon": "person", "at": 186.3 },
+          { "type": "text", "size": "small", "text": "Exemple : un salarié à domicile", "at": 186.8 }
+        ] }
+      ]
+    },
+    {
+      "from": 190.0,
+      "to": 215.8,
+      "items": [
+        { "type": "text", "size": "big", "text": "Le point de vigilance", "at": 190.1, "out": 193.6, "hide": true },
+        { "type": "compare", "at": 193.8, "left": {
+          "title": "L’économie promise", "icon": "piggy", "items": [
+            { "text": "Une réduction d’impôt", "at": 194.0 }
+          ] }, "right": {
+          "title": "La perte possible", "icon": "alert", "items": [
+            { "text": "Parfois plus grande", "at": 199.0 }
+          ] } },
+        { "type": "row", "at": 203.4, "items": [
+          { "type": "icon", "icon": "calendar", "at": 203.4 },
+          { "type": "text", "size": "small", "text": "Seuils et dispositifs changent à chaque loi", "at": 203.6 }
+        ] },
+        { "type": "row", "at": 208.3, "items": [
+          { "type": "icon", "icon": "calculator", "at": 208.3 },
+          { "type": "text", "size": "small", "text": "Simulateur officiel · barème fictif ici", "at": 208.6 }
+        ] }
+      ]
+    },
+    {
+      "from": 215.8,
+      "to": 233.9,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Exemple fictif · un barème simplifié", "at": 215.9 },
+        { "type": "cards", "at": 220.8, "items": [
+          { "icon": "percent", "title": "0 %", "sub": "jusqu’à 10 000 €", "at": 221.0 },
+          { "icon": "percent", "title": "10 %", "sub": "de 10 000 à 30 000 €", "at": 224.0 },
+          { "icon": "percent", "title": "30 %", "sub": "au-delà", "at": 227.4, "accent": true }
+        ] },
+        { "type": "counter", "label": "Revenu imposable de Léo", "to": 35000, "at": 229.9, "until": 232.6 },
+        { "type": "actor", "character": "toi", "name": "Léo", "at": 229.9 }
+      ]
+    },
+    {
+      "from": 233.9,
+      "to": 249.7,
+      "items": [
+        { "type": "list", "style": "num", "at": 235.4, "items": [
+          { "text": "10 000 premiers euros : 0 €", "at": 235.5 },
+          { "text": "20 000 suivants à 10 % : 2 000 €", "at": 238.6 },
+          { "text": "5 000 restants à 30 % : 1 500 €", "at": 242.6 }
+        ] },
+        { "type": "counter", "label": "Impôt total", "to": 3500, "tone": "loss", "at": 247.1, "until": 249.5 }
+      ]
+    },
+    {
+      "from": 249.7,
+      "to": 255.2,
+      "items": [
+        { "type": "gauge", "label": "Taux marginal", "value": 30, "at": 249.8, "until": 251.8, "tone": "accent" },
+        { "type": "gauge", "label": "Taux moyen", "value": 10, "at": 252.3, "until": 254.2 }
+      ]
+    },
+    {
+      "from": 255.2,
+      "to": 267.0,
+      "items": [
+        { "type": "split", "label": "1 000 € de plus", "total": 1000, "at": 255.4, "parts": [
+          { "label": "impôt à 30 %", "value": 300, "at": 260.0, "tone": "loss" },
+          { "label": "il garde", "value": 700, "at": 262.9, "tone": "gain" }
+        ] },
+        { "type": "text", "size": "mid", "text": "Il gagne toujours [[plus]] qu’avant", "at": 264.8 },
+        { "type": "actor", "character": "toi", "name": "Léo", "at": 255.3 }
+      ]
+    },
+    {
+      "from": 267.0,
+      "to": 282,
+      "items": [
+        { "type": "text", "size": "big", "text": "Pour résumer", "at": 267.1, "out": 268.1, "hide": true },
+        { "type": "list", "style": "check", "at": 268.2, "items": [
+          { "text": "Impôt progressif, par tranches", "at": 268.3 },
+          { "text": "Marginal : euros au-dessus du seuil seulement", "at": 270.9 },
+          { "text": "Gagner plus fait gagner plus", "at": 275.3 }
+        ] },
+        { "type": "text", "size": "small", "text": "À bientôt", "at": 279.3 }
+      ]
+    }
+  ]
+}

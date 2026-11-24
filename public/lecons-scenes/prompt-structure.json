@@ -1,0 +1,190 @@
+{
+  "lesson": "prompt-structure",
+  "version": "1.0.0",
+  "scenes": [
+    { "from": 0, "to": 14.2, "items": [
+      { "type": "text", "size": "title", "text": "Construire un prompt qui se teste", "at": 0.2, "out": 4.0, "hide": true },
+      { "type": "text", "size": "small", "text": "Bienvenue", "at": 2.9, "out": 4.0, "hide": true },
+      { "type": "dialog", "at": 4.2, "items": [
+        { "character": "toi", "name": "toi", "text": "« Fais-moi un truc. »", "at": 4.3, "side": "left" },
+        { "character": "robot", "text": "« Voilà… »", "at": 6.0, "side": "right" }
+      ] },
+      { "type": "text", "size": "mid", "text": "Souvent, le problème, c’est [[la demande]]", "at": 11.7 }
+    ] },
+    { "from": 14.2, "to": 30.4, "items": [
+      { "type": "chips", "at": 17.6, "items": [
+        { "text": "prompt", "at": 17.7, "tone": "accent" },
+        { "text": "=", "at": 18.8 },
+        { "text": "le message donné à l’IA", "at": 19.7 }
+      ] },
+      { "type": "compare", "at": 23.3,
+        "left": { "title": "Demande vague", "icon": "cross", "items": [ { "text": "« Fais-moi un truc »", "at": 23.5 } ] },
+        "right": { "title": "Consigne claire", "icon": "check", "items": [
+          { "text": "réutilisable", "at": 25.7 },
+          { "text": "testable", "at": 27.6 } ] } }
+    ] },
+    { "from": 30.4, "to": 51.7, "items": [
+      { "type": "text", "size": "big", "text": "Pourquoi apprendre ça ?", "at": 30.5, "out": 32.0, "hide": true },
+      { "type": "text", "size": "mid", "text": "Un prompt [[≠]] une formule magique", "at": 32.6 },
+      { "type": "icon", "icon": "contract", "size": "l", "label": "un petit cahier des charges", "at": 36.1 },
+      { "type": "dialog", "at": 44.5, "items": [
+        { "character": "toi", "name": "toi", "text": "« Fais-moi un truc sur nos ventes. »", "at": 44.6, "side": "left" },
+        { "character": "client", "name": "collègue", "text": "« Euh… quoi, exactement ? »", "at": 47.0, "side": "right" }
+      ] }
+    ] },
+    { "from": 51.7, "to": 72.4, "items": [
+      { "type": "list", "style": "cross", "at": 51.8, "items": [
+        { "text": "l’objectif manque", "at": 52.0 },
+        { "text": "les données manquent", "at": 54.4 },
+        { "text": "le critère de réussite manque", "at": 56.2 }
+      ] },
+      { "type": "chips", "at": 58.8, "items": [
+        { "text": "modèle", "at": 59.0 },
+        { "text": "+", "at": 60.4 },
+        { "text": "tâche", "at": 61.0 },
+        { "text": "+", "at": 62.4 },
+        { "text": "exemples", "at": 63.0 }
+      ] },
+      { "type": "text", "size": "big", "text": "Une consigne [[testée]]", "at": 67.7 }
+    ] },
+    { "from": 72.4, "to": 102.8, "items": [
+      { "type": "text", "size": "big", "text": "Une structure en [[7]] questions", "at": 72.5 },
+      { "type": "cards", "at": 80.6, "items": [
+        { "icon": "target", "title": "1 · Objectif", "sub": "résumer, classer, rédiger", "at": 80.7, "subAt": 82.2, "accent": true },
+        { "icon": "users", "title": "2 · Contexte", "sub": "public, décision, situation", "at": 88.0, "subAt": 89.7 },
+        { "icon": "database", "title": "3 · Données", "sub": "sur quoi s’appuyer", "at": 93.8, "subAt": 95.5 },
+        { "icon": "shield", "title": "4 · Contraintes", "sub": "à respecter ou signaler", "at": 98.5, "subAt": 100.2 }
+      ] }
+    ] },
+    { "from": 102.8, "to": 122.4, "items": [
+      { "type": "cards", "at": 102.8, "items": [
+        { "icon": "gear", "title": "5 · Méthode", "sub": "étapes observables", "at": 102.9, "subAt": 104.6 },
+        { "icon": "layers", "title": "6 · Format", "sub": "tableau, liste, texte, JSON", "at": 106.9, "subAt": 108.9 },
+        { "icon": "check", "title": "7 · Critères", "sub": "comment juger", "at": 118.4, "subAt": 120.3, "accent": true }
+      ] },
+      { "type": "row", "at": 113.8, "items": [
+        { "type": "icon", "icon": "database", "label": "JSON : des données que les logiciels savent lire", "at": 113.9 }
+      ] }
+    ] },
+    { "from": 122.4, "to": 144.7, "items": [
+      { "type": "text", "size": "mid", "text": "Décris ce que tu veux [[et comment le contrôler]]", "at": 122.5 },
+      { "type": "compare", "at": 131.0,
+        "left": { "title": "Vérifiable", "icon": "check", "items": [
+          { "text": "Chaque total = somme des lignes", "at": 131.2 },
+          { "text": "Donnée absente : « inconnue »", "at": 136.1 } ] },
+        "right": { "title": "Invérifiable", "icon": "cross", "items": [ { "text": "« Sois excellent »", "at": 140.2 } ] } }
+    ] },
+    { "from": 144.7, "to": 168.2, "items": [
+      { "type": "text", "size": "big", "text": "Exemples et données non fiables", "at": 144.8, "out": 147.4, "hide": true },
+      { "type": "compare", "at": 149.0,
+        "left": { "title": "Zero-shot", "icon": "pencil", "items": [ { "text": "une tâche, aucun exemple", "at": 149.2 } ] },
+        "right": { "title": "Few-shot", "icon": "layers", "items": [ { "text": "entrée → sortie attendue", "at": 153.4 } ] } },
+      { "type": "chips", "at": 160.8, "items": [
+        { "text": "1 exemple ambigu", "at": 160.9, "tone": "accent" },
+        { "text": ">", "at": 162.4 },
+        { "text": "3 variantes faciles", "at": 162.8 }
+      ] }
+    ] },
+    { "from": 168.2, "to": 183.0, "items": [
+      { "type": "cards", "at": 168.3, "items": [
+        { "icon": "pencil", "title": "Instructions", "at": 168.4 },
+        { "icon": "document", "title": "Documents", "at": 170.0 }
+      ] },
+      { "type": "row", "at": 173.4, "items": [
+        { "type": "icon", "icon": "alert", "tone": "loss", "at": 173.4 },
+        { "type": "text", "size": "mid", "text": "« Ignore tout ce qui précède »", "at": 177.7, "tone": "loss" }
+      ] },
+      { "type": "text", "size": "small", "text": "Injection de prompt", "at": 180.0 }
+    ] },
+    { "from": 183.0, "to": 200.2, "items": [
+      { "type": "chips", "at": 183.3, "items": [
+        { "text": "<message>", "at": 183.4 },
+        { "text": "…", "at": 184.6 },
+        { "text": "</message>", "at": 185.4 }
+      ] },
+      { "type": "text", "size": "mid", "text": "Des séparateurs ne protègent pas [[à 100 %]]", "at": 186.0 },
+      { "type": "steps", "at": 191.8, "items": [
+        { "text": "Vérifier la structure", "icon": "check", "at": 192.0 },
+        { "text": "Gérer les échecs", "icon": "alert", "at": 194.8 },
+        { "text": "Limiter les droits", "icon": "lock", "at": 197.4 }
+      ] }
+    ] },
+    { "from": 200.2, "to": 223.5, "items": [
+      { "type": "text", "size": "big", "text": "Tester, comparer, améliorer", "at": 200.3, "out": 202.9, "hide": true },
+      { "type": "icon", "icon": "document", "size": "l", "label": "des cas + le résultat attendu", "at": 205.4 },
+      { "type": "list", "style": "dot", "at": 210.8, "items": [
+        { "text": "Données manquantes", "at": 211.0 },
+        { "text": "Ambiguïté", "at": 212.6 },
+        { "text": "Contradiction", "at": 214.0 },
+        { "text": "Contenu hostile", "at": 215.4 }
+      ] },
+      { "type": "text", "size": "big", "text": "Une chose [[à la fois]]", "at": 219.3 }
+    ] },
+    { "from": 223.5, "to": 245.9, "items": [
+      { "type": "cards", "at": 223.6, "items": [
+        { "icon": "alert", "title": "Erreurs graves", "at": 223.7, "tone": "loss" },
+        { "icon": "coins", "title": "Coût", "at": 225.7 },
+        { "icon": "clock", "title": "Temps de réponse", "at": 227.2 }
+      ] },
+      { "type": "compare", "at": 229.8,
+        "left": { "title": "Grille de l’Atelier IA", "icon": "check", "items": [ { "text": "repère les éléments présents", "at": 233.8 } ] },
+        "right": { "title": "Ne fait pas", "icon": "cross", "items": [
+          { "text": "n’interroge pas de vrai modèle", "at": 237.0 },
+          { "text": "ne mesure pas la qualité réelle", "at": 239.0 } ] } },
+      { "type": "text", "size": "small", "text": "Avant de passer aux vrais essais", "at": 242.0 }
+    ] },
+    { "from": 245.9, "to": 262.7, "items": [
+      { "type": "text", "size": "big", "text": "Classer les demandes de support", "at": 246.0, "out": 248.8, "hide": true },
+      { "type": "cards", "at": 252.7, "items": [
+        { "icon": "invoice", "title": "Facturation", "at": 253.4 },
+        { "icon": "alert", "title": "Incident", "at": 255.0 },
+        { "icon": "question", "title": "Autre", "at": 256.6 }
+      ] },
+      { "type": "chips", "at": 258.7, "items": [
+        { "text": "<message>", "at": 258.8 },
+        { "text": "uniquement ceci", "at": 260.0, "tone": "accent" },
+        { "text": "</message>", "at": 261.6 }
+      ] }
+    ] },
+    { "from": 262.7, "to": 275.8, "items": [
+      { "type": "list", "style": "check", "at": 262.7, "items": [
+        { "text": "Ne pas obéir aux instructions du message", "at": 262.8 },
+        { "text": "Ne rien inventer", "at": 265.6 },
+        { "text": "Doute : répondre « autre »", "at": 267.2 }
+      ] },
+      { "type": "chips", "at": 270.9, "items": [
+        { "text": "identifiant", "at": 271.0 },
+        { "text": "+", "at": 272.4 },
+        { "text": "catégorie", "at": 272.8 },
+        { "text": "+", "at": 273.6 },
+        { "text": "justification", "at": 274.0 }
+      ] }
+    ] },
+    { "from": 275.8, "to": 286.4, "items": [
+      { "type": "stats", "at": 275.8, "items": [
+        { "label": "Cas de test", "value": 12, "unit": "", "at": 278.0, "accent": true }
+      ] },
+      { "type": "list", "style": "check", "at": 276.0, "items": [
+        { "text": "Bonne catégorie", "at": 276.2 },
+        { "text": "Aucune donnée ajoutée", "at": 279.0 }
+      ] },
+      { "type": "row", "at": 281.6, "items": [
+        { "type": "icon", "icon": "alert", "tone": "loss", "label": "un message qui dit d’ignorer les consignes", "at": 281.8 }
+      ] }
+    ] },
+    { "from": 286.4, "to": 305, "items": [
+      { "type": "text", "size": "mid", "text": "Pour résumer", "at": 286.5 },
+      { "type": "chips", "at": 286.6, "items": [
+        { "text": "objectif", "at": 286.7 },
+        { "text": "contexte", "at": 288.1 },
+        { "text": "données", "at": 289.4 },
+        { "text": "contraintes", "at": 290.7 },
+        { "text": "méthode", "at": 291.9 },
+        { "text": "format", "at": 293.1 },
+        { "text": "critères", "at": 294.0 }
+      ] },
+      { "type": "text", "size": "big", "text": "Elle se teste sur des cas [[réels]]", "at": 297.5 },
+      { "type": "text", "size": "small", "text": "À bientôt", "at": 302.4 }
+    ] }
+  ]
+}

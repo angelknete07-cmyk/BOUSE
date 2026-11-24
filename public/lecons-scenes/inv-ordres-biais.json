@@ -1,0 +1,290 @@
+{
+  "lesson": "inv-ordres-biais",
+  "version": "1.0.0",
+  "scenes": [
+    {
+      "from": 0,
+      "to": 5.4,
+      "items": [
+        { "type": "text", "size": "title", "text": "Passer un ordre, déjouer ses biais", "at": 0.2 },
+        { "type": "text", "size": "small", "text": "Bienvenue", "at": 2.9 }
+      ]
+    },
+    {
+      "from": 5.4,
+      "to": 24.3,
+      "items": [
+        { "type": "steps", "at": 5.5, "items": [
+          { "text": "Placement choisi", "icon": "check", "at": 5.5 },
+          { "text": "Passer l’ordre", "icon": "cart", "at": 8.0 }
+        ] },
+        { "type": "row", "at": 11.8, "items": [
+          { "type": "icon", "icon": "alert", "tone": "loss", "at": 11.8 },
+          { "type": "text", "size": "mid", "text": "des erreurs qui coûtent", "at": 12.2 }
+        ] },
+        { "type": "chips", "at": 14.6, "items": [
+          { "text": "types d’ordres", "at": 14.6 },
+          { "text": "fourchette", "at": 16.0 },
+          { "text": "frais", "at": 17.4 }
+        ] },
+        { "type": "row", "at": 18.8, "items": [
+          { "type": "icon", "icon": "brain", "tone": "accent", "at": 18.8 },
+          { "type": "text", "size": "mid", "text": "les [[biais]] de ton cerveau", "at": 19.4 }
+        ] },
+        { "type": "actor", "character": "toi", "name": "toi", "at": 5.6 }
+      ]
+    },
+    {
+      "from": 24.3,
+      "to": 44.2,
+      "items": [
+        { "type": "row", "at": 25.8, "items": [
+          { "type": "icon", "icon": "clock", "at": 25.8 },
+          { "type": "text", "size": "mid", "text": "Le moment d’agir coûte le plus", "at": 26.2 }
+        ] },
+        { "type": "list", "style": "cross", "at": 29.8, "items": [
+          { "text": "Un mauvais type d’ordre", "at": 29.8 },
+          { "text": "Un titre peu échangé", "at": 31.3 },
+          { "text": "Une décision sous le coup de l’émotion", "at": 33.0 }
+        ] },
+        { "type": "text", "size": "mid", "text": "Connaître ton [[exécution]] et tes biais, plus fort que prédire le marché", "at": 35.7 }
+      ]
+    },
+    {
+      "from": 44.2,
+      "to": 58.9,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Le carnet d’ordres", "at": 45.8 },
+        { "type": "compare", "at": 47.8,
+          "left": { "title": "Acheteurs", "icon": "cart", "items": [
+            { "text": "prix auxquels ils veulent acheter", "at": 48.6 }
+          ] },
+          "right": { "title": "Vendeurs", "icon": "shop", "items": [
+            { "text": "prix auxquels ils veulent vendre", "at": 50.8 }
+          ] } },
+        { "type": "chips", "at": 53.7, "items": [
+          { "text": "meilleur prix de vente", "at": 54.0 },
+          { "text": "−", "at": 55.4 },
+          { "text": "meilleur prix d’achat", "at": 56.0 }
+        ] }
+      ]
+    },
+    {
+      "from": 58.9,
+      "to": 71.6,
+      "items": [
+        { "type": "text", "size": "big", "text": "fourchette = [[spread]]", "at": 58.9 },
+        { "type": "chips", "at": 62.6, "items": [
+          { "text": "titre peu échangé", "at": 62.6 },
+          { "text": "→", "at": 64.0 },
+          { "text": "fourchette large", "at": 64.4 },
+          { "text": "→", "at": 66.0 },
+          { "text": "tu perds", "at": 66.6, "tone": "loss" }
+        ] },
+        { "type": "row", "at": 67.4, "items": [
+          { "type": "icon", "icon": "cart", "label": "acheter", "at": 67.4 },
+          { "type": "icon", "icon": "coins", "label": "revendre", "at": 68.4, "tone": "loss" }
+        ] }
+      ]
+    },
+    {
+      "from": 71.6,
+      "to": 79.3,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Ordre [[au marché]]", "at": 71.7 },
+        { "type": "cards", "at": 75.0, "items": [
+          { "icon": "check", "title": "Exécution", "sub": "quasi certaine", "at": 75.0, "tone": "gain" },
+          { "icon": "question", "title": "Prix", "sub": "incertain", "at": 77.2, "tone": "loss" }
+        ] }
+      ]
+    },
+    {
+      "from": 79.3,
+      "to": 91.4,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Ordre à [[cours limité]]", "at": 79.4 },
+        { "type": "chips", "at": 80.4, "items": [
+          { "text": "prix maximum à l’achat", "at": 80.6 },
+          { "text": "prix minimum à la vente", "at": 82.4 }
+        ] },
+        { "type": "cards", "at": 84.6, "items": [
+          { "icon": "target", "title": "Prix", "sub": "maîtrisé", "at": 84.6, "tone": "gain" },
+          { "icon": "hour", "title": "Exécution", "sub": "non garantie : si personne n’accepte, rien", "at": 86.2, "tone": "loss" }
+        ] }
+      ]
+    },
+    {
+      "from": 91.4,
+      "to": 103.5,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Ordre à seuil : le [[stop]]", "at": 91.5 },
+        { "type": "steps", "at": 93.0, "items": [
+          { "text": "Seuil atteint", "icon": "flag", "at": 94.0 },
+          { "text": "Ordre au marché", "icon": "cart", "at": 96.0 },
+          { "text": "Exécuté plus bas ?", "icon": "chart-down", "at": 98.1 }
+        ] },
+        { "type": "chart", "at": 98.4, "baseline": { "value": 40, "label": "seuil" }, "lines": [
+          { "label": "prix", "values": [60, 55, 50, 20, 6, 4], "at": 98.4, "until": 102.4, "tone": "loss" }
+        ] }
+      ]
+    },
+    {
+      "from": 103.5,
+      "to": 111.4,
+      "items": [
+        { "type": "row", "at": 103.5, "items": [
+          { "type": "icon", "icon": "calendar", "size": "l", "label": "durée de validité", "at": 103.6 },
+          { "type": "icon", "icon": "coins", "size": "l", "label": "frais de courtage", "at": 106.5 }
+        ] },
+        { "type": "text", "size": "small", "text": "courtage = la commission de l’intermédiaire", "at": 108.0 }
+      ]
+    },
+    {
+      "from": 111.4,
+      "to": 127.6,
+      "items": [
+        { "type": "text", "size": "big", "text": "Les biais", "at": 111.5, "out": 114.2, "hide": true },
+        { "type": "icon", "icon": "brain", "size": "l", "label": "raisonner mal, en automatique", "at": 114.8 },
+        { "type": "text", "size": "mid", "text": "[[Aversion à la perte]]", "at": 118.2 },
+        { "type": "row", "at": 120.0, "items": [
+          { "type": "icon", "icon": "chart-down", "tone": "loss", "label": "titre en baisse", "at": 120.0 },
+          { "type": "icon", "icon": "lock", "label": "je ne vends pas", "at": 124.4 }
+        ] }
+      ]
+    },
+    {
+      "from": 127.6,
+      "to": 142.4,
+      "items": [
+        { "type": "cards", "at": 127.7, "items": [
+          { "icon": "ticket", "title": "Ancrage", "sub": "ton prix d’achat ne compte pas pour le marché", "at": 127.7, "subAt": 131.6 },
+          { "icon": "rocket", "title": "Excès de confiance", "sub": "tu sous-estimes le hasard", "at": 134.8, "subAt": 135.4 },
+          { "icon": "eye", "title": "Confirmation", "sub": "tu cherches ce qui te donne raison", "at": 138.2, "subAt": 138.8 }
+        ] }
+      ]
+    },
+    {
+      "from": 142.4,
+      "to": 148.6,
+      "items": [
+        { "type": "row", "at": 142.4, "items": [
+          { "type": "icon", "icon": "fire", "tone": "accent", "at": 142.4 },
+          { "type": "text", "size": "mid", "text": "Effet de mode : peur de rater la hausse", "at": 142.8 }
+        ] },
+        { "type": "chart", "at": 145.4, "lines": [
+          { "label": "achat après la montée", "values": [10, 14, 20, 34, 52, 70], "at": 145.5, "until": 148.2 }
+        ] }
+      ]
+    },
+    {
+      "from": 148.6,
+      "to": 167.2,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Trois [[antidotes]]", "at": 149.8 },
+        { "type": "cards", "at": 151.0, "items": [
+          { "icon": "document", "title": "Plan écrit", "sub": "objectif, horizon, répartition", "at": 151.0, "subAt": 152.4 },
+          { "icon": "calendar", "title": "Versements programmés", "sub": "moins de risque de mal choisir ton moment", "at": 155.8, "subAt": 157.0 },
+          { "icon": "scale", "title": "Rééquilibrage", "sub": "régulier, pas au fil de l’actualité", "at": 161.9, "subAt": 163.0, "accent": true }
+        ] }
+      ]
+    },
+    {
+      "from": 167.2,
+      "to": 179.8,
+      "items": [
+        { "type": "text", "size": "big", "text": "L’action permanente", "at": 167.3, "out": 171.8, "hide": true },
+        { "type": "icons", "icon": "cart", "count": 8, "step": 0.4, "at": 172.1 },
+        { "type": "row", "at": 174.8, "items": [
+          { "type": "icon", "icon": "percent", "tone": "loss", "label": "frais", "at": 174.8 },
+          { "type": "icon", "icon": "alert", "tone": "loss", "label": "erreurs", "at": 175.6 }
+        ] },
+        { "type": "text", "size": "mid", "text": "Produits à levier : les [[CFD]]", "at": 176.4 }
+      ]
+    },
+    {
+      "from": 179.8,
+      "to": 188.7,
+      "items": [
+        { "type": "chart", "at": 180.0, "baseline": { "value": 0, "label": "0" }, "lines": [
+          { "label": "gains amplifiés", "values": [0, 10, 24, 40, 60, 80], "at": 180.1, "until": 183.0, "tone": "gain" },
+          { "label": "pertes amplifiées", "values": [0, -10, -24, -40, -60, -80], "at": 181.2, "until": 184.0, "tone": "loss" }
+        ] },
+        { "type": "text", "size": "mid", "text": "Une [[majorité]] de comptes y perd", "at": 183.4 }
+      ]
+    },
+    {
+      "from": 188.7,
+      "to": 204.4,
+      "items": [
+        { "type": "row", "at": 188.7, "items": [
+          { "type": "icon", "icon": "phone", "label": "réseaux sociaux", "at": 188.7 },
+          { "type": "text", "size": "big", "text": "[[≠]]", "at": 190.2 },
+          { "type": "icon", "icon": "shield", "label": "conseil autorisé", "at": 191.0 }
+        ] },
+        { "type": "list", "style": "num", "at": 194.2, "items": [
+          { "text": "Qui parle ?", "at": 194.4 },
+          { "text": "Que gagne-t-il à te convaincre ?", "at": 195.4 },
+          { "text": "Est-il autorisé ?", "at": 196.8 }
+        ] },
+        { "type": "text", "size": "small", "text": "tous les types d’ordres et toutes les places : hors sujet", "at": 198.4 }
+      ]
+    },
+    {
+      "from": 204.4,
+      "to": 219.8,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Exemple fictif · un carnet d’ordres", "at": 204.5 },
+        { "type": "stats", "at": 208.9, "items": [
+          { "label": "meilleur achat", "value": 20, "unit": " €", "at": 209.0 },
+          { "label": "meilleure vente", "value": 20.1, "unit": " €", "at": 212.6 }
+        ] },
+        { "type": "chips", "at": 215.7, "items": [
+          { "text": "fourchette", "at": 215.7 },
+          { "text": "=", "at": 216.5 },
+          { "text": "0,10 €", "at": 217.0 },
+          { "text": "=", "at": 218.0 },
+          { "text": "0,5 %", "at": 218.4, "tone": "loss" }
+        ] }
+      ]
+    },
+    {
+      "from": 219.8,
+      "to": 234.2,
+      "items": [
+        { "type": "chips", "at": 219.9, "items": [
+          { "text": "achat au marché · 100 actions", "at": 220.0 },
+          { "text": "≈", "at": 222.6 },
+          { "text": "20,10 €", "at": 223.2 }
+        ] },
+        { "type": "text", "size": "small", "text": "sinon, un prix [[plus haut|loss]]", "at": 225.7 },
+        { "type": "row", "at": 227.4, "items": [
+          { "type": "icon", "icon": "hour", "label": "limite à 20,05 € : on attend un vendeur", "at": 227.4 }
+        ] },
+        { "type": "row", "at": 232.0, "items": [
+          { "type": "icon", "icon": "cross", "tone": "loss", "at": 232.0 },
+          { "type": "text", "size": "small", "text": "peut-être jamais exécuté", "at": 232.3 }
+        ] }
+      ]
+    },
+    {
+      "from": 234.2,
+      "to": 250.0,
+      "items": [
+        { "type": "compare", "at": 235.2,
+          "left": { "title": "Au marché", "icon": "rocket", "items": [
+            { "text": "exécution garantie", "at": 235.4 },
+            { "text": "prix pas garanti", "at": 237.0 }
+          ] },
+          "right": { "title": "Cours limité", "icon": "target", "items": [
+            { "text": "prix garanti", "at": 238.7 },
+            { "text": "exécution pas garantie", "at": 240.2 }
+          ] } },
+        { "type": "row", "at": 242.2, "items": [
+          { "type": "icon", "icon": "document", "tone": "accent", "label": "un plan écrit à l’avance", "at": 245.0 },
+          { "type": "text", "size": "mid", "text": "le plus grand risque : [[nous-mêmes]]", "at": 242.4 }
+        ] },
+        { "type": "text", "size": "small", "text": "À bientôt", "at": 247.9 }
+      ]
+    }
+  ]
+}

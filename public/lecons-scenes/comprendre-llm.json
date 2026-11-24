@@ -1,0 +1,748 @@
+{
+  "lesson": "comprendre-llm",
+  "version": "1.0.0",
+  "scenes": [
+    {
+      "from": 0,
+      "to": 13.4,
+      "items": [
+        {
+          "type": "text",
+          "size": "title",
+          "text": "Ce qu’un LLM fait vraiment",
+          "at": 0.2,
+          "out": 4.3,
+          "hide": true
+        },
+        {
+          "type": "text",
+          "size": "small",
+          "text": "Bienvenue",
+          "at": 3.4,
+          "out": 4.3,
+          "hide": true
+        },
+        {
+          "type": "icon",
+          "icon": "robot",
+          "size": "l",
+          "label": "une réponse très fluide",
+          "at": 4.6
+        },
+        {
+          "type": "text",
+          "size": "big",
+          "text": "Mais [[vraie]] ?",
+          "at": 11.3
+        },
+        {
+          "type": "actor",
+          "character": "toi",
+          "name": "toi",
+          "at": 4.8,
+          "think": {
+            "text": "?",
+            "at": 11.4
+          }
+        }
+      ]
+    },
+    {
+      "from": 13.4,
+      "to": 29.0,
+      "items": [
+        {
+          "type": "text",
+          "size": "mid",
+          "text": "Grand modèle de langage = [[LLM]]",
+          "at": 13.5
+        },
+        {
+          "type": "cards",
+          "at": 17.9,
+          "items": [
+            {
+              "icon": "brain",
+              "title": "Modèle",
+              "at": 18.4
+            },
+            {
+              "icon": "laptop",
+              "title": "Application",
+              "at": 20.0
+            },
+            {
+              "icon": "layers",
+              "title": "Contexte",
+              "at": 21.4
+            },
+            {
+              "icon": "alert",
+              "title": "Hallucination",
+              "at": 22.8,
+              "tone": "loss"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "size": "mid",
+          "text": "Sans lui prêter [[des pouvoirs]] qu’il n’a pas",
+          "at": 24.6
+        }
+      ]
+    },
+    {
+      "from": 29.0,
+      "to": 49.3,
+      "items": [
+        {
+          "type": "text",
+          "size": "big",
+          "text": "Pourquoi apprendre ça ?",
+          "at": 29.1,
+          "out": 30.8,
+          "hide": true
+        },
+        {
+          "type": "chips",
+          "at": 31.9,
+          "items": [
+            {
+              "text": "bien écrit",
+              "at": 32.0
+            },
+            {
+              "text": "≠",
+              "at": 34.0
+            },
+            {
+              "text": "vrai",
+              "at": 35.6,
+              "tone": "loss"
+            }
+          ]
+        },
+        {
+          "type": "list",
+          "style": "check",
+          "at": 38.9,
+          "items": [
+            {
+              "text": "Choisir les bonnes tâches",
+              "at": 42.0
+            },
+            {
+              "text": "Donner les bonnes informations",
+              "at": 44.6
+            },
+            {
+              "text": "Vérifier ce qui mérite de l’être",
+              "at": 46.7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "from": 49.3,
+      "to": 63.1,
+      "items": [
+        {
+          "type": "icon",
+          "icon": "pencil",
+          "size": "l",
+          "label": "l’assistant qui rédige : une image incomplète",
+          "at": 49.5
+        },
+        {
+          "type": "row",
+          "at": 55.6,
+          "items": [
+            {
+              "type": "icon",
+              "icon": "database",
+              "label": "pas une bibliothèque complète",
+              "at": 55.8
+            },
+            {
+              "type": "icon",
+              "icon": "person",
+              "label": "pas quelqu’un qui a tout vérifié",
+              "at": 58.4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "from": 63.1,
+      "to": 81.7,
+      "items": [
+        {
+          "type": "text",
+          "size": "big",
+          "text": "Du texte aux tokens",
+          "at": 63.2,
+          "out": 65.3,
+          "hide": true
+        },
+        {
+          "type": "icon",
+          "icon": "database",
+          "size": "l",
+          "label": "d’énormes quantités de textes",
+          "at": 68.1
+        },
+        {
+          "type": "chips",
+          "at": 76.6,
+          "items": [
+            {
+              "text": "façons de dire qui reviennent",
+              "at": 76.7,
+              "tone": "accent"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "from": 81.7,
+      "to": 98.9,
+      "items": [
+        {
+          "type": "chips",
+          "at": 82.0,
+          "items": [
+            {
+              "text": "Le",
+              "at": 82.0
+            },
+            {
+              "text": "chat",
+              "at": 83.0
+            },
+            {
+              "text": "dor",
+              "at": 84.0
+            },
+            {
+              "text": "t",
+              "at": 84.7
+            },
+            {
+              "text": ".",
+              "at": 85.3
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "size": "mid",
+          "text": "Un [[token]] = mot, fragment ou symbole",
+          "at": 86.2
+        },
+        {
+          "type": "text",
+          "size": "small",
+          "text": "À chaque pas : le token le plus probable",
+          "at": 93.4
+        }
+      ]
+    },
+    {
+      "from": 98.9,
+      "to": 115.2,
+      "items": [
+        {
+          "type": "compare",
+          "at": 100.0,
+          "left": {
+            "title": "Entraînement",
+            "icon": "graduate",
+            "items": [
+              {
+                "text": "il apprend : ses paramètres se règlent",
+                "at": 100.9
+              }
+            ]
+          },
+          "right": {
+            "title": "Inférence",
+            "icon": "chat",
+            "items": [
+              {
+                "text": "il répond",
+                "at": 106.4
+              }
+            ]
+          }
+        },
+        {
+          "type": "text",
+          "size": "mid",
+          "text": "Ta conversation ne le réentraîne pas [[sur le moment]]",
+          "at": 110.5
+        }
+      ]
+    },
+    {
+      "from": 115.2,
+      "to": 136.9,
+      "items": [
+        {
+          "type": "row",
+          "at": 115.4,
+          "items": [
+            {
+              "type": "icon",
+              "icon": "alert",
+              "label": "ce que le service garde de tes messages",
+              "at": 116.4
+            },
+            {
+              "type": "icon",
+              "icon": "gear",
+              "label": "dépend du service et de tes réglages",
+              "at": 119.0
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "size": "small",
+          "text": "Lis ses conditions",
+          "at": 122.0
+        },
+        {
+          "type": "text",
+          "size": "small",
+          "text": "Prédire des tokens ne garantit pas :",
+          "at": 124.3
+        },
+        {
+          "type": "list",
+          "style": "cross",
+          "at": 130.5,
+          "items": [
+            {
+              "text": "la vérité",
+              "at": 130.6
+            },
+            {
+              "text": "un calcul exact",
+              "at": 132.7
+            },
+            {
+              "text": "les événements récents",
+              "at": 134.2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "from": 136.9,
+      "to": 162.9,
+      "items": [
+        {
+          "type": "text",
+          "size": "big",
+          "text": "Modèle, application, outils",
+          "at": 137.0,
+          "out": 139.5,
+          "hide": true
+        },
+        {
+          "type": "cards",
+          "at": 144.3,
+          "items": [
+            {
+              "icon": "gear",
+              "title": "Modèle",
+              "sub": "le moteur",
+              "at": 144.4
+            },
+            {
+              "icon": "car",
+              "title": "Application",
+              "sub": "la voiture entière : discussion, historique, mémoire, outils",
+              "at": 146.2
+            }
+          ]
+        },
+        {
+          "type": "row",
+          "at": 154.0,
+          "items": [
+            {
+              "type": "icon",
+              "icon": "search",
+              "label": "recherche web",
+              "at": 154.2
+            },
+            {
+              "type": "icon",
+              "icon": "calculator",
+              "label": "calculateur",
+              "at": 157.0
+            },
+            {
+              "type": "icon",
+              "icon": "document",
+              "label": "lecture de fichier",
+              "at": 159.2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "from": 162.9,
+      "to": 180.7,
+      "items": [
+        {
+          "type": "text",
+          "size": "mid",
+          "text": "Le [[contexte]] : tout ce qu’on lui transmet",
+          "at": 163.0
+        },
+        {
+          "type": "row",
+          "at": 165.0,
+          "items": [
+            {
+              "type": "icon",
+              "icon": "chat",
+              "label": "tes messages",
+              "at": 165.6
+            },
+            {
+              "type": "icon",
+              "icon": "pencil",
+              "label": "instructions",
+              "at": 167.2
+            },
+            {
+              "type": "icon",
+              "icon": "document",
+              "label": "documents",
+              "at": 168.8
+            },
+            {
+              "type": "icon",
+              "icon": "calculator",
+              "label": "résultats d’outils",
+              "at": 170.4
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "size": "mid",
+          "text": "[[Limité]]",
+          "at": 172.8
+        },
+        {
+          "type": "text",
+          "size": "small",
+          "text": "Un ancien fichier n’est peut-être plus accessible",
+          "at": 177.2
+        }
+      ]
+    },
+    {
+      "from": 180.7,
+      "to": 191.6,
+      "items": [
+        {
+          "type": "compare",
+          "at": 180.8,
+          "left": {
+            "title": "Contexte",
+            "icon": "layers",
+            "items": [
+              {
+                "text": "ce qu’on envoie à chaque demande",
+                "at": 181.0
+              }
+            ]
+          },
+          "right": {
+            "title": "Mémoire de l’appli",
+            "icon": "database",
+            "items": [
+              {
+                "text": "garde des infos d’une conversation à l’autre",
+                "at": 183.0
+              },
+              {
+                "text": "restitution pas garantie exacte",
+                "at": 188.0
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "from": 191.6,
+      "to": 216.8,
+      "items": [
+        {
+          "type": "text",
+          "size": "big",
+          "text": "Reconnaître les limites",
+          "at": 191.7,
+          "out": 193.5,
+          "hide": true
+        },
+        {
+          "type": "icon",
+          "icon": "alert",
+          "size": "m",
+          "tone": "loss",
+          "label": "plausible mais fausse",
+          "at": 195.9
+        },
+        {
+          "type": "list",
+          "style": "dot",
+          "at": 201.3,
+          "items": [
+            {
+              "text": "Une référence inventée",
+              "at": 201.4
+            },
+            {
+              "text": "Un chiffre sans source",
+              "at": 203.0
+            }
+          ]
+        },
+        {
+          "type": "dialog",
+          "at": 207.0,
+          "items": [
+            {
+              "character": "toi",
+              "name": "toi",
+              "text": "« Es-tu sûr ? »",
+              "at": 207.1,
+              "side": "left"
+            },
+            {
+              "character": "robot",
+              "text": "« Oui. »",
+              "at": 209.7,
+              "side": "right"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "from": 216.8,
+      "to": 241.6,
+      "items": [
+        {
+          "type": "list",
+          "style": "check",
+          "at": 216.9,
+          "items": [
+            {
+              "text": "Info importante : source, date, champ d’application",
+              "at": 217.0
+            },
+            {
+              "text": "Calcul : une calculatrice, ou refais-le",
+              "at": 222.8
+            },
+            {
+              "text": "Document : passages exacts, contrôlés par toi",
+              "at": 228.2
+            }
+          ]
+        },
+        {
+          "type": "chips",
+          "at": 234.6,
+          "items": [
+            {
+              "text": "moins aléatoire",
+              "at": 234.7
+            },
+            {
+              "text": "≠",
+              "at": 239.0
+            },
+            {
+              "text": "plus exact",
+              "at": 239.2,
+              "tone": "loss"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "from": 241.6,
+      "to": 253.9,
+      "items": [
+        {
+          "type": "row",
+          "at": 241.6,
+          "items": [
+            {
+              "type": "icon",
+              "icon": "lock",
+              "size": "l",
+              "label": "pas de données confidentielles sans autorisation",
+              "at": 241.8
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "size": "small",
+          "text": "Comprends d’abord les conditions du service",
+          "at": 245.0
+        },
+        {
+          "type": "text",
+          "size": "big",
+          "text": "Un cas fictif",
+          "at": 249.1
+        }
+      ]
+    },
+    {
+      "from": 253.9,
+      "to": 268.9,
+      "items": [
+        {
+          "type": "dialog",
+          "at": 253.9,
+          "items": [
+            {
+              "character": "toi",
+              "name": "toi",
+              "text": "« Quels sont les délais de résiliation ? »",
+              "at": 254.0,
+              "side": "left"
+            }
+          ]
+        },
+        {
+          "type": "compare",
+          "at": 257.9,
+          "left": {
+            "title": "Réponse utile",
+            "icon": "check",
+            "items": [
+              {
+                "text": "cite la clause",
+                "at": 258.0
+              },
+              {
+                "text": "distingue les cas",
+                "at": 260.2
+              },
+              {
+                "text": "signale ce qui manque",
+                "at": 262.4
+              }
+            ]
+          },
+          "right": {
+            "title": "Réponse risquée",
+            "icon": "cross",
+            "items": [
+              {
+                "text": "un délai « habituel »",
+                "at": 264.6
+              },
+              {
+                "text": "sans citer le texte",
+                "at": 266.4
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "from": 268.9,
+      "to": 278.1,
+      "items": [
+        {
+          "type": "text",
+          "size": "mid",
+          "text": "Le modèle aide à repérer · [[tu vérifies]]",
+          "at": 269.0
+        },
+        {
+          "type": "row",
+          "at": 273.8,
+          "items": [
+            {
+              "type": "icon",
+              "icon": "handshake",
+              "size": "l",
+              "label": "décision importante : l’avis d’un spécialiste",
+              "at": 274.0
+            }
+          ]
+        },
+        {
+          "type": "actor",
+          "character": "conseiller",
+          "name": "spécialiste",
+          "at": 274.0
+        }
+      ]
+    },
+    {
+      "from": 278.1,
+      "to": 295,
+      "items": [
+        {
+          "type": "text",
+          "size": "big",
+          "text": "Pour résumer",
+          "at": 278.2,
+          "out": 279.3,
+          "hide": true
+        },
+        {
+          "type": "list",
+          "style": "check",
+          "at": 279.4,
+          "items": [
+            {
+              "text": "Le modèle prédit, il ne vérifie pas",
+              "at": 279.5
+            },
+            {
+              "text": "L’application ajoute outils et mémoire",
+              "at": 283.5
+            },
+            {
+              "text": "Le contexte est limité",
+              "at": 286.6
+            },
+            {
+              "text": "Fluide ne veut pas dire vrai",
+              "at": 288.7
+            },
+            {
+              "text": "Vérifie ce qui compte",
+              "at": 291.2
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

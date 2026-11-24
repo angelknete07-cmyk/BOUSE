@@ -1,0 +1,318 @@
+{
+  "lesson": "ent-trouver-clients",
+  "version": "1.0.0",
+  "scenes": [
+    {
+      "from": 0,
+      "to": 3.0,
+      "items": [
+        { "type": "text", "size": "title", "text": "Trouver ses premiers clients", "at": 0.2 },
+        { "type": "text", "size": "small", "text": "Bienvenue", "at": 1.8 }
+      ]
+    },
+    {
+      "from": 3.0,
+      "to": 15.4,
+      "items": [
+        { "type": "row", "at": 3.0, "items": [
+          { "type": "icon", "icon": "rocket", "size": "l", "label": "un bon produit", "at": 3.0 },
+          { "type": "icon", "icon": "question", "size": "l", "label": "des clients ?", "at": 5.8 }
+        ] },
+        { "type": "dialog", "at": 6.4, "items": [
+          { "character": "toi", "name": "toi", "text": "« Les clients viendront. »", "at": 6.6, "side": "left" }
+        ] },
+        { "type": "text", "size": "mid", "text": "presque [[jamais|loss]] le cas", "at": 9.2 }
+      ]
+    },
+    {
+      "from": 15.4,
+      "to": 25.8,
+      "items": [
+        { "type": "steps", "at": 16.0, "items": [
+          { "text": "Choisir un canal", "icon": "link", "at": 16.4 },
+          { "text": "Un message clair", "icon": "chat", "at": 20.8 },
+          { "text": "Mesurer chaque étape", "icon": "chart-bar", "at": 22.6 }
+        ] }
+      ]
+    },
+    {
+      "from": 25.8,
+      "to": 37.2,
+      "items": [
+        { "type": "text", "size": "mid", "text": "« Si le produit est bon, les clients viendront »", "at": 27.8 },
+        { "type": "row", "at": 33.6, "items": [
+          { "type": "icon", "icon": "rocket", "label": "excellent produit", "at": 33.6 },
+          { "type": "icon", "icon": "eye", "tone": "muted", "label": "inconnu", "at": 35.0 },
+          { "type": "icon", "icon": "cross", "tone": "loss", "label": "pas de vente", "at": 36.0 }
+        ] }
+      ]
+    },
+    {
+      "from": 37.2,
+      "to": 49.0,
+      "items": [
+        { "type": "icons", "icon": "person", "count": 10, "step": 0.25, "at": 37.3 },
+        { "type": "chips", "at": 40.7, "items": [
+          { "text": "ton réseau", "at": 41.0 },
+          { "text": "une communauté", "at": 42.4 },
+          { "text": "des conversations", "at": 43.8 }
+        ] },
+        { "type": "row", "at": 45.5, "items": [
+          { "type": "icon", "icon": "bulb", "at": 45.5 },
+          { "type": "text", "size": "small", "text": "ils t’apprennent sur ton offre", "at": 46.0 }
+        ] }
+      ]
+    },
+    {
+      "from": 49.0,
+      "to": 55.6,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Le [[canal]] d’acquisition", "at": 50.8 },
+        { "type": "row", "at": 53.0, "items": [
+          { "type": "icon", "icon": "link", "at": 53.0 },
+          { "type": "text", "size": "small", "text": "le chemin par lequel on te découvre", "at": 53.4 }
+        ] }
+      ]
+    },
+    {
+      "from": 55.6,
+      "to": 69.3,
+      "items": [
+        { "type": "list", "style": "dot", "at": 55.6, "items": [
+          { "text": "Prospection directe : appel, message, visite", "at": 55.6 },
+          { "text": "Recommandation", "at": 61.3 },
+          { "text": "Contenu et référencement naturel", "at": 62.6 }
+        ] }
+      ]
+    },
+    {
+      "from": 69.3,
+      "to": 75.4,
+      "items": [
+        { "type": "cards", "at": 69.3, "items": [
+          { "icon": "users", "title": "Réseaux sociaux", "sub": "", "at": 69.3 },
+          { "icon": "megaphone", "title": "Publicité payante", "sub": "", "at": 70.5 },
+          { "icon": "handshake", "title": "Partenariats, salons", "sub": "places de marché", "at": 72.1 }
+        ] }
+      ]
+    },
+    {
+      "from": 75.4,
+      "to": 82.6,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Au début, [[ne te disperse pas]]", "at": 75.5 },
+        { "type": "compare", "at": 77.6,
+          "left": { "title": "1 ou 2 canaux", "icon": "check", "items": [
+            { "text": "bien travaillés", "at": 77.8 }
+          ] },
+          "right": { "title": "10 canaux", "icon": "cross", "items": [
+            { "text": "essayés à moitié", "at": 79.6 }
+          ] } }
+      ]
+    },
+    {
+      "from": 82.6,
+      "to": 94.0,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Va là où ton [[segment]] passe du temps", "at": 84.2 },
+        { "type": "row", "at": 86.8, "items": [
+          { "type": "icon", "icon": "users", "at": 86.8 },
+          { "type": "text", "size": "small", "text": "le groupe de personnes que tu vises", "at": 87.2 }
+        ] },
+        { "type": "row", "at": 89.7, "items": [
+          { "type": "icon", "icon": "person", "label": "directrice de crèche", "at": 89.7 },
+          { "type": "text", "size": "big", "text": "[[≠]]", "at": 91.0 },
+          { "type": "icon", "icon": "laptop", "label": "développeur", "at": 91.6 }
+        ] }
+      ]
+    },
+    {
+      "from": 94.0,
+      "to": 102.3,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Le [[positionnement]]", "at": 94.1 },
+        { "type": "list", "style": "num", "at": 96.1, "items": [
+          { "text": "Pour qui est ton offre", "at": 96.5 },
+          { "text": "Quel problème elle résout", "at": 98.0 },
+          { "text": "Ce qui la distingue des alternatives", "at": 99.8 }
+        ] }
+      ]
+    },
+    {
+      "from": 102.3,
+      "to": 113.8,
+      "items": [
+        { "type": "row", "at": 102.6, "items": [
+          { "type": "icon", "icon": "person", "label": "artisans du bâtiment", "at": 103.2 },
+          { "type": "icon", "icon": "hour", "tone": "loss", "label": "heures perdues en devis", "at": 106.0 },
+          { "type": "icon", "icon": "invoice", "tone": "gain", "label": "devis prêt en 10 minutes", "at": 108.3 }
+        ] },
+        { "type": "text", "size": "small", "text": "sans logiciel à installer", "at": 110.4 },
+        { "type": "actor", "character": "artisan", "name": "l’artisan", "at": 102.5 }
+      ]
+    },
+    {
+      "from": 113.8,
+      "to": 139.0,
+      "items": [
+        { "type": "text", "size": "mid", "text": "L’entonnoir de conversion", "at": 115.8 },
+        { "type": "icons", "icon": "person", "count": 8, "step": 0.3, "at": 120.4 },
+        { "type": "steps", "at": 123.8, "items": [
+          { "text": "Découvrent", "icon": "eye", "at": 123.8 },
+          { "text": "S’intéressent", "icon": "search", "at": 126.4 },
+          { "text": "Essaient", "icon": "calendar", "at": 130.6 },
+          { "text": "Achètent", "icon": "cart", "at": 134.5 },
+          { "text": "Reviennent", "icon": "heart", "at": 136.0 }
+        ] }
+      ]
+    },
+    {
+      "from": 139.0,
+      "to": 151.0,
+      "items": [
+        { "type": "text", "size": "mid", "text": "[[Taux de conversion]]", "at": 139.1 },
+        { "type": "chips", "at": 142.0, "items": [
+          { "text": "passent à l’étape suivante", "at": 142.2 },
+          { "text": "÷", "at": 144.4 },
+          { "text": "à l’étape actuelle", "at": 144.8 }
+        ] },
+        { "type": "row", "at": 147.8, "items": [
+          { "type": "icon", "icon": "search", "at": 147.8 },
+          { "type": "text", "size": "small", "text": "où le parcours casse", "at": 148.4 }
+        ] }
+      ]
+    },
+    {
+      "from": 151.0,
+      "to": 161.2,
+      "items": [
+        { "type": "compare", "at": 151.2,
+          "left": { "title": "Peu de demandes", "icon": "chat", "items": [
+            { "text": "message pas assez clair", "at": 153.6 }
+          ] },
+          "right": { "title": "Peu de signatures", "icon": "invoice", "items": [
+            { "text": "prix ou confiance", "at": 158.4 }
+          ] } }
+      ]
+    },
+    {
+      "from": 161.2,
+      "to": 175.7,
+      "items": [
+        { "type": "text", "size": "big", "text": "garder [[<]] trouver", "at": 161.3 },
+        { "type": "chips", "at": 165.8, "items": [
+          { "text": "client satisfait", "at": 165.9 },
+          { "text": "→", "at": 167.0 },
+          { "text": "rachète", "at": 167.2 },
+          { "text": "+", "at": 167.9 },
+          { "text": "recommande", "at": 168.0 }
+        ] },
+        { "type": "list", "style": "check", "at": 169.0, "items": [
+          { "text": "Un petit suivi", "at": 169.2 },
+          { "text": "Une demande d’avis", "at": 171.2 },
+          { "text": "Une offre pour racheter", "at": 173.0 }
+        ] }
+      ]
+    },
+    {
+      "from": 175.7,
+      "to": 200.2,
+      "items": [
+        { "type": "text", "size": "mid", "text": "La prospection est [[encadrée]]", "at": 179.8 },
+        { "type": "row", "at": 182.4, "items": [
+          { "type": "icon", "icon": "shield", "at": 182.4 },
+          { "type": "text", "size": "mid", "text": "[[RGPD]] · données personnelles", "at": 182.8 }
+        ] },
+        { "type": "row", "at": 187.6, "items": [
+          { "type": "icon", "icon": "phone", "at": 187.6 },
+          { "type": "text", "size": "mid", "text": "particuliers : [[Bloctel]]", "at": 188.2 }
+        ] },
+        { "type": "list", "style": "check", "at": 195.0, "items": [
+          { "text": "Seulement les données utiles", "at": 195.0 },
+          { "text": "Un moyen simple de dire non", "at": 197.4 }
+        ] }
+      ]
+    },
+    {
+      "from": 200.2,
+      "to": 210.4,
+      "items": [
+        { "type": "chips", "at": 200.4, "items": [
+          { "text": "abonnés", "at": 202.6, "tone": "muted" },
+          { "text": "j’aime", "at": 204.0, "tone": "muted" },
+          { "text": "visites", "at": 205.4, "tone": "muted" }
+        ] },
+        { "type": "row", "at": 206.0, "items": [
+          { "type": "icon", "icon": "invoice", "tone": "loss", "at": 206.0 },
+          { "type": "text", "size": "small", "text": "ne paient pas les factures", "at": 206.4 }
+        ] },
+        { "type": "text", "size": "mid", "text": "suis les étapes vers l’[[achat]]", "at": 207.6 }
+      ]
+    },
+    {
+      "from": 210.4,
+      "to": 225.5,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Exemple fictif · une photographe culinaire", "at": 210.5, "out": 215.0 },
+        { "type": "row", "at": 215.5, "items": [
+          { "type": "icon", "icon": "shop", "label": "restaurants indépendants", "at": 215.5 },
+          { "type": "icon", "icon": "cross", "tone": "loss", "label": "mauvaises photos", "at": 217.4 }
+        ] },
+        { "type": "chips", "at": 220.3, "items": [
+          { "text": "un seul canal", "at": 220.5 },
+          { "text": "visite directe", "at": 222.2, "tone": "accent" }
+        ] },
+        { "type": "actor", "character": "entrepreneuse", "name": "la photographe", "at": 215.6 }
+      ]
+    },
+    {
+      "from": 225.5,
+      "to": 231.2,
+      "items": [
+        { "type": "text", "size": "mid", "text": "« Des photos qui donnent faim, prêtes en [[48 heures]] »", "at": 225.6 }
+      ]
+    },
+    {
+      "from": 231.2,
+      "to": 239.0,
+      "items": [
+        { "type": "bars", "at": 232.3, "items": [
+          { "label": "visités", "value": 40, "at": 232.4 },
+          { "label": "rendez-vous", "value": 12, "at": 234.2 },
+          { "label": "devis", "value": 5, "at": 236.0 },
+          { "label": "signés", "value": 3, "at": 237.5, "tone": "gain" }
+        ] }
+      ]
+    },
+    {
+      "from": 239.0,
+      "to": 250.7,
+      "items": [
+        { "type": "text", "size": "mid", "text": "L’étape la plus faible ?", "at": 239.1 },
+        { "type": "chips", "at": 240.6, "items": [
+          { "text": "rendez-vous", "at": 240.7 },
+          { "text": "→", "at": 241.6 },
+          { "text": "devis", "at": 241.8, "tone": "loss" }
+        ] },
+        { "type": "row", "at": 242.7, "items": [
+          { "type": "icon", "icon": "sparkle", "tone": "accent", "at": 242.7 },
+          { "type": "text", "size": "small", "text": "un exemple fait sur le plat du restaurant", "at": 243.4 }
+        ] },
+        { "type": "actor", "character": "entrepreneuse", "name": "la photographe", "at": 239.2, "think": { "text": "!", "at": 242.8 } }
+      ]
+    },
+    {
+      "from": 250.7,
+      "to": 262.8,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Les clients ne viennent pas [[seuls]]", "at": 251.0 },
+        { "type": "chips", "at": 253.4, "items": [
+          { "text": "1 ou 2 canaux", "at": 253.8 },
+          { "text": "positionnement clair", "at": 256.0 },
+          { "text": "entonnoir mesuré", "at": 258.2 }
+        ] },
+        { "type": "text", "size": "small", "text": "À bientôt", "at": 260.8 }
+      ]
+    }
+  ]
+}

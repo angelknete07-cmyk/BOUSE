@@ -1,0 +1,208 @@
+{
+  "lesson": "ia-cadre-legal",
+  "version": "1.0.0",
+  "scenes": [
+    {
+      "from": 0,
+      "to": 24.1,
+      "items": [
+        { "type": "text", "size": "title", "text": "Le cadre légal de l’IA en Europe", "at": 0.2 },
+        { "type": "row", "at": 4.3, "items": [
+          { "type": "icon", "icon": "globe", "size": "l", "label": "une loi européenne", "at": 4.4 },
+          { "type": "icon", "icon": "layers", "size": "l", "label": "niveaux de risque", "at": 7.9 }
+        ] },
+        { "type": "chips", "at": 15.5, "items": [
+          { "text": "interdit", "at": 17.2, "tone": "loss" },
+          { "text": "encadré", "at": 18.6 },
+          { "text": "libre", "at": 19.8, "tone": "gain" },
+          { "text": "PME", "at": 21.2, "tone": "accent" }
+        ] },
+        { "type": "actor", "character": "entrepreneuse", "name": "toi", "at": 10.4, "think": { "text": "?", "at": 11.0 } }
+      ]
+    },
+    {
+      "from": 24.1,
+      "to": 49.9,
+      "items": [
+        { "type": "timeline", "at": 26.1, "points": [
+          { "label": "Août 2024", "sub": "entrée en vigueur", "pos": 10, "at": 28.4 },
+          { "label": "Ensuite", "sub": "application progressive", "pos": 88, "at": 33.4 }
+        ] },
+        { "type": "cards", "at": 35.2, "items": [
+          { "icon": "laptop", "title": "Développer", "at": 35.4 },
+          { "icon": "briefcase", "title": "Déployer dans son activité", "at": 37.4, "accent": true }
+        ] },
+        { "type": "chips", "at": 40.8, "items": [
+          { "text": "interdit ?", "at": 42.4, "tone": "loss" },
+          { "text": "haut risque ?", "at": 44.0 },
+          { "text": "transparence ?", "at": 45.6 },
+          { "text": "libre ?", "at": 47.4, "tone": "gain" }
+        ] }
+      ]
+    },
+    {
+      "from": 49.9,
+      "to": 73.4,
+      "items": [
+        { "type": "text", "size": "big", "text": "1 · [[Interdit]]", "at": 55.2 },
+        { "type": "list", "style": "cross", "at": 60.8, "items": [
+          { "text": "Notation sociale des personnes", "at": 60.8 },
+          { "text": "Manipulation des vulnérabilités", "at": 63.8 },
+          { "text": "Certaines identifications biométriques", "at": 66.7 },
+          { "text": "Émotions reconnues au travail et à l’école", "at": 69.6 }
+        ] }
+      ]
+    },
+    {
+      "from": 73.4,
+      "to": 95.7,
+      "items": [
+        { "type": "text", "size": "big", "text": "2 · [[Haut risque]]", "at": 75.4 },
+        { "type": "chips", "at": 75.9, "items": [
+          { "text": "recrutement", "at": 76.2 },
+          { "text": "salariés", "at": 78.6 },
+          { "text": "crédit", "at": 80.0 },
+          { "text": "éducation", "at": 81.0 },
+          { "text": "santé", "at": 82.0 },
+          { "text": "justice", "at": 84.4 }
+        ] },
+        { "type": "list", "style": "check", "at": 87.0, "items": [
+          { "text": "Gestion des risques, données de qualité", "at": 87.2 },
+          { "text": "Documentation", "at": 90.0 },
+          { "text": "Supervision humaine", "at": 91.4 },
+          { "text": "Contrôle de conformité", "at": 93.2 }
+        ] }
+      ]
+    },
+    {
+      "from": 95.7,
+      "to": 111.6,
+      "items": [
+        { "type": "text", "size": "big", "text": "3 · [[Transparence]]", "at": 95.8 },
+        { "type": "cards", "at": 98.2, "items": [
+          { "icon": "robot", "title": "Agent conversationnel", "sub": "dire qu’on parle à une IA", "at": 98.3 },
+          { "icon": "sparkle", "title": "Hypertrucages", "sub": "signaler les contenus générés", "at": 103.4 },
+          { "icon": "eye", "title": "Contenus synthétiques", "sub": "marquage détectable", "at": 107.8 }
+        ] }
+      ]
+    },
+    {
+      "from": 111.6,
+      "to": 122.6,
+      "items": [
+        { "type": "text", "size": "big", "text": "4 · [[Risque minimal]]", "at": 111.7 },
+        { "type": "chips", "at": 114.5, "items": [
+          { "text": "filtres", "at": 115.2 },
+          { "text": "aide à la rédaction", "at": 117.0 }
+        ] },
+        { "type": "row", "at": 119.0, "items": [
+          { "type": "icon", "icon": "check", "tone": "gain", "at": 119.1 },
+          { "type": "text", "size": "small", "text": "Pas d’obligation particulière", "at": 119.4 }
+        ] }
+      ]
+    },
+    {
+      "from": 122.6,
+      "to": 168.1,
+      "items": [
+        { "type": "list", "style": "dot", "at": 125.8, "items": [
+          { "text": "Févr. 2025 : interdictions et maîtrise de l’IA", "at": 125.8 },
+          { "text": "Août 2025 : modèles à usage général", "at": 134.0 },
+          { "text": "Août 2026 : transparence", "at": 138.9 },
+          { "text": "2 déc. 2027 : haut risque (annexe 3)", "at": 151.2 },
+          { "text": "2 août 2028 : IA des produits réglementés", "at": 159.0 }
+        ] },
+        { "type": "text", "size": "small", "text": "« Omnibus numérique » : haut risque [[reporté]]", "at": 143.3 },
+        { "type": "text", "size": "small", "text": "RGPD et droit d’auteur [[continuent]]", "at": 163.6 }
+      ]
+    },
+    {
+      "from": 168.1,
+      "to": 195.1,
+      "items": [
+        { "type": "chips", "at": 171.8, "items": [
+          { "text": "trier des candidatures", "at": 171.9 },
+          { "text": "→", "at": 175.0 },
+          { "text": "haut risque", "at": 175.4, "tone": "loss" }
+        ] },
+        { "type": "list", "style": "check", "at": 179.1, "items": [
+          { "text": "Supervision humaine", "at": 179.3 },
+          { "text": "Information des personnes", "at": 181.2 },
+          { "text": "Documentation", "at": 183.4 }
+        ] },
+        { "type": "text", "size": "small", "text": "Sanctions [[élevées|loss]]", "at": 186.1 },
+        { "type": "chips", "at": 188.1, "items": [
+          { "text": "Commission européenne", "at": 189.2 },
+          { "text": "CNIL", "at": 191.0 },
+          { "text": "un juriste", "at": 192.2 }
+        ] }
+      ]
+    },
+    {
+      "from": 195.1,
+      "to": 228.9,
+      "items": [
+        { "type": "cards", "at": 203.2, "items": [
+          { "icon": "pencil", "title": "Assistant de rédaction", "sub": "risque minimal", "at": 203.3, "subAt": 205.7 },
+          { "icon": "chat", "title": "Agent sur le site", "sub": "dire qu’on est une IA", "at": 209.8, "subAt": 212.2 },
+          { "icon": "users", "title": "Tri des candidatures", "sub": "haut risque", "at": 215.4, "subAt": 218.6, "accent": true }
+        ] },
+        { "type": "text", "size": "small", "text": "Tri [[humain]] gardé, l’outil résume les dossiers", "at": 223.5 },
+        { "type": "actor", "character": "entrepreneuse", "name": "la PME", "at": 200.6 }
+      ]
+    },
+    {
+      "from": 228.9,
+      "to": 235.5,
+      "items": [
+        { "type": "chart", "at": 229.0, "lines": [
+          { "label": "encadrement", "values": [5, 10, 18, 30, 48, 70], "at": 229.2, "until": 234.0, "tone": "accent" }
+        ] },
+        { "type": "text", "size": "small", "text": "Plus d’impact sur une vie, [[plus encadré]]", "at": 230.4 }
+      ]
+    },
+    {
+      "from": 235.5,
+      "to": 255.8,
+      "items": [
+        { "type": "cards", "at": 235.5, "items": [
+          { "icon": "pencil", "title": "Rédiger un texte", "sub": "peu d’impact, presque libre", "at": 235.6 },
+          { "icon": "robot", "title": "Robot de conversation", "sub": "dire qu’il est une machine", "at": 239.9 },
+          { "icon": "scale", "title": "Crédit ou candidats", "sub": "influence l’avenir de quelqu’un", "at": 243.5, "accent": true }
+        ] },
+        { "type": "chips", "at": 249.7, "items": [
+          { "text": "documentation", "at": 250.8 },
+          { "text": "supervision humaine", "at": 252.0 },
+          { "text": "transparence", "at": 253.8 }
+        ] }
+      ]
+    },
+    {
+      "from": 255.8,
+      "to": 273.0,
+      "items": [
+        { "type": "list", "style": "num", "at": 255.8, "items": [
+          { "text": "Qui sera concerné par ses résultats ?", "at": 255.8 },
+          { "text": "Quelle conséquence d’une erreur pour cette personne ?", "at": 261.5 }
+        ] },
+        { "type": "text", "size": "mid", "text": "Réponse grave : [[haut risque]] probable", "at": 264.7 },
+        { "type": "text", "size": "small", "text": "Dans le doute : conseil [[avant]], pas sanction après", "at": 268.3 }
+      ]
+    },
+    {
+      "from": 273.0,
+      "to": 290,
+      "items": [
+        { "type": "text", "size": "big", "text": "Pour résumer", "at": 273.1, "out": 274.1, "hide": true },
+        { "type": "chips", "at": 274.2, "items": [
+          { "text": "interdit", "at": 274.4, "tone": "loss" },
+          { "text": "haut risque", "at": 275.8 },
+          { "text": "transparence", "at": 277.4 },
+          { "text": "risque minimal", "at": 278.6, "tone": "gain" }
+        ] },
+        { "type": "text", "size": "small", "text": "Recrutement, évaluation : [[haut risque]]", "at": 280.2 },
+        { "type": "text", "size": "small", "text": "Une personne parle à une IA : [[informe-la]]", "at": 283.8 }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,744 @@
+{
+ "lesson": "fp-logement",
+ "version": "1.0.0",
+ "scenes": [
+  {
+   "from": 0,
+   "to": 22.1,
+   "items": [
+    {
+     "type": "text",
+     "size": "title",
+     "text": "Louer ou acheter son logement",
+     "at": 0.2
+    },
+    {
+     "type": "row",
+     "at": 3.8,
+     "items": [
+      {
+       "type": "icon",
+       "icon": "key",
+       "size": "l",
+       "label": "louer",
+       "at": 3.8,
+       "tone": "loss"
+      },
+      {
+       "type": "icon",
+       "icon": "coins",
+       "size": "l",
+       "at": 5.4,
+       "tone": "muted"
+      }
+     ]
+    },
+    {
+     "type": "text",
+     "size": "mid",
+     "text": "Pas toujours [[✓|gain]]",
+     "at": 9.4
+    },
+    {
+     "type": "chips",
+     "at": 13.5,
+     "items": [
+      {
+       "text": "Coût réel",
+       "at": 13.6
+      },
+      {
+       "text": "Durée",
+       "at": 16.9,
+       "tone": "accent"
+      },
+      {
+       "text": "Capacité d’emprunt",
+       "at": 18.8
+      }
+     ]
+    },
+    {
+     "type": "actor",
+     "character": "toi",
+     "name": "toi",
+     "at": 3.9,
+     "think": {
+      "text": "?",
+      "at": 8.4
+     }
+    }
+   ]
+  },
+  {
+   "from": 22.1,
+   "to": 39.8,
+   "items": [
+    {
+     "type": "text",
+     "size": "big",
+     "text": "Pourquoi apprendre ça ?",
+     "at": 22.2,
+     "out": 23.7,
+     "hide": true
+    },
+    {
+     "type": "icon",
+     "icon": "house",
+     "size": "l",
+     "label": "la plus grosse décision d’une vie",
+     "at": 23.9
+    },
+    {
+     "type": "text",
+     "size": "mid",
+     "text": "Tous les coûts, pas que [[la mensualité]]",
+     "at": 28.2
+    },
+    {
+     "type": "row",
+     "at": 33.8,
+     "items": [
+      {
+       "type": "icon",
+       "icon": "scale",
+       "size": "m",
+       "label": "pas de réponse universelle",
+       "at": 33.8
+      },
+      {
+       "type": "icon",
+       "icon": "clock",
+       "size": "m",
+       "label": "durée de détention",
+       "at": 36.4,
+       "tone": "accent"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "from": 39.8,
+   "to": 64.6,
+   "items": [
+    {
+     "type": "text",
+     "size": "big",
+     "text": "Le coût complet d’un achat",
+     "at": 39.9,
+     "out": 42.2,
+     "hide": true
+    },
+    {
+     "type": "row",
+     "at": 44.9,
+     "items": [
+      {
+       "type": "icon",
+       "icon": "house",
+       "size": "l",
+       "label": "prix du bien",
+       "at": 44.9
+      },
+      {
+       "type": "text",
+       "size": "big",
+       "text": "[[+]]",
+       "at": 47.5
+      },
+      {
+       "type": "icon",
+       "icon": "document",
+       "size": "l",
+       "label": "taxes + notaire",
+       "at": 47.6
+      }
+     ]
+    },
+    {
+     "type": "text",
+     "size": "big",
+     "text": "[[7 à 8 %]] du prix dans l’ancien",
+     "at": 53.9
+    },
+    {
+     "type": "chips",
+     "at": 59.7,
+     "items": [
+      {
+       "text": "garantie",
+       "at": 59.7,
+       "tone": "muted"
+      },
+      {
+       "text": "dossier du crédit",
+       "at": 61.0,
+       "tone": "muted"
+      },
+      {
+       "text": "travaux",
+       "at": 63.0,
+       "tone": "muted"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "from": 64.6,
+   "to": 88.5,
+   "items": [
+    {
+     "type": "chips",
+     "at": 64.8,
+     "items": [
+      {
+       "text": "intérêts",
+       "at": 65.8,
+       "tone": "loss"
+      },
+      {
+       "text": "assurance",
+       "at": 67.3,
+       "tone": "loss"
+      },
+      {
+       "text": "taxe foncière",
+       "at": 68.4,
+       "tone": "loss"
+      },
+      {
+       "text": "copropriété",
+       "at": 70.0,
+       "tone": "loss"
+      },
+      {
+       "text": "entretien",
+       "at": 71.2,
+       "tone": "loss"
+      },
+      {
+       "text": "gros travaux",
+       "at": 72.4,
+       "tone": "loss"
+      }
+     ]
+    },
+    {
+     "type": "text",
+     "size": "mid",
+     "text": "Capital remboursé : [[pas un coût|gain]]",
+     "at": 74.3
+    },
+    {
+     "type": "row",
+     "at": 80.2,
+     "items": [
+      {
+       "type": "icon",
+       "icon": "piggy",
+       "size": "l",
+       "label": "épargne forcée",
+       "at": 80.2,
+       "tone": "gain"
+      },
+      {
+       "type": "icon",
+       "icon": "question",
+       "size": "m",
+       "label": "frais et prix de revente",
+       "at": 84.4,
+       "tone": "muted"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "from": 88.5,
+   "to": 99.7,
+   "items": [
+    {
+     "type": "text",
+     "size": "mid",
+     "text": "L’apport a un [[coût d’opportunité]]",
+     "at": 88.6
+    },
+    {
+     "type": "compare",
+     "at": 94.7,
+     "left": {
+      "title": "Dans le bien",
+      "icon": "house",
+      "items": [
+       {
+        "text": "ton apport",
+        "at": 94.8
+       }
+      ]
+     },
+     "right": {
+      "title": "Placé ailleurs",
+      "icon": "plant",
+      "items": [
+       {
+        "text": "il aurait rapporté",
+        "at": 97.0
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "from": 99.7,
+   "to": 129.6,
+   "items": [
+    {
+     "type": "text",
+     "size": "big",
+     "text": "Capacité d’emprunt",
+     "at": 99.8,
+     "out": 102.5,
+     "hide": true
+    },
+    {
+     "type": "gauge",
+     "label": "Taux d’effort maximum",
+     "value": 35,
+     "at": 110.4,
+     "until": 114.5
+    },
+    {
+     "type": "text",
+     "size": "small",
+     "text": "part des revenus pour rembourser",
+     "at": 115.4
+    },
+    {
+     "type": "stats",
+     "at": 119.4,
+     "items": [
+      {
+       "label": "Durée maximale",
+       "value": 25,
+       "unit": " ans",
+       "at": 119.4,
+       "accent": true
+      }
+     ]
+    },
+    {
+     "type": "chips",
+     "at": 124.3,
+     "items": [
+      {
+       "text": "apport",
+       "at": 124.4
+      },
+      {
+       "text": "revenus stables",
+       "at": 125.5
+      },
+      {
+       "text": "reste à vivre",
+       "at": 127.4
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "from": 129.6,
+   "to": 146.3,
+   "items": [
+    {
+     "type": "compare",
+     "at": 133.9,
+     "left": {
+      "title": "Propriétaire",
+      "icon": "house",
+      "items": [
+       {
+        "text": "intérêts, assurance",
+        "at": 134.2
+       },
+       {
+        "text": "taxe foncière, charges",
+        "at": 137.2
+       },
+       {
+        "text": "entretien",
+        "at": 139.8
+       },
+       {
+        "text": "coût d’opportunité de l’apport",
+        "at": 141.4
+       }
+      ]
+     },
+     "right": {
+      "title": "Locataire",
+      "icon": "key",
+      "items": [
+       {
+        "text": "le loyer",
+        "at": 144.8
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "from": 146.3,
+   "to": 155.4,
+   "items": [
+    {
+     "type": "timeline",
+     "at": 146.4,
+     "points": [
+      {
+       "label": "Achat",
+       "sub": "frais payés une fois",
+       "pos": 6,
+       "at": 146.4
+      },
+      {
+       "label": "Revente",
+       "sub": "2 ou 3 ans",
+       "pos": 94,
+       "at": 151.6
+      }
+     ],
+     "span": {
+      "label": "frais amortis",
+      "from": 6,
+      "to": 94,
+      "at": 148.4
+     }
+    },
+    {
+     "type": "text",
+     "size": "mid",
+     "text": "Revendre vite : [[rarement rentable|loss]]",
+     "at": 152.0
+    }
+   ]
+  },
+  {
+   "from": 155.4,
+   "to": 169.1,
+   "items": [
+    {
+     "type": "cards",
+     "at": 155.5,
+     "items": [
+      {
+       "icon": "gift",
+       "title": "Prêt à taux zéro",
+       "sub": "ressources et zone",
+       "at": 155.5,
+       "subAt": 157.6,
+       "accent": true
+      },
+      {
+       "icon": "briefcase",
+       "title": "Prêts d’employeur",
+       "sub": "selon ta situation",
+       "at": 160.0
+      }
+     ]
+    },
+    {
+     "type": "row",
+     "at": 162.7,
+     "items": [
+      {
+       "type": "icon",
+       "icon": "search",
+       "size": "m",
+       "label": "ANIL : vérifier les conditions",
+       "at": 162.7
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "from": 169.1,
+   "to": 192.7,
+   "items": [
+    {
+     "type": "text",
+     "size": "big",
+     "text": "Le point de vigilance",
+     "at": 169.2,
+     "out": 171.0,
+     "hide": true
+    },
+    {
+     "type": "compare",
+     "at": 172.9,
+     "left": {
+      "title": "Mensualité",
+      "icon": "wallet",
+      "items": [
+       {
+        "text": "= ton loyer actuel",
+        "at": 173.0
+       }
+      ]
+     },
+     "right": {
+      "title": "Coût réel [[≠]]",
+      "icon": "alert",
+      "items": [
+       {
+        "text": "taxe foncière",
+        "at": 177.6
+       },
+       {
+        "text": "charges, entretien",
+        "at": 179.0
+       },
+       {
+        "text": "frais d’achat",
+        "at": 180.6
+       }
+      ]
+     }
+    },
+    {
+     "type": "row",
+     "at": 182.7,
+     "items": [
+      {
+       "type": "icon",
+       "icon": "umbrella",
+       "size": "l",
+       "label": "épargne de précaution",
+       "at": 182.7,
+       "tone": "accent"
+      },
+      {
+       "type": "icon",
+       "icon": "coins",
+       "size": "m",
+       "label": "plusieurs milliers d’euros d’imprévus",
+       "at": 185.5,
+       "tone": "loss"
+      }
+     ]
+    },
+    {
+     "type": "text",
+     "size": "small",
+     "text": "L’apport ne vide pas la réserve",
+     "at": 189.3
+    }
+   ]
+  },
+  {
+   "from": 192.7,
+   "to": 206.2,
+   "items": [
+    {
+     "type": "text",
+     "size": "mid",
+     "text": "Inès hésite",
+     "at": 192.8
+    },
+    {
+     "type": "row",
+     "at": 197.7,
+     "items": [
+      {
+       "type": "icon",
+       "icon": "key",
+       "size": "l",
+       "label": "loue · 900 € par mois",
+       "at": 197.7
+      },
+      {
+       "type": "icon",
+       "icon": "house",
+       "size": "l",
+       "label": "acheter · 220 000 €",
+       "at": 200.8,
+       "tone": "accent"
+      }
+     ]
+    },
+    {
+     "type": "counter",
+     "label": "Frais d’acquisition",
+     "from": 0,
+     "to": 16000,
+     "at": 203.2,
+     "until": 205.4,
+     "tone": "loss"
+    },
+    {
+     "type": "actor",
+     "character": "toi",
+     "name": "Inès",
+     "at": 197.8
+    }
+   ]
+  },
+  {
+   "from": 206.2,
+   "to": 220.8,
+   "items": [
+    {
+     "type": "text",
+     "size": "small",
+     "text": "Première année, coûts non récupérables",
+     "at": 206.3
+    },
+    {
+     "type": "waterfall",
+     "at": 206.4,
+     "rows": [
+      {
+       "label": "intérêts",
+       "value": 6000,
+       "kind": "start",
+       "at": 206.4
+      },
+      {
+       "label": "assurance",
+       "value": 600,
+       "kind": "plus",
+       "at": 209.2
+      },
+      {
+       "label": "taxe foncière",
+       "value": 1100,
+       "kind": "plus",
+       "at": 210.4
+      },
+      {
+       "label": "charges",
+       "value": 1200,
+       "kind": "plus",
+       "at": 212.2
+      },
+      {
+       "label": "entretien",
+       "value": 1500,
+       "kind": "plus",
+       "at": 214.0
+      },
+      {
+       "label": "total",
+       "value": 10400,
+       "kind": "total",
+       "at": 217.1,
+       "tone": "loss"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "from": 220.8,
+   "to": 235.8,
+   "items": [
+    {
+     "type": "bars",
+     "at": 220.9,
+     "unit": " €",
+     "items": [
+      {
+       "label": "Coûts du propriétaire",
+       "value": 10400,
+       "at": 220.9,
+       "tone": "loss"
+      },
+      {
+       "label": "Loyer annuel",
+       "value": 10800,
+       "at": 222.4,
+       "tone": "accent"
+      }
+     ]
+    },
+    {
+     "type": "text",
+     "size": "mid",
+     "text": "Écart [[faible]]",
+     "at": 224.3
+    },
+    {
+     "type": "row",
+     "at": 229.9,
+     "items": [
+      {
+       "type": "icon",
+       "icon": "truck",
+       "size": "m",
+       "label": "déménage dans 3 ans",
+       "at": 229.9
+      },
+      {
+       "type": "icon",
+       "icon": "key",
+       "size": "m",
+       "label": "louer ✓",
+       "at": 233.2,
+       "tone": "gain"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "from": 235.8,
+   "to": 248,
+   "items": [
+    {
+     "type": "text",
+     "size": "big",
+     "text": "Pour résumer",
+     "at": 235.9,
+     "out": 237.0,
+     "hide": true
+    },
+    {
+     "type": "cards",
+     "at": 237.3,
+     "items": [
+      {
+       "icon": "calculator",
+       "title": "Tous les coûts",
+       "sub": "pas que la mensualité",
+       "at": 237.3
+      },
+      {
+       "icon": "clock",
+       "title": "Durée de détention",
+       "sub": "change tout",
+       "at": 240.3,
+       "accent": true
+      },
+      {
+       "icon": "umbrella",
+       "title": "Une réserve",
+       "sub": "après l’achat",
+       "at": 242.7
+      }
+     ]
+    },
+    {
+     "type": "text",
+     "size": "small",
+     "text": "À bientôt",
+     "at": 245.3
+    }
+   ]
+  }
+ ]
+}

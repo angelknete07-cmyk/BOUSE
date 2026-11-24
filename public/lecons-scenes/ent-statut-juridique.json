@@ -1,0 +1,370 @@
+{
+  "lesson": "ent-statut-juridique",
+  "version": "1.0.0",
+  "scenes": [
+    {
+      "from": 0,
+      "to": 7.4,
+      "items": [
+        { "type": "text", "size": "title", "text": "Choisir son statut : EI, micro, EURL, SASU…", "at": 0.2 },
+        { "type": "text", "size": "small", "text": "Bienvenue", "at": 6.6 }
+      ]
+    },
+    {
+      "from": 7.4,
+      "to": 23.2,
+      "items": [
+        { "type": "row", "at": 7.4, "items": [
+          { "type": "icon", "icon": "rocket", "size": "l", "label": "lancer une activité", "at": 7.6 }
+        ] },
+        { "type": "chips", "at": 10.4, "items": [
+          { "text": "EI", "at": 10.6 },
+          { "text": "micro", "at": 12.0 },
+          { "text": "EURL", "at": 13.4 },
+          { "text": "SASU", "at": 15.0 },
+          { "text": "SAS", "at": 16.6 }
+        ] },
+        { "type": "icon", "icon": "question", "tone": "accent", "at": 19.4 },
+        { "type": "actor", "character": "toi", "name": "toi", "at": 7.8, "think": { "text": "?", "at": 19.6 } }
+      ]
+    },
+    {
+      "from": 23.2,
+      "to": 31.3,
+      "items": [
+        { "type": "steps", "at": 23.6, "items": [
+          { "text": "Les grandes familles", "icon": "layers", "at": 24.0 },
+          { "text": "Ce qui change vraiment", "icon": "scale", "at": 25.6 },
+          { "text": "Choisir selon ton projet", "icon": "target", "at": 27.6 }
+        ] }
+      ]
+    },
+    {
+      "from": 31.3,
+      "to": 49.6,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Le statut décide de [[quatre choses]]", "at": 34.2 },
+        { "type": "cards", "at": 37.2, "items": [
+          { "icon": "alert", "title": "Dettes", "sub": "qui en répond", "at": 37.4 },
+          { "icon": "shield", "title": "Protection", "sub": "maladie, retraite", "at": 39.5 },
+          { "icon": "percent", "title": "Impôts", "sub": "sur les bénéfices", "at": 44.6 },
+          { "icon": "users", "title": "Associés", "sub": "à plusieurs", "at": 46.9 }
+        ] }
+      ]
+    },
+    {
+      "from": 49.6,
+      "to": 65.7,
+      "items": [
+        { "type": "text", "size": "big", "text": "pas de [[meilleur]] statut absolu", "at": 49.6 },
+        { "type": "row", "at": 52.3, "items": [
+          { "type": "icon", "icon": "target", "at": 52.3 },
+          { "type": "text", "size": "small", "text": "adapté à un projet, à un moment", "at": 52.7 }
+        ] },
+        { "type": "row", "at": 56.3, "items": [
+          { "type": "icon", "icon": "check", "tone": "gain", "at": 56.3 },
+          { "type": "text", "size": "small", "text": "tu peux en changer plus tard", "at": 56.7 }
+        ] },
+        { "type": "steps", "at": 59.0, "items": [
+          { "text": "Commencer simple", "icon": "plant", "at": 59.2 },
+          { "text": "Créer une société", "icon": "building", "at": 62.6 }
+        ] }
+      ]
+    },
+    {
+      "from": 65.7,
+      "to": 71.9,
+      "items": [
+        { "type": "cards", "at": 67.3, "items": [
+          { "icon": "person", "title": "Entreprise individuelle", "sub": "", "at": 67.5 },
+          { "icon": "building", "title": "Sociétés", "sub": "", "at": 69.6 }
+        ] }
+      ]
+    },
+    {
+      "from": 71.9,
+      "to": 89.5,
+      "items": [
+        { "type": "text", "size": "mid", "text": "[[EI]] · entreprise individuelle", "at": 72.0 },
+        { "type": "row", "at": 75.8, "items": [
+          { "type": "icon", "icon": "person", "label": "en son nom propre", "at": 75.8 },
+          { "type": "icon", "icon": "cross", "tone": "muted", "label": "pas de personne morale", "at": 78.4 }
+        ] },
+        { "type": "row", "at": 83.5, "items": [
+          { "type": "icon", "icon": "house", "label": "patrimoine perso", "at": 83.8 },
+          { "type": "text", "size": "big", "text": "[[≠]]", "at": 85.4 },
+          { "type": "icon", "icon": "briefcase", "label": "patrimoine pro", "at": 86.0 }
+        ] },
+        { "type": "text", "size": "small", "text": "séparés depuis mai 2022", "at": 87.0 }
+      ]
+    },
+    {
+      "from": 89.5,
+      "to": 103.8,
+      "items": [
+        { "type": "row", "at": 89.6, "items": [
+          { "type": "icon", "icon": "invoice", "tone": "loss", "label": "créancier pro", "at": 89.6 },
+          { "type": "icon", "icon": "briefcase", "label": "biens de l’activité seulement", "at": 92.4 },
+          { "type": "icon", "icon": "shield", "tone": "gain", "label": "le reste protégé", "at": 94.4 }
+        ] },
+        { "type": "text", "size": "small", "text": "sauf exceptions", "at": 96.0 },
+        { "type": "chips", "at": 97.7, "items": [
+          { "text": "impôt sur le revenu", "at": 97.9 },
+          { "text": "ou option", "at": 100.0, "tone": "muted" },
+          { "text": "impôt sur les sociétés", "at": 101.2 }
+        ] }
+      ]
+    },
+    {
+      "from": 103.8,
+      "to": 121.8,
+      "items": [
+        { "type": "text", "size": "big", "text": "micro [[≠]] forme juridique", "at": 104.1 },
+        { "type": "row", "at": 107.7, "items": [
+          { "type": "icon", "icon": "document", "at": 107.7 },
+          { "type": "text", "size": "small", "text": "un régime simplifié, pour l’EI", "at": 108.2 }
+        ] },
+        { "type": "chips", "at": 113.7, "items": [
+          { "text": "cotisations", "at": 113.8 },
+          { "text": "=", "at": 115.0 },
+          { "text": "% du CA encaissé", "at": 115.4 }
+        ] },
+        { "type": "list", "style": "check", "at": 117.0, "items": [
+          { "text": "Comptabilité allégée", "at": 117.1, "style": "check" },
+          { "text": "Charges réelles non déductibles", "at": 119.0, "style": "cross" }
+        ] }
+      ]
+    },
+    {
+      "from": 121.8,
+      "to": 130.4,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Les [[sociétés]]", "at": 121.9 },
+        { "type": "row", "at": 123.7, "items": [
+          { "type": "icon", "icon": "building", "label": "personne morale distincte de toi", "at": 123.8 },
+          { "type": "icon", "icon": "contract", "label": "statuts : règlement écrit", "at": 127.4 }
+        ] }
+      ]
+    },
+    {
+      "from": 130.4,
+      "to": 147.6,
+      "items": [
+        { "type": "compare", "at": 130.6,
+          "left": { "title": "Seul", "icon": "person", "items": [
+            { "text": "EURL · un seul associé", "at": 132.4 },
+            { "text": "SASU · un seul associé", "at": 137.6 }
+          ] },
+          "right": { "title": "À plusieurs", "icon": "users", "items": [
+            { "text": "SARL", "at": 143.4 },
+            { "text": "SAS", "at": 145.4 }
+          ] } }
+      ]
+    },
+    {
+      "from": 147.6,
+      "to": 161.1,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Responsabilité limitée aux [[apports]]", "at": 147.7 },
+        { "type": "row", "at": 154.2, "items": [
+          { "type": "icon", "icon": "coin", "at": 154.2 },
+          { "type": "text", "size": "small", "text": "capital minimum libre : 1 € possible", "at": 154.6 }
+        ] },
+        { "type": "row", "at": 157.6, "items": [
+          { "type": "icon", "icon": "alert", "tone": "loss", "at": 157.6 },
+          { "type": "text", "size": "small", "text": "capital trop faible : peu de confiance", "at": 158.0 }
+        ] }
+      ]
+    },
+    {
+      "from": 161.1,
+      "to": 169.1,
+      "items": [
+        { "type": "steps", "at": 163.0, "items": [
+          { "text": "Protection sociale", "icon": "shield", "at": 165.9 },
+          { "text": "Impôts", "icon": "percent", "at": 166.6 },
+          { "text": "Rémunération", "icon": "euro", "at": 167.3 }
+        ] }
+      ]
+    },
+    {
+      "from": 169.1,
+      "to": 199.0,
+      "items": [
+        { "type": "compare", "at": 170.0,
+          "left": { "title": "Gérant EURL ou SARL : TNS", "icon": "briefcase", "items": [
+            { "text": "cotisations plus faibles", "at": 178.6 },
+            { "text": "protection plus réduite", "at": 181.6 }
+          ] },
+          "right": { "title": "Président SASU ou SAS", "icon": "person", "items": [
+            { "text": "assimilé salarié, sans chômage", "at": 184.0 },
+            { "text": "cotise plus cher", "at": 193.2 },
+            { "text": "meilleure couverture, retraite", "at": 195.6 }
+          ] } }
+      ]
+    },
+    {
+      "from": 199.0,
+      "to": 225.4,
+      "items": [
+        { "type": "compare", "at": 201.2,
+          "left": { "title": "Impôt sur le revenu", "icon": "person", "items": [
+            { "text": "bénéfice ajouté à tes revenus", "at": 201.4 },
+            { "text": "retiré ou non", "at": 205.2 }
+          ] },
+          "right": { "title": "Impôt sur les sociétés", "icon": "building", "items": [
+            { "text": "la société paie sur son bénéfice", "at": 206.9 }
+          ] } },
+        { "type": "chips", "at": 211.4, "items": [
+          { "text": "ta rémunération", "at": 211.6 },
+          { "text": "+", "at": 213.2 },
+          { "text": "dividendes", "at": 213.8 }
+        ] },
+        { "type": "text", "size": "small", "text": "taux réduit sur une première tranche : montants à vérifier", "at": 218.8 }
+      ]
+    },
+    {
+      "from": 225.4,
+      "to": 252.2,
+      "items": [
+        { "type": "compare", "at": 227.9,
+          "left": { "title": "En SAS", "icon": "rocket", "items": [
+            { "text": "dividendes sans cotisations", "at": 228.0 },
+            { "text": "mais prélèvements et impôt", "at": 231.4 },
+            { "text": "petit salaire + dividendes", "at": 234.9 },
+            { "text": "protection moindre", "at": 237.8 }
+          ] },
+          "right": { "title": "EURL ou SARL", "icon": "briefcase", "items": [
+            { "text": "dividendes du gérant majoritaire", "at": 240.4 },
+            { "text": "en partie soumis aux cotisations", "at": 244.2 }
+          ] } },
+        { "type": "text", "size": "small", "text": "cas par cas, avec un expert-comptable", "at": 248.0 },
+        { "type": "actor", "character": "conseiller", "name": "expert-comptable", "at": 247.9, "think": { "text": "!", "at": 249.0 } }
+      ]
+    },
+    {
+      "from": 252.2,
+      "to": 267.6,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Les [[critères]]", "at": 254.0, "out": 255.9, "hide": true },
+        { "type": "list", "style": "dot", "at": 256.1, "items": [
+          { "text": "Seul ou à plusieurs ?", "at": 256.1 },
+          { "text": "Quel chiffre d’affaires, quelles charges ?", "at": 258.0 },
+          { "text": "Investir ou lever des fonds ?", "at": 261.0 }
+        ] },
+        { "type": "chips", "at": 263.7, "items": [
+          { "text": "investisseurs", "at": 263.8 },
+          { "text": "→", "at": 265.0 },
+          { "text": "SAS plus souple", "at": 265.4, "tone": "accent" }
+        ] }
+      ]
+    },
+    {
+      "from": 267.6,
+      "to": 279.6,
+      "items": [
+        { "type": "list", "style": "dot", "at": 267.6, "items": [
+          { "text": "Quelle protection sociale ?", "at": 267.7 },
+          { "text": "Quelle crédibilité face aux clients ?", "at": 269.7 },
+          { "text": "Combien de temps en gestion ?", "at": 272.6 }
+        ] },
+        { "type": "row", "at": 275.1, "items": [
+          { "type": "icon", "icon": "calendar", "at": 275.1 },
+          { "type": "text", "size": "small", "text": "société : comptabilité complète, formalités chaque année", "at": 275.5 }
+        ] }
+      ]
+    },
+    {
+      "from": 279.6,
+      "to": 292.6,
+      "items": [
+        { "type": "row", "at": 279.6, "items": [
+          { "type": "icon", "icon": "laptop", "at": 279.6 },
+          { "type": "text", "size": "small", "text": "les comparatifs en ligne aident", "at": 280.0 }
+        ] },
+        { "type": "steps", "at": 282.4, "items": [
+          { "text": "Simulateurs de l’Urssaf", "icon": "calculator", "at": 282.8 },
+          { "text": "Relecture par un pro", "icon": "handshake", "at": 285.6 }
+        ] },
+        { "type": "chips", "at": 288.0, "items": [
+          { "text": "expert-comptable", "at": 288.2 },
+          { "text": "avocat", "at": 290.0 },
+          { "text": "chambre consulaire", "at": 290.8 }
+        ] }
+      ]
+    },
+    {
+      "from": 292.6,
+      "to": 308.8,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Exemple fictif · trois profils", "at": 292.7, "out": 298.8 },
+        { "type": "row", "at": 299.0, "items": [
+          { "type": "icon", "icon": "clock", "label": "cours le soir", "at": 299.2 },
+          { "type": "icon", "icon": "briefcase", "label": "à côté d’un emploi", "at": 300.6 }
+        ] },
+        { "type": "chips", "at": 302.6, "items": [
+          { "text": "peu de charges", "at": 302.7 },
+          { "text": "CA modeste", "at": 304.2 }
+        ] },
+        { "type": "row", "at": 305.3, "items": [
+          { "type": "icon", "icon": "rocket", "tone": "accent", "at": 305.3 },
+          { "type": "text", "size": "mid", "text": "[[micro]] : départ en quelques jours", "at": 305.7 }
+        ] },
+        { "type": "actor", "character": "toi", "name": "Sami", "at": 299.0 }
+      ]
+    },
+    {
+      "from": 308.8,
+      "to": 319.7,
+      "items": [
+        { "type": "row", "at": 311.0, "items": [
+          { "type": "icon", "icon": "house", "label": "local", "at": 311.0 },
+          { "type": "icon", "icon": "gear", "label": "machines", "at": 312.0 },
+          { "type": "icon", "icon": "box", "label": "gros achats", "at": 313.0 }
+        ] },
+        { "type": "chips", "at": 314.2, "items": [
+          { "text": "charges réelles élevées", "at": 314.3, "tone": "loss" }
+        ] },
+        { "type": "row", "at": 316.0, "items": [
+          { "type": "icon", "icon": "check", "tone": "gain", "at": 316.0 },
+          { "type": "text", "size": "mid", "text": "[[EURL]] · régime réel : tout déduire", "at": 316.4 }
+        ] },
+        { "type": "actor", "character": "artisan", "name": "Léa", "at": 309.0 }
+      ]
+    },
+    {
+      "from": 319.7,
+      "to": 328.6,
+      "items": [
+        { "type": "row", "at": 319.7, "items": [
+          { "type": "icon", "icon": "person", "label": "Inès", "at": 319.8 },
+          { "type": "icon", "icon": "person", "label": "Marc", "at": 320.4 },
+          { "type": "icon", "icon": "laptop", "label": "une application", "at": 321.2 }
+        ] },
+        { "type": "icon", "icon": "users", "label": "investisseurs à venir", "at": 322.4 },
+        { "type": "row", "at": 323.8, "items": [
+          { "type": "text", "size": "big", "text": "[[SAS]]", "at": 323.8 },
+          { "type": "text", "size": "small", "text": "statuts qui organisent l’entrée de nouveaux associés", "at": 325.4 }
+        ] }
+      ]
+    },
+    {
+      "from": 328.6,
+      "to": 344.0,
+      "items": [
+        { "type": "cards", "at": 329.5, "items": [
+          { "icon": "shield", "title": "Dettes", "sub": "", "at": 330.6 },
+          { "icon": "heart", "title": "Social", "sub": "", "at": 332.2 },
+          { "icon": "percent", "title": "Impôts", "sub": "", "at": 333.6 },
+          { "icon": "users", "title": "Associés", "sub": "", "at": 334.6 }
+        ] },
+        { "type": "text", "size": "mid", "text": "le bon statut pour [[ton projet]]", "at": 335.8 },
+        { "type": "row", "at": 339.6, "items": [
+          { "type": "icon", "icon": "handshake", "at": 339.6 },
+          { "type": "text", "size": "small", "text": "avec un professionnel", "at": 340.0 }
+        ] },
+        { "type": "text", "size": "small", "text": "À bientôt", "at": 342.0 }
+      ]
+    }
+  ]
+}

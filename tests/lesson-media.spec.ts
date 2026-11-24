@@ -121,3 +121,33 @@ test("sans minutage, un message clair et la lecture reste", async ({
   ).toBeVisible();
   await expect(page.getByText("LA QUESTION DE DÉPART")).toBeVisible();
 });
+
+test("la vidéo animée suit la voix, et sans scénario la vidéo reste simple", async ({
+  page,
+}) => {
+  await setup(page);
+  await page.goto(`/#lesson/${lessonId}`);
+  const scenes = page.locator(".lesson-media .ls-root");
+  await expect(scenes).toHaveCount(1);
+  // Au début : le titre de la leçon s'anime.
+  await expect(page.locator(".ls-scene.is-on")).toContainText(
+    "Chiffre d’affaires, marge et trésorerie",
+  );
+  // On avance (même sans son) : la scène du compte en banque apparaît.
+  await page.locator(".lesson-media audio").evaluate((audio: HTMLAudioElement) => {
+    audio.currentTime = 199;
+    audio.dispatchEvent(new Event("timeupdate"));
+  });
+  await expect(page.locator(".ls-scene.is-on .ls-vault")).toContainText("5 100");
+
+  // Sans scénario : les phrases de la voix, comme avant.
+  await page.route(`**/lecons-scenes/${lessonId}.json`, (route) =>
+    route.fulfill({ status: 404, body: "" }),
+  );
+  await page.reload();
+  await expect(page.getByRole("region", { name: "Vidéo de la leçon" })).toBeVisible();
+  await expect(page.locator(".lesson-media .ls-root")).toHaveCount(0);
+  // (la position est gardée : on reprend au compte en banque, en phrases)
+  await expect(page.locator(".lm-scene")).toBeVisible();
+  await expect(page.locator(".lm-scene")).toContainText("Les trois mécanismes");
+});

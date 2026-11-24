@@ -1,0 +1,261 @@
+{
+  "lesson": "fp-assurances",
+  "version": "1.0.0",
+  "scenes": [
+    {
+      "from": 0,
+      "to": 16.3,
+      "items": [
+        { "type": "text", "size": "title", "text": "S’assurer sans se ruiner", "at": 0.2 },
+        { "type": "row", "at": 3.5, "items": [
+          { "type": "icon", "icon": "calendar", "label": "payées chaque mois", "at": 6.3 },
+          { "type": "icon", "icon": "umbrella", "label": "on espère ne pas s’en servir", "at": 8.0 }
+        ] },
+        { "type": "compare", "at": 9.9, "left": {
+          "title": "Bien choisies", "icon": "shield", "items": [
+            { "text": "Protègent des catastrophes", "at": 10.2 }
+          ] }, "right": {
+          "title": "Mal choisies", "icon": "cross", "items": [
+            { "text": "Coûtent cher pour rien", "at": 13.4 }
+          ] } }
+      ]
+    },
+    {
+      "from": 16.3,
+      "to": 29.5,
+      "items": [
+        { "type": "cards", "at": 16.5, "items": [
+          { "icon": "lock", "title": "Obligatoires", "at": 17.0 },
+          { "icon": "heart", "title": "Utiles", "at": 18.6 },
+          { "icon": "cross", "title": "Superflues", "at": 20.0, "tone": "muted" }
+        ] },
+        { "type": "chips", "at": 21.9, "items": [
+          { "text": "garanties", "at": 23.0 },
+          { "text": "franchises", "at": 24.2 },
+          { "text": "exclusions", "at": 25.2 }
+        ] },
+        { "type": "row", "at": 26.5, "items": [
+          { "type": "icon", "icon": "contract", "at": 26.5 },
+          { "type": "text", "size": "small", "text": "Changer de contrat quand il le faut", "at": 27.0 }
+        ] }
+      ]
+    },
+    {
+      "from": 29.5,
+      "to": 46.0,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Transférer un risque trop lourd", "at": 29.6, "out": 35.0 },
+        { "type": "row", "at": 35.9, "items": [
+          { "type": "icon", "icon": "car", "size": "l", "tone": "loss", "label": "accident grave", "at": 35.9 },
+          { "type": "icon", "icon": "umbrella", "size": "l", "tone": "gain", "label": "l’assurance paie", "at": 40.7 }
+        ] },
+        { "type": "text", "size": "small", "text": "Mal choisie : cher pour un risque mineur", "at": 42.9 }
+      ]
+    },
+    {
+      "from": 46.0,
+      "to": 62.7,
+      "items": [
+        { "type": "row", "at": 46.1, "items": [
+          { "type": "icon", "icon": "alert", "label": "un sinistre : des dégâts", "at": 48.4 },
+          { "type": "icon", "icon": "invoice", "tone": "loss", "label": "dette énorme sans assurance", "at": 50.0 }
+        ] },
+        { "type": "compare", "at": 53.1, "left": {
+          "title": "Assurer", "icon": "shield", "items": [
+            { "text": "Risques graves et rares", "at": 53.4 }
+          ] }, "right": {
+          "title": "Garder à ta charge", "icon": "piggy", "items": [
+            { "text": "Petits risques fréquents", "at": 57.2 },
+            { "text": "Épargne de précaution", "at": 59.8 }
+          ] } }
+      ]
+    },
+    {
+      "from": 62.7,
+      "to": 87.4,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Les assurances [[obligatoires]]", "at": 62.8 },
+        { "type": "cards", "at": 71.3, "items": [
+          { "icon": "car", "title": "Véhicule à moteur", "sub": "responsabilité civile : dégâts causés aux autres", "at": 71.4 },
+          { "icon": "house", "title": "Locataire", "sub": "incendie, dégâts des eaux", "at": 77.8 },
+          { "icon": "briefcase", "title": "Selon le métier", "sub": "assurances professionnelles", "at": 84.3 }
+        ] }
+      ]
+    },
+    {
+      "from": 87.4,
+      "to": 95.9,
+      "items": [
+        { "type": "row", "at": 87.5, "items": [
+          { "type": "icon", "icon": "contract", "size": "l", "label": "assurance emprunteur : pas obligatoire", "at": 87.5 },
+          { "type": "icon", "icon": "bank", "size": "l", "label": "la banque l’exige presque toujours", "at": 92.2 }
+        ] }
+      ]
+    },
+    {
+      "from": 95.9,
+      "to": 124.2,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Les assurances très [[utiles]]", "at": 96.0 },
+        { "type": "cards", "at": 98.1, "items": [
+          { "icon": "heart", "title": "Complémentaire santé", "sub": "souvent via l’employeur", "at": 98.2 },
+          { "icon": "house", "title": "Responsabilité civile", "sub": "souvent dans l’habitation", "at": 101.5 },
+          { "icon": "umbrella", "title": "Prévoyance", "sub": "invalidité et décès", "at": 106.4 }
+        ] },
+        { "type": "row", "at": 115.7, "items": [
+          { "type": "icon", "icon": "phone", "label": "téléphone", "at": 116.2 },
+          { "type": "icon", "icon": "globe", "label": "voyage", "at": 117.8 },
+          { "type": "icon", "icon": "card", "label": "carte bancaire", "at": 119.6 }
+        ] },
+        { "type": "text", "size": "small", "text": "À examiner de près : souvent en [[doublon|loss]]", "at": 122.0 }
+      ]
+    },
+    {
+      "from": 124.2,
+      "to": 142.9,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Quatre mots d’un contrat", "at": 124.3, "out": 129.0, "hide": true },
+        { "type": "cards", "at": 129.6, "items": [
+          { "icon": "shield", "title": "Garanties", "sub": "ce qui est couvert", "at": 129.7 },
+          { "icon": "target", "title": "Plafond", "sub": "jusqu’où l’assurance paie", "at": 132.2 },
+          { "icon": "wallet", "title": "Franchise", "sub": "à ta charge à chaque sinistre", "at": 135.5, "accent": true },
+          { "icon": "cross", "title": "Exclusions", "sub": "jamais couvert", "at": 139.6 }
+        ] }
+      ]
+    },
+    {
+      "from": 142.9,
+      "to": 150.9,
+      "items": [
+        { "type": "compare", "at": 143.0, "left": {
+          "title": "Prime basse", "icon": "coin", "items": [
+            { "text": "Séduisant", "at": 143.2 }
+          ] }, "right": {
+          "title": "En vrai", "icon": "alert", "items": [
+            { "text": "Franchise élevée", "at": 144.2 },
+            { "text": "Exclusions larges", "at": 146.0 }
+          ] } },
+        { "type": "text", "size": "small", "text": "La prime : ce que tu paies", "at": 148.5 }
+      ]
+    },
+    {
+      "from": 150.9,
+      "to": 171.6,
+      "items": [
+        { "type": "text", "size": "mid", "text": "[[Résilier]] : arrêter un contrat", "at": 151.0 },
+        { "type": "timeline", "at": 153.4, "points": [
+          { "label": "Souscription", "pos": 8, "at": 153.4 },
+          { "label": "Après 1 an", "pos": 50, "at": 153.8 }
+        ], "span": { "label": "à tout moment", "from": 50, "to": 94, "at": 155.0 } },
+        { "type": "row", "at": 158.9, "items": [
+          { "type": "icon", "icon": "handshake", "at": 158.9 },
+          { "type": "text", "size": "small", "text": "Le nouvel assureur fait les démarches", "at": 159.2 }
+        ] },
+        { "type": "row", "at": 161.9, "items": [
+          { "type": "icon", "icon": "bank", "at": 161.9 },
+          { "type": "text", "size": "small", "text": "Emprunteur : loi Lemoine, 2022 · garanties équivalentes", "at": 162.2 }
+        ] }
+      ]
+    },
+    {
+      "from": 171.6,
+      "to": 180.8,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Un sinistre : [[déclare-le]] dans les délais", "at": 171.7 },
+        { "type": "chips", "at": 174.0, "items": [
+          { "text": "photos", "at": 174.2 },
+          { "text": "factures", "at": 175.2 },
+          { "text": "constat", "at": 176.2 }
+        ] },
+        { "type": "row", "at": 178.3, "items": [
+          { "type": "icon", "icon": "coins", "at": 178.3 },
+          { "type": "text", "size": "small", "text": "Cela conditionne ton indemnisation", "at": 178.6 }
+        ] }
+      ]
+    },
+    {
+      "from": 180.8,
+      "to": 194.9,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Une [[fausse déclaration]]", "at": 184.3 },
+        { "type": "list", "style": "cross", "at": 187.4, "items": [
+          { "text": "Tes antécédents", "at": 187.6 },
+          { "text": "L’usage du véhicule", "at": 189.0 },
+          { "text": "Les conducteurs", "at": 190.6 }
+        ] },
+        { "type": "row", "at": 192.4, "items": [
+          { "type": "icon", "icon": "alert", "tone": "loss", "at": 192.4 },
+          { "type": "text", "size": "small", "text": "Contrat nul ou indemnisation réduite", "at": 192.6 }
+        ] }
+      ]
+    },
+    {
+      "from": 194.9,
+      "to": 207.4,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Compare à garanties [[identiques]]", "at": 195.0 },
+        { "type": "steps", "at": 199.1, "items": [
+          { "text": "Service réclamations", "icon": "mail", "at": 200.4 },
+          { "text": "Médiateur de l’assurance", "icon": "scale", "at": 202.4 }
+        ] },
+        { "type": "text", "size": "small", "text": "Recours gratuit", "at": 205.3 }
+      ]
+    },
+    {
+      "from": 207.4,
+      "to": 224.0,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Exemple fictif · deux contrats auto", "at": 207.5 },
+        { "type": "compare", "at": 215.0, "left": {
+          "title": "Contrat 1", "icon": "car", "items": [
+            { "text": "480 € par an", "at": 215.2 },
+            { "text": "Franchise de 800 €", "at": 217.4 }
+          ] }, "right": {
+          "title": "Contrat 2", "icon": "car", "items": [
+            { "text": "600 € par an", "at": 219.9 },
+            { "text": "Franchise de 200 €", "at": 221.6 }
+          ] } },
+        { "type": "actor", "character": "toi", "name": "Sofia", "at": 212.3, "think": { "text": "?", "at": 213.4 } }
+      ]
+    },
+    {
+      "from": 224.0,
+      "to": 233.2,
+      "items": [
+        { "type": "row", "at": 224.1, "items": [
+          { "type": "icon", "icon": "piggy", "tone": "gain", "label": "épargne suffisante", "at": 224.2 },
+          { "type": "icon", "icon": "calendar", "label": "aucun sinistre depuis 10 ans", "at": 226.0 }
+        ] },
+        { "type": "text", "size": "mid", "text": "Elle choisit le [[contrat 1]]", "at": 228.9 },
+        { "type": "row", "at": 230.7, "items": [
+          { "type": "icon", "icon": "piggy", "at": 230.7 },
+          { "type": "text", "size": "small", "text": "La différence de prime va sur l’épargne", "at": 231.0 }
+        ] }
+      ]
+    },
+    {
+      "from": 233.2,
+      "to": 241.3,
+      "items": [
+        { "type": "row", "at": 233.3, "items": [
+          { "type": "icon", "icon": "card", "label": "la carte couvre déjà l’assistance voyage", "at": 233.4 },
+          { "type": "icon", "icon": "cross", "tone": "loss", "label": "garantie en doublon supprimée", "at": 237.3 }
+        ] }
+      ]
+    },
+    {
+      "from": 241.3,
+      "to": 256,
+      "items": [
+        { "type": "text", "size": "big", "text": "Pour résumer", "at": 241.4, "out": 241.9, "hide": true },
+        { "type": "list", "style": "check", "at": 242.0, "items": [
+          { "text": "Assure d’abord les gros risques", "at": 241.5 },
+          { "text": "Garanties, plafonds, franchises, exclusions", "at": 243.8 },
+          { "text": "Compare à garanties égales", "at": 248.1 },
+          { "text": "Change de contrat quand c’est utile", "at": 250.0 }
+        ] },
+        { "type": "text", "size": "small", "text": "À bientôt", "at": 253.4 }
+      ]
+    }
+  ]
+}

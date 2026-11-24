@@ -1,0 +1,230 @@
+{
+  "lesson": "ent-facturer-declarer",
+  "version": "1.0.0",
+  "scenes": [
+    {
+      "from": 0, "to": 14.4,
+      "items": [
+        { "type": "text", "size": "title", "text": "Facturer, encaisser, déclarer", "at": 0.2 },
+        { "type": "row", "at": 4.2, "items": [
+          { "type": "icon", "icon": "cart", "size": "l", "label": "vendre", "at": 4.2 },
+          { "type": "icon", "icon": "wallet", "size": "l", "tone": "accent", "label": "être payé", "at": 5.9 }
+        ] },
+        { "type": "steps", "at": 8.2, "items": [
+          { "text": "Facture", "icon": "invoice", "at": 8.4 },
+          { "text": "Encaissement", "icon": "coins", "at": 10.4 },
+          { "text": "Déclaration", "icon": "calendar", "at": 12.2 }
+        ] },
+        { "type": "actor", "character": "toi", "name": "toi", "at": 3.3 }
+      ]
+    },
+    {
+      "from": 14.4, "to": 25.6,
+      "items": [
+        { "type": "icon", "icon": "document", "size": "l", "label": "le quotidien administratif", "at": 14.5 },
+        { "type": "icon", "icon": "shield", "size": "l", "tone": "accent", "label": "protège ta trésorerie", "at": 18.8 },
+        { "type": "text", "size": "small", "text": "L’argent disponible sur ton compte", "at": 22.0 }
+      ]
+    },
+    {
+      "from": 25.6, "to": 47.6,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Vendre [[≠]] être payé", "at": 27.4 },
+        { "type": "row", "at": 30.6, "items": [
+          { "type": "icon", "icon": "hour", "tone": "loss", "label": "retards de paiement", "at": 30.7 },
+          { "type": "icon", "icon": "invoice", "tone": "loss", "label": "factures incomplètes", "at": 33.0 }
+        ] },
+        { "type": "compare", "at": 41.0,
+          "left": { "title": "Par trimestre", "icon": "cross", "items": [
+            { "text": "Un week-end entier", "at": 41.6 },
+            { "text": "Pénalités et oublis", "at": 44.9 }
+          ] },
+          "right": { "title": "Par semaine", "icon": "check", "items": [
+            { "text": "Une heure", "at": 42.2 }
+          ] } }
+      ]
+    },
+    {
+      "from": 47.6, "to": 77.0,
+      "items": [
+        { "type": "text", "size": "mid", "text": "La facture entre professionnels", "at": 49.2 },
+        { "type": "chips", "at": 52.0, "items": [
+          { "text": "Numéro unique", "at": 53.0 },
+          { "text": "Date", "at": 55.5 },
+          { "text": "Vendeur · acheteur", "at": 57.5 },
+          { "text": "Description", "at": 60.5 },
+          { "text": "Prix unitaire HT", "at": 63.0 }
+        ] },
+        { "type": "chips", "at": 65.5, "items": [
+          { "text": "TVA", "at": 66.0 },
+          { "text": "Total", "at": 69.0 },
+          { "text": "Échéance", "at": 70.5, "tone": "accent" },
+          { "text": "Pénalités de retard", "at": 73.0 },
+          { "text": "Frais de recouvrement", "at": 75.0 }
+        ] }
+      ]
+    },
+    {
+      "from": 77.0, "to": 100.6,
+      "items": [
+        { "type": "text", "size": "mid", "text": "[[Facture électronique]] obligatoire", "at": 77.2 },
+        { "type": "timeline", "at": 84.0, "points": [
+          { "label": "1er sept. 2026", "sub": "recevoir : toutes", "pos": 14, "at": 84.3 },
+          { "label": "1er sept. 2027", "sub": "émettre : PME, micros", "pos": 86, "at": 90.6 }
+        ] },
+        { "type": "icon", "icon": "laptop", "label": "plateformes agréées", "at": 97.9 }
+      ]
+    },
+    {
+      "from": 100.6, "to": 114.2,
+      "items": [
+        { "type": "row", "at": 100.8, "items": [
+          { "type": "icon", "icon": "contract", "size": "l", "label": "le devis", "at": 100.8 },
+          { "type": "icon", "icon": "handshake", "size": "l", "label": "protège les deux", "at": 102.9 }
+        ] },
+        { "type": "list", "style": "check", "at": 105.6, "items": [
+          { "text": "Le prix", "at": 105.7 },
+          { "text": "Ce qui est inclus", "at": 106.8 },
+          { "text": "Les délais", "at": 108.0 }
+        ] },
+        { "type": "text", "size": "small", "text": "Avant de commencer, parfois obligatoire pour un particulier", "at": 109.1 }
+      ]
+    },
+    {
+      "from": 114.2, "to": 133.6,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Délais de paiement [[plafonnés]]", "at": 116.6 },
+        { "type": "timeline", "at": 123.0, "points": [
+          { "label": "Facture", "sub": "jour 0", "pos": 6, "at": 123.3 },
+          { "label": "Paiement", "sub": "jour 60", "pos": 94, "at": 126.0 }
+        ], "span": { "label": "60 jours", "from": 6, "to": 94, "at": 125.5 } },
+        { "type": "chips", "at": 127.4, "items": [
+          { "text": "ou 45 jours fin de mois", "at": 127.6 }
+        ] },
+        { "type": "text", "size": "small", "text": "Certains secteurs : règles à part", "at": 131.1 }
+      ]
+    },
+    {
+      "from": 133.6, "to": 150.8,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Un client tarde ?", "at": 133.7 },
+        { "type": "steps", "at": 136.6, "items": [
+          { "text": "Acompte", "icon": "coin", "at": 136.7 },
+          { "text": "Relance aimable", "icon": "mail", "at": 141.4 },
+          { "text": "Relance ferme", "icon": "megaphone", "at": 144.1 },
+          { "text": "Mise en demeure", "icon": "document", "at": 146.2 }
+        ] }
+      ]
+    },
+    {
+      "from": 150.8, "to": 162.2,
+      "items": [
+        { "type": "text", "size": "mid", "text": "[[La TVA]]", "at": 150.9 },
+        { "type": "cards", "at": 152.4, "items": [
+          { "icon": "invoice", "title": "Collectée", "sub": "facturée à tes clients", "at": 152.5 },
+          { "icon": "cart", "title": "Déductible", "sub": "payée sur tes achats", "at": 155.8 }
+        ] },
+        { "type": "chips", "at": 159.6, "items": [
+          { "text": "collectée", "at": 159.7 },
+          { "text": "−", "at": 160.2 },
+          { "text": "déductible", "at": 160.5 },
+          { "text": "=", "at": 160.9 },
+          { "text": "à reverser", "at": 161.1, "tone": "accent" }
+        ] }
+      ]
+    },
+    {
+      "from": 162.2, "to": 178.1,
+      "items": [
+        { "type": "text", "size": "big", "text": "La TVA [[≠]] ton argent", "at": 162.3 },
+        { "type": "row", "at": 167.3, "items": [
+          { "type": "icon", "icon": "piggy", "size": "l", "tone": "accent", "label": "de côté à chaque encaissement", "at": 167.4 }
+        ] },
+        { "type": "row", "at": 170.8, "items": [
+          { "type": "icon", "icon": "calendar", "label": "rappels", "at": 170.9 },
+          { "type": "icon", "icon": "bank", "label": "compte dédié", "at": 173.4 }
+        ] }
+      ]
+    },
+    {
+      "from": 178.1, "to": 197.6,
+      "items": [
+        { "type": "icon", "icon": "document", "size": "l", "label": "à conserver plusieurs années", "at": 181.3 },
+        { "type": "text", "size": "small", "text": "Durées légales : à vérifier", "at": 185.3 },
+        { "type": "icon", "icon": "laptop", "label": "logiciel de facturation conforme", "at": 188.7 },
+        { "type": "list", "style": "check", "at": 191.2, "items": [
+          { "text": "Numérotation automatique", "at": 191.3 },
+          { "text": "Facture émise : non modifiable", "at": 193.4 }
+        ] }
+      ]
+    },
+    {
+      "from": 197.6, "to": 208.9,
+      "items": [
+        { "type": "text", "size": "big", "text": "Une facture ne se [[supprime]] pas", "at": 197.7 },
+        { "type": "chips", "at": 201.3, "items": [
+          { "text": "Erreur", "at": 201.4, "tone": "loss" },
+          { "text": "→", "at": 202.2 },
+          { "text": "avoir", "at": 202.6, "tone": "accent" }
+        ] },
+        { "type": "text", "size": "small", "text": "Un avoir annule tout ou partie de la facture", "at": 204.3 }
+      ]
+    },
+    {
+      "from": 208.9, "to": 225.5,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Karim · développeur web", "at": 209.0 },
+        { "type": "waterfall", "at": 217.9, "rows": [
+          { "label": "Site facturé HT", "value": 4000, "kind": "start", "at": 217.9 },
+          { "label": "TVA à 20 %", "value": 800, "kind": "plus", "at": 220.6 },
+          { "label": "Total TTC", "value": 4800, "kind": "total", "at": 222.6, "tone": "accent" }
+        ] },
+        { "type": "actor", "character": "toi", "name": "Karim", "at": 214.8 }
+      ]
+    },
+    {
+      "from": 225.5, "to": 237.5,
+      "items": [
+        { "type": "row", "at": 225.7, "items": [
+          { "type": "icon", "icon": "laptop", "label": "logiciels : 600 € HT", "at": 225.7 },
+          { "type": "icon", "icon": "percent", "label": "TVA : 120 €", "at": 228.6 }
+        ] },
+        { "type": "waterfall", "at": 231.0, "rows": [
+          { "label": "TVA collectée", "value": 800, "kind": "start", "at": 231.1 },
+          { "label": "TVA sur achats", "value": 120, "kind": "minus", "at": 233.3 },
+          { "label": "À reverser", "value": 680, "kind": "total", "at": 235.0, "tone": "accent" }
+        ] }
+      ]
+    },
+    {
+      "from": 237.5, "to": 251.0,
+      "items": [
+        { "type": "timeline", "at": 237.6, "points": [
+          { "label": "Échéance", "pos": 12, "at": 237.7 },
+          { "label": "Paiement", "pos": 88, "at": 239.0 }
+        ], "span": { "label": "30 jours de retard", "from": 12, "to": 88, "at": 238.4 } },
+        { "type": "steps", "at": 240.2, "items": [
+          { "text": "Relance", "icon": "mail", "at": 240.3 },
+          { "text": "Pénalités prévues", "icon": "percent", "at": 242.6 }
+        ] },
+        { "type": "row", "at": 245.0, "items": [
+          { "type": "icon", "icon": "piggy", "tone": "gain", "label": "TVA déjà de côté", "at": 245.1 },
+          { "type": "icon", "icon": "check", "tone": "gain", "label": "pas de mauvaise surprise", "at": 248.4 }
+        ] }
+      ]
+    },
+    {
+      "from": 251.0, "to": 263,
+      "items": [
+        { "type": "list", "style": "check", "at": 252.2, "items": [
+          { "text": "Facture complète", "at": 252.4 },
+          { "text": "Paiements suivis", "at": 254.2 },
+          { "text": "TVA mise de côté", "at": 255.8 },
+          { "text": "Organisation régulière", "at": 257.2 }
+        ] },
+        { "type": "icon", "icon": "shield", "size": "l", "tone": "accent", "label": "ta trésorerie protégée", "at": 258.8 },
+        { "type": "text", "size": "small", "text": "À bientôt", "at": 261.1 }
+      ]
+    }
+  ]
+}

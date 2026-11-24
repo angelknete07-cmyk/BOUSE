@@ -1,0 +1,270 @@
+{
+  "lesson": "fin-investir-amortir",
+  "version": "1.0.0",
+  "scenes": [
+    {
+      "from": 0,
+      "to": 13.5,
+      "items": [
+        { "type": "text", "size": "title", "text": "Investir et amortir", "at": 0.2 },
+        { "type": "row", "at": 4.0, "items": [
+          { "type": "icon", "icon": "factory", "size": "l", "label": "une machine", "at": 4.3 },
+          { "type": "icon", "icon": "car", "size": "l", "label": "un véhicule", "at": 6.0 },
+          { "type": "icon", "icon": "building", "size": "l", "label": "un local", "at": 7.6 }
+        ] },
+        { "type": "text", "size": "mid", "text": "Ça sert des [[années]]", "at": 9.3 }
+      ]
+    },
+    {
+      "from": 13.5,
+      "to": 27.3,
+      "items": [
+        { "type": "chips", "at": 14.0, "items": [
+          { "text": "coût d’un achat", "at": 14.4 },
+          { "text": "→", "at": 17.0 },
+          { "text": "réparti sur la durée d’utilisation", "at": 17.6, "tone": "accent" }
+        ] },
+        { "type": "row", "at": 21.6, "items": [
+          { "type": "icon", "icon": "chart-up", "label": "ce qu’il rapporte", "at": 22.0 },
+          { "type": "icon", "icon": "hour", "label": "le temps de se rembourser", "at": 24.4 }
+        ] }
+      ]
+    },
+    {
+      "from": 27.3,
+      "to": 50.5,
+      "items": [
+        { "type": "text", "size": "big", "text": "Pourquoi apprendre ça ?", "at": 27.4, "out": 29.0, "hide": true },
+        { "type": "row", "at": 29.3, "items": [
+          { "type": "icon", "icon": "car", "label": "véhicule", "at": 29.3 },
+          { "type": "icon", "icon": "laptop", "label": "logiciel", "at": 31.0 },
+          { "type": "icon", "icon": "building", "label": "local", "at": 32.6 }
+        ] },
+        { "type": "list", "style": "cross", "at": 37.7, "items": [
+          { "text": "Un gros achat « plombe » une seule année", "at": 37.8 },
+          { "text": "Oublier de le renouveler", "at": 41.4 }
+        ] },
+        { "type": "chips", "at": 43.9, "items": [
+          { "text": "comparer des options", "at": 44.8 },
+          { "text": "choisir son financement", "at": 47.2, "tone": "accent" }
+        ] }
+      ]
+    },
+    {
+      "from": 50.5,
+      "to": 76.8,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Immobilisation et amortissement", "at": 50.6, "out": 53.4 },
+        { "type": "compare", "at": 53.6, "left": {
+          "title": "Bien durable", "icon": "factory", "items": [
+            { "text": "Plus d’un exercice", "at": 55.0 },
+            { "text": "Actif du bilan", "at": 59.4 }
+          ] }, "right": {
+          "title": "Charge immédiate", "icon": "cross", "items": [
+            { "text": "Pas pour un bien durable", "at": 60.4 }
+          ] } },
+        { "type": "chips", "at": 67.8, "items": [
+          { "text": "valeur d’achat HT", "at": 68.0 },
+          { "text": "÷", "at": 71.4 },
+          { "text": "durée", "at": 71.8 },
+          { "text": "=", "at": 73.0 },
+          { "text": "dotation annuelle", "at": 73.4, "tone": "accent" }
+        ] }
+      ]
+    },
+    {
+      "from": 76.8,
+      "to": 84.2,
+      "items": [
+        { "type": "split", "label": "Un four, amorti sur 5 ans", "total": 30000, "at": 77.0, "parts": [
+          { "label": "an 1", "value": 6000, "at": 80.6, "tone": "accent" },
+          { "label": "an 2", "value": 6000, "at": 81.0 },
+          { "label": "an 3", "value": 6000, "at": 81.4 },
+          { "label": "an 4", "value": 6000, "at": 81.8 },
+          { "label": "an 5", "value": 6000, "at": 82.2 }
+        ] },
+        { "type": "chips", "at": 82.0, "items": [
+          { "text": "30 000 € ÷ 5 ans", "at": 82.2 },
+          { "text": "=", "at": 83.0 },
+          { "text": "6 000 € / an", "at": 83.2, "tone": "accent" }
+        ] }
+      ]
+    },
+    {
+      "from": 84.2,
+      "to": 103.2,
+      "items": [
+        { "type": "compare", "at": 84.4, "left": {
+          "title": "Dotation", "icon": "calculator", "items": [
+            { "text": "Une charge chaque année", "at": 84.6 },
+            { "text": "Aucun argent ne sort", "at": 86.4 }
+          ] }, "right": {
+          "title": "Trésorerie", "icon": "wallet", "items": [
+            { "text": "Sortie le jour de l’achat", "at": 89.2 }
+          ] } },
+        { "type": "chips", "at": 92.9, "items": [
+          { "text": "résultat net", "at": 96.4 },
+          { "text": "+", "at": 98.0 },
+          { "text": "dotations", "at": 98.4 },
+          { "text": "=", "at": 100.0 },
+          { "text": "CAF", "at": 100.4, "tone": "accent" }
+        ] },
+        { "type": "text", "size": "small", "text": "CAF : capacité d’autofinancement", "at": 93.0 }
+      ]
+    },
+    {
+      "from": 103.2,
+      "to": 123.8,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Évaluer : [[deux outils]] simples", "at": 103.3 },
+        { "type": "cards", "at": 108.2, "items": [
+          { "icon": "hour", "title": "Délai de récupération", "sub": "remboursé en combien de temps ?", "at": 109.8, "accent": true },
+          { "icon": "percent", "title": "ROI", "sub": "gain ÷ investi", "at": 123.0 }
+        ] },
+        { "type": "chips", "at": 116.8, "items": [
+          { "text": "coût", "at": 117.0 },
+          { "text": "÷", "at": 118.0 },
+          { "text": "gain de trésorerie annuel", "at": 118.4 }
+        ] },
+        { "type": "text", "size": "small", "text": "Simple, utile pour comparer des projets risqués", "at": 119.9 }
+      ]
+    },
+    {
+      "from": 123.8,
+      "to": 145.2,
+      "items": [
+        { "type": "chips", "at": 124.0, "items": [
+          { "text": "gain", "at": 125.0 },
+          { "text": "÷", "at": 127.0 },
+          { "text": "montant investi", "at": 127.4 },
+          { "text": "=", "at": 129.6 },
+          { "text": "ROI en % par an", "at": 130.0, "tone": "accent" }
+        ] },
+        { "type": "compare", "at": 133.3, "left": {
+          "title": "Aujourd’hui", "icon": "coin", "items": [
+            { "text": "1 €", "at": 134.6 }
+          ] }, "right": {
+          "title": "Dans 5 ans", "icon": "hour", "items": [
+            { "text": "1 € vaut moins", "at": 136.0 }
+          ] } },
+        { "type": "row", "at": 139.1, "items": [
+          { "type": "icon", "icon": "calculator", "tone": "muted", "at": 139.1 },
+          { "type": "text", "size": "small", "text": "Méthodes avancées : flux actualisés", "at": 139.3, "tone": "muted" }
+        ] }
+      ]
+    },
+    {
+      "from": 145.2,
+      "to": 172.1,
+      "items": [
+        { "type": "text", "size": "big", "text": "Le point de vigilance", "at": 145.3, "out": 149.4, "hide": true },
+        { "type": "list", "style": "check", "at": 149.8, "items": [
+          { "text": "Trésorerie supplémentaire", "at": 149.8 },
+          { "text": "Ou coûts évités", "at": 152.6 }
+        ] },
+        { "type": "chips", "at": 155.4, "items": [
+          { "text": "entretien", "at": 155.6 },
+          { "text": "énergie", "at": 156.8 },
+          { "text": "formation", "at": 157.8 },
+          { "text": "arrêts de production", "at": 158.6 }
+        ] },
+        { "type": "row", "at": 160.5, "items": [
+          { "type": "icon", "icon": "alert", "tone": "loss", "at": 160.5 },
+          { "type": "text", "size": "small", "text": "Payé par la trésorerie : crise de liquidités", "at": 161.0 }
+        ] },
+        { "type": "cards", "at": 165.5, "items": [
+          { "icon": "bank", "title": "Emprunt", "at": 167.0 },
+          { "icon": "contract", "title": "Crédit-bail", "at": 168.8 },
+          { "icon": "piggy", "title": "Apport", "at": 170.4, "accent": true }
+        ] }
+      ]
+    },
+    {
+      "from": 172.1,
+      "to": 189.0,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Exemple fictif · un imprimeur", "at": 172.2 },
+        { "type": "row", "at": 176.5, "items": [
+          { "type": "icon", "icon": "factory", "size": "l", "label": "la machine", "at": 176.6 },
+          { "type": "counter", "label": "Prix hors taxes", "to": 48000, "at": 177.4, "until": 179.8, "tone": "loss" }
+        ] },
+        { "type": "chips", "at": 180.9, "items": [
+          { "text": "1 000 € économisés", "at": 181.2, "tone": "gain" },
+          { "text": "−", "at": 183.6 },
+          { "text": "200 € d’entretien", "at": 184.0, "tone": "loss" }
+        ] },
+        { "type": "actor", "character": "artisan", "name": "l’imprimeur", "at": 176.7, "think": { "text": "?", "at": 177.4 } }
+      ]
+    },
+    {
+      "from": 189.0,
+      "to": 203.2,
+      "items": [
+        { "type": "stats", "at": 189.2, "items": [
+          { "label": "Gain net par an", "value": 9600, "at": 189.2, "tone": "gain" },
+          { "label": "Délai de récupération", "value": 5, "unit": " ans", "at": 189.8, "accent": true }
+        ] },
+        { "type": "chips", "at": 191.8, "items": [
+          { "text": "48 000 € ÷ 6 ans", "at": 192.2 },
+          { "text": "=", "at": 194.4 },
+          { "text": "8 000 € de dotation", "at": 194.8 }
+        ] },
+        { "type": "row", "at": 196.4, "items": [
+          { "type": "icon", "icon": "bank", "label": "emprunt sur 5 ans", "at": 196.8 },
+          { "type": "icon", "icon": "shield", "label": "réserve de sécurité gardée", "at": 200.0 }
+        ] }
+      ]
+    },
+    {
+      "from": 203.2,
+      "to": 225.4,
+      "items": [
+        { "type": "row", "at": 205.8, "items": [
+          { "type": "icon", "icon": "car", "size": "l", "label": "15 000 €", "at": 205.8 },
+          { "type": "icon", "icon": "calendar", "size": "l", "label": "5 ans", "at": 209.0 }
+        ] },
+        { "type": "compare", "at": 210.8, "left": {
+          "title": "Étrange", "icon": "cross", "items": [
+            { "text": "15 000 € la 1re année, rien après", "at": 211.0 }
+          ] }, "right": {
+          "title": "Réel", "icon": "check", "items": [
+            { "text": "Un peu chaque année", "at": 216.8 },
+            { "text": "Coût réparti sur les années", "at": 220.0 }
+          ] } },
+        { "type": "text", "size": "small", "text": "Une image simple pour l’amortissement", "at": 203.4 }
+      ]
+    },
+    {
+      "from": 225.4,
+      "to": 245.4,
+      "items": [
+        { "type": "compare", "at": 225.6, "left": {
+          "title": "Résultat comptable", "icon": "chart-bar", "items": [
+            { "text": "Charge étalée dans le temps", "at": 226.0 }
+          ] }, "right": {
+          "title": "Compte en banque", "icon": "bank", "items": [
+            { "text": "Argent sorti d’un coup", "at": 231.2 }
+          ] } },
+        { "type": "text", "size": "mid", "text": "Bon résultat + trésorerie [[serrée|loss]]", "at": 234.8 },
+        { "type": "list", "style": "check", "at": 241.0, "items": [
+          { "text": "Regarder les deux", "at": 241.0 },
+          { "text": "Financement prévu avant de signer", "at": 243.0 }
+        ] }
+      ]
+    },
+    {
+      "from": 245.4,
+      "to": 264,
+      "items": [
+        { "type": "text", "size": "big", "text": "Pour résumer", "at": 245.5, "out": 246.7, "hide": true },
+        { "type": "steps", "at": 246.8, "items": [
+          { "text": "Amorti sur sa durée", "icon": "calendar", "at": 246.9 },
+          { "text": "Charge sans sortie", "icon": "calculator", "at": 250.3 },
+          { "text": "Délai et ROI", "icon": "percent", "at": 253.5 },
+          { "text": "Ressources durables", "icon": "bank", "at": 258.5 }
+        ] },
+        { "type": "text", "size": "small", "text": "À bientôt", "at": 262.0 }
+      ]
+    }
+  ]
+}

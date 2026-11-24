@@ -1,0 +1,244 @@
+{
+  "lesson": "inv-allocation-profil",
+  "version": "1.0.0",
+  "scenes": [
+    {
+      "from": 0,
+      "to": 11.4,
+      "items": [
+        { "type": "text", "size": "title", "text": "Construire son allocation", "at": 0.2 },
+        { "type": "row", "at": 4.5, "items": [
+          { "type": "icon", "icon": "shield", "size": "l", "label": "sécurité", "at": 4.8 },
+          { "type": "icon", "icon": "chart-up", "size": "l", "label": "actions", "at": 5.8 },
+          { "type": "icon", "icon": "house", "size": "l", "label": "ailleurs", "at": 6.8 }
+        ] },
+        { "type": "text", "size": "big", "text": "La répartition = l’[[allocation]]", "at": 8.5 },
+        { "type": "actor", "character": "toi", "name": "toi", "at": 3.3, "think": { "text": "?", "at": 4.6 } }
+      ]
+    },
+    {
+      "from": 11.4,
+      "to": 23.7,
+      "items": [
+        { "type": "cards", "at": 13.5, "items": [
+          { "icon": "hour", "title": "Horizon", "at": 13.8 },
+          { "icon": "chart-down", "title": "Supporter une baisse", "at": 15.8 },
+          { "icon": "target", "title": "Objectifs", "at": 18.4, "accent": true }
+        ] },
+        { "type": "text", "size": "big", "text": "Et surtout : [[s’y tenir]]", "at": 21.2 }
+      ]
+    },
+    {
+      "from": 23.7,
+      "to": 51.6,
+      "items": [
+        { "type": "text", "size": "big", "text": "Pourquoi apprendre ça ?", "at": 23.8, "out": 25.4, "hide": true },
+        { "type": "chips", "at": 31.9, "items": [
+          { "text": "liquidités", "at": 32.0 },
+          { "text": "fonds en euros", "at": 33.6 },
+          { "text": "obligations", "at": 35.2 },
+          { "text": "actions", "at": 36.5, "tone": "accent" },
+          { "text": "immobilier", "at": 37.6 }
+        ] },
+        { "type": "text", "size": "mid", "text": "La [[répartition]] compte plus qu’un titre", "at": 39.4 },
+        { "type": "row", "at": 44.0, "items": [
+          { "type": "icon", "icon": "alert", "tone": "loss", "label": "vendre en panique", "at": 46.0 },
+          { "type": "icon", "icon": "rocket", "tone": "loss", "label": "acheter dans l’euphorie", "at": 48.4 }
+        ] },
+        { "type": "icon", "icon": "shield", "size": "m", "label": "décidé à l’avance", "at": 42.8, "tone": "accent" }
+      ]
+    },
+    {
+      "from": 51.6,
+      "to": 75.0,
+      "items": [
+        { "type": "text", "size": "big", "text": "Ton profil de risque", "at": 51.7 },
+        { "type": "cards", "at": 57.7, "items": [
+          { "icon": "hour", "title": "Horizon", "sub": "Quand ai-je besoin de cet argent ?", "at": 57.8, "subAt": 59.8 },
+          { "icon": "wallet", "title": "Capacité à perdre", "sub": "Et si ça baisse de 30 % ?", "at": 63.0, "subAt": 66.0 },
+          { "icon": "heart", "title": "Tolérance", "sub": "Vais-je vendre en panique ?", "at": 69.8, "subAt": 72.6, "accent": true }
+        ] }
+      ]
+    },
+    {
+      "from": 75.0,
+      "to": 98.2,
+      "items": [
+        { "type": "row", "at": 75.0, "items": [
+          { "type": "icon", "icon": "document", "size": "l", "label": "questionnaire d’adéquation", "at": 76.0 },
+          { "type": "icon", "icon": "check", "tone": "gain", "label": "réponds sincèrement", "at": 81.8 }
+        ] },
+        { "type": "list", "style": "num", "at": 87.2, "items": [
+          { "text": "Épargne de précaution disponible", "at": 87.2 },
+          { "text": "Projets à court terme, supports sûrs", "at": 89.8 },
+          { "text": "Épargne de long terme, plus risquée", "at": 93.3, "style": "dot" }
+        ] },
+        { "type": "actor", "character": "conseiller", "name": "le pro", "at": 75.1 }
+      ]
+    },
+    {
+      "from": 98.2,
+      "to": 123.4,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Deux poches", "at": 103.7 },
+        { "type": "compare", "at": 106.4,
+          "left": { "title": "Poche sûre", "icon": "shield", "items": [
+            { "text": "Livrets", "at": 107.0 },
+            { "text": "Fonds en euros", "at": 108.4 },
+            { "text": "Obligations court terme", "at": 109.6 }
+          ] },
+          "right": { "title": "Poche de croissance", "icon": "chart-up", "items": [
+            { "text": "Actions diversifiées", "at": 111.5 },
+            { "text": "Fonds indiciels mondiaux", "at": 114.6 }
+          ] } },
+        { "type": "chips", "at": 117.0, "items": [
+          { "text": "horizon long", "at": 117.6 },
+          { "text": "+", "at": 119.6 },
+          { "text": "capacité à perdre", "at": 120.0 },
+          { "text": "→", "at": 121.6 },
+          { "text": "plus de croissance", "at": 121.9, "tone": "accent" }
+        ] }
+      ]
+    },
+    {
+      "from": 123.4,
+      "to": 142.8,
+      "items": [
+        { "type": "chart", "at": 123.6, "baseline": { "value": 50, "label": "cible" }, "lines": [
+          { "label": "part des actions", "values": [50, 52, 56, 60, 64, 68], "at": 126.8, "until": 131.0, "tone": "accent" }
+        ] },
+        { "type": "text", "size": "mid", "text": "[[Rééquilibrer]] : 1 à 2 fois par an", "at": 131.4 },
+        { "type": "chips", "at": 138.4, "items": [
+          { "text": "vendre ce qui a monté", "at": 138.5, "tone": "gain" },
+          { "text": "→", "at": 140.2 },
+          { "text": "acheter ce qui a baissé", "at": 140.5 }
+        ] }
+      ]
+    },
+    {
+      "from": 142.8,
+      "to": 151.8,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Versements programmés", "at": 142.9 },
+        { "type": "icons", "icon": "coin", "count": 6, "step": 0.3, "label": "même montant", "at": 144.0 },
+        { "type": "chips", "at": 147.4, "items": [
+          { "text": "prix d’achat lissé", "at": 147.6 },
+          { "text": "discipline automatique", "at": 149.4, "tone": "accent" }
+        ] }
+      ]
+    },
+    {
+      "from": 151.8,
+      "to": 176.8,
+      "items": [
+        { "type": "text", "size": "big", "text": "Le point de vigilance", "at": 151.9, "out": 153.4, "hide": true },
+        { "type": "text", "size": "mid", "text": "Pas d’allocation parfaite pour tous", "at": 155.0 },
+        { "type": "text", "size": "big", "text": "Un exemple [[≠]] un conseil", "at": 158.8 },
+        { "type": "row", "at": 161.8, "items": [
+          { "type": "icon", "icon": "alert", "tone": "loss", "at": 162.0 },
+          { "type": "text", "size": "small", "text": "Tu perds le sommeil : trop risqué pour toi", "at": 162.4 }
+        ] },
+        { "type": "chips", "at": 168.0, "items": [
+          { "text": "ton employeur", "at": 169.0 },
+          { "text": "un seul pays", "at": 170.4 },
+          { "text": "un seul secteur", "at": 171.8 },
+          { "text": "un seul bien", "at": 173.4 }
+        ] }
+      ]
+    },
+    {
+      "from": 176.8,
+      "to": 189.0,
+      "items": [
+        { "type": "chips", "at": 182.2, "items": [
+          { "text": "60 % actions", "at": 183.6 },
+          { "text": "40 % fonds en euros", "at": 185.2 }
+        ] },
+        { "type": "counter", "label": "Portefeuille", "from": 0, "to": 20000, "at": 186.4, "until": 188.6, "tone": "accent" },
+        { "type": "actor", "character": "entrepreneuse", "name": "Aïcha", "at": 180.5 }
+      ]
+    },
+    {
+      "from": 189.0,
+      "to": 198.9,
+      "items": [
+        { "type": "bars", "at": 189.0, "items": [
+          { "label": "Actions", "value": 15000, "at": 190.6 },
+          { "label": "Fonds en euros", "value": 8400, "at": 193.0 }
+        ] },
+        { "type": "gauge", "label": "Actions : 64 %", "value": 64, "at": 195.5, "until": 197.5, "tone": "loss" },
+        { "type": "actor", "character": "entrepreneuse", "name": "Aïcha", "at": 189.1, "think": { "text": "!", "at": 195.6 } }
+      ]
+    },
+    {
+      "from": 198.9,
+      "to": 213.2,
+      "items": [
+        { "type": "counter", "label": "Déplacé vers le fonds en euros", "from": 0, "to": 960, "at": 199.0, "until": 202.4, "tone": "accent" },
+        { "type": "text", "size": "mid", "text": "Retour à [[60 / 40]]", "at": 204.4 },
+        { "type": "compare", "at": 207.1,
+          "left": { "title": "Après la hausse", "icon": "chart-up", "items": [
+            { "text": "Vend des actions", "at": 207.2 }
+          ] },
+          "right": { "title": "L’année suivante", "icon": "chart-down", "items": [
+            { "text": "Achète des actions", "at": 207.6 },
+            { "text": "à un prix plus bas", "at": 210.5 }
+          ] } }
+      ]
+    },
+    {
+      "from": 213.2,
+      "to": 238.6,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Ton assiette", "at": 213.3 },
+        { "type": "cards", "at": 216.4, "items": [
+          { "icon": "cake", "title": "Que des gâteaux", "sub": "du plaisir, pas longtemps", "at": 216.5, "subAt": 218.6 },
+          { "icon": "plant", "title": "Que des légumes", "sub": "sain, mais trop sage", "at": 221.4, "subAt": 223.0 },
+          { "icon": "scale", "title": "Repas équilibré", "sub": "un mélange, bien dosé", "at": 226.2, "subAt": 227.4, "accent": true }
+        ] },
+        { "type": "chips", "at": 230.5, "items": [
+          { "text": "prudent", "at": 231.4 },
+          { "text": "+", "at": 232.4 },
+          { "text": "dynamique", "at": 232.9 },
+          { "text": "=", "at": 234.0 },
+          { "text": "allocation", "at": 234.4, "tone": "accent" }
+        ] },
+        { "type": "text", "size": "small", "text": "La bonne proportion dépend de [[toi]]", "at": 236.2 }
+      ]
+    },
+    {
+      "from": 238.6,
+      "to": 260.8,
+      "items": [
+        { "type": "compare", "at": 238.6,
+          "left": { "title": "Besoin dans 2 ans", "icon": "calendar", "items": [
+            { "text": "Un projet précis", "at": 239.4 },
+            { "text": "Surtout des supports sûrs", "at": 241.8 }
+          ] },
+          "right": { "title": "Retraite dans 30 ans", "icon": "hour", "items": [
+            { "text": "Plus de variations", "at": 245.0 },
+            { "text": "Le temps de se remettre", "at": 248.0 }
+          ] } },
+        { "type": "text", "size": "big", "text": "Choisie ? [[Tu t’y tiens]]", "at": 251.4 },
+        { "type": "text", "size": "small", "text": "Les décisions [[émotionnelles|loss]] coûtent plus cher", "at": 255.4 }
+      ]
+    },
+    {
+      "from": 260.8,
+      "to": 276,
+      "items": [
+        { "type": "text", "size": "big", "text": "Pour résumer", "at": 260.9, "out": 262.1, "hide": true },
+        { "type": "list", "style": "check", "at": 262.3, "items": [
+          { "text": "Ton horizon", "at": 262.8 },
+          { "text": "Ta capacité à perdre", "at": 264.4 },
+          { "text": "Ta tolérance au risque", "at": 266.2 }
+        ] },
+        { "type": "steps", "at": 268.1, "items": [
+          { "text": "Décider à l’avance", "icon": "flag", "at": 268.2 },
+          { "text": "Rééquilibrer", "icon": "scale", "at": 270.2 },
+          { "text": "Tenir son plan", "icon": "lock", "at": 272.0 }
+        ] }
+      ]
+    }
+  ]
+}

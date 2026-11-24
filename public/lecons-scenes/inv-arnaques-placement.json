@@ -1,0 +1,244 @@
+{
+  "lesson": "inv-arnaques-placement",
+  "version": "1.0.0",
+  "scenes": [
+    {
+      "from": 0,
+      "to": 24.1,
+      "items": [
+        { "type": "text", "size": "title", "text": "Repérer une arnaque au placement", "at": 0.2 },
+        { "type": "icons", "icon": "person", "count": 6, "step": 0.4, "at": 3.8 },
+        { "type": "row", "at": 8.9, "items": [
+          { "type": "icon", "icon": "bank", "size": "m", "label": "la vraie", "at": 8.9 },
+          { "type": "icon", "icon": "bank", "size": "m", "label": "la copie", "at": 11.2, "tone": "loss" }
+        ] },
+        { "type": "chips", "at": 15.5, "items": [
+          { "text": "Signaux d’alerte", "at": 15.6 },
+          { "text": "Vérifier en 5 minutes", "at": 18.0, "tone": "accent" },
+          { "text": "Déjà versé ?", "at": 21.2 }
+        ] }
+      ]
+    },
+    {
+      "from": 24.1,
+      "to": 43.9,
+      "items": [
+        { "type": "text", "size": "big", "text": "Pourquoi apprendre ça ?", "at": 24.2, "out": 25.8, "hide": true },
+        { "type": "icon", "icon": "coins", "size": "m", "label": "des sommes considérables", "at": 25.9, "tone": "loss" },
+        { "type": "icons", "icon": "person", "count": 5, "step": 0.35, "label": "tous les âges", "at": 30.4 },
+        { "type": "row", "at": 34.1, "items": [
+          { "type": "icon", "icon": "coins", "size": "m", "label": "argent versé", "at": 34.1 },
+          { "type": "icon", "icon": "globe", "size": "m", "label": "à l’étranger", "at": 36.0, "tone": "muted" },
+          { "type": "icon", "icon": "cross", "size": "m", "label": "rarement récupéré", "at": 38.0, "tone": "loss" }
+        ] },
+        { "type": "text", "size": "mid", "text": "Seule vraie protection : la [[prévention]]", "at": 40.3 }
+      ]
+    },
+    {
+      "from": 43.9,
+      "to": 62.8,
+      "items": [
+        { "type": "text", "size": "big", "text": "Les signaux d’alerte", "at": 44.0, "out": 45.8, "hide": true },
+        { "type": "text", "size": "mid", "text": "Un seul signal : prends du [[recul]]", "at": 47.6 },
+        { "type": "row", "at": 50.9, "items": [
+          { "type": "icon", "icon": "chart-up", "size": "m", "label": "rendement « garanti »", "at": 50.9, "tone": "loss" },
+          { "type": "icon", "icon": "clock", "size": "m", "label": "décider vite", "at": 56.7, "tone": "loss" }
+        ] },
+        { "type": "chips", "at": 59.9, "items": [
+          { "text": "« Offre limitée »", "at": 60.0 },
+          { "text": "« Dernières places »", "at": 61.3 }
+        ] }
+      ]
+    },
+    {
+      "from": 62.8,
+      "to": 83.4,
+      "items": [
+        { "type": "text", "size": "mid", "text": "[[3 ·]] Un contact que tu n’as pas demandé", "at": 62.9 },
+        { "type": "row", "at": 66.8, "items": [
+          { "type": "icon", "icon": "phone", "size": "m", "label": "appel", "at": 67.0 },
+          { "type": "icon", "icon": "mail", "size": "m", "label": "message", "at": 68.4 },
+          { "type": "icon", "icon": "megaphone", "size": "m", "label": "pub", "at": 70.0 },
+          { "type": "icon", "icon": "document", "size": "m", "label": "faux article", "at": 71.6 }
+        ] },
+        { "type": "text", "size": "mid", "text": "[[4 ·]] Introuvable sur les registres", "at": 74.5 },
+        { "type": "row", "at": 77.0, "items": [
+          { "type": "icon", "icon": "search", "size": "m", "label": "registre officiel", "at": 77.0 },
+          { "type": "icon", "icon": "cross", "size": "m", "label": "ou nom usurpé", "at": 79.8, "tone": "loss" }
+        ] }
+      ]
+    },
+    {
+      "from": 83.4,
+      "to": 113.3,
+      "items": [
+        { "type": "row", "at": 83.6, "items": [
+          { "type": "icon", "icon": "globe", "size": "m", "label": "compte à l’étranger", "at": 83.6 },
+          { "type": "icon", "icon": "coins", "size": "m", "label": "crypto-actifs", "at": 86.4 },
+          { "type": "icon", "icon": "card", "size": "m", "label": "carte prépayée", "at": 88.4 }
+        ] },
+        { "type": "text", "size": "mid", "text": "[[6 ·]] Des actifs exotiques", "at": 91.3 },
+        { "type": "chips", "at": 95.7, "items": [
+          { "text": "vin", "at": 96.0 },
+          { "text": "diamants", "at": 97.2 },
+          { "text": "forêts", "at": 98.6 },
+          { "text": "maisons de retraite", "at": 99.8 },
+          { "text": "crypto « exclusifs »", "at": 101.6 },
+          { "text": "trading par IA", "at": 103.6 }
+        ] },
+        { "type": "text", "size": "mid", "text": "« Récupération » contre frais : une [[seconde arnaque|loss]]", "at": 105.7 }
+      ]
+    },
+    {
+      "from": 113.3,
+      "to": 131.8,
+      "items": [
+        { "type": "text", "size": "big", "text": "Vérifier avant de verser", "at": 113.4, "out": 115.7, "hide": true },
+        { "type": "cards", "at": 119.4, "items": [
+          { "icon": "shield", "title": "AMF", "sub": "liste noire", "at": 119.4, "accent": true },
+          { "icon": "bank", "title": "ACPR", "sub": "liste noire", "at": 123.6 }
+        ] },
+        { "type": "row", "at": 128.4, "items": [
+          { "type": "icon", "icon": "alert", "size": "m", "label": "sites et entités non autorisés", "at": 128.4, "tone": "loss" }
+        ] }
+      ]
+    },
+    {
+      "from": 131.8,
+      "to": 146.1,
+      "items": [
+        { "type": "list", "style": "check", "at": 131.9, "items": [
+          { "text": "ORIAS : l’intermédiaire est enregistré", "at": 132.0 },
+          { "text": "REGAFI : le prestataire est autorisé", "at": 136.0 },
+          { "text": "Crypto : la liste de l’AMF", "at": 141.2 }
+        ] }
+      ]
+    },
+    {
+      "from": 146.1,
+      "to": 160.5,
+      "items": [
+        { "type": "compare", "at": 146.2,
+          "left": { "title": "Site cloné", "icon": "alert", "items": [{ "text": "une vraie société, usurpée", "at": 146.3 }] },
+          "right": { "title": "Toi, tu appelles", "icon": "phone", "items": [
+            { "text": "coordonnées du registre officiel", "at": 150.9 },
+            { "text": "jamais celles de l’interlocuteur", "at": 157.1 } ] } }
+      ]
+    },
+    {
+      "from": 160.5,
+      "to": 180.4,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Déjà versé ? [[Agis vite]]", "at": 164.9 },
+        { "type": "steps", "at": 167.8, "items": [
+          { "text": "Arrête tout versement", "icon": "cross", "at": 167.8 },
+          { "text": "Préviens ta banque", "icon": "bank", "at": 169.3 },
+          { "text": "Garde les preuves", "icon": "document", "at": 173.9 },
+          { "text": "Porte plainte", "icon": "flag", "at": 175.6 },
+          { "text": "Signale à l’AMF", "icon": "megaphone", "at": 176.8 }
+        ] }
+      ]
+    },
+    {
+      "from": 180.4,
+      "to": 188.4,
+      "items": [
+        { "type": "row", "at": 180.5, "items": [
+          { "type": "icon", "icon": "invoice", "size": "m", "label": "« frais de déblocage »", "at": 180.5, "tone": "loss" },
+          { "type": "icon", "icon": "percent", "size": "m", "label": "« taxes »", "at": 182.8, "tone": "loss" }
+        ] },
+        { "type": "text", "size": "mid", "text": "Un vrai placement ne les exige [[jamais]]", "at": 185.1 }
+      ]
+    },
+    {
+      "from": 188.4,
+      "to": 207.0,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Le « livret » garanti", "at": 188.5, "out": 194.8, "hide": true },
+        { "type": "row", "at": 195.0, "items": [
+          { "type": "icon", "icon": "megaphone", "size": "m", "label": "pub sur un réseau social", "at": 195.0 },
+          { "type": "icon", "icon": "bank", "size": "m", "label": "au nom connu", "at": 199.8 }
+        ] },
+        { "type": "counter", "label": "Livret « garanti »", "from": 0, "to": 9, "unit": " %", "at": 196.8, "until": 198.8 },
+        { "type": "row", "at": 202.3, "items": [
+          { "type": "icon", "icon": "phone", "size": "m", "label": "un conseiller rappelle", "at": 202.3 },
+          { "type": "icon", "icon": "contract", "size": "m", "label": "documentation, contrat", "at": 204.4 }
+        ] },
+        { "type": "actor", "character": "toi", "name": "Paul", "at": 195.1 }
+      ]
+    },
+    {
+      "from": 207.0,
+      "to": 222.7,
+      "items": [
+        { "type": "steps", "at": 207.0, "items": [
+          { "text": "Liste noire de l’AMF", "icon": "search", "at": 207.1 },
+          { "text": "Un site au nom proche", "icon": "alert", "at": 211.4 },
+          { "text": "Appel à la vraie banque", "icon": "phone", "at": 214.1 },
+          { "text": "Aucun produit de ce type", "icon": "cross", "at": 217.9 }
+        ] },
+        { "type": "text", "size": "big", "text": "Un site [[cloné|loss]]", "at": 220.7 }
+      ]
+    },
+    {
+      "from": 222.7,
+      "to": 233.8,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Elles exploitent nos [[émotions]]", "at": 225.4 },
+        { "type": "cards", "at": 227.7, "items": [
+          { "icon": "coins", "title": "Gagner facilement", "sub": "", "at": 227.7 },
+          { "icon": "alert", "title": "Peur de rater", "sub": "", "at": 229.9 },
+          { "icon": "hour", "title": "Urgence", "sub": "", "at": 231.9 }
+        ] }
+      ]
+    },
+    {
+      "from": 233.8,
+      "to": 250.6,
+      "items": [
+        { "type": "chips", "at": 234.2, "items": [
+          { "text": "sites soignés", "at": 234.4 },
+          { "text": "documents pro", "at": 236.0 },
+          { "text": "conseillers patients", "at": 238.0 }
+        ] },
+        { "type": "timeline", "at": 240.7, "points": [
+          { "label": "Appels", "sub": "plusieurs fois", "pos": 6, "at": 240.7 },
+          { "label": "Confiance", "sub": "petit à petit", "pos": 50, "at": 243.0 },
+          { "label": "Gros versement", "sub": "", "pos": 92, "at": 245.0 }
+        ] }
+      ]
+    },
+    {
+      "from": 250.6,
+      "to": 270.0,
+      "items": [
+        { "type": "counter", "label": "Pause avant de verser", "from": 0, "to": 48, "unit": " h", "at": 251.1, "until": 255.0, "bar": true, "max": 48 },
+        { "type": "list", "style": "check", "at": 256.5, "items": [
+          { "text": "Vérifier sur les listes officielles", "at": 256.5 },
+          { "text": "En parler à une personne de confiance", "at": 259.0 }
+        ] },
+        { "type": "compare", "at": 261.8,
+          "left": { "title": "Un vrai placement", "icon": "check", "items": [{ "text": "encore là après 2 jours", "at": 261.9 }] },
+          "right": { "title": "Une arnaque", "icon": "cross", "items": [{ "text": "s’effondre", "at": 265.8 }] } }
+      ]
+    },
+    {
+      "from": 270.0,
+      "to": 289,
+      "items": [
+        { "type": "chips", "at": 271.5, "items": [
+          { "text": "rendement garanti", "at": 271.6, "tone": "loss" },
+          { "text": "pression", "at": 273.6, "tone": "loss" },
+          { "text": "contact non sollicité", "at": 275.0, "tone": "loss" },
+          { "text": "introuvable", "at": 277.0, "tone": "loss" }
+        ] },
+        { "type": "list", "style": "check", "at": 279.2, "items": [
+          { "text": "Vérifie sur les listes officielles", "at": 279.3 },
+          { "text": "Contacte la vraie société toi-même", "at": 281.5 },
+          { "text": "Ne paie jamais pour récupérer", "at": 283.6 }
+        ] },
+        { "type": "text", "size": "small", "text": "À bientôt", "at": 286.9 }
+      ]
+    }
+  ]
+}

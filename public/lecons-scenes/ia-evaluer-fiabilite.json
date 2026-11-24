@@ -1,0 +1,243 @@
+{
+  "lesson": "ia-evaluer-fiabilite",
+  "version": "1.0.0",
+  "scenes": [
+    {
+      "from": 0,
+      "to": 21.2,
+      "items": [
+        { "type": "text", "size": "title", "text": "Évaluer et tester une IA", "at": 0.2 },
+        { "type": "row", "at": 3.6, "items": [
+          { "type": "icon", "icon": "robot", "size": "l", "label": "démo impressionnante", "at": 3.7 },
+          { "type": "text", "size": "big", "text": "[[≠]]", "at": 6.4 },
+          { "type": "icon", "icon": "check", "size": "l", "label": "preuve", "at": 6.8 }
+        ] },
+        { "type": "chips", "at": 12.2, "items": [
+          { "text": "jeu de cas", "at": 12.4 },
+          { "text": "erreurs graves", "at": 14.8, "tone": "loss" },
+          { "text": "variabilité", "at": 17.0 },
+          { "text": "biais", "at": 18.8 }
+        ] }
+      ]
+    },
+    {
+      "from": 21.2,
+      "to": 39.9,
+      "items": [
+        { "type": "icons", "icon": "check", "count": 10, "step": 0.3, "label": "", "at": 22.8 },
+        { "type": "row", "at": 25.4, "items": [
+          { "type": "icon", "icon": "cross", "tone": "loss", "label": "le onzième, banal", "at": 25.5 }
+        ] },
+        { "type": "row", "at": 28.2, "items": [
+          { "type": "icon", "icon": "alert", "tone": "loss", "at": 28.3 },
+          { "type": "text", "size": "small", "text": "Erreurs découvertes chez les clients", "at": 28.5 }
+        ] },
+        { "type": "chips", "at": 33.0, "items": [
+          { "text": "outil A", "at": 33.5 },
+          { "text": "vs", "at": 35.0 },
+          { "text": "outil B", "at": 35.4 },
+          { "text": "base commune", "at": 36.6, "tone": "accent" }
+        ] }
+      ]
+    },
+    {
+      "from": 39.9,
+      "to": 64.0,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Un jeu de cas de test", "at": 41.9 },
+        { "type": "chips", "at": 44.9, "items": [
+          { "text": "exemples réels", "at": 45.0 },
+          { "text": "résultat attendu ou grille", "at": 48.4 }
+        ] },
+        { "type": "chips", "at": 51.4, "items": [
+          { "text": "faciles", "at": 52.4 },
+          { "text": "ambigus", "at": 54.0 },
+          { "text": "données manquantes", "at": 55.4 },
+          { "text": "contradictions", "at": 58.0 },
+          { "text": "hostiles", "at": 60.2, "tone": "loss" }
+        ] },
+        { "type": "text", "size": "small", "text": "Injection de prompt : un texte qui donne des ordres à l’IA", "at": 60.6 }
+      ]
+    },
+    {
+      "from": 64.0,
+      "to": 74.8,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Des critères observables", "at": 64.1 },
+        { "type": "list", "style": "check", "at": 66.1, "items": [
+          { "text": "Faits et chiffres exacts", "at": 66.1 },
+          { "text": "Format respecté", "at": 68.4 },
+          { "text": "Aucune invention", "at": 69.8 },
+          { "text": "Incertitudes signalées", "at": 71.2 },
+          { "text": "Ton adapté", "at": 73.2 }
+        ] }
+      ]
+    },
+    {
+      "from": 74.8,
+      "to": 88.5,
+      "items": [
+        { "type": "cards", "at": 74.8, "items": [
+          { "icon": "alert", "title": "Erreur grave", "sub": "fausse info, donnée sensible exposée", "at": 74.9, "subAt": 78.4, "tone": "loss" },
+          { "icon": "check", "title": "Imperfection mineure", "sub": "sans gravité", "at": 77.0 }
+        ] },
+        { "type": "row", "at": 84.4, "items": [
+          { "type": "icon", "icon": "briefcase", "at": 84.5 },
+          { "type": "text", "size": "small", "text": "Référence : ton processus [[actuel]]", "at": 84.8 }
+        ] }
+      ]
+    },
+    {
+      "from": 88.5,
+      "to": 97.4,
+      "items": [
+        { "type": "row", "at": 88.5, "items": [
+          { "type": "gauge", "label": "IA : erreurs", "value": 5, "at": 88.8, "until": 91.5 },
+          { "type": "gauge", "label": "Humain pressé", "value": 8, "at": 91.8, "until": 94.0, "tone": "loss" }
+        ] },
+        { "type": "text", "size": "small", "text": "…sauf si ses erreurs sont [[plus graves]]", "at": 94.4 }
+      ]
+    },
+    {
+      "from": 97.4,
+      "to": 113.6,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Variabilité", "at": 100.8 },
+        { "type": "icons", "icon": "chat", "count": 4, "step": 0.5, "label": "même question", "at": 102.6 },
+        { "type": "gauge", "label": "Correct 1 fois sur 2", "value": 50, "at": 110.2, "until": 112.6, "tone": "loss" }
+      ]
+    },
+    {
+      "from": 113.6,
+      "to": 128.8,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Biais", "at": 113.7 },
+        { "type": "chips", "at": 114.8, "items": [
+          { "text": "genre", "at": 118.0 },
+          { "text": "origine", "at": 119.4 },
+          { "text": "âge", "at": 120.6 },
+          { "text": "quartier", "at": 121.6 }
+        ] },
+        { "type": "chips", "at": 124.0, "items": [
+          { "text": "cas A", "at": 124.4 },
+          { "text": "=", "at": 125.4 },
+          { "text": "cas B", "at": 125.8 },
+          { "text": "sauf 1 critère", "at": 126.6, "tone": "accent" }
+        ] }
+      ]
+    },
+    {
+      "from": 128.8,
+      "to": 142.1,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Une supervision humaine [[réelle]]", "at": 128.9 },
+        { "type": "list", "style": "check", "at": 130.6, "items": [
+          { "text": "Une personne compétente", "at": 131.0 },
+          { "text": "Le temps de relire", "at": 133.4 },
+          { "text": "L’autorité de refuser", "at": 135.2 },
+          { "text": "Validation automatique « par habitude »", "at": 137.4, "style": "cross" }
+        ] }
+      ]
+    },
+    {
+      "from": 142.1,
+      "to": 160.5,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Réévaluer après chaque [[changement]]", "at": 145.7 },
+        { "type": "chips", "at": 147.0, "items": [
+          { "text": "nouvelle version", "at": 147.2 },
+          { "text": "nouvelle consigne", "at": 149.0 },
+          { "text": "nouvelles données", "at": 150.4 }
+        ] },
+        { "type": "row", "at": 152.1, "items": [
+          { "type": "icon", "icon": "coin", "label": "coût par tâche", "at": 152.5 },
+          { "type": "icon", "icon": "clock", "label": "délai", "at": 154.4 }
+        ] },
+        { "type": "text", "size": "small", "text": "Très précis mais trop lent ou cher : [[inadapté]]", "at": 156.1 }
+      ]
+    },
+    {
+      "from": 160.5,
+      "to": 178.4,
+      "items": [
+        { "type": "chips", "at": 165.5, "items": [
+          { "text": "montant", "at": 166.6 },
+          { "text": "date", "at": 168.0 },
+          { "text": "fournisseur", "at": 169.0 }
+        ] },
+        { "type": "stats", "at": 170.6, "items": [
+          { "label": "Factures", "value": 50, "unit": "", "at": 170.8 },
+          { "label": "Difficiles", "value": 10, "unit": "", "at": 172.6, "accent": true }
+        ] },
+        { "type": "chips", "at": 174.0, "items": [
+          { "text": "scans flous", "at": 174.2 },
+          { "text": "devises étrangères", "at": 175.4 },
+          { "text": "avoirs", "at": 177.0 }
+        ] },
+        { "type": "actor", "character": "conseiller", "name": "le cabinet", "at": 165.5 }
+      ]
+    },
+    {
+      "from": 178.4,
+      "to": 196.1,
+      "items": [
+        { "type": "text", "size": "small", "text": "Chaque facture : [[3 passages]]", "at": 178.5 },
+        { "type": "split", "label": "50 factures", "total": 50, "unit": "", "at": 180.8, "parts": [
+          { "label": "correctes et stables", "value": 46, "at": 181.0, "tone": "gain" },
+          { "label": "erreurs de date", "value": 3, "at": 184.4, "tone": "muted" },
+          { "label": "avoir lu comme facture", "value": 1, "at": 185.9, "tone": "loss" }
+        ] },
+        { "type": "chips", "at": 189.7, "items": [
+          { "text": "montant négatif ou avoir", "at": 189.8 },
+          { "text": "→", "at": 192.4 },
+          { "text": "vérification manuelle", "at": 192.8, "tone": "accent" }
+        ] }
+      ]
+    },
+    {
+      "from": 196.1,
+      "to": 212.3,
+      "items": [
+        { "type": "compare", "at": 197.4,
+          "left": { "title": "L’examen", "icon": "graduate", "items": [
+            { "text": "3 questions révisées", "at": 197.6 },
+            { "text": "Le prof ne sait presque rien", "at": 200.6 }
+          ] },
+          "right": { "title": "Une démo d’IA", "icon": "robot", "items": [
+            { "text": "Exemples bien choisis", "at": 205.8 },
+            { "text": "Pas tes vrais cas", "at": 208.6 }
+          ] } }
+      ]
+    },
+    {
+      "from": 212.3,
+      "to": 234.6,
+      "items": [
+        { "type": "chips", "at": 212.3, "items": [
+          { "text": "ordinaires", "at": 213.6 },
+          { "text": "piégeux", "at": 215.6 },
+          { "text": "hostiles", "at": 217.6, "tone": "loss" }
+        ] },
+        { "type": "text", "size": "mid", "text": "[[Erreurs graves]] > petites imperfections", "at": 223.5 },
+        { "type": "row", "at": 228.4, "items": [
+          { "type": "icon", "icon": "chat", "tone": "loss", "at": 228.5 },
+          { "type": "text", "size": "small", "text": "Réponses différentes : pas de régularité", "at": 228.8 }
+        ] }
+      ]
+    },
+    {
+      "from": 234.6,
+      "to": 251,
+      "items": [
+        { "type": "list", "style": "check", "at": 235.8, "items": [
+          { "text": "Jeu de cas réels", "at": 235.8 },
+          { "text": "Erreurs graves comptées", "at": 238.0 },
+          { "text": "Essais répétés : stabilité", "at": 239.8 },
+          { "text": "Biais cherchés", "at": 242.5 },
+          { "text": "Supervision humaine réelle", "at": 243.8 }
+        ] },
+        { "type": "text", "size": "mid", "text": "Réévaluer à chaque [[changement]]", "at": 246.3 }
+      ]
+    }
+  ]
+}

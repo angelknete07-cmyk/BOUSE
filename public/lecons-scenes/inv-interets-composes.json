@@ -1,0 +1,296 @@
+{
+  "lesson": "inv-interets-composes",
+  "version": "1.0.0",
+  "scenes": [
+    {
+      "from": 0,
+      "to": 4.9,
+      "items": [
+        { "type": "text", "size": "title", "text": "Intérêts composés, inflation et frais", "at": 0.2 },
+        { "type": "text", "size": "small", "text": "Bienvenue", "at": 3.5 }
+      ]
+    },
+    {
+      "from": 4.9,
+      "to": 15.2,
+      "items": [
+        { "type": "row", "at": 4.9, "items": [
+          { "type": "icon", "icon": "chart-up", "size": "l", "label": "placement A", "at": 5.0 },
+          { "type": "icon", "icon": "chart-up", "size": "l", "label": "placement B", "at": 6.2 }
+        ] },
+        { "type": "chart", "at": 9.0, "lines": [
+          { "label": "A", "values": [10, 20, 34, 52, 80], "at": 9.1, "until": 12.8 },
+          { "label": "B", "values": [10, 17, 25, 33, 42], "at": 9.4, "until": 13.0, "tone": "muted" }
+        ] },
+        { "type": "actor", "character": "toi", "name": "toi", "at": 5.0, "think": { "text": "?", "at": 13.6 } }
+      ]
+    },
+    {
+      "from": 15.2,
+      "to": 28.2,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Trois forces avec le temps", "at": 15.3 },
+        { "type": "cards", "at": 19.1, "items": [
+          { "icon": "snowball", "title": "Intérêts composés", "sub": "font grossir ton capital", "at": 19.2, "tone": "gain" },
+          { "icon": "fire", "title": "Inflation", "sub": "grignote sa valeur", "at": 22.6, "tone": "loss" },
+          { "icon": "invoice", "title": "Frais", "sub": "travaillent contre toi", "at": 25.3, "tone": "loss" }
+        ] }
+      ]
+    },
+    {
+      "from": 28.2,
+      "to": 41.6,
+      "items": [
+        { "type": "text", "size": "big", "text": "Pourquoi apprendre ça ?", "at": 28.3, "out": 31.0, "hide": true },
+        { "type": "text", "size": "mid", "text": "Une seule année : [[invisible]]", "at": 31.4 },
+        { "type": "chips", "at": 35.3, "items": [
+          { "text": "gains", "at": 35.5, "tone": "gain" },
+          { "text": "+", "at": 36.8 },
+          { "text": "inflation", "at": 37.2, "tone": "loss" },
+          { "text": "+", "at": 38.4 },
+          { "text": "frais", "at": 38.8, "tone": "loss" }
+        ] },
+        { "type": "text", "size": "small", "text": "année après année", "at": 39.8 }
+      ]
+    },
+    {
+      "from": 41.6,
+      "to": 49.7,
+      "items": [
+        { "type": "cards", "at": 41.7, "items": [
+          { "icon": "scale", "title": "Comparer", "sub": "des offres", "at": 42.5 },
+          { "icon": "eye", "title": "Se méfier", "sub": "des projections trop belles", "at": 44.6 },
+          { "icon": "search", "title": "Repérer", "sub": "les coûts qui comptent", "at": 46.6 }
+        ] }
+      ]
+    },
+    {
+      "from": 49.7,
+      "to": 59.7,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Intérêts [[simples]]", "at": 51.4 },
+        { "type": "icons", "icon": "coins", "count": 3, "step": 1.6, "label": "même somme", "at": 53.6 }
+      ]
+    },
+    {
+      "from": 59.7,
+      "to": 70.3,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Intérêts [[composés]]", "at": 59.8 },
+        { "type": "steps", "at": 62.4, "items": [
+          { "text": "Gains réinvestis", "icon": "coins", "at": 62.5 },
+          { "text": "Ils font des gains", "icon": "plant", "at": 64.4 }
+        ] },
+        { "type": "icon", "icon": "snowball", "size": "l", "label": "boule de neige", "at": 67.3 }
+      ]
+    },
+    {
+      "from": 70.3,
+      "to": 86.2,
+      "items": [
+        { "type": "counter", "label": "Capital", "from": 1000, "to": 1050, "at": 73.7, "until": 75.7 },
+        { "type": "chips", "at": 73.8, "items": [
+          { "text": "1 000 € à 5 %", "at": 73.8 },
+          { "text": "=", "at": 75.0 },
+          { "text": "50 €", "at": 75.4, "tone": "gain" }
+        ] },
+        { "type": "chips", "at": 76.5, "items": [
+          { "text": "5 % de 1 050 €", "at": 76.5 },
+          { "text": "=", "at": 79.0 },
+          { "text": "52,50 €", "at": 79.6, "tone": "gain" }
+        ] },
+        { "type": "text", "size": "mid", "text": "Le gain [[grossit]]", "at": 83.4 }
+      ]
+    },
+    {
+      "from": 86.2,
+      "to": 94.5,
+      "items": [
+        { "type": "chips", "at": 86.4, "items": [
+          { "text": "capital final", "at": 86.4, "tone": "accent" },
+          { "text": "=", "at": 87.4 },
+          { "text": "capital de départ", "at": 87.8 },
+          { "text": "×", "at": 89.4 },
+          { "text": "(1 + taux)^années", "at": 90.0 }
+        ] }
+      ]
+    },
+    {
+      "from": 94.5,
+      "to": 106.4,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Inflation", "at": 94.6 },
+        { "type": "stats", "at": 98.4, "items": [
+          { "label": "Placement", "value": 3, "unit": " %", "at": 98.5, "tone": "gain" },
+          { "label": "Prix", "value": 3, "unit": " %", "at": 100.2, "tone": "loss" }
+        ] },
+        { "type": "text", "size": "mid", "text": "Pouvoir d’achat [[maintenu]], pas plus", "at": 103.0 }
+      ]
+    },
+    {
+      "from": 106.4,
+      "to": 113.8,
+      "items": [
+        { "type": "text", "size": "small", "text": "Rendement réel", "at": 106.5 },
+        { "type": "chips", "at": 108.2, "items": [
+          { "text": "rendement affiché", "at": 108.3 },
+          { "text": "−", "at": 109.8 },
+          { "text": "inflation", "at": 110.2, "tone": "loss" },
+          { "text": "≈", "at": 111.2 },
+          { "text": "réel", "at": 111.6, "tone": "accent" }
+        ] }
+      ]
+    },
+    {
+      "from": 113.8,
+      "to": 125.5,
+      "items": [
+        { "type": "icon", "icon": "invoice", "size": "l", "label": "les frais", "at": 113.9 },
+        { "type": "text", "size": "small", "text": "Chaque année, sur tout le capital", "at": 115.8 },
+        { "type": "compare", "at": 119.8, "left": { "title": "Intérêts composés", "icon": "snowball", "items": [
+          { "text": "Pour toi", "at": 120.4 }
+        ] }, "right": { "title": "Frais composés", "icon": "invoice", "items": [
+          { "text": "Contre toi", "at": 122.4, "tone": "loss" }
+        ] } }
+      ]
+    },
+    {
+      "from": 125.5,
+      "to": 138.6,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Plusieurs types de frais", "at": 125.6 },
+        { "type": "cards", "at": 127.3, "items": [
+          { "icon": "key", "title": "Frais d’entrée", "sub": "quand tu investis", "at": 127.4 },
+          { "icon": "calendar", "title": "Gestion annuelle", "sub": "prélevés chaque année", "at": 130.1 },
+          { "icon": "cart", "title": "Courtage", "sub": "à chaque ordre", "at": 134.3 }
+        ] }
+      ]
+    },
+    {
+      "from": 138.6,
+      "to": 149.0,
+      "items": [
+        { "type": "cards", "at": 142.9, "items": [
+          { "icon": "percent", "title": "Nominal", "sub": "affiché, avant inflation", "at": 143.0 },
+          { "icon": "target", "title": "Réel", "sub": "tient compte de l’inflation", "at": 147.3, "accent": true }
+        ] }
+      ]
+    },
+    {
+      "from": 149.0,
+      "to": 156.3,
+      "items": [
+        { "type": "chips", "at": 149.1, "items": [
+          { "text": "frais courants", "at": 149.2 },
+          { "text": "en % par an", "at": 150.4 },
+          { "text": "sur l’encours", "at": 153.9, "tone": "accent" }
+        ] },
+        { "type": "icon", "icon": "pie", "label": "la somme investie", "at": 154.0 }
+      ]
+    },
+    {
+      "from": 156.3,
+      "to": 172.8,
+      "items": [
+        { "type": "text", "size": "mid", "text": "La règle de [[72]]", "at": 156.4 },
+        { "type": "chips", "at": 160.3, "items": [
+          { "text": "72", "at": 160.3 },
+          { "text": "÷", "at": 161.4 },
+          { "text": "taux annuel", "at": 161.8 },
+          { "text": "=", "at": 163.4 },
+          { "text": "années pour doubler", "at": 163.8, "tone": "accent" }
+        ] },
+        { "type": "chips", "at": 165.8, "items": [
+          { "text": "6 % par an", "at": 165.8 },
+          { "text": "→", "at": 167.0 },
+          { "text": "environ 12 ans", "at": 167.4, "tone": "gain" }
+        ] },
+        { "type": "text", "size": "small", "text": "Une approximation", "at": 169.7 }
+      ]
+    },
+    {
+      "from": 172.8,
+      "to": 192.0,
+      "items": [
+        { "type": "chart", "at": 177.5, "lines": [
+          { "label": "taux constant", "values": [10, 22, 34, 46, 58, 70], "at": 177.6, "until": 182.0, "tone": "muted" },
+          { "label": "réalité risquée", "values": [10, 30, 18, 44, 26, 52], "at": 183.0, "until": 187.4, "tone": "accent" }
+        ] },
+        { "type": "text", "size": "mid", "text": "Taux passé [[≠]] garantie", "at": 188.6 }
+      ]
+    },
+    {
+      "from": 192.0,
+      "to": 201.3,
+      "items": [
+        { "type": "compare", "at": 192.1, "left": { "title": "Sur 1 an", "icon": "calendar", "items": [
+          { "text": "Écart de frais : négligeable", "at": 192.4 }
+        ] }, "right": { "title": "Sur 20 ans", "icon": "calendar", "items": [
+          { "text": "Une part importante du capital", "at": 196.6, "tone": "loss" }
+        ] } }
+      ]
+    },
+    {
+      "from": 201.3,
+      "to": 213.9,
+      "items": [
+        { "type": "row", "at": 201.4, "items": [
+          { "type": "icon", "icon": "document", "size": "l", "label": "frais du contrat aussi", "at": 201.4 },
+          { "type": "icon", "icon": "scale", "label": "compare les frais totaux", "at": 203.4 }
+        ] },
+        { "type": "text", "size": "small", "text": "Exemples sans impôts : à vérifier à ta date de décision", "at": 206.3 }
+      ]
+    },
+    {
+      "from": 213.9,
+      "to": 225.6,
+      "items": [
+        { "type": "text", "size": "mid", "text": "10 000 € pendant 20 ans", "at": 214.0, "out": 218.9, "hide": true },
+        { "type": "stats", "at": 219.2, "items": [
+          { "label": "Placé", "value": 10000, "unit": " €", "at": 219.3 },
+          { "label": "Durée", "value": 20, "unit": " ans", "at": 220.8 },
+          { "label": "Taux", "value": 5, "unit": " %", "at": 222.2 }
+        ] },
+        { "type": "text", "size": "small", "text": "intérêts réinvestis", "at": 224.0 }
+      ]
+    },
+    {
+      "from": 225.6,
+      "to": 244.8,
+      "items": [
+        { "type": "bars", "at": 225.7, "unit": " €", "items": [
+          { "label": "Sans frais", "value": 26533, "at": 225.8, "tone": "gain" },
+          { "label": "1 % de frais", "value": 21702, "at": 232.0 },
+          { "label": "2 % de frais", "value": 17714, "at": 236.2, "tone": "loss" }
+        ] },
+        { "type": "text", "size": "mid", "text": "Des [[milliers d’euros]]", "at": 240.9 }
+      ]
+    },
+    {
+      "from": 244.8,
+      "to": 260.6,
+      "items": [
+        { "type": "icon", "icon": "fire", "label": "l’inflation : 2 % par an", "at": 244.9 },
+        { "type": "chips", "at": 247.0, "items": [
+          { "text": "26 533 €", "at": 247.0 },
+          { "text": "≈", "at": 250.0 },
+          { "text": "17 856 € d’aujourd’hui", "at": 251.0, "tone": "loss" }
+        ] },
+        { "type": "text", "size": "small", "text": "Un mécanisme, ni prévision ni promesse", "at": 257.4 }
+      ]
+    },
+    {
+      "from": 260.6,
+      "to": 276,
+      "items": [
+        { "type": "list", "style": "check", "at": 260.7, "items": [
+          { "text": "Intérêts composés : le capital grossit", "at": 261.9 },
+          { "text": "Inflation : la valeur baisse", "at": 265.2 },
+          { "text": "Frais : ils grignotent", "at": 267.5 },
+          { "text": "Sur la durée : toute la différence", "at": 269.5 }
+        ] },
+        { "type": "text", "size": "small", "text": "À bientôt", "at": 273.4 }
+      ]
+    }
+  ]
+}

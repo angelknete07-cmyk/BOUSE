@@ -1,0 +1,243 @@
+{
+  "lesson": "ent-creer-etapes",
+  "version": "1.0.0",
+  "scenes": [
+    {
+      "from": 0, "to": 13.2,
+      "items": [
+        { "type": "text", "size": "title", "text": "Créer son entreprise, étape par étape", "at": 0.2 },
+        { "type": "icon", "icon": "building", "size": "l", "label": "mon entreprise", "at": 4.6 },
+        { "type": "steps", "at": 10.8, "items": [
+          { "text": "Étape 1", "icon": "search", "at": 10.8 },
+          { "text": "Étape 2", "icon": "calculator", "at": 11.5 },
+          { "text": "Étape 3", "icon": "check", "at": 12.2 }
+        ] },
+        { "type": "actor", "character": "entrepreneuse", "name": "toi", "at": 4.5, "think": { "text": "?", "at": 5.0 } }
+      ]
+    },
+    {
+      "from": 13.2, "to": 25.4,
+      "items": [
+        { "type": "timeline", "at": 13.4, "points": [
+          { "label": "Étude de marché", "sub": "le début", "pos": 8, "at": 13.5 },
+          { "label": "Immatriculation", "sub": "inscription officielle", "pos": 55, "at": 17.6 },
+          { "label": "Premier euro", "sub": "encaissé", "pos": 93, "at": 21.5 }
+        ] },
+        { "type": "icon", "icon": "euro", "size": "l", "tone": "accent", "at": 22.0 }
+      ]
+    },
+    {
+      "from": 25.4, "to": 43.9,
+      "items": [
+        { "type": "text", "size": "big", "text": "Pourquoi l’ordre compte ?", "at": 25.5, "out": 28.6, "hide": true },
+        { "type": "list", "style": "cross", "at": 28.8, "items": [
+          { "text": "Nom déjà déposé", "at": 28.8 },
+          { "text": "Activité réglementée oubliée", "at": 31.3 },
+          { "text": "Assurance manquante", "at": 33.9 }
+        ] },
+        { "type": "row", "at": 35.5, "items": [
+          { "type": "icon", "icon": "alert", "tone": "loss", "at": 35.5 },
+          { "type": "text", "size": "mid", "text": "Cher [[après coup|loss]]", "at": 35.6 }
+        ] },
+        { "type": "row", "at": 37.9, "items": [
+          { "type": "icon", "icon": "piggy", "at": 37.9 },
+          { "type": "text", "size": "small", "text": "Démarches faites toi-même : rien à payer", "at": 39.5 }
+        ] }
+      ]
+    },
+    {
+      "from": 43.9, "to": 69.0,
+      "items": [
+        { "type": "text", "size": "mid", "text": "[[1 ·]] L’étude de marché", "at": 44.0 },
+        { "type": "chips", "at": 50.6, "items": [
+          { "text": "Marché", "at": 50.7 },
+          { "text": "Clients", "at": 52.6 },
+          { "text": "Concurrents", "at": 54.1 },
+          { "text": "Prix", "at": 55.6 },
+          { "text": "Règles", "at": 56.8 }
+        ] },
+        { "type": "icon", "icon": "chat", "label": "les entretiens, le cœur", "tone": "accent", "at": 58.4 },
+        { "type": "cards", "at": 62.6, "items": [
+          { "icon": "chart-bar", "title": "Insee", "sub": "données publiques", "at": 63.4 },
+          { "icon": "users", "title": "Fédérations", "sub": "professionnelles", "at": 64.9 },
+          { "icon": "building", "title": "Chambre de commerce", "sub": "", "at": 66.4 }
+        ] }
+      ]
+    },
+    {
+      "from": 69.0, "to": 85.4,
+      "items": [
+        { "type": "text", "size": "mid", "text": "[[2 ·]] Le prévisionnel financier", "at": 69.3 },
+        { "type": "chips", "at": 72.4, "items": [
+          { "text": "Chiffre d’affaires", "at": 73.0 },
+          { "text": "Charges", "at": 75.2 },
+          { "text": "Investissements", "at": 76.4 },
+          { "text": "Besoin de financement", "at": 77.9 },
+          { "text": "Trésorerie", "at": 79.4 }
+        ] },
+        { "type": "timeline", "at": 80.0, "points": [
+          { "label": "Mois 1", "pos": 6, "at": 80.0 },
+          { "label": "Mois 12", "pos": 94, "at": 81.2 }
+        ], "span": { "label": "au moins un an", "from": 6, "to": 94, "at": 81.0 } },
+        { "type": "row", "at": 82.1, "items": [
+          { "type": "icon", "icon": "bulb", "label": "décider", "at": 82.1 },
+          { "type": "icon", "icon": "bank", "label": "les banques", "at": 83.5 }
+        ] }
+      ]
+    },
+    {
+      "from": 85.4, "to": 97.0,
+      "items": [
+        { "type": "text", "size": "mid", "text": "[[3 ·]] Les vérifications", "at": 85.5 },
+        { "type": "row", "at": 88.0, "items": [
+          { "type": "icon", "icon": "alert", "at": 88.0 },
+          { "type": "text", "size": "mid", "text": "Activité [[réglementée]] ?", "at": 88.0 }
+        ] },
+        { "type": "chips", "at": 90.6, "items": [
+          { "text": "Diplôme", "at": 90.8 },
+          { "text": "Qualification", "at": 92.2 },
+          { "text": "Carte pro", "at": 93.4 },
+          { "text": "Assurance", "at": 94.8 }
+        ] }
+      ]
+    },
+    {
+      "from": 97.0, "to": 121.6,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Nom et marque [[libres]] ?", "at": 97.0 },
+        { "type": "row", "at": 100.6, "items": [
+          { "type": "icon", "icon": "search", "size": "l", "label": "INPI : noms déjà déposés", "at": 100.6 },
+          { "type": "icon", "icon": "globe", "size": "l", "label": "nom de domaine", "at": 109.7 }
+        ] },
+        { "type": "text", "size": "small", "text": "Et ton adresse ?", "at": 114.0 },
+        { "type": "cards", "at": 115.0, "items": [
+          { "icon": "house", "title": "Chez toi", "sub": "sous conditions", "at": 115.2 },
+          { "icon": "shop", "title": "Un local", "sub": "", "at": 117.2 },
+          { "icon": "building", "title": "Domiciliation", "sub": "", "at": 118.6 }
+        ] }
+      ]
+    },
+    {
+      "from": 121.6, "to": 137.0,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Les formalités d’une société", "at": 121.7 },
+        { "type": "steps", "at": 124.8, "items": [
+          { "text": "Statuts", "icon": "document", "at": 124.8 },
+          { "text": "Capital bloqué", "icon": "lock", "at": 127.5 },
+          { "text": "Annonce légale", "icon": "megaphone", "at": 132.0 },
+          { "text": "Déclaration", "icon": "flag", "at": 134.8 }
+        ] }
+      ]
+    },
+    {
+      "from": 137.0, "to": 167.4,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Un seul guichet : [[INPI]]", "at": 137.3 },
+        { "type": "chips", "at": 139.0, "items": [
+          { "text": "Créer", "at": 139.2 },
+          { "text": "Modifier", "at": 141.5 },
+          { "text": "Fermer", "at": 144.5 }
+        ] },
+        { "type": "row", "at": 148.5, "items": [
+          { "type": "icon", "icon": "person", "label": "même un micro-entrepreneur", "at": 148.5 },
+          { "type": "icon", "icon": "database", "label": "Registre national", "at": 150.4 }
+        ] },
+        { "type": "cards", "at": 156.8, "items": [
+          { "icon": "building", "title": "SIREN", "sub": "identifie l’entreprise", "at": 156.9 },
+          { "icon": "shop", "title": "SIRET", "sub": "chaque établissement", "at": 159.7 },
+          { "icon": "gear", "title": "Code APE", "sub": "son activité", "at": 163.2 }
+        ] }
+      ]
+    },
+    {
+      "from": 167.4, "to": 194.8,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Après l’immatriculation : [[4 choses]]", "at": 167.5 },
+        { "type": "cards", "at": 170.6, "items": [
+          { "icon": "bank", "title": "Compte pro", "sub": "obligatoire pour une société", "at": 170.7, "subAt": 172.9 },
+          { "icon": "shield", "title": "Assurances", "sub": "responsabilité civile", "at": 180.9 },
+          { "icon": "invoice", "title": "Factures et compta", "sub": "à mettre en place", "at": 187.5 },
+          { "icon": "coins", "title": "Aides", "sub": "dans les délais", "at": 191.3 }
+        ] }
+      ]
+    },
+    {
+      "from": 194.8, "to": 223.7,
+      "items": [
+        { "type": "icon", "icon": "calendar", "size": "l", "label": "aides : délais et conditions", "at": 196.8 },
+        { "type": "text", "size": "mid", "text": "[[ACRE]] : réformée en 2026", "at": 201.3 },
+        { "type": "chips", "at": 206.8, "items": [
+          { "text": "Demande à l’Urssaf", "at": 206.9 },
+          { "text": "obligatoire", "at": 209.0, "tone": "muted" }
+        ] },
+        { "type": "counter", "label": "Réduction de cotisations", "from": 50, "to": 25, "unit": " %", "at": 211.6, "until": 216.0, "bar": true, "max": 100 },
+        { "type": "text", "size": "small", "text": "à partir du 1er juillet 2026", "at": 216.8 },
+        { "type": "text", "size": "small", "text": "Vérifie conditions et dates [[avant|gain]] de créer", "at": 220.2 }
+      ]
+    },
+    {
+      "from": 223.7, "to": 236.4,
+      "items": [
+        { "type": "icon", "icon": "mail", "size": "l", "label": "courrier d’allure officielle", "at": 223.9 },
+        { "type": "text", "size": "mid", "text": "Annuaire « obligatoire » ?", "at": 228.7 },
+        { "type": "row", "at": 234.4, "items": [
+          { "type": "icon", "icon": "alert", "tone": "loss", "at": 234.4 },
+          { "type": "text", "size": "mid", "text": "Souvent une [[arnaque|loss]]", "at": 234.5 }
+        ] }
+      ]
+    },
+    {
+      "from": 236.4, "to": 256.2,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Nora · boutique de vélos d’occasion", "at": 236.5 },
+        { "type": "stats", "at": 245.7, "items": [
+          { "label": "Cyclistes interrogés", "value": 20, "unit": "", "at": 246.0 },
+          { "label": "Ateliers concurrents", "value": 3, "unit": "", "at": 247.8 }
+        ] },
+        { "type": "counter", "label": "Prévisionnel", "from": 0, "to": 12, "unit": " mois", "at": 249.6, "until": 251.8 },
+        { "type": "counter", "label": "Stock et outillage", "from": 0, "to": 15000, "at": 252.4, "until": 255.4, "tone": "accent" },
+        { "type": "actor", "character": "entrepreneuse", "name": "Nora", "at": 242.8 }
+      ]
+    },
+    {
+      "from": 256.2, "to": 267.7,
+      "items": [
+        { "type": "steps", "at": 256.4, "items": [
+          { "text": "Nom vérifié", "icon": "check", "at": 256.4 },
+          { "text": "SARL avec son associé", "icon": "handshake", "at": 258.9 },
+          { "text": "Capital déposé", "icon": "lock", "at": 262.2 },
+          { "text": "Annonce légale", "icon": "megaphone", "at": 264.0 },
+          { "text": "Guichet unique", "icon": "globe", "at": 265.6 }
+        ] }
+      ]
+    },
+    {
+      "from": 267.7, "to": 277.0,
+      "items": [
+        { "type": "chips", "at": 267.8, "items": [
+          { "text": "SIRET reçu", "at": 267.8, "tone": "accent" }
+        ] },
+        { "type": "row", "at": 269.0, "items": [
+          { "type": "icon", "icon": "bank", "size": "l", "label": "compte pro", "at": 269.0 },
+          { "type": "icon", "icon": "shield", "size": "l", "label": "assurances", "at": 271.2 },
+          { "type": "icon", "icon": "invoice", "size": "l", "label": "factures", "at": 273.4 }
+        ] },
+        { "type": "text", "size": "small", "text": "Avant la première vente", "at": 275.2 }
+      ]
+    },
+    {
+      "from": 277.0, "to": 293,
+      "items": [
+        { "type": "text", "size": "big", "text": "Pour résumer", "at": 277.1, "out": 278.3, "hide": true },
+        { "type": "list", "style": "check", "at": 278.5, "items": [
+          { "text": "Marché", "at": 278.5 },
+          { "text": "Prévisionnel", "at": 280.0 },
+          { "text": "Règles et noms", "at": 282.0 },
+          { "text": "Guichet unique", "at": 284.0 },
+          { "text": "Compte, assurance, factures", "at": 286.4 }
+        ] },
+        { "type": "text", "size": "small", "text": "À bientôt", "at": 290.9 }
+      ]
+    }
+  ]
+}

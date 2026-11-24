@@ -28,6 +28,7 @@ test("les montants s'écrivent à la française", () => {
   assert.equal(money(12000).replace(/\s/g, " "), "12 000 €");
   assert.equal(money(-300), "−300 €");
   assert.equal(money(4.5, " %"), "4,5 %");
+  assert.equal(money(20.1), "20,10 €");
 });
 
 test("[[mot]] colore un mot, avec un ton au choix", () => {

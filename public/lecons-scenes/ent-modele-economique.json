@@ -1,0 +1,313 @@
+{
+  "lesson": "ent-modele-economique",
+  "version": "1.0.0",
+  "scenes": [
+    {
+      "from": 0,
+      "to": 3.6,
+      "items": [
+        { "type": "text", "size": "title", "text": "De l’idée au modèle économique", "at": 0.2 },
+        { "type": "text", "size": "small", "text": "Bienvenue", "at": 2.6 }
+      ]
+    },
+    {
+      "from": 3.6,
+      "to": 13.6,
+      "items": [
+        { "type": "row", "at": 3.6, "items": [
+          { "type": "icon", "icon": "bulb", "size": "l", "label": "une idée", "at": 3.6 },
+          { "type": "icon", "icon": "check", "size": "l", "label": "un problème validé", "at": 5.6, "tone": "gain" }
+        ] },
+        { "type": "text", "size": "big", "text": "validé [[≠]] entreprise", "at": 10.4 }
+      ]
+    },
+    {
+      "from": 13.6,
+      "to": 28.4,
+      "items": [
+        { "type": "cards", "at": 17.4, "items": [
+          { "icon": "users", "title": "Qui paie ?", "sub": "", "at": 17.4 },
+          { "icon": "gift", "title": "Pour quoi ?", "sub": "", "at": 18.5 },
+          { "icon": "truck", "title": "Par quel chemin ?", "sub": "", "at": 19.4 },
+          { "icon": "coins", "title": "Quels coûts ?", "sub": "", "at": 21.4 }
+        ] },
+        { "type": "text", "size": "mid", "text": "l’ensemble = le [[modèle économique]]", "at": 22.9 }
+      ]
+    },
+    {
+      "from": 28.4,
+      "to": 41.2,
+      "items": [
+        { "type": "row", "at": 30.1, "items": [
+          { "type": "icon", "icon": "rocket", "label": "un bon produit", "at": 30.1 },
+          { "type": "icon", "icon": "cross", "label": "mais l’entreprise échoue", "at": 33.3, "tone": "loss" }
+        ] },
+        { "type": "list", "style": "cross", "at": 34.2, "items": [
+          { "text": "Personne ne paie assez", "at": 34.2 },
+          { "text": "L’argent arrive trop tard", "at": 36.2 },
+          { "text": "Convaincre les clients coûte trop cher", "at": 38.2 }
+        ] }
+      ]
+    },
+    {
+      "from": 41.2,
+      "to": 62.8,
+      "items": [
+        { "type": "chips", "at": 41.2, "items": [
+          { "text": "valeur pour le client", "at": 43.6 },
+          { "text": "→", "at": 45.4 },
+          { "text": "une part gardée pour vivre", "at": 46.0, "tone": "gain" }
+        ] },
+        { "type": "row", "at": 49.4, "items": [
+          { "type": "icon", "icon": "document", "size": "l", "label": "une seule page", "at": 49.4 },
+          { "type": "text", "size": "small", "text": "avant de dépenser quoi que ce soit", "at": 51.4 }
+        ] },
+        { "type": "row", "at": 54.6, "items": [
+          { "type": "icon", "icon": "target", "tone": "accent", "at": 54.6 },
+          { "type": "text", "size": "mid", "text": "l’hypothèse la [[plus fragile]]", "at": 55.0 }
+        ] },
+        { "type": "text", "size": "small", "text": "à tester en premier", "at": 60.7 }
+      ]
+    },
+    {
+      "from": 62.8,
+      "to": 78.4,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Business Model [[Canvas]]", "at": 64.9 },
+        { "type": "icons", "icon": "layers", "count": 9, "step": 0.35, "at": 73.2 },
+        { "type": "text", "size": "small", "text": "une feuille, neuf cases", "at": 76.0 }
+      ]
+    },
+    {
+      "from": 78.4,
+      "to": 100.4,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Côté [[client]] · 5 cases", "at": 78.9 },
+        { "type": "steps", "at": 81.4, "items": [
+          { "text": "Segments de clients", "icon": "users", "at": 81.4 },
+          { "text": "Proposition de valeur", "icon": "gift", "at": 85.3 },
+          { "text": "Canaux", "icon": "truck", "at": 88.5 },
+          { "text": "Relation client", "icon": "heart", "at": 93.7 },
+          { "text": "Sources de revenus", "icon": "euro", "at": 96.9 }
+        ] }
+      ]
+    },
+    {
+      "from": 100.4,
+      "to": 116.8,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Côté [[entreprise]] · 4 cases", "at": 100.5 },
+        { "type": "steps", "at": 103.1, "items": [
+          { "text": "Ressources clés", "icon": "key", "at": 103.1 },
+          { "text": "Activités clés", "icon": "gear", "at": 107.4 },
+          { "text": "Partenaires clés", "icon": "handshake", "at": 110.6 },
+          { "text": "Structure de coûts", "icon": "coins", "at": 113.6 }
+        ] }
+      ]
+    },
+    {
+      "from": 116.8,
+      "to": 123.3,
+      "items": [
+        { "type": "chips", "at": 116.9, "items": [
+          { "text": "un segment précis", "at": 117.2 },
+          { "text": "+", "at": 118.6 },
+          { "text": "sa proposition de valeur", "at": 119.0 }
+        ] },
+        { "type": "text", "size": "big", "text": "le reste en [[découle]]", "at": 121.6 }
+      ]
+    },
+    {
+      "from": 123.3,
+      "to": 138.8,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Les modèles de revenus", "at": 123.4, "out": 126.0 },
+        { "type": "cards", "at": 126.1, "items": [
+          { "icon": "box", "title": "Vente à l’unité", "sub": "vendu une fois", "at": 126.1 },
+          { "icon": "calendar", "title": "Abonnement", "sub": "paiement régulier", "at": 129.2 },
+          { "icon": "percent", "title": "Commission", "sub": "un % sur une transaction", "at": 132.1 },
+          { "icon": "key", "title": "Licence", "sub": "droit d’usage", "at": 135.6 }
+        ] }
+      ]
+    },
+    {
+      "from": 138.8,
+      "to": 152.8,
+      "items": [
+        { "type": "cards", "at": 138.8, "items": [
+          { "icon": "gift", "title": "Freemium", "sub": "version gratuite + version payante", "at": 138.8 },
+          { "icon": "megaphone", "title": "Publicité", "sub": "", "at": 142.4 }
+        ] },
+        { "type": "text", "size": "small", "text": "un même produit peut changer de modèle", "at": 144.2 },
+        { "type": "chips", "at": 146.4, "items": [
+          { "text": "argent disponible", "at": 147.4 },
+          { "text": "fidélité", "at": 149.0 },
+          { "text": "travail de vente", "at": 150.4 }
+        ] }
+      ]
+    },
+    {
+      "from": 152.8,
+      "to": 173.3,
+      "items": [
+        { "type": "text", "size": "mid", "text": "L’économie d’un client", "at": 154.5, "out": 156.2, "hide": true },
+        { "type": "icon", "icon": "person", "size": "l", "label": "un seul client", "at": 156.4 },
+        { "type": "text", "size": "big", "text": "[[CAC]] = coût d’acquisition client", "at": 161.4 },
+        { "type": "chips", "at": 165.6, "items": [
+          { "text": "publicité", "at": 166.0 },
+          { "text": "temps de vente", "at": 167.6 },
+          { "text": "salons", "at": 169.6 },
+          { "text": "remises de bienvenue", "at": 171.0 }
+        ] }
+      ]
+    },
+    {
+      "from": 173.3,
+      "to": 194.5,
+      "items": [
+        { "type": "text", "size": "big", "text": "[[LTV]] = valeur vie client", "at": 173.4 },
+        { "type": "chips", "at": 181.9, "items": [
+          { "text": "marge par achat", "at": 182.4 },
+          { "text": "×", "at": 184.0 },
+          { "text": "nombre d’achats attendus", "at": 184.4 }
+        ] },
+        { "type": "text", "size": "big", "text": "LTV [[>]] CAC", "at": 186.4 },
+        { "type": "row", "at": 190.6, "items": [
+          { "type": "icon", "icon": "clock", "at": 190.6 },
+          { "type": "text", "size": "small", "text": "coût récupéré assez vite", "at": 191.0 }
+        ] }
+      ]
+    },
+    {
+      "from": 194.5,
+      "to": 212.0,
+      "items": [
+        { "type": "text", "size": "mid", "text": "[[MVP]] · produit minimum viable", "at": 194.6 },
+        { "type": "row", "at": 198.8, "items": [
+          { "type": "icon", "icon": "bulb", "at": 198.8 },
+          { "type": "text", "size": "small", "text": "la plus petite version, pour apprendre", "at": 199.2 }
+        ] },
+        { "type": "cards", "at": 204.4, "items": [
+          { "icon": "person", "title": "Service à la main", "sub": "", "at": 204.6 },
+          { "icon": "laptop", "title": "Page de précommande", "sub": "", "at": 206.2 },
+          { "icon": "gear", "title": "Prototype", "sub": "", "at": 207.6 }
+        ] },
+        { "type": "text", "size": "big", "text": "mesure [[>]] finition", "at": 208.9 }
+      ]
+    },
+    {
+      "from": 212.0,
+      "to": 228.9,
+      "items": [
+        { "type": "text", "size": "big", "text": "canvas rempli [[≠]] preuve", "at": 215.5 },
+        { "type": "compare", "at": 218.1,
+          "left": { "title": "Confirmé", "icon": "check", "items": [
+            { "text": "entretiens", "at": 220.6 },
+            { "text": "ventes", "at": 222.0 },
+            { "text": "chiffres", "at": 223.4 }
+          ] },
+          "right": { "title": "Supposé", "icon": "question", "items": [
+            { "text": "à noter aussi", "at": 226.6 }
+          ] } }
+      ]
+    },
+    {
+      "from": 228.9,
+      "to": 245.6,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Méfie-toi des moyennes", "at": 229.0 },
+        { "type": "chips", "at": 230.4, "items": [
+          { "text": "premiers clients", "at": 230.4 },
+          { "text": "→", "at": 232.2 },
+          { "text": "ton réseau", "at": 232.6 }
+        ] },
+        { "type": "chart", "at": 235.2, "baseline": { "value": 20, "label": "CAC calculé" }, "lines": [
+          { "label": "clients suivants", "values": [18, 22, 32, 46, 62, 78], "at": 235.3, "until": 238.8, "tone": "loss" }
+        ] },
+        { "type": "row", "at": 239.0, "items": [
+          { "type": "icon", "icon": "sparkle", "at": 239.0 },
+          { "type": "text", "size": "small", "text": "LTV : une projection, pas un fait", "at": 240.0 }
+        ] }
+      ]
+    },
+    {
+      "from": 245.6,
+      "to": 259.2,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Exemple fictif · repas pour crèches", "at": 245.7, "out": 250.4 },
+        { "type": "row", "at": 250.9, "items": [
+          { "type": "icon", "icon": "truck", "label": "repas livrés", "at": 250.9 },
+          { "type": "icon", "icon": "building", "label": "crèches privées", "at": 252.0 }
+        ] },
+        { "type": "chips", "at": 253.7, "items": [
+          { "text": "canvas", "at": 253.8 },
+          { "text": "segment · 20 à 40 places", "at": 255.4 }
+        ] },
+        { "type": "actor", "character": "entrepreneuse", "name": "la cuisinière", "at": 250.9 }
+      ]
+    },
+    {
+      "from": 259.2,
+      "to": 273.1,
+      "items": [
+        { "type": "list", "style": "check", "at": 259.4, "items": [
+          { "text": "Menus équilibrés et conformes", "at": 259.6 },
+          { "text": "Livrés chaque matin", "at": 262.2 },
+          { "text": "Aucune cuisine à gérer", "at": 264.0 }
+        ] },
+        { "type": "row", "at": 266.4, "items": [
+          { "type": "icon", "icon": "calendar", "at": 266.4 },
+          { "type": "text", "size": "small", "text": "abonnement mensuel par enfant", "at": 267.0 }
+        ] },
+        { "type": "chips", "at": 269.3, "items": [
+          { "text": "ingrédients", "at": 269.6, "tone": "loss" },
+          { "text": "livraison", "at": 270.8, "tone": "loss" },
+          { "text": "cuisine louée", "at": 271.8, "tone": "loss" }
+        ] }
+      ]
+    },
+    {
+      "from": 273.1,
+      "to": 285.0,
+      "items": [
+        { "type": "dialog", "at": 273.2, "items": [
+          { "character": "client", "name": "directrice", "text": "« Est-ce conforme aux règles ? »", "at": 273.2, "side": "left" },
+          { "character": "entrepreneuse", "name": "cuisinière", "text": "« Voici la traçabilité »", "at": 279.0, "side": "right" }
+        ] },
+        { "type": "text", "size": "small", "text": "traçabilité : d’où vient chaque repas", "at": 280.6 }
+      ]
+    },
+    {
+      "from": 285.0,
+      "to": 295.0,
+      "items": [
+        { "type": "icons", "icon": "building", "count": 3, "step": 0.4, "label": "pilote", "at": 285.2 },
+        { "type": "timeline", "at": 287.0, "points": [
+          { "label": "début", "pos": 8, "at": 287.0 },
+          { "label": "1 mois", "pos": 92, "at": 288.4 }
+        ], "span": { "label": "pilote", "from": 8, "to": 92, "at": 288.6 } },
+        { "type": "row", "at": 291.6, "items": [
+          { "type": "icon", "icon": "lock", "at": 291.6 },
+          { "type": "text", "size": "small", "text": "rien investi avant d’avoir appris", "at": 292.0 }
+        ] }
+      ]
+    },
+    {
+      "from": 295.0,
+      "to": 310.0,
+      "items": [
+        { "type": "chips", "at": 295.3, "items": [
+          { "text": "qui paie", "at": 295.4 },
+          { "text": "pour quoi", "at": 296.6 },
+          { "text": "comment", "at": 297.8 },
+          { "text": "quels coûts", "at": 299.0 }
+        ] },
+        { "type": "list", "style": "check", "at": 302.2, "items": [
+          { "text": "Chaque case est une hypothèse à tester", "at": 302.4 },
+          { "text": "MVP : apprendre vite, à petit prix", "at": 305.0 }
+        ] },
+        { "type": "text", "size": "small", "text": "À bientôt", "at": 308.0 }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,258 @@
+{
+  "lesson": "fin-bfr-tresorerie",
+  "version": "1.0.0",
+  "scenes": [
+    {
+      "from": 0, "to": 13.0,
+      "items": [
+        { "type": "text", "size": "title", "text": "BFR et plan de trésorerie", "at": 0.2 },
+        { "type": "row", "at": 4.4, "items": [
+          { "type": "icon", "icon": "chart-up", "tone": "gain", "label": "rentable", "at": 4.4 },
+          { "type": "icon", "icon": "users", "tone": "loss", "label": "salariés plus payés", "at": 6.0 }
+        ] },
+        { "type": "chips", "at": 8.8, "items": [
+          { "text": "Bénéfice", "at": 9.0, "tone": "muted" },
+          { "text": "≠", "at": 10.4 },
+          { "text": "Trésorerie", "at": 11.0, "tone": "accent" }
+        ] },
+        { "type": "actor", "character": "entrepreneuse", "name": "toi", "at": 4.3, "think": { "text": "?", "at": 7.9 } }
+      ]
+    },
+    {
+      "from": 13.0, "to": 23.0,
+      "items": [
+        { "type": "steps", "at": 14.0, "items": [
+          { "text": "Mesurer le BFR", "icon": "calculator", "at": 14.4 },
+          { "text": "Prévoir mois par mois", "icon": "calendar", "at": 18.2 }
+        ] },
+        { "type": "icon", "icon": "alert", "tone": "loss", "label": "la panne d’argent", "at": 20.2 }
+      ]
+    },
+    {
+      "from": 23.0, "to": 39.5,
+      "items": [
+        { "type": "row", "at": 24.6, "items": [
+          { "type": "icon", "icon": "chart-up", "tone": "gain", "label": "rentable", "at": 24.6 },
+          { "type": "icon", "icon": "cross", "tone": "loss", "label": "paiements stoppés", "at": 26.0 }
+        ] },
+        { "type": "chips", "at": 27.6, "items": [
+          { "text": "Trésorerie", "at": 27.7, "tone": "accent" },
+          { "text": "→", "at": 29.0 },
+          { "text": "salaires, fournisseurs", "at": 29.6 }
+        ] },
+        { "type": "chart", "at": 32.2, "baseline": { "value": 0, "label": "0 €" }, "lines": [
+          { "label": "stocks et créances", "values": [10, 20, 34, 48, 60], "at": 34.9, "until": 38.5 },
+          { "label": "ton argent", "values": [20, 14, 4, -8, -18], "at": 35.6, "until": 39.2, "tone": "loss" }
+        ] }
+      ]
+    },
+    {
+      "from": 39.5, "to": 48.0,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Prévoir pour [[agir à temps]]", "at": 39.6 },
+        { "type": "list", "style": "check", "at": 41.4, "items": [
+          { "text": "Négocier un délai", "at": 41.5 },
+          { "text": "Demander un acompte", "at": 43.4 },
+          { "text": "Mobiliser un financement", "at": 45.3 }
+        ] }
+      ]
+    },
+    {
+      "from": 48.0, "to": 68.4,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Le [[BFR]]", "at": 50.7 },
+        { "type": "chips", "at": 53.6, "items": [
+          { "text": "Stocks", "at": 55.2 },
+          { "text": "+", "at": 56.0 },
+          { "text": "Créances clients", "at": 56.5 },
+          { "text": "−", "at": 58.4 },
+          { "text": "Dettes d’exploitation", "at": 59.0, "tone": "muted" }
+        ] },
+        { "type": "timeline", "at": 62.4, "points": [
+          { "label": "Tu paies", "pos": 8, "at": 62.5 },
+          { "label": "Tu encaisses", "pos": 92, "at": 66.0 }
+        ], "span": { "label": "argent immobilisé", "from": 8, "to": 92, "at": 64.6 } }
+      ]
+    },
+    {
+      "from": 68.4, "to": 83.6,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Le délai client moyen", "at": 68.6 },
+        { "type": "chips", "at": 71.5, "items": [
+          { "text": "Créances clients", "at": 72.0 },
+          { "text": "÷", "at": 73.6 },
+          { "text": "CA TTC", "at": 74.2 },
+          { "text": "×", "at": 76.4 },
+          { "text": "365", "at": 77.0 },
+          { "text": "=", "at": 78.0 },
+          { "text": "jours", "at": 78.6, "tone": "accent" }
+        ] },
+        { "type": "icon", "icon": "clock", "label": "ils te paient en combien de jours", "at": 80.0 }
+      ]
+    },
+    {
+      "from": 83.6, "to": 98.6,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Le délai fournisseur", "at": 83.7 },
+        { "type": "chips", "at": 84.4, "items": [
+          { "text": "Dettes fournisseurs", "at": 84.8 },
+          { "text": "÷", "at": 86.4 },
+          { "text": "achats TTC", "at": 87.0 },
+          { "text": "×", "at": 89.4 },
+          { "text": "365", "at": 90.0 },
+          { "text": "=", "at": 90.6 },
+          { "text": "jours", "at": 91.0, "tone": "accent" }
+        ] },
+        { "type": "icon", "icon": "truck", "label": "tu les paies en combien de jours", "at": 91.8 },
+        { "type": "text", "size": "small", "text": "Délai client [[plus long|loss]] : BFR en hausse", "at": 95.1 }
+      ]
+    },
+    {
+      "from": 98.6, "to": 118.7,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Le fonds de roulement", "at": 98.7 },
+        { "type": "chips", "at": 101.4, "items": [
+          { "text": "Ressources durables", "at": 101.5 },
+          { "text": "−", "at": 104.6 },
+          { "text": "Immobilisations", "at": 105.4 }
+        ] },
+        { "type": "chips", "at": 107.4, "items": [
+          { "text": "Trésorerie nette", "at": 107.5 },
+          { "text": "≈", "at": 108.4 },
+          { "text": "fonds de roulement", "at": 108.8 },
+          { "text": "−", "at": 110.2 },
+          { "text": "BFR", "at": 110.6, "tone": "accent" }
+        ] },
+        { "type": "icon", "icon": "alert", "tone": "loss", "label": "BFR plus grand : découvert", "at": 112.0 }
+      ]
+    },
+    {
+      "from": 118.7, "to": 132.5,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Le plan de trésorerie", "at": 120.7 },
+        { "type": "icon", "icon": "calendar", "label": "un mois par colonne", "at": 122.9 },
+        { "type": "steps", "at": 125.4, "items": [
+          { "text": "Départ", "icon": "wallet", "at": 125.5 },
+          { "text": "Entrées", "icon": "coins", "at": 127.4 },
+          { "text": "Sorties", "icon": "invoice", "at": 128.9 },
+          { "text": "Solde final", "icon": "bank", "at": 130.2 }
+        ] }
+      ]
+    },
+    {
+      "from": 132.5, "to": 143.0,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Montants [[à la date de paiement]]", "at": 132.6 },
+        { "type": "compare", "at": 136.0,
+          "left": { "title": "Plan de trésorerie", "icon": "coins", "items": [
+            { "text": "Date de paiement, TVA comprise", "at": 136.2 }
+          ] },
+          "right": { "title": "Compte de résultat", "icon": "invoice", "items": [
+            { "text": "Date de facture", "at": 139.9 }
+          ] } }
+      ]
+    },
+    {
+      "from": 143.0, "to": 155.1,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Le solde plonge ? Les leviers", "at": 143.1 },
+        { "type": "list", "style": "check", "at": 145.8, "items": [
+          { "text": "Acomptes à la commande", "at": 145.9 },
+          { "text": "Relancer vite", "at": 147.7 },
+          { "text": "Réduire les stocks", "at": 149.0 },
+          { "text": "Négocier des délais", "at": 150.4 },
+          { "text": "Un financement adapté", "at": 152.7 }
+        ] }
+      ]
+    },
+    {
+      "from": 155.1, "to": 172.6,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Les décaissements [[oubliés|loss]]", "at": 157.0 },
+        { "type": "list", "style": "dot", "at": 158.9, "items": [
+          { "text": "TVA trimestrielle", "at": 159.0 },
+          { "text": "Régularisation de cotisations", "at": 160.8 },
+          { "text": "Impôt", "at": 162.8 },
+          { "text": "Assurance annuelle", "at": 163.8 },
+          { "text": "Renouvellement de matériel", "at": 165.6 }
+        ] },
+        { "type": "text", "size": "small", "text": "Un plan sans eux rassure à tort", "at": 169.5 }
+      ]
+    },
+    {
+      "from": 172.6, "to": 186.5,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Un grossiste en thé", "at": 175.8 },
+        { "type": "counter", "label": "Ventes par mois", "from": 0, "to": 50000, "at": 177.5, "until": 179.8 },
+        { "type": "cards", "at": 180.6, "items": [
+          { "icon": "truck", "title": "Fournisseurs", "sub": "payés à 30 jours", "at": 180.8 },
+          { "icon": "box", "title": "Stock", "sub": "un mois", "at": 183.0 },
+          { "icon": "users", "title": "Clients", "sub": "paient à 60 jours", "at": 184.6 }
+        ] }
+      ]
+    },
+    {
+      "from": 186.5, "to": 198.2,
+      "items": [
+        { "type": "text", "size": "big", "text": "Ventes [[× 2]]", "at": 186.6 },
+        { "type": "row", "at": 189.2, "items": [
+          { "type": "icon", "icon": "box", "label": "stock × 2", "at": 189.3 },
+          { "type": "icon", "icon": "invoice", "label": "créances × 2", "at": 191.0 }
+        ] },
+        { "type": "counter", "label": "Creux au 3e mois", "from": 0, "to": -70000, "at": 193.8, "until": 196.6, "tone": "loss", "bar": true, "max": 70000 }
+      ]
+    },
+    {
+      "from": 198.2, "to": 205.4,
+      "items": [
+        { "type": "gauge", "label": "Acompte du nouveau client", "value": 30, "at": 198.6, "until": 201.0, "tone": "gain" },
+        { "type": "counter", "label": "Délai du fournisseur principal", "from": 30, "to": 45, "unit": " jours", "at": 202.6, "until": 204.8, "tone": "gain" }
+      ]
+    },
+    {
+      "from": 205.4, "to": 226.3,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Une image : le restaurateur", "at": 207.6 },
+        { "type": "timeline", "at": 208.6, "points": [
+          { "label": "Achats", "sub": "lundi", "pos": 8, "at": 209.0 },
+          { "label": "Il paie", "sub": "jeudi", "pos": 45, "at": 213.0 },
+          { "label": "Il encaisse", "sub": "fin de mois", "pos": 92, "at": 216.0 }
+        ], "span": { "label": "décalage financé seul", "from": 8, "to": 92, "at": 218.0 } },
+        { "type": "icon", "icon": "lock", "tone": "accent", "label": "montant bloqué : le BFR", "at": 223.8 },
+        { "type": "actor", "character": "artisan", "name": "restaurateur", "at": 208.4 }
+      ]
+    },
+    {
+      "from": 226.3, "to": 235.8,
+      "items": [
+        { "type": "chart", "at": 226.6, "lines": [
+          { "label": "activité", "values": [10, 20, 32, 46, 62], "at": 226.7, "until": 230.4 },
+          { "label": "montant bloqué", "values": [6, 14, 26, 42, 60], "at": 227.6, "until": 231.0, "tone": "loss" }
+        ] },
+        { "type": "text", "size": "mid", "text": "Croissance : [[plus]] de financement", "at": 230.6 }
+      ]
+    },
+    {
+      "from": 235.8, "to": 247.7,
+      "items": [
+        { "type": "cards", "at": 236.0, "items": [
+          { "icon": "users", "title": "Clients", "sub": "te paient plus vite", "at": 236.2 },
+          { "icon": "truck", "title": "Fournisseurs", "sub": "te paient plus tard", "at": 240.0 }
+        ] },
+        { "type": "text", "size": "small", "text": "De l’argent libéré, sans vendre davantage", "at": 243.7 }
+      ]
+    },
+    {
+      "from": 247.7, "to": 265,
+      "items": [
+        { "type": "text", "size": "big", "text": "Pour résumer", "at": 247.8, "out": 248.8, "hide": true },
+        { "type": "list", "style": "check", "at": 248.9, "items": [
+          { "text": "BFR : argent bloqué entre payer et encaisser", "at": 249.0 },
+          { "text": "Le plan prévoit les mois à risque", "at": 253.9 },
+          { "text": "Acompte, relance, stock, délais", "at": 256.9 }
+        ] },
+        { "type": "text", "size": "small", "text": "À bientôt", "at": 262.4 }
+      ]
+    }
+  ]
+}

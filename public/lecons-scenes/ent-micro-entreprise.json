@@ -1,0 +1,243 @@
+{
+  "lesson": "ent-micro-entreprise",
+  "version": "1.0.0",
+  "scenes": [
+    {
+      "from": 0, "to": 14.1,
+      "items": [
+        { "type": "text", "size": "title", "text": "La micro-entreprise de A à Z", "at": 0.2 },
+        { "type": "row", "at": 3.9, "items": [
+          { "type": "icon", "icon": "person", "size": "l", "label": "seul", "at": 3.9 },
+          { "type": "icon", "icon": "document", "size": "l", "label": "peu de paperasse", "at": 5.4 },
+          { "type": "icon", "icon": "alert", "size": "l", "tone": "loss", "label": "limites", "at": 10.0 }
+        ] },
+        { "type": "actor", "character": "toi", "name": "toi", "at": 3.9, "think": { "text": "?", "at": 10.2 } }
+      ]
+    },
+    {
+      "from": 14.1, "to": 22.6,
+      "items": [
+        { "type": "chips", "at": 14.8, "items": [
+          { "text": "Plafonds", "at": 15.0 },
+          { "text": "Cotisations", "at": 16.2 },
+          { "text": "Impôt", "at": 17.3 },
+          { "text": "TVA", "at": 18.1 },
+          { "text": "Obligations", "at": 19.2 },
+          { "text": "Limites", "at": 20.6, "tone": "muted" }
+        ] }
+      ]
+    },
+    {
+      "from": 22.6, "to": 44.2,
+      "items": [
+        { "type": "row", "at": 24.1, "items": [
+          { "type": "icon", "icon": "rocket", "label": "test rapide", "at": 24.1 },
+          { "type": "icon", "icon": "laptop", "label": "en ligne", "at": 28.5 },
+          { "type": "icon", "icon": "coins", "label": "cotisations si encaissé", "at": 30.3 },
+          { "type": "icon", "icon": "calculator", "label": "compta réduite", "at": 33.3 }
+        ] },
+        { "type": "text", "size": "mid", "text": "Micro-entreprise [[≠]] forme juridique", "at": 35.4 },
+        { "type": "text", "size": "small", "text": "Le régime simplifié de l’entreprise individuelle", "at": 38.9 }
+      ]
+    },
+    {
+      "from": 44.2, "to": 67.9,
+      "items": [
+        { "type": "text", "size": "mid", "text": "[[1 ·]] Les plafonds de chiffre d’affaires", "at": 44.3 },
+        { "type": "bars", "unit": " €", "at": 53.6, "items": [
+          { "label": "Vente, hébergement", "value": 203100, "at": 54.0 },
+          { "label": "Services, libéral", "value": 83600, "at": 61.0, "tone": "accent" }
+        ] },
+        { "type": "icon", "icon": "calendar", "label": "révisés tous les 3 ans", "at": 65.6 }
+      ]
+    },
+    {
+      "from": 67.9, "to": 75.9,
+      "items": [
+        { "type": "timeline", "at": 68.2, "points": [
+          { "label": "Année 1 au-dessus", "sub": "tu restes", "pos": 18, "at": 68.3 },
+          { "label": "Année 2 au-dessus", "sub": "tu sors", "pos": 82, "at": 71.7 }
+        ], "span": { "label": "deux années de suite", "from": 18, "to": 82, "at": 72.0 } }
+      ]
+    },
+    {
+      "from": 75.9, "to": 95.6,
+      "items": [
+        { "type": "text", "size": "mid", "text": "[[2 ·]] Les cotisations sociales", "at": 76.0 },
+        { "type": "row", "at": 78.7, "items": [
+          { "type": "icon", "icon": "shield", "label": "protection sociale", "at": 78.7 },
+          { "type": "icon", "icon": "calendar", "label": "mois ou trimestre · Urssaf", "at": 85.4 }
+        ] },
+        { "type": "chips", "at": 81.9, "items": [
+          { "text": "CA encaissé", "at": 82.0 },
+          { "text": "×", "at": 83.0 },
+          { "text": "taux", "at": 83.6 },
+          { "text": "=", "at": 84.4 },
+          { "text": "cotisations", "at": 84.8, "tone": "accent" }
+        ] },
+        { "type": "stats", "at": 89.3, "items": [
+          { "label": "Chiffre d’affaires", "value": 0, "at": 89.4 },
+          { "label": "Cotisations", "value": 0, "at": 90.6 }
+        ] },
+        { "type": "text", "size": "small", "text": "Quand même : déclaration [[à zéro]]", "at": 92.2 }
+      ]
+    },
+    {
+      "from": 95.6, "to": 113.9,
+      "items": [
+        { "type": "gauge", "label": "Vente de marchandises", "value": 12.3, "at": 96.0, "until": 98.5 },
+        { "type": "gauge", "label": "Services commerciaux, artisanaux", "value": 21.2, "at": 99.5, "until": 102.5, "tone": "accent" },
+        { "type": "text", "size": "small", "text": "Libéral : selon la caisse, relevé récemment", "at": 105.3 },
+        { "type": "text", "size": "small", "text": "Vérifie sur le site de l’Urssaf", "at": 110.1 }
+      ]
+    },
+    {
+      "from": 113.9, "to": 125.8,
+      "items": [
+        { "type": "cards", "at": 114.1, "items": [
+          { "icon": "piggy", "title": "Retraite", "sub": "", "at": 114.4 },
+          { "icon": "heart", "title": "Santé", "sub": "", "at": 115.8 },
+          { "icon": "wallet", "title": "Indemnités", "sub": "journalières", "at": 117.2 }
+        ] },
+        { "type": "text", "size": "mid", "text": "Petit CA = [[peu de droits|loss]]", "at": 122.5 }
+      ]
+    },
+    {
+      "from": 125.8, "to": 139.6,
+      "items": [
+        { "type": "text", "size": "mid", "text": "[[3 ·]] L’impôt", "at": 125.9 },
+        { "type": "chips", "at": 129.2, "items": [
+          { "text": "Chiffre d’affaires", "at": 129.3 },
+          { "text": "−", "at": 131.8 },
+          { "text": "abattement", "at": 132.2, "tone": "accent" },
+          { "text": "=", "at": 134.0 },
+          { "text": "revenu imposable", "at": 134.4 }
+        ] },
+        { "type": "text", "size": "small", "text": "Abattement : réduction automatique, censée valoir tes charges", "at": 135.5 }
+      ]
+    },
+    {
+      "from": 139.6, "to": 152.6,
+      "items": [
+        { "type": "bars", "unit": " %", "at": 139.8, "items": [
+          { "label": "Vente", "value": 71, "at": 140.2 },
+          { "label": "Commercial, artisanal", "value": 50, "at": 143.4 },
+          { "label": "Libéral", "value": 34, "at": 146.6, "tone": "accent" }
+        ] },
+        { "type": "row", "at": 149.4, "items": [
+          { "type": "icon", "icon": "house", "at": 149.4 },
+          { "type": "text", "size": "small", "text": "S’ajoute aux autres revenus du foyer", "at": 149.5 }
+        ] }
+      ]
+    },
+    {
+      "from": 152.6, "to": 170.7,
+      "items": [
+        { "type": "text", "size": "mid", "text": "[[4 ·]] La TVA", "at": 152.7 },
+        { "type": "row", "at": 156.2, "items": [
+          { "type": "icon", "icon": "percent", "label": "sous le seuil : pas de TVA", "at": 156.2 }
+        ] },
+        { "type": "bars", "unit": " €", "at": 162.0, "items": [
+          { "label": "Vente", "value": 85000, "at": 162.5 },
+          { "label": "Services", "value": 37500, "at": 166.6, "tone": "accent" }
+        ] }
+      ]
+    },
+    {
+      "from": 170.7, "to": 187.0,
+      "items": [
+        { "type": "text", "size": "mid", "text": "« TVA non applicable, article 293 B du CGI »", "at": 171.0 },
+        { "type": "compare", "at": 177.9,
+          "left": { "title": "Sous le seuil", "icon": "shop", "items": [
+            { "text": "Pas de TVA facturée", "at": 178.0 },
+            { "text": "TVA des achats non récupérée", "at": 178.8 }
+          ] },
+          "right": { "title": "Au-delà", "icon": "alert", "items": [
+            { "text": "TVA facturée et reversée", "at": 181.3 }
+          ] } }
+      ]
+    },
+    {
+      "from": 187.0, "to": 201.8,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Les autres obligations", "at": 187.1 },
+        { "type": "list", "style": "check", "at": 189.0, "items": [
+          { "text": "Livre des recettes", "at": 189.0 },
+          { "text": "Factures conservées", "at": 191.1 },
+          { "text": "CFE, en général dès la 2e année", "at": 192.9 },
+          { "text": "Assurances nécessaires", "at": 199.0 }
+        ] }
+      ]
+    },
+    {
+      "from": 201.8, "to": 230.0,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Charges réelles : [[non déduites|loss]]", "at": 205.9 },
+        { "type": "row", "at": 209.2, "items": [
+          { "type": "icon", "icon": "cart", "label": "achats", "at": 209.4 },
+          { "type": "icon", "icon": "users", "label": "sous-traitance", "at": 211.4 },
+          { "type": "icon", "icon": "house", "label": "local cher", "at": 214.2 }
+        ] },
+        { "type": "row", "at": 217.2, "items": [
+          { "type": "icon", "icon": "scale", "at": 217.2 },
+          { "type": "text", "size": "mid", "text": "Comparer avec le [[régime réel]]", "at": 217.3 }
+        ] },
+        { "type": "icon", "icon": "calendar", "label": "seuils, taux, aide : ça change", "at": 221.2 },
+        { "type": "text", "size": "small", "text": "Vérifie sur les sites officiels", "at": 225.4 }
+      ]
+    },
+    {
+      "from": 230.0, "to": 249.6,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Hugo · professeur de yoga", "at": 230.2 },
+        { "type": "counter", "label": "Encaissé en mars", "from": 0, "to": 2000, "at": 238.6, "until": 240.8, "tone": "gain" },
+        { "type": "row", "at": 241.8, "items": [
+          { "type": "icon", "icon": "laptop", "label": "déclaré à l’Urssaf", "at": 241.8 },
+          { "type": "icon", "icon": "calculator", "label": "taux libéral", "at": 245.7 }
+        ] },
+        { "type": "actor", "character": "toi", "name": "Hugo", "at": 235.8 }
+      ]
+    },
+    {
+      "from": 249.6, "to": 266.0,
+      "items": [
+        { "type": "row", "at": 249.7, "items": [
+          { "type": "icon", "icon": "cross", "tone": "muted", "label": "pas de versement libératoire", "at": 249.7 }
+        ] },
+        { "type": "chips", "at": 255.9, "items": [
+          { "text": "CA de l’année", "at": 256.0 },
+          { "text": "−", "at": 257.6 },
+          { "text": "abattement", "at": 258.0 },
+          { "text": "=", "at": 259.8 },
+          { "text": "à déclarer", "at": 260.2, "tone": "accent" }
+        ] },
+        { "type": "gauge", "label": "Abattement libéral", "value": 34, "at": 258.2, "until": 261.2 },
+        { "type": "text", "size": "mid", "text": "Sous le seuil de [[franchise de TVA]]", "at": 262.3 }
+      ]
+    },
+    {
+      "from": 266.0, "to": 279.4,
+      "items": [
+        { "type": "text", "size": "small", "text": "« TVA non applicable, article 293 B du CGI »", "at": 266.2 },
+        { "type": "stats", "at": 272.9, "items": [
+          { "label": "Août · encaissé", "value": 0, "at": 273.0 },
+          { "label": "Cotisations", "value": 0, "at": 276.2, "tone": "gain" }
+        ] },
+        { "type": "text", "size": "small", "text": "Déclaration à zéro", "at": 274.8 }
+      ]
+    },
+    {
+      "from": 279.4, "to": 294,
+      "items": [
+        { "type": "text", "size": "big", "text": "Pour résumer", "at": 279.5, "out": 280.7, "hide": true },
+        { "type": "cards", "at": 280.9, "items": [
+          { "icon": "chart-bar", "title": "Plafonds", "sub": "à respecter", "at": 281.2 },
+          { "icon": "percent", "title": "Cotisations", "sub": "selon le chiffre d’affaires", "at": 283.6 },
+          { "icon": "cross", "title": "Charges", "sub": "non déduites", "at": 286.2, "accent": true }
+        ] },
+        { "type": "text", "size": "small", "text": "Seuils et taux : toujours à jour", "at": 288.6 },
+        { "type": "text", "size": "small", "text": "À bientôt", "at": 291.9 }
+      ]
+    }
+  ]
+}

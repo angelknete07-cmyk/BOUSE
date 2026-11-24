@@ -1,3 +1,14 @@
+# Review design — Les vidéos animées des 43 leçons
+
+**25 novembre 2026.** **La direction artistique n’est pas déclarée validée.** L’utilisateur trouvait les vidéos « trop simples » (le texte qui défile). Maquette `maquette/video-anime.html` (v1 puis v2) montrée : « c’est parfait », puis « Oui, fais-les ». Construit pour les 43 leçons. Paire principale : `21-lecon-video` (lecteur à l’arrêt), plus deux images de scènes : `24-video-animee-desktop.png` (BFR, ordinateur) et `24-video-animee-mobile.png` (budget, téléphone).
+
+- **Moteur** (`src/components/LessonScenes.tsx`, `src/lib/lessonScenes.ts`, `src/lib/sceneArt.ts`, `src/lesson-scenes.css`) : tout se calcule depuis le temps de la voix (on peut avancer, reculer, changer la vitesse). 21 sortes d’éléments : titres et mots colorés, icônes au trait (~80), personnages (7), formules en pastilles, cartes, compteurs, cascades, compte en banque avec pièces qui volent, frise, courbe qui se dessine, jauges, listes, étapes, avant / après, dialogues. Léger zoom de caméra, mouvement réduit respecté.
+- **Scénarios** : `public/lecons-scenes/<id>.json`, 43 leçons, 769 scènes, calées sur le minutage de la voix ElevenLabs. Uniquement les chiffres dits par la voix. Sans scénario (ou version différente de la voix), la vidéo reste l’ancienne, simple : rien n’est retiré.
+- **Contrôles de l’agent** : `npm test` 350 (dont un test de format par leçon) ; `scripts/check-scenes.mjs` sur les 43 leçons, chaque scène, ordinateur 1280×860 et téléphone 390×844 : rien ne sort de la vidéo, aucun chevauchement (1 538 images regardées par échantillon) ; `npx playwright test` complet : 154 passés, 8 ignorés prévus ; `npm run build`.
+- **Limites** : les contenus des scènes (mots illustratifs, dialogues, formes des courbes) sont à relire par l’utilisateur ; quelques scènes ont plus d’une touche lavande (12 sur 769, comme la leçon modèle) ; pas de vrai iPhone ; pas de validation externe.
+
+---
+
 # Review — La vraie voix des 43 leçons (ElevenLabs)
 
 **17 novembre 2026.** **La direction artistique n’est pas déclarée validée.** Aucun changement d’écran : seul le son change. Les 43 vidéos et podcasts passent de la voix gratuite du Mac à la voix « BOUSE » choisie par l’utilisateur sur ElevenLabs (formule Creator), fabriquée et contrôlée dans `~/claude/bouse-voix` (conversation « Voix off des 43 leçons »).

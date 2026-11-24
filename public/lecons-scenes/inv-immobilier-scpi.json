@@ -1,0 +1,280 @@
+{
+  "lesson": "inv-immobilier-scpi",
+  "version": "1.0.0",
+  "scenes": [
+    {
+      "from": 0,
+      "to": 27.9,
+      "items": [
+        { "type": "text", "size": "title", "text": "Investir dans l’immobilier : locatif et SCPI", "at": 0.2 },
+        { "type": "icon", "icon": "house", "size": "l", "label": "concret, visitable, à crédit", "at": 5.6 },
+        { "type": "text", "size": "mid", "text": "Vraiment [[rentable]] ?", "at": 11.8 },
+        { "type": "chips", "at": 14.0, "items": [
+          { "text": "Rendement net", "at": 14.2 },
+          { "text": "Vacance et charges", "at": 16.2 },
+          { "text": "Fiscalité", "at": 18.4 },
+          { "text": "SCPI", "at": 21.4, "tone": "accent" }
+        ] }
+      ]
+    },
+    {
+      "from": 27.9,
+      "to": 42.8,
+      "items": [
+        { "type": "text", "size": "big", "text": "Pourquoi apprendre ça ?", "at": 28.0, "out": 29.6, "hide": true },
+        { "type": "counter", "label": "Rendement brut affiché", "from": 0, "to": 7, "unit": " %", "at": 34.1, "until": 36.2 },
+        { "type": "chips", "at": 37.4, "items": [
+          { "text": "vacance", "at": 37.6, "tone": "loss" },
+          { "text": "charges", "at": 38.8, "tone": "loss" },
+          { "text": "travaux", "at": 39.8, "tone": "loss" },
+          { "text": "impôts", "at": 40.8, "tone": "loss" }
+        ] }
+      ]
+    },
+    {
+      "from": 42.8,
+      "to": 56.1,
+      "items": [
+        { "type": "row", "at": 42.9, "items": [
+          { "type": "icon", "icon": "house", "size": "m", "label": "vacance : vide, sans loyer", "at": 42.9, "tone": "muted" }
+        ] },
+        { "type": "icon", "icon": "building", "size": "m", "label": "SCPI : sans gestion", "at": 47.1 },
+        { "type": "chips", "at": 50.5, "items": [
+          { "text": "frais", "at": 50.6, "tone": "loss" },
+          { "text": "risques", "at": 52.2, "tone": "loss" },
+          { "text": "revente difficile", "at": 53.4, "tone": "loss" }
+        ] }
+      ]
+    },
+    {
+      "from": 56.1,
+      "to": 74.2,
+      "items": [
+        { "type": "row", "at": 58.6, "items": [
+          { "type": "icon", "icon": "house", "size": "m", "label": "acheter", "at": 58.6 },
+          { "type": "text", "size": "big", "text": "[[→]]", "at": 60.5 },
+          { "type": "icon", "icon": "key", "size": "m", "label": "pour louer", "at": 61.0 }
+        ] },
+        { "type": "chips", "at": 64.0, "items": [
+          { "text": "loyers annuels", "at": 64.1 },
+          { "text": "÷", "at": 65.8 },
+          { "text": "prix d’achat", "at": 66.2 },
+          { "text": "=", "at": 67.0 },
+          { "text": "rendement brut", "at": 67.3, "tone": "accent" }
+        ] },
+        { "type": "icon", "icon": "alert", "size": "s", "label": "trompeur : oublie les coûts", "at": 68.4, "tone": "loss" },
+        { "type": "text", "size": "mid", "text": "Rendement [[net]] de charges : plus juste", "at": 71.8 }
+      ]
+    },
+    {
+      "from": 74.2,
+      "to": 83.7,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Loyers [[−]] charges non récupérables", "at": 74.4 },
+        { "type": "list", "style": "dot", "at": 76.5, "items": [
+          { "text": "taxe foncière", "at": 77.0 },
+          { "text": "assurance", "at": 78.2 },
+          { "text": "gestion", "at": 79.3 },
+          { "text": "entretien", "at": 80.0 },
+          { "text": "provision pour la vacance", "at": 81.2 }
+        ] }
+      ]
+    },
+    {
+      "from": 83.7,
+      "to": 93.4,
+      "items": [
+        { "type": "row", "at": 83.8, "items": [
+          { "type": "icon", "icon": "house", "size": "m", "label": "prix", "at": 84.4 },
+          { "type": "text", "size": "big", "text": "[[+]]", "at": 85.8 },
+          { "type": "icon", "icon": "document", "size": "m", "label": "frais d’acquisition", "at": 86.0 },
+          { "type": "text", "size": "big", "text": "[[+]]", "at": 87.4 },
+          { "type": "icon", "icon": "gear", "size": "m", "label": "travaux", "at": 87.6 }
+        ] },
+        { "type": "text", "size": "mid", "text": "Net d’impôt : on retire [[les impôts]]", "at": 89.5 }
+      ]
+    },
+    {
+      "from": 93.4,
+      "to": 108.2,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Location nue : [[revenus fonciers]]", "at": 93.5 },
+        { "type": "compare", "at": 100.6,
+          "left": { "title": "Micro-foncier", "icon": "percent", "items": [{ "text": "abattement de 30 %", "at": 100.7 }] },
+          "right": { "title": "Régime réel", "icon": "calculator", "items": [{ "text": "charges réelles déduites", "at": 104.5 }] } }
+      ]
+    },
+    {
+      "from": 108.2,
+      "to": 125.8,
+      "items": [
+        { "type": "text", "size": "mid", "text": "L’effet de [[levier]]", "at": 108.3 },
+        { "type": "compare", "at": 110.8,
+          "left": { "title": "Bien > crédit", "icon": "chart-up", "items": [{ "text": "tu t’enrichis avec l’argent emprunté", "at": 110.9 }] },
+          "right": { "title": "Bien < crédit", "icon": "chart-down", "items": [{ "text": "le levier amplifie les pertes", "at": 115.9 }] } },
+        { "type": "chips", "at": 119.5, "items": [
+          { "text": "locataire qui ne paie plus", "at": 120.0, "tone": "loss" },
+          { "text": "vacance", "at": 122.0, "tone": "loss" },
+          { "text": "travaux imprévus", "at": 123.2, "tone": "loss" }
+        ] }
+      ]
+    },
+    {
+      "from": 125.8,
+      "to": 146.5,
+      "items": [
+        { "type": "text", "size": "big", "text": "Les SCPI", "at": 125.9, "out": 127.8, "hide": true },
+        { "type": "row", "at": 129.7, "items": [
+          { "type": "icon", "icon": "users", "size": "m", "label": "de nombreux associés", "at": 129.7 },
+          { "type": "text", "size": "big", "text": "[[→]]", "at": 132.0 },
+          { "type": "icon", "icon": "building", "size": "m", "label": "un parc d’immeubles", "at": 132.4 }
+        ] },
+        { "type": "chips", "at": 134.0, "items": [
+          { "text": "bureaux", "at": 134.4 },
+          { "text": "commerces", "at": 135.9 },
+          { "text": "santé", "at": 137.6 },
+          { "text": "logistique", "at": 139.0 }
+        ] },
+        { "type": "text", "size": "small", "text": "Des loyers selon tes parts", "at": 142.0 }
+      ]
+    },
+    {
+      "from": 146.5,
+      "to": 169.9,
+      "items": [
+        { "type": "stats", "at": 147.8, "items": [
+          { "label": "Souscription", "value": "8 à 12 %", "at": 147.8, "tone": "loss", "accent": true },
+          { "label": "Gestion", "value": "chaque année", "at": 152.9 },
+          { "label": "Horizon", "value": "8 à 10 ans", "at": 155.2 }
+        ] },
+        { "type": "list", "style": "cross", "at": 159.0, "items": [
+          { "text": "revenus non garantis", "at": 159.0 },
+          { "text": "prix des parts en baisse possible", "at": 160.9 },
+          { "text": "revente selon les acheteurs", "at": 166.9 }
+        ] }
+      ]
+    },
+    {
+      "from": 169.9,
+      "to": 194.6,
+      "items": [
+        { "type": "row", "at": 173.8, "items": [
+          { "type": "icon", "icon": "percent", "size": "m", "label": "pour la réduction d’impôt", "at": 173.8, "tone": "muted" },
+          { "type": "icon", "icon": "alert", "size": "m", "label": "mal placé : on perd plus", "at": 177.6, "tone": "loss" }
+        ] },
+        { "type": "row", "at": 183.0, "items": [
+          { "type": "icon", "icon": "house", "size": "m", "label": "tout dans un seul bien", "at": 183.0 },
+          { "type": "icon", "icon": "bank", "size": "m", "label": "à crédit", "at": 186.0, "tone": "loss" }
+        ] },
+        { "type": "chips", "at": 189.2, "items": [
+          { "text": "SCPI : plus diversifiées", "at": 189.3, "tone": "gain" },
+          { "text": "frais", "at": 191.2 },
+          { "text": "liquidité limitée", "at": 192.3 }
+        ] }
+      ]
+    },
+    {
+      "from": 194.6,
+      "to": 206.0,
+      "items": [
+        { "type": "icon", "icon": "house", "size": "l", "label": "un studio · 120 000 €", "at": 200.1 },
+        { "type": "chips", "at": 202.7, "items": [
+          { "text": "9 000 € de frais", "at": 202.8 },
+          { "text": "6 000 € de travaux", "at": 204.3 }
+        ] },
+        { "type": "actor", "character": "toi", "name": "Nadia", "at": 200.2 }
+      ]
+    },
+    {
+      "from": 206.0,
+      "to": 212.9,
+      "items": [
+        { "type": "stats", "at": 206.1, "items": [
+          { "label": "Loyer par mois", "value": "600 €", "at": 206.1 },
+          { "label": "Loyer par an", "value": "7 200 €", "at": 208.0 }
+        ] },
+        { "type": "gauge", "label": "Rendement brut", "value": 6, "at": 210.4, "until": 212.2 }
+      ]
+    },
+    {
+      "from": 212.9,
+      "to": 227.0,
+      "items": [
+        { "type": "waterfall", "at": 212.9, "rows": [
+          { "label": "loyers", "value": 7200, "kind": "start", "at": 212.9 },
+          { "label": "charges non récupérables", "value": 1900, "kind": "minus", "at": 214.0, "tone": "loss" },
+          { "label": "vacance", "value": 600, "kind": "minus", "at": 219.3, "tone": "loss" },
+          { "label": "il lui reste", "value": 4700, "kind": "total", "at": 222.2, "tone": "gain" }
+        ] },
+        { "type": "text", "size": "small", "text": "Coût total : 135 000 €", "at": 223.6 }
+      ]
+    },
+    {
+      "from": 227.0,
+      "to": 233.4,
+      "items": [
+        { "type": "gauge", "label": "Rendement net de charges", "value": 3.5, "at": 227.1, "until": 229.5, "tone": "accent" },
+        { "type": "chips", "at": 230.0, "items": [
+          { "text": "avant impôt", "at": 230.1 },
+          { "text": "avant le coût du crédit", "at": 231.4 }
+        ] }
+      ]
+    },
+    {
+      "from": 233.4,
+      "to": 244.8,
+      "items": [
+        { "type": "bars", "at": 233.5, "unit": " €", "items": [
+          { "label": "Salaire brut", "value": 2000, "at": 233.6 },
+          { "label": "Ce qu’il te reste", "value": 1600, "at": 237.5, "tone": "gain" }
+        ] },
+        { "type": "text", "size": "mid", "text": "Tu ne gagnes pas [[2 000 €]]", "at": 242.8 }
+      ]
+    },
+    {
+      "from": 244.8,
+      "to": 255.4,
+      "items": [
+        { "type": "compare", "at": 247.0,
+          "left": { "title": "Loyer affiché", "icon": "invoice", "items": [{ "text": "le rendement brut", "at": 247.1 }] },
+          "right": { "title": "Argent qui reste", "icon": "wallet", "items": [{ "text": "après charges, vacance, travaux", "at": 250.0 }] } },
+        { "type": "text", "size": "small", "text": "Même logique que ton salaire", "at": 244.9 }
+      ]
+    },
+    {
+      "from": 255.4,
+      "to": 266.4,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Un bien ne se vend pas [[en un clic]]", "at": 255.5 },
+        { "type": "timeline", "at": 258.6, "points": [
+          { "label": "Mise en vente", "sub": "", "pos": 6, "at": 258.6 },
+          { "label": "Vendu", "sub": "+ des frais", "pos": 94, "at": 261.0 }
+        ], "span": { "label": "semaines, parfois mois", "from": 6, "to": 94, "at": 259.2 } },
+        { "type": "text", "size": "mid", "text": "Manque de [[liquidité]]", "at": 263.8 }
+      ]
+    },
+    {
+      "from": 266.4,
+      "to": 278.0,
+      "items": [
+        { "type": "icon", "icon": "users", "size": "m", "label": "SCPI : pas d’acheteur au prix espéré", "at": 266.5, "tone": "loss" },
+        { "type": "row", "at": 271.8, "items": [
+          { "type": "icon", "icon": "hour", "size": "m", "label": "pouvoir attendre", "at": 271.8 },
+          { "type": "icon", "icon": "alert", "size": "m", "label": "sans revendre en urgence", "at": 274.5, "tone": "muted" }
+        ] }
+      ]
+    },
+    {
+      "from": 278.0,
+      "to": 293,
+      "items": [
+        { "type": "cards", "at": 279.2, "items": [
+          { "icon": "chart-up", "title": "Rendement brut", "sub": "il flatte", "at": 279.2 },
+          { "icon": "calculator", "title": "Rendement net", "sub": "charges et vacance", "at": 281.2, "accent": true },
+          { "icon": "building", "title": "SCPI", "sub": "frais élevés, revente difficile", "at": 285.2 }
+        ] },
+        { "type": "text", "size": "small", "text": "À bientôt", "at": 290.7 }
+      ]
+    }
+  ]
+}
