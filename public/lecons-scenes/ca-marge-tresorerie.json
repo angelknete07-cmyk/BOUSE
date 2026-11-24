@@ -1,0 +1,299 @@
+{
+  "lesson": "ca-marge-tresorerie",
+  "version": "1.0.0",
+  "scenes": [
+    {
+      "from": 0,
+      "to": 5.1,
+      "items": [
+        { "type": "text", "size": "title", "text": "Chiffre d’affaires, marge et trésorerie", "at": 0.2 },
+        { "type": "text", "size": "small", "text": "Bienvenue dans cette leçon", "at": 3.4 }
+      ]
+    },
+    {
+      "from": 5.1,
+      "to": 17.3,
+      "items": [
+        { "type": "icons", "icon": "cake", "count": 6, "step": 0.4, "at": 5.4 },
+        { "type": "chips", "at": 7.9, "items": [
+          { "text": "Commande ✓", "at": 7.9 },
+          { "text": "Commande ✓", "at": 8.5 },
+          { "text": "Commande ✓", "at": 9.1 }
+        ] },
+        { "type": "row", "at": 10.4, "items": [
+          { "type": "icon", "icon": "flour", "size": "l", "label": "la farine", "at": 10.4, "id": "farine" },
+          { "type": "icon", "icon": "wallet", "size": "l", "at": 11.0, "id": "porte-monnaie" },
+          { "type": "counter", "label": "Sur ton compte", "from": 120, "to": 0, "at": 11.0, "until": 13.8, "tone": "loss", "bar": true }
+        ] },
+        { "type": "fly", "from": "porte-monnaie", "to": "farine", "at": 11.4, "until": 13.6, "count": 3, "dir": "out" },
+        { "type": "actor", "character": "patissiere", "name": "toi", "at": 5.2, "think": { "text": "?", "at": 14.4 } }
+      ]
+    },
+    {
+      "from": 17.3,
+      "to": 33.0,
+      "items": [
+        { "type": "cards", "at": 21.3, "items": [
+          { "icon": "ticket", "title": "Chiffre d’affaires", "sub": "Combien j’ai vendu ?", "at": 21.3, "subAt": 25.9 },
+          { "icon": "cake", "title": "Marge", "sub": "Combien j’ai gagné ?", "at": 22.6, "subAt": 26.5, "accent": true },
+          { "icon": "bank", "title": "Trésorerie", "sub": "Combien j’ai sur mon compte ?", "at": 23.9, "subAt": 27.1 }
+        ] },
+        { "type": "text", "size": "big", "text": "Vendre beaucoup [[≠]] gagner de l’argent", "at": 29.4 }
+      ]
+    },
+    {
+      "from": 33.0,
+      "to": 51.0,
+      "items": [
+        { "type": "text", "size": "big", "text": "Pourquoi apprendre ça ?", "at": 33.1, "out": 34.7, "hide": true },
+        { "type": "bars", "at": 34.8, "items": [
+          { "label": "Ventes", "value": 12000, "at": 34.8 },
+          { "label": "Bénéfice", "value": 1500, "at": 36.8, "tone": "gain" },
+          { "label": "Sur le compte", "value": 300, "at": 38.8, "tone": "loss" }
+        ] },
+        { "type": "row", "at": 40.6, "items": [
+          { "type": "icon", "icon": "invoice", "at": 40.6 },
+          { "type": "text", "size": "mid", "text": "[[Fournisseur à payer|loss]]", "at": 40.6 }
+        ] },
+        { "type": "row", "at": 42.6, "items": [
+          { "type": "icon", "icon": "truck", "at": 42.6 },
+          { "type": "text", "size": "small", "text": "Fournisseur = celui qui te vend de quoi travailler (pour tes gâteaux : le marchand de farine)", "at": 42.6 }
+        ] }
+      ]
+    },
+    {
+      "from": 51.0,
+      "to": 75.0,
+      "items": [
+        { "type": "stats", "at": 54.8, "items": [
+          { "label": "Vendu", "value": 12000, "at": 54.8 },
+          { "label": "Gagné", "value": 1500, "at": 56.4, "tone": "gain" },
+          { "label": "Disponible", "value": -300, "at": 58.3, "tone": "loss", "accent": true }
+        ] },
+        { "type": "text", "size": "mid", "text": "Trois chiffres différents, pour une même entreprise", "at": 61.4 },
+        { "type": "text", "size": "small", "text": "Lequel regarder pour décider ?", "at": 65.6 },
+        { "type": "text", "size": "big", "text": "vendu [[≠]] gagné [[≠]] disponible", "at": 69.4 }
+      ]
+    },
+    {
+      "from": 75.0,
+      "to": 95.4,
+      "items": [
+        { "type": "text", "size": "big", "text": "Les trois mécanismes", "at": 75.1, "out": 79.2, "hide": true },
+        { "type": "text", "size": "mid", "text": "[[1 ·]] Le chiffre d’affaires (CA)", "at": 79.4 },
+        { "type": "text", "size": "small", "text": "= le montant de tout ce que tu as vendu", "at": 84.6 },
+        { "type": "icons", "icon": "cake", "count": 10, "step": 0.32, "label": "5 €", "at": 87.6, "id": "gateau" },
+        { "type": "counter", "label": "Chiffre d’affaires", "to": 50, "at": 88.4, "until": 91.6, "id": "ca" },
+        { "type": "chips", "at": 92.7, "items": [
+          { "text": "5 € le gâteau", "at": 92.7 },
+          { "text": "×", "at": 93.2 },
+          { "text": "10 vendus", "at": 93.5 },
+          { "text": "=", "at": 94.0 },
+          { "text": "50 €", "at": 94.3 }
+        ] },
+        { "type": "fly", "from": "gateau-0", "to": "ca", "at": 88.2, "until": 88.9 },
+        { "type": "fly", "from": "gateau-3", "to": "ca", "at": 89.1, "until": 89.8 },
+        { "type": "fly", "from": "gateau-6", "to": "ca", "at": 90.1, "until": 90.8 },
+        { "type": "fly", "from": "gateau-9", "to": "ca", "at": 91.0, "until": 91.7 }
+      ]
+    },
+    {
+      "from": 95.4,
+      "to": 115.7,
+      "items": [
+        { "type": "chips", "at": 95.6, "items": [
+          { "text": "Prix hors taxes · 5 €", "at": 95.6 },
+          { "text": "+", "at": 98.4 },
+          { "text": "TVA", "at": 98.4, "tone": "muted" }
+        ] },
+        { "type": "text", "size": "small", "text": "La TVA, un impôt ajouté au prix : on la met de côté", "at": 100.0 },
+        { "type": "row", "at": 104.0, "items": [
+          { "type": "icon", "icon": "invoice", "size": "l", "label": "Facturé · 50 €", "at": 104.0 },
+          { "type": "icon", "icon": "hour", "label": "le client n’a pas encore payé", "at": 107.9 }
+        ] },
+        { "type": "text", "size": "mid", "text": "Compte dans le CA [[✓|gain]]", "at": 106.6 },
+        { "type": "row", "at": 110.8, "items": [
+          { "type": "icon", "icon": "coins", "tone": "muted", "label": "argent promis : 50 €", "at": 110.8 },
+          { "type": "icon", "icon": "wallet", "tone": "loss", "label": "dans ta poche : 0 €", "at": 112.4 }
+        ] }
+      ]
+    },
+    {
+      "from": 115.7,
+      "to": 147.3,
+      "items": [
+        { "type": "text", "size": "mid", "text": "[[2 ·]] La marge sur coûts variables", "at": 115.8 },
+        { "type": "split", "label": "Tu vends pour 50 €", "total": 50, "at": 116.6, "parts": [
+          { "label": "ingrédients", "value": 20, "at": 130.8, "tone": "muted" },
+          { "label": "marge", "value": 30, "at": 132.8, "tone": "accent" }
+        ] },
+        { "type": "text", "size": "small", "text": "Coût variable : il augmente quand tu vends plus", "at": 119.0 },
+        { "type": "row", "at": 122.8, "items": [
+          { "type": "icon", "icon": "flour", "at": 122.8 },
+          { "type": "icon", "icon": "butter", "at": 123.6 },
+          { "type": "icon", "icon": "egg", "at": 124.6 }
+        ] },
+        { "type": "row", "at": 138.8, "items": [
+          { "type": "icon", "icon": "house", "size": "s", "at": 138.8 },
+          { "type": "text", "size": "small", "text": "Coût fixe : le loyer de l’atelier, qui ne bouge pas", "at": 138.8 }
+        ] },
+        { "type": "text", "size": "big", "text": "marge [[≠]] bénéfice", "at": 144.8 }
+      ]
+    },
+    {
+      "from": 147.3,
+      "to": 168.6,
+      "items": [
+        { "type": "chips", "at": 147.6, "items": [
+          { "text": "Chiffre d’affaires", "at": 147.6 },
+          { "text": "−", "at": 148.6 },
+          { "text": "toutes les charges", "at": 149.2 },
+          { "text": "=", "at": 150.2 },
+          { "text": "résultat", "at": 150.6, "tone": "gain" }
+        ] },
+        { "type": "text", "size": "small", "text": "Une charge, c’est une dépense", "at": 151.8 },
+        { "type": "chips", "at": 155.0, "out": 159.3, "items": [
+          { "text": "amortissements", "at": 155.0, "tone": "muted" },
+          { "text": "charges financières", "at": 156.4, "tone": "muted" },
+          { "text": "impôts", "at": 157.8, "tone": "muted" }
+        ] },
+        { "type": "dialog", "at": 161.4, "items": [
+          { "character": "client", "text": "« Ma marge est de 40 % »", "at": 161.4, "side": "left" },
+          { "character": "patissiere", "name": "toi", "text": "« Quels coûts as-tu retirés ? »", "at": 165.0, "side": "right" }
+        ] }
+      ]
+    },
+    {
+      "from": 168.6,
+      "to": 200.8,
+      "items": [
+        { "type": "text", "size": "mid", "text": "[[3 ·]] La trésorerie : l’argent vraiment sur ton compte", "at": 168.8 },
+        { "type": "account", "start": 1000, "at": 170.9, "flows": [
+          { "label": "encaissements", "amount": 600, "dir": "in", "at": 177.4 },
+          { "label": "décaissements", "amount": 500, "dir": "out", "at": 180.3 },
+          { "label": "emprunt", "amount": 5000, "dir": "in", "at": 184.4, "note": "pas une vente : pas du CA" },
+          { "label": "remboursement", "amount": 1000, "dir": "out", "at": 189.9, "note": "pas une charge du résultat" }
+        ] },
+        { "type": "text", "size": "mid", "text": "L’argent bouge, [[le résultat ne bouge pas]]", "mark": { "text": "le résultat ne bouge pas", "at": 198.2 }, "at": 197.1 }
+      ]
+    },
+    {
+      "from": 200.8,
+      "to": 225.2,
+      "items": [
+        { "type": "text", "size": "big", "text": "Le vocabulaire du métier", "at": 200.9, "out": 205.8, "hide": true },
+        { "type": "timeline", "at": 206.4, "points": [
+          { "label": "Facture", "sub": "jour 0", "pos": 6, "at": 206.4 },
+          { "label": "Paiement", "sub": "jour 60", "pos": 94, "at": 217.8 }
+        ], "span": { "label": "délai de paiement", "from": 6, "to": 94, "at": 217.9 } },
+        { "type": "cards", "at": 207.0, "items": [
+          { "icon": "person", "title": "Créance client", "sub": "le client te doit", "at": 207.0 },
+          { "icon": "truck", "title": "Dette fournisseur", "sub": "tu dois au fournisseur", "at": 213.0 }
+        ] },
+        { "type": "text", "size": "small", "text": "C’est ce délai qui décale ton activité et ta trésorerie", "at": 221.4 }
+      ]
+    },
+    {
+      "from": 225.2,
+      "to": 244.5,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Besoin en fonds de roulement [[(BFR)]]", "at": 225.4 },
+        { "type": "row", "at": 231.0, "items": [
+          { "type": "icon", "icon": "box", "size": "l", "label": "stock acheté, pas vendu", "at": 231.0 },
+          { "type": "text", "size": "big", "text": "[[+]]", "at": 232.6 },
+          { "type": "icon", "icon": "invoice", "size": "l", "label": "ce que tes clients te doivent", "at": 234.0 },
+          { "type": "text", "size": "big", "text": "[[−]]", "at": 237.6 },
+          { "type": "icon", "icon": "truck", "size": "l", "label": "ce que tu dois", "at": 238.0 }
+        ] },
+        { "type": "icon", "icon": "lock", "tone": "accent", "at": 241.6 },
+        { "type": "text", "size": "big", "text": "De l’argent peut rester [[bloqué]]", "mark": { "text": "bloqué", "at": 242.4 }, "at": 241.5 }
+      ]
+    },
+    {
+      "from": 244.5,
+      "to": 273.3,
+      "items": [
+        { "type": "timeline", "at": 252.4, "points": [
+          { "label": "Tu paies ton stock", "sub": "tout de suite", "pos": 10, "at": 252.4 },
+          { "label": "Tu es payé", "sub": "60 jours après", "pos": 90, "at": 255.0 }
+        ] },
+        { "type": "chart", "at": 257.6, "baseline": { "value": 0, "label": "0 €" }, "lines": [
+          { "label": "commandes", "values": [10, 14, 22, 34, 48, 60], "at": 257.8, "until": 262.8 },
+          { "label": "ton argent", "values": [20, 18, 10, -2, -14, -22], "at": 259.5, "until": 265.2, "tone": "loss" }
+        ] },
+        { "type": "text", "size": "big", "text": "Ta croissance [[consomme|loss]] ton argent", "mark": { "text": "consomme", "at": 263.8 }, "at": 263.1 }
+      ]
+    },
+    {
+      "from": 273.3,
+      "to": 298.4,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Avant une grosse commande, trois questions", "at": 273.5 },
+        { "type": "list", "style": "num", "at": 276.7, "items": [
+          { "text": "Quelle marge me laisse-t-elle ?", "at": 276.7 },
+          { "text": "Quand vais-je payer ?", "at": 278.3 },
+          { "text": "Quand vais-je être payé ?", "at": 279.5 }
+        ] },
+        { "type": "row", "at": 281.2, "items": [
+          { "type": "icon", "icon": "coin", "at": 281.2 },
+          { "type": "text", "size": "mid", "text": "Acompte : une partie du prix [[à l’avance]]", "at": 281.2 }
+        ] },
+        { "type": "text", "size": "small", "text": "On simplifie : TVA, stocks et acomptes demandent un vrai comptable.", "at": 288.4 },
+        { "type": "actor", "character": "patissiere", "name": "toi", "at": 273.6 }
+      ]
+    },
+    {
+      "from": 298.4,
+      "to": 325.0,
+      "items": [
+        { "type": "row", "at": 298.7, "items": [
+          { "type": "text", "size": "mid", "text": "Exemple fictif · un atelier de mobilier", "at": 298.7 }
+        ] },
+        { "type": "icons", "icon": "desk", "count": 10, "step": 0.32, "at": 305.0 },
+        { "type": "waterfall", "at": 309.5, "rows": [
+          { "label": "Chiffre d’affaires", "value": 5000, "kind": "start", "at": 309.5 },
+          { "label": "bois, transport", "value": 2000, "kind": "minus", "at": 311.9 },
+          { "label": "marge", "value": 3000, "kind": "total", "at": 316.0, "tone": "accent" },
+          { "label": "charges fixes", "value": 2200, "kind": "minus", "at": 318.5 },
+          { "label": "résultat", "value": 800, "kind": "total", "at": 321.7, "tone": "gain" }
+        ] },
+        { "type": "text", "size": "mid", "text": "[[Un beau mois ✓|gain]]", "at": 324.0 },
+        { "type": "actor", "character": "artisan", "name": "l’artisan", "at": 299.2 }
+      ]
+    },
+    {
+      "from": 325.0,
+      "to": 352.0,
+      "items": [
+        { "type": "text", "size": "mid", "text": "Mais regardons l’argent", "at": 325.2 },
+        { "type": "waterfall", "at": 326.9, "rows": [
+          { "label": "au départ", "value": 4000, "kind": "start", "at": 334.2 },
+          { "label": "encaissé", "value": 1000, "kind": "plus", "at": 326.9 },
+          { "label": "décaissé", "value": 4200, "kind": "minus", "at": 331.5, "tone": "loss" },
+          { "label": "à la fin", "value": 800, "kind": "total", "at": 336.5 }
+        ] },
+        { "type": "stats", "at": 342.4, "items": [
+          { "label": "Résultat", "value": 800, "at": 342.4, "tone": "gain" },
+          { "label": "Trésorerie", "value": 800, "at": 342.8, "accent": true }
+        ] },
+        { "type": "text", "size": "mid", "text": "Même chiffre, [[par hasard]]", "mark": { "text": "par hasard", "at": 344.0 }, "at": 343.2 },
+        { "type": "text", "size": "small", "text": "Un résultat positif ne veut pas dire que l’argent est arrivé", "at": 347.4 },
+        { "type": "actor", "character": "artisan", "name": "l’artisan", "at": 325.2 }
+      ]
+    },
+    {
+      "from": 352.0,
+      "to": 371.0,
+      "items": [
+        { "type": "text", "size": "big", "text": "Pour résumer", "at": 352.1, "out": 353.2, "hide": true },
+        { "type": "cards", "at": 353.4, "items": [
+          { "icon": "ticket", "title": "Chiffre d’affaires", "sub": "ce que tu as vendu", "at": 353.4 },
+          { "icon": "cake", "title": "Marge", "sub": "ce qu’il reste après les coûts variables", "at": 356.1, "accent": true },
+          { "icon": "bank", "title": "Trésorerie", "sub": "l’argent vraiment disponible", "at": 360.6 }
+        ] },
+        { "type": "text", "size": "big", "text": "Trois questions, trois chiffres", "at": 364.0 },
+        { "type": "text", "size": "small", "text": "À bientôt pour la leçon suivante", "at": 368.0 }
+      ]
+    }
+  ]
+}

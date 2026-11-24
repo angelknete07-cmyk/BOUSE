@@ -15,7 +15,9 @@ import {
   type LearningMode,
   type VoiceTrack,
 } from "../lib/lessonVideo";
+import { isStoryboard, type Storyboard } from "../lib/lessonScenes";
 import { Icon } from "./Icon";
+import { LessonScenes } from "./LessonScenes";
 import { Terrain } from "./Terrain";
 
 type Props = {
@@ -51,6 +53,7 @@ function savePosition(id: string, seconds: number) {
  */
 export function LessonMedia({ lesson, mode, onMode, onExercise }: Props) {
   const [track, setTrack] = useState<VoiceTrack | null>(null);
+  const [board, setBoard] = useState<Storyboard | null>(null);
   const [failed, setFailed] = useState(false);
   const [time, setTime] = useState(0);
   const [playing, setPlaying] = useState(false);
@@ -75,6 +78,21 @@ export function LessonMedia({ lesson, mode, onMode, onExercise }: Props) {
         else setFailed(true);
       })
       .catch(() => live && setFailed(true));
+    return () => {
+      live = false;
+    };
+  }, [lesson.id]);
+
+  // Le scénario animé (s'il manque, la vidéo affiche les phrases de la voix).
+  useEffect(() => {
+    let live = true;
+    setBoard(null);
+    fetch(`${base}lecons-scenes/${lesson.id}.json`)
+      .then((r) => (r.ok ? r.json() : null))
+      .then((json) => {
+        if (live && isStoryboard(json) && json.lesson === lesson.id) setBoard(json);
+      })
+      .catch(() => undefined);
     return () => {
       live = false;
     };
@@ -229,12 +247,14 @@ export function LessonMedia({ lesson, mode, onMode, onExercise }: Props) {
   const formula = line?.kind === "line" ? formulaIn(line.text) : null;
   const figures = line?.kind === "line" && !formula ? figuresIn(line.text) : [];
   const podcast = mode === "ecouter";
+  const animated =
+    !podcast && board !== null && track !== null && board.version === track.version;
 
   return (
     <div className="lesson-media">
       {picker}
       <div
-        className={`lm-player${podcast ? " is-podcast" : ""}${playing ? " is-playing" : ""}`}
+        className={`lm-player${podcast ? " is-podcast" : ""}${playing ? " is-playing" : ""}${animated ? " is-animated" : ""}`}
       >
         <div
           className="lm-stage"
@@ -265,8 +285,17 @@ export function LessonMedia({ lesson, mode, onMode, onExercise }: Props) {
           <div className="lm-brand" aria-hidden="true">
             BOOST · {podcast ? "Podcast" : "Leçon en vidéo"}
           </div>
+          {animated && (
+            <LessonScenes
+              board={board}
+              time={time}
+              kicker={
+                !line || part < 0 ? kicker : `${kicker} · ${partTitle}`
+              }
+            />
+          )}
           <div
-            className="lm-scene"
+            className={`lm-scene${animated ? " is-hidden-by-scenes" : ""}`}
             key={podcast ? part : index}
             aria-live="off"
           >

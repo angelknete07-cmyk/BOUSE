@@ -1,0 +1,103 @@
+/* Dessins au trait des vidéos animées : icônes (24 × 24) et personnages
+   (64 × 84). Un seul style : trait argent, sans remplissage. */
+
+export const ICONS: Record<string, string> = {
+  cake: '<path d="M4 20h16M5 20v-6a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v6"/><path d="M5 15c1.5 1 3 1 4.5 0s3-1 4.5 0 3 1 4.5 0"/><path d="M12 12V9"/><path d="M12 6.5c.8-.8.8-1.7 0-2.5-.8.8-.8 1.7 0 2.5z"/>',
+  flour: '<path d="M7 4h10l1 3-1 13H7L6 7z"/><path d="M6 7h12"/><path d="M10 12c1-1.5 3-1.5 4 0"/><path d="M12 12v4"/>',
+  egg: '<path d="M12 4c3 0 6 5 6 9a6 6 0 0 1-12 0c0-4 3-9 6-9z"/>',
+  butter: '<path d="M4 10l3-3h13v8l-3 3H4z"/><path d="M4 10h13v8M17 10l3-3"/>',
+  wallet: '<rect x="3" y="6" width="18" height="13" rx="2.5"/><path d="M16 12.5h3"/><path d="M3 9h15"/>',
+  ticket: '<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8"/><path d="m9 16 2 2 4-4"/>',
+  invoice: '<path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4"/><path d="M9 11h7M9 14h7M9 17h4"/>',
+  document: '<path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4"/><path d="M9 12h7M9 16h7"/>',
+  contract: '<path d="M6 3h12v18H6z"/><path d="M9 8h6M9 11h6"/><path d="M9 17c1-1.5 2-1.5 2.5 0s1.5 1.5 2.5 0 1.5-1 2 0"/>',
+  house: '<path d="M4 11 12 4l8 7"/><path d="M6 10v10h12V10"/><path d="M10 20v-5h4v5"/>',
+  building: '<rect x="5" y="3" width="14" height="18" rx="1"/><path d="M9 7h2M13 7h2M9 11h2M13 11h2M9 15h2M13 15h2"/><path d="M11 21v-3h2v3"/>',
+  shop: '<path d="M4 9 5.5 4h13L20 9"/><path d="M4 9c0 1.7 1.3 3 3 3s2.7-1.3 2.7-3c0 1.7 1.2 3 2.3 3s2.3-1.3 2.3-3c0 1.7 1.3 3 2.7 3s3-1.3 3-3"/><path d="M5.5 12v8h13v-8"/><path d="M10 20v-4h4v4"/>',
+  factory: '<path d="M3 20V10l5 3V10l5 3V6h4l1 14z"/><path d="M3 20h18"/><path d="M7 17h2M12 17h2"/>',
+  bank: '<path d="M3 10 12 4l9 6"/><path d="M5 10v8M9.5 10v8M14.5 10v8M19 10v8"/><path d="M3 20h18"/>',
+  truck: '<path d="M3 7h11v9H3z"/><path d="M14 10h4l3 3v3h-7"/><circle cx="7" cy="17.5" r="1.6"/><circle cx="17" cy="17.5" r="1.6"/>',
+  car: '<path d="M5 16V12l2-5h10l2 5v4"/><path d="M4 16h16v2H4z"/><path d="M5 12h14"/><circle cx="8" cy="14" r=".6"/><circle cx="16" cy="14" r=".6"/>',
+  desk: '<rect x="3" y="7" width="18" height="3" rx="1"/><path d="M5 10v10M19 10v10"/><path d="M13 10v5h6"/><path d="M15 12.5h2"/>',
+  box: '<path d="M4 8 12 4l8 4v9l-8 4-8-4z"/><path d="M4 8l8 4 8-4M12 12v9"/>',
+  cart: '<path d="M3 4h2.5l2 11h10.5l2-8H6.5"/><circle cx="9" cy="19" r="1.4"/><circle cx="17" cy="19" r="1.4"/>',
+  lock: '<rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',
+  key: '<circle cx="8" cy="14" r="4"/><path d="m11 11 8-8M16 6l2 2M14 8l2 2"/>',
+  shield: '<path d="M12 3 5 6v5c0 5 3 8 7 10 4-2 7-5 7-10V6z"/><path d="m9 12 2 2 4-4"/>',
+  umbrella: '<path d="M3 12a9 9 0 0 1 18 0z"/><path d="M12 12v6a2 2 0 0 0 4 0"/><path d="M12 3v0"/>',
+  alert: '<path d="M12 4 3 20h18z"/><path d="M12 10v4M12 17v.5"/>',
+  check: '<circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/>',
+  cross: '<circle cx="12" cy="12" r="9"/><path d="m9 9 6 6M15 9l-6 6"/>',
+  question: '<circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.3-1 .9-1 1.7"/><path d="M12 16.5v.5"/>',
+  hour: '<path d="M7 3h10M7 21h10"/><path d="M8 3c0 5 8 5 8 9s-8 4-8 9M16 3c0 5-8 5-8 9s8 4 8 9"/>',
+  clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+  calendar: '<rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M8 3v4M16 3v4"/><path d="M8 14h2M12 14h2"/>',
+  coin: '<circle cx="12" cy="12" r="8"/><path d="M14.5 9.5c-.7-.9-1.6-1.3-2.7-1.3-1.9 0-3.3 1.6-3.3 3.8s1.4 3.8 3.3 3.8c1.1 0 2-.4 2.7-1.3M7.5 11h5M7.5 13h5"/>',
+  coins: '<ellipse cx="9" cy="7" rx="5" ry="2.2"/><path d="M4 7v4c0 1.2 2.2 2.2 5 2.2s5-1 5-2.2V7"/><path d="M10 15c.3 1.1 2.4 2 5 2 2.8 0 5-1 5-2.2v-4c0-1.2-2.2-2.2-5-2.2"/><path d="M20 14.8v4c0 1.2-2.2 2.2-5 2.2s-5-1-5-2.2v-3.8"/>',
+  piggy: '<path d="M5 12c0-3.5 3.5-6 8-6 4 0 7 2.5 7 6 0 2-1 3.5-2.5 4.5V20h-3v-2h-3v2h-3v-3C6.5 16 5 14.2 5 12z"/><path d="M5 11H3.5M16 9.5h.01"/><path d="M11 6.5V5"/>',
+  card: '<rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M7 15h4"/>',
+  calculator: '<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8v3H8z"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 17.5h.01M12 17.5h.01M16 17.5h.01"/>',
+  percent: '<path d="M19 5 5 19"/><circle cx="7" cy="7" r="2.5"/><circle cx="17" cy="17" r="2.5"/>',
+  "chart-up": '<path d="M4 20h16"/><path d="m4 16 5-5 4 3 7-8"/><path d="M15 6h5v5"/>',
+  "chart-down": '<path d="M4 20h16"/><path d="m4 6 5 5 4-3 7 8"/><path d="M15 16h5v-5"/>',
+  "chart-bar": '<path d="M4 20h16"/><path d="M6 20v-6M10 20V9M14 20v-4M18 20V5"/>',
+  pie: '<path d="M12 3a9 9 0 1 0 9 9h-9z"/><path d="M15 3.5A9 9 0 0 1 20.5 9H15z"/>',
+  scale: '<path d="M12 4v16M7 20h10M5 7h14"/><path d="M5 7l-3 6a3 3 0 0 0 6 0zM19 7l-3 6a3 3 0 0 0 6 0z"/>',
+  target: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/>',
+  rocket: '<path d="M12 3c3 2 5 6 5 10l-2 3H9l-2-3c0-4 2-8 5-10z"/><circle cx="12" cy="10" r="1.6"/><path d="M9 16l-2 4M15 16l2 4M12 17v3"/>',
+  briefcase: '<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5h6v2M3 12h18"/>',
+  users: '<circle cx="9" cy="8" r="3"/><path d="M3.5 19c.6-3.2 2.8-5 5.5-5s4.9 1.8 5.5 5"/><circle cx="17" cy="9" r="2.4"/><path d="M15.5 14.2c2.3.1 4.2 1.7 4.7 4.3"/>',
+  person: '<circle cx="12" cy="8" r="3.5"/><path d="M5 20c1-4 4-6 7-6s6 2 7 6"/>',
+  handshake: '<path d="M3 11l4-4 4 2 3-2 7 4"/><path d="M3 11l5 6 2-1 2 2 2-1 2 1 4-5"/><path d="M10 13l2 2"/>',
+  phone: '<rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18h2"/>',
+  laptop: '<rect x="5" y="5" width="14" height="10" rx="1"/><path d="M3 19h18l-2-4H5z"/>',
+  mail: '<rect x="3" y="6" width="18" height="13" rx="2"/><path d="m3 7 9 6 9-6"/>',
+  chat: '<path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/>',
+  robot: '<rect x="5" y="8" width="14" height="11" rx="3"/><path d="M12 4v4M9 13h.01M15 13h.01M9.5 16h5"/><circle cx="12" cy="3.5" r="1"/>',
+  brain: '<path d="M9 4a3 3 0 0 0-3 3 3 3 0 0 0-2 5 3 3 0 0 0 2 5 3 3 0 0 0 3 3h1V4z"/><path d="M15 4a3 3 0 0 1 3 3 3 3 0 0 1 2 5 3 3 0 0 1-2 5 3 3 0 0 1-3 3h-1V4z"/>',
+  sparkle: '<path d="M12 3c.6 4.5 2.5 6.4 7 7-4.5.6-6.4 2.5-7 7-.6-4.5-2.5-6.4-7-7 4.5-.6 6.4-2.5 7-7z"/><path d="M19 16c.2 1.4.8 2 2 2.2-1.2.2-1.8.8-2 2.2-.2-1.4-.8-2-2-2.2 1.2-.2 1.8-.8 2-2.2z"/>',
+  database: '<ellipse cx="12" cy="6" rx="7" ry="2.6"/><path d="M5 6v12c0 1.4 3.1 2.6 7 2.6s7-1.2 7-2.6V6"/><path d="M5 12c0 1.4 3.1 2.6 7 2.6s7-1.2 7-2.6"/>',
+  eye: '<path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/>',
+  search: '<circle cx="11" cy="11" r="6"/><path d="m20 20-4.5-4.5"/>',
+  gear: '<circle cx="12" cy="12" r="3"/><path d="M12 3v2.5M12 18.5V21M3 12h2.5M18.5 12H21M5.6 5.6l1.8 1.8M16.6 16.6l1.8 1.8M5.6 18.4l1.8-1.8M16.6 7.4l1.8-1.8"/>',
+  bulb: '<path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"/>',
+  gift: '<rect x="4" y="9" width="16" height="11" rx="1"/><path d="M3 9h18v3H3zM12 9v11"/><path d="M12 9c-2.5 0-4-1-4-2.5S10 4 12 9zM12 9c2.5 0 4-1 4-2.5S14 4 12 9z"/>',
+  plant: '<path d="M12 21v-9"/><path d="M12 12c0-4 2.5-6.5 7-7 0 4.5-3 7-7 7z"/><path d="M12 15c0-3-2-5-6-5.5 0 3.5 2.5 5.5 6 5.5z"/><path d="M8 21h8"/>',
+  globe: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 3.8 5.5 3.8 9s-1.3 6.5-3.8 9c-2.5-2.5-3.8-5.5-3.8-9S9.5 5.5 12 3z"/>',
+  link: '<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>',
+  flag: '<path d="M5 21V4M5 4h11l-2 4 2 4H5"/>',
+  ladder: '<path d="M7 3v18M17 3v18M7 7h10M7 12h10M7 17h10"/>',
+  fire: '<path d="M12 3c1 3.5 5 5.5 5 10a5 5 0 0 1-10 0c0-2.5 1.5-4 2.5-5 .3 1.5 1 2.5 2 2.5-.5-3 0-5.5.5-7.5z"/>',
+  snowball: '<circle cx="12" cy="14" r="6"/><path d="M4 8c2 0 3 1 3.5 2M3 12h3"/><path d="M10 12c.8-.8 2-.8 2.8 0"/>',
+  pencil: '<path d="M4 20l1-4L16 5l3 3L8 19z"/><path d="M14 7l3 3"/>',
+  megaphone: '<path d="M4 10v4h3l8 4V6l-8 4z"/><path d="M7 14l1 5h2.5l-1-4.5"/><path d="M18 9.5c1 .8 1 4.2 0 5"/>',
+  fish: '<path d="M3 12c3-4 8-5 12-3l4-3v12l-4-3c-4 2-9 1-12-3z"/><circle cx="8" cy="11" r=".7"/>',
+  thermometer: '<path d="M10 14V5a2 2 0 0 1 4 0v9a4 4 0 1 1-4 0z"/><path d="M12 10v6"/>',
+  heart: '<path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 10c0 5.5-7 10-7 10z"/>',
+  graduate: '<path d="m2 9 10-5 10 5-10 5z"/><path d="M6 11v5c2 2 10 2 12 0v-5"/><path d="M22 9v5"/>',
+  layers: '<path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/>',
+  basket: '<path d="M3 10h18l-2 10H5z"/><path d="m8 10 3-6M16 10l-3-6"/><path d="M9 14v3M12 14v3M15 14v3"/>',
+  sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.4 1.4M17.6 17.6 19 19M5 19l1.4-1.4M17.6 6.4 19 5"/>',
+  euro: '<path d="M17 6.5A6.5 6.5 0 1 0 17 17.5"/><path d="M5 10h8M5 14h8"/>',
+};
+
+const FACE =
+  '<circle cx="32" cy="40" r="10"/><path d="M28.4 38.4v1.4M35.6 38.4v1.4"/><path d="M28.2 43.6c2.2 2 5.4 2 7.6 0"/>';
+const BODY = '<path d="M12 82c0-15 8.8-27 20-27s20 12 20 27"/>';
+
+export const CHARACTERS: Record<string, string> = {
+  /** Toi, la pâtissière (toque). */
+  patissiere: `<path d="M21 26c-6 .5-9.5-4.5-7.5-8.5 1.8-3.6 6.5-3.8 8.6-1.6.8-4.2 5-6.4 9.9-6.4s9.1 2.2 9.9 6.4c2.1-2.2 6.8-2 8.6 1.6 2 4-1.5 9-7.5 8.5z"/><path d="M21 26v5h22v-5"/>${FACE}${BODY}<path d="M25 62v20M39 62v20M25 69h14"/>`,
+  /** Un artisan (casquette, salopette). */
+  artisan: `<path d="M21.5 36c0-7.5 4.5-12 10.5-12s10.5 4.5 10.5 12z"/><path d="M42.5 35.5h8"/>${FACE}${BODY}<path d="M26 60v22M38 60v22M26 70h12"/>`,
+  /** Une personne (client, voisin, ami). */
+  client: `${FACE}<path d="M22.2 38c.8-6.5 5-10.5 9.8-10.5s9 4 9.8 10.5"/>${BODY}`,
+  /** Toi, au quotidien (cheveux, sac en bandoulière). */
+  toi: `${FACE}<path d="M21.8 40c-1-8 4-13 10.2-13s11 4.5 10.2 13c-2.2-3.5-6-5.5-10.2-5.5S24 36.5 21.8 40z"/>${BODY}<path d="M20 60l22 18"/>`,
+  /** Le banquier ou le conseiller (cravate). */
+  conseiller: `${FACE}<path d="M22.2 37c1-6 5-9.5 9.8-9.5s8.8 3.5 9.8 9.5"/>${BODY}<path d="M32 55l-3 4 3 14 3-14z"/>`,
+  /** Une entrepreneuse (lunettes). */
+  entrepreneuse: `<circle cx="32" cy="40" r="10"/><circle cx="28" cy="39" r="2.6"/><circle cx="36" cy="39" r="2.6"/><path d="M30.6 39h2.8"/><path d="M28.6 44c2 1.6 4.8 1.6 6.8 0"/><path d="M21.8 42c-1.5-9 3.5-15 10.2-15s11.7 6 10.2 15"/>${BODY}<path d="M24 64h16v12H24z"/>`,
+  /** Une intelligence artificielle (robot au trait). */
+  robot: `<rect x="20" y="30" width="24" height="20" rx="5"/><path d="M32 24v6"/><circle cx="32" cy="22" r="2"/><path d="M27 39v2M37 39v2M27.5 45h9"/><path d="M14 82V66c0-5 4-9 9-9h18c5 0 9 4 9 9v16"/><path d="M26 66h12v8H26z"/>`,
+};

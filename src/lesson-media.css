@@ -529,3 +529,15 @@
     transition-duration: 1ms !important;
   }
 }
+
+/* Vidéo animée : le scénario remplace les phrases (gardées pour les lecteurs
+   d'écran et les tests, mais invisibles). */
+.lm-scene.is-hidden-by-scenes {
+  visibility: hidden;
+}
+.lm-player.is-animated .lm-waves {
+  opacity: 0.14;
+}
+.lm-player.is-animated .lm-brand {
+  display: none;
+}

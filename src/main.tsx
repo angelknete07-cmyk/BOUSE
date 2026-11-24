@@ -27,6 +27,7 @@ import "./missions.css";
 import "./traps.css";
 import "./placement.css";
 import "./lesson-media.css";
+import "./lesson-scenes.css";
 import "./phone.css";
 import "./rail.css";
 import { restoreEasyReading } from "./components/Comfort";

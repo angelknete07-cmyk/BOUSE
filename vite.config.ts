@@ -33,6 +33,7 @@ function precacheServiceWorker(): Plugin {
             file !== "/sw.js" &&
             // Les voix des leçons (≈ 1 Mo chacune) se chargent à l'écoute.
             !file.startsWith("/lecons-voix/") &&
+            !file.startsWith("/lecons-scenes/") &&
             !file.endsWith(".md") &&
             !file.endsWith(".txt"),
         )
