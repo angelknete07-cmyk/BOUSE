@@ -54,6 +54,7 @@ import { latestCurrentAttempt } from "./lib/portfolio";
 import { catalogueDomain, catalogueSkill } from "./lib/catalogue";
 import { findMission } from "./lib/missions";
 import { findTemplate } from "./lib/templates";
+import { RulesRegister } from "./components/RuleWatch";
 
 // Secondary screens load on demand; home and onboarding stay in the entry chunk.
 const Academy = lazy(() =>
@@ -755,7 +756,7 @@ function App({
                 }
               >
                 {route === "home" ? (
-                  <Dashboard state={state} onNavigate={go} />
+                  <Dashboard state={state} update={update} onNavigate={go} />
                 ) : route === "academy" ? (
                   <Academy state={state} update={update} onNavigate={go} />
                 ) : lesson ? (
@@ -869,7 +870,7 @@ function App({
                     onNavigate={go}
                   />
                 ) : route === "radar" ? (
-                  <Radar />
+                  <Radar onNavigate={go} />
                 ) : route === "settings" ? (
                   <Settings
                     state={state}
@@ -964,7 +965,7 @@ function App({
   );
 }
 
-function Radar() {
+function Radar({ onNavigate }: { onNavigate: (route: string) => void }) {
   const sources = [
     {
       title: "Banque de France · ABC de l’économie",
@@ -1029,6 +1030,7 @@ function Radar() {
           </a>
         ))}
       </div>
+      <RulesRegister onNavigate={onNavigate} />
     </>
   );
 }

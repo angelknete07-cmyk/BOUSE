@@ -14,6 +14,7 @@ import {
   VerificationBadge,
 } from "./LessonExtras";
 import { ExplainOtherwise } from "./ExplainOtherwise";
+import { LessonRules } from "./RuleWatch";
 import { MentorPanel } from "./MentorPanel";
 import { latestCurrentAttempt } from "../lib/portfolio";
 import {
@@ -302,6 +303,7 @@ export function LessonView({
         </div>
         <h1>{lesson.title}</h1>
         <p>{lesson.summary}</p>
+        <LessonRules lessonId={lesson.id} />
         {canSkipToQuiz(state.profile?.level) && !latest && tab === 0 && (
           <div className="learning-skip">
             <span>

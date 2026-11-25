@@ -1,6 +1,6 @@
 import { useState, type CSSProperties } from "react";
 import { lessons, type Lesson } from "../data/lessons";
-import type { AppState } from "../lib/types";
+import type { AppState, StateUpdater } from "../lib/types";
 import {
   practiceFor,
   recommendLesson,
@@ -17,10 +17,15 @@ import { buildReviewDeck, dueReviewCards } from "../lib/reviews";
 import { useClock } from "../lib/useClock";
 import { Terrain } from "./Terrain";
 import { FirstSteps } from "./Guide";
+import { RuleAlerts } from "./RuleWatch";
 import { useTraps } from "./useTraps";
 import { trapsToFoil } from "../lib/traps";
 
-type Props = { state: AppState; onNavigate: (route: string) => void };
+type Props = {
+  state: AppState;
+  update?: StateUpdater;
+  onNavigate: (route: string) => void;
+};
 
 type TrackNode = { id: string; x: number; y: number; icon: string };
 const trackIcons = ["chart", "lab", "idea", "node", "book", "clock", "ai"];
@@ -62,7 +67,7 @@ const trackOf = (lessonId: string) =>
   tracks.find((track) => track.nodes.some((node) => node.id === lessonId)) ||
   tracks[0]!;
 
-export function Dashboard({ state, onNavigate }: Props) {
+export function Dashboard({ state, update, onNavigate }: Props) {
   const now = useClock();
   const reviewDeck = buildReviewDeck(lessons, state, now);
   const due = dueReviewCards(reviewDeck, now);
@@ -240,6 +245,8 @@ export function Dashboard({ state, onNavigate }: Props) {
           )}
         </div>
       </header>
+
+      <RuleAlerts state={state} update={update} onNavigate={onNavigate} />
 
       <FirstSteps
         state={state}

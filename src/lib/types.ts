@@ -109,6 +109,8 @@ export interface AppState {
   learningMode?: "lire" | "regarder" | "ecouter";
   /** Modèles remplis (devis, facture, budget, prévisionnel), par modèle. */
   templates?: Record<string, Record<string, string>>;
+  /** Alertes « une règle a changé » déjà vues (« règle@date »). */
+  seenRules?: string[];
 }
 export interface PlacementRecord {
   at: string;

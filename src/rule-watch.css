@@ -1,0 +1,147 @@
+/* Idée 33 : contenu daté et vérifié (src/components/RuleWatch.tsx). */
+
+.rw-change {
+  color: var(--text);
+}
+.rw-change s {
+  color: var(--text-tertiary);
+  text-decoration-color: rgb(var(--accent-violet-rgb) / 0.6);
+}
+.rw-change > span[aria-hidden] {
+  color: rgb(var(--accent-violet-rgb));
+}
+.rw-change b {
+  font-weight: 560;
+}
+.rw-topic {
+  color: var(--text-secondary);
+  font-size: 12.5px;
+}
+
+/* Alerte de l'accueil */
+.rw-alert {
+  display: grid;
+  gap: var(--space-4);
+  margin: 0 0 var(--space-6);
+  padding: var(--space-5);
+  border: 1px solid var(--line-strong);
+  border-left: 2px solid rgb(var(--accent-violet-rgb) / 0.8);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  background: linear-gradient(180deg, var(--raised), var(--surface));
+  box-shadow: var(--shadow-surface);
+  animation: rw-in 360ms var(--ease-out) both;
+}
+@keyframes rw-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+.rw-alert-head .eyebrow {
+  color: rgb(var(--accent-violet-rgb));
+}
+.rw-alert h2 {
+  margin: 4px 0 0;
+  color: var(--text);
+  font: 600 18px/1.25 var(--font-display);
+}
+.rw-alert ul,
+.rw-lesson ul,
+.rw-register ul {
+  display: grid;
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.rw-alert li,
+.rw-lesson li,
+.rw-register li {
+  display: grid;
+  gap: 3px;
+}
+.rw-alert li .text-button {
+  justify-self: start;
+  font-size: 13px;
+}
+.rw-alert > .button {
+  justify-self: start;
+}
+
+/* Dans une leçon */
+.rw-lesson {
+  grid-column: -2 / -1;
+  max-width: 68ch;
+  margin-top: var(--space-4);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--surface-low);
+}
+.rw-lesson summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 12px;
+  min-height: 44px;
+  padding: 10px 14px;
+  color: var(--text-secondary);
+  font-size: 13.5px;
+  cursor: pointer;
+  list-style: none;
+}
+.rw-lesson summary::-webkit-details-marker {
+  display: none;
+}
+.rw-lesson summary .eyebrow {
+  color: var(--text-tertiary);
+}
+.rw-lesson[open] summary {
+  border-bottom: 1px solid var(--line);
+}
+.rw-lesson ul {
+  padding: 12px 14px 14px;
+}
+.rw-lesson li[data-changed] .rw-topic::before {
+  content: "Nouveau · ";
+  color: rgb(var(--accent-violet-rgb));
+}
+.rw-lesson small,
+.rw-register small {
+  color: var(--text-tertiary);
+  font-size: 12px;
+}
+.rw-lesson em,
+.rw-register em {
+  color: var(--warning-text);
+  font-style: normal;
+}
+.rw-lesson a,
+.rw-register a {
+  color: var(--text-secondary);
+}
+
+/* Dans Sources */
+.rw-register {
+  margin-top: var(--space-10);
+  max-width: 820px;
+}
+.rw-register h2 {
+  margin: 0 0 var(--space-2);
+  color: var(--text);
+  font: 600 20px/1.25 var(--font-display);
+}
+.rw-register > p {
+  max-width: 62ch;
+  margin: 0 0 var(--space-5);
+  color: var(--text-secondary);
+  font-size: var(--type-body-sm);
+}
+.rw-register li {
+  padding: var(--space-3) 0;
+  border-top: 1px solid var(--line);
+}
+@media (prefers-reduced-motion: reduce) {
+  .rw-alert {
+    animation: none;
+  }
+}

@@ -138,6 +138,13 @@ export function parseState(raw: string): AppState {
       new Set(s.domains).size !== s.domains.length)
   )
     throw new Error("Domaines choisis invalides.");
+  if (
+    s.seenRules !== undefined &&
+    (!Array.isArray(s.seenRules) ||
+      s.seenRules.length > 200 ||
+      !s.seenRules.every((key: unknown) => isShortText(key, 80)))
+  )
+    throw new Error("Alertes de règles invalides.");
   if (s.templates !== undefined && !isTemplates(s.templates))
     throw new Error("Modèles remplis invalides.");
   if (s.missions !== undefined && !isMissions(s.missions))
