@@ -1,3 +1,15 @@
+# Review design — Modèles à remplir, « Explique-moi autrement », règles datées (idées 22, 17, 33)
+
+**25 novembre 2026.** **La direction artistique n’est pas déclarée validée.** L’utilisateur a demandé « fais-moi la 22 puis la 17 puis la 33 sans me demander » : construit sans maquette préalable, dans le style des Missions réelles (feuille claire qui se remplit en direct). Captures : `24-modeles`, `25-modele-facture` (et `-viewport`).
+
+- **Idée 22, Modèles** (nouvel espace « Modèles » dans Construire, `#modeles`) : devis, facture, budget du mois, prévisionnel sur 3 ans. Formulaire à gauche, document à droite (sur téléphone : bascule « Remplir / Voir le document »). Calculs en direct (HT, TVA, TTC, échéance, reste à vivre, marge, résultat, seuil de rentabilité), « Remplir avec un exemple », « Tout effacer » (confirmé), ce qui manque est dit sans bloquer. **PDF** par l’impression (seule la feuille part) ; **Excel** : un vrai `.xlsx` avec formules (vérifié dans l’aperçu macOS). Enregistré avec la progression. Lien « Le remplir » depuis les leçons concernées.
+- **Idée 17, « Explique-moi autrement »** : sous chaque partie d’une leçon, « Avec une image », « Avec un exemple », « Plus simplement ». Compte connecté : le mentor répond dans la leçon (brouillon non vérifié, s’appuie sur le passage). Sans compte : la demande et le passage sont copiés pour sa propre conversation Claude.
+- **Idée 33, règles datées** : 9 règles (PFU, prélèvements sociaux, ACRE, plafonds micro, franchise de TVA, facture électronique, MiCA, retraite, AI Act), reprises mot pour mot des leçons, avec date de vérification et site officiel. Accueil : « Une règle a changé depuis ta leçon » (avant barré → après, « C’est noté ») pour qui avait réussi la leçon avant la mise à jour. Leçon : bloc « Chiffres datés ». Sources : la liste complète ; plus d’un an sans vérification = « à revérifier ».
+- **Contrôles de l’agent** : `npm test` 368 ; `npx playwright test` complet : 162 passés, 8 ignorés prévus ; `npm run build` ; captures regardées sur ordinateur et téléphone (pas de débordement horizontal).
+- **Limites** : le mentor n’a pas été essayé avec un vrai compte (il coûte un appel IA) ; l’impression PDF testée par simulation (la fenêtre d’impression n’est pas ouverte en test) ; pas de vrai iPhone ; pas de validation externe.
+
+---
+
 # Review design — Les vidéos animées des 43 leçons
 
 **25 novembre 2026.** **La direction artistique n’est pas déclarée validée.** L’utilisateur trouvait les vidéos « trop simples » (le texte qui défile). Maquette `maquette/video-anime.html` (v1 puis v2) montrée : « c’est parfait », puis « Oui, fais-les ». Construit pour les 43 leçons. Paire principale : `21-lecon-video` (lecteur à l’arrêt), plus deux images de scènes : `24-video-animee-desktop.png` (BFR, ordinateur) et `24-video-animee-mobile.png` (budget, téléphone).

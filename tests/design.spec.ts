@@ -117,6 +117,7 @@ async function capture(page: Page, testInfo: TestInfo, name: string) {
       "19-finance-perso-budget",
       "20-niveau-resultat",
       "21-lecon-video",
+      "25-modele-facture",
     ].includes(name)
   )
     await page.screenshot({
@@ -519,6 +520,18 @@ test("galerie des écrans et du quiz validé sans débordement", async ({
   ).toContainText(lesson.title);
   await page.waitForTimeout(800);
   await capture(page, testInfo, "21-lecon-video");
+
+  // Les modèles à remplir (idée 22), remplis avec l'exemple.
+  await page.goto("/#modeles");
+  await expect(page.locator(".tp-card")).toHaveCount(4);
+  await capture(page, testInfo, "24-modeles");
+  await page.goto("/#modele/facture");
+  await page.getByRole("button", { name: "Remplir avec un exemple" }).click();
+  if ((page.viewportSize()?.width ?? 1280) <= 960)
+    await page.getByRole("button", { name: "Voir le document" }).click();
+  await expect(page.locator(".tp-work .tp-totals")).toContainText("1 200 €");
+  await page.waitForTimeout(600);
+  await capture(page, testInfo, "25-modele-facture");
 
   // Use the application's validated import flow. The gallery init script would
   // replace direct localStorage mutations after a document reload.

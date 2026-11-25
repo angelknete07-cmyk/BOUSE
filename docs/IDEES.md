@@ -31,7 +31,7 @@ Progresser : 26. compétences en « je sais faire » avec attestation PDF ; 27. 
 Ensemble : 29. apprendre à plusieurs (inviter un ami, défi commun).
 Confort : 31. mode lecture facile (texte plus grand, phrases courtes) ; 32. hors ligne complet.
 Produit : 33. contenu daté et vérifié, avec alerte quand une règle change (impôts, plafonds) ; 34. version écoles et entreprises (parcours d'un formateur, suivi d'un groupe) — **à changer** (tri du 9/11, précisions à venir) ; 35. mesure anonyme des endroits où les gens bloquent.
-Priorités conseillées : 22, 17, 16, 19, 33.
+Priorités conseillées : 22, 17, 16, 19, 33. **Faites** : 16 et 19 (14/11, 12/11), puis 22, 17 et 33 le 25/11 (« fais-moi la 22 puis la 17 puis la 33 sans me demander »).
 
 ## Apprendre à sa façon (idée de l'utilisateur, 9/11) — reprend et précise les idées 1 et 3
 
