@@ -13,6 +13,7 @@ import {
   PracticeDrill,
   VerificationBadge,
 } from "./LessonExtras";
+import { ExplainOtherwise } from "./ExplainOtherwise";
 import { MentorPanel } from "./MentorPanel";
 import { latestCurrentAttempt } from "../lib/portfolio";
 import {
@@ -520,6 +521,11 @@ export function LessonView({
                         </div>
                       </div>
                     )}
+                    <ExplainOtherwise
+                      lesson={lesson}
+                      sectionIndex={current.sectionIndex}
+                      onNavigate={onNavigate}
+                    />
                   </>
                 )}
                 {current.type === "example" && (

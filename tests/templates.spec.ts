@@ -100,3 +100,20 @@ test("le budget dit ce qui reste, et une leçon mène à son modèle", async ({
   await page.getByRole("button", { name: /Le remplir/ }).click();
   await expect(page).toHaveURL(/#modele\/budget$/);
 });
+
+test("« Explique-moi autrement » propose trois façons, même sans compte", async ({
+  page,
+}) => {
+  await page.goto("/#lesson/fp-budget");
+  const box = page.locator(".xo");
+  await box.scrollIntoViewIfNeeded();
+  await expect(box.locator(".xo-mode")).toHaveText([
+    "Avec une image",
+    "Avec un exemple",
+    "Plus simplement",
+  ]);
+  await box.getByRole("button", { name: "Avec un exemple" }).click();
+  await expect(box.getByRole("button", { name: "Avec un exemple" })).toHaveAttribute("aria-pressed", "true");
+  await expect(box.locator(".xo-off, .xo-answer")).toBeVisible();
+  await expect(box.getByRole("button", { name: "Copier et demander à mon Claude" })).toBeVisible();
+});

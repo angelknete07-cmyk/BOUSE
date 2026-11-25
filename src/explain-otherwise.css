@@ -1,0 +1,142 @@
+/* Idée 17 : « Explique-moi autrement » (src/components/ExplainOtherwise.tsx). */
+
+.xo {
+  display: grid;
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--line);
+}
+.xo-ask {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3) var(--space-4);
+}
+.xo-ask p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--type-body-sm);
+}
+.xo-ask p span {
+  color: var(--text);
+}
+.xo-modes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.xo-mode {
+  min-height: 40px;
+  padding: 0 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: var(--surface-low);
+  color: var(--text-secondary);
+  font: 13.5px var(--font-sans);
+  cursor: pointer;
+  transition:
+    border-color var(--motion-fast) var(--ease-out),
+    color var(--motion-fast) var(--ease-out),
+    transform var(--motion-fast) var(--ease-out);
+}
+.xo-mode:hover:not(:disabled) {
+  border-color: var(--line-silver);
+  color: var(--text);
+}
+.xo-mode:active:not(:disabled) {
+  transform: scale(0.97);
+}
+.xo-mode[aria-pressed="true"] {
+  border-color: rgb(var(--accent-violet-rgb) / 0.6);
+  color: var(--text);
+}
+.xo-mode:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+.xo-mode:focus-visible {
+  outline: 2px solid rgb(var(--accent-violet-rgb) / 0.7);
+  outline-offset: 2px;
+}
+.xo-wait {
+  margin: 0;
+  color: var(--text-tertiary);
+  font-size: var(--type-body-sm);
+  animation: xo-breathe 1.6s var(--ease-in-out) infinite;
+}
+@keyframes xo-breathe {
+  50% {
+    opacity: 0.45;
+  }
+}
+.xo-answer,
+.xo-off {
+  max-width: 68ch;
+  padding: var(--space-5);
+  border: 1px solid var(--line-strong);
+  border-left: 2px solid rgb(var(--accent-violet-rgb) / 0.7);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  background: var(--surface-low);
+  animation: xo-in 320ms var(--ease-out) both;
+}
+@keyframes xo-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+.xo-answer p,
+.xo-off p {
+  margin: 0;
+  color: var(--text);
+  font-size: var(--type-body);
+  line-height: 1.65;
+  white-space: pre-line;
+}
+.xo-answer p + p {
+  margin-top: var(--space-3);
+}
+.xo-badge {
+  display: block;
+  margin-bottom: var(--space-3);
+  color: var(--text-tertiary);
+  font-size: 12px;
+  letter-spacing: 0.02em;
+}
+.xo-off p {
+  color: var(--text-secondary);
+  font-size: var(--type-body-sm);
+}
+.xo-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+}
+.xo-off small,
+.xo-answer small {
+  display: block;
+  margin-top: var(--space-3);
+  color: var(--text-tertiary);
+  font-size: 12.5px;
+}
+.xo-off .field {
+  margin-top: var(--space-3);
+}
+.xo-note {
+  margin: 0;
+  color: var(--warning-text);
+  font-size: var(--type-body-sm);
+}
+@media (prefers-reduced-motion: reduce) {
+  .xo-answer,
+  .xo-off,
+  .xo-wait {
+    animation: none;
+  }
+  .xo-mode {
+    transition-duration: 1ms;
+  }
+}

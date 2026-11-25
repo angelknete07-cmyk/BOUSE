@@ -25,6 +25,7 @@ import "./skill-tree.css";
 import "./catalogue.css";
 import "./missions.css";
 import "./templates.css";
+import "./explain-otherwise.css";
 import "./traps.css";
 import "./placement.css";
 import "./lesson-media.css";
