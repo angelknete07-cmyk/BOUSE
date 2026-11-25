@@ -53,6 +53,7 @@ import {
 import { latestCurrentAttempt } from "./lib/portfolio";
 import { catalogueDomain, catalogueSkill } from "./lib/catalogue";
 import { findMission } from "./lib/missions";
+import { findTemplate } from "./lib/templates";
 
 // Secondary screens load on demand; home and onboarding stay in the entry chunk.
 const Academy = lazy(() =>
@@ -69,6 +70,12 @@ const SkillSheet = lazy(() =>
 );
 const Placement = lazy(() =>
   import("./components/Placement").then((m) => ({ default: m.Placement })),
+);
+const TemplateList = lazy(() =>
+  import("./components/Templates").then((m) => ({ default: m.TemplateList })),
+);
+const TemplatePage = lazy(() =>
+  import("./components/Templates").then((m) => ({ default: m.TemplatePage })),
 );
 const MissionList = lazy(() =>
   import("./components/Missions").then((m) => ({ default: m.MissionList })),
@@ -178,6 +185,13 @@ const navigation = [
     icon: "idea",
     group: "Construire",
     hint: "Du savoir au terrain",
+  },
+  {
+    id: "modeles",
+    label: "Modèles",
+    icon: "doc",
+    group: "Construire",
+    hint: "Devis, facture, budget, prévisionnel",
   },
   {
     id: "radar",
@@ -383,6 +397,8 @@ function App({
                   ? "Missions réelles"
                   : route.startsWith("mission/")
                     ? findMission(route.slice(8))?.title
+                    : route.startsWith("modele/")
+                    ? findTemplate(route.slice(7))?.title
                     : projectId !== null
                       ? state.projects.find((item) => item.id === projectId)
                           ?.title
@@ -476,7 +492,8 @@ function App({
     route === id ||
     (id === "academy" && !!(lesson || inGlossary || inCatalogue)) ||
     (id === "skills" && route === "portfolio") ||
-    (id === "incubator" && (projectId !== null || inMissions));
+    (id === "incubator" && (projectId !== null || inMissions)) ||
+    (id === "modeles" && route.startsWith("modele/"));
   // Changer d'espace rejoue l'apparition de la page (pas d'une leçon à l'autre).
   const stageKey = navigation.find((n) => navActive(n.id))?.id ?? route;
   // La pastille de la barre du bas : l'espace ouvert, ou « Explorer ».
@@ -637,6 +654,8 @@ function App({
                   ? "Portfolio"
                   : projectId !== null || inMissions
                     ? "Projets"
+                    : route.startsWith("modele/")
+                    ? "Modèles"
                     : navigation.find((n) => n.id === route)?.label ||
                       (route === "settings"
                         ? "Préférences"
@@ -795,6 +814,16 @@ function App({
                   />
                 ) : route === "ai" ? (
                   <AILab />
+                ) : route === "modeles" ? (
+                  <TemplateList state={state} onNavigate={go} />
+                ) : route.startsWith("modele/") ? (
+                  <TemplatePage
+                    key={route}
+                    id={route.slice(7)}
+                    state={state}
+                    update={update}
+                    onNavigate={go}
+                  />
                 ) : route === "missions" ? (
                   <MissionList state={state} onNavigate={go} />
                 ) : route.startsWith("mission/") ? (

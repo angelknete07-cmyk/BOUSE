@@ -4,6 +4,7 @@ import { lessons, type Lesson } from "../data/lessons";
 import { verificationStatus } from "../data/lessonVerification";
 import { practiceQuestions } from "../lib/practice";
 import { practicalSheets } from "../lib/practicalSheets";
+import { templatesForLesson } from "../lib/templates";
 import { downloadFile } from "../lib/storage";
 import { Icon } from "./Icon";
 
@@ -149,6 +150,38 @@ export function PracticalSheetButton({ lessonId }: { lessonId: string }) {
           Fichier préparé : {sheet.filename}.
         </small>
       )}
+    </div>
+  );
+}
+
+/** Idée 22 : les modèles à remplir que cette leçon explique. */
+export function TemplateLinks({
+  lessonId,
+  onNavigate,
+}: {
+  lessonId: string;
+  onNavigate: (route: string) => void;
+}) {
+  const list = templatesForLesson(lessonId);
+  if (!list.length) return null;
+  return (
+    <div className="practical-sheet">
+      <div>
+        <span className="eyebrow">MODÈLE À REMPLIR</span>
+        <strong>{list.map((t) => t.title).join(" · ")}</strong>
+        <small>Calculé en direct, à garder en PDF ou en Excel.</small>
+      </div>
+      {list.map((t) => (
+        <button
+          key={t.id}
+          type="button"
+          className="button secondary"
+          onClick={() => onNavigate(`modele/${t.id}`)}
+        >
+          {list.length > 1 ? t.title : "Le remplir"}{" "}
+          <Icon name="arrow" size={15} />
+        </button>
+      ))}
     </div>
   );
 }

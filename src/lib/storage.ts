@@ -138,6 +138,8 @@ export function parseState(raw: string): AppState {
       new Set(s.domains).size !== s.domains.length)
   )
     throw new Error("Domaines choisis invalides.");
+  if (s.templates !== undefined && !isTemplates(s.templates))
+    throw new Error("Modèles remplis invalides.");
   if (s.missions !== undefined && !isMissions(s.missions))
     throw new Error("Missions invalides.");
   if (s.placements !== undefined && !isPlacements(s.placements))
@@ -223,6 +225,24 @@ export function downloadFile(
 
 const isShortText = (value: unknown, max: number) =>
   typeof value === "string" && value.length <= max;
+
+/** Les modèles remplis : quelques modèles, des champs courts. */
+function isTemplates(value: unknown): boolean {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return false;
+  const entries = Object.entries(value as Record<string, unknown>);
+  return (
+    entries.length <= 20 &&
+    entries.every(([id, fields]) => {
+      if (id.length > 40 || !fields || typeof fields !== "object") return false;
+      if (Array.isArray(fields)) return false;
+      const list = Object.entries(fields as Record<string, unknown>);
+      return (
+        list.length <= 200 &&
+        list.every(([key, text]) => key.length <= 60 && isShortText(text, 2000))
+      );
+    })
+  );
+}
 
 /** Les missions réelles : brouillons et étapes validées, bornés. */
 function isPlacements(value: unknown): boolean {

@@ -107,6 +107,8 @@ export interface AppState {
   placements?: Record<string, PlacementRecord>;
   /** Façon d'apprendre choisie dans les leçons (lire, regarder, écouter). */
   learningMode?: "lire" | "regarder" | "ecouter";
+  /** Modèles remplis (devis, facture, budget, prévisionnel), par modèle. */
+  templates?: Record<string, Record<string, string>>;
 }
 export interface PlacementRecord {
   at: string;

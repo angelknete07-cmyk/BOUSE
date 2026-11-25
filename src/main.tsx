@@ -24,6 +24,7 @@ import "./guide.css";
 import "./skill-tree.css";
 import "./catalogue.css";
 import "./missions.css";
+import "./templates.css";
 import "./traps.css";
 import "./placement.css";
 import "./lesson-media.css";

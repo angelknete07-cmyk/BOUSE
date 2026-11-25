@@ -9,6 +9,7 @@ import { LessonScene } from "./LessonScene";
 import { LessonMedia } from "./LessonMedia";
 import {
   PracticalSheetButton,
+  TemplateLinks,
   PracticeDrill,
   VerificationBadge,
 } from "./LessonExtras";
@@ -1136,6 +1137,7 @@ export function LessonView({
               </h2>
               <p className="learning-lead">{lesson.application}</p>
               <PracticalSheetButton lessonId={lesson.id} />
+              <TemplateLinks lessonId={lesson.id} onNavigate={onNavigate} />
               {state.projects.length > 0 ? (
                 <form
                   className="learning-project-link"
