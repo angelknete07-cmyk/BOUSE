@@ -1,3 +1,15 @@
+# Review design — Une question après chaque partie de la vidéo, l’exercice à la fin
+
+**25 novembre 2026.** **La direction artistique n’est pas déclarée validée.** L’utilisateur a demandé si les exercices s’affichent pendant la vidéo, puis a choisi (widget) « une question par partie + l’exercice ». Construit dans le style existant de la carte de question. Paire principale : `26-video-question-viewport` ; aussi `27-video-exercice` (et `-viewport`).
+
+- **Arrêts** (`videoQuestions` dans `src/lib/lessonVideo.ts`) : après chaque partie, la vidéo s’arrête pour une question. D’abord les 2 questions du quiz, puis les cartes de révision (« Rappel » : on répond dans sa tête, « Voir la réponse »). Chacune est placée après la partie dont elle parle le plus, jamais avant ce qui a été dit ; 2 à 4 arrêts par leçon, 129 en tout. Rien n’est inventé. Compteur « 1 / 3 ». Un saut plus loin dans la vidéo ne rouvre pas les arrêts passés.
+- **Exercice à la fin** : l’exercice de la leçon s’ouvre dans la vidéo (la vidéo s’agrandit au lieu de couper) : réponse libre, « Un indice », « Voir la solution » (réponse et explication), puis « Passer au quiz ». Le brouillon suit dans l’onglet « Pratiquer ».
+- **Défaut corrigé** : depuis les vidéos animées (24/11), la carte de question passait sous l’animation ; elle est maintenant devant.
+- **Contrôles de l’agent** : `npm test` 369 (dont un test sur les 43 leçons : une question par partie, dans l’ordre, après la fin de sa partie) ; `npx playwright test` complet : 164 passés, 8 ignorés prévus ; `npm run build` ; captures regardées sur ordinateur et téléphone (pas de débordement horizontal).
+- **Limites** : le choix de la partie pour chaque question est automatique (mots en commun) : à relire en regardant quelques vidéos ; le son n’est pas joué en test (lecture simulée) ; pas de vrai iPhone ; pas de validation externe.
+
+---
+
 # Review design — Modèles à remplir, « Explique-moi autrement », règles datées (idées 22, 17, 33)
 
 **25 novembre 2026.** **La direction artistique n’est pas déclarée validée.** L’utilisateur a demandé « fais-moi la 22 puis la 17 puis la 33 sans me demander » : construit sans maquette préalable, dans le style des Missions réelles (feuille claire qui se remplit en direct). Captures : `24-modeles`, `25-modele-facture` (et `-viewport`).

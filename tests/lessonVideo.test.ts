@@ -13,6 +13,7 @@ import {
   partLabel,
   partProgress,
   partsOf,
+  videoQuestions,
   wordsSaid,
   type VoiceTrack,
 } from "../src/lib/lessonVideo.ts";
@@ -137,4 +138,30 @@ test("chaque leçon a sa voix, à jour de sa version", () => {
       `voix à refaire : ${lesson.id}`,
     );
   }
+});
+
+test("une question après chaque partie, jamais sur ce qui n'a pas été dit", () => {
+  let stops = 0;
+  for (const lesson of lessons) {
+    const file = `public/lecons-voix/${lesson.id}.json`;
+    if (!existsSync(file)) continue;
+    const voice = JSON.parse(readFileSync(file, "utf8")) as VoiceTrack;
+    const plan = videoQuestions(voice, lesson.sections, lesson.quiz, lesson.flashcards);
+    assert.ok(plan.length >= 2, `${lesson.id} : au moins deux arrêts`);
+    const parts = plan.map((s) => s.part);
+    assert.equal(new Set(parts).size, parts.length, `${lesson.id} : une question par partie`);
+    plan.forEach((stop, i) => {
+      assert.ok(stop.part < lesson.sections.length);
+      if (i) assert.ok(stop.at > plan[i - 1]!.at, `${lesson.id} : dans l'ordre`);
+      const last = voice.lines.filter((l) => l.part === stop.part).at(-1)!;
+      assert.ok(stop.at > last.end, `${lesson.id} : après la fin de la partie`);
+      assert.ok(stop.at < voice.duration, `${lesson.id} : avant la fin de la vidéo`);
+      if (stop.kind === "quiz") assert.ok(lesson.quiz[stop.index]);
+      else assert.ok(lesson.flashcards[stop.index]);
+    });
+    // Les deux questions du quiz passent toujours en premier.
+    assert.ok(plan.filter((s) => s.kind === "quiz").length >= 1, lesson.id);
+    stops += plan.length;
+  }
+  assert.ok(stops >= 100);
 });

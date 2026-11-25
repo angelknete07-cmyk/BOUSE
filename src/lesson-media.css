@@ -277,6 +277,8 @@
 /* La question dans la vidéo, et la fin. */
 .lm-ask {
   position: absolute;
+  /* Devant l'animation de la leçon (lesson-scenes.css, z-index 2 à 4). */
+  z-index: 6;
   inset: 0;
   display: grid;
   place-items: center;
@@ -540,4 +542,55 @@
 }
 .lm-player.is-animated .lm-brand {
   display: none;
+}
+
+/* Une question après chaque partie, l'exercice à la fin (25/11). */
+.lm-ask-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+.lm-ask-count {
+  color: var(--text-tertiary);
+  font-variant-numeric: tabular-nums;
+}
+.lm-ask-think {
+  margin: 0;
+  color: var(--text-tertiary);
+  font-size: 13.5px;
+}
+.lm-ex-field textarea {
+  width: 100%;
+  min-height: 64px;
+  padding: 10px 12px;
+  border: 1px solid var(--line-strong);
+  border-radius: 12px;
+  background: var(--surface-low);
+  color: var(--text);
+  font: 14px/1.45 var(--font-sans);
+  resize: vertical;
+}
+.lm-ex-field textarea:focus-visible {
+  outline: 2px solid rgb(var(--lm-v) / 0.6);
+  outline-offset: 1px;
+}
+.lm-solution {
+  display: grid;
+  gap: 4px;
+}
+.lm-solution strong {
+  color: var(--text);
+  font: 600 18px/1.2 var(--font-display);
+  font-variant-numeric: tabular-nums;
+}
+/* L'exercice a besoin de place : la vidéo s'agrandit au lieu de couper. */
+.lm-stage[data-open] {
+  aspect-ratio: auto;
+  min-height: 320px;
+}
+.lm-stage[data-open] .lm-ask {
+  position: relative;
+  inset: auto;
+  min-height: 320px;
+  overflow: visible;
 }

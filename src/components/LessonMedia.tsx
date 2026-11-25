@@ -1,7 +1,6 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { Lesson } from "../data/lessons";
 import {
-  askAfter,
   clockLabel,
   durationLabel,
   figuresIn,
@@ -11,6 +10,7 @@ import {
   partLabel,
   partProgress,
   partsOf,
+  videoQuestions,
   wordsSaid,
   type LearningMode,
   type VoiceTrack,
@@ -24,7 +24,11 @@ type Props = {
   lesson: Lesson;
   mode: LearningMode;
   onMode: (mode: LearningMode) => void;
-  onExercise: () => void;
+  /** Après l'exercice de fin de vidéo : le quiz. */
+  onQuiz: () => void;
+  /** Le brouillon de l'exercice, partagé avec l'onglet « Pratiquer ». */
+  exerciseText: string;
+  onExerciseText: (text: string) => void;
 };
 
 const SPEEDS = [1, 1.25, 1.5, 0.85];
@@ -51,7 +55,14 @@ function savePosition(id: string, seconds: number) {
  * La leçon en vidéo (image animée qui suit la voix) ou en podcast (la voix
  * seule). La lecture reste juste en dessous, inchangée (« Lire »).
  */
-export function LessonMedia({ lesson, mode, onMode, onExercise }: Props) {
+export function LessonMedia({
+  lesson,
+  mode,
+  onMode,
+  onQuiz,
+  exerciseText,
+  onExerciseText,
+}: Props) {
   const [track, setTrack] = useState<VoiceTrack | null>(null);
   const [board, setBoard] = useState<Storyboard | null>(null);
   const [failed, setFailed] = useState(false);
@@ -59,17 +70,24 @@ export function LessonMedia({ lesson, mode, onMode, onExercise }: Props) {
   const [playing, setPlaying] = useState(false);
   const [speed, setSpeed] = useState(1);
   const [captions, setCaptions] = useState(false);
-  const [asking, setAsking] = useState(false);
+  const [askingAt, setAskingAt] = useState<number | null>(null);
   const [picked, setPicked] = useState<number | null>(null);
+  const [flipped, setFlipped] = useState(false);
   const [ended, setEnded] = useState(false);
+  const [hint, setHint] = useState(false);
+  const [solution, setSolution] = useState(false);
   const audio = useRef<HTMLAudioElement>(null);
-  const asked = useRef(false);
+  const asked = useRef(new Set<number>());
   const saved = useRef(0);
 
   useEffect(() => {
     let live = true;
     setTrack(null);
     setFailed(false);
+    setEnded(false);
+    setHint(false);
+    setSolution(false);
+    setAskingAt(null);
     fetch(`${base}lecons-voix/${lesson.id}.json`)
       .then((r) => (r.ok ? r.json() : null))
       .then((json) => {
@@ -116,17 +134,37 @@ export function LessonMedia({ lesson, mode, onMode, onExercise }: Props) {
     if (mode === "lire") audio.current?.pause();
   }, [mode]);
 
-  const ask = track ? askAfter(track) : null;
-  const question = lesson.quiz[0];
+  // Une question rapide après chaque partie (quiz ou carte de révision).
+  const stops = useMemo(
+    () =>
+      track
+        ? videoQuestions(track, lesson.sections, lesson.quiz, lesson.flashcards)
+        : [],
+    [track, lesson],
+  );
+  const asking = askingAt !== null;
+  const stop = askingAt !== null ? stops[askingAt] : undefined;
+  const question = stop?.kind === "quiz" ? lesson.quiz[stop.index] : undefined;
+  const card = stop?.kind === "card" ? lesson.flashcards[stop.index] : undefined;
   useEffect(() => {
     const el = audio.current;
-    if (!el || !playing || mode !== "regarder" || asked.current) return;
-    if (ask !== null && question && time >= ask) {
-      asked.current = true;
-      el.pause();
-      setAsking(true);
-    }
-  }, [time, playing, mode, ask, question]);
+    if (!el || !playing || mode !== "regarder") return;
+    const next = stops.findIndex(
+      (s, i) => !asked.current.has(i) && time >= s.at,
+    );
+    if (next < 0) return;
+    asked.current.add(next);
+    el.pause();
+    setPicked(null);
+    setFlipped(false);
+    setAskingAt(next);
+  }, [time, playing, mode, stops]);
+  /** Les arrêts déjà dépassés ne se rouvrent pas quand on saute plus loin. */
+  function passedUntil(at: number) {
+    asked.current = new Set(
+      stops.flatMap((s, i) => (s.at < at ? [i] : [])),
+    );
+  }
 
   function onLoaded() {
     const el = audio.current;
@@ -135,7 +173,7 @@ export function LessonMedia({ lesson, mode, onMode, onExercise }: Props) {
     if (at > 0 && at < track.duration - 3) {
       el.currentTime = at;
       setTime(at);
-      if (ask !== null && at >= ask) asked.current = true;
+      passedUntil(at);
     }
   }
   function onTime() {
@@ -164,7 +202,7 @@ export function LessonMedia({ lesson, mode, onMode, onExercise }: Props) {
     if (el.paused) {
       if (ended) {
         el.currentTime = 0;
-        asked.current = false;
+        asked.current = new Set();
       }
       el.play().catch(() => setFailed(true));
     } else el.pause();
@@ -176,11 +214,12 @@ export function LessonMedia({ lesson, mode, onMode, onExercise }: Props) {
     el.currentTime = at;
     setTime(at);
     setEnded(false);
-    if (ask !== null && at < ask) asked.current = false;
+    passedUntil(at);
   }
   function resume() {
-    setAsking(false);
+    setAskingAt(null);
     setPicked(null);
+    setFlipped(false);
     audio.current?.play().catch(() => setFailed(true));
   }
 
@@ -260,6 +299,7 @@ export function LessonMedia({ lesson, mode, onMode, onExercise }: Props) {
           className="lm-stage"
           role="region"
           aria-label={podcast ? "Podcast de la leçon" : "Vidéo de la leçon"}
+          data-open={ended || undefined}
           onClick={toggle}
         >
           {!podcast && (
@@ -355,71 +395,161 @@ export function LessonMedia({ lesson, mode, onMode, onExercise }: Props) {
               </span>
             </div>
           )}
-          {asking && question && (
+          {asking && stop && (
             <div className="lm-ask" onClick={(e) => e.stopPropagation()}>
               <div
                 className="lm-ask-card"
                 role="dialog"
                 aria-label="Question rapide"
               >
-                <p className="lm-kicker">La question de départ</p>
-                <p className="lm-ask-q">{question.question}</p>
-                {question.options.map((option, i) => (
-                  <button
-                    key={i}
-                    type="button"
-                    className="lm-opt"
-                    disabled={picked !== null}
-                    data-r={
-                      picked === null
-                        ? undefined
-                        : i === question.answer
-                          ? "ok"
-                          : i === picked
-                            ? "ko"
-                            : undefined
-                    }
-                    onClick={() => setPicked(i)}
-                  >
-                    {option}
-                  </button>
-                ))}
-                {picked !== null && (
-                  <p className="lm-why" role="status">
-                    {picked === question.answer
-                      ? "Juste. "
-                      : "Pas tout à fait. "}
-                    {question.explanation}
-                  </p>
+                <p className="lm-kicker lm-ask-head">
+                  <span>
+                    {question ? "Question" : "Rappel"} · Partie {stop.part + 1}
+                  </span>
+                  <span className="lm-ask-count">
+                    {askingAt! + 1} / {stops.length}
+                  </span>
+                </p>
+                {question && (
+                  <>
+                    <p className="lm-ask-q">{question.question}</p>
+                    {question.options.map((option, i) => (
+                      <button
+                        key={i}
+                        type="button"
+                        className="lm-opt"
+                        disabled={picked !== null}
+                        data-r={
+                          picked === null
+                            ? undefined
+                            : i === question.answer
+                              ? "ok"
+                              : i === picked
+                                ? "ko"
+                                : undefined
+                        }
+                        onClick={() => setPicked(i)}
+                      >
+                        {option}
+                      </button>
+                    ))}
+                    {picked !== null && (
+                      <p className="lm-why" role="status">
+                        {picked === question.answer
+                          ? "Juste. "
+                          : "Pas tout à fait. "}
+                        {question.explanation}
+                      </p>
+                    )}
+                  </>
+                )}
+                {card && (
+                  <>
+                    <p className="lm-ask-q">{card.front}</p>
+                    {flipped ? (
+                      <p className="lm-why" role="status">
+                        {card.back}
+                      </p>
+                    ) : (
+                      <p className="lm-ask-think">
+                        Répondez dans votre tête, puis retournez la carte.
+                      </p>
+                    )}
+                  </>
                 )}
                 <div className="lm-ask-actions">
-                  <button
-                    type="button"
-                    className="lm-ctl lm-main lm-wide"
-                    onClick={resume}
-                  >
-                    {picked === null ? "Passer" : "Reprendre la vidéo"}{" "}
-                    <Icon name="arrow" size={15} />
-                  </button>
+                  {card && !flipped ? (
+                    <>
+                      <button
+                        type="button"
+                        className="lm-ctl lm-main lm-wide"
+                        onClick={() => setFlipped(true)}
+                      >
+                        Voir la réponse
+                      </button>
+                      <button
+                        type="button"
+                        className="lm-ctl lm-wide"
+                        onClick={resume}
+                      >
+                        Passer
+                      </button>
+                    </>
+                  ) : (
+                    <button
+                      type="button"
+                      className="lm-ctl lm-main lm-wide"
+                      onClick={resume}
+                    >
+                      {question && picked === null
+                        ? "Passer"
+                        : "Reprendre la vidéo"}{" "}
+                      <Icon name="arrow" size={15} />
+                    </button>
+                  )}
                 </div>
               </div>
             </div>
           )}
           {ended && (
             <div className="lm-ask" onClick={(e) => e.stopPropagation()}>
-              <div className="lm-ask-card lm-end">
-                <p className="lm-kicker">Leçon écoutée</p>
-                <p className="lm-ask-q">
-                  À vous de jouer : un petit exercice, puis le quiz.
-                </p>
+              <div
+                className="lm-ask-card lm-end"
+                role="dialog"
+                aria-label="Exercice de la leçon"
+              >
+                <p className="lm-kicker">À vous de jouer · l’exercice</p>
+                <p className="lm-ask-q">{lesson.exercise.prompt}</p>
+                <label className="lm-ex-field">
+                  <span className="sr-only">Votre réponse</span>
+                  <textarea
+                    rows={2}
+                    value={exerciseText}
+                    onChange={(e) => onExerciseText(e.target.value)}
+                    placeholder="Votre réponse, votre calcul…"
+                  />
+                </label>
+                {hint && !solution && (
+                  <p className="lm-why" role="status">
+                    <b>Indice. </b>
+                    {lesson.exercise.hint}
+                  </p>
+                )}
+                {solution && (
+                  <div className="lm-why lm-solution" role="status">
+                    <strong>{lesson.exercise.answer}</strong>
+                    <span>{lesson.exercise.explanation}</span>
+                  </div>
+                )}
                 <div className="lm-ask-actions">
-                  <button
-                    type="button"
-                    className="lm-ctl lm-main lm-wide"
-                    onClick={onExercise}
-                  >
-                    Passer à l’exercice <Icon name="arrow" size={15} />
-                  </button>
+                  {solution ? (
+                    <button
+                      type="button"
+                      className="lm-ctl lm-main lm-wide"
+                      onClick={onQuiz}
+                    >
+                      Passer au quiz <Icon name="arrow" size={15} />
+                    </button>
+                  ) : (
+                    <>
+                      <button
+                        type="button"
+                        className="lm-ctl lm-main lm-wide"
+                        onClick={() => setSolution(true)}
+                      >
+                        Voir la solution
+                      </button>
+                      {!hint && (
+                        <button
+                          type="button"
+                          className="lm-ctl lm-wide"
+                          onClick={() => setHint(true)}
+                        >
+                          Un indice
+                        </button>
+                      )}
+                    </>
+                  )}
                   <button
                     type="button"
                     className="lm-ctl lm-wide"
@@ -532,6 +662,7 @@ export function LessonMedia({ lesson, mode, onMode, onExercise }: Props) {
           }}
           onEnded={() => {
             setPlaying(false);
+            setAskingAt(null);
             setEnded(true);
             savePosition(lesson.id, 0);
           }}

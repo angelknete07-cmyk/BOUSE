@@ -93,19 +93,51 @@ test("regarder, écouter ou lire : le choix se garde et la lecture reste", async
   expect((await saved(page)).learningMode).toBe("lire");
 });
 
-test("à la fin de la vidéo, on passe à l'exercice", async ({ page }) => {
+test("à la fin de la vidéo, l'exercice se fait dans la vidéo", async ({ page }) => {
   await setup(page);
   await page.goto(`/#lesson/${lessonId}`);
   await expect(page.locator(".lesson-media audio")).toHaveCount(1);
   await page
     .locator(".lesson-media audio")
     .evaluate((audio) => audio.dispatchEvent(new Event("ended")));
-  await expect(page.getByText("Leçon écoutée")).toBeVisible();
-  await page.getByRole("button", { name: /Passer à l’exercice/ }).click();
-  await expect(page.getByRole("tab", { name: /Pratiquer/ })).toHaveAttribute(
+  const exercise = page.getByRole("dialog", { name: "Exercice de la leçon" });
+  await expect(exercise).toContainText("À vous de jouer");
+  await exercise.getByRole("textbox").fill("Mon calcul");
+  await exercise.getByRole("button", { name: "Un indice" }).click();
+  await expect(exercise).toContainText("Indice.");
+  await exercise.getByRole("button", { name: "Voir la solution" }).click();
+  await exercise.getByRole("button", { name: /Passer au quiz/ }).click();
+  await expect(page.getByRole("tab", { name: /Démontrer/ })).toHaveAttribute(
     "aria-selected",
     "true",
   );
+  // Le brouillon suit dans l'onglet « Pratiquer ».
+  await page.getByRole("tab", { name: /Pratiquer/ }).click();
+  await expect(page.getByRole("textbox", { name: "Votre raisonnement" })).toHaveValue(
+    "Mon calcul",
+  );
+});
+
+test("la vidéo s'arrête après une partie pour une question", async ({ page }) => {
+  await setup(page);
+  await page.goto(`/#lesson/${lessonId}`);
+  const audio = page.locator(".lesson-media audio");
+  await expect(audio).toHaveCount(1);
+  // On fait comme si la voix jouait et atteignait la fin de la dernière partie
+  // (le navigateur de test ne lit pas forcément le son).
+  await audio.evaluate(async (el: HTMLAudioElement) => {
+    const r = await fetch(el.src.replace(/\.m4a$/, ".json")).then((x) => x.json());
+    const lines = r.lines.filter((l: { part: number }) => l.part === 3);
+    const at = lines.at(-1).end + 0.5;
+    Object.defineProperty(el, "currentTime", { get: () => at, set: () => {}, configurable: true });
+    el.pause = () => {};
+    el.dispatchEvent(new Event("play"));
+  });
+  const ask = page.getByRole("dialog", { name: "Question rapide" });
+  await expect(ask).toBeVisible();
+  await expect(ask).toContainText("Partie");
+  await ask.getByRole("button").first().click();
+  await expect(ask.getByRole("button", { name: /Reprendre la vidéo/ })).toBeVisible();
 });
 
 test("sans minutage, un message clair et la lecture reste", async ({

@@ -118,6 +118,8 @@ async function capture(page: Page, testInfo: TestInfo, name: string) {
       "20-niveau-resultat",
       "21-lecon-video",
       "25-modele-facture",
+      "26-video-question",
+      "27-video-exercice",
     ].includes(name)
   )
     await page.screenshot({
@@ -520,6 +522,26 @@ test("galerie des écrans et du quiz validé sans débordement", async ({
   ).toContainText(lesson.title);
   await page.waitForTimeout(800);
   await capture(page, testInfo, "21-lecon-video");
+
+  // Une question après une partie, puis l'exercice à la fin de la vidéo (25/11).
+  const audio = page.locator(".lesson-media audio");
+  await audio.evaluate(async (el: HTMLAudioElement) => {
+    const r = await fetch(el.src.replace(/\.m4a$/, ".json")).then((x) => x.json());
+    const at = r.lines.filter((l: { part: number }) => l.part === 2).at(-1).end + 0.4;
+    Object.defineProperty(el, "currentTime", { get: () => at, set: () => {}, configurable: true });
+    el.pause = () => {};
+    el.dispatchEvent(new Event("play"));
+  });
+  const ask = page.getByRole("dialog", { name: "Question rapide" });
+  await expect(ask).toBeVisible();
+  await ask.getByRole("button").first().click();
+  await page.waitForTimeout(500);
+  await capture(page, testInfo, "26-video-question");
+  await audio.evaluate((el) => el.dispatchEvent(new Event("ended")));
+  const exercise = page.getByRole("dialog", { name: "Exercice de la leçon" });
+  await exercise.getByRole("button", { name: "Un indice" }).click();
+  await page.waitForTimeout(500);
+  await capture(page, testInfo, "27-video-exercice");
 
   // Les modèles à remplir (idée 22), remplis avec l'exemple.
   await page.goto("/#modeles");

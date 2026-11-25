@@ -381,7 +381,9 @@ export function LessonView({
                       : { ...previous, learningMode: mode },
                   )
                 }
-                onExercise={() => advanceTo(1)}
+                onQuiz={() => advanceTo(2)}
+                exerciseText={exerciseText}
+                onExerciseText={setExerciseText}
               />
               <div className="learning-sequence-top">
                 <span className="eyebrow">

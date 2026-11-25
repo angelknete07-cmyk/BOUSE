@@ -116,6 +116,92 @@ export function askAfter(track: VoiceTrack): number | null {
   return lines.at(-1)!.end + 0.2;
 }
 
+const STOP = new Set(
+  "avec dans pour plus moins sont cette celui celle leurs votre vous nous elle elles mais donc alors aussi entre comme quand toute toutes tous tout faut peut sans sous chez avant apres encore leur deux trois"
+    .split(" "),
+);
+/** Les mots qui portent le sens (sans accents, au moins 5 lettres). */
+export function meaningWords(text: string): Set<string> {
+  return new Set(
+    text
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[̀-ͯ]/g, "")
+      .split(/[^a-z0-9]+/)
+      .filter((w) => w.length >= 5 && !STOP.has(w)),
+  );
+}
+
+export type VideoQuestion = {
+  /** « quiz » : trois réponses à toucher ; « card » : une carte à retourner. */
+  kind: "quiz" | "card";
+  index: number;
+  part: number;
+  at: number;
+};
+
+type QuizItem = { question: string; options: string[]; answer: number; explanation: string };
+type CardItem = { front: string; back: string };
+
+/**
+ * Une question rapide après chaque partie de la vidéo (idée d'Angel, 25/11).
+ * D'abord les questions du quiz, puis les cartes de révision pour les parties
+ * restantes. Chacune va après la partie dont elle parle le plus, pour ne
+ * jamais demander ce qui n'a pas encore été dit. Une question au plus par
+ * partie ; une partie sans question proche n'arrête pas la vidéo.
+ */
+export function videoQuestions(
+  track: VoiceTrack,
+  sections: { title: string; body: string[] }[],
+  quiz: QuizItem[],
+  cards: CardItem[] = [],
+): VideoQuestion[] {
+  const partWords = sections.map((s) => meaningWords([s.title, ...s.body].join(" ")));
+  const scoreOf = (text: string) => {
+    const words = meaningWords(text);
+    return partWords.map((pw) => [...words].filter((w) => pw.has(w)).length);
+  };
+  const items = [
+    ...quiz.map((q, index) => ({
+      kind: "quiz" as const,
+      index,
+      row: scoreOf([q.question, q.options[q.answer] ?? "", q.explanation].join(" ")),
+    })),
+    ...cards.map((c, index) => ({
+      kind: "card" as const,
+      index,
+      row: scoreOf(`${c.front} ${c.back}`),
+    })),
+  ];
+  const stops = sections.map((_, part) => {
+    const last = track.lines.filter((l) => l.part === part).at(-1);
+    return last && track.lines.some((l) => l.start > last.end) ? last.end + 0.2 : null;
+  });
+  const chosen = new Map<number, VideoQuestion>();
+  const used = new Set<(typeof items)[number]>();
+  for (const kind of ["quiz", "card"] as const) {
+    stops.forEach((at, part) => {
+      if (at === null || chosen.has(part)) return;
+      let best: (typeof items)[number] | null = null;
+      let bestScore = 0;
+      for (const item of items) {
+        if (item.kind !== kind || used.has(item)) continue;
+        // La question doit parler surtout de cette partie, pas d'une suivante.
+        const later = Math.max(0, ...item.row.slice(part + 1));
+        const score = item.row[part] ?? 0;
+        if (score > bestScore && score >= later) {
+          best = item;
+          bestScore = score;
+        }
+      }
+      if (!best) return;
+      used.add(best);
+      chosen.set(part, { kind, index: best.index, part, at });
+    });
+  }
+  return [...chosen.values()].sort((a, b) => a.at - b.at);
+}
+
 /** « Leçon », « Partie 2 / 4 » ou « Exemple ». */
 export function partLabel(part: number, sections: number): string {
   if (part < 0) return "Leçon";
